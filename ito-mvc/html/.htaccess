@@ -1,0 +1,28 @@
+RewriteEngine On
+
+# Deny direct requests to framework files. Send [F|Forbidden] status header
+# and stop any further rules processing.
+	RewriteCond %{REQUEST_URI} ^.*(-mapping)\.xml$	[NC]
+	RewriteRule . -									[NS,F,L]
+
+# Do not apply rewriting rules for some common file types.
+RewriteCond %{REQUEST_URI} ^/.*\.(xml|xsd|dtd|css|js|jpg|gif|txt|png|swf|ico|tiff|bmp|pdf)$ [NC]
+	RewriteRule . -									[L]
+
+# Process any internal redirects at the very beginning!
+# E.g. %{ENV:REDIRECT_MAPPING} was already set.
+	RewriteCond %{REQUEST_URI} ^/index\.php$		[NC]
+	RewriteCond %{DOCUMENT_ROOT}%{ENV:REDIRECT_MAPPING}	-f
+	RewriteCond %{ENV:REDIRECT_MAPPING} ^(.*)$		[NC]
+	RewriteRule . - 								[E=MAPPING:%1,L]
+
+# "No trailing slash" URLs to the correct location (302 via 200 OK status)
+	RewriteCond %{REQUEST_URI} ^.*/([^/\.]+)$		[NC]
+	RewriteRule .*  %{REQUEST_URI}/					[L]
+
+# Resolve the module configuration filename from request URI.
+# Test physical file location and set MAPPING value.
+	RewriteRule ^/*([^\./]+)(/[^/]*)$ - [E=MAPPING:$1-mapping.xml,C]
+	RewriteCond %{DOCUMENT_ROOT}%{ENV:MAPPING} -f
+	RewriteRule .* index.php 						[L]
+	RewriteRule .* index.php						[E=MAPPING:actions-mapping.xml,L]

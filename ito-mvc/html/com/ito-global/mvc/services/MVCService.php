@@ -1,8 +1,8 @@
 <?php
 
-class MVCClassLoaderService {
+class MVCService {
 
-    public static function getInstanceByClassName($className){
+    public static function getController($className){
         // use classname to extract class path and type
         $tokens = split('\.', $className);
         $classPath = implode('/', $tokens) . '.php';

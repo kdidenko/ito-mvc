@@ -80,9 +80,7 @@ class HttpHelper {
             }
 
             $mapping = self::getValOrNull($env, self::MVC_MAPNG);
-            if($mapping != null){
-                self::$reqOpts[self::MVC_MAPNG] = $mapping;
-            }
+            self::$reqOpts[self::MVC_MAPNG] = $mapping ? $mapping : ActionsMappingResolver::DEFAULT_MAPPING_FILE;
 
             self::parseActionParams();
     }

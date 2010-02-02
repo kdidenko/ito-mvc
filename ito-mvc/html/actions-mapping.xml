@@ -4,14 +4,14 @@
 		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.0.xsd  
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.0.xsd" >
 
-	<action name="/index.html" id="hello-word">
+	<action name="/index.html" id="home">
 		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />
-		<forwards id="navigation">
+		<!-- forwards id="navigation">
 			<target name="Start" location="/start-operating.html" />
 			<target name="Help" location="/help-start-operating.html" />
 			<target name="Cancel" location="/index.html" id="navCncl" />
-		</forwards>
+		</forwards-->
 	</action>	
 	
 </actions>

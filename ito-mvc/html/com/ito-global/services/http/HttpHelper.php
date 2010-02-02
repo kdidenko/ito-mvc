@@ -1,4 +1,5 @@
 <?php
+//TODO: HttpHelper class implementation requires refactoring!
 class HttpHelper {
 
     const REQ_METHOD = 'REQUEST_METHOD';

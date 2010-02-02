@@ -4,12 +4,13 @@ class SessionService {
 
 	public static function startSession() {
 		if(session_id() || session_start()){
-			// check if session is new or existing one
+			# check if session is new or existing one
 			if(!isset($_SESSION['timestamp']))  {
-				// security: clear any recovered data and regenerate ids
+				# security: clear any recovered data and regenerate ids
 				session_regenerate_id(true);
 				$_SESSION['timestamp'] = time();
-				// storage: setup session storage structure
+				//TODO: session storage is not completely removed after the session is closed. The root directory always resists
+				# storage: setup session storage structure
 				StorageService::initSessionStorage( session_id() );
 			}
 		}
@@ -30,7 +31,7 @@ class SessionService {
 
 	public static function endSession() {
 		if(session_id() || session_start()){
-		    // release all resources
+		    # release all resources
             $sid = session_id();
 			StorageService::clearSessionStorage($sid);
 			session_destroy();

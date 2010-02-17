@@ -57,6 +57,24 @@ class XsltHandler {
         return $result;
     }
 
+    /**
+     * Performs XSLT Transformation for specified XML and XSL files.
+     * Functionality is based on XSLTProcessor and DOMDocument implementation.
+     * @param $xmlFile file name of XML input
+     * @param $xslFile file name of XSL stylesheet
+     * @return html string
+     */
+    public function transform($xmlFile, $xslFile) {
+        # load the xsl as DOM object
+        $this->dom->load($xslFile);
+        # import xsl DOM to processor
+        $this->xslt->importStyleSheet($this->dom);
+        # load xml DOM
+        $this->dom->load($xmlFile);
+        # execute XSLT
+        return $this->xslt->transformToXML($this->dom);
+    }
+
 }
 
 

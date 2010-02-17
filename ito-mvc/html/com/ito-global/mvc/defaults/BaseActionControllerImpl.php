@@ -47,7 +47,7 @@ class BaseActionControllerImpl implements BaseActionController {
 
 
 	/**
-	 * Implements rge action request forwarding defined by
+	 * Implements the action request forwarding defined by
 	 * BaseActionController interface.
 	 *
      * @param $location the location to forward the action request

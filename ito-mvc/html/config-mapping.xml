@@ -6,12 +6,14 @@
 
 	<action name="/index.html" id="home">
 		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />
-		<!-- forwards id="navigation">
-			<target name="Start" location="/start-operating.html" />
-			<target name="Help" location="/help-start-operating.html" />
-			<target name="Cancel" location="/index.html" id="navCncl" />
-		</forwards-->
+		<template name="home" path="templates/system/html/index.html" />
 	</action>
-		
+	
+	<action name="/actions-list.html" id="actions-list">
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<template name="actions" path="templates/system/xsl/actions-mapping.xsl" type="XSLT">
+			<input name="data" value="actions-mapping.xml" type="FILE" />
+		</template>
+	</action>
+	
 </actions>

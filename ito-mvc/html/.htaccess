@@ -6,7 +6,7 @@ RewriteEngine On
 	RewriteRule . -									[NS,F,L]
 
 # Do not apply rewriting rules for some common file types.
-RewriteCond %{REQUEST_URI} ^/.*\.(xml|xsd|dtd|css|js|jpg|gif|txt|png|swf|ico|tiff|bmp|pdf)$ [NC]
+RewriteCond %{REQUEST_URI} ^/.*\.(xml|xsd|xsl|dtd|css|js|jpg|gif|txt|png|swf|ico|tiff|bmp|pdf)$ [NC]
 	RewriteRule . -									[L]
 
 # Process any internal redirects at the very beginning!

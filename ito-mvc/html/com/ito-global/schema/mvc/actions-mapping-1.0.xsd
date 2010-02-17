@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../styles/xs3p.xsl" type="text/xsl"?>
 <xsd:schema xmlns="http://www.ito-global.com/schema/mvc"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ito-global.com/schema/mvc">
 
@@ -50,11 +51,27 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<!-- element <input> tag -->
+	<xsd:element name="input">
+		<xsd:complexType>
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="value" type="xsd:string" use="required" />
+			<xsd:attribute name="type" type="inputType" use="optional" default="MODEL" />
+		</xsd:complexType>
+	</xsd:element>	
+
 	<!-- element <template> tag -->
 	<xsd:element name="template">
-		<xsd:complexType>
-			<xsd:attribute name="name" type="xsd:string" />
-			<xsd:attribute name="path" type="xsd:string" />
+        <xsd:annotation>
+        	<xsd:documentation>Defines template configuration entry to be used by Template Engine for output rendering initialization.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="input" maxOccurs="1" minOccurs="0" />
+			</xsd:sequence>		
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="path" type="xsd:string" use="optional" />
+			<xsd:attribute name="type" type="templateType" use="optional" default="HTML" />
 		</xsd:complexType>
 	</xsd:element>
 
@@ -81,4 +98,19 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<!-- Types section begin -->
+	<xsd:simpleType name="templateType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="HTML" />
+			<xsd:enumeration value="XSLT" />		
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="inputType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FILE" />
+			<xsd:enumeration value="MODEL" />
+		</xsd:restriction>		
+	</xsd:simpleType>	
+	
 </xsd:schema>

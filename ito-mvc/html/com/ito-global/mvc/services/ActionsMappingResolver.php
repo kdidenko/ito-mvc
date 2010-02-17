@@ -1,5 +1,5 @@
 <?php
-class ActionsMappingResolver {
+class ActionsMappingResolver  {
 
     const DEFAULT_MAPPING_FILE = 'actions-mapping.xml';
 

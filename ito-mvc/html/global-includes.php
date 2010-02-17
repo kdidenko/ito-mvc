@@ -11,6 +11,7 @@
 	include_once 'com/ito-global/mvc/models/ModelAndView.php';
 	include_once 'com/ito-global/mvc/services/ActionsMappingResolver.php';
 	include_once 'com/ito-global/mvc/services/MVCService.php';
+    include_once 'com/ito-global/mvc/services/TemplateEngine.php';
 
 	include_once 'com/ito-global/services/messages/MessageService.php';
 	include_once 'com/ito-global/services/messages/LocalizationFactory.php';

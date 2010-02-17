@@ -48,16 +48,15 @@
 	$messages = MessageService::getInstance();
 	$messages->loadMessages(DEFAULT_LOCALE);
 
-	# define the page template constants
-    define('TEMPLATE_PATH', (string) $mappingObj->template['path']);
+	# get the template configuration
+	$template = $mappingObj->template;
 
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.
-
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!
-	    include_once TEMPLATE_PATH;
+	    TemplateEngine::run($template);
 	# show it up!
     ob_end_flush();
 ?>

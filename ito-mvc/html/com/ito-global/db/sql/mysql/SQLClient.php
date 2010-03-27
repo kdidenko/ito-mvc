@@ -45,14 +45,16 @@ class SQLClient implements SQLClientInterface {
 	 */
     public static function exec ($sql, $link) {
         $result = mysql_query($sql, $link);
+        if (!$result) {
+            die("Problem executing query:\r $sql \r" . mysql_error());
+        }
         return $result;
     }
     /* (non-PHPdoc)
 	 * @see com/ito-global/db/sql/SQLClientInterface#execInsert($fields, $values, $into, $link)
 	 */
     public static function execInsert ($fields, $values, $into, $link) {
-        echo 'test';
-        $sql = self::INSERT . self::INTO . $into . "(" . $fields . ") VALUES (" . $values . ")";
+        $sql = self::INSERT . self::INTO . $into . " (" . $fields . ") VALUES (" . $values . ")";
         $result = self::exec($sql, $link);
         return $result;
     }

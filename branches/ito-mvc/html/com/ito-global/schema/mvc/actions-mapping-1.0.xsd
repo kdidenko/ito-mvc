@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../styles/xs3p.xsl" type="text/xsl"?>
+<xsd:schema xmlns="http://www.ito-global.com/schema/mvc"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ito-global.com/schema/mvc">
+
+	<!-- element <target> tag -->
+	<xsd:element name="target">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="location" type="xsd:anyURI" use="required" />
+			<xsd:attribute name="condition" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="onsuccess" />
+						<xsd:enumeration value="onfailure" />
+						<xsd:enumeration value="onabort" />
+					</xsd:restriction>		
+				</xsd:simpleType>
+			</xsd:attribute>			
+		</xsd:complexType>	
+	</xsd:element>
+
+	<!-- element <forwards> tag -->
+	<xsd:element name="forwards">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="target" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- element <property> tag -->
+	<xsd:element name="property">
+		<xsd:complexType>
+			<xsd:attribute name="name" type="xsd:string" />
+			<xsd:attribute name="value" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- element <controller> tag -->
+	<xsd:element name="controller">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="class" type="xsd:string"
+				default="com.ito.mvc.defaults.BaseActionControllerImpl" />
+			<xsd:attribute name="method" type="xsd:string" default="handleActionRequest" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- element <input> tag -->
+	<xsd:element name="input">
+		<xsd:complexType>
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="value" type="xsd:string" use="required" />
+			<xsd:attribute name="type" type="inputType" use="optional" default="MODEL" />
+		</xsd:complexType>
+	</xsd:element>	
+
+	<!-- element <template> tag -->
+	<xsd:element name="template">
+        <xsd:annotation>
+        	<xsd:documentation>Defines template configuration entry to be used by Template Engine for output rendering initialization.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="input" maxOccurs="1" minOccurs="0" />
+			</xsd:sequence>		
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="path" type="xsd:string" use="optional" />
+			<xsd:attribute name="type" type="templateType" use="optional" default="HTML" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- element <action> tag -->
+	<xsd:element name="action">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="controller" maxOccurs="1" minOccurs="0" />
+				<xsd:element ref="template" maxOccurs="1" minOccurs="0" />
+				<xsd:element ref="property" maxOccurs="unbounded" minOccurs="0"/>
+				<xsd:element ref="forwards" maxOccurs="1" minOccurs="0" />
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+			<xsd:attribute name="id" type="xsd:string" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Top-level <actions> tag -->
+	<xsd:element name="actions">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="action" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Types section begin -->
+	<xsd:simpleType name="templateType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="HTML" />
+			<xsd:enumeration value="XSLT" />		
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="inputType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FILE" />
+			<xsd:enumeration value="MODEL" />
+		</xsd:restriction>		
+	</xsd:simpleType>	
+	
+</xsd:schema>

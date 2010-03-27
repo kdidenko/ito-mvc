@@ -29,11 +29,27 @@ interface SQLClientInterface {
     /**
      * @var string SQL FROM statement identifier.
      */
-    const FROM = 'FROM ';
+    const FROM = ' FROM ';
     /**
      * @var string SQL WHERE statement identifier.
      */
-    const WHERE = 'WHERE ';
+    const WHERE = ' WHERE ';
+    /**
+     * @var string SQL LIMIT statement identifier.
+     */
+    const LIMIT = ' LIMIT ';
+    /**
+     * @var string SQL SET statement identifier.
+     */
+    const SET = ' SET ';
+    /**
+     * @var string SQL GROUP BY statement identifier.
+     */
+    const GROUOPBY = ' GROUP BY ';
+    /**
+     * @var string SQL GROUP BY statement identifier.
+     */
+    const ORDERBY = ' ORDER BY ';
 
     /**
      * Executes the SQL query and returns the execution result status.
@@ -62,16 +78,18 @@ interface SQLClientInterface {
      * @return mixed - array if execution was successful. NULL if an error occured.
      */
     public static function execSelect ($fields, $from, $where, $groupBy, $orderBy, $limit, $link);
+
     /**
-     * Prepares and executes SQL UPDATE statement.
-     * @param $from string - comma separated list of tables to be used for update.
-     * @param $set string - string defining the SQL SET expression.
-     * @param $where string - UPDATE query condition expression.
-     * @param $orderBy string - specifies the order of UPDATE query. Could not be used for multiple-table syntax.
-     * @param $limit string - UPDATE query LIMIT expression. Could not be used for multiple-table syntax.
-     * @return integer - zero if execution was successful. Non-zero if an error occurred.
+     * @param $fields string - comma separated list of fields to select.
+     * @param $from string - comma separated list of table names to use for select query.
+     * @param $vals string - comma separated list of new values to set.
+     * @param $where string - SELECT query condition expression.
+     * @param $orderBy string - SELECT query ORDER BY expression string.
+     * @param $limit string - SELECT query LIMIT expression.
+     * @return unknown_type
      */
-    public static function execUpdate ($from, $set, $where, $orderBy, $limit, $link);
+    public static function execUpdate ($fields, $from, $vals, $where, $orderBy, $limit, $link);
+
     /**
      * Prepares and executes SQL DELETE statement.
      * @param $from

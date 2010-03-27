@@ -11,6 +11,19 @@
     # include all required code
 	include_once 'global-includes.php';
 
+
+/*	$client = new SQLClient();
+    $link = $client->connect('mlslviv', 'localhost', 'root', '', 'UTF8');
+    $result = $client->execSelect('*', 'realty_data', null, null, null, '0, 3', $link);
+
+    if(!$result){
+        die(mysql_error());
+    }
+
+    header('Charset', 'utf-8');
+    print_r($result);
+*/
+
 	# session may be started now
 	//SessionService::startSession();
 

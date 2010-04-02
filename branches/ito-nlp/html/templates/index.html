@@ -1,13 +1,36 @@
 <? echo XML_CONTENT_DEFINITION ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-			"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<title>iTO MVC</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="/styles/main.css" rel="stylesheet" type="text/css" />
+	<title>ITO Global - Global IT Outsourcing company</title>
+	<link type="text/css" rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
+<h1>
+	<img src="images/ito-global-logo.png" alt="ITO Global" class="logo" />
+	<b>Your global IT outsourcing partner</b>
+    <a href="registration.html">Registration</a>
+</h1>
 
+<form action="login.html" method="post">
+	<fieldset class="loginFrm">	
+		<legend><b>Members login:</b></legend>
+		<br />
+		<label for="username">Username:</label>
+		<br />
+		<input type="text" id="username" name="username"/>
+		<br />
+		<label for="password">Password:</label>
+		<br />
+		<input type="password" id="password" name="password"/>
+		<input type="submit" name="submit" value="Login" class="submitBtn"/>
+	</fieldset>
+</form>
+
+<div class="footer">
+	<p>Copyright &copy;2009 ITO-Global by <a href="http://www.ito-global.com" title="ITO Global - Global IT Outsourcing company">www.ito-global.com</a></p>
+</div>
 </body>
 </html>

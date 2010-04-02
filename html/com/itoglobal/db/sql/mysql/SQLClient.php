@@ -1,5 +1,5 @@
 <?php
-require_once 'com/ito-global/db/sql/SQLClientInterface.php';
+require_once 'com/itoglobal/db/sql/SQLClientInterface.php';
 /**
  * SQLClient is a basic implementation of SQLClientInterface providing simplification for
  * some of native MySQL Extension's functions, connection errors handling and SQL statement composing.
@@ -41,7 +41,7 @@ class SQLClient implements SQLClientInterface {
         mysql_close($link);
     }
     /* (non-PHPdoc)
-	 * @see com/ito-global/db/sql/SQLClientInterface#exec($sql, $link)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#exec($sql, $link)
 	 */
     public static function exec ($sql, $link) {
         $result = mysql_query($sql, $link);
@@ -51,7 +51,7 @@ class SQLClient implements SQLClientInterface {
         return $result;
     }
     /* (non-PHPdoc)
-	 * @see com/ito-global/db/sql/SQLClientInterface#execInsert($fields, $values, $into, $link)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execInsert($fields, $values, $into, $link)
 	 */
     public static function execInsert ($fields, $values, $into, $link) {
         $sql = self::INSERT . self::INTO . $into . " (" . $fields . ") VALUES (" . $values . ")";

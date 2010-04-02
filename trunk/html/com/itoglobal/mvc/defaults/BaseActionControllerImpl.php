@@ -59,7 +59,7 @@ class BaseActionControllerImpl implements BaseActionController {
 
 	/**
 	 * Basic implementation of onSuccess method defined by
-	 * com.ito-global.mvc.defaults.BaseActionController interface.
+	 * com.itoglobal.mvc.defaults.BaseActionController interface.
 	 *
      * @see BaseActionController->onSuccess($actionParams)
      */
@@ -69,7 +69,7 @@ class BaseActionControllerImpl implements BaseActionController {
 
 	/**
 	 * Basic implementation of onFailure method defined by
-	 * com.ito-global.mvc.defaults.BaseActionController interface.
+	 * com.itoglobal.mvc.defaults.BaseActionController interface.
 	 *
      * @see BaseActionController->onFailure($actionParams)
      */
@@ -79,7 +79,7 @@ class BaseActionControllerImpl implements BaseActionController {
 
 	/**
 	 * Basic implementation of onAbort method defined by
-	 * com.ito-global.mvc.defaults.BaseActionController interface.
+	 * com.itoglobal.mvc.defaults.BaseActionController interface.
 	 *
      * @see BaseActionController->onAbort($actionParams)
      */

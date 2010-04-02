@@ -5,7 +5,7 @@
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.0.xsd" >
 
 	<action name="/index.html" id="home">
-		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />
 		<!-- forwards id="navigation">
 			<target name="Start" location="/start-operating.html" />
@@ -15,7 +15,7 @@
 	</action>
 	
 	<action name="/login.html" id="home">
-		<controller class="com.ito-global.users.AuthenticationController" 
+		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="login" />
 		<template name="home.html" path="templates/home.html"/>
 		<forwards>
@@ -25,12 +25,12 @@
 	
 	
 	<action name="/registration.html" id="home">
-		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="registration.html" path="templates/registration.html" />
 	</action>
 	
 	<action name="/registr.html" id="home">
-		<controller class="com.ito-global.users.RegistrationController" 
+		<controller class="com.itoglobal.users.RegistrationController" 
 			method="registration"/>
 		<template name="home.html" path="templates/home.html" />
 		<forwards>

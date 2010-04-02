@@ -1,6 +1,6 @@
 <?php
 
-require_once 'com/ito-global/mvc/defaults/BaseActionControllerImpl.php';
+require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
 	

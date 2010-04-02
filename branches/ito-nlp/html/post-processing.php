@@ -12,5 +12,4 @@
         $pattern = '/_i18n\((.*?)\)/i';
         return preg_replace_callback($pattern, 'callback', $mssg);
     }
-
 ?>

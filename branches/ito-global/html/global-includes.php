@@ -11,20 +11,20 @@
 	# set MVC libraries include path
 	//set_include_path(get_include_path() . PATH_SEPARATOR . 'D:\Work\www\ito-mvc\html');
 
-	require_once 'com/ito-global/services/xml/XsltHandler.php';
-    require_once 'com/ito-global/services/SessionService.php';
-    require_once 'com/ito-global/services/StorageService.php';
+	require_once 'com/itoglobal/services/xml/XsltHandler.php';
+    require_once 'com/itoglobal/services/SessionService.php';
+    require_once 'com/itoglobal/services/StorageService.php';
 
-	require_once 'com/ito-global/mvc/models/ModelAndView.php';
-	require_once 'com/ito-global/mvc/services/ActionsMappingResolver.php';
-	require_once 'com/ito-global/mvc/services/MVCService.php';
-    require_once 'com/ito-global/mvc/services/TemplateEngine.php';
+	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
+	require_once 'com/itoglobal/mvc/services/ActionsMappingResolver.php';
+	require_once 'com/itoglobal/mvc/services/MVCService.php';
+    require_once 'com/itoglobal/mvc/services/TemplateEngine.php';
 
-	require_once 'com/ito-global/services/messages/MessageService.php';
-	require_once 'com/ito-global/services/messages/LocalizationFactory.php';
-    require_once 'com/ito-global/services/http/HttpHelper.php';
+	require_once 'com/itoglobal/services/messages/MessageService.php';
+	require_once 'com/itoglobal/services/messages/LocalizationFactory.php';
+    require_once 'com/itoglobal/services/http/HttpHelper.php';
 
-    require_once 'com/ito-global/db/sql/mysql/SQLClient.php';
+    require_once 'com/itoglobal/db/sql/mysql/SQLClient.php';
 
 
 ?>

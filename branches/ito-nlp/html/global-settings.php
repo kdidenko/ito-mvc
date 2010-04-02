@@ -9,6 +9,8 @@
 	// localization:
 	define('DEFAULT_LOCALE', 'en');
 	
+	//TODO: setting below must be stored somewhere else and have to be dynamically loaded 
+	//		by smth. like "SettingsService" which must be also implemented!
 	// db settings
 	$db_host = 'localhost';
 	$db_name = 'ito_trainings';		

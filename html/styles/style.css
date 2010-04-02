@@ -1,0 +1,238 @@
+body {
+	background-color: #EEF3FA;	
+	font: 14px Tahoma, Arial, Verdana, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+dl{
+	overflow: hidden;
+}
+
+dt {
+	clear:both;
+	float:left;
+	text-align:right;
+	width:35%;
+	margin: 2px;
+}
+
+dd {
+	float:left;
+	text-align:left;
+	width:58%;
+	margin: 2px;
+}
+
+a:hover {
+	text-decoration: none;
+	color: red;
+}
+
+a {
+	text-decoration: underline;
+	color: black;
+}
+
+p {
+	font: 12px Tahoma, Arial, Verdana, sans-serif;	
+	margin: 10px 0 20px 0;
+}
+
+h1{
+	margin: 5px 10px 5px 0px;
+	font: 16px Tahoma, Arial, Verdana, sans-serif;	
+}
+
+h2{
+	font: 14px Tahoma, Arial, Verdana, sans-serif;	
+	margin: 0;
+}
+
+img {
+	border: none;
+}
+
+
+
+.level0 {
+	background-color: #ffffff;
+	width: 1000px;
+	margin: 0 auto;
+	border-left:45px solid white;
+	border-right:45px solid white;
+	display: block;
+	text-align: center;
+	clear: both;
+	overflow: hidden;
+	align: center;
+}
+
+.logo {
+	margin: 50px 0 30px 0; 
+	width: 250px;
+	height: 70px;
+	background-color: #EFEFEF;
+	float: left;
+	line-height: 70px;
+	display: block;
+}
+
+.useful-bar{
+	display: block;
+	line-height: 70px;
+	margin: 50px 0 30px 0; 
+	width: 250px;
+	height: 70px;
+	float: right;
+	background-color: #EFEFEF;
+}
+
+.useful-bar li{
+	float: left;
+	list-style: none; 
+	margin-left: 5px;
+}
+
+.menu-h { 
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.menu-h a{
+	color: white;
+	text-decoration: underline;
+}
+
+.menu-h li {
+	display: block;
+	line-height: 35px;
+	width: 170px;
+	height: 35px;
+	float: left; 
+	list-style: none;  
+	background-color: #999999;
+	margin-right: 10px;
+}
+
+.search{
+	width: 250px;
+	height: 35px;
+	line-height: 35px;
+	float: right;
+	background-color: #EFEFEF;
+}
+
+
+.content{ 
+	margin: 30px 0;
+	text-align: left;	
+	float:right;
+	width:730px;
+	display: block;
+}
+
+.sidebar {
+	margin: 30px 0;
+	float: left;
+	width: 240px;
+	display: block;
+}
+
+.content a{
+	text-decoration: underline;
+}
+
+tr{
+	vertical-align: top;
+}
+
+td{
+	width: 50%;
+	padding: 10px 15px 10px 25px;
+}
+
+.buton a {
+	color: white; 
+	height: 20px;
+	line-height: 20px;
+	background-color: #999999;
+}
+
+.title{
+background-color: #EFEFEF;
+}
+
+.title h2{
+float: left;
+}
+
+.title select{
+float: right;
+}
+
+.form{
+background-color: #EFEFEF;
+height: 190px;
+margin: 0;
+}
+
+.form b {
+	padding-top: 10px;
+	display: block;		
+}
+
+.form a {
+	padding: 10px;
+	display: block;		
+}
+
+
+.champion{
+background-color: #EFEFEF;
+height: 185px;
+margin: 25px 0 0 0;
+}
+
+.footer {
+	line-height: 70px;
+	height: 70px;
+	background-color: #EFEFEF;		
+	margin: 0 0 30px;
+}
+
+.registration{
+	margin: 30px auto;
+	height: 30px;
+	line-height: 30px;
+	width: 600px;
+	padding: 10px;
+	background-color: #EFEFEF;
+	color: black;
+}
+
+.reg_form{
+	margin: 30px;
+	font-size: 11px;	
+}
+
+.reg_form dt{
+	clear:both;
+	float:left;
+	text-align:right;
+	margin: 3px;
+	width: 40%
+}
+
+.reg_form dd{
+	float:left;
+	text-align:left;
+	margin: 3px 3px 3px 20px;
+	width: 45%
+}
+
+.error p{
+	margin: 3px;
+	color: red;
+}@CHARSET "UTF-8";

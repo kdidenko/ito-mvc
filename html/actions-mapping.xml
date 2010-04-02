@@ -5,7 +5,7 @@
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.0.xsd" >
 
 	<action name="/index.html" id="home">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />
 		<!-- forwards id="navigation">
 			<target name="Start" location="/start-operating.html" />
@@ -14,28 +14,24 @@
 		</forwards-->
 	</action>
 	
-	<action name="/login.html" id="home">
-		<controller class="com.itoglobal.users.AuthenticationController" 
-			method="login" />
-		<template name="home.html" path="templates/home.html"/>
-		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
-		</forwards>
-	</action>	
-	
-	
-	<action name="/registration.html" id="home">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="registration.html" path="templates/registration.html" />
+	<action name="/training-exercises.html" id="exercises-browse">
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/index.html" />	
 	</action>
 	
-	<action name="/registr.html" id="home">
-		<controller class="com.itoglobal.users.RegistrationController" 
-			method="registration"/>
-		<template name="home.html" path="templates/home.html" />
-		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
-		</forwards>
+	<action name="/training-categories.html" id="categories-browse">
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/index.html" />	
+	</action>
+	
+	<action name="/training-faq.html" id="faq">
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/index.html" />	
+	</action>	
+	
+	<action name="/registration.html" id="registration">
+		<controller class="com.ito-global.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/registration.html" />	
 	</action>
 	
 </actions>

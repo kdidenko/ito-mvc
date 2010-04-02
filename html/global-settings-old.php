@@ -8,10 +8,4 @@
 
 	// localization:
 	define('DEFAULT_LOCALE', 'en');
-	
-	// db settings
-	$db_host = 'localhost';
-	$db_name = 'ito_trainings';		
-	$db_user = 'ito';		
-	$db_pass = 'Ssn123456';
 ?>

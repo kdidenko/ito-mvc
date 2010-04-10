@@ -34,4 +34,26 @@
 		<template name="index.html" path="templates/registration.html" />	
 	</action>
 	
+	<action name="/scoupe.html" id="scoupe">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="scoupe.html" path="templates/scoupe.html" />	
+	</action>
+	
+	<action name="/scoupe_create.html" id="scoupe">
+		<controller class="com.itoglobal.services.ContextService" 
+			method="CreateContext"/>
+		<template name="scoupe.html" path="templates/scoupe.html" />	
+		<forwards>
+			<target location="/home.html" name="scoupe" condition="onfailure"/>		
+		</forwards>
+	</action>
+	
+	<action name="/scoupe_delete.html" id="scoupe">
+		<controller class="com.itoglobal.services.ContextService" 
+			method="DeleteContext"/>
+		<template name="scoupe.html" path="templates/scoupe.html" />	
+		<forwards>
+			<target location="/home.html" name="scoupe" condition="onfailure"/>		
+		</forwards>
+	</action>
 </actions>

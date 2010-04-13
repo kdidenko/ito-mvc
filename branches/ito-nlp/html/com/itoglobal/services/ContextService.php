@@ -7,6 +7,12 @@ class ContextService extends BaseActionControllerImpl {
 	const ALIAS = 'alias';
 	const DOMEN = 'dom';
 	const DELETE = 'delete';
+	const CONTEXT = 'context';
+	const IMAGES = 'images';
+	const TEMPLATES = 'templates';
+	const STYLES = 'styles';
+	const INC = 'inc';
+	const PATH_SEPARATOR = '/'; 
 	
 	public static $res;
 	public static $view;
@@ -19,53 +25,58 @@ class ContextService extends BaseActionControllerImpl {
 		$alias = $_POST[self::ALIAS];
 		//self::$res = StorageService::initSessionStorage($domen);
 		
-		$path = StorageService::getStoragePath($domen);
+		/*$path = StorageService::getStoragePath($domen);
 		$list = StorageService::readDir($path);
         foreach ($list as $next){
        		self::$view .= $next . "<br/>"; 	
-        }
+        }*/
         
         
-        
-        file_exists('context/') ? '' : mkdir('context/', 0755, true) ;
-        file_exists('images/' . $alias) ? '' : mkdir('images/' . $alias, 0755, true) ;
-        file_exists('templates/' . $domen . '/inc') ? '' : mkdir('templates/' . $domen . '/inc', 0755, true) ;
+        //creating struct
+        self::CreateDirectory(self::CONTEXT . self::PATH_SEPARATOR);
+        self::CreateDirectory(self::IMAGES . self::PATH_SEPARATOR . $alias);
+        self::CreateDirectory(self::STYLES . self::PATH_SEPARATOR . $alias);
+        self::CreateDirectory(self::TEMPLATES . self::PATH_SEPARATOR . $domen . self::PATH_SEPARATOR . self::INC . self::PATH_SEPARATOR);
 		
-        $file = 'context/' . $domen . '-mapping.xml';
-	    if( !file_exists($file)){
-	        $file = fopen($file, 'w') or die("can't open file");
-			fclose($file);
-        }
+        self::CreateFile(self::CONTEXT . self::PATH_SEPARATOR . $domen . '-mapping.xml');
+	    self::CreateFile(self::TEMPLATES . self::PATH_SEPARATOR . $domen . self::PATH_SEPARATOR . 'template.xml');
+		self::CreateFile(self::TEMPLATES . self::PATH_SEPARATOR . $domen . self::PATH_SEPARATOR . self::INC . self::PATH_SEPARATOR . 'index.html',  "Hello Word, I am " . $domen);
 		
-        $file = 'templates/' . $domen . '/template.xml';
-		if( !file_exists($file)){
-			$file = fopen($file, 'w') or die("can't open file");
-			fclose($file);
-		}
-		
-		$file = 'templates/' . $domen . '/inc/index.html';
-		if( !file_exists($file)){
-			$file = fopen($file, 'w') or die("can't open file");
-	        fwrite($file, "Hello Word, I am " . $domen);
-	        fclose($file);
-		}
 		return $mvc;
 	} 
-	
-	
 	
 	public function DeleteContext($actionParams, $requestParams){
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
+		$dir = $_POST[self::DELETE];
+		self::DeleteDirectory($dir);
 		
-		$domen = $_POST[self::DELETE];
-		self::$res = StorageService::clearSessionStorage($domen);
 		return $mvc;
 	} 
+	
+	private function CreateDirectory($path){
+		file_exists($path) ? '' : mkdir($path, 0755, true) ;
+	} 
+	
+	private function CreateFile($path, $context = null) {
+		if( !file_exists($path)){
+	        $path = fopen($path, 'w') or die("can't open file");
+			isset($context) ? fwrite($path, $context) : fwrite($path, $context);
+	        fclose($path);
+        }
+	}
 		
-
-
+	private function DeleteDirectory($dir) {
+        if (!file_exists($dir)) return true;
+        if (!is_dir($dir)) return unlink($dir);
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') continue;
+            if (!self::deleteDirectory($dir . self::PATH_SEPARATOR . $item)) return false;
+        }
+        return rmdir($dir);
+    }
+	
 
 
 }

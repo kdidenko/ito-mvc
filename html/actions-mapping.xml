@@ -14,17 +14,27 @@
 		</forwards-->
 	</action>
 	
-	<action name="/training-exercises.html" id="exercises-browse">
+	<action name="/schools.html" id="schools-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />	
 	</action>
 	
-	<action name="/training-categories.html" id="categories-browse">
+	<action name="/trainings.html" id="trainings-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />	
 	</action>
 	
-	<action name="/training-faq.html" id="faq">
+	<action name="/community.html" id="community">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/index.html" />	
+	</action>	
+	
+	<action name="/help.html" id="help">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/index.html" />	
+	</action>
+	
+	<action name="/about.html" id="about">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/index.html" />	
 	</action>	

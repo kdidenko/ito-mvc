@@ -36,7 +36,8 @@ class AuthenticationController extends BaseActionControllerImpl {
 				$this->forwardActionRequest ( $location );
 			}
 		} else {
-			$error = "please try again";
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );
 		}
 		
 		return $mvc;

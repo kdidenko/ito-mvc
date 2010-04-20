@@ -6,6 +6,8 @@ class RegistrationController extends BaseActionControllerImpl {
 	
 	public static $error = '';
 	
+	const ID = 'id';
+	
 	const USERNAME = 'username';
 	
 	const FIRSTNAME = 'firstname';
@@ -19,6 +21,8 @@ class RegistrationController extends BaseActionControllerImpl {
 	const CONFIRM = 'confirm_password';
 	
 	const CRDATE = 'crdate';
+	
+	const VALIDATION = 'validation_id';
 	
 	const USERS = 'users';
 	
@@ -39,36 +43,55 @@ class RegistrationController extends BaseActionControllerImpl {
 
 			//TODO: error reporting
 			//$error - mistakes
-			if (self::$error != NULL) {
-				$location = $this->onFailure ( $actionParams );
-				$this->forwardActionRequest ( $location );
-			} else {
+			if (self::$error == NULL) {
 				// Insert new users to DB
-				$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE;
-				$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
+				$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
+				$hash = md5 ( rand ( 1, 9999 ) );
+				$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "'";
 				$into = self::USERS;
 				$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
 				$result = SQLClient::execInsert ( $fields, $values, $into, $link );
+				
+				self::sendMail ( $requestParams [self::EMAIL], $hash, $requestParams [self::USERNAME] );
+				$location = $this->onSuccess ( $actionParams );
+				$this->forwardActionRequest ( $location );
+			} else {
+				$location = $this->onFailure ( $actionParams );
+				$this->forwardActionRequest ( $location );
 			}
 		}
 		return $mvc;
 	
 	}
 	
+	private function sendMail($email, $hash, $user) {
+		$fields = self::ID;
+		$from = self::USERS;
+		$where = self::USERNAME . " = '" . $user . "'";
+		$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
+		$result = SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );
+		
+		$subject = 'Confirm registration';
+		$url = 'http://ito-nlp/validation?id=' . $result [0] [self::ID] . '&validation=' . $hash;
+		$message = "Please click here " . $url;
+		mail ( $email, $subject, $message );
+		return true;
+	}
+	
 	private function checkUsername($username) {
-		if (!$username) {
+		if (! $username) {
 			return '<p>Please enter your User Name</p>';
 		}
 	}
 	
 	private function checkName($name) {
-		if (!$name) {
+		if (! $name) {
 			return '<p>Please enter your First Name</p>';
 		}
 	}
 	
 	private function checkLastname($lastname) {
-		if (!$lastname) {
+		if (! $lastname) {
 			return '<p>Please enter your Last Name</p>';
 		}
 	}

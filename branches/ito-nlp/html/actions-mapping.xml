@@ -29,6 +29,11 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
 	
+	<action name="/discussions.html" id="discussions">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>	
+	
 	<action name="/help.html" id="help">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	

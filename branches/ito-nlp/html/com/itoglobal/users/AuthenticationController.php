@@ -23,7 +23,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
 
-		$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
+		$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
 		$result = SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );
 		
 		if (isset ( $result [0] [self::PASSWORD] )) {

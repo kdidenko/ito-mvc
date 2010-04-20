@@ -25,35 +25,35 @@ class RegistrationController extends BaseActionControllerImpl {
 	public function registration($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		if ($_POST){
-		self::$error = '';
-		self::$error .= self::checkUsername ( $requestParams[self::USERNAME] );
-		self::$error .= self::checkName ( $requestParams[self::FIRSTNAME] );
-		self::$error .= self::checkEmail ( $requestParams[self::EMAIL] );
-		self::$error .= self::checkPassword ( $requestParams[self::PASSWORD] );
-		self::$error .= self::checkConfirmPassword ( $requestParams[self::PASSWORD], $requestParams[self::CONFIRM] );
-		//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
-		//TODO: create birthday field!        
-		
-		
-		//TODO: error reporting
-		//$error - mistakes
-		if (self::$error != NULL) {
-			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );
-		}
-		
-		// Insert new users to DB
-		$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE;
-		$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
-		$into = self::USERS;
-		$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
-		$result = SQLClient::execInsert ( $fields, $values, $into, $link );
+		if ($_POST) {
+			self::$error = '';
+			self::$error .= self::checkUsername ( $requestParams [self::USERNAME] );
+			self::$error .= self::checkName ( $requestParams [self::FIRSTNAME] );
+			self::$error .= self::checkLastname ( $requestParams [self::LASTNAME] );
+			self::$error .= self::checkEmail ( $requestParams [self::EMAIL] );
+			self::$error .= self::checkPassword ( $requestParams [self::PASSWORD] );
+			self::$error .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
+			//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
+			//TODO: create birthday field!        
+			
+
+			//TODO: error reporting
+			//$error - mistakes
+			if (self::$error != NULL) {
+				$location = $this->onFailure ( $actionParams );
+				$this->forwardActionRequest ( $location );
+			} else {
+				// Insert new users to DB
+				$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE;
+				$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
+				$into = self::USERS;
+				$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
+				$result = SQLClient::execInsert ( $fields, $values, $into, $link );
+			}
 		}
 		return $mvc;
-		
-	}
 	
+	}
 	
 	private function checkUsername($username) {
 		if (!$username) {
@@ -78,7 +78,7 @@ class RegistrationController extends BaseActionControllerImpl {
 			if (! preg_match ( '/^(([^<>()[\]\\.,;:\s@"\']+(\.[^<>()[\]\\.,;:\s@"\']+)*)|("[^"\']+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\d\-]+\.)+[a-zA-Z]{2,}))$/', $email )) {
 				return "<p>Wrong email. Please enter a correct email</p>";
 			}
-		}else{
+		} else {
 			return '<p>Please enter your email address.</p>';
 		}
 	}

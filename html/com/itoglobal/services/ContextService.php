@@ -1,9 +1,11 @@
 <?php
 
+//TODO: ContextService refactoring - methods related top the file systemm must be moved to StorageService class  
+
 require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class ContextService extends BaseActionControllerImpl {
-	
+	//TODO: move IMAGES, TEMPLATES, STYLES, PATH_SEPARATOR 	to StorageService
 	/**
 	 * @var string - alias for new web site
 	 */
@@ -36,6 +38,7 @@ class ContextService extends BaseActionControllerImpl {
 	 * @var string - inc directory name
 	 */
 	const INC = 'inc';
+
 	const PATH_SEPARATOR = '/';
 	
 	public static $res;
@@ -77,10 +80,12 @@ class ContextService extends BaseActionControllerImpl {
 		return $mvc;
 	}
 	
+	//TODO: move to StorageService
 	private function CreateDirectory($path) {
 		file_exists ( $path ) ? '' : mkdir ( $path, 0755, true );
 	}
-	
+
+	//TODO: move to StorageService	
 	private function CreateFile($path, $context = null) {
 		if (! file_exists ( $path )) {
 			$path = fopen ( $path, 'w' ) or die ( "can't open file" );
@@ -89,6 +94,8 @@ class ContextService extends BaseActionControllerImpl {
 		}
 	}
 	
+	
+	//TODO: move to StorageService	
 	private function DeleteDirectory($dir) {
 		if (! file_exists ( $dir ))
 			return true;

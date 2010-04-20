@@ -132,11 +132,11 @@ class StorageService {
 	}
 
 	
-	public function CreateDirectory($path) {
+	public function createDirectory($path) {
 		file_exists ( $path ) ? '' : mkdir ( $path, 0755, true );
 	}
 	
-	public function CreateFile($path, $context = null) {
+	public function createFile($path, $context = null) {
 		if (! file_exists ( $path )) {
 			$path = fopen ( $path, 'w' ) or die ( "can't open file" );
 			isset ( $context ) ? fwrite ( $path, $context ) : fwrite ( $path, $context );
@@ -144,7 +144,7 @@ class StorageService {
 		}
 	}
 	
-	public function DeleteDirectory($dir) {
+	public function deleteDirectory($dir) {
 		if (! file_exists ( $dir ))
 			return true;
 		if (! is_dir ( $dir ))

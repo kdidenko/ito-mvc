@@ -17,7 +17,7 @@ class ContextService extends BaseActionControllerImpl {
 	 */
 	const DELETE = 'delete';
 
-	public function CreateContext($actionParams, $requestParams) {
+	public function createContext($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -26,24 +26,24 @@ class ContextService extends BaseActionControllerImpl {
 		
 		
 		//creating struct
-		StorageService::CreateDirectory ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR );
-		StorageService::CreateDirectory ( StorageService::IMAGES . StorageService::PATH_SEPARATOR . $alias );
-		StorageService::CreateDirectory ( StorageService::STYLES . StorageService::PATH_SEPARATOR . $alias );
-		StorageService::CreateDirectory ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . StorageService::INC . StorageService::PATH_SEPARATOR );
+		StorageService::createDirectory ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR );
+		StorageService::createDirectory ( StorageService::IMAGES . StorageService::PATH_SEPARATOR . $alias );
+		StorageService::createDirectory ( StorageService::STYLES . StorageService::PATH_SEPARATOR . $alias );
+		StorageService::createDirectory ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . StorageService::INC . StorageService::PATH_SEPARATOR );
 		
-		StorageService::CreateFile ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR . $domen . '-mapping.xml' );
-		StorageService::CreateFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . 'template.xml' );
-		StorageService::CreateFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . StorageService::INC . StorageService::PATH_SEPARATOR . 'index.html', "Hello Word, I am " . $domen );
+		StorageService::createFile ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR . $domen . '-mapping.xml' );
+		StorageService::createFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . 'template.xml' );
+		StorageService::createFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . StorageService::INC . StorageService::PATH_SEPARATOR . 'index.html', "Hello Word, I am " . $domen );
 		
 		return $mvc;
 	}
 	
-	public function DeleteContext($actionParams, $requestParams) {
+	public function deleteContext($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$dir = $_POST [self::DELETE];
-		StorageService::DeleteDirectory ( $dir );
+		StorageService::deleteDirectory ( $dir );
 		
 		return $mvc;
 	}

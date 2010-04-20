@@ -47,7 +47,7 @@ class RegistrationController extends BaseActionControllerImpl {
 				$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE;
 				$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
 				$into = self::USERS;
-				$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
+				$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
 				$result = SQLClient::execInsert ( $fields, $values, $into, $link );
 			}
 		}

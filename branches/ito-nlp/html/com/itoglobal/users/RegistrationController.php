@@ -72,9 +72,10 @@ class RegistrationController extends BaseActionControllerImpl {
 		$result = SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );
 		
 		$subject = 'Confirm registration';
-		$url = 'http://ito-nlp/validation?id=' . $result [0] [self::ID] . '&validation=' . $hash;
+		$url = 'http://' . $_SERVER[SERVER_NAME] . '/validation.html?id=' . $result [0] [self::ID] . '&validation=' . $hash;
 		$message = "Please click here " . $url;
-		mail ( $email, $subject, $message );
+		$headers  = 'From:' . $_SERVER[SERVER_NAME];
+		mail ( $email, $subject, $message, $headers );
 		return true;
 	}
 	

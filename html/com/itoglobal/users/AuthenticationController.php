@@ -21,14 +21,14 @@ class AuthenticationController extends BaseActionControllerImpl {
 
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD;
 		$from = self::USERS;
-		$where = self::USERNAME . " = '" . $_POST [self::USERNAME] . "'";
+		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
 
 		$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
 		$result = SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );
 		
 		if (isset ( $result [0] [self::PASSWORD] )) {
 			$id = $result [0] [self::ID];
-			if ($result [0] [self::PASSWORD] == $_POST [self::PASSWORD]) {
+			if ($result [0] [self::PASSWORD] == $requestParams [self::PASSWORD]) {
 				$session = SessionService::getSessionId ();
 				SessionService::setAttribute ( self::USERS, $id );
 			} else {

@@ -6,7 +6,7 @@
 
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
 		<!-- forwards id="navigation">
 			<target name="Start" location="/start-operating.html" />
 			<target name="Help" location="/help-start-operating.html" />
@@ -16,33 +16,33 @@
 	
 	<action name="/schools.html" id="schools-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
 	<action name="/trainings.html" id="trainings-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
 	<action name="/community.html" id="community">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
 	
 	<action name="/help.html" id="help">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
 	<action name="/about.html" id="about">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
 	
 	<action name="/login.html" id="login">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="login" />
-		<template name="index.html" path="templates/index.html"/>
+		<template name="index.html" path="templates/layout-two-columns.html"/>
 		<forwards>
 			<target location="registration.html" name="registration" condition="onfailure"/>		
 		</forwards>

@@ -39,6 +39,15 @@
 		<template name="index.html" path="templates/index.html" />	
 	</action>	
 	
+	<action name="/login.html" id="login">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<template name="index.html" path="templates/index.html"/>
+		<forwards>
+			<target location="registration.html" name="registration" condition="onfailure"/>		
+		</forwards>
+	</action>
+	
 	<action name="/registration.html" id="registration">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/registration.html" />	

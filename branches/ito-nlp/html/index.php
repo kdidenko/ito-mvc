@@ -58,5 +58,5 @@
         # go! go! go!
 	    TemplateEngine::run($template);
 	# show it up!
-    ob_end_flush();
+    @ob_end_flush();
 ?>

@@ -58,8 +58,14 @@
 			method="registration" />
 		<template name="index.html" path="templates/layout-one-column.html" />	
 		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
+			<target location="registration.html" name="registration" condition="onfailure"/>
+			<target location="validation.html" name="validation" condition="onsuccess"/>
 		</forwards>
+	</action>
+	
+	<action name="/validation.html" id="validation">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="validation.html" path="templates/validation.html" />	
 	</action>
 	
 	<action name="/scoupe.html" id="scoupe">

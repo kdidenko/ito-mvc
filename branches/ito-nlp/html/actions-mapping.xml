@@ -41,7 +41,7 @@
 	
 	<action name="/scoupe_create.html" id="scoupe">
 		<controller class="com.itoglobal.services.ContextService" 
-			method="CreateContext"/>
+			method="createContext"/>
 		<template name="scoupe.html" path="templates/scoupe.html" />	
 		<forwards>
 			<target location="/home.html" name="scoupe" condition="onfailure"/>		
@@ -50,7 +50,7 @@
 	
 	<action name="/scoupe_delete.html" id="scoupe">
 		<controller class="com.itoglobal.services.ContextService" 
-			method="DeleteContext"/>
+			method="deleteContext"/>
 		<template name="scoupe.html" path="templates/scoupe.html" />	
 		<forwards>
 			<target location="/home.html" name="scoupe" condition="onfailure"/>		

@@ -50,7 +50,7 @@
 	
 	<action name="/registration.html" id="registration">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/registration.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 	
 	<action name="/scoupe.html" id="scoupe">

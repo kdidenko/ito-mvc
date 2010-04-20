@@ -18,32 +18,30 @@
 <!--  Navigation block end -->
 <!--  Middle block begin -->
 <div class="level0">
-<?php echo ContextService::$res . "<br/>" ?>
-<?php echo ContextService::$view; ?>
-        <form class="reg_form" action="scoupe_create.html" method="post">
-                <dl>
-                        <dt>Name of new website:</dt>
-                                <dd><input type="text" name="name_site" id="name_site" size="35"></input></dd>
-                        <dt>Domain which will be used:</dt>
-                                <dd><input type="text" name="dom" id="dom" size="35"></input></dd>
-                        <dt>Alias for new website:</dt>
-                                <dd><input type="text" name="alias" id="alias" size="35"></input></dd>
-                        <dt>Name of registrant (first name, last name):</dt>
-                                <dd><input type="text" name="name_user" id="name_user" size="35"></input></dd>
-                        <dt>Contact email:</dt>
-                                <dd><input type="text" name="email" id="email" size="35"></input></dd>
-                </dl>
-                <input type="submit" value="Submit" id="submit" name="submit"></input>
-        </form>
-       
-       
-        <form class="reg_form" action="scoupe_delete.html" method="post">
-                <dl>
-        <dt>Domain which will be deleted:</dt>
-                                <dd><input type="text" name="delete" id="delete" size="35"></input></dd>
-                 </dl>
-                <input type="submit" value="Submit" id="submit" name="submit"></input>
-        </form>
+	<form class="reg_form" action="scoupe_create.html" method="post">
+	        <dl>
+	                <dt>Name of new website:</dt>
+	                        <dd><input type="text" name="name_site" id="name_site" size="35"></input></dd>
+	                <dt>Domain which will be used:</dt>
+	                        <dd><input type="text" name="dom" id="dom" size="35"></input></dd>
+	                <dt>Alias for new website:</dt>
+	                        <dd><input type="text" name="alias" id="alias" size="35"></input></dd>
+	                <dt>Name of registrant (first name, last name):</dt>
+	                        <dd><input type="text" name="name_user" id="name_user" size="35"></input></dd>
+	                <dt>Contact email:</dt>
+	                        <dd><input type="text" name="email" id="email" size="35"></input></dd>
+	        </dl>
+	        <input type="submit" value="Submit" id="submit" name="submit"></input>
+	</form>
+	
+	
+	<form class="reg_form" action="scoupe_delete.html" method="post">
+	        <dl>
+				<dt>Domain which will be deleted:</dt>
+	            	<dd><input type="text" name="delete" id="delete" size="35"></input></dd>
+	        </dl>
+	        <input type="submit" value="Submit" id="submit" name="submit"></input>
+	</form>
         
         
 </div><!--  Middle block end -->

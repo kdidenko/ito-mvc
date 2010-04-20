@@ -9,7 +9,29 @@ class StorageService {
     const TYPE_DIR = 0;
 
     const TYPE_FILE = 1;
-
+    /**
+	 * @var string - context directory name 
+	 */
+	const CONTEXT = 'context';
+	/**
+	 * @var string - images directory name 
+	 */
+	const IMAGES = 'images';
+	/**
+	 * @var string - templates directory name 
+	 */
+	const TEMPLATES = 'templates';
+	/**
+	 * @var string - style directory name
+	 */
+	const STYLES = 'styles';
+	/**
+	 * @var string - inc directory name
+	 */
+	const INC = 'inc';
+	
+    
+    
     private static $exps = array(
     	'\*', '\?', '\(', '\)', '\|'
     );
@@ -109,5 +131,32 @@ class StorageService {
 	    return file_exists($absPass) ? unlink($absPass) : false;
 	}
 
+	
+	public function CreateDirectory($path) {
+		file_exists ( $path ) ? '' : mkdir ( $path, 0755, true );
+	}
+	
+	public function CreateFile($path, $context = null) {
+		if (! file_exists ( $path )) {
+			$path = fopen ( $path, 'w' ) or die ( "can't open file" );
+			isset ( $context ) ? fwrite ( $path, $context ) : fwrite ( $path, $context );
+			fclose ( $path );
+		}
+	}
+	
+	public function DeleteDirectory($dir) {
+		if (! file_exists ( $dir ))
+			return true;
+		if (! is_dir ( $dir ))
+			return unlink ( $dir );
+		foreach ( scandir ( $dir ) as $item ) {
+			if ($item == '.' || $item == '..')
+				continue;
+			if (! self::deleteDirectory ( $dir . self::PATH_SEPARATOR . $item ))
+				return false;
+		}
+		return rmdir ( $dir );
+	}
 }
+
 ?>

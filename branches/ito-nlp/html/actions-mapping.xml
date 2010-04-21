@@ -68,26 +68,20 @@
 		<template name="validation.html" path="templates/validation.html" />	
 	</action>
 	
-	<action name="/scoupe.html" id="scoupe">
+	<action name="/scope.html" id="scope">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="scoupe.html" path="templates/scoupe.html" />	
+		<template name="scope.html" path="templates/scope.html" />	
 	</action>
 	
-	<action name="/scoupe_create.html" id="scoupe">
-		<controller class="com.itoglobal.services.ContextService" 
-			method="createContext"/>
-		<template name="scoupe.html" path="templates/scoupe.html" />	
-		<forwards>
-			<target location="/home.html" name="scoupe" condition="onfailure"/>		
-		</forwards>
+	<action name="/scope-create.html" id="scope-create">
+		<controller class="com.itoglobal.scopes.ScopeController" 
+			method="createScope"/>
+		<template name="scope.html" path="templates/scope.html" />	
 	</action>
 	
-	<action name="/scoupe_delete.html" id="scoupe">
-		<controller class="com.itoglobal.services.ContextService" 
-			method="deleteContext"/>
-		<template name="scoupe.html" path="templates/scoupe.html" />	
-		<forwards>
-			<target location="/home.html" name="scoupe" condition="onfailure"/>		
-		</forwards>
+	<action name="/scope-delete.html" id="scope-delete">
+		<controller class="com.itoglobal.scopes.ScopeController" 
+			method="deleteScope"/>
+		<template name="scope.html" path="templates/scope.html" />	
 	</action>
 </actions>

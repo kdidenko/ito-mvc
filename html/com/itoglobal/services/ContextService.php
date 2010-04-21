@@ -1,29 +1,10 @@
 <?php
 
 require_once 'com/itoglobal/services/StorageService.php';
-require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
-class ContextService extends BaseActionControllerImpl {
-	/**
-	 * @var string - alias for new web site
-	 */
-	const ALIAS = 'alias';
-	/**
-	 * @var string - domain for new web site
-	 */
-	const DOMAIN = 'dom';
-	/**
-	 * @var string - domain which will be deleted
-	 */
-	const DELETE = 'delete';
-
-	public function createContext($actionParams, $requestParams) {
-		// calling parent to get the model
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		$domen = $requestParams [self::DOMAIN];
-		$alias = $requestParams [self::ALIAS];
-		
+class ContextService {
+	
+	public function createContext($alias, $domen) {
 		
 		//creating struct
 		StorageService::createDirectory ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR );
@@ -34,19 +15,16 @@ class ContextService extends BaseActionControllerImpl {
 		StorageService::createFile ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR . $domen . '-mapping.xml' );
 		StorageService::createFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . 'template.xml' );
 		StorageService::createFile ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $domen . StorageService::PATH_SEPARATOR . StorageService::INC . StorageService::PATH_SEPARATOR . 'index.html', "Hello Word, I am " . $domen );
-		
-		return $mvc;
 	}
 	
-	public function deleteContext($actionParams, $requestParams) {
-		// calling parent to get the model
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+	public function deleteContext($dir) {
 		
-		$dir = $_POST [self::DELETE];
-		StorageService::deleteDirectory ( $dir );
+		StorageService::deleteDirectory ( StorageService::CONTEXT . StorageService::PATH_SEPARATOR . $dir . '.com' . '-mapping.xml' );	
+		StorageService::deleteDirectory ( StorageService::IMAGES . StorageService::PATH_SEPARATOR . $dir );
+		StorageService::deleteDirectory ( StorageService::STYLES . StorageService::PATH_SEPARATOR . $dir );
+		StorageService::deleteDirectory ( StorageService::TEMPLATES . StorageService::PATH_SEPARATOR . $dir . '.com' );
 		
-		return $mvc;
-	}
+		}
 
 }
 

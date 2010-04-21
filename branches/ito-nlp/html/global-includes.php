@@ -12,6 +12,7 @@
 	//set_include_path(get_include_path() . PATH_SEPARATOR . 'D:\Work\www\ito-mvc\html');
 
 	require_once 'com/itoglobal/services/xml/XsltHandler.php';
+	require_once 'com/itoglobal/services/http/RequestDispatcher.php';	
     require_once 'com/itoglobal/services/SessionService.php';
     require_once 'com/itoglobal/services/StorageService.php';
     require_once 'com/itoglobal/services/ContextService.php';

@@ -20,8 +20,7 @@ class ActionsMappingResolver  {
      * @param $mapping the MVC mapping filename.
      * @return void
      */
-    public static function init ($mapping = self::DEFAULT_MAPPING_FILE, $context = '') {
-        self::$context = $context;
+    public static function init ($mapping = self::DEFAULT_MAPPING_FILE) {
         $xmlStr = file_get_contents($mapping);
         $xmlObj = new SimpleXMLElement($xmlStr);
         foreach ($xmlObj->action as $action) {

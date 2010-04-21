@@ -24,6 +24,11 @@ class TemplateEngine {
             echo XsltHandler::getInstance()->transform((string)$template->input['value'],(string)$template['path']);
         }
     }
+    
+    public static function execute($action) {
+    	
+    	
+    }
 
 }
 ?>

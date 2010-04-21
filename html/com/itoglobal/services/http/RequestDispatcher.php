@@ -12,6 +12,10 @@ class RequestDispatcher {
 				
 	}
 	
+	public function dispatchActionRequest($action){
+				
+	}	
+	
 	private function __construct(){
 	}
 	

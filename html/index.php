@@ -14,16 +14,19 @@
 	# session may be started now
 	//SessionService::startSession();
 
+	# get Request Dispatcher
+	$rd = RequestDispatcher::getInstance();
+	
+	
 	# initialize the http helper object
 	HttpHelper::init($_SERVER);
 
 	$uri = HttpHelper::getActionName();
 	$map = HttpHelper::getMappingParam();
-    $cntxt = HttpHelper::getContextName();
 
     $map = $map == ''  ? ActionsMappingResolver::DEFAULT_MAPPING_FILE : $map;
 	# initialize the ActionsMappingResolver and retreive the action mapping model
-	ActionsMappingResolver::init($map, $cntxt);
+	ActionsMappingResolver::init($map);	
 
 	$mappingObj = ActionsMappingResolver::getActionMapping($uri);
 	if( !isset($mappingObj) ){
@@ -42,8 +45,7 @@
 
 	# run the controller method and get an MVC model object
 	$mvc = $controller->$methodName($mappingObj, $_REQUEST);
-	$mvc->setContext($cntxt);
-
+	
 	# initialize the Messages Service
 	$messages = MessageService::getInstance();
 	$messages->loadMessages(DEFAULT_LOCALE);

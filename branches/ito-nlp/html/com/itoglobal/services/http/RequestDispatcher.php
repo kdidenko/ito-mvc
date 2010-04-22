@@ -19,7 +19,7 @@ class RequestDispatcher {
 	private function __construct(){
 	}
 	
-	public function getInstance(){
+	public static function getInstance(){
 		return (self::$instance === NULL) ? self::$instance = new self() : self::$instance;
 	}
 }

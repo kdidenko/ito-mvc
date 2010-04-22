@@ -11,16 +11,16 @@
 </head>
 <body>
 <!-- Header block begin  -->
-<?php include_once 'header.html' ?>
+<?php TemplateEngine::inclusion('header.html', $mvc)?>
 <!-- Header block end  -->
 <!--  Navigation block begin -->
-<?php include_once 'navigation.html' ?>
+<?php TemplateEngine::inclusion('navigation.html', $mvc) ?>
 <!--  Navigation block end -->
 <!--  Middle block begin -->
-<?php include_once 'one-column.html' ?>
+<?php TemplateEngine::inclusion('one-column.html', $mvc) ?>
 <!--  Middle block end -->
 <!--  Footer block begin -->
-<?php include_once 'footer.html' ?>
+<?php TemplateEngine::inclusion('footer.html', $mvc) ?>
 <!--  Footer block end -->
 </body>
 </html>

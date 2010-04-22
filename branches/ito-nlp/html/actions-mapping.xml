@@ -75,7 +75,7 @@
 
 	<action name="/scope.html" id="scope">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="scope.html" path="templates/scope.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 
 	<action name="/scope-create.html" id="scope-create">

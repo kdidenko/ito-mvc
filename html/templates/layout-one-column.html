@@ -17,7 +17,9 @@
 <?php TemplateEngine::inclusion('navigation.html', $mvc) ?>
 <!--  Navigation block end -->
 <!--  Middle block begin -->
-<?php TemplateEngine::inclusion('one-column.html', $mvc) ?>
+<div class="level0">
+<?php TemplateEngine::inclusion('views/' . $mvc->getView() . '.html', $mvc) ?>	
+</div>
 <!--  Middle block end -->
 <!--  Footer block begin -->
 <?php TemplateEngine::inclusion('footer.html', $mvc) ?>

@@ -31,7 +31,7 @@ class TemplateEngine {
 	 * @param ModelAndView the $mvc Object
 	 */
 	public static function inclusion($filename, $mvc = null) {
-		include_once $filename;
+		include_once TEMPLATES_PATH . $filename;
 	}
 	
 	public static function execute($action) {

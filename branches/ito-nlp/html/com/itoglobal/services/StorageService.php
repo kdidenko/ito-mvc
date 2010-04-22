@@ -136,10 +136,10 @@ class StorageService {
 		file_exists ( $path ) ? '' : mkdir ( $path, 0755, true );
 	}
 	
-	public function createFile($path, $context = null) {
+	public function createFile($path, $content = null) {
 		if (! file_exists ( $path )) {
 			$path = fopen ( $path, 'w' ) or die ( "can't open file" );
-			isset ( $context ) ? fwrite ( $path, $context ) : fwrite ( $path, $context );
+			isset ( $content ) ? fwrite ( $path, $content ) : fwrite ( $path, $content );
 			fclose ( $path );
 		}
 	}

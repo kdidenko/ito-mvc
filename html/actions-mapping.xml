@@ -70,7 +70,7 @@
 	
 	<action name="/validation.html" id="validation">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="validation.html" path="templates/validation.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 	
 	<action name="/scope.html" id="scope">

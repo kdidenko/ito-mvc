@@ -16,49 +16,19 @@
 
 	# get Request Dispatcher
 	$rd = RequestDispatcher::getInstance();
-	
-	
-	# initialize the http helper object
-	HttpHelper::init($_SERVER);
-
-	$uri = HttpHelper::getActionName();
-	$map = HttpHelper::getMappingParam();
-
-    $map = $map == ''  ? ActionsMappingResolver::DEFAULT_MAPPING_FILE : $map;
-	# initialize the ActionsMappingResolver and retreive the action mapping model
-	ActionsMappingResolver::init($map);	
-
-	$mappingObj = ActionsMappingResolver::getActionMapping($uri);
-	if( !isset($mappingObj) ){
-		error_log("Could not resolve the Action Mapping for request path: $uri \r Environment details: \r" .
-				print_r($_SERVER, true));
-		die($_SERVER['HTTP_HOST'] . $uri . ' Not found on server');
-	}
-
-    # get the conntroller object instance
-	$controller = MVCService::getController((string) $mappingObj->controller['class']);
-
-	# do handle action
-	$methodName = isset($mappingObj->controller['method']) ?
-	                  (string) $mappingObj->controller['method'] :
-	                          BaseActionController::MVC_DEFAULT_METHOD;
-
-	# run the controller method and get an MVC model object
-	$mvc = $controller->$methodName($mappingObj, $_REQUEST);
+	$mvc = $rd->dispatchHttpRequest($_SERVER);
 	
 	# initialize the Messages Service
-	$messages = MessageService::getInstance();
-	$messages->loadMessages(DEFAULT_LOCALE);
-
-	# get the template configuration
-	$template = $mappingObj->template;
+	//TODO: temporary disabled
+	//$messages = MessageService::getInstance();
+	//$messages->loadMessages(DEFAULT_LOCALE);
 
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!
-	    TemplateEngine::run($template, $mvc);
+	    TemplateEngine::run($mvc->getTemplate(), $mvc);
 	# show it up!
     @ob_end_flush();
 ?>

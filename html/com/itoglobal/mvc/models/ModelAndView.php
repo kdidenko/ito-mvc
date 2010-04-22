@@ -3,10 +3,24 @@
 class ModelAndView {
 
 	private $view = null;
+	
+	private $template = null;
 
 	private $context = '';
 
 	private $model = array();
+	/**
+	 * @return the $template
+	 */
+	public function getTemplate() {
+		return $this->template;
+	}
+	/**
+	 * @param $template the $template to set
+	 */
+	public function setTemplate($template) {
+		$this->template = $template;
+	}
 	/**
 	 * @return the $view
 	 */

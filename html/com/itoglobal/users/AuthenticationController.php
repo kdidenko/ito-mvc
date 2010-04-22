@@ -16,9 +16,6 @@ class AuthenticationController extends BaseActionControllerImpl {
 	public function login($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-
-
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
@@ -29,7 +26,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 		if (isset ( $result [0] [self::PASSWORD] )) {
 			$id = $result [0] [self::ID];
 			if ($result [0] [self::PASSWORD] == $requestParams [self::PASSWORD]) {
-				$session = SessionService::getSessionId ();
+				$session = SessionService::startSession();
 				SessionService::setAttribute ( self::USERS, $id );
 			} else {
 				$location = $this->onFailure ( $actionParams );

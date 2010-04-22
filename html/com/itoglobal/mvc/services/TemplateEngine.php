@@ -7,7 +7,8 @@ class TemplateEngine {
 
     const TYPE_FILE = 'FILE';
 
-    public static function run ($template, $mvc) {
+    public static function run ($mvc) {
+    	$template = $mvc->getTemplate();
         switch ((string) $template['type']) {
             case self::TYPE_XSLT:
                 self::doXSLT($template);

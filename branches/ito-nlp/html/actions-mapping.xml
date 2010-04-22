@@ -49,9 +49,14 @@
 			method="login" />
 		<template name="index.html" path="templates/layout-two-columns.html"/>
 		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
+			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
 		</forwards>
 	</action>
+	
+	<action name="/login-failed.html" id="login-failed">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>	
 	
 	<action name="/registration.html" id="registration">
 		<controller class="com.itoglobal.users.RegistrationController" 

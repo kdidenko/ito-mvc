@@ -28,7 +28,7 @@
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!
-	    TemplateEngine::run($mvc->getTemplate(), $mvc);
+	    TemplateEngine::run($mvc);
 	# show it up!
     @ob_end_flush();
 ?>

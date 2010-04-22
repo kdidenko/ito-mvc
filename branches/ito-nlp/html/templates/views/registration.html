@@ -1,0 +1,43 @@
+        <div class="registration">
+                <b>Sign Up for Online Learning Center NLP</b>
+        </div>
+        <div class="error">
+ 
+        </div>
+        <form class="reg_form" action="registration.html" method="post">
+                <dl>
+               			<dt>User Name:</dt>
+                                <dd><input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input></dd>
+                        <dt>First Name:</dt>
+                                <dd><input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input></dd>
+                        <dt>Last Name:</dt>
+                                <dd><input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input></dd>
+                        <dt>Your Email:</dt>
+                                <dd><input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input></dd>
+                        <dt>Password:</dt>
+                                <dd><input type="password" name="password" id="password" size="35"></input></dd>
+                        <dt>Confirm Password:</dt>
+                                <dd><input type="password" name="confirm_password" id="confirm_password" size="35"></input></dd>
+                        <!--<dt>Birthday:</dt>
+                                <dd>
+                                         <select name="birth_day">
+                                         <option value="">Day:</option>
+                                         <option value="1">1</option>
+                                         <option value="2">2</option>
+                                        </select>
+                                        
+                                        <select name="birth_month">
+                                        <option value="">Month:</option>
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                        </select>
+                        
+                        <select name="birth_year">
+                                        <option value="">Year:</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>                
+                        </select>
+                                </dd>                   
+                --></dl>
+                <input type="submit" value="Sign up" id="submit" name="submit"></input>
+        </form>

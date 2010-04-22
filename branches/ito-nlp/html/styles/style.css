@@ -236,3 +236,14 @@ margin: 25px 0 0 0;
 	margin: 3px;
 	color: red;
 }@CHARSET "UTF-8";
+
+.login_failed{
+	text-align: center;
+}
+
+.login_failed dd{
+	width:30%;
+}
+.login_failed dt{
+	width:45%;
+}

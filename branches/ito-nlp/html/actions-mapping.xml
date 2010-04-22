@@ -13,37 +13,37 @@
 			<target name="Cancel" location="/index.html" id="navCncl" />
 		</forwards-->
 	</action>
-	
+
 	<action name="/schools.html" id="schools-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
-	
+
 	<action name="/trainings.html" id="trainings-browse">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
-	
+
 	<action name="/community.html" id="community">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
-	
+
 	<action name="/discussions.html" id="discussions">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
-	
+
 	<action name="/help.html" id="help">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
-	
+
 	<action name="/about.html" id="about">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
-	
+
 	<action name="/login.html" id="login">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="login" />
@@ -52,12 +52,12 @@
 			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
 		</forwards>
 	</action>
-	
+
 	<action name="/login-failed.html" id="login-failed">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html"/>
 	</action>	
-	
+
 	<action name="/registration.html" id="registration">
 		<controller class="com.itoglobal.users.RegistrationController" 
 			method="registration" />
@@ -67,23 +67,23 @@
 			<target location="validation.html" name="validation" condition="onsuccess"/>
 		</forwards>
 	</action>
-	
+
 	<action name="/validation.html" id="validation">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
-	
+
 	<action name="/scope.html" id="scope">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="scope.html" path="templates/scope.html" />	
 	</action>
-	
+
 	<action name="/scope-create.html" id="scope-create">
 		<controller class="com.itoglobal.scopes.ScopeController" 
 			method="createScope"/>
 		<template name="scope.html" path="templates/scope.html" />	
 	</action>
-	
+
 	<action name="/scope-delete.html" id="scope-delete">
 		<controller class="com.itoglobal.scopes.ScopeController" 
 			method="deleteScope"/>

@@ -9,19 +9,24 @@ class RequestDispatcher {
 	private static $instance = NULL;
 	
 	public function dispatchHttpRequest($env) {
-		$result = null;
 		# initialize the http helper object
 		HttpHelper::init ( $env );
 		# retreive request parameters
-		$uri = HttpHelper::getActionName ();
+		$action = HttpHelper::getActionName ();
+		# return dispatched action result
+		return $this->dispatchActionRequest($action);
+	}
+	
+	public function dispatchActionRequest($action) {
+		$result = null;
 		$map = HttpHelper::getMappingParam ();
 		$map = $map == '' ? ActionsMappingResolver::DEFAULT_MAPPING_FILE : $map;
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
-		$mappingObj = ActionsMappingResolver::getActionMapping ( $uri );
+		$mappingObj = ActionsMappingResolver::getActionMapping ( $action );
 		if (! isset ( $mappingObj )) {
-			error_log ( "Could not resolve the Action Mapping for request path: $uri \r Environment details: \r" . print_r ( $_SERVER, true ) );
-			die ( $_SERVER ['HTTP_HOST'] . $uri . ' Not found on server' );
+			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
+			die ( $action . ' Not found on server' );
 		}
 		# get the conntroller object instance
 		$controller = MVCService::getController ( ( string ) $mappingObj->controller ['class'] );
@@ -30,11 +35,7 @@ class RequestDispatcher {
 		# run the controller method and return MVC model object
 		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
 		$result->setTemplate ( $mappingObj->template );
-		return $result;
-	}
-	
-	public function dispatchActionRequest($action) {
-	
+		return $result;	
 	}
 	
 	private function __construct() {

@@ -2,7 +2,12 @@
                 <b>Sign Up for Online Learning Center NLP</b>
         </div>
         <div class="error">
- 
+	 		<?php
+	 			$errors = $mvc->getObject('error');
+				for ($i=0; $i<count($errors); $i++){
+					echo '<p>' . $errors[$i] . '</p>';
+				}
+	 		?>
         </div>
         <form class="reg_form" action="registration.html" method="post">
                 <dl>

@@ -1,5 +1,11 @@
 <div class="registration">
-        <b>You entered wrong username or password. Please try again.</b>
+		<?php	
+				$message = $mvc->getObject('message');
+				if(!isset($message))
+				echo '<b>You entered wrong username or password. Please try again.</b>';
+				echo '<p>' . $message . '</p>';
+		?>
+        
 </div>
 <div class="login_failed"> 
 	<form action="login.html" method="post">

@@ -72,6 +72,11 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
+	
+	<action name="/confirm-registration.html" id="login-failed">
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>	
 
 	<action name="/scope.html" id="scope">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

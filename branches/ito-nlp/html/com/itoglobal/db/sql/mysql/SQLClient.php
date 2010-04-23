@@ -72,7 +72,7 @@ class SQLClient implements SQLClientInterface {
         return $result;
     }
     public static function execUpdate ($fields, $from, $vals, $where, $orderBy, $limit, $link) {
-        $sql = self::UPDATE . $fields . self::FROM . $from . self::SET . $vals;
+        $sql = self::UPDATE . $from . self::SET . $fields . '=' . $vals;
         $sql .= $where ? ' ' . self::WHERE . $where : '';
         $result = self::exec($sql, $link);
         return $result;

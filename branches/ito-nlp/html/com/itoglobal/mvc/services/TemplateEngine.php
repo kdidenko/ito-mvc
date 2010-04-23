@@ -35,7 +35,7 @@ class TemplateEngine {
 		//TODO: implement the StorageService::getFileContent method
 		$content = StorageService::getFileContent ( $filename );
 		foreach ( $vars as $key => $value ) {
-			$content .= str_replace ( $key, $value, $content );
+			$content = str_replace ( $key, $value, $content );
 		}
 		return $content;
 	}

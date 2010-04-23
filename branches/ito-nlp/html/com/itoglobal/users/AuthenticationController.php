@@ -24,6 +24,11 @@ class AuthenticationController extends BaseActionControllerImpl {
 	 */
 	const USERS = 'users';
 	
+	/**
+	 * @var string defining the enabled field name
+	 */
+	const ENABLED = 'enabled';
+	
 	/** User login handling controller method
 	 * @param the $actionParams
 	 * @param the $requestParams
@@ -32,18 +37,26 @@ class AuthenticationController extends BaseActionControllerImpl {
 	public function login($actionParams, $requestParams) {
 		# calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
 		# setting the query variables
-		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD;
+		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::ENABLED;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
+		
 		# executing the query
-		$result = DBClientHandler::getInstance()->execSelect ( $fields, $from, $where, '', '', '');
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		
 		# authenticating user login
-		if (isset ( $result [0] [self::PASSWORD] )) {
-			$id = $result [0] [self::ID];
-			if ($result [0] [self::PASSWORD] == $requestParams [self::PASSWORD]) {
-				$session = SessionService::startSession ();
-				SessionService::setAttribute ( self::USERS, $id );
+		if ($result [0] [self::ENABLED] == 1) {
+			if (isset ( $result [0] [self::PASSWORD] )) {
+				$id = $result [0] [self::ID];
+				if ($result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
+					$session = SessionService::startSession ();
+					SessionService::setAttribute ( self::USERS, $id );
+				} else {
+					$location = $this->onFailure ( $actionParams );
+					$this->forwardActionRequest ( $location );
+				}
 			} else {
 				$location = $this->onFailure ( $actionParams );
 				$this->forwardActionRequest ( $location );

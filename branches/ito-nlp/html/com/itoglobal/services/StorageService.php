@@ -157,6 +157,11 @@ class StorageService {
 		}
 		return rmdir ( $dir );
 	}
+	
+	public function getFileContent ( $filename ){
+		$file = file_get_contents($filename, true);
+		return $file;
+	}
 }
 
 ?>

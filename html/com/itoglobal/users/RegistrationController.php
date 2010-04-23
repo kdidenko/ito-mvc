@@ -3,7 +3,7 @@ require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
 	
-	public static $error = array();
+	public static $error = array ();
 	
 	const ID = 'id';
 	
@@ -26,39 +26,35 @@ class RegistrationController extends BaseActionControllerImpl {
 	const USERS = 'users';
 	
 	const ERROR = 'error';
-		
+	
 	public function registration($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if ($_POST) {
-			self::$error[0] = self::checkUsername ( $requestParams [self::USERNAME] );
-			self::$error[1] = self::checkName ( $requestParams [self::FIRSTNAME] );
-			self::$error[2] = self::checkLastname ( $requestParams [self::LASTNAME] );
-			self::$error[3] = self::checkEmail ( $requestParams [self::EMAIL] );
-			self::$error[4] = self::checkPassword ( $requestParams [self::PASSWORD] );
-			self::$error[5] = self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
+			self::$error [0] = self::checkUsername ( $requestParams [self::USERNAME] );
+			self::$error [1] = self::checkName ( $requestParams [self::FIRSTNAME] );
+			self::$error [2] = self::checkLastname ( $requestParams [self::LASTNAME] );
+			self::$error [3] = self::checkEmail ( $requestParams [self::EMAIL] );
+			self::$error [4] = self::checkPassword ( $requestParams [self::PASSWORD] );
+			self::$error [5] = self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
 			//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
 			//TODO: create birthday field!        
 			
 
-			//TODO: error reporting
-			//$error - mistakes
-			if (self::$error[0] == NULL & self::$error[1] == NULL & self::$error[2] == NULL & self::$error[3] == NULL & self::$error[4] == NULL & self::$error[5] == NULL ) {
+			if (self::$error [0] == NULL & self::$error [1] == NULL & self::$error [2] == NULL & self::$error [3] == NULL & self::$error [4] == NULL & self::$error [5] == NULL) {
 				// Insert new users to DB
 				$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
 				$hash = md5 ( rand ( 1, 9999 ) );
 				$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . $requestParams [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "'";
 				$into = self::USERS;
-				$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
-				$result = SQLClient::execInsert ( $fields, $values, $into, $link );
-				
+				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				self::sendMail ( $requestParams [self::EMAIL], $hash, $requestParams [self::USERNAME] );
 				$location = $this->onSuccess ( $actionParams );
 				$this->forwardActionRequest ( $location );
 			} else {
-				$mvc->addObject(self::ERROR, self::$error);
+				$mvc->addObject ( self::ERROR, self::$error );
 			}
-		}	
+		}
 		return $mvc;
 	
 	}
@@ -67,13 +63,11 @@ class RegistrationController extends BaseActionControllerImpl {
 		$fields = self::ID;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $user . "'";
-		$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
-		$result = SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );
-		
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$subject = 'Confirm registration';
-		$url = 'http://' . $_SERVER['SERVER_NAME'] . '/validation.html?id=' . $result [0] [self::ID] . '&validation=' . $hash;
+		$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/validation.html?id=' . $result [0] [self::ID] . '&validation=' . $hash;
 		$message = "Please click here " . $url;
-		$headers  = 'From: Admin noreply@' . $_SERVER['SERVER_NAME'];
+		$headers = 'From: Admin noreply@' . $_SERVER ['SERVER_NAME'];
 		mail ( $email, $subject, $message, $headers );
 		return true;
 	}
@@ -81,6 +75,13 @@ class RegistrationController extends BaseActionControllerImpl {
 	private function checkUsername($username) {
 		if (! $username) {
 			return 'Please enter your User Name';
+		} else {
+			$where = self::USERNAME . " = '" . $username . "'";
+			$result = DBClientHandler::getInstance ()->execSelect ( self::USERNAME, self::USERS, $where, '', '', '' );
+			if (isset ( $result [0] [self::USERNAME] )) {
+				return 'There is an existing account associated with this User Name.';
+				break;
+			}
 		}
 	}
 	
@@ -100,6 +101,13 @@ class RegistrationController extends BaseActionControllerImpl {
 		if ($email) {
 			if (! preg_match ( '/^(([^<>()[\]\\.,;:\s@"\']+(\.[^<>()[\]\\.,;:\s@"\']+)*)|("[^"\']+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\d\-]+\.)+[a-zA-Z]{2,}))$/', $email )) {
 				return "Wrong email. Please enter a correct email";
+			} else {
+				$where = self::EMAIL . " = '" . $email . "'";
+				$result = DBClientHandler::getInstance ()->execSelect ( self::EMAIL, self::USERS, $where, '', '', '' );
+				if (isset ( $result [0] [self::EMAIL] )) {
+					return 'There is an existing account associated with this email.';
+					break;
+				}
 			}
 		} else {
 			return 'Please enter your email address.';

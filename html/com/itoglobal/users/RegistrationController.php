@@ -64,7 +64,7 @@ class RegistrationController extends BaseActionControllerImpl {
 			}
 		} else {
 			self::confirmRegistration ( $requestParams [self::ID], $requestParams [self::VALIDATION] );
-			$message = 'You complite registration. Your registration successful';
+			$message = 'You completed registration. Your registration successful';
 			$mvc->addObject ( 'message', $message );
 		}
 		return $mvc;

@@ -28,5 +28,5 @@
 	require_once 'com/itoglobal/services/messages/LocalizationFactory.php';
     require_once 'com/itoglobal/services/http/HttpHelper.php';
 
-    require_once 'com/itoglobal/db/sql/mysql/SQLClient.php';    
+	require_once 'com/itoglobal/db/DBImplementation.php';    
 ?>

@@ -8,7 +8,7 @@ class DBClientHandler {
 	
 	private $connection = null;
 	
-	private static final $instance = null;
+	private static $instance = null;
 	
 	/**
 	 * Private constructor 

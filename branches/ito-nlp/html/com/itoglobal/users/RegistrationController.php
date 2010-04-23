@@ -45,10 +45,11 @@ class RegistrationController extends BaseActionControllerImpl {
 				self::$error [] .= self::checkPassword ( $requestParams [self::PASSWORD] );
 				self::$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
 				//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
-				//TODO: create birthday field!        
-				
+				//TODO: create birthday field!
 
-				if (self::$error [0] == NULL & self::$error [1] == NULL & self::$error [2] == NULL & self::$error [3] == NULL & self::$error [4] == NULL & self::$error [5] == NULL) {
+				self::$error = array_filter(self::$error); 
+				
+				if (count(self::$error) == 0) {
 					// Insert new users to DB
 					$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
 					$hash = md5 ( rand ( 1, 9999 ) );
@@ -91,16 +92,17 @@ class RegistrationController extends BaseActionControllerImpl {
 	}
 	
 	private function checkUsername($username) {
+		$result = false;
 		if (! $username) {
-			return 'Please enter your User Name';
+			$result = 'Please enter your username';
 		} else {
 			$where = self::USERNAME . " = '" . $username . "'";
-			$result = DBClientHandler::getInstance ()->execSelect ( self::USERNAME, self::USERS, $where, '', '', '' );
-			if (isset ( $result [0] [self::USERNAME] )) {
-				return 'There is an existing account associated with this User Name.';
-				break;
+			$res = DBClientHandler::getInstance ()->execSelect ( self::USERNAME, self::USERS, $where, '', '', '' );
+			if (isset ( $res [0] [self::USERNAME] )) {
+				$result = 'Such username already exists';
 			}
 		}
+		return $result;
 	}
 	
 	private function checkName($name) {

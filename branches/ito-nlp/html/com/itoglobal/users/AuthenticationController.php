@@ -47,7 +47,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
 		# authenticating user login
-		if ($result [0] [self::ENABLED] == 1) {
+		if (count($result) > 0 && $result [0] [self::ENABLED] == 1) {
 			if (isset ( $requestParams [self::PASSWORD] ) & $result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
 				$id = $result [0] [self::ID];
 				$session = SessionService::startSession ();

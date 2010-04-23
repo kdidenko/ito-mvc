@@ -40,8 +40,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 		//TODO: use DAOServise instead of SQLClient  
 		/*$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
 		SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );*/
-		$dao = DBClientHandler::getInstance();
-		$result = $dao->getClient()->execSelect ( $fields, $from, $where, '', '', '', $link );
+		$result = DBClientHandler::getInstance()->execSelect ( $fields, $from, $where, '', '', '');
 		# authenticating user login
 		if (isset ( $result [0] [self::PASSWORD] )) {
 			$id = $result [0] [self::ID];

@@ -46,12 +46,39 @@ class DBClientHandler {
 		return (self::$instance === NULL) ? self::$instance = new self () : self::$instance;
 	}
 	
-	/**
-	 * DB connection client getter
-	 * @return Object of SQLClientInterface implementation 
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#exec($sql)
 	 */
-	public function getClient() {
-		return $this->client;
+	public function exec($sql) {
+		return $this->client->exec ( $sql, $this->connection );
+	}
+	
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execInsert($fields, $values, $into)
+	 */
+	public function execInsert($fields, $values, $into) {
+		return $this->client->execInsert ( $fields, $values, $into, $this->connection );
+	}
+	
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execSelect($fields, $from, $where, $groupBy, $orderBy, $limit)
+	 */
+	public function execSelect($fields, $from, $where, $groupBy, $orderBy, $limit) {
+		return $this->client->execSelect ( $fields, $from, $where, $groupBy, $orderBy, $limit, $this->connection );
+	}
+	
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execUpdate($fields, $from, $vals, $where, $orderBy, $limit)
+	 */
+	public function execUpdate($fields, $from, $vals, $where, $orderBy, $limit) {
+		return $this->client->execUpdate ( $fields, $from, $vals, $where, $orderBy, $limit, $this->connection );
+	}
+	
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execDelete($from, $where, $orderBy, $limit)
+	 */
+	public function execDelete($from, $where, $orderBy, $limit) {
+		return $this->client->execUpdate ( $from, $where, $orderBy, $limit, $this->connection );
 	}
 
 }

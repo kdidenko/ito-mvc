@@ -4,8 +4,8 @@
         <div class="error">
 	 		<?php
 	 			$errors = $mvc->getObject('error');
-				for ($i=0; $i<count($errors); $i++){
-					echo '<p>' . $errors[$i] . '</p>';
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
 				}
 	 		?>
         </div>

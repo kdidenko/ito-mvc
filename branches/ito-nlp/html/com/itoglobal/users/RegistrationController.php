@@ -3,8 +3,6 @@ require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
 	
-	public static $error = array ();
-	
 	const ID = 'id';
 	
 	const USERNAME = 'username';
@@ -38,18 +36,19 @@ class RegistrationController extends BaseActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (! isset ( $requestParams [self::ID] )) {
 			if ($_POST) {
-				self::$error [] .= self::checkUsername ( $requestParams [self::USERNAME] );
-				self::$error [] .= self::checkName ( $requestParams [self::FIRSTNAME] );
-				self::$error [] .= self::checkLastname ( $requestParams [self::LASTNAME] );
-				self::$error [] .= self::checkEmail ( $requestParams [self::EMAIL] );
-				self::$error [] .= self::checkPassword ( $requestParams [self::PASSWORD] );
-				self::$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
-				//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
+				$error = array ();
+				$error [] .= self::checkUsername ( $requestParams [self::USERNAME] );
+				$error [] .= self::checkName ( $requestParams [self::FIRSTNAME] );
+				$error [] .= self::checkLastname ( $requestParams [self::LASTNAME] );
+				$error [] .= self::checkEmail ( $requestParams [self::EMAIL] );
+				$error [] .= self::checkPassword ( $requestParams [self::PASSWORD] );
+				$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
+				//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
 				//TODO: create birthday field!
 
-				self::$error = array_filter(self::$error); 
+				$error = array_filter($error); 
 				
-				if (count(self::$error) == 0) {
+				if (count($error) == 0) {
 					// Insert new users to DB
 					$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
 					$hash = md5 ( rand ( 1, 9999 ) );
@@ -60,7 +59,7 @@ class RegistrationController extends BaseActionControllerImpl {
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
 				} else {
-					$mvc->addObject ( self::ERROR, self::$error );
+					$mvc->addObject ( self::ERROR, $error );
 				}
 			}
 		} else {
@@ -106,52 +105,61 @@ class RegistrationController extends BaseActionControllerImpl {
 	}
 	
 	private function checkName($name) {
+		$result = false;
 		if (! $name) {
-			return 'Please enter your First Name';
+			$result = 'Please enter your First Name';
 		}
+		return $result;
 	}
 	
 	private function checkLastname($lastname) {
+		$result = false;
 		if (! $lastname) {
-			return 'Please enter your Last Name';
+			$result = 'Please enter your Last Name';
 		}
+		return $result;
 	}
 	
 	private function checkEmail($email) {
+		$result = false;
 		if ($email) {
 			if (! preg_match ( '/^(([^<>()[\]\\.,;:\s@"\']+(\.[^<>()[\]\\.,;:\s@"\']+)*)|("[^"\']+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\d\-]+\.)+[a-zA-Z]{2,}))$/', $email )) {
-				return "Wrong email. Please enter a correct email";
+				$result = "Wrong email. Please enter a correct email";
 			} else {
 				$where = self::EMAIL . " = '" . $email . "'";
-				$result = DBClientHandler::getInstance ()->execSelect ( self::EMAIL, self::USERS, $where, '', '', '' );
-				if (isset ( $result [0] [self::EMAIL] )) {
-					return 'There is an existing account associated with this email.';
-					break;
+				$res = DBClientHandler::getInstance ()->execSelect ( self::EMAIL, self::USERS, $where, '', '', '' );
+				if (isset ( $res [0] [self::EMAIL] )) {
+					$result = 'There is an existing account associated with this email.';
 				}
 			}
 		} else {
-			return 'Please enter your email address.';
+			$result = 'Please enter your email address.';
 		}
+		return $result;
 	}
 	
 	private function checkPassword($password) {
+		$result = false;
 		if ($password) {
 			if (strlen ( $password ) < 6) {
-				return 'The password you provided must have at least 6 characters.';
+				$result = 'The password you provided must have at least 6 characters.';
 			}
 		} else {
-			return 'Please enter password';
+			$result = 'Please enter password';
 		}
+		return $result;
 	}
 	
 	private function checkConfirmPassword($password, $confirm_password) {
+		$result = false;
 		if ($confirm_password) {
 			if ($password != $confirm_password) {
-				return 'Confirm Password does not match the password.';
+				$result = 'Confirm Password does not match the password.';
 			}
 		} else {
-			return 'Please enter confirm password';
+			$result = 'Please enter confirm password';
 		}
+		return $result;
 	}
 	
 	public function confirmRegistration($id, $hash) {

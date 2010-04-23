@@ -4,8 +4,10 @@
         <div class="error">
 	 		<?php
 	 			$errors = $mvc->getObject('error');
-				foreach ($errors as $key => $value){
-					echo '<p>' . $value . '</p>';
+				if (isset($errors)){
+					foreach ($errors as $key => $value){
+						echo '<p>' . $value . '</p>';
+					}
 				}
 	 		?>
         </div>

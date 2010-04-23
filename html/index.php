@@ -13,6 +13,10 @@
 
 	# session may be started now
 	//SessionService::startSession();
+	
+	# initialize the DAO object
+	$dao = DBImplementation::getInstance();
+	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
 
 	# get Request Dispatcher
 	$rd = RequestDispatcher::getInstance();

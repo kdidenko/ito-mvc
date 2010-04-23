@@ -19,7 +19,7 @@ class DBClientHandler {
 	/**
 	 * Private destructor handling the connection to be properly closed  
 	 */
-	private function __destruct() {
+	public function __destruct() {
 		if ($this->client != null && $this->connection != null) {
 			$this->client->disconnect ( $this->connection );
 		}

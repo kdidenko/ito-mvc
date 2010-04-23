@@ -48,15 +48,10 @@ class AuthenticationController extends BaseActionControllerImpl {
 		
 		# authenticating user login
 		if ($result [0] [self::ENABLED] == 1) {
-			if (isset ( $result [0] [self::PASSWORD] )) {
+			if (isset ( $requestParams [self::PASSWORD] ) & $result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
 				$id = $result [0] [self::ID];
-				if ($result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
-					$session = SessionService::startSession ();
-					SessionService::setAttribute ( self::USERS, $id );
-				} else {
-					$location = $this->onFailure ( $actionParams );
-					$this->forwardActionRequest ( $location );
-				}
+				$session = SessionService::startSession ();
+				SessionService::setAttribute ( self::USERS, $id );
 			} else {
 				$location = $this->onFailure ( $actionParams );
 				$this->forwardActionRequest ( $location );

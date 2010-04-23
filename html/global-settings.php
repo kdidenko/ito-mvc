@@ -14,8 +14,8 @@
 	//		by smth. like "SettingsService" which must be also implemented!
 	// db settings
 	$db_host = 'localhost';
-	$db_name = 'ito_trainings';		
-	$db_user = 'ito';		
-	$db_pass = 'Ssn123456';
+	$db_name = 'youcademy';		
+	$db_user = 'root';		
+	$db_pass = '';
 	$charset = 'UTF8';
 ?>

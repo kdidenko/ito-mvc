@@ -2,7 +2,7 @@
 
 require_once 'com/itoglobal/db/sql/mysql/SQLClient.php';
 
-class DBImplementation {
+class DBClientHandler {
 	
 	private $client = null;
 	
@@ -40,7 +40,7 @@ class DBImplementation {
 	
 	/**
 	 * Object instance getter
-	 * @return the DBImplementation Object
+	 * @return the DBClientHandler Object
 	 */
 	public static function getInstance() {
 		return (self::$instance === NULL) ? self::$instance = new self () : self::$instance;

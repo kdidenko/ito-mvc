@@ -73,7 +73,7 @@ class RegistrationController extends BaseActionControllerImpl {
 		$subject = 'Confirm registration';
 		$url = 'http://' . $_SERVER['SERVER_NAME'] . '/validation.html?id=' . $result [0] [self::ID] . '&validation=' . $hash;
 		$message = "Please click here " . $url;
-		$headers  = 'From: Admin <noreply@' . $_SERVER['SERVER_NAME'] ."'";
+		$headers  = 'From: Admin noreply@' . $_SERVER['SERVER_NAME'];
 		mail ( $email, $subject, $message, $headers );
 		return true;
 	}

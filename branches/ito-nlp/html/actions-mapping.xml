@@ -59,13 +59,13 @@
 	</action>	
 
 	<action name="/registration.html" id="registration">
-		<controller class="com.itoglobal.users.RegistrationController" 
-			method="registration" />
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
 		<template name="index.html" path="templates/layout-one-column.html" />	
 		<forwards>
 			<target location="registration.html" name="registration" condition="onfailure"/>
 			<target location="validation.html" name="validation" condition="onsuccess"/>
 		</forwards>
+		<property name="template" value="templates/plain/email-confirmation.txt"/>
 	</action>
 
 	<action name="/validation.html" id="validation">

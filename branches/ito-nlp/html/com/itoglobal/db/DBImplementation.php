@@ -43,9 +43,8 @@ class DBImplementation {
 	 * @return the DBImplementation Object
 	 */
 	public static function getInstance() {
-		return (self::$instance === NULL) ? self::$instance = new self () : self::$instance;		
+		return (self::$instance === NULL) ? self::$instance = new self () : self::$instance;
 	}
-	
 	
 	/**
 	 * DB connection client getter

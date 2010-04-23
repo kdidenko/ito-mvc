@@ -15,7 +15,7 @@
 	//SessionService::startSession();
 	
 	# initialize the DAO object
-	$dao = DBImplementation::getInstance();
+	$dao = DBClientHandler::getInstance();
 	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
 
 	# get Request Dispatcher

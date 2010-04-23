@@ -37,9 +37,6 @@ class AuthenticationController extends BaseActionControllerImpl {
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
 		# executing the query
-		//TODO: use DAOServise instead of SQLClient  
-		/*$link = SQLClient::connect ( 'youcademy', 'localhost', 'root', '' );
-		SQLClient::execSelect ( $fields, $from, $where, '', '', '', $link );*/
 		$result = DBClientHandler::getInstance()->execSelect ( $fields, $from, $where, '', '', '');
 		# authenticating user login
 		if (isset ( $result [0] [self::PASSWORD] )) {

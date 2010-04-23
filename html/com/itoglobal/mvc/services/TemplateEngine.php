@@ -25,6 +25,21 @@ class TemplateEngine {
 		}
 	}
 	
+	/**
+	 * Load and populate the plain text template with values	 * 
+	 * @param the $filename of template
+	 * @param the $vars of values
+	 * @return string plain text content
+	 */
+	public static function doPlain($filename, $vars) {
+		//TODO: implement the StorageService::getFileContent method
+		$content = StorageService::getFileContent ( $filename );
+		foreach ( $vars as $key => $value ) {
+			$content .= str_replace ( $key, $value, $content );
+		}
+		return $content;
+	}
+	
 	/** 
 	 * Wrapper method for including files from template 
 	 * @param string the $filename to include

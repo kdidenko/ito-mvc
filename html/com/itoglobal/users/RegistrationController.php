@@ -64,10 +64,17 @@ class RegistrationController extends BaseActionControllerImpl {
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $user . "'";
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$headers = 'From: Admin noreply@' . $_SERVER ['SERVER_NAME'];
 		$subject = 'Confirm registration';
 		$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/validation.html?id=' . $result [0] [self::ID] . '&validation=' . $hash;
-		$message = "Please click here " . $url;
-		$headers = 'From: Admin noreply@' . $_SERVER ['SERVER_NAME'];
+		
+		$vars['###FIRST_NAME###'] = 'John';  
+		$vars['###LAST_NAME###'] = 'Smith';
+		//bla bla ......
+		
+		//$message = "Please click here " . $url;
+		$message = TemplateEngine::doPlain('path to plain text template', $vars);
+
 		mail ( $email, $subject, $message, $headers );
 		return true;
 	}

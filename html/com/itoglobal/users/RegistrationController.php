@@ -98,7 +98,7 @@ class RegistrationController extends BaseActionControllerImpl {
 			$where = self::USERNAME . " = '" . $username . "'";
 			$res = DBClientHandler::getInstance ()->execSelect ( self::USERNAME, self::USERS, $where, '', '', '' );
 			if (isset ( $res [0] [self::USERNAME] )) {
-				$result = 'Such username already exists';
+				$result = 'Such username already exists.';
 			}
 		}
 		return $result;
@@ -129,7 +129,7 @@ class RegistrationController extends BaseActionControllerImpl {
 				$where = self::EMAIL . " = '" . $email . "'";
 				$res = DBClientHandler::getInstance ()->execSelect ( self::EMAIL, self::USERS, $where, '', '', '' );
 				if (isset ( $res [0] [self::EMAIL] )) {
-					$result = 'There is an existing account associated with this email.';
+					$result = 'Such email already exists.';
 				}
 			}
 		} else {

@@ -1,9 +1,11 @@
 <div class="registration">
 		<?php	
 				$message = $mvc->getObject('message');
-				if(!isset($message))
-				echo '<b>You entered wrong username or password. Please try again.</b>';
-				echo '<p>' . $message . '</p>';
+				if(isset($message)){
+					echo '<p>' . $message . '</p>';
+				}else{ 
+					echo '<b>Please try again enter to your account.</b>';
+				}
 		?>
         
 </div>
@@ -31,5 +33,9 @@
 	        </dl>
 	        <input type="submit" value="Sign in"></input>
 	</form>
+	<?php	
+		if(!isset($message))
+		echo '<p><a href="reset-password.html">Forgot password?</a></p>';
+	?>
 	<p><a href="registration.html">Sign Up to Online Learning Center NLP</a></p>
 </div>

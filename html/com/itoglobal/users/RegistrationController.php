@@ -85,7 +85,8 @@ class RegistrationController extends BaseActionControllerImpl {
 				if (isset ( $requestParams [self::EMAIL] ) && $requestParams [self::EMAIL] != NULL) {
 					$fields = self::VALIDATION;
 					$from = self::USERS;
-					$vals = "'" . md5 ( rand ( 1, 9999 ) ) . "'";
+					$hash = md5 ( rand ( 1, 9999 ) );
+					$vals = "'" . $hash . "'"; 
 					$where = self::EMAIL . " = '" . $requestParams [self::EMAIL] . "'";
 					DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 					
@@ -95,7 +96,7 @@ class RegistrationController extends BaseActionControllerImpl {
 					$email = $requestParams [self::EMAIL];
 					$subject = 'Please, confirm change password';
 					$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];
-					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [self::EMAIL] . '&validation_id=' . $vals;
+					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [self::EMAIL] . '&validation_id=' . $hash;
 					$vars ['###FIRST_NAME###'] = $result [0] [self::FIRSTNAME];
 					$vars ['###LAST_NAME###'] = $result [0] [self::LASTNAME];
 					$vars ['###CONFIRMATION_URL###'] = $url;

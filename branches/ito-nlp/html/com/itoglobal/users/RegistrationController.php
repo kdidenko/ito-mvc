@@ -108,8 +108,13 @@ class RegistrationController extends BaseActionControllerImpl {
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
 				}
+			}else{
+				$mvc->addObject(self::EMAIL, $requestParams[self::EMAIL]);
+				$mvc->addObject(self::VALIDATION, $requestParams[self::VALIDATION]);
 			}
 		} else {
+			$mvc->addObject(self::EMAIL, $requestParams[self::EMAIL]);
+			$mvc->addObject(self::VALIDATION, $requestParams[self::VALIDATION]);
 			# setting the query variables
 			$fields = self::VALIDATION;
 			$from = self::USERS;

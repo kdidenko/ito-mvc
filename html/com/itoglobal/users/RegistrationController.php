@@ -3,6 +3,10 @@ require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
 	
+	private static $validation = '';
+	
+	private static $email = '';
+	
 	const ID = 'id';
 	
 	const USERNAME = 'username';
@@ -45,10 +49,11 @@ class RegistrationController extends BaseActionControllerImpl {
 				$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
 				//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
 				//TODO: create birthday field!
-
-				$error = array_filter($error); 
 				
-				if (count($error) == 0) {
+
+				$error = array_filter ( $error );
+				
+				if (count ( $error ) == 0) {
 					// Insert new users to DB
 					$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
 					$hash = md5 ( rand ( 1, 9999 ) );
@@ -64,11 +69,78 @@ class RegistrationController extends BaseActionControllerImpl {
 			}
 		} else {
 			self::confirmRegistration ( $requestParams [self::ID], $requestParams [self::VALIDATION] );
-			$message = 'You completed registration. Your registration successful';
+			$message = 'You completed registration.';
 			$mvc->addObject ( 'message', $message );
 		}
 		return $mvc;
 	
+	}
+	
+	public function resetPassword($actionParams, $requestParams) {
+		// calling parent to get the model
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (!isset ( $requestParams [self::PASSWORD] )) {
+			if (!isset ( $requestParams [self::VALIDATION] )) {
+				if (isset ( $requestParams [self::EMAIL] ) && $requestParams [self::EMAIL] != NULL) {
+					$fields = self::VALIDATION;
+					$from = self::USERS;
+					$vals = "'" . md5 ( rand ( 1, 9999 ) ) . "'";
+					$where = self::EMAIL . " = '" . $requestParams [self::EMAIL] . "'";
+					DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+					
+					$fields = self::FIRSTNAME . ',' . self::LASTNAME;
+					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					
+					$email = $requestParams [self::EMAIL];
+					$subject = 'Please, confirm change password';
+					$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];
+					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [self::EMAIL] . '&validation_id=' . $vals;
+					$vars ['###FIRST_NAME###'] = $result [0] [self::FIRSTNAME];
+					$vars ['###LAST_NAME###'] = $result [0] [self::LASTNAME];
+					$vars ['###CONFIRMATION_URL###'] = $url;
+					$path = $actionParams->property ['value'];
+					
+					$message = TemplateEngine::doPlain ( $path, $vars );
+					mail ( $email, $subject, $message, $headers );
+					
+					$location = $this->onSuccess ( $actionParams );
+					$this->forwardActionRequest ( $location );
+				}
+			}
+		} else {
+			# setting the query variables
+			$fields = self::VALIDATION;
+			$from = self::USERS;
+			$where = self::EMAIL . " = '" . $requestParams[self::EMAIL] . "'";
+			# executing the query
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			if (isset($result [0] [self::VALIDATION]) && $result [0] [self::VALIDATION] == $requestParams[self::VALIDATION]) {
+				$error = array ();
+				$error [] .= self::checkPassword ( $requestParams [self::PASSWORD] );
+				$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
+				$error = array_filter ( $error );
+				if (count ( $error ) == 0) {
+					self::createNewPassword ( $requestParams[self::EMAIL], $requestParams [self::PASSWORD] );
+					$location = $this->onSuccess ( $actionParams );
+					$this->forwardActionRequest ( $location );
+				} else {
+					$mvc->addObject ( self::ERROR, $error );
+				}
+			}else{
+				$location = $this->onFailure ( $actionParams );
+				$this->forwardActionRequest ( $location );
+			}
+		}
+		return $mvc;
+	}
+	
+	private function createNewPassword($email, $password) {
+		$fields = self::PASSWORD;
+		$from = self::USERS;
+		$vals = "'" . md5 ( $password ) . "'";
+		$where = self::EMAIL . " = '" . $email . "'";
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
 	private function sendMail($email, $hash, $user, $firstname, $lastname, $path) {
@@ -77,7 +149,7 @@ class RegistrationController extends BaseActionControllerImpl {
 		$where = self::USERNAME . " = '" . $user . "'";
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];
-		$subject = 'Please confirm registration';
+		$subject = 'Please, confirm registration';
 		$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $result [0] [self::ID] . '&validation_id=' . $hash;
 		
 		$vars ['###FIRST_NAME###'] = $firstname;
@@ -180,6 +252,7 @@ class RegistrationController extends BaseActionControllerImpl {
 			DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 		}
 	}
+
 }
 
 ?>

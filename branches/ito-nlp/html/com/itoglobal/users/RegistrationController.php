@@ -80,60 +80,61 @@ class RegistrationController extends BaseActionControllerImpl {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		if (!isset ( $requestParams [self::PASSWORD] )) {
-			if (!isset ( $requestParams [self::VALIDATION] )) {
+		if (! isset ( $requestParams [self::PASSWORD] )) {
+			if (! isset ( $requestParams [self::VALIDATION] )) {
 				if (isset ( $requestParams [self::EMAIL] ) && $requestParams [self::EMAIL] != NULL) {
 					$fields = self::VALIDATION;
 					$from = self::USERS;
 					$hash = md5 ( rand ( 1, 9999 ) );
-					$vals = "'" . $hash . "'"; 
+					$vals = "'" . $hash . "'";
 					$where = self::EMAIL . " = '" . $requestParams [self::EMAIL] . "'";
 					DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 					
 					$fields = self::FIRSTNAME . ',' . self::LASTNAME;
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-					
-					$email = $requestParams [self::EMAIL];
-					$subject = 'Please, confirm change password';
-					$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];
-					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [self::EMAIL] . '&validation_id=' . $hash;
-					$vars ['###FIRST_NAME###'] = $result [0] [self::FIRSTNAME];
-					$vars ['###LAST_NAME###'] = $result [0] [self::LASTNAME];
-					$vars ['###CONFIRMATION_URL###'] = $url;
-					$path = $actionParams->property ['value'];
-					
-					$message = TemplateEngine::doPlain ( $path, $vars );
-					mail ( $email, $subject, $message, $headers );
-					
-					$location = $this->onSuccess ( $actionParams );
-					$this->forwardActionRequest ( $location );
+					if (isset ( $result [0] [self::FIRSTNAME] )) {
+						$email = $requestParams [self::EMAIL];
+						$subject = 'Please, confirm change password';
+						$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];
+						$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [self::EMAIL] . '&validation_id=' . $hash;
+						$vars ['###FIRST_NAME###'] = $result [0] [self::FIRSTNAME];
+						$vars ['###LAST_NAME###'] = $result [0] [self::LASTNAME];
+						$vars ['###CONFIRMATION_URL###'] = $url;
+						$path = $actionParams->property ['value'];
+						
+						$message = TemplateEngine::doPlain ( $path, $vars );
+						mail ( $email, $subject, $message, $headers );
+						
+						$location = $this->onSuccess ( $actionParams );
+						$this->forwardActionRequest ( $location );
+					}
 				}
-			}else{
-				$mvc->addObject(self::EMAIL, $requestParams[self::EMAIL]);
-				$mvc->addObject(self::VALIDATION, $requestParams[self::VALIDATION]);
+			} else {
+				$mvc->addObject ( self::EMAIL, $requestParams [self::EMAIL] );
+				$mvc->addObject ( self::VALIDATION, $requestParams [self::VALIDATION] );
 			}
 		} else {
-			$mvc->addObject(self::EMAIL, $requestParams[self::EMAIL]);
-			$mvc->addObject(self::VALIDATION, $requestParams[self::VALIDATION]);
+			$mvc->addObject ( self::EMAIL, $requestParams [self::EMAIL] );
+			$mvc->addObject ( self::VALIDATION, $requestParams [self::VALIDATION] );
 			# setting the query variables
 			$fields = self::VALIDATION;
 			$from = self::USERS;
-			$where = self::EMAIL . " = '" . $requestParams[self::EMAIL] . "'";
+			$where = self::EMAIL . " = '" . $requestParams [self::EMAIL] . "'";
 			# executing the query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			if (isset($result [0] [self::VALIDATION]) && $result [0] [self::VALIDATION] == $requestParams[self::VALIDATION]) {
+			if (isset ( $result [0] [self::VALIDATION] ) && $result [0] [self::VALIDATION] == $requestParams [self::VALIDATION]) {
 				$error = array ();
 				$error [] .= self::checkPassword ( $requestParams [self::PASSWORD] );
 				$error [] .= self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] );
 				$error = array_filter ( $error );
 				if (count ( $error ) == 0) {
-					self::createNewPassword ( $requestParams[self::EMAIL], $requestParams [self::PASSWORD] );
+					self::createNewPassword ( $requestParams [self::EMAIL], $requestParams [self::PASSWORD] );
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
 				} else {
 					$mvc->addObject ( self::ERROR, $error );
 				}
-			}else{
+			} else {
 				$location = $this->onFailure ( $actionParams );
 				$this->forwardActionRequest ( $location );
 			}

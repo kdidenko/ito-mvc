@@ -56,7 +56,12 @@ class AuthenticationController extends BaseActionControllerImpl {
 		}
 		$this->forwardActionRequest ( $location );
 	}
-
+	
+	public function logout($actionParams, $requestParams) {
+		SessionService::endSession();
+		$location = $this->onSuccess ( $actionParams );
+		$this->forwardActionRequest ( $location );
+	}
 }
 
 ?>

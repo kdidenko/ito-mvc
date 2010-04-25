@@ -116,6 +116,29 @@ img {
 	margin-right: 10px;
 }
 
+.menu-v { 
+	padding: 10px 30px;
+	font-size: 13px;
+	display: block;
+	clear: both;
+}
+
+.menu-v a{
+	color: white;
+	text-decoration: underline;
+}
+
+.menu-v li {
+	text-align:left;
+	width: 180px;
+	height: 25px;
+	line-height: 5px;
+	list-style: none;  
+	background-color: #999999;
+	border: 1px solid white;
+	margin-bottom: 5px;
+}
+
 .search{
 	width: 250px;
 	height: 35px;
@@ -174,7 +197,7 @@ float: right;
 
 .form{
 background-color: #EFEFEF;
-height: 190px;
+height: auto;
 margin: 0;
 }
 

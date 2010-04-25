@@ -60,7 +60,7 @@ class RegistrationController extends BaseActionControllerImpl {
 					$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . md5 ( $requestParams [self::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "'";
 					$into = self::USERS;
 					$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-					self::sendMail ( $requestParams [self::EMAIL], $hash, $requestParams [self::USERNAME], $requestParams [self::FIRSTNAME], $requestParams [self::LASTNAME], $actionParams->property ['value'] );
+					self::sendRegistrationMail ( $requestParams [self::EMAIL], $hash, $requestParams [self::USERNAME], $requestParams [self::FIRSTNAME], $requestParams [self::LASTNAME], $actionParams->property ['value'] );
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
 				} else {
@@ -102,8 +102,7 @@ class RegistrationController extends BaseActionControllerImpl {
 						$vars ['###CONFIRMATION_URL###'] = $url;
 						$path = $actionParams->property ['value'];
 						
-						$message = TemplateEngine::doPlain ( $path, $vars );
-						mail ( $email, $subject, $message, $headers );
+						self::sendMail($path, $vars, $email, $subject, $headers);
 						
 						$location = $this->onSuccess ( $actionParams );
 						$this->forwardActionRequest ( $location );
@@ -150,7 +149,7 @@ class RegistrationController extends BaseActionControllerImpl {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	private function sendMail($email, $hash, $user, $firstname, $lastname, $path) {
+	private function sendRegistrationMail($email, $hash, $user, $firstname, $lastname, $path) {
 		$fields = self::ID;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $user . "'";
@@ -164,11 +163,16 @@ class RegistrationController extends BaseActionControllerImpl {
 		$vars ['###CONFIRMATION_URL###'] = $url;
 		$vars ['###USERNAME###'] = $user;
 		
-		$message = TemplateEngine::doPlain ( $path, $vars );
-		mail ( $email, $subject, $message, $headers );
+		self::sendMail($path, $vars, $email, $subject, $headers);
+		
 		return true;
 	}
 	
+	private function sendMail($path, $vars, $email, $subject, $headers){
+		$message = TemplateEngine::doPlain ( $path, $vars );
+		mail ( $email, $subject, $message, $headers );	
+	}
+		
 	private function checkUsername($username) {
 		$result = false;
 		if (! $username) {

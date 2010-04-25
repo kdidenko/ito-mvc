@@ -14,12 +14,12 @@
 		</forwards-->
 	</action>
 
-	<action name="/schools.html" id="schools-browse">
+	<action name="/schools.html" id="schools">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 
-	<action name="/trainings.html" id="trainings-browse">
+	<action name="/trainings.html" id="trainings">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
@@ -43,6 +43,32 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
+	
+	<action name="/overview.html" id="overview">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/responses.html" id="responses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/valuate-responses.html" id="valuate-responses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/challenges.html" id="challenges">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/messages.html" id="messages">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+
 
 	<action name="/login.html" id="login">
 		<controller class="com.itoglobal.users.AuthenticationController" 
@@ -50,6 +76,14 @@
 		<forwards>
 			<target location="/index.html" name="home" condition="onsuccess"/>
 			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
+		</forwards>
+	</action>
+	
+	<action name="/logout.html" id="logout">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="logout" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
 		</forwards>
 	</action>
 	

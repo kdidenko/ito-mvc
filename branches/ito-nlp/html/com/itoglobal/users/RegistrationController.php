@@ -188,11 +188,11 @@ class RegistrationController extends BaseActionControllerImpl {
 	}
 	
 	private function checkName($name) {
-		$result = false;
+/*		$result = false;
 		if (! $name) {
 			$result = 'Please enter your First Name';
-		}
-		return $result;
+		}*/
+		return $name ? false : 'Please enter your First Name';
 	}
 	
 	private function checkLastname($lastname) {

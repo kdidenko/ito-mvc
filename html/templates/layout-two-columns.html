@@ -17,7 +17,17 @@
 <?php TemplateEngine::inclusion('navigation.html', $mvc)?>
 <!--  Navigation block end -->
 <!--  Middle block begin -->
-<?php TemplateEngine::inclusion('two-columns.html', $mvc)?>
+<div class="level0">
+	<div class="sidebar">
+		<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html');	?>
+        <div class="champion">
+                <h2>Top Scores</h2>
+        </div>
+	</div>        
+	<div class="content">
+        <?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html'); ?>                
+	</div>
+</div>
 <!--  Middle block end -->
 <!--  Footer block begin -->
 <?php TemplateEngine::inclusion('footer.html', $mvc)?>

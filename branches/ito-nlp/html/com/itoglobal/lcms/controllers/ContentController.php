@@ -9,14 +9,7 @@ class ContentController extends SecureActionControllerImpl {
 	 * @return ModelAndView
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
-		$result = null;
-		$sid = SessionService::getAttribute ( SessionService::USERS_ID );
-		if (! isset ( $sid )) {
-			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) );
-		} else {
-			$result = parent::handleActionRequest ( $actionParams, $requestParams );
-		}
-		return $result;
+		return (SessionService::isUserLogin( $actionParams, $requestParams ) == true) ? SessionService::isUserLogin( $actionParams, $requestParams ) : SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
 	}
 
 }

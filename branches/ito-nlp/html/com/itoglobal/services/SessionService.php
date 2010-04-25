@@ -41,7 +41,14 @@ class SessionService {
 			session_destroy();
 		}
 	}
-
+	
+	public function isUserLogin( $actionParams, $requestParams ){
+		$result = null;
+		$sid = self::getAttribute ( self::USERS_ID );
+		if (! isset ( $sid )) {
+			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) );
+		}
+		return $result;
+	}
 }
-
 ?>

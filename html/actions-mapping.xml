@@ -123,7 +123,7 @@
 		<controller class="com.itoglobal.lcms.controllers.SidebarController" />
 		<template name="$1.html" path="templates/views/sidebars/$1.html" />
 		<forwards>
-			<target location="templates/views/sidebars/login-form.html" name="Login" condition="onsignedoff"/>
+			<target location="views/sidebars/login-form.html" name="Login" condition="onsignedoff"/>
 		</forwards>
 	</action>	
 	

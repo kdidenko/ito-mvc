@@ -44,12 +44,12 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>	
 	
-	<action name="/overview.html" id="overview">
+	<action name="/overview.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/responses.html" id="responses">
+	<action name="/my-responses.html" id="my-responses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
@@ -59,7 +59,7 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/challenges.html" id="challenges">
+	<action name="/my-challenges.html" id="my-challenges">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
@@ -79,7 +79,7 @@
 		</forwards>
 	</action>
 	
-	<action name="/logout.html" id="logout">
+	<action name="/signout.html" id="signout">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="logout" />
 		<forwards>
@@ -165,9 +165,21 @@
 			<target location="/login-form.html" name="Login" condition="onsignedoff"/>
 		</forwards>
 	</action>	
-	
 	<!-- Sidebar views mapping begin -->	
 	
-	
+	<!-- Content views mapping begin -->
+	<action name="/content-*.html" id="content">
+		<controller class="com.itoglobal.lcms.controllers.ContentController" />
+		<template name="$1.html" path="templates/views/content/$1.html" />
+		<forwards>
+			<target location="/login-content.html" name="login-content" condition="onsignedoff"/>
+		</forwards>
+	</action>	
+	<!-- Content views mapping begin -->	
+		
+	<action name="/login-content.html" id="login-content">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/login-content.html"/>
+	</action>	
 	
 </actions>

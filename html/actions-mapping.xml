@@ -172,14 +172,35 @@
 		<controller class="com.itoglobal.lcms.controllers.ContentController" />
 		<template name="$1.html" path="templates/views/content/$1.html" />
 		<forwards>
-			<target location="/home-content.html" name="home-content" condition="onsignedoff"/>
+			<target location="/home-$1.html" name="home-$1.html" condition="onsignedoff"/>
 		</forwards>
 	</action>	
 	<!-- Content views mapping end -->	
-		
-	<action name="/home-content.html" id="home-content">
+	
+	<action name="/home-home.html" id="home-home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/views/content/home-content.html"/>
-	</action>	
+	</action>
+	<action name="/home-schools.html" id="home-schools">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/home-schools.html"/>
+	</action>
+	<action name="/home-trainings.html" id="home-trainings">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/home-trainings.html"/>
+	</action>
+	<action name="/home-community.html" id="home-community">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/community.html"/>
+	</action>
+	<action name="/home-discussions.html" id="home-discussions">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/discussions.html"/>
+	</action>
+	<action name="/home-about.html" id="home-about">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/about.html"/>
+	</action>
+	
 	
 </actions>

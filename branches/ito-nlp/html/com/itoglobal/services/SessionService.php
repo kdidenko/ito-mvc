@@ -26,7 +26,9 @@ class SessionService {
 	}
 
 	public static function getAttribute($key){
-		return  key_exists($key, $_SESSION) ? $_SESSION[$key] : null;
+		if (isset($_SESSION)){
+			return  key_exists($key, $_SESSION) ? $_SESSION[$key] : null;
+		}
 	}
 
 	public static function endSession() {

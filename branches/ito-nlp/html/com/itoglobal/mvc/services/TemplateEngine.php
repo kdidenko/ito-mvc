@@ -14,8 +14,7 @@ class TemplateEngine {
 				self::doXSLT ( $template );
 				break;
 			default :
-				define ( 'TEMPLATE_PATH', ( string ) $template ['path'] );
-				include_once TEMPLATE_PATH;
+				include_once ( string ) $template ['path'];
 		}
 	}
 	
@@ -51,7 +50,12 @@ class TemplateEngine {
 	
 	public static function execute($action) {
 		$rd = RequestDispatcher::getInstance ();
-		TemplateEngine::run ( $rd->execute ( $action ) );
+		TemplateEngine::run ( $rd->dispatchActionRequest ( $action ) );
+	}
+	
+	public static function getView($view) {
+		$rd = RequestDispatcher::getInstance ();
+		TemplateEngine::run ( $rd->dispatchViewRequest ( $view ) );
 	}
 
 }

@@ -117,4 +117,15 @@
 			method="deleteScope"/>
 		<template name="scope.html" path="templates/scope.html" />	
 	</action>
+	
+	<!-- Sidebar views mapping begin -->
+	<action name="/sidebar-home.html" id="sidebar-home">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="sidebar-home.html" path="templates/views/sidebars/login-form.html"/>
+	</action>	
+	
+	<!-- Sidebar views mapping begin -->	
+	
+	
+	
 </actions>

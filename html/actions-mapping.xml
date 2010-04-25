@@ -165,21 +165,21 @@
 			<target location="/login-form.html" name="Login" condition="onsignedoff"/>
 		</forwards>
 	</action>	
-	<!-- Sidebar views mapping begin -->	
+	<!-- Sidebar views mapping end -->	
 	
 	<!-- Content views mapping begin -->
 	<action name="/content-*.html" id="content">
 		<controller class="com.itoglobal.lcms.controllers.ContentController" />
 		<template name="$1.html" path="templates/views/content/$1.html" />
 		<forwards>
-			<target location="/login-content.html" name="login-content" condition="onsignedoff"/>
+			<target location="/home-content.html" name="home-content" condition="onsignedoff"/>
 		</forwards>
 	</action>	
-	<!-- Content views mapping begin -->	
+	<!-- Content views mapping end -->	
 		
-	<action name="/login-content.html" id="login-content">
+	<action name="/home-content.html" id="home-content">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/views/content/login-content.html"/>
+		<template name="index.html" path="templates/views/content/home-content.html"/>
 	</action>	
 	
 </actions>

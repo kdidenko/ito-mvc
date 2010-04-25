@@ -52,6 +52,11 @@
 			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
 		</forwards>
 	</action>
+	
+	<action name="/login-form.html" id="login-form">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/views/sidebars/login-form.html"/>
+	</action>	
 
 	<action name="/login-failed.html" id="login-failed">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
@@ -123,7 +128,7 @@
 		<controller class="com.itoglobal.lcms.controllers.SidebarController" />
 		<template name="$1.html" path="templates/views/sidebars/$1.html" />
 		<forwards>
-			<target location="views/sidebars/login-form.html" name="Login" condition="onsignedoff"/>
+			<target location="/login-form.html" name="Login" condition="onsignedoff"/>
 		</forwards>
 	</action>	
 	

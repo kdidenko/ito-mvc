@@ -14,7 +14,7 @@ class RequestDispatcher {
 	}
 	
 	public function dispatchActionRequest($action) {
-		$map = $this->getMappingConfig();
+		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
 		$mappingObj = ActionsMappingResolver::getActionMapping ( $action );
@@ -22,11 +22,11 @@ class RequestDispatcher {
 			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $action . ' Not found on server' );
 		}
-		return $this->dispatch($mappingObj);
+		return $this->dispatch ( $mappingObj );
 	}
 	
 	public function dispatchViewRequest($view) {
-		$map = $this->getMappingConfig();
+		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
 		$mappingObj = ActionsMappingResolver::getViewMapping ( $view );
@@ -34,19 +34,22 @@ class RequestDispatcher {
 			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $view . ' Not found on server' );
 		}
-		return $this->dispatch($mappingObj);
-	}	
+		return $this->dispatch ( $mappingObj );
+	}
 	
-	private function dispatch($mappingObj){
-		$result = null;		
+	private function dispatch($mappingObj) {
+		$result = null;
 		# get the conntroller object instance
 		$controller = MVCService::getController ( ( string ) $mappingObj->controller ['class'] );
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object
 		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
-		$result->setTemplate ( $mappingObj->template );
-		return $result;		
+		// template could be already set within the controller above. Do not override this property if it is already present 
+		if ($result != null && $result->getTemplate() == null) {
+			$result->setTemplate ( $mappingObj->template );
+		}
+		return $result;
 	}
 	
 	private function __construct() {

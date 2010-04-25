@@ -12,7 +12,7 @@
 	include_once 'global-includes.php';
 
 	# session may be started now
-	//SessionService::startSession();
+	SessionService::startSession();
 	
 	# initialize the DAO object
 	$dao = DBClientHandler::getInstance();

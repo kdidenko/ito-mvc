@@ -47,8 +47,8 @@
 	<action name="/login.html" id="login">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="login" />
-		<template name="index.html" path="templates/layout-two-columns.html"/>
 		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
 			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
 		</forwards>
 	</action>

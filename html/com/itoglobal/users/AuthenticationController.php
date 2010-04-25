@@ -35,9 +35,6 @@ class AuthenticationController extends BaseActionControllerImpl {
 	 * @return Object of ModelAndView
 	 */
 	public function login($actionParams, $requestParams) {
-		# calling parent to get the model
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-
 		# setting the query variables
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::ENABLED;
 		$from = self::USERS;
@@ -47,7 +44,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
 		# authenticating user login
-		if (count($result) > 0 && $result [0] [self::ENABLED] == 1) {
+		if (count ( $result ) > 0 && $result [0] [self::ENABLED] == 1) {
 			if (isset ( $requestParams [self::PASSWORD] ) & $result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
 				$id = $result [0] [self::ID];
 				$session = SessionService::startSession ();
@@ -61,7 +58,8 @@ class AuthenticationController extends BaseActionControllerImpl {
 			$this->forwardActionRequest ( $location );
 		}
 		
-		return $mvc;
+		$location = $this->onSuccess ( $actionParams );
+		$this->forwardActionRequest ( $location );
 	}
 
 }

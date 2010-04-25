@@ -15,6 +15,8 @@
 						<xsd:enumeration value="onsuccess" />
 						<xsd:enumeration value="onfailure" />
 						<xsd:enumeration value="onabort" />
+						<xsd:enumeration value="onsignedoff" />
+						<xsd:enumeration value="onloggedin" />
 					</xsd:restriction>		
 				</xsd:simpleType>
 			</xsd:attribute>			

@@ -42,7 +42,7 @@ class SessionService {
 		}
 	}
 	
-	public function isUserLogin( $actionParams, $requestParams ){
+	public function isUserLogedin( $actionParams, $requestParams ){
 		$result = null;
 		$sid = self::getAttribute ( self::USERS_ID );
 		if (! isset ( $sid )) {

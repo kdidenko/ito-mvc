@@ -10,13 +10,14 @@ class SidebarController extends SecureActionControllerImpl {
 	 * @return ModelAndView
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
-		$sid = SessionService::getAttribute (self::USERS_ID);
+		$result = null;
+		$sid = SessionService::getAttribute ( self::USERS_ID );
 		if (! isset ( $sid )) {
-			TemplateEngine::inclusion ( $this->onSignedOff ( $actionParams ) );
+			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) );
 		} else {
-			# calling parent to get the model
-			return parent::handleActionRequest( $actionParams, $requestParams );
+			$result = parent::handleActionRequest ( $actionParams, $requestParams );
 		}
+		return $result;
 	}
 
 }

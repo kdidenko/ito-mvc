@@ -54,6 +54,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 */
 	public function forwardActionRequest($location) {
 		header ( "Location: $location" );
+		exit;
 	}
 	
 	/**

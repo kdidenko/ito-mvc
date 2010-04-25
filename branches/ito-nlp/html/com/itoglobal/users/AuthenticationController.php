@@ -29,7 +29,6 @@ class AuthenticationController extends BaseActionControllerImpl {
 	 */
 	const ENABLED = 'enabled';
 	
-	const USERS_ID = 'user_id';
 	/** User login handling controller method
 	 * @param the $actionParams
 	 * @param the $requestParams
@@ -38,7 +37,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 	public function login($actionParams, $requestParams) {
 		# calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+
 		# setting the query variables
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::ENABLED;
 		$from = self::USERS;
@@ -52,7 +51,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 			if (isset ( $requestParams [self::PASSWORD] ) & $result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
 				$id = $result [0] [self::ID];
 				$session = SessionService::startSession ();
-				SessionService::setAttribute ( self::USERS_ID, $id );
+				SessionService::setAttribute ( SessionService::USERS_ID, $id );
 			} else {
 				$location = $this->onFailure ( $actionParams );
 				$this->forwardActionRequest ( $location );

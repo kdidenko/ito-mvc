@@ -1,7 +1,9 @@
 <?php
 
 class SessionService {
-
+	
+	const USERS_ID = 'user_id';
+	
 	public static function startSession() {
 		if(session_id() || session_start()){
 			# check if session is new or existing one

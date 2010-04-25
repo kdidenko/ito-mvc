@@ -3,7 +3,6 @@
 require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 
 class SidebarController extends SecureActionControllerImpl {
-	const USERS_ID = 'user_id';
 	/**
 	 * @param unknown_type unknown_type $actionParams
 	 * @param unknown_type unknown_type $requestParams
@@ -11,7 +10,7 @@ class SidebarController extends SecureActionControllerImpl {
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
 		$result = null;
-		$sid = SessionService::getAttribute ( self::USERS_ID );
+		$sid = SessionService::getAttribute ( SessionService::USERS_ID );
 		if (! isset ( $sid )) {
 			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) );
 		} else {

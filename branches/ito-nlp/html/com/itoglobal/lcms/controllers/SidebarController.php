@@ -9,7 +9,9 @@ class SidebarController extends SecureActionControllerImpl {
 	 * @return ModelAndView
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
-		return 	(SessionService::isUserLogin( $actionParams, $requestParams ) == true) ? SessionService::isUserLogin( $actionParams, $requestParams ) : SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
+		return SessionService::isUserLogedin ( $actionParams, $requestParams ) ? 
+				SessionService::isUserLogedin ( $actionParams, $requestParams ) : 
+						SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
 	}
 
 }

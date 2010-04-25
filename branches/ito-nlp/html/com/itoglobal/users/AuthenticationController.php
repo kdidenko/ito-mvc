@@ -35,14 +35,13 @@ class AuthenticationController extends BaseActionControllerImpl {
 	 * @return Object of ModelAndView
 	 */
 	public function login($actionParams, $requestParams) {
+		$location = $this->onSuccess ( $actionParams );
 		# setting the query variables
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::ENABLED;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
-		
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-		
 		# authenticating user login
 		if (count ( $result ) > 0 && $result [0] [self::ENABLED] == 1) {
 			if (isset ( $requestParams [self::PASSWORD] ) & $result [0] [self::PASSWORD] == md5 ( $requestParams [self::PASSWORD] )) {
@@ -51,14 +50,10 @@ class AuthenticationController extends BaseActionControllerImpl {
 				SessionService::setAttribute ( SessionService::USERS_ID, $id );
 			} else {
 				$location = $this->onFailure ( $actionParams );
-				$this->forwardActionRequest ( $location );
 			}
 		} else {
 			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );
 		}
-		
-		$location = $this->onSuccess ( $actionParams );
 		$this->forwardActionRequest ( $location );
 	}
 

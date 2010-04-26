@@ -1,0 +1,79 @@
+<form action="manage-users.html" method="post">
+	<table>
+		<tr class="title">
+			<td colspan="2">
+			<h2>Admins Manage Users</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ID:
+		 	</td>
+		 	<td>
+		 		<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+		 		User name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::USERNAME);echo isset($message) ? $message : 'username';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				First Name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+		 		Last Name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Email:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Enable:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::ENABLED);echo isset($message) ? $message : 'enable';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Deleted:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::DELETED);echo isset($message) ? $message : 'deleted';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Role:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="" value="<?php $message = $mvc->getObject(UsersService::ROLE);echo isset($message) ? $message : 'role';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		<tr class="title">
+			<td colspan="2">
+				<input type="submit" name="submit" value="Submit Changes"/>
+			</td>
+		</tr>
+	</table>
+</form>

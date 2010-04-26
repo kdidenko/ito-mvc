@@ -10,11 +10,11 @@ class SidebarController extends SecureActionControllerImpl {
 	 *
 	 * @see BaseActionController->handleActionRequest($actionParams, $requestParams)
 	 */
-	public function handleActionRequest($actionParams, $requestParams) {
+	/*public function handleActionRequest($actionParams, $requestParams) {
 		return SessionService::isLogedIn () ? 
 				RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) ) :
 						SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
-	}
+	}*/
 	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );

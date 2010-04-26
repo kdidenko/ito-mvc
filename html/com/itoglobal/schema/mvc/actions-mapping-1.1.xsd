@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns="http://www.ito-global.com/schema/mvc"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ito-global.com/schema/mvc">
+	
+	<!-- element <role> tag -->
+	<xsd:element name="role">
+		<xsd:complexType>
+			<xsd:attribute name="type" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="VR"/>
+						<xsd:enumeration value="UR"/>
+						<xsd:enumeration value="MR"/>
+						<xsd:enumeration value="AR"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="path" type="xsd:string" use="required"/>		
+		</xsd:complexType>
+	</xsd:element>
+	
 
 	<!-- element <target> tag -->
 	<xsd:element name="target">
@@ -69,6 +87,7 @@
         <xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="input" maxOccurs="1" minOccurs="0" />
+				<xsd:element ref="role" minOccurs="0" maxOccurs="unbounded" />
 			</xsd:sequence>		
 			<xsd:attribute name="name" type="xsd:string" use="required" />
 			<xsd:attribute name="path" type="xsd:string" use="optional" />

@@ -46,8 +46,8 @@ class RequestDispatcher {
 		# run the controller method and return MVC model object
 		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
 		// template could be already set within the controller above. Do not override this property if it is already present 
-		if ($result != null && $result->getTemplate() == null) {
-			$result->setTemplate ( $mappingObj->template );
+		if ($result != null && $result->getTemplate () == null) {
+			$result->setTemplate ( $this->getTemplateConfig ( $mappingObj ) );
 		}
 		return $result;
 	}
@@ -62,6 +62,10 @@ class RequestDispatcher {
 	private function getMappingConfig() {
 		$map = HttpHelper::getMappingParam ();
 		return $map == '' ? ActionsMappingResolver::DEFAULT_MAPPING_FILE : $map;
+	}
+	
+	private function getTemplateConfig($mappingObj) {
+		return $mappingObj->template;
 	}
 }
 

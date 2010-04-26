@@ -70,5 +70,9 @@ class SessionService {
 		$result = self::getAttribute ( self::ROLE ); 
 		return $result != null ? $result : self::ROLE_VR;
 	}
+	
+	public static function setRole($role){
+		self::setAttribute(self::ROLE, $role);
+	} 
 }
 ?>

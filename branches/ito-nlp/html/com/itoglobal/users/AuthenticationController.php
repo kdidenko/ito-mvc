@@ -37,7 +37,7 @@ class AuthenticationController extends BaseActionControllerImpl {
 	public function login($actionParams, $requestParams) {
 		$location = $this->onSuccess ( $actionParams );
 		# setting the query variables
-		$fields = self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::ENABLED;
+		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::PASSWORD . ', ' . self::ENABLED;
 		$from = self::USERS;
 		$where = self::USERNAME . " = '" . $requestParams [self::USERNAME] . "'";
 		# executing the query
@@ -48,6 +48,10 @@ class AuthenticationController extends BaseActionControllerImpl {
 				$id = $result [0] [self::ID];
 				$session = SessionService::startSession ();
 				SessionService::setAttribute ( SessionService::USERS_ID, $id );
+				SessionService::setAttribute ( SessionService::USERNAME, $result [0] [SessionService::USERNAME] );
+				SessionService::setAttribute ( SessionService::FIRSTNAME, $result [0] [SessionService::FIRSTNAME] );
+				SessionService::setAttribute ( SessionService::LASTNAME, $result [0] [SessionService::LASTNAME]);
+				SessionService::setAttribute ( SessionService::EMAIL, $result [0] [SessionService::EMAIL]);
 			} else {
 				$location = $this->onFailure ( $actionParams );
 			}

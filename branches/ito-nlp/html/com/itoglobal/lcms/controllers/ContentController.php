@@ -13,7 +13,38 @@ class ContentController extends SecureActionControllerImpl {
 				SessionService::isUserLogedin ( $actionParams, $requestParams ) : 
 						SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
 	}
-
+	
+	public function handleHome($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	
+	public function handleSchools($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleTrainings($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleCommunity($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleDiscussions($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleAbout($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleMyResponses($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleValuateResponses($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleMyChallenges($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
+	public function handleMessages($actionParams, $requestParams) {
+		return $this->handleActionRequest($actionParams, $requestParams);
+	}
 }
 
 ?>

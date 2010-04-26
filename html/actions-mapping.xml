@@ -156,26 +156,11 @@
 	<action name="/sidebar-*.html" id="sidebar">
 		<controller class="com.itoglobal.lcms.controllers.SidebarController" 
 				method="handle$1" />
-		<!-- template name="$1.html" path="templates/views/sidebars/users/$1.html" /-->
 		<template name="$1.html">
 			<role type="VR" path="templates/views/sidebars/default/login-form.html"/>
 			<role type="UR" path="templates/views/sidebars/users/$1.html"/>
 			<role type="AR" path="templates/views/sidebars/admin/$1.html"/>		
-		</template>		
-		<!-- forwards>
-			<target location="/login-form.html" name="Login" condition="onsignedoff"/>
-			<target location="/sidebar-admin.html" name="sidebar-admin" condition=""/>
-		</forwards -->
-	</action>
-	
-	<action name="/login-form.html" id="login-form">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/views/sidebars/default/login-form.html"/>
-	</action>
-		
-	<action name="/sidebar-admin.html" id="sidebar-admin">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/views/sidebars/admin/sidebar-admin.html"/>
+		</template>	
 	</action>
 	<!-- Sidebar views mapping end -->	
 	
@@ -183,21 +168,11 @@
 	<action name="/content-*.html" id="content">
 		<controller class="com.itoglobal.lcms.controllers.ContentController" 
 				method="handle$1" />
-		<template name="$1.html" path="templates/views/content/users/$1.html" />
-		<forwards>
-			<target location="/default-$1.html" name="default-$1.html" condition="onsignedoff"/>
-			<target location="/admin-$1.html" name="admin-$1.html" condition=""/>
-		</forwards>
-	</action>	
-	
-	<action name="/default-*.html" id="default-*">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/views/content/default/$1.html"/>
-	</action>
-	
-	<action name="/admin-*.html" id="admin-*">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/views/content/admin/$1.html"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/$1.html"/>
+			<role type="UR" path="templates/views/content/users/$1.html"/>
+			<role type="AR" path="templates/views/content/admin/$1.html"/>		
+		</template>	
 	</action>
 	<!-- Content views mapping end -->
 	

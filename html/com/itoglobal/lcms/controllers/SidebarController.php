@@ -4,24 +4,10 @@ require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 
 class SidebarController extends SecureActionControllerImpl {
 	
-	/**
-	 * Secure actions handling method implementation. Qualifies the
-	 * minimum required for sidebar Model View Controlling. 
-	 *
-	 * @see BaseActionController->handleActionRequest($actionParams, $requestParams)
-	 */
-	/*public function handleActionRequest($actionParams, $requestParams) {
-		return SessionService::isLogedIn () ? 
-				RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) ) :
-						SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
-	}*/
-	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
 		$sid = SessionService::getAttribute ( SessionService::FIRSTNAME );
 		isset ( $sid ) ? $mvc->addObject ( SessionService::FIRSTNAME, $sid ) : null;
-		
 		return $mvc;
 	}
 	

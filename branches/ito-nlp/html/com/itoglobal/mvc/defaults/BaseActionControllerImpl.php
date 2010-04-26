@@ -41,6 +41,8 @@ class BaseActionControllerImpl implements BaseActionController {
 		$modelAndView->addObject ( 'action_forwards', $actionParams->forwards );
 		// add received request parameters
 		$modelAndView->addObject ( 'request_params', $requestParams );
+		// set the template property
+		$modelAndView->setTemplate($actionParams->template);
 		// return create MVC model object
 		return $modelAndView;
 	}

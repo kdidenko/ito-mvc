@@ -45,10 +45,6 @@ class RequestDispatcher {
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object
 		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
-		// template could be already set within the controller above. Do not override this property if it is already present 
-		if ($result != null && $result->getTemplate () == null) {
-			$result->setTemplate ( $this->getTemplateConfig ( $mappingObj ) );
-		}
 		return $result;
 	}
 	

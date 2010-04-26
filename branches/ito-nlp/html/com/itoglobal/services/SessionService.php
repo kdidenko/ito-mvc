@@ -12,6 +12,16 @@ class SessionService {
 	
 	const EMAIL = 'email';
 	
+	const ROLE = 'role';
+	
+	const ROLE_VR = 'VR';
+	
+	const ROLE_UR = 'UR';
+	
+	const ROLE_MR = 'MR';
+	
+	const ROLE_AR = 'AR';
+	
 	public static function startSession() {
 		if (session_id () || session_start ()) {
 			# check if session is new or existing one
@@ -54,6 +64,11 @@ class SessionService {
 	
 	public static function isLogedIn() {
 		return self::getAttribute ( self::USERS_ID ) != null;
+	}
+	
+	public static function getRole() {
+		$result = self::getAttribute ( self::ROLE ); 
+		return $result != null ? $result : self::ROLE_VR;
 	}
 }
 ?>

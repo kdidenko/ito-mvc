@@ -16,6 +16,7 @@
     require_once 'com/itoglobal/services/SessionService.php';
     require_once 'com/itoglobal/services/StorageService.php';
     require_once 'com/itoglobal/services/ContextService.php';
+    require_once 'com/itoglobal/lcms/UsersService.php';
 
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/services/ActionsMappingResolver.php';

@@ -1,15 +1,53 @@
-<table>
-	<tr class="title">
-		<td colspan="2">
-		<h2>Manage Users</h2>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php		
-				$message = $mvc->getObject(SessionService::FIRSTNAME);
-				echo isset($message) ? $message : null;
-	 		?>
-	 	</td>
-	</tr>
-</table>
+<form action="manage-users.html" method="post">
+	<table style="border: 1px solid black;">
+		<tr class="title"style="border: 1px solid black;">
+			<td colspan="5"style="border: 1px solid black;">
+			<h2>Admins Manage Users</h2>
+			</td>
+		</tr>
+		<tr class="title"style="border: 1px solid black;">
+			<td style="border: 1px solid black;">
+				User Name:
+			</td>
+			<td style="border: 1px solid black;">
+				First Name:
+			</td>
+			<td style="border: 1px solid black;">
+				Last Name:
+			</td>
+			<td style="border: 1px solid black;">
+				Role:
+			</td>
+			<td style="border: 1px solid black;">
+				Operations:
+			</td>
+		</tr>
+		<?php 		
+			$message = $mvc->getObject ( ContentController::RESULT );
+			if (isset ( $message )) {
+		?>
+		<tr style="border: 1px solid black;">
+			<td>
+				<?php echo isset($message[0][UsersService::USERNAME]) ? $message[0][UsersService::USERNAME] : null;?>
+			</td>
+			<td>
+				<?php echo isset($message[0][UsersService::FIRSTNAME]) ? $message[0][UsersService::FIRSTNAME] : null;?>
+			</td>
+			<td>
+				<?php echo isset($message[0][UsersService::LASTNAME]) ? $message[0][UsersService::LASTNAME] : null;?>
+			</td>
+			<td>
+				<?php echo isset($message[0][UsersService::ROLE]) ? $message[0][UsersService::ROLE] : null;?>
+			</td>
+			<td>
+				<a href="">edit</a>
+				<a href="">delete</a>
+			</td>
+		</tr>
+		<?php
+			}
+		?> 
+		
+
+	</table>
+</form>

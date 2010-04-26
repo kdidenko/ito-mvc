@@ -68,7 +68,21 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
-
+	
+	<action name="/manage-schools.html" id="manageschools">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/manage-exercises.html" id="manageexercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/manage-users.html" id="manageusers">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
 
 	<action name="/login.html" id="login">
 		<controller class="com.itoglobal.users.AuthenticationController" 

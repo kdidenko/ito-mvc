@@ -1,0 +1,15 @@
+<table>
+	<tr class="title">
+		<td colspan="2">
+		<h2>Manage Users</h2>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php		
+				$message = $mvc->getObject(SessionService::FIRSTNAME);
+				echo isset($message) ? $message : null;
+	 		?>
+	 	</td>
+	</tr>
+</table>

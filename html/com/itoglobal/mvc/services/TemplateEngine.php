@@ -25,7 +25,7 @@ class TemplateEngine {
 	}
 	
 	/**
-	 * Load and populate the plain text template with values	 * 
+	 * Load and populate the plain text template with values 
 	 * @param the $filename of template
 	 * @param the $vars of values
 	 * @return string plain text content

@@ -50,11 +50,11 @@ class SessionService {
 		}
 	}
 	
-	public function isUserLogedin( $actionParams, $requestParams ){
+	public static function isUserLogedin( $actionParams, $requestParams ){
 		$result = null;
 		$sid = self::getAttribute ( self::USERS_ID );
 		if (! isset ( $sid )) {
-			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) );
+			$result = RequestDispatcher::getInstance ()->dispatchActionRequest ( SecureActionControllerImpl::onSignedOff ( $actionParams ) );
 		}
 		return $result;
 	}

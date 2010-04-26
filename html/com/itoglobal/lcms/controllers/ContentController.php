@@ -9,8 +9,8 @@ class ContentController extends SecureActionControllerImpl {
 	 * @return ModelAndView
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
-		return SessionService::isUserLogedin ( $actionParams, $requestParams ) ? 
-				SessionService::isUserLogedin ( $actionParams, $requestParams ) : 
+		return SessionService::isLogedIn () ? 
+				RequestDispatcher::getInstance ()->dispatchActionRequest ( $this->onSignedOff ( $actionParams ) ) : 
 						SecureActionControllerImpl::handleActionRequest ( $actionParams, $requestParams );
 	}
 	

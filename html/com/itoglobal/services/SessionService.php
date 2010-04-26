@@ -4,6 +4,14 @@ class SessionService {
 	
 	const USERS_ID = 'user_id';
 	
+	const USERNAME = 'username';
+	
+	const FIRSTNAME = 'firstname';
+	
+	const LASTNAME = 'lastname';
+	
+	const EMAIL = 'email';
+	
 	public static function startSession() {
 		if(session_id() || session_start()){
 			# check if session is new or existing one

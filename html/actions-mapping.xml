@@ -49,17 +49,17 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/my-responses.html" id="my-responses">
+	<action name="/my-responses.html" id="myresponses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/valuate-responses.html" id="valuate-responses">
+	<action name="/valuate-responses.html" id="valuateresponses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/my-challenges.html" id="my-challenges">
+	<action name="/my-challenges.html" id="mychallenges">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
@@ -176,7 +176,8 @@
 	
 	<!-- Content views mapping begin -->
 	<action name="/content-*.html" id="content">
-		<controller class="com.itoglobal.lcms.controllers.ContentController" />
+		<controller class="com.itoglobal.lcms.controllers.ContentController" 
+				method="handle$1" />
 		<template name="$1.html" path="templates/views/content/users/$1.html" />
 		<forwards>
 			<target location="/default-$1.html" name="default-$1.html" condition="onsignedoff"/>

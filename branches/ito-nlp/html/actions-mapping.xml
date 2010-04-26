@@ -154,7 +154,8 @@
 	
 	<!-- Sidebar views mapping begin -->
 	<action name="/sidebar-*.html" id="sidebar">
-		<controller class="com.itoglobal.lcms.controllers.SidebarController" />
+		<controller class="com.itoglobal.lcms.controllers.SidebarController" 
+				method="handle$1" />
 		<template name="$1.html" path="templates/views/sidebars/users/$1.html" />
 		<forwards>
 			<target location="/login-form.html" name="Login" condition="onsignedoff"/>

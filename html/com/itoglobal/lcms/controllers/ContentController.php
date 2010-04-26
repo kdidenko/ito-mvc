@@ -15,7 +15,14 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	
 	public function handleHome($actionParams, $requestParams) {
-		return $this->handleActionRequest($actionParams, $requestParams);
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
+		isset( $firstname )? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ): null;
+		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
+		isset( $lastname )? $mvc->addObject ( SessionService::LASTNAME, $lastname ): null;
+		
+		return $mvc;
 	}
 	
 	public function handleSchools($actionParams, $requestParams) {

@@ -1,4 +1,3 @@
-
 <table>
 	<tr class="title">
 		<td>
@@ -7,7 +6,14 @@
 	</tr>
 	<tr>
 		<td>
-		<p>Jane Doe, you have taken 8 courses in 3 schools and completed
+		<p>
+		<?php		
+				$message = $mvc->getObject(SessionService::FIRSTNAME);
+				echo isset($message) ? $message . ' ' : 'Jone ';
+				$message = $mvc->getObject(SessionService::LASTNAME);
+				echo isset($message) ? $message : 'Doe';
+	 	?>
+		, you have taken 8 courses in 3 schools and completed
 		11 course levels. You have responded to 5412 challenges. You are
 		wearing titles: NLP Practitioner and Shaman and are posessing
 		certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
@@ -15,7 +21,7 @@
 	</tr>
 	<tr>
 		<td>
-		<h2><a href="exercise-details.html">Richard Bandler’s NLP,
+		<h2><a href="exercise-details.html">Richard Bandlers NLP,
 		DHE ans SHE school</a></h2>
 		<p>Master Practitioner course created and moderated by John
 		LaValle. The course consist of 3 sections and you need to achieve 280
@@ -25,8 +31,7 @@
 	</tr>
 	<tr>
 		<td>
-		<h2><a href="exercise-details.html">Институт НЛП, Ректор:
-		М.Пелехатый (NLP Institute, Moscow, Russia)</a></h2>
+		<h2><a href="exercise-details.html">NLP Institute of M.Pelehatiy, Moscow, Russia</a></h2>
 		<p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive
 		Customer Service! Increased Income! Influence More Gently but with
 		Precision. 5 groups of exercises, 100 points in every one of them for

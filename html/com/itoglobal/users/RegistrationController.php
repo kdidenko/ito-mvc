@@ -31,6 +31,8 @@ class RegistrationController extends BaseActionControllerImpl {
 	 */
 	const VALIDATION = 'validation_id';
 	
+	const ROLE = 'role';
+	
 	const USERS = 'users';
 	
 	const ERROR = 'error';
@@ -55,9 +57,9 @@ class RegistrationController extends BaseActionControllerImpl {
 				
 				if (count ( $error ) == 0) {
 					// Insert new users to DB
-					$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION;
+					$fields = self::USERNAME . ', ' . self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::PASSWORD . ', ' . self::CRDATE . ', ' . self::VALIDATION . ', ' . self::ROLE;
 					$hash = md5 ( rand ( 1, 9999 ) );
-					$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . md5 ( $requestParams [self::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "'";
+					$values = "'" . $requestParams [self::USERNAME] . "','" . $requestParams [self::FIRSTNAME] . "','" . $requestParams [self::LASTNAME] . "','" . $requestParams [self::EMAIL] . "','" . md5 ( $requestParams [self::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','UR'";
 					$into = self::USERS;
 					$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 					self::sendRegistrationMail ( $requestParams [self::EMAIL], $hash, $requestParams [self::USERNAME], $requestParams [self::FIRSTNAME], $requestParams [self::LASTNAME], $actionParams->property ['value'] );

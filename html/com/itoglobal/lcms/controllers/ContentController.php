@@ -77,7 +77,7 @@ class ContentController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
-	public function handleEditUsers($actionParams, $requestParams) {
+	public function handleEditUser($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
 		$result = UsersService::getFields ( $where );

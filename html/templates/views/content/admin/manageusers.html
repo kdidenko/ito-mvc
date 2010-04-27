@@ -41,7 +41,7 @@
 				<?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?>
 			</td>
 			<td>
-				<a href=<?php echo 'edit-users.html?id=' . $message[$i][UsersService::ID]?>>edit</a>
+				<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>edit</a>
 				<a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a>
 			</td>
 		</tr>

@@ -70,8 +70,9 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields($requestParams [UsersService::DELETED], UsersService::DELETED, '1') : '';
-		
 		$where = UsersService::DELETED . " = 0";
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		isset ( $id ) ? $where .=  " and " . UsersService::ID . "!=" . $id : '';
 		$result = UsersService::getFields ($where);
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 		
@@ -91,6 +92,9 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
 		
 		return $mvc;
+	}
+	public function handleMyProfile($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 }
 

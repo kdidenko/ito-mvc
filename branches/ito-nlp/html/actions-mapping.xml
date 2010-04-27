@@ -190,7 +190,7 @@
 	</action>
 	<!-- Content views mapping end -->
 		
-	<action name="/edit-users.html" id="editusers">
+	<action name="/edit-user.html" id="edituser">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>

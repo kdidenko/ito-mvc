@@ -277,5 +277,8 @@ margin: 25px 0 0 0;
 }
 
 .profile{
-	border: none;
+	border: 1px solid #EFEFEF;
+}
+.profile:hover{
+	border: 1px solid #999999;
 }

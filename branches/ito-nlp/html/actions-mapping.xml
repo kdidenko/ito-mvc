@@ -189,5 +189,11 @@
 		</template>	
 	</action>
 	<!-- Content views mapping end -->
+		
+	<action name="/edit-users.html" id="editusers">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
 	
 </actions>

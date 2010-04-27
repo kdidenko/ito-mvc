@@ -203,17 +203,27 @@ class RegistrationController extends BaseActionControllerImpl {
 	
 	public function confirmRegistration($id, $hash) {
 		# setting the query variables
-		$fields = UsersService::VALIDATION;
+		$fields = UsersService::VALIDATION . ',' . UsersService::USERNAME;
 		$from = UsersService::USERS;
 		$where = UsersService::ID . " = '" . $id . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
 		if ($result [0] [UsersService::VALIDATION] == $hash) {
+			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME]);
+			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME] . '/profile');
+			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME] . '/trainings');
+			$path = 'storage/uploads/' . $result[0][UsersService::USERNAME] . '/profile/avatar.jpg';
+			copy('storage/uploads/default-avatar.jpg', $path);
+			
 			# setting the query variables
-			$fields = UsersService::ENABLED;
+			$fields = array();
+			$fields[] .= UsersService::ENABLED;
+			$fields[] .= UsersService::AVATAR;
 			$from = UsersService::USERS;
-			$vals = '1';
+			$vals = array();
+			$vals[] .= '1';
+			$vals[] .= $path;
 			$where = UsersService::ID . " = '" . $id . "'";
 			# executing the query
 			DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );

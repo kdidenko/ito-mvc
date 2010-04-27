@@ -51,15 +51,15 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset ( $requestParams ['submit'] )) {
-			$fields = array();
-			$fields[] .= UsersService::USERNAME;
-			$fields[] .= UsersService::FIRSTNAME;
-			$fields[] .= UsersService::LASTNAME;
-			$fields[] .= UsersService::EMAIL;
-			$fields[] .= UsersService::ENABLED;
-			$fields[] .= UsersService::ROLE;
-			$vals = array();
-			$id = $requestParams[UsersService::ID];
+			$fields = array ();
+			$fields [] .= UsersService::USERNAME;
+			$fields [] .= UsersService::FIRSTNAME;
+			$fields [] .= UsersService::LASTNAME;
+			$fields [] .= UsersService::EMAIL;
+			$fields [] .= UsersService::ENABLED;
+			$fields [] .= UsersService::ROLE;
+			$vals = array ();
+			$id = $requestParams [UsersService::ID];
 			$vals [] .= $requestParams [UsersService::USERNAME];
 			$vals [] .= $requestParams [UsersService::FIRSTNAME];
 			$vals [] .= $requestParams [UsersService::LASTNAME];
@@ -69,11 +69,11 @@ class ContentController extends SecureActionControllerImpl {
 			UsersService::updateFields ( $id, $fields, $vals );
 		}
 		
-		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields($requestParams [UsersService::DELETED], UsersService::DELETED, '1') : '';
+		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
 		$where = UsersService::DELETED . " = 0";
-		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		isset ( $id ) ? $where .=  " and " . UsersService::ID . "!=" . $id : '';
-		$result = UsersService::getFields ($where);
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
+		$result = UsersService::getFields ( $where );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 		
 		return $mvc;
@@ -93,8 +93,38 @@ class ContentController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
+	
 	public function handleMyProfile($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$username = SessionService::getAttribute(UsersService::USERNAME);
+		if (isset ( $_FILES ['file'] )) {
+			$file = $_FILES ['file'];
+			$path = 'storage/uploads/' . $username . "/profile/avatar.jpg";
+			StorageService::uploadFile ( $path, $file );
+			
+			$fields = array ();
+			$fields [] .= UsersService::FIRSTNAME;
+			$fields [] .= UsersService::LASTNAME;
+			$fields [] .= UsersService::EMAIL;
+			$fields [] .= UsersService::AVATAR;
+			$vals = array ();
+			$vals [] .= $requestParams [UsersService::FIRSTNAME];
+			$vals [] .= $requestParams [UsersService::LASTNAME];
+			$vals [] .= $requestParams [UsersService::EMAIL];
+			$vals [] .= $path;
+			UsersService::updateFields ( $id, $fields, $vals );
+		}
+
+		$where = UsersService::ID . " = '" . $id . "'";
+		$result = UsersService::getFields ( $where );
+		
+		isset ( $result [0] [UsersService::AVATAR] ) ? $mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] ) : null;
+		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
+		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
+		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
+		
+		return $mvc;
 	}
 }
 

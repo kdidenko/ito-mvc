@@ -69,9 +69,13 @@ class UsersService {
 	 * @var string defining the administrator role type
 	 */
 	const ROLE_AR = 'AR';
+	/**
+	 * @var string defining the avatar field name
+	 */
+	const AVATAR = 'avatar';
 	
 	public function getFields($where = null) {
-		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . SessionService::ROLE;
+		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
 		$from = self::USERS;
 		isset ( $where ) ? $where : '';
 		# executing the query

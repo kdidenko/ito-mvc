@@ -78,7 +78,7 @@ class DBClientHandler {
 	 * @see com/itoglobal/db/sql/SQLClientInterface#execDelete($from, $where, $orderBy, $limit)
 	 */
 	public function execDelete($from, $where, $orderBy, $limit) {
-		return $this->client->execUpdate ( $from, $where, $orderBy, $limit, $this->connection );
+		return $this->client->execDelete ( $from, $where, $orderBy, $limit, $this->connection );
 	}
 
 }

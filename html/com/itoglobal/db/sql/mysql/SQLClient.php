@@ -74,13 +74,18 @@ class SQLClient implements SQLClientInterface {
     public static function execUpdate ($fields, $from, $vals, $where, $orderBy, $limit, $link) {
         $sql = self::UPDATE . $from . self::SET . $fields . '=' . $vals;
         $sql .= $where ? ' ' . self::WHERE . $where : '';
+        $sql .= $orderBy ? self::ORDERBY . $orderBy : '';
+        $sql .= $limit ? self::LIMIT . $limit : '';
         $result = self::exec($sql, $link);
         return $result;
     }
-    public static function execDelete ($from, $where, $orderBy, $limit, $link) {/*if($cond != NULL) $sql = "WHERE" . $cond;
-		$sql .= BaseSQLDBService::DELETE . $tbl
-		$result = self::exec($sql);
-		return $result;*/
-}
+    public static function execDelete ($from, $where, $orderBy, $limit, $link) {
+		$sql = self::DELETE . self::FROM . $from;
+        $sql .= $where ? self::WHERE . $where : '';
+        $sql .= $orderBy ? self::ORDERBY . $orderBy : '';
+        $sql .= $limit ? self::LIMIT . $limit : '';
+		$result = self::exec($sql, $link);
+		return $result;
+	}
 }
 ?>

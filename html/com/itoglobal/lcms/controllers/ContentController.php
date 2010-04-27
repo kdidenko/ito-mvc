@@ -49,20 +49,46 @@ class ContentController extends SecureActionControllerImpl {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleManageUsers($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams ); //print_r($_POST);exit;
-		$result = UsersService::getField ();
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset ( $requestParams ['submit'] )) {
+			$fields = array();
+			$fields[] .= UsersService::USERNAME;
+			$fields[] .= UsersService::FIRSTNAME;
+			$fields[] .= UsersService::LASTNAME;
+			$fields[] .= UsersService::EMAIL;
+			$fields[] .= UsersService::ENABLED;
+			$fields[] .= UsersService::ROLE;
+			$vals = array();
+			$id = $requestParams[UsersService::ID];
+			$vals [] .= $requestParams [UsersService::USERNAME];
+			$vals [] .= $requestParams [UsersService::FIRSTNAME];
+			$vals [] .= $requestParams [UsersService::LASTNAME];
+			$vals [] .= $requestParams [UsersService::EMAIL];
+			$vals [] .= $requestParams [UsersService::ENABLED];
+			$vals [] .= $requestParams [UsersService::ROLE];
+			UsersService::updateFields ( $id, $fields, $vals );
+		}
+		
+		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields($requestParams [UsersService::DELETED], UsersService::DELETED, '1') : '';
+		
+		$where = UsersService::DELETED . " = 0";
+		$result = UsersService::getFields ($where);
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 		
-		/*$firstname = SessionService::getAttribute ( UsersService::FIRSTNAME );
-		isset ( $firstname ) ? $mvc->addObject ( UsersService::FIRSTNAME, $firstname ) : null;
-		//isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
+		return $mvc;
+	}
+	public function handleEditUsers($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
+		$result = UsersService::getFields ( $where );
+		isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
 		isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
 		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
-		//isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
-		//isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
-		//isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
+		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
+		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
+		isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
+		isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
 		isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
-		*/	
 		
 		return $mvc;
 	}

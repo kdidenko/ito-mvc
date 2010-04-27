@@ -12,7 +12,7 @@ class UsersService {
 	/**
 	 * @var string defining the firstname field name
 	 */
-	const FIRSTNAME = 'firstname';	
+	const FIRSTNAME = 'firstname';
 	/**
 	 * @var string defining the lastname field name
 	 */
@@ -24,7 +24,7 @@ class UsersService {
 	/**
 	 * @var string defining the password field name
 	 */
-	const PASSWORD = 'password';	
+	const PASSWORD = 'password';
 	/**
 	 * @var string defining the confirm_password field name
 	 */
@@ -69,15 +69,32 @@ class UsersService {
 	 * @var string defining the administrator role type
 	 */
 	const ROLE_AR = 'AR';
-
 	
-	public function getField() {
+	public function getFields($where = null) {
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . SessionService::ROLE;
 		$from = self::USERS;
+		isset ( $where ) ? $where : '';
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '', '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		return $result;
 	}
+	
+	public function updateFields($id, $fields, $vals) {
+		# setting the query variables
+		$from = self::USERS;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	public function deleteUser($id, $fields, $vals) {
+		# setting the query variables
+		$from = self::USERS;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+
 }
 
 ?>

@@ -1,0 +1,78 @@
+<form action="manage-users.html" method="post">
+	<table>
+		<tr class="title">
+			<td colspan="2">
+			<h2>Admins Manage Users</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ID:
+		 	</td>
+		 	<td>
+		 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+		 		<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+		 		User name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="username" value="<?php $message = $mvc->getObject(UsersService::USERNAME);echo isset($message) ? $message : 'username';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				First Name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="firstname" value="<?php $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+		 		Last Name:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Email:
+		 	</td>
+		 	<td>
+		 		<input type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Status:
+		 	</td>
+		 	<td>
+		 		<input type="radio" name="enabled" value="1" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? 'checked' : ''; ?>/>Enedled
+				<input type="radio" name="enabled" value="0" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? '' : 'checked'; ?>/>Desibled<br/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Role:
+		 	</td>
+		 	<td>
+		 		<select name="role">
+		 			<option><?php $message = $mvc->getObject(UsersService::ROLE);echo isset($message) ? $message : 'role';?></option>
+		 			<option><?php echo UsersService::ROLE_VR?></option>
+		 			<option><?php echo UsersService::ROLE_UR?></option>
+		 			<option><?php echo UsersService::ROLE_MR?></option>
+		 			<option><?php echo UsersService::ROLE_AR?></option>
+		 		</select>
+		 	</td>
+		</tr>
+		<tr class="title">
+			<td colspan="2">
+				<input type="submit" name="submit" value="Submit Changes"/>
+			</td>
+		</tr>
+	</table>
+</form>

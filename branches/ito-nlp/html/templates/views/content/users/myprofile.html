@@ -1,0 +1,49 @@
+<form enctype="multipart/form-data" action="my-profile.html" method="post" >
+	<table>
+		<tr class="title">
+			<td colspan="3">
+			<h2>My profile</h2>
+			</td>
+		</tr>
+		<tr>
+		 	<td>
+				Your First Name:
+		 	</td>
+		 	<td colspan="2">
+		 		<input class="profile" type="text" name="firstname" onmouseover="this.style.cssText='border: 1px solid #999999;'" onmouseover="this.style.backgroundColor='#EFEFEF';" onmouseout="this.style.cssText='border: none;'" " value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>" />
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+		 		Your Last Name:
+		 	</td>
+		 	<td colspan="2">
+		 		<input class="profile" type="text" name="lastname" onmouseover="this.style.cssText='border: 1px solid #999999;'" onmouseover="this.style.backgroundColor='#EFEFEF';" onmouseout="this.style.cssText='border: none;'" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Your Email:
+		 	</td>
+		 	<td colspan="2">
+		 		<input class="profile" type="text" name="email" onmouseover="this.style.cssText='border: 1px solid #999999;'"  onmouseout="this.style.cssText='border: none;'" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
+		 	</td>
+		</tr>
+		<tr>
+		 	<td>
+				Avatar:
+			</td>	
+			<td>	
+				<img alt="ava" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
+		 	</td>
+		 	<td>
+				<input type="file" name="file" size="30" />
+		 	</td>
+		</tr>
+		<tr class="title">
+			<td colspan="3">
+				<input type="submit" name="submit" value="Submit Changes"/>
+			</td>
+		</tr>
+	</table>
+</form>

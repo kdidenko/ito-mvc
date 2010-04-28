@@ -51,8 +51,8 @@
 				Status:
 		 	</td>
 		 	<td>
-		 		<input type="radio" name="enabled" value="1" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? 'checked' : ''; ?>/>Enedled
-				<input type="radio" name="enabled" value="0" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? '' : 'checked'; ?>/>Desibled<br/>
+		 		<input type="radio" name="enabled" value="1" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? 'checked' : ''; ?>/>Enabled
+				<input type="radio" name="enabled" value="0" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? '' : 'checked'; ?>/>Disabled<br/>
 		 	</td>
 		</tr>
 		<tr>
@@ -62,10 +62,15 @@
 		 	<td>
 		 		<select name="role">
 		 			<option><?php $message = $mvc->getObject(UsersService::ROLE);echo isset($message) ? $message : 'role';?></option>
-		 			<option><?php echo UsersService::ROLE_VR?></option>
-		 			<option><?php echo UsersService::ROLE_UR?></option>
-		 			<option><?php echo UsersService::ROLE_MR?></option>
-		 			<option><?php echo UsersService::ROLE_AR?></option>
+		 			<?php if ($message != UsersService::ROLE_UR){ ?>
+		 			<option><?php echo UsersService::ROLE_UR ?></option>
+		 			<?php }?>
+		 			<?php if ($message != UsersService::ROLE_MR){ ?>
+		 			<option><?php echo UsersService::ROLE_MR ?></option>
+		 			<?php }?>
+		 			<?php if ($message != UsersService::ROLE_AR){ ?>
+		 			<option><?php echo UsersService::ROLE_AR ?></option>
+		 			<?php }?>
 		 		</select>
 		 	</td>
 		</tr>

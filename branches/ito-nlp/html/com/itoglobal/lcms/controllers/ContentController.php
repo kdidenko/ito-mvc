@@ -97,13 +97,13 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleMyProfile($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$username = SessionService::getAttribute(UsersService::USERNAME);
+		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		if (isset ( $_FILES ['file'] )) {
 			$file = $_FILES ['file'];
 			$path = 'storage/uploads/' . $username . "/profile/avatar.jpg";
-	
-   			$size = getimagesize($file['tmp_name']);
-   			if($size[0] <= 80 && $size[1] <= 80){
+			
+			$size = getimagesize ( $file ['tmp_name'] );
+			if ($size [0] <= 80 && $size [1] <= 80) {
 				StorageService::uploadFile ( $path, $file );
 			}
 			
@@ -119,7 +119,7 @@ class ContentController extends SecureActionControllerImpl {
 			$vals [] .= $path;
 			UsersService::updateFields ( $id, $fields, $vals );
 		}
-
+		
 		$where = UsersService::ID . " = '" . $id . "'";
 		$result = UsersService::getFields ( $where );
 		
@@ -128,6 +128,38 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
 		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
 		
+		return $mvc;
+	}
+	
+	public function handleAddUser($actionParams, $requestParams) {
+		// calling parent to get the model
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset($requestParams ['submit'])) {
+			//server-side validation
+			$error = UsersService::validation ( $requestParams );
+			if (count ( $error ) == 0) {
+				// Insert new users to DB
+				StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] );
+				StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] . '/profile' );
+				StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] . '/trainings' );
+				$path = 'storage/uploads/' . $requestParams [UsersService::USERNAME] . '/profile/avatar.jpg';
+				copy ( 'storage/uploads/default-avatar.jpg', $path );
+				
+				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ENABLED . ', ' . UsersService::ROLE . ', ' . UsersService::AVATAR;
+				$hash = md5 ( rand ( 1, 9999 ) );
+				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . $requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','1','UR','" . $path . "'";
+				$into = UsersService::USERS;
+				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+				
+				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
+				MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $actionParams->property ['value'], $url);
+				
+				$location = $this->onSuccess ( $actionParams );
+				$this->forwardActionRequest ( $location );
+			} else {
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
+		}
 		return $mvc;
 	}
 }

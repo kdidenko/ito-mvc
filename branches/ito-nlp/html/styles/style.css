@@ -156,6 +156,12 @@ img {
 	display: block;
 }
 
+.center{
+	text-align: center;
+	float: none;
+	width:650px;
+}
+
 .sidebar {
 	margin: 30px 0;
 	float: left;

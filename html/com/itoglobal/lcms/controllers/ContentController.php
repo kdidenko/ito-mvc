@@ -101,7 +101,11 @@ class ContentController extends SecureActionControllerImpl {
 		if (isset ( $_FILES ['file'] )) {
 			$file = $_FILES ['file'];
 			$path = 'storage/uploads/' . $username . "/profile/avatar.jpg";
-			StorageService::uploadFile ( $path, $file );
+	
+   			$size = getimagesize($file['tmp_name']);
+   			if($size[0] <= 80 && $size[1] <= 80){
+				StorageService::uploadFile ( $path, $file );
+			}
 			
 			$fields = array ();
 			$fields [] .= UsersService::FIRSTNAME;

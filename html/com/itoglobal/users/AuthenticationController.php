@@ -3,7 +3,7 @@
 require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class AuthenticationController extends BaseActionControllerImpl {
-
+	
 	/** User login handling controller method
 	 * @param the $actionParams
 	 * @param the $requestParams
@@ -30,6 +30,10 @@ class AuthenticationController extends BaseActionControllerImpl {
 				SessionService::setAttribute ( SessionService::LASTNAME, $result [0] [SessionService::LASTNAME] );
 				SessionService::setAttribute ( SessionService::EMAIL, $result [0] [SessionService::EMAIL] );
 				SessionService::setRole ( $result [0] [UsersService::ROLE] );
+				if (isset ( $requestParams ['persistent'] )) {
+					$expire = time () + 60 * 60 * 24 * 7;
+					setcookie ( "PHPSESSID", $session, $expire );
+				}
 			} else {
 				$location = $this->onFailure ( $actionParams );
 			}

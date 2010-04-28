@@ -187,6 +187,7 @@
 			<role type="UR" path="templates/views/content/users/$1.html"/>
 			<role type="AR" path="templates/views/content/admin/$1.html"/>		
 		</template>	
+		<property name="template" value="templates/plain/created-account.txt"/>
 	</action>
 	<!-- Content views mapping end -->
 		
@@ -198,6 +199,14 @@
 	<action name="/my-profile.html" id="myprofile">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/add-user.html" id="adduser">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+		<forwards>
+			<target location="/manage-users.html" name="manageusers" condition="onsuccess"/>
+		</forwards>
 	</action>
 
 </actions>

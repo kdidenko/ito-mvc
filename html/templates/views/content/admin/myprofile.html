@@ -1,49 +1,27 @@
-<form enctype="multipart/form-data" action="my-profile.html" method="post" >
-	<table>
-		<tr class="title">
-			<td colspan="3">
-			<h2>My profile</h2>
-			</td>
-		</tr>
-		<tr>
-		 	<td>
-				Your First Name:
-		 	</td>
-		 	<td colspan="2">
-		 		<input class="profile" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>" />
-		 	</td>
-		</tr>
-		<tr>
-		 	<td>
-		 		Your Last Name:
-		 	</td>
-		 	<td colspan="2">
-		 		<input class="profile" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
-		 	</td>
-		</tr>
-		<tr>
-		 	<td>
-				Your Email:
-		 	</td>
-		 	<td colspan="2">
-		 		<input class="profile" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
-		 	</td>
-		</tr>
-		<tr>
-		 	<td>
-				Avatar(80x80) :
-			</td>	
-			<td>	
-				<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
-		 	</td>
-		 	<td>
-				<input type="file" name="file" size="30" />
-		 	</td>
-		</tr>
-		<tr class="title">
-			<td colspan="3">
-				<input type="submit" name="submit" value="Submit Changes"/>
-			</td>
-		</tr>
-	</table>
-</form>
+<h2>My profile</h2>
+<div class="center">
+	<form enctype="multipart/form-data" action="my-profile.html" method="post" >
+		<dl>
+			<dt>Your First Name:</dt>
+	 		<dd>
+	 		<input class="profile" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>" />
+	 		</dd>
+	 		<dt>Your Last Name:</dt>
+	 		<dd>
+	 		<input class="profile" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
+			</dd>
+			<dt>Your Email:</dt>
+	 		<dd>
+	 		<input class="profile" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
+			</dd>
+			<dt>Avatar(80x80) :</dt>
+			<dd>
+			<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
+			</dd>
+			</dd>
+			<input type="file" name="file" size="30" />
+			</dd>
+		</dl>
+	<input type="submit" name="submit" value="Submit Changes"/>
+	</form>
+</div>

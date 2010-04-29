@@ -138,7 +138,7 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
-	public function handleAddUser($actionParams, $requestParams) {
+	public function handleNewUser($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams ['submit'])) {

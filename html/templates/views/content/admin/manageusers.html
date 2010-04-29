@@ -1,7 +1,13 @@
 <h2>Admins Manage Users:</h2>
 <span class="subMnu">
-	<a href="/add-user.html" title="Create New User">New User</a>
+	<a href="/new-user.html" title="Create New User">New User</a>
 </span>
+
+<?php 		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) {
+?>
+
 <div class="title">
 	<ul class="manage">
 		<li>User Name:</li>
@@ -11,33 +17,30 @@
 		<li>Delete:</li>
 	</ul>
 </div>
+
+<?php 	for($i = 0; count($message)>$i; $i++){ ?>
 <form action="manage-users.html" method="post">
-		<?php 		
-			$message = $mvc->getObject ( ContentController::RESULT );
-			if (isset ( $message )) {
-				for($i = 0; count($message)>$i; $i++){
-		?>
+
 		<div>
 			<ul class="manage userlist">
 				<li><?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></li>
 				<li>
-					<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>
+					<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID];?>>
 						<?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
 					</a>
 				</li>
 				<li>
 					<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '1') {?>
-						<a href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID]?>>Enable</a>
-					<?php ;}else{ ?>
-						<a href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID]?>>Disable</a> 
-					<?php ;}} ?>
+						<a href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Enable</a>
+					<?php }else{ ?>
+						<a href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Disable</a> 
+					<?php }} ?>
 				</li>
 				<li><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></li>
-				<li><a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a></li>
+				<li><a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>delete</a></li>
 			</ul>
 		</div>
-		<?php
-				}
-			}
-		?> 
+		<?php }}else{ ?>  
+		<span class="message">No users available at this moment.</span>
+		<?php } ?>
 </form>

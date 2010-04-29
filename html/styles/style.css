@@ -202,18 +202,18 @@ float: left;
 float: right;
 }
 
-.form{
+.lftMnu{
 background-color: #EFEFEF;
 height: auto;
 margin: 0;
 }
 
-.form b {
+.lftMnu b {
 	padding-top: 10px;
 	display: block;		
 }
 
-.form a {
+.lftMnu a {
 	padding: 10px;
 	display: block;		
 }

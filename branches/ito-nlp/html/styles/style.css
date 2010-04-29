@@ -246,7 +246,7 @@ margin: 25px 0 0 0;
 	font-size: 11px;	
 }
 
-.reg_form dt{
+.center dt{
 	clear:both;
 	float:left;
 	text-align:right;
@@ -254,7 +254,7 @@ margin: 25px 0 0 0;
 	width: 40%
 }
 
-.reg_form dd{
+.center dd{
 	float:left;
 	text-align:left;
 	margin: 3px 3px 3px 20px;
@@ -284,29 +284,6 @@ margin: 25px 0 0 0;
 	border: 1px solid #999999;
 }
 
-
-
-.user{
-	height: 40px;
-	line-height: 40px;
-	background-color: #EFEFEF;
-	margin-bottom: 10px;
-}
-.user b{
-	float: left;
-	margin-left: 30px;
-	padding: 0;
-	font-size: 14px;
-}
-.user a{
-	margin: 8px;
-	float: right;
-	height: 25px;
-	width: 100px;
-	text-align: center;
-	line-height: 25px;
-	background-color: #999999;
-}
 .manage { 
 	margin: 15px;
 	padding: 0;

@@ -1,46 +1,32 @@
-<table>
-	<tr class="title">
-		<td>
-		<h2><b>Your personal overview</b></h2>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<p>
-		<?php		
-				$message = $mvc->getObject(SessionService::FIRSTNAME);
-				echo isset($message) ? $message . ' ' : 'Jone ';
-				$message = $mvc->getObject(SessionService::LASTNAME);
-				echo isset($message) ? $message : 'Doe';
-	 	?>
-		, you have taken 8 courses in 3 schools and completed
-		11 course levels. You have responded to 5412 challenges. You are
-		wearing titles: NLP Practitioner and Shaman and are posessing
-		certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
-		schools and 3 courses:</p>
-	</tr>
-	<tr>
-		<td>
-		<h2><a href="exercise-details.html">Richard Bandlers NLP,
-		DHE ans SHE school</a></h2>
-		<p>Master Practitioner course created and moderated by John
-		LaValle. The course consist of 3 sections and you need to achieve 280
-		points in every one of them to complete each of the 5 course levels.
-		Certificates after level 3. Monthly fee: $5</p>
-		<a href='exercise-details.html' class="buton">View</a></td>
-	</tr>
-	<tr>
-		<td>
-		<h2><a href="exercise-details.html">NLP Institute of M.Pelehatiy, Moscow, Russia</a></h2>
-		<p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive
-		Customer Service! Increased Income! Influence More Gently but with
-		Precision. 5 groups of exercises, 100 points in every one of them for
-		each of the 2 levels. Monthly fee: $5</p>
-		<a href='exercise-details.html' class="buton">View</a></td>
-	</tr>
-	<tr class="title">
-		<td colspan="2">
-		<p>To contact us: Frequently Asked Questions (FAQ)</p>
-		</td>
-	</tr>
-</table>
+<h2>Your personal overview</h2>
+<div>
+	<p>
+	<?php		
+			$message = $mvc->getObject(SessionService::FIRSTNAME);
+			echo isset($message) ? $message . ' ' : 'Jone ';
+			$message = $mvc->getObject(SessionService::LASTNAME);
+			echo isset($message) ? $message : 'Doe';
+	?>
+	, you have taken 8 courses in 3 schools and completed
+	11 course levels. You have responded to 5412 challenges. You are
+	wearing titles: NLP Practitioner and Shaman and are posessing
+	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
+	schools and 3 courses:</p>
+</div>
+<div>
+	<h2><a href="exercise-details.html">Richard Bandlers NLP, DHE ans SHE school</a></h2>
+	<p>Master Practitioner course created and moderated by John
+	LaValle. The course consist of 3 sections and you need to achieve 280
+	points in every one of them to complete each of the 5 course levels.
+	Certificates after level 3. Monthly fee: $5</p>
+	<a href='exercise-details.html' class="buton">View</a>
+</div>
+<div>
+	<h2><a href="exercise-details.html">NLP Institute of M.Pelehatiy, Moscow, Russia</a></h2>
+	<p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive
+	Customer Service! Increased Income! Influence More Gently but with
+	Precision. 5 groups of exercises, 100 points in every one of them for
+	each of the 2 levels. Monthly fee: $5</p>
+	<a href='exercise-details.html' class="buton">View</a>
+</div>
+<h2>To contact us: Frequently Asked Questions (FAQ)</h2>

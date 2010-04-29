@@ -69,10 +69,13 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/manage-schools.html" id="manageschools">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<!--  Schools management actions begin -->
+	<action name="/*-schools.html" id="$1schools">
+		<controller class="com.itoglobal.schools.SchoolsManagementController" 
+				method="handle$1Action"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
+	<!--  Schools management actions end -->	
 	
 	<action name="/manage-exercises.html" id="manageexercises">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

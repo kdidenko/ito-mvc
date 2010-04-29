@@ -17,7 +17,7 @@
 	# initialize the DAO object
 	$dao = DBClientHandler::getInstance();
 	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
-
+	
 	# get Request Dispatcher
 	$rd = RequestDispatcher::getInstance();
 	$mvc = $rd->dispatchHttpRequest($_SERVER);

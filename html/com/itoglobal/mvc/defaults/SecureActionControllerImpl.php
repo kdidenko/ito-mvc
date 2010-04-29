@@ -1,5 +1,6 @@
 <?php
 
+require_once "com/itoglobal/mvc/defaults/BaseActionControllerImpl.php";
 require_once "com/itoglobal/mvc/defaults/SecureActionController.php";
 
 class SecureActionControllerImpl extends BaseActionControllerImpl implements SecureActionController {

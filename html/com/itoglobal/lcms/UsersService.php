@@ -42,6 +42,10 @@ class UsersService {
 	 */
 	const ENABLED = 'enabled';
 	/**
+	 * @var string defining the enabled field name
+	 */
+	const DISABLE = 'disable';
+	/**
 	 * @var string defining the deleted field name
 	 */
 	const DELETED = 'deleted';
@@ -78,7 +82,7 @@ class UsersService {
 	 */
 	const ERROR = 'error';
 	
-	public static function getFields($where = null) {
+	public static function getUsersList($where = null) {
 		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
 		$from = self::USERS;
 		isset ( $where ) ? $where : '';

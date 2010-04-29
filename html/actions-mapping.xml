@@ -198,11 +198,11 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	
-	<action name="/add-user.html" id="adduser">
+	<action name="/new-*.html" id="new$1">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 		<forwards>
-			<target location="/manage-users.html" name="manageusers" condition="onsuccess"/>
+			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>
 	</action>
 

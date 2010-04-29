@@ -43,7 +43,10 @@ class ContentController extends SecureActionControllerImpl {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleManageSchools($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$list = SchoolService::getSchoolsList();
+		$mvc->addObject('list', $list);		
+		return $mvc;
 	}
 	public function handleManageExercises($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );

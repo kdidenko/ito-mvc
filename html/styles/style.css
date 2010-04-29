@@ -328,3 +328,10 @@ margin: 25px 0 0 0;
 	color:white;
 	padding:0;
 }
+
+span.message {
+	font-size: small;
+	margin:10px 0;
+	display:block;
+	color:gray;
+}

@@ -7,11 +7,6 @@
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
-		<!-- forwards id="navigation">
-			<target name="Start" location="/start-operating.html" />
-			<target name="Help" location="/help-start-operating.html" />
-			<target name="Cancel" location="/index.html" id="navCncl" />
-		</forwards-->
 	</action>
 
 	<action name="/schools.html" id="schools">
@@ -71,9 +66,8 @@
 	
 	<!--  Schools management actions begin -->
 	<action name="/*-schools.html" id="$1schools">
-		<controller class="com.itoglobal.schools.SchoolsManagementController" 
-				method="handle$1Action"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	<!--  Schools management actions end -->	
 	

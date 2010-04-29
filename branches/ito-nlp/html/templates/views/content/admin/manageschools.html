@@ -2,3 +2,15 @@
 <span class="subMnu">
 	<a href="/new-school.html" title="Create New School">New...</a>
 </span>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No schools available at this moment.</span>
+<?php
+	} else {
+		foreach($list as $key => $value){
+			print_r($value);
+		}
+	}
+?>

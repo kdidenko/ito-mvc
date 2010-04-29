@@ -11,6 +11,9 @@ class SidebarController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleHelp($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	public function handleSchools($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}

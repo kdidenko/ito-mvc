@@ -190,7 +190,8 @@ td{
 }
 
 .title{
-background-color: #EFEFEF;
+	background-color: #EFEFEF;
+	height: 40px;
 }
 
 .title h2{
@@ -295,14 +296,16 @@ margin: 25px 0 0 0;
 }
 .manage li {
 	display: block;
-	width: 130px;
+	width: 120px;
 	float: left;
-	line-height: 10px;
-	height: 10px;
+	line-height: 2px;
+	height: 2px;
 	list-style: none;  
-	margin-right: 10px;
+	margin-left: 20px;
 }
-
+.userlist{
+	font-size: 12px;
+}
 .content h2 {
 	background-color: #EFEFEF;
 	font-weight: bold;

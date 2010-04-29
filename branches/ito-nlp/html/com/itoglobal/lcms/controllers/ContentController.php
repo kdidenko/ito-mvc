@@ -14,7 +14,9 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
 		return $mvc;
 	}
-	
+	public function handleHelp($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	public function handleSchools($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -71,20 +73,22 @@ class ContentController extends SecureActionControllerImpl {
 			$vals [] .= $requestParams [UsersService::ROLE];
 			UsersService::updateFields ( $id, $fields, $vals );
 		}
-		
+		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
+		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
 		$where = UsersService::DELETED . " = 0";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
-		$result = UsersService::getFields ( $where );
+		$result = UsersService::getUsersList ( $where );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 		
 		return $mvc;
 	}
+	
 	public function handleEditUser($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
-		$result = UsersService::getFields ( $where );
+		$result = UsersService::getUsersList ( $where );
 		isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
 		isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
 		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
@@ -124,7 +128,7 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		
 		$where = UsersService::ID . " = '" . $id . "'";
-		$result = UsersService::getFields ( $where );
+		$result = UsersService::getUsersList ( $where );
 		
 		isset ( $result [0] [UsersService::AVATAR] ) ? $mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] ) : null;
 		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;

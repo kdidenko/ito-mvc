@@ -2,31 +2,38 @@
 <span class="subMnu">
 	<a href="/add-user.html" title="Create New User">New User</a>
 </span>
+<div class="title">
+	<ul class="manage">
+		<li>User Name:</li>
+		<li>Name:</li>
+		<li>Status:</li>
+		<li>Role:</li>
+		<li>Delete:</li>
+	</ul>
+</div>
 <form action="manage-users.html" method="post">
-		<div class="title">
-				<ul class="manage">
-				<li>User Name:</li>
-				<li>First Name:</li>
-				<li>Last Name:</li>
-				<li>Role:</li>
-				<li>Operations:</li>
-				</ul>
-		</div>
 		<?php 		
 			$message = $mvc->getObject ( ContentController::RESULT );
 			if (isset ( $message )) {
 				for($i = 0; count($message)>$i; $i++){
 		?>
 		<div>
-			<ul class="manage">
+			<ul class="manage userlist">
 				<li><?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></li>
-				<li><?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] : null;?></li>
-				<li><?php echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></li>
-				<li><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></li>
 				<li>
-					<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>edit</a>
-					<a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a>
+					<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>
+						<?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
+					</a>
 				</li>
+				<li>
+					<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '1') {?>
+						<a href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID]?>>Enable</a>
+					<?php ;}else{ ?>
+						<a href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID]?>>Disable</a> 
+					<?php ;}} ?>
+				</li>
+				<li><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></li>
+				<li><a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a></li>
 			</ul>
 		</div>
 		<?php

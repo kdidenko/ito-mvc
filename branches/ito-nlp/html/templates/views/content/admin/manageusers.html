@@ -1,58 +1,38 @@
 <form action="manage-users.html" method="post">
-	<table class="user">
-		<tr class="title">
-			<td colspan="4">
-			<h2>Admins Manage Users:</h2>
-			</td>
-			<td>
-			<a href="add-user.html"><button name="adduser">Add User</button></a>
-			</td>
-		</tr>
-		<tr class="title">
-			<td>
-				User Name:
-			</td>
-			<td>
-				First Name:
-			</td>
-			<td>
-				Last Name:
-			</td>
-			<td>
-				Role:
-			</td>
-			<td>
-				Operations:
-			</td>
-		</tr>
+		<div class="user">
+			<b>Admins Manage Users:</b>
+			<a href="add-user.html">Add User</a>
+		</div>
+		<div class="user">
+				<ul class="manage">
+				<li>User Name:</li>
+				<li>First Name:</li>
+				<li>Last Name:</li>
+				<li>Role:</li>
+				<li>Operations:</li>
+				</ul>
+		</div>
 		<?php 		
 			$message = $mvc->getObject ( ContentController::RESULT );
 			if (isset ( $message )) {
 				for($i = 0; count($message)>$i; $i++){
 		?>
-		<tr>
-			<td>
-				<?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?>
-			</td>
-			<td>
-				<?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] : null;?>
-			</td>
-			<td>
-				<?php echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
-			</td>
-			<td>
-				<?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?>
-			</td>
-			<td>
-				<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>edit</a>
-				<a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a>
-			</td>
-		</tr>
+		<div>
+			<ul class="manage">
+				<li><?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></li>
+				<li><?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] : null;?></li>
+				<li><?php echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></li>
+				<li><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></li>
+				<li>
+					<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID]?>>edit</a>
+					<a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID]?>>delete</a>
+				</li>
+			</ul>
+		</div>
 		<?php
 				}
 			}
 		?> 
 		
 
-	</table>
 </form>

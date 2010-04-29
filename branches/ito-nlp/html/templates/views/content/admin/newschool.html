@@ -1,0 +1,36 @@
+ <div class="center">       
+ 		<div class="error">
+	 		<?php
+	 			$errors = $mvc->getObject(UsersService::ERROR);
+				if (isset($errors)){
+					foreach ($errors as $key => $value){
+						echo '<p>' . $value . '</p>';
+					}
+				}
+	 		?>
+        </div>
+        <form class="reg_form" action="new-user.html" method="post">
+			<dl>
+               			<dt>User Name:</dt>
+                                <dd><input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input></dd>
+                        <dt>First Name:</dt>
+                                <dd><input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input></dd>
+                        <dt>Last Name:</dt>
+                                <dd><input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input></dd>
+                        <dt>Email:</dt>
+                                <dd><input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input></dd>
+					 	<dt>Role:</dt>
+							 	<dd>
+							 		<select name="role" >
+							 			<option><?php echo UsersService::ROLE_UR ?></option>
+							 			<option><?php echo UsersService::ROLE_MR ?></option>
+							 			<option><?php echo UsersService::ROLE_AR ?></option>
+							 		</select>
+							 	</dd>
+						<input type="submit" value="Add user" id="submit" name="submit"></input>
+			</dl>
+		</form>
+		<div class="error">
+		<p>Note: user should get email</p> 
+		</div>
+</div>

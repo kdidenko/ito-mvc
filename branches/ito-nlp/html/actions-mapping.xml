@@ -64,13 +64,6 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<!--  Schools management actions begin -->
-	<action name="/*-schools.html" id="$1schools">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-	<!--  Schools management actions end -->	
-	
 	<action name="/manage-exercises.html" id="manageexercises">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
@@ -187,6 +180,13 @@
 		<property name="template" value="templates/plain/created-account.txt"/>
 	</action>
 	<!-- Content views mapping end -->
+	
+	<!--  Schools management actions begin -->
+	<action name="/*-schools.html" id="$1schools">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<!--  Schools management actions end -->	
 		
 	<action name="/edit-user.html" id="edituser">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

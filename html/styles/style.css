@@ -278,13 +278,51 @@ margin: 25px 0 0 0;
 	width:45%;
 }
 
-.user td{
-	border: 1px solid #999999;
-}
-
 .profile{
 	border: 1px solid #EFEFEF;
 }
 .profile:hover{
 	border: 1px solid #999999;
+}
+
+
+
+.user{
+	height: 40px;
+	line-height: 40px;
+	background-color: #EFEFEF;
+	margin-bottom: 10px;
+}
+.user b{
+	float: left;
+	margin-left: 30px;
+	padding: 0;
+	font-size: 14px;
+}
+.user a{
+	margin: 8px;
+	float: right;
+	height: 25px;
+	width: 100px;
+	text-align: center;
+	line-height: 25px;
+	background-color: #999999;
+}
+.manage { 
+	margin: 15px;
+	padding: 0;
+	float: left;
+}
+.manage a{
+	color: black;
+	text-decoration: underline;
+}
+.manage li {
+	display: block;
+	width: 130px;
+	float: left;
+	line-height: 10px;
+	height: 10px;
+	list-style: none;  
+	margin-right: 10px;
 }

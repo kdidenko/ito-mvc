@@ -1,13 +1,9 @@
-<div class="form">
-        <b>
-	        Welcome admin:
-	        <?php		
-				$message = $mvc->getObject(SessionService::FIRSTNAME);
-				echo isset($message) ? $message : null;
-	 		?>
-        </b>        
-        <?php
-        	include_once 'navigation.html';
-        ?>
-
+<div class="lftMnu">
+	<b>Welcome
+	<?php
+	$message = $mvc->getObject(SessionService::FIRSTNAME);
+	echo isset($message) ? $message : null;
+	?>
+	</b>      
+	<?php include_once 'navigation.html'; ?>
 </div>

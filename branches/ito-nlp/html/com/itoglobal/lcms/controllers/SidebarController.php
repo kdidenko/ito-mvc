@@ -56,7 +56,7 @@ class SidebarController extends SecureActionControllerImpl {
 	public function handleMyProfile($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-	public function handleAddUser($actionParams, $requestParams) {
+	public function handleNewUser($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 }

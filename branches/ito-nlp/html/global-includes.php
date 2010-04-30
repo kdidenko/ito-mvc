@@ -19,7 +19,7 @@
 	require_once 'com/itoglobal/services/MailersService.php';
     require_once 'com/itoglobal/lcms/UsersService.php';
     require_once 'com/itoglobal/lcms/SchoolService.php';
-    
+    require_once 'com/itoglobal/lcms/ExerciseService.php';    
 
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/services/ActionsMappingResolver.php';

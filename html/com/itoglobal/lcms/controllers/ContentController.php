@@ -146,6 +146,9 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleNewUser($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		/*$plain = $mvc->getProperty('template');
+		$plain2 = $mvc->getProperty('onsuccess');
+				echo $plain . " " . $plain2;exit;*/
 		if (isset($requestParams ['submit'])) {
 			//server-side validation
 			$error = UsersService::validation ( $requestParams );
@@ -164,7 +167,9 @@ class ContentController extends SecureActionControllerImpl {
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
 				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
-				MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $actionParams->property ['value'], $url);
+				$plain = $mvc->getProperty('template');
+				
+				MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 				
 				$location = $this->onSuccess ( $actionParams );
 				$this->forwardActionRequest ( $location );

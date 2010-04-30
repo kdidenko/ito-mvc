@@ -2,14 +2,14 @@
 require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
-
+	
 	public function registration($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (! isset ( $requestParams [UsersService::ID] )) {
-			if (isset($requestParams ['submit'])) {
-			//server-side validation
-			$error = UsersService::validation($requestParams);
+			if (isset ( $requestParams ['submit'] )) {
+				//server-side validation
+				$error = UsersService::validation ( $requestParams );
 				if (count ( $error ) == 0) {
 					// Insert new users to DB
 					$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ROLE;
@@ -22,9 +22,9 @@ class RegistrationController extends BaseActionControllerImpl {
 					$from = UsersService::USERS;
 					$where = UsersService::USERNAME . " = '" . $requestParams [UsersService::USERNAME] . "'";
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-					$plain = $mvc->getProperty('template');
+					$plain = $mvc->getProperty ( 'template' );
 					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $result [0] [UsersService::ID] . '&validation_id=' . $hash;
-					MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
+					MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
 					
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
@@ -47,24 +47,28 @@ class RegistrationController extends BaseActionControllerImpl {
 		
 		if (! isset ( $requestParams [UsersService::PASSWORD] )) {
 			if (! isset ( $requestParams [UsersService::VALIDATION] )) {
-				if (isset ( $requestParams [UsersService::EMAIL] ) && $requestParams [UsersService::EMAIL] != NULL) {
-					$fields = UsersService::VALIDATION;
+				if (isset ( $requestParams [UsersService::EMAIL] )) {
+					$fields = UsersService::FIRSTNAME . ',' . UsersService::LASTNAME . ',' . UsersService::USERNAME . ',' . UsersService::EMAIL;
 					$from = UsersService::USERS;
-					$hash = md5 ( rand ( 1, 9999 ) );
-					$vals = "'" . $hash . "'";
 					$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
-					DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
-					
-					$fields = UsersService::FIRSTNAME . ',' . UsersService::LASTNAME . ',' . UsersService::USERNAME;
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-					if (isset ( $result [0] [UsersService::FIRSTNAME] )) {
-						$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
-						MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $result [0] [UsersService::USERNAME], $result [0] [UsersService::FIRSTNAME], $result [0] [UsersService::LASTNAME], $actionParams->property ['value'], $url);
+					if (isset ( $result [0] [UsersService::EMAIL]) && $requestParams [UsersService::EMAIL] != NULL ) {
 						
-						$location = $this->onSuccess ( $actionParams );
-						$this->forwardActionRequest ( $location );
-					}
-				}
+						$fields = UsersService::VALIDATION;
+						$hash = md5 ( rand ( 1, 9999 ) );
+						$vals = "'" . $hash . "'";
+						DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+						
+						if (isset ( $result [0] [UsersService::FIRSTNAME] )) {
+							$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
+							MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $result [0] [UsersService::USERNAME], $result [0] [UsersService::FIRSTNAME], $result [0] [UsersService::LASTNAME], $actionParams->property ['value'], $url );
+							
+							$location = $this->onSuccess ( $actionParams );
+							$this->forwardActionRequest ( $location );
+						}
+					} else {
+						$mvc->addObject ( UsersService::ERROR, 'Email address not found' );
+					}}
 			} else {
 				$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
 				$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
@@ -114,21 +118,21 @@ class RegistrationController extends BaseActionControllerImpl {
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
-		if (isset($result [0] [UsersService::VALIDATION]) && $result [0] [UsersService::VALIDATION] == $hash) {
-			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME]);
-			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME] . '/profile');
-			StorageService::createDirectory('storage/uploads/' . $result[0][UsersService::USERNAME] . '/trainings');
-			$path = 'storage/uploads/' . $result[0][UsersService::USERNAME] . '/profile/avatar.jpg';
-			copy('storage/uploads/default-avatar.jpg', $path);
+		if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $hash) {
+			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] );
+			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/profile' );
+			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/trainings' );
+			$path = 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/profile/avatar.jpg';
+			copy ( 'storage/uploads/default-avatar.jpg', $path );
 			
 			# setting the query variables
-			$fields = array();
-			$fields[] .= UsersService::ENABLED;
-			$fields[] .= UsersService::AVATAR;
+			$fields = array ();
+			$fields [] .= UsersService::ENABLED;
+			$fields [] .= UsersService::AVATAR;
 			$from = UsersService::USERS;
-			$vals = array();
-			$vals[] .= '1';
-			$vals[] .= $path;
+			$vals = array ();
+			$vals [] .= '1';
+			$vals [] .= $path;
 			$where = UsersService::ID . " = '" . $id . "'";
 			# executing the query
 			DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
@@ -136,5 +140,6 @@ class RegistrationController extends BaseActionControllerImpl {
 	}
 
 }
+
 
 ?>

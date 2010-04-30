@@ -22,9 +22,9 @@ class RegistrationController extends BaseActionControllerImpl {
 					$from = UsersService::USERS;
 					$where = UsersService::USERNAME . " = '" . $requestParams [UsersService::USERNAME] . "'";
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-					
+					$plain = $mvc->getProperty('template');
 					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $result [0] [UsersService::ID] . '&validation_id=' . $hash;
-					MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $actionParams->property ['value'], $url);
+					MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 					
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );

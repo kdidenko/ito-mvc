@@ -133,11 +133,11 @@ class StorageService {
 		return file_exists ( $absPass ) ? unlink ( $absPass ) : false;
 	}
 	
-	public function createDirectory($path) {
+	public static function createDirectory($path) {
 		file_exists ( $path ) ? '' : mkdir ( $path, 0755, true );
 	}
 	
-	public function createFile($path, $content = null) {
+	public static function createFile($path, $content = null) {
 		if (! file_exists ( $path )) {
 			$path = fopen ( $path, 'w' ) or die ( "can't open file" );
 			isset ( $content ) ? fwrite ( $path, $content ) : fwrite ( $path, $content );
@@ -145,7 +145,7 @@ class StorageService {
 		}
 	}
 	
-	public function deleteDirectory($dir) {
+	public static function deleteDirectory($dir) {
 		if (! file_exists ( $dir ))
 			return true;
 		if (! is_dir ( $dir ))
@@ -159,12 +159,12 @@ class StorageService {
 		return rmdir ( $dir );
 	}
 	
-	public function getFileContent($filename) {
+	public static function getFileContent($filename) {
 		$file = file_get_contents ( $filename, true );
 		return $file;
 	}
 	
-	public function uploadFile($path, $file) {
+	public static function uploadFile($path, $file) {
 		if (is_uploaded_file ( $file ['tmp_name'] )) {
 			if ($file ['size'] != 0 and $file ['size'] <= 512000) {
 				if (move_uploaded_file ( $file ['tmp_name'], $path )) {

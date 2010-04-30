@@ -79,8 +79,12 @@ class ModelAndView {
 	}
 	
 	public function getProperty($name) {
-		//echo $this->model['action_properties']['name'];exit;
-		return  $name == $this->model['action_properties']['name'] ? $this->model['action_properties']['value'] : null;
+		$result = false;
+		$res = $this->model['action_properties'];
+		for ($i=0;$i<count($res);$i++){
+			$result = ($name == $res[$i]['name']) ?  $res[$i]['value'] : $result; 
+		}
+		return $result;
 	}
 	
 

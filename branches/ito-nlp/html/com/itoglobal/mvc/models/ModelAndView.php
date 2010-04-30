@@ -77,6 +77,12 @@ class ModelAndView {
 	public function getObject($name) {
 		return key_exists ( $name, $this->model ) ? $this->model [$name] : null;
 	}
+	
+	public function getProperty($name) {
+		//echo $this->model['action_properties']['name'];exit;
+		return  $name == $this->model['action_properties']['name'] ? $this->model['action_properties']['value'] : null;
+	}
+	
 
 }
 

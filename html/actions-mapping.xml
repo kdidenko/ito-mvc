@@ -178,7 +178,7 @@
 			<role type="AR" path="templates/views/content/admin/$1.html"/>		
 		</template>	
 		<property name="onsuccess" value="manage-users.html"/>
-		<property name="template" value="templates/plain/created-account.txt"/>
+		<property name="template" value="templates/plain/created-account.txt"/>		
 		
 		<!-- <forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>

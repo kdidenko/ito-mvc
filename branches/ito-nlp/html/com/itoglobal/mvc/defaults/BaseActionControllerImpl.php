@@ -37,12 +37,16 @@ class BaseActionControllerImpl implements BaseActionController {
 		// define the view id
 		$modelAndView->setView ( ( string ) $actionParams ['id'] );
 		// add action mapping configuration defined properties
-		$modelAndView->addObject ( 'action_properties', $actionParams->property );
+		$props = null;
+		foreach ( $actionParams->property as $key => $value ) {
+			$props [] = array ('name' => ( string ) $value ['name'], 'value' => ( string ) $value ['value'] );
+		}
+		$modelAndView->addObject ( 'action_properties', $props );
 		$modelAndView->addObject ( 'action_forwards', $actionParams->forwards );
 		// add received request parameters
 		$modelAndView->addObject ( 'request_params', $requestParams );
 		// set the template property
-		$modelAndView->setTemplate($actionParams->template);
+		$modelAndView->setTemplate ( $actionParams->template );
 		// return create MVC model object
 		return $modelAndView;
 	}
@@ -56,7 +60,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 */
 	public function forwardActionRequest($location) {
 		header ( "Location: $location" );
-		exit;
+		exit ();
 	}
 	
 	/**

@@ -188,7 +188,14 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	<!--  Schools management actions end -->	
-		
+	
+	<!--  Exercises management actions begin -->
+	<action name="/*-exercises.html" id="$1exercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<!--  Exercises management actions end -->
+	
 	<action name="/edit-user.html" id="edituser">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

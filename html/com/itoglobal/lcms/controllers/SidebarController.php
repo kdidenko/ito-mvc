@@ -17,11 +17,9 @@ class SidebarController extends SecureActionControllerImpl {
 	public function handleSchools($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-	
 	public function handleNewSchool($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-		
 	public function handleTrainings($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -40,6 +38,12 @@ class SidebarController extends SecureActionControllerImpl {
 	public function handleValuateResponses($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleBrowseExercises($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	public function handleExerciseDetails($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	public function handleMyChallenges($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -53,6 +57,9 @@ class SidebarController extends SecureActionControllerImpl {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleManageExercises($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	public function handleEditExercise($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleManageUsers($actionParams, $requestParams) {

@@ -37,21 +37,31 @@ class ExerciseService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getExercisesList() {
+	public static function getExercisesList($where = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER;
+		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE;
 		$from = self::EXERCISES_TABLE;
-		$where = null;
+		isset ( $where ) ? $where : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$fields = UsersService::USERNAME;
+		
+		$from = UsersService::USERS;
+		for($i=0;$i<count($result);$i++){
+			$where = $result[$i][self::OWNER] . '=' . UsersService::ID;
+			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result[$i][self::OWNER] = $res[0][UsersService::USERNAME];
+		}
+				
 		return $result;
 	}
-/*	public static function updateFields($id, $fields, $vals) {
+	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables
 		$from = self::EXERCISES_TABLE;
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
-	}*/
+	}
+	
 	public static function deleteExercise($id) {
 		# setting the query variables
 		$from = self::EXERCISES_TABLE;

@@ -1,0 +1,17 @@
+<h2>Admins Manage Users</h2>	
+<div class="center">
+	<form action="manage-exercises.html" method="post">
+		<dl>
+			<dt>ID:</dt>
+	 		<dd>
+	 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(ExerciseService::ID);echo isset($message) ? $message : 'id';?>"/>
+	 		<?php $message = $mvc->getObject(ExerciseService::ID);echo isset($message) ? $message : 'id';?>
+	 		</dd>
+			<dt>Exercise Name:</dt>
+			<dd><input type="text" name="caption" id="caption" size="35" value="<?php $message = $mvc->getObject(ExerciseService::CAPTION);echo isset($message) ? $message : null;?>"/></dd>
+			<dt>Description:</dt>
+			<dd><textarea rows="10" cols="28"  name="description" id="description"><?php $message = $mvc->getObject(ExerciseService::DESCRIPTION);echo isset($message) ? $message : null;?></textarea></dd>
+		</dl>
+		<input type="submit" name="submit" value="Submit Changes"/>
+	</form>	
+</div>

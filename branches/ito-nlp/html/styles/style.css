@@ -190,6 +190,7 @@ td{
 }
 
 .title{
+	font-size: 14px;
 	background-color: #EFEFEF;
 	height: 40px;
 }
@@ -338,7 +339,30 @@ span.message {
 	display:block;
 	color:gray;
 }
-.listExe{
+.list{
 	border: 1px solid #EFEFEF;
+	margin: 20px;
+}
+.list img{
+	float: right;
+	margin: 15px;
+}
+.listSchool{
+	margin: 20px;
+	font-size: 12px;
+	text-align: center;
+}
+.listSchool tr{
+	margin: 0;
+	padding: 0;
+	border: 1px solid #EFEFEF;
+}
+.listSchool td{
+	width: 28%; 
+	border: 1px solid #EFEFEF;
+}
+
+.details img{
+	float: left;
 	margin: 20px;
 }

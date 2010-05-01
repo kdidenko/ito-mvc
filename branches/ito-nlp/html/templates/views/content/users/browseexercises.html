@@ -10,7 +10,7 @@
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
-<div class="listExe">
+<div class="list">
 			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
 				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
 			</a>

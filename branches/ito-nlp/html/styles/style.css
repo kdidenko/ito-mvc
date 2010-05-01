@@ -325,7 +325,7 @@ margin: 25px 0 0 0;
 	line-height:25px;
 	display:block;
 	background-color:#999999;
-	width:70px;
+	width:90px;
 	text-align:center;
 	border:1px solid white;
 	color:white;
@@ -337,4 +337,8 @@ span.message {
 	margin:10px 0;
 	display:block;
 	color:gray;
+}
+.listExe{
+	border: 1px solid #EFEFEF;
+	margin: 20px;
 }

@@ -14,7 +14,6 @@
 		<li>Caption:</li>
 		<li>Owner:</li>
 		<li>Rate:</li>
-		<li>Description:</li>
 		<li>Delete:</li>
 	</ul>
 </div>
@@ -22,15 +21,20 @@
 <div>
 	<ul class="manage userlist">
 		<li>
-			<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>
+			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
 				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
 			</a>
 		</li>
 		<li><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></li>
 		<li><?php echo isset($value[ExerciseService::RATE]) ? $value[ExerciseService::RATE] : null;?></li>
-		<li><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></li>
-		<li><a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a></li>
+		<li>
+		<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
+		<a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
+		</li>
 	</ul>
 </div>
 
 <?php } } ?>
+
+
+

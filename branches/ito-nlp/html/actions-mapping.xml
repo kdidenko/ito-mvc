@@ -54,6 +54,11 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
+	<action name="/browse-exercises.html" id="browseexercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
 	<action name="/my-challenges.html" id="mychallenges">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
@@ -195,6 +200,15 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	<!--  Exercises management actions end -->
+	
+	<action name="/exercise-details.html" id="exercisedetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>	
+	<action name="/edit-exercise.html" id="editexercise">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
 	
 	<action name="/edit-user.html" id="edituser">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

@@ -20,11 +20,9 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleSchools($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-	
 	public function handleNewSchool($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}	
-	
 	public function handleTrainings($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -43,6 +41,21 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleValuateResponses($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleBrowseExercises($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED]) : null;
+		$list = ExerciseService::getExercisesList();
+		$mvc->addObject('list', $list);		
+		return $mvc;
+	}
+	public function handleExerciseDetails($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED]) : null;
+		$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
+		$list = ExerciseService::getExercisesList($where);
+		$mvc->addObject('list', $list);		
+		return $mvc;
+	}
 	public function handleMyChallenges($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -55,20 +68,34 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc->addObject('list', $list);		
 		return $mvc;
 	}
-	
 	public function handleManageExercises($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		/*SELECT exercises.id, exercises.owner_id, caption, description, users.username
-		FROM exercises
-		LEFT JOIN users ON exercises.owner_id = users.id*/
-		
-		
+		if (isset ( $requestParams ['submit'] )) {
+			$fields = array ();
+			$fields [] .= ExerciseService::CAPTION;
+			$fields [] .= ExerciseService::DESCRIPTION;
+			$vals = array ();
+			$id = $requestParams [ExerciseService::ID];
+			$vals [] .= $requestParams [ExerciseService::CAPTION];
+			$vals [] .= $requestParams [ExerciseService::DESCRIPTION];
+			ExerciseService::updateFields ( $id, $fields, $vals );
+		}
 		
 		
 		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED]) : null;
 		$list = ExerciseService::getExercisesList();
 		$mvc->addObject('list', $list);		
+		return $mvc;
+	}
+	public function handleEditExercise($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
+		$result = ExerciseService::getExercisesList ( $where );
+		isset ( $result [0] [ExerciseService::ID] ) ? $mvc->addObject ( ExerciseService::ID, $result [0] [ExerciseService::ID] ) : null;
+		isset ( $result [0] [ExerciseService::CAPTION] ) ? $mvc->addObject ( ExerciseService::CAPTION, $result [0] [ExerciseService::CAPTION] ) : null;
+		isset ( $result [0] [ExerciseService::DESCRIPTION] ) ? $mvc->addObject ( ExerciseService::DESCRIPTION, $result [0] [ExerciseService::DESCRIPTION] ) : null;
+		
 		return $mvc;
 	}
 	
@@ -79,7 +106,7 @@ class ContentController extends SecureActionControllerImpl {
 			//server-side validation
 			$error = ExerciseService::validation ( $requestParams );
 			if (isset($error) && count ( $error ) == 0) {
-				// Insert new users to DB
+				// Insert new exercise to DB
 				/*StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] );
 				StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] . '/profile' );
 				StorageService::createDirectory ( 'storage/uploads/' . $requestParams [UsersService::USERNAME] . '/trainings' );

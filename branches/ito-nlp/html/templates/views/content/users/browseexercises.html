@@ -1,0 +1,38 @@
+<h2>Browse Exercises</h2>
+<span class="subMnu">
+	<a href="/new-exercise.html" title="Create New Exercise">New...</a>
+</span>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+
+<?php foreach($list as $key => $value){ ?>
+<div class="listExe">
+			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
+				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
+			</a>
+			<p>
+			Owner: <?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?>
+			Rate:
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 0){ ?>
+			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>
+			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>
+			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>
+			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>
+			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
+			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>
+			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
+			</p>
+			<p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>  class="buton">
+			View
+			</a>
+</div>
+<?php } }?>

@@ -201,6 +201,14 @@
 	</action>
 	<!--  Exercises management actions end -->
 	
+	<action name="/school-details.html" id="schooldetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>	
+	<action name="/edit-school.html" id="editschool">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
 	<action name="/exercise-details.html" id="exercisedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />

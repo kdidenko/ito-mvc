@@ -17,6 +17,9 @@ class SidebarController extends SecureActionControllerImpl {
 	public function handleSchools($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleSchoolDetails($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	public function handleNewSchool($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
@@ -51,6 +54,9 @@ class SidebarController extends SecureActionControllerImpl {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleManageSchools($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	public function handleEditSchool($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleNewExercise($actionParams, $requestParams) {

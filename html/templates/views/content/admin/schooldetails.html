@@ -1,0 +1,28 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+<div class="details">
+	<h2><?php echo isset($list[0][SchoolService::CAPTION]) ? $list[0][SchoolService::CAPTION] : null;?></h2>
+	<img alt="none avatar" src="<?php echo isset($list[0][SchoolService::AVATAR]) ? $list[0][SchoolService::AVATAR] : null;?>">
+	<p>
+	Rate:
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 0){ ?>
+	<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 1){ ?>
+	<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 2){ ?>
+	<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 3){ ?>
+	<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 4){ ?>
+	<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
+	<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 5){ ?>
+	<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
+	</p>
+	<p>Base fee: <?php echo isset($list[0][SchoolService::FEE]) ? $list[0][SchoolService::FEE] : null;?></p>
+	<p><?php echo isset($list[0][SchoolService::DESCRIPTION]) ? $list[0][SchoolService::DESCRIPTION] : null;?></p>
+</div>
+<?php }?>

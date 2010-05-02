@@ -314,6 +314,7 @@ margin: 25px 0 0 0;
 	text-indent: 10px;
 }
 
+
 .subMnu {
 	background-color:#F9F9F9;
 	display:block;
@@ -343,6 +344,26 @@ span.message {
 	border: 1px solid #EFEFEF;
 	margin: 20px;
 }
+
+.left{
+	margin: 10px;
+	display: block;
+	float: left;
+	width: 47%;
+	clear: both;
+}
+.right{
+	display: block;
+	margin: 10px;
+	float: right;
+	width: 46%;
+}
+
+.left img{
+	float: left;
+	margin: 15px;
+}
+
 .list img{
 	float: right;
 	margin: 15px;

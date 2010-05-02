@@ -119,10 +119,10 @@ class RegistrationController extends BaseActionControllerImpl {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
 		if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $hash) {
-			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] );
-			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/profile' );
-			StorageService::createDirectory ( 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/trainings' );
-			$path = 'storage/uploads/' . $result [0] [UsersService::USERNAME] . '/profile/avatar.jpg';
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] );
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile' );
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/trainings' );
+			$path = 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile/avatar.jpg';
 			copy ( 'storage/uploads/default-avatar.jpg', $path );
 			
 			# setting the query variables

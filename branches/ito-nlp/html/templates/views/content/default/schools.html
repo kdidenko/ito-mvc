@@ -1,46 +1,34 @@
-<table>
-	<tr class="title">
-		<td colspan="2">
-		<h2>Schools overview</h2>
-		<select>
-			<option>Сортировать по</option>
-		</select></td>
-	</tr>
-	<tr>
-		<td>
-		<h2><a href="exercise-details.html">Поведенчиская подстройка</a></h2>
-		<p>Изминение параметров проведения Консультанта таким образом,
-		чтобы стать максимально похожим на Клиента: подстройка по позе,
-		жестам, дыханию.</p>
-		<a href='exercise-details.html' class="buton">Посмотреть</a></td>
-		<td>
-		<h2><a href="exercise-details.html">Подстрайка к модели мира</a></h2>
-		<p>Росчет ценностей и критериев Клиента, его манеры говорить.
-		Позволяет сделать слова Консультанта более значимыми.</p>
-		<a href='exercise-details.html' class="buton">Посмотреть</a></td>
-	</tr>
-	<tr>
-		<td>
-		<h2><a href="exercise-details.html">Ресурсные / нересурсные
-		состояния</a></h2>
-		<p>В ресурсном состоянии Клиент может дейтсвовать наиболее
-		эфективным образом, обладая несколькими(не менее трех) вариантами
-		проведения решения(выбора). В нересурсном состоянии Клиент имеет
-		только один вариант поведения, как правило, не устраивающий его.
-		Приятно также говорить о состоянии ресурса(см. Ресурс) и состоянии
-		нересурса.</p>
-		<a href='exercise-details.html' class="buton">Посмотреть</a></td>
-		<td>
-		<h2><a href="exercise-details.html">Рефрейминг смысла</a></h2>
-		<p>Консультант предлогает другое, более ресурсное название для
-		того же опыта Клиента. Например, "поздоровел" вместо "потолстел",
-		"настойчивый" вместо "упрямый". Позволяет переосмыслить его значение,
-		обратить внимание на другие аспекты личностного опыта.</p>
-		<a href='exercise-details.html' class="buton">Посмотреть</a></td>
-	</tr>
-	<tr class="title">
-		<td colspan="2">
-		<h2><a href="exercise-scroller.html">Постраничный навигатор</a></h2>
-		</td>
-	</tr>
-</table>
+<h2>Schools Overview
+<span class="subMnu">
+	<select>
+		<option>Sort by:</option>
+	</select>
+</span>
+</h2>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+
+<?php foreach($list as $key => $value){ ?>
+<?php if($key%2){ ?>
+
+<div class="list right">
+<?php }else{ ?>
+<div>
+<div class="list left">
+<?php } ?>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+				<b><?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?></b>
+			</a>
+			<img alt="none avatar" src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>">
+			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>  class="buton">
+			View
+			</a>
+</div>
+<?php if($key%2){ ?>
+</div>
+<?php } } }?>

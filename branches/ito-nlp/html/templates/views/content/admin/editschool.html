@@ -1,6 +1,16 @@
 <h2>Admins Manage Users</h2>	
 <div class="center">
-	<form enctype="multipart/form-data" action="manage-schools.html" method="post">
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
+	<form enctype="multipart/form-data" action="edit-school.html" method="post">
 		<dl>
 			<dt>ID:</dt>
 	 		<dd>

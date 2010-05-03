@@ -17,6 +17,7 @@
     require_once 'com/itoglobal/services/StorageService.php';
     require_once 'com/itoglobal/services/ContextService.php';
 	require_once 'com/itoglobal/services/MailersService.php';
+	require_once 'com/itoglobal/services/ValidationService.php';
     require_once 'com/itoglobal/lcms/UsersService.php';
     require_once 'com/itoglobal/lcms/SchoolService.php';
     require_once 'com/itoglobal/lcms/ExerciseService.php';    

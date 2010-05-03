@@ -1,5 +1,15 @@
 <h2>My profile</h2>
 <div class="center">
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
 	<form enctype="multipart/form-data" action="my-profile.html" method="post" >
 		<dl>
 			<dt>Your First Name:</dt>

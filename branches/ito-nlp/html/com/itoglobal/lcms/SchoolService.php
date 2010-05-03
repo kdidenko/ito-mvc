@@ -32,7 +32,7 @@ class SchoolService {
 	/**
 	 * @var string defining the fee_id field name
 	 */
-	const FEE = 'fee_id'; 
+	const FEE = 'fee_id';
 	/**
 	 * @var string defining the enabled field name
 	 */
@@ -71,15 +71,16 @@ class SchoolService {
 		$from = self::SCHOOLS_TABLE;
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
-		DBClientHandler::getInstance ()->execDelete ($from, $where, '', '' );
+		DBClientHandler::getInstance ()->execDelete ( $from, $where, '', '' );
 	}
 	
-	public static function validation($requestParams){
+	public static function validation($requestParams,  $_FILES) {
 		$error = array ();
 		$error [] .= self::checkAlias ( $requestParams [self::ALIAS] );
-		$error [] .= self::checkName ( $requestParams [self::CAPTION] );
-		$error [] .= self::checkDescription ( $requestParams [self::DESCRIPTION] );
+		$error [] .= $requestParams [self::CAPTION] ? false : 'Please enter caption';
+		$error [] .= $requestParams [self::DESCRIPTION] ? false : 'Please enter description';
 		$error [] .= self::checkAdmin ( $requestParams [self::ADMIN] );
+		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		return array_filter ( $error );
 	}
 	
@@ -88,31 +89,33 @@ class SchoolService {
 		if (! $alias) {
 			$result = 'Please enter alias';
 		} else {
+			$result = ValidationService::alphaNumeric ( $alias ) ? 
+				false : 
+					'Wrong alias. Please enter a correct email';
+		}
+		if (! $result) {
 			$where = self::ALIAS . " = '" . $alias . "'";
 			$res = DBClientHandler::getInstance ()->execSelect ( self::ALIAS, self::SCHOOLS_TABLE, $where, '', '', '' );
 			$result = isset ( $res [0] [self::ALIAS] ) ? 'Such alias already exists.' : false;
 		}
 		return $result;
 	}
-	public static  function checkName($name) {
-		return $name ? false : 'Please enter caption';
-	}
-	public static  function checkDescription($description) {
-		return $description ? false : 'Please enter description';
-	}
-	public static  function checkAdmin($admin) {
+
+	public static function checkAdmin($admin) {
 		$result = false;
 		if (! $admin) {
-				$result = 'Please enter admin';
+			$result = 'Please enter admin';
 		} else {
 			$fields = UsersService::ID;
 			$from = UsersService::USERS;
 			$where = UsersService::USERNAME . "='" . $admin . "'";
 			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			$result = isset ( $res [0] [UsersService::ID] ) ?  false : 'No such user';
+			$result = isset ( $res [0] [UsersService::ID] ) ? false : 'No such user';
 		}
-	return $result;
+		return $result;
 	}
+	
+	
 }
 
 ?>

@@ -107,14 +107,24 @@ class UsersService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function validation($requestParams){
+	/*public static function createUserDirectory($directory){
+		StorageService::createDirectory ( $user_path . $directory );
+		StorageService::createDirectory ( $user_path . $directory . '/profile' );
+		StorageService::createDirectory ( $user_path . $directory . '/trainings' );
+		$path = $user_path . $directory . '/profile/avatar.jpg';
+		copy ( $user_avatar, $path );
+		return $path;
+	}*/
+	
+	public static function validation($requestParams, $_FILES = null){
 		$error = array ();
-		$error [] .= self::checkUsername ( $requestParams [self::USERNAME] );
-		$error [] .= self::checkName ( $requestParams [self::FIRSTNAME] );
-		$error [] .= self::checkLastname ( $requestParams [self::LASTNAME] );
+		$error [] .= isset($requestParams [self::USERNAME])? self::checkUsername ( $requestParams [self::USERNAME] ) : false;
+		$error [] .= $requestParams [self::FIRSTNAME] ? false : 'Please enter your First Name';
+		$error [] .= $requestParams [self::LASTNAME] ? false : 'Please enter your Last Name';
 		$error [] .= self::checkEmail ( $requestParams [self::EMAIL] );
 		$error [] .= isset($requestParams [self::PASSWORD])? self::checkPassword ( $requestParams [self::PASSWORD] ) : false;
 		$error [] .= isset($requestParams [self::CONFIRM])? self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] ) : false;
+		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
 		//TODO: create birthday field!
 		return array_filter ( $error );
@@ -125,6 +135,11 @@ class UsersService {
 		if (! $username) {
 			$result = 'Please enter your username';
 		} else {
+			$result = ValidationService::alphaNumeric($username)?
+				false :
+					'Wrong username. Please enter a correct email';
+		}
+		if (!$result) {
 			$where = self::USERNAME . " = '" . $username . "'";
 			$res = DBClientHandler::getInstance ()->execSelect ( self::USERNAME, UsersService::USERS, $where, '', '', '' );
 			$result = isset ( $res [0] [self::USERNAME] ) ? 'Such username already exists.' : false;
@@ -132,20 +147,11 @@ class UsersService {
 		return $result;
 	}
 	
-	public static  function checkName($name) {
-		return $name ? false : 'Please enter your First Name';
-	}
-	
-	public static  function checkLastname($lastname) {
-		return $lastname ? false : 'Please enter your Last Name';
-	}
-	
 	public static  function checkEmail($email) {
 		$result = false;
 		if ($email) {
-			if (! preg_match ( '/^(([^<>()[\]\\.,;:\s@"\']+(\.[^<>()[\]\\.,;:\s@"\']+)*)|("[^"\']+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\d\-]+\.)+[a-zA-Z]{2,}))$/', $email )) {
-				$result = "Wrong email. Please enter a correct email";
-			} else {
+			$result = ValidationService::checkEmail($email);
+			if (!$result) {
 				$where = self::EMAIL . " = '" . $email . "'";
 				$res = DBClientHandler::getInstance ()->execSelect ( self::EMAIL, self::USERS, $where, '', '', '' );
 				$result = isset ( $res [0] [self::EMAIL] )? 'Such email already exists.' : false;
@@ -158,23 +164,20 @@ class UsersService {
 	
 	public static  function checkPassword($password) {
 		$result = false;
-		if ($password) {
-			$result = strlen ( $password ) < 6 ? 'The password you provided must have at least 6 characters.' : false;
-		} else {
-			$result = 'Please enter password';
-		}
+		$result = $password ?
+			$result = ValidationService::checkPassword($password) :
+				'Please enter password';
 		return $result;
 	}
 	
 	public static  function checkConfirmPassword($password, $confirm_password) {
 		$result = false;
-		if ($confirm_password) {
-			$result = $password != $confirm_password ? 'Confirm Password does not match the password.' : false;
-		} else {
-			$result = 'Please enter confirm password';
-		}
+		$result = $confirm_password ? 
+			ValidationService::checkConfirmPassword($password, $confirm_password) :
+				'Please enter confirm password';
 		return $result;
 	}
+	
 
 }
 

@@ -18,4 +18,10 @@
 	$db_user = 'root';		
 	$db_pass = '';
 	$charset = 'UTF8';
+	
+	//TODO: setting bellow must be used!!!!!!!
+	$user_path = 'storage/uploads/users/';
+	$school_path = 'storage/uploads/schools/';
+	$school_avatar = 'storage/uploads/default-school.jpg';
+	$user_avatar = 'storage/uploads/default-avatar.jpg';
 ?>

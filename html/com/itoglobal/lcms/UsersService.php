@@ -124,8 +124,10 @@ class UsersService {
 		$error [] .= self::checkEmail ( $requestParams [self::EMAIL] );
 		$error [] .= isset($requestParams [self::PASSWORD])? self::checkPassword ( $requestParams [self::PASSWORD] ) : false;
 		$error [] .= isset($requestParams [self::CONFIRM])? self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] ) : false;
-		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
-		//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
+		if(isset($_FILES)) {
+			$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
+		}
+		//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year); 
 		//TODO: create birthday field!
 		return array_filter ( $error );
 	}

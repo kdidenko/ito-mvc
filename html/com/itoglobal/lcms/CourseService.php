@@ -50,6 +50,14 @@ class CourseService {
 	 */
 	const DELETED = 'deleted';
 	/**
+	 * @var string defining the remove
+	 */
+	const REMOVE = 'remove';
+	/**
+	 * @var string defining the add
+	 */
+	const ADD = 'add';
+	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
@@ -76,6 +84,26 @@ class CourseService {
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete ( $from, $where, '', '' );
+	}
+	
+	public static function removeCourse($id, $school_id) {
+		# setting the query variables
+		$fields = self::SCHOOL_ID;
+		$vals = '0';
+		$from = self::COURSE_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	public static function addCourse($id, $school_id) {
+		# setting the query variables
+		$fields = self::SCHOOL_ID;
+		$vals = $school_id;
+		$from = self::COURSE_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
 	public static function validation($requestParams,  $_FILES) {

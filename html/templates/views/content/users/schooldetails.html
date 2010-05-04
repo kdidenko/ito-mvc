@@ -31,12 +31,12 @@
 
 <div>
 <?php
-	$courseslist = $mvc->getObject('courseslist');
-	if(!isset($courseslist) || count($courseslist) == 0){
+	$courseslist = $mvc->getObject('courselist');
+	if(!isset($courselist) || count($courselist) == 0){
 ?>
 <span class="message">No course sign in to school.</span>
 <?php } else { ?>
-<?php foreach($courseslist as $key => $value){ ?>
+<?php foreach($courselist as $key => $value){ ?>
 <div class="lessdetails">
 	<b><?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?></b>
 	<img alt="none avatar" src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>">

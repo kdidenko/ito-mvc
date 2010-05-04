@@ -25,14 +25,19 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
+		isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+		
 		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 		$list = SchoolService::getSchoolsList ( $where );
 		$mvc->addObject ( 'list', $list );
-				
-		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$courseslist = CourseService::getCoursesList ( $where );
+		
+		$courseslist = CourseService::getCoursesList ();
 		$mvc->addObject ( 'courseslist', $courseslist );
 		
+		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$courselist = CourseService::getCoursesList ( $where );
+		$mvc->addObject ( 'courselist', $courselist );
 		return $mvc;
 	}
 	public function handleTrainings($actionParams, $requestParams) {

@@ -393,12 +393,30 @@ class ContentController extends SecureActionControllerImpl {
 				$file = $_FILES ['file'];
 				$path = 'storage/uploads/users/' . $username . "/profile/avatar.jpg";
 				$error[] .= ValidationService::checkAvatar ( $file );
-				$error = array_filter ( $error );
 			}
 			
+			if ($requestParams[UsersService::OLDPASSWORD] != null){
+				$error [] .= isset($requestParams [UsersService::PASSWORD])? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
+				$error [] .= isset($requestParams [UsersService::CONFIRM])? UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] ) : false;
+			}
+			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
 				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 					StorageService::uploadFile ( $path, $file );
+				}
+				if ($requestParams[UsersService::OLDPASSWORD] != null){
+					$fields = UsersService::PASSWORD;
+					$from = UsersService::USERS;
+					$where = UsersService::ID . " = " . $requestParams[UsersService::ID];
+					# executing the query
+					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					if (md5($requestParams[UsersService::OLDPASSWORD]) == $result[0][UsersService::PASSWORD]){
+						$fields = array ();
+						$fields[] .= UsersService::PASSWORD;
+						$vals = array ();
+						$vals [] .= md5($requestParams [UsersService::PASSWORD]);
+						UsersService::updateFields ( $id, $fields, $vals );	
+					}
 				}
 			}else{
 				$mvc->addObject ( UsersService::ERROR, $error );

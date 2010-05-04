@@ -19,7 +19,6 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
 		$list = SchoolService::getSchoolsList ();
 		$mvc->addObject ( 'list', $list );
 		return $mvc;
@@ -29,10 +28,18 @@ class ContentController extends SecureActionControllerImpl {
 		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 		$list = SchoolService::getSchoolsList ( $where );
 		$mvc->addObject ( 'list', $list );
+				
+		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$courseslist = CourseService::getCoursesList ( $where );
+		$mvc->addObject ( 'courseslist', $courseslist );
+		
 		return $mvc;
 	}
 	public function handleTrainings($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$list = CourseService::getCoursesList();
+		$mvc->addObject ( 'list', $list );
+		return $mvc;
 	}
 	public function handleCommunity($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
@@ -49,6 +56,91 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleValuateResponses($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleManageCourses($actionParams, $requestParams) {		
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		isset ( $requestParams [CourseService::DELETED] ) ? CourseService::deleteCourse ( $requestParams [CourseService::DELETED] ) : null;
+		$list = CourseService::getCoursesList();
+		$mvc->addObject ( 'list', $list );
+		return $mvc;
+	}
+	public function handleNewCourse($actionParams, $requestParams) {
+		// calling parent to get the model
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset ( $requestParams ['submit'] )) {
+			//server-side validation
+			$error = CourseService::validation ( $requestParams,  $_FILES );
+			if (isset ( $error ) && count ( $error ) == 0) {
+				StorageService::createDirectory ( 'storage/uploads/courses/' . $requestParams [CourseService::ALIAS] );
+				$path = 'storage/uploads/courses/' . $requestParams [CourseService::ALIAS] . "/avatar.jpg";
+				isset ( $_FILES ['file'] ) && $_FILES ['file'] ['error'] == 0 ?
+					StorageService::uploadFile ( $path, $_FILES ['file'] ) :
+						copy ( 'storage/uploads/default-course.jpg', $path );
+				// Insert new school to DB
+				$fields = CourseService::LEVEL . ', ' . CourseService::CAPTION . ', ' . CourseService::DESCRIPTION . ', ' . CourseService::ALIAS . ', ' . CourseService::AVATAR . ', ' . CourseService::CRDATE . ', ' . CourseService::FEE . ', ' . CourseService::SCHOOL_ID;
+				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
+				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0','0'";
+				$into = CourseService::COURSE_TABLE;
+				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+				
+				//$mvc->addObject ( 'forward', 'successful' );
+				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
+			} else {
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
+		}
+		return $mvc;
+	}
+	public function handleEditCourse($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset ( $requestParams ['submit'] )) {
+			$error = array ();
+			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+				$file = $_FILES ['file'];
+				$path = 'storage/uploads/courses/' . $requestParams [CourseService::ALIAS] . "/avatar.jpg";
+				$error[] .= ValidationService::checkAvatar ( $file );
+				$error = array_filter ( $error );
+			}
+			if (count ( $error ) == 0) {
+				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+					StorageService::uploadFile ( $path, $file );
+				}
+			}else{
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
+			$fields = array ();
+			$fields [] .= CourseService::CAPTION;
+			$fields [] .= CourseService::DESCRIPTION;
+			$fields [] .= CourseService::LEVEL;
+			$fields [] .= CourseService::SCHOOL_ID;
+			$vals = array ();
+			$id = $requestParams [CourseService::ID];
+			$vals [] .= $requestParams [CourseService::CAPTION];
+			$vals [] .= $requestParams [CourseService::DESCRIPTION];
+			$vals [] .= $requestParams [CourseService::LEVEL];
+			$vals [] .= $requestParams [CourseService::SCHOOL_ID];
+			CourseService::updateFields ( $id, $fields, $vals );
+		}
+		
+		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$result = CourseService::getCoursesList ( $where );
+		isset ( $result [0] [CourseService::ID] ) ? $mvc->addObject ( CourseService::ID, $result [0] [CourseService::ID] ) : null;
+		isset ( $result [0] [CourseService::CAPTION] ) ? $mvc->addObject ( CourseService::CAPTION, $result [0] [CourseService::CAPTION] ) : null;
+		isset ( $result [0] [CourseService::DESCRIPTION] ) ? $mvc->addObject ( CourseService::DESCRIPTION, $result [0] [CourseService::DESCRIPTION] ) : null;
+		isset ( $result [0] [CourseService::LEVEL] ) ? $mvc->addObject ( CourseService::LEVEL, $result [0] [CourseService::LEVEL] ) : null;
+		isset ( $result [0] [CourseService::SCHOOL_ID] ) ? $mvc->addObject ( CourseService::SCHOOL_ID, $result [0] [CourseService::SCHOOL_ID] ) : null;
+		isset ( $result [0] [CourseService::AVATAR] ) ? $mvc->addObject ( CourseService::AVATAR, $result [0] [CourseService::AVATAR] ) : null;
+		isset ( $result [0] [CourseService::ALIAS] ) ? $mvc->addObject ( CourseService::ALIAS, $result [0] [CourseService::ALIAS] ) : null;
+		return $mvc;
+	}
+	public function handleCourseDetails($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$list = CourseService::getCoursesList ( $where );
+		$mvc->addObject ( 'list', $list );
+		return $mvc;
+	}
+		
+		
 	public function handleBrowseExercises($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;

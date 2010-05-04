@@ -69,6 +69,21 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
+	<action name="/manage-courses.html" id="managecourses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/edit-course.html" id="editcourse">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/course-details.html" id="coursedetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
 	<action name="/manage-exercises.html" id="manageexercises">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
@@ -204,7 +219,7 @@
 	<action name="/school-details.html" id="schooldetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>	
+	</action>
 	<action name="/edit-school.html" id="editschool">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

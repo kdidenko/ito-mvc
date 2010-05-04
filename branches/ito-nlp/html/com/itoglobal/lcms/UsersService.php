@@ -30,6 +30,10 @@ class UsersService {
 	 */
 	const CONFIRM = 'confirm_password';
 	/**
+	 * @var string defining the old_password field name
+	 */
+	const OLDPASSWORD = 'old_password';
+	/**
 	 * @var string defining the users table name
 	 */
 	const USERS = 'users';

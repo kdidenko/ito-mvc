@@ -387,3 +387,14 @@ span.message {
 	float: left;
 	margin: 20px;
 }
+
+.lessdetails {
+	clear: both;
+	float: right;
+	width: 80%;
+	font-size: 11px; 
+}
+
+.lessdetails img{
+	float: right; 
+}

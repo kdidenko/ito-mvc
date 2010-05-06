@@ -13,20 +13,37 @@
 	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
 	schools and 3 courses:</p>
 </div>
-<div>
-	<h2><a href="exercise-details.html">Richard Bandlers NLP, DHE ans SHE school</a></h2>
-	<p>Master Practitioner course created and moderated by John
-	LaValle. The course consist of 3 sections and you need to achieve 280
-	points in every one of them to complete each of the 5 course levels.
-	Certificates after level 3. Monthly fee: $5</p>
-	<a href='exercise-details.html' class="buton">View</a>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No school available at this moment.</span>
+<?php } else { ?>
+<h2>Your School</h2>
+<?php foreach($list as $key => $value){ ?>
+<div class="list">
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+				<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+			<img alt="none avatar" src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>">
+			<p>
+			Rate:
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 0){ ?>
+			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 1){ ?>
+			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 2){ ?>
+			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 3){ ?>
+			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 4){ ?>
+			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
+			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 5){ ?>
+			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
+			</p>
+			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>  class="buton">
+			View
+			</a>
 </div>
-<div>
-	<h2><a href="exercise-details.html">NLP Institute of M.Pelehatiy, Moscow, Russia</a></h2>
-	<p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive
-	Customer Service! Increased Income! Influence More Gently but with
-	Precision. 5 groups of exercises, 100 points in every one of them for
-	each of the 2 levels. Monthly fee: $5</p>
-	<a href='exercise-details.html' class="buton">View</a>
-</div>
-<h2>To contact us: Frequently Asked Questions (FAQ)</h2>
+<?php } }?>

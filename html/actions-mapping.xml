@@ -198,6 +198,7 @@
 			<role type="AR" path="templates/views/content/admin/$1.html"/>		
 		</template>	
 		<property name="onsuccess" value="manage-users.html"/>
+		<property name="schoolassigned" value="overview.html"/>
 		<property name="template" value="templates/plain/created-account.txt"/>		
 	</action>
 	<!-- Content views mapping end -->
@@ -242,7 +243,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-		
+	
+	<action name="/school-assigned.html" id="schoolassigned">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
 	<action name="/new-*.html" id="new$1">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
@@ -250,5 +256,10 @@
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>
 	</action>
-
+	<!--
+	<action name="/school-assigned.html" id="schoolassigned">
+		<controller class="com.itoglobal.lcms.controllers.AssignedController" method="handleschoolassigned"/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	-->
 </actions>

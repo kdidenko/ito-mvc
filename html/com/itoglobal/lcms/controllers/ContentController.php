@@ -12,6 +12,25 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
 		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
 		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
+		
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		$fields = AssignedService::SCHOOL_ID;
+		$from = AssignedService::SCHOOLS_ASSIGNED;
+		$where = AssignedService::USER_ID . "='" . $user_id . "'";
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		
+		if (isset($result [0] [AssignedService::SCHOOL_ID])){
+			$where = '';
+			foreach($result as $key => $value){
+				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where .= $key != count ($result) - 1 ? " OR " : null;
+			}
+			$list = SchoolService::getSchoolsList ($where);
+			$mvc->addObject ( 'list', $list );
+		}
+		
+		
 		return $mvc;
 	}
 	public function handleHelp($actionParams, $requestParams) {
@@ -372,7 +391,7 @@ class ContentController extends SecureActionControllerImpl {
 				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
 				$plain = $mvc->getProperty ( 'template' );
 				
-				//MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
+				MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 				$mvc->addObject ( 'forward', 'successful' );
 				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
 			} else {
@@ -444,6 +463,22 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
 		
 		return $mvc;
+	}
+	public function handleSchoolAssigned($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		if (isset($requestParams[AssignedService::SIGNUP])){
+			$school_id = $requestParams[AssignedService::SIGNUP];
+			AssignedService::SignUpSchool($school_id, $user_id);
+		}
+		
+		if (isset($requestParams[AssignedService::SIGNOUT])){ 
+			$school_id = $requestParams[AssignedService::SIGNOUT];
+			AssignedService::SignOutSchool($school_id, $user_id);
+		}
+			
+		$this->forwardActionRequest ( $mvc->getProperty('schoolassigned') );
 	}
 }
 

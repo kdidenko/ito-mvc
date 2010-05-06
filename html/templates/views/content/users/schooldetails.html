@@ -25,6 +25,10 @@
 	<p>Base fee: <?php echo isset($list[0][SchoolService::FEE]) ? $list[0][SchoolService::FEE] : null;?></p>
 	<p><?php echo isset($list[0][SchoolService::DESCRIPTION]) ? $list[0][SchoolService::DESCRIPTION] : null;?></p>
 </div>
+<div class="subMnu">
+	<a href="<?php echo "/school-assigned.html?signup=" . $list[0][SchoolService::ID] ?>">SignUp</a>
+	<a href="<?php echo "/school-assigned.html?signout=" . $list[0][SchoolService::ID] ?>">SignOut</a>
+</div>
 <p>Less details:</p>
 <?php }?>
 

@@ -51,12 +51,30 @@ class ContentController extends SecureActionControllerImpl {
 		$list = SchoolService::getSchoolsList ( $where );
 		$mvc->addObject ( 'list', $list );
 		
+		#for admin
 		$courseslist = CourseService::getCoursesList ();
 		$mvc->addObject ( 'courseslist', $courseslist );
 		
+		#for users and visitor
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$courselist = CourseService::getCoursesList ( $where );
 		$mvc->addObject ( 'courselist', $courselist );
+		
+		
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$school_id = $requestParams[AssignedService::ID];
+		
+		isset($requestParams[AssignedService::SIGNOUT]) ?		
+			$school_id = $requestParams[AssignedService::SIGNOUT] :
+				null;
+		
+		$fields = AssignedService::SCHOOL_ID;
+		$from = AssignedService::SCHOOLS_ASSIGNED;
+		$where = AssignedService::SCHOOL_ID . " = '" . $school_id . "' AND " . AssignedService::USER_ID . " = '" . $user_id . "'";
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		
+		isset ($result) ? $mvc->addObject ( 'assign', $result ) : null;
+		
 		return $mvc;
 	}
 	public function handleTrainings($actionParams, $requestParams) {
@@ -471,14 +489,18 @@ class ContentController extends SecureActionControllerImpl {
 		if (isset($requestParams[AssignedService::SIGNUP])){
 			$school_id = $requestParams[AssignedService::SIGNUP];
 			AssignedService::SignUpSchool($school_id, $user_id);
+			$message = 'You succesfully signed up to this school'; 
 		}
 		
 		if (isset($requestParams[AssignedService::SIGNOUT])){ 
 			$school_id = $requestParams[AssignedService::SIGNOUT];
 			AssignedService::SignOutSchool($school_id, $user_id);
+			$message = 'You succesfully signed out from this school'; 
 		}
-			
-		$this->forwardActionRequest ( $mvc->getProperty('schoolassigned') );
+		
+		$mvc->addObject ( 'message', $message );
+		
+		return $mvc;
 	}
 }
 

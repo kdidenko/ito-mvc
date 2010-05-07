@@ -11,65 +11,28 @@
     # include all required code
 	include_once 'global-includes.php';
 
-
-/*	$client = new SQLClient();
-    $link = $client->connect('mlslviv', 'localhost', 'root', '', 'UTF8');
-    $result = $client->execSelect('*', 'realty_data', null, null, null, '0, 3', $link);
-
-    if(!$result){
-        die(mysql_error());
-    }
-
-    header('Charset', 'utf-8');
-    print_r($result);
-*/
-
 	# session may be started now
-	//SessionService::startSession();
-
-	# initialize the http helper object
-	HttpHelper::init($_SERVER);
-
-	$uri = HttpHelper::getActionName();
-	$map = HttpHelper::getMappingParam();
-    $cntxt = HttpHelper::getContextName();
-
-    $map = $map == ''  ? ActionsMappingResolver::DEFAULT_MAPPING_FILE : $map;
-	# initialize the ActionsMappingResolver and retreive the action mapping model
-	ActionsMappingResolver::init($map, $cntxt);
-
-	$mappingObj = ActionsMappingResolver::getActionMapping($uri);
-	if( !isset($mappingObj) ){
-		error_log("Could not resolve the Action Mapping for request path: $uri \r Environment details: \r" .
-				print_r($_SERVER, true));
-		die($_SERVER['HTTP_HOST'] . $uri . ' Not found on server');
-	}
-
-    # get the conntroller object instance
-	$controller = MVCService::getController((string) $mappingObj->controller['class']);
-
-	# do handle action
-	$methodName = isset($mappingObj->controller['method']) ?
-	                  (string) $mappingObj->controller['method'] :
-	                          BaseActionController::MVC_DEFAULT_METHOD;
-
-	# run the controller method and get an MVC model object
-	$mvc = $controller->$methodName($mappingObj, $_REQUEST);
-	$mvc->setContext($cntxt);
-
+	SessionService::startSession();
+	
+	# initialize the DAO object
+	$dao = DBClientHandler::getInstance();
+	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
+	
+	# get Request Dispatcher
+	$rd = RequestDispatcher::getInstance();
+	$mvc = $rd->dispatchHttpRequest($_SERVER);
+	
 	# initialize the Messages Service
-	$messages = MessageService::getInstance();
-	$messages->loadMessages(DEFAULT_LOCALE);
-
-	# get the template configuration
-	$template = $mappingObj->template;
+	//TODO: temporary disabled
+	//$messages = MessageService::getInstance();
+	//$messages->loadMessages(DEFAULT_LOCALE);
 
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!
-	    TemplateEngine::run($template);
+	    TemplateEngine::run($mvc);
 	# show it up!
-    ob_end_flush();
+    @ob_end_flush();
 ?>

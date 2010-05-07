@@ -447,12 +447,15 @@ class ContentController extends SecureActionControllerImpl {
 					$where = UsersService::ID . " = " . $requestParams[UsersService::ID];
 					# executing the query
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					//print_r($requestParams[UsersService::ID]); echo " "; print_r(md5($requestParams[UsersService::OLDPASSWORD])); exit;
 					if (md5($requestParams[UsersService::OLDPASSWORD]) == $result[0][UsersService::PASSWORD]){
 						$fields = array ();
 						$fields[] .= UsersService::PASSWORD;
 						$vals = array ();
 						$vals [] .= md5($requestParams [UsersService::PASSWORD]);
-						UsersService::updateFields ( $id, $fields, $vals );	
+						UsersService::updateFields ( $id, $fields, $vals );
+						$error[] = 'Your password successfully changed';
+						$mvc->addObject ( UsersService::ERROR, $error ); 
 					}
 				}
 			}else{
@@ -474,7 +477,7 @@ class ContentController extends SecureActionControllerImpl {
 		
 		$where = UsersService::ID . " = '" . $id . "'";
 		$result = UsersService::getUsersList ( $where );
-		
+		isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
 		isset ( $result [0] [UsersService::AVATAR] ) ? $mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] ) : null;
 		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
 		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;

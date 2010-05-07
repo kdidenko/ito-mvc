@@ -167,15 +167,10 @@ class StorageService {
 	public static function uploadFile($path, $file) {
 		if (is_uploaded_file ( $file ['tmp_name'] )) {
 			if ($file ['size'] != 0 and $file ['size'] <= 512000) {
-				if (move_uploaded_file ( $file ['tmp_name'], $path )) {
-				} else {
-					//error_log ( 'Произошла ошибка при перемещении файла в папку' . $path );
-				}
-			} else {
-				//error_log ( 'For file Max size 500Kb' );
+				move_uploaded_file ( $file ['tmp_name'], $path ) ? 
+					null :
+						error_log ( 'Invalid mooving file to' . $path );
 			}
-		} else {
-			//error_log ( 'Прозошла ошибка при загрузке файла на сервер' );
 		}
 	}
 }

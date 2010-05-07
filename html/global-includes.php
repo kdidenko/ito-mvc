@@ -11,13 +11,13 @@
 	# set MVC libraries include path
 	//set_include_path(get_include_path() . PATH_SEPARATOR . 'D:\Work\www\ito-mvc\html');
 
-	require_once 'com/itoglobal/services/xml/XsltHandler.php';
-	require_once 'com/itoglobal/services/http/RequestDispatcher.php';	
-    require_once 'com/itoglobal/services/SessionService.php';
-    require_once 'com/itoglobal/services/StorageService.php';
-    require_once 'com/itoglobal/services/ContextService.php';
-	require_once 'com/itoglobal/services/MailersService.php';
-	require_once 'com/itoglobal/services/ValidationService.php';
+	require_once 'com/itoglobal/xml/XsltHandler.php';
+	require_once 'com/itoglobal/http/RequestDispatcher.php';	
+    require_once 'com/itoglobal/session/SessionService.php';
+    require_once 'com/itoglobal/storage/StorageService.php';
+    require_once 'com/itoglobal/context/ContextService.php';
+	require_once 'com/itoglobal/mail/MailerService.php';
+	require_once 'com/itoglobal/validation/ValidationService.php';
     require_once 'com/itoglobal/lcms/UsersService.php';
     require_once 'com/itoglobal/lcms/SchoolService.php';
     require_once 'com/itoglobal/lcms/ExerciseService.php';
@@ -25,15 +25,15 @@
     require_once 'com/itoglobal/lcms/AssignedService.php';
 
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
-	require_once 'com/itoglobal/mvc/services/ActionsMappingResolver.php';
-	require_once 'com/itoglobal/mvc/services/MVCService.php';
+	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';
+	require_once 'com/itoglobal/mvc/core/MVCService.php';
 	
 	//TODO: TemplateEngine is crappy and requires implementation!
-    require_once 'com/itoglobal/mvc/services/TemplateEngine.php';
+    require_once 'com/itoglobal/mvc/core/TemplateEngine.php';
 
-	require_once 'com/itoglobal/services/messages/MessageService.php';
-	require_once 'com/itoglobal/services/messages/LocalizationFactory.php';
-    require_once 'com/itoglobal/services/http/HttpHelper.php';
+	require_once 'com/itoglobal/i18n/MessageService.php';
+	require_once 'com/itoglobal/i18n/LocalizationFactory.php';
+    require_once 'com/itoglobal/http/HttpHelper.php';
 
 	require_once 'com/itoglobal/db/DBClientHandler.php';    
 ?>

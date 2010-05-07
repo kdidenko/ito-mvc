@@ -1,7 +1,5 @@
 <?php
 
-require_once 'com/itoglobal/services/StorageService.php';
-
 class ContextService {
 	
 	public function createContext($alias, $domen) {

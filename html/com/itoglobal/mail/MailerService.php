@@ -1,6 +1,6 @@
 <?php
 
-class MailersService {
+class MailerService {
 	
 	public static function replaceVars($email, $user, $firstname, $lastname, $path, $url) {
 		$headers = 'From: YouCademy noreply@' . $_SERVER ['SERVER_NAME'];

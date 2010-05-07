@@ -24,7 +24,7 @@ class RegistrationController extends BaseActionControllerImpl {
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 					$plain = $mvc->getProperty ( 'template' );
 					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $result [0] [UsersService::ID] . '&validation_id=' . $hash;
-					MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
+					MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
 					
 					$location = $this->onSuccess ( $actionParams );
 					$this->forwardActionRequest ( $location );
@@ -61,7 +61,7 @@ class RegistrationController extends BaseActionControllerImpl {
 						
 						if (isset ( $result [0] [UsersService::FIRSTNAME] )) {
 							$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
-							MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $result [0] [UsersService::USERNAME], $result [0] [UsersService::FIRSTNAME], $result [0] [UsersService::LASTNAME], $actionParams->property ['value'], $url );
+							MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $result [0] [UsersService::USERNAME], $result [0] [UsersService::FIRSTNAME], $result [0] [UsersService::LASTNAME], $actionParams->property ['value'], $url );
 							
 							$location = $this->onSuccess ( $actionParams );
 							$this->forwardActionRequest ( $location );

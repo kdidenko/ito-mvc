@@ -409,7 +409,7 @@ class ContentController extends SecureActionControllerImpl {
 				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
 				$plain = $mvc->getProperty ( 'template' );
 				
-				MailersService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
+				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 				$mvc->addObject ( 'forward', 'successful' );
 				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
 			} else {

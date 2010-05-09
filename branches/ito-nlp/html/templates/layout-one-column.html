@@ -1,28 +1,32 @@
 <? echo XML_CONTENT_DEFINITION ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>YouCademy!</title>
+	<title>YouCademy</title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="styles/style.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="styles/styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div class="globalWrapper">
+	<div class="globalSubWrapper">
 <!-- Header block begin  -->
 <?php TemplateEngine::inclusion('header.html', $mvc)?>
 <!-- Header block end  -->
-<!--  Navigation block begin -->
-<?php TemplateEngine::inclusion('navigation.html', $mvc) ?>
-<!--  Navigation block end -->
-<!--  Middle block begin -->
-<div class="level0">
-<?php TemplateEngine::inclusion('views/' . $mvc->getView() . '.html', $mvc) ?>	
-</div>
-<!--  Middle block end -->
+		<div class="pageWrapper">
+<!-- Content block begin -->
+			<div class="mainPageContent">
+<?php TemplateEngine::inclusion('views/' . $mvc->getView() . '.html', $mvc) ?>
+			</div>	
+		</div>
+<!--  Content block end -->
+	</div>
 <!--  Footer block begin -->
-<?php TemplateEngine::inclusion('footer.html', $mvc) ?>
+	<div class="footerWrapper">
+<?php TemplateEngine::inclusion('footer.html', $mvc)?>
+	</div>
 <!--  Footer block end -->
+</div>
 </body>
 </html>

@@ -1,15 +1,11 @@
-<div class="lftMnu">
-	<b>YouCademy accaunt</b>
-	<form action="login.html" method="post">
-		<dl>
-			<dt><label for="username">Username:</label></dt>
-			<dd><input type="text" name="username" size="17" id="username"></input></dd>
-			<dt><label for="password">Password:</label></dt>
-			<dd><input type="password" name="password" size="17" id="password"></input>	</dd>
-			<dt><input type="checkbox" name="persistent" id="persistent"></input></dt>
-			<dd><label for="persistent">Stay signed in</label></dd>
-		</dl>
-		<input type="submit" value="Sign in"></input>
-	</form>
-	<a href="registration.html">Registration</a>
+<div class="sidePgItem">
+	<h2>YouCademy account</h2>
+		<div class="signinForm">
+			<form action="login.html" method="post">
+				<p><label>Username:</label><br /><input type="text" class="inpTxt" name="username"/></p>
+				<p><label>Password:</label><br /><input type="password" class="inpTxt" name="password"/></p>
+				<p><input type="checkbox" class="inpChk" id="ss" name="persistent"/><label for="ss">Stay signed in</label></p>
+				<p class="btns"><input type="submit" value="Sign In" /></p>
+			</form>
+		</div>
 </div>

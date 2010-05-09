@@ -1,8 +1,22 @@
-<div class="level0">
-	<a href="index.html" title="YouCademy" class="logo">YouCademy</a>
-	<ul class="useful-bar">
-		<li><a href="#" title="English">En</a></li>
-		<li><a href="#" title="Russian">Ru</a></li>
-		<li class="help"><a href="help.html" title="Help">Help</a></li>
-	</ul>
+<div class="headerWrapper">
+	<div class="headerLogo">
+		<a href="/" title=""><img src="images/logo.png" alt="" title="" style="margin:15px 0 0 0" /></a>
+	</div>
+	<div class="headerForms">
+		<form action="" class="languages">
+			<select>
+				<option>Select language:</option>
+				<option selected="selected">English</option>
+				<option>Russian</option>
+			</select>
+		</form>
+		<form action="" class="search">
+			<input type="text" value="" /><input type="submit" value="Search" />
+		</form>
+	</div>
+	<div class="headerMenu">
+	<!--  Navigation block begin -->
+<?php TemplateEngine::execute('/navigation-' . $mvc->getView() . '.html', $mvc)?>
+	<!--  Navigation block end -->	
+	</div>
 </div>

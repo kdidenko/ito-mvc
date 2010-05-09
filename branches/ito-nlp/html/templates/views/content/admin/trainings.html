@@ -16,7 +16,7 @@
 
 <?php foreach($list as $key => $value){ ?>
 <div class="list">
-			<a href=<?phpecho 'course-details.html?id=' . $value[CourseService::ID];?>>
+			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>>
 				<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
 			</a>
 			<img alt="none avatar" src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>">

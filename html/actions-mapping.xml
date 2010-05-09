@@ -176,6 +176,17 @@
 		<template name="scope.html" path="templates/scope.html" />	
 	</action>
 	
+	<!-- Navigation views mapping begin -->
+	<action name="/navigation-*.html" id="navigation-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
+			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
+		</template>	
+	</action>
+	<!-- Navigation views mapping end -->	
+	
 	<!-- Sidebar views mapping begin -->
 	<action name="/sidebar-*.html" id="sidebar">
 		<controller class="com.itoglobal.lcms.controllers.SidebarController" 
@@ -256,10 +267,5 @@
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>
 	</action>
-	<!--
-	<action name="/school-assigned.html" id="schoolassigned">
-		<controller class="com.itoglobal.lcms.controllers.AssignedController" method="handleschoolassigned"/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-	-->
+
 </actions>

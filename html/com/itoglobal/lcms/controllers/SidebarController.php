@@ -5,12 +5,8 @@ require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 class SidebarController extends SecureActionControllerImpl {
 	
 	public function handleHome($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$sid = SessionService::getAttribute ( SessionService::FIRSTNAME );
-		isset ( $sid ) ? $mvc->addObject ( SessionService::FIRSTNAME, $sid ) : null;
-		return $mvc;
+		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-	
 	public function handleHelp($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}

@@ -5,7 +5,7 @@
 <span class="message">No course available at this moment.</span>
 <?php } else { ?>
 <div class="details">
-	<h2><?php echo isset($list[0][CourseService::CAPTION]) ? $list[0][CourseService::CAPTION] : null;?></h2>
+	<h1><?php echo isset($list[0][CourseService::CAPTION]) ? $list[0][CourseService::CAPTION] : null;?></h1>
 	<img alt="none avatar" src="<?php echo isset($list[0][CourseService::AVATAR]) ? $list[0][CourseService::AVATAR] : null;?>">
 	<p>
 	Rate:

@@ -5,7 +5,7 @@
 <span class="message">No exercises available at this moment.</span>
 <?php } else { ?>
 <div>
-	<h2><?php echo isset($list[0][ExerciseService::CAPTION]) ? $list[0][ExerciseService::CAPTION] : null;?></h2>
+	<h1><?php echo isset($list[0][ExerciseService::CAPTION]) ? $list[0][ExerciseService::CAPTION] : null;?></h1>
 	<p>
 	Owner: <?php echo isset($list[0][ExerciseService::OWNER]) ? $list[0][ExerciseService::OWNER] : null;?>
 	</p>

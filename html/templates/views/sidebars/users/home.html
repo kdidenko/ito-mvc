@@ -1,9 +1,9 @@
-<div class="lftMnu">
-	<b>Welcome
+<div class="sidePgItem">
+	<h2>Welcome
 	<?php
 	$message = $mvc->getObject(SessionService::FIRSTNAME);
 	echo isset($message) ? $message : null;
 	?>
-	</b>      
+	</h2>      
 	<?php include_once 'navigation.html'; ?>
 </div>

@@ -154,10 +154,10 @@
 		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 	
-	<action name="/confirm-registration.html" id="login-failed">
+	<action name="/confirm-registration.html" id="loginfailed">
 		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
-		<template name="index.html" path="templates/layout-one-column.html" />
-	</action>	
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
 
 	<action name="/scope.html" id="scope">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

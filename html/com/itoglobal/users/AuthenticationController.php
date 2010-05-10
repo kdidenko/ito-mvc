@@ -14,14 +14,14 @@ class AuthenticationController extends BaseActionControllerImpl {
 		# setting the query variables
 		$fields = UsersService::ID . ', ' . UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::ENABLED . ', ' . UsersService::DELETED . ', ' . UsersService::ROLE;
 		$from = UsersService::USERS;
-		$where = UsersService::USERNAME . " = '" . $requestParams [UsersService::USERNAME] . "'";
+		$where = isset($requestParams [UsersService::USERNAME]) ? UsersService::USERNAME . " = '" . $requestParams [UsersService::USERNAME] . "'" : null;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		# authenticating user login
 		
 
 		if (count ( $result ) > 0 && $result [0] [UsersService::ENABLED] == 1 && $result [0] [UsersService::DELETED] == 0) {
-			if (isset ( $requestParams [UsersService::PASSWORD] ) & $result [0] [UsersService::PASSWORD] == md5 ( $requestParams [UsersService::PASSWORD] )) {
+			if (isset ( $requestParams [UsersService::PASSWORD] ) && $result [0] [UsersService::PASSWORD] == md5 ( $requestParams [UsersService::PASSWORD] )) {
 				$id = $result [0] [UsersService::ID];
 				$session = SessionService::startSession ();
 				SessionService::setAttribute ( SessionService::USERS_ID, $id );

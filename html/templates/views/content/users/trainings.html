@@ -15,8 +15,6 @@
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
-
-
 <div class="pgItemsList">
 	<div class="pgListItem">
 	<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title=""><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></a></div>

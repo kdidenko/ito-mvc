@@ -6,7 +6,7 @@
 	$schoolslist = $mvc->getObject('schoolslist');
 	if(!isset($schoolslist) || count($schoolslist) == 0){
 ?>
-<span class="message">No school available at this moment.</span>
+<span class="message">No schools available at this moment.</span>
 <?php } else { ?>
 <div class="pgItemsList">
 <div class="pgContentTools">
@@ -35,7 +35,7 @@
 	$courseslist = $mvc->getObject('courseslist');
 	if(!isset($courseslist) || count($courseslist) == 0){
 ?>
-<span class="message">No school available at this moment.</span>
+<span class="message">No courses available at this moment.</span>
 <?php } else { ?>
 <div class="pgItemsList">
  <div class="pgContentTools">
@@ -45,13 +45,40 @@
 </div>
 <?php foreach($courseslist as $key => $value){ ?>
 	<div class="pgListItem">
-		<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+		<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 		<div class="pgItemBody">
-		<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+		<h2><a href="<?php echo 'course-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
 		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
 		</a></h2>
 		<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
-		<p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+		<p class="extLink"><a href="<?php echo 'course-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+	</div>
+	</div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } } } ?>
+</div>
+
+<?php
+	$exerciseslist = $mvc->getObject('exerciseslist');
+	if(!isset($exerciseslist) || count($exerciseslist) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+<div class="pgItemsList">
+ <div class="pgContentTools">
+	<ul>
+    	<li><h2>Exercises lists:</h2></li>
+    </ul>
+</div>
+<?php foreach($exerciseslist as $key => $value){ ?>
+	<div class="pgListItem">
+		<div class="pgItemBody">
+		<h2><a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="School details">
+		<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
+		</a></h2>
+		<p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+		<p class="extLink"><a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">View</a></p>
 	</div>
 	</div>
     <?php if($key%2){ ?>

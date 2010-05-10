@@ -9,32 +9,30 @@
 <span class="message">No exercises available at this moment.</span>
 <?php } else { ?>
 
-<div class="title">
-	<ul class="manage">
-		<li>Caption:</li>
-		<li>Owner:</li>
-		<li>Rate:</li>
-		<li>Options:</li>
-	</ul>
-</div>
+<table class="list">
+<tr class="title">
+	<td>Caption:</td>
+	<td>Owner:</td>
+	<td>Rate:</td>
+	<td>Options:</td>
+</tr>
 <?php foreach($list as $key => $value){ ?>
-<div>
-	<ul class="manage userlist">
-		<li>
+<tr  style="border: 1px solid #EFEFEF">
+		<td>
 			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
 				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
 			</a>
-		</li>
-		<li><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></li>
-		<li><?php echo isset($value[ExerciseService::RATE]) ? $value[ExerciseService::RATE] : null;?></li>
-		<li>
-		<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
-		<a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
-		</li>
-	</ul>
-</div>
-
-<?php } } ?>
-
-
-
+		</td>
+		<td>
+			<?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?>
+		</td>
+		<td>
+			<?php echo isset($value[ExerciseService::RATE]) ? $value[ExerciseService::RATE] : null;?>
+		</td>
+		<td>
+			<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
+			<a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
+		</td>
+	</tr>
+<?php } }?>
+</table>

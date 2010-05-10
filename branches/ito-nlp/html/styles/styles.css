@@ -71,4 +71,15 @@ form.search {float:right}
 .footerBody {width:960px; margin:0 auto; padding:5px 0 15px 20px}
 .footerBody p {font-size:11px; color:#666; padding:0}
 
-.error p{margin:0; padding:0; color:red; text-align:center;}
+.error p {margin:0; padding:0; color:red; text-align:center;}
+.profile {border: 1px solid #EFEFEF;}
+.profile:hover {border: 1px solid #999999;}
+.center {text-align: center;}
+
+dl {overflow: hidden;}
+dt {clear:both; float:left; text-align:right; width:35%; margin: 2px;}
+dd {float:left;	text-align:left; width:58%;	margin: 2px;}
+
+.list {margin: 20px;font-size: 12px;text-align: center;}
+.list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
+.list td{	width: 28%;	border: 1px solid #EFEFEF;}

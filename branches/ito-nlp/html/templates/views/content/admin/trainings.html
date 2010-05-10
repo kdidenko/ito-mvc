@@ -1,43 +1,55 @@
 <h1>List of YouCademy trainings</h1>
-<div>
-	<p>
-	You have responded to 5412 challenges in 108 exercises (420 responses this month). 
-	Since your last visit 12 responses have been valuated totaling in 19 grade  points. 
-	You have collected 2846 contribution points this month for 524 valuations given and 
-	27 contributed challenges.
-	</p>
+<div class="pgContentTools">
+	<ul>
+    	<li>Sort by:</li>
+        <li><a href="#" title="">rating</a>,</li>
+        <li><a href="#" title="">languages</a>,</li>
+        <li><a href="#" title="">courses</a></li>
+    </ul>
 </div>
 <?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No exercises available at this moment.</span>
+<span class="message">No trainings available at this moment.</span>
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
-<div class="list">
-			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>>
-				<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
-			</a>
-			<img alt="none avatar" src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>">
-			<p>
-			Rate:
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 0){ ?>
-			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>
-			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>
-			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>
-			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>
-			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>
-			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
-			</p>
-			<p><?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?></p>
-			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>  class="buton">
-			View
-			</a>
+
+
+<div class="pgItemsList">
+	<div class="pgListItem">
+	<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title=""><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></a></div>
+	   <div class="pgItemBody">
+	   	<h2><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="School details">
+	  	<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
+	   	</a></h2>
+	       <p><?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?></p>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>*<?php } } ?> 
+	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>**<?php } } ?>
+	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>***<?php } } ?>
+	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>****<?php } } ?>
+	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>*****<?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Level:</span><span class="lsValue"><?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+	       </ul>
+	       <p class="extLink"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">View</a></p>
+		</div>
+    </div>
+    
+    
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
+	
 </div>
-<?php } }?>
+
+<?php } } ?>

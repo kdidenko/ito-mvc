@@ -66,7 +66,7 @@ class CourseService {
 		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::SCHOOL_ID;
 		$from = self::COURSE_TABLE;
 		isset ( $where ) ? $where : '';
-		
+		isset ( $limit ) ? $limit : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		return $result;
 	}

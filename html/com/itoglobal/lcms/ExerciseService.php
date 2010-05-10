@@ -37,12 +37,13 @@ class ExerciseService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getExercisesList($where = null) {
+	public static function getExercisesList($where = null, $limit = null) {
 		$result = null;
 		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE;
 		$from = self::EXERCISES_TABLE;
 		isset ( $where ) ? $where : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		isset ( $limit ) ? $limit : '';
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		$fields = UsersService::USERNAME;
 		
 		$from = UsersService::USERS;

@@ -1,42 +1,59 @@
 <h1>List of YouCademy schools</h1>
-<div>
-	<p>
+<p>
 	Here you can select the schools you wish to learn from. Every
 	school has its own rules and fees, please see school details for more
 	information.
-	</p>
+</p>
+<div class="pgContentTools">
+	<ul>
+    	<li>Sort by:</li>
+        <li><a href="#" title="">rating</a>,</li>
+        <li><a href="#" title="">languages</a>,</li>
+        <li><a href="#" title="">courses</a></li>
+    </ul>
 </div>
 <?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No exercises available at this moment.</span>
+<span class="message">No school available at this moment.</span>
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
-<div class="list">
-			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
-				<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
-			</a>
-			<img alt="none avatar" src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>">
-			<p>
-			Rate:
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 0){ ?>
-			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 1){ ?>
-			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 2){ ?>
-			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 3){ ?>
-			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 4){ ?>
-			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
-			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 5){ ?>
-			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
-			</p>
-			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
-			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>  class="buton">
-			View
-			</a>
+
+<div class="pgItemsList">
+	<div class="pgListItem">
+	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+	   <div class="pgItemBody">
+	   	<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+	  	<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+	   	</a></h2>
+	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 1){ ?>*<?php } } ?> 
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 2){ ?>**<?php } } ?>
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 3){ ?>***<?php } } ?>
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 4){ ?>****<?php } } ?>
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 5){ ?>*****<?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+          	<li><span>Courses:</span><span class="lsValue">2</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+	       </ul>
+	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+		</div>
+    </div>
+    
+    
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
+	
 </div>
+
 <?php } }?>

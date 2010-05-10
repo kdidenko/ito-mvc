@@ -30,6 +30,11 @@ class ContentController extends SecureActionControllerImpl {
 			$mvc->addObject ( 'list', $list );
 		}
 		
+		$schoolslist = SchoolService::getSchoolsList (null, '4');
+		$mvc->addObject ( 'schoolslist', $schoolslist );
+		
+		$courseslist = CourseService::getCoursesList(null, '4');
+		$mvc->addObject ( 'courseslist', $courseslist );
 		
 		return $mvc;
 	}

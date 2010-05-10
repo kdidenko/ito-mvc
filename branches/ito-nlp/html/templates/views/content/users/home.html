@@ -1,6 +1,5 @@
-<h2>Your personal overview</h2>
-<div>
-	<p>
+<h1>Your personal overview</h1>
+<p>
 	<?php		
 			$message = $mvc->getObject(SessionService::FIRSTNAME);
 			echo isset($message) ? $message . ' ' : 'Jone ';
@@ -11,8 +10,8 @@
 	11 course levels. You have responded to 5412 challenges. You are
 	wearing titles: NLP Practitioner and Shaman and are posessing
 	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
-	schools and 3 courses:</p>
-</div>
+	schools and 3 courses:
+</p>
 <?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){

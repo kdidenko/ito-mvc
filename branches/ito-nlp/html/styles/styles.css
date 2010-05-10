@@ -70,3 +70,5 @@ form.search {float:right}
 .footerWrapper {border-top:7px solid #cbcbcb}
 .footerBody {width:960px; margin:0 auto; padding:5px 0 15px 20px}
 .footerBody p {font-size:11px; color:#666; padding:0}
+
+.error p{margin:0; padding:0; color:red; text-align:center;}

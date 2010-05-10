@@ -49,12 +49,13 @@ class SchoolService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getSchoolsList($where = null) {
+	public static function getSchoolsList($where = null, $limit = null) {
 		$result = null;
 		$fields = self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE;
 		$from = self::SCHOOLS_TABLE;
 		isset ( $where ) ? $where : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		isset ( $limit ) ? $limit : '';
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		return $result;
 	}
 	

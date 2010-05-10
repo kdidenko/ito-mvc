@@ -1,57 +1,60 @@
 <h1>Welcome to YourCademy.net</h1>
-   <p><img src="images/cnt/home-teaser-img.jpg" alt="" title="" /></p>
-   <p class="pgIntro">YouCademy.net is a platform for computer aided learning (CAL), that enables schools to transmit their skill building methods to students via internet.&nbsp;<a href="#" title="">See more about YouCademy &raquo;</a></p>
-   <div class="pgItemsList">
-       <div class="clnr brdr">&nbsp;</div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Master Practitioner course created and moderated by John LaValle. Certificates after level 3.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive Customer Service! Increased Income! Influence More Gently but with Precision.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-       <div class="clnr brdr">&nbsp;</div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Master Practitioner course created and moderated by John LaValle. The course consist of 3 sections and you need to achieve 280 points in every one of them to complete each of the 5 course levels. Certificates after level 3.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive Customer Service! Increased Income! Influence More Gently but with Precision. 5 groups of exercises, 100 points in every one of them for each of the 2 levels.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-       <div class="clnr brdr">&nbsp;</div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Master Practitioner course created and moderated by John LaValle. The course consist of 3 sections and you need to achieve 280 points in every one of them to complete each of the 5 course levels. Certificates after level 3.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-   	<div class="pgListItem">
-       	<div class="pgItemImg"><a href="#" title=""><img src="http://nlp.ito-global.com/storage/uploads/courses/persuasion/avatar.jpg" alt="" title="" /></a></div>
-           <div class="pgItemBody">
-           	<h2><a href="#" title="">Richard Bandler’s NLP, DHE ans SHE school</a></h2>
-               <p>Sky Rocket Sales! Accelerated Bottom Line! More Responsive Customer Service! Increased Income! Influence More Gently but with Precision. 5 groups of exercises, 100 points in every one of them for each of the 2 levels.</p>
-               <p class="extLink"><a href="#" title="">Subscribe or smth else</a></p>
-           </div>
-       </div>
-       <div class="clnr brdr">&nbsp;</div>
-   </div>
+<p><img src="images/cnt/home-teaser-img.jpg" alt="" title="" /></p>
+<p class="pgIntro">YouCademy.net is a platform for computer aided learning (CAL), that enables schools to transmit their skill building methods to students via internet.&nbsp;<a href="about.html" title="">See more about YouCademy &raquo;</a></p>
+
+<?php
+	$schoolslist = $mvc->getObject('schoolslist');
+	if(!isset($schoolslist) || count($schoolslist) == 0){
+?>
+<span class="message">No school available at this moment.</span>
+<?php } else { ?>
+<div class="pgItemsList">
+ <div class="pgContentTools">
+	<ul>
+    	<li><h2>Schools lists:</h2></li>
+    </ul>
+</div>
+<?php foreach($schoolslist as $key => $value){ ?>
+	<div class="pgListItem">
+		<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+		<div class="pgItemBody">
+		<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+		</a></h2>
+		<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+		<p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+	</div>
+	</div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } } } ?>
+</div>
+
+
+<?php
+	$courseslist = $mvc->getObject('courseslist');
+	if(!isset($courseslist) || count($courseslist) == 0){
+?>
+<span class="message">No school available at this moment.</span>
+<?php } else { ?>
+<div class="pgItemsList">
+ <div class="pgContentTools">
+	<ul>
+    	<li><h2>Trainings lists:</h2></li>
+    </ul>
+</div>
+<?php foreach($courseslist as $key => $value){ ?>
+	<div class="pgListItem">
+		<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+		<div class="pgItemBody">
+		<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+		</a></h2>
+		<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+		<p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+	</div>
+	</div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } } } ?>
+</div>

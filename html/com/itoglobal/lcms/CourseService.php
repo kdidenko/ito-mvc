@@ -61,12 +61,13 @@ class CourseService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getCoursesList($where = null) {
+	public static function getCoursesList($where = null, $limit = null) {
 		$result = null;
 		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::SCHOOL_ID;
 		$from = self::COURSE_TABLE;
 		isset ( $where ) ? $where : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		return $result;
 	}
 	

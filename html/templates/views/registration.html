@@ -1,50 +1,25 @@
-        <div class="registration">
-                <b>Sign Up for Online Learning Center NLP</b>
-        </div>
-        <div class="error">
-	 		<?php
-	 			$errors = $mvc->getObject(UsersService::ERROR);
-				if (isset($errors)){
-					foreach ($errors as $key => $value){
-						echo '<p>' . $value . '</p>';
-					}
-				}
-	 		?>
-        </div>
-        <form class="reg_form" action="registration.html" method="post">
-                <dl>
-               			<dt>User Name:</dt>
-                                <dd><input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input></dd>
-                        <dt>First Name:</dt>
-                                <dd><input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input></dd>
-                        <dt>Last Name:</dt>
-                                <dd><input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input></dd>
-                        <dt>Your Email:</dt>
-                                <dd><input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"></input></dd>
-                        <dt>Password:</dt>
-                                <dd><input type="password" name="password" id="password" size="35"></input></dd>
-                        <dt>Confirm Password:</dt>
-                                <dd><input type="password" name="confirm_password" id="confirm_password" size="35"></input></dd>
-                        <!--<dt>Birthday:</dt>
-                                <dd>
-                                         <select name="birth_day">
-                                         <option value="">Day:</option>
-                                         <option value="1">1</option>
-                                         <option value="2">2</option>
-                                        </select>
-                                        
-                                        <select name="birth_month">
-                                        <option value="">Month:</option>
-                                        <option value="1">Jan</option>
-                                        <option value="2">Feb</option>
-                        </select>
-                        
-                        <select name="birth_year">
-                                        <option value="">Year:</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2009">2009</option>                
-                        </select>
-                                </dd>                   
-                --></dl>
-                <input type="submit" value="Sign up" id="submit" name="submit"></input>
-        </form>
+<h1>Hi! Ready to register with YouCademy?</h1>
+<p>It's your typical registration - it's free and fairly simple to complete.
+Already registered or want to make changes to your account? <a href="login.html" title="Sign in to YouCademy account">Sign in</a></p>
+<div class="error">
+	<?php
+		$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){
+			foreach ($errors as $key => $value){
+				echo '<p>' . $value . '</p>';
+			}
+		}
+	?>
+</div>
+<h2>Tell us about yourselft</h2>
+<div class="signinForm">
+	<form action="registration.html" method="post">
+			<p><label>Username:</label><br /><input type="text" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"/></p>
+			<p><label>First Name:</label><br /><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></p>
+			<p><label>Last Name:</label><br /><input type="text" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></p>
+			<p><label>Your Email:</label><br /><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></p>
+			<p><label>Password:</label><br /><input type="password" class="inpTxt" name="password"/></p>
+			<p><label>Repeat Password:</label><br /><input type="password" class="inpTxt" name="confirm_password"/></p>
+			<p class="btns"><input type="submit" value="Sign Up"  value="Sign up" id="submit" name="submit"/></p>
+	</form>
+</div>

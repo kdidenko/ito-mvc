@@ -111,9 +111,9 @@
 		</forwards>
 	</action>
 	
-	<action name="/login-failed.html" id="login-failed">
+	<action name="/login-failed.html" id="loginfailed">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html"/>
+		<template name="index.html" path="templates/layout-two-columns.html"/>
 	</action>
 	
 	<action name="/reset-password.html" id="reset-password">

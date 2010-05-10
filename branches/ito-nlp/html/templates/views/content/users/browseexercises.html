@@ -10,29 +10,35 @@
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
-<div class="list">
-			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
+<div class="pgItemsList">
+	<div class="pgListItem">
+	   <div class="pgItemBody">
+	   	<h2><a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
 				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
-			</a>
-			<p>
-			Owner: <?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?>
-			Rate:
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 0){ ?>
-			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>
-			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>
-			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>
-			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>
-			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
-			<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>
-			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
-			</p>
-			<p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
-			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>  class="buton">
-			View
-			</a>
+			</a></h2>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>*<?php } } ?> 
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>**<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>***<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>****<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>*****<?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Level:</span><span class="lsValue"><?php //echo isset($value[ExerciseService::LEVEL]) ? $value[ExerciseService::LEVEL] : null;?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Owner:</span><span class="lsValue"><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></span></li>
+	       </ul>
+		 <p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+		 <p class="extLink"><a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>  class="buton">View</a></p>
+		</div>
+    </div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
 </div>
-<?php } }?>
+<?php } } ?>

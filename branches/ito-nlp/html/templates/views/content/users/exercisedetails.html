@@ -4,32 +4,37 @@
 ?>
 <span class="message">No exercises available at this moment.</span>
 <?php } else { ?>
-<div>
-	<h2><?php echo isset($list[0][ExerciseService::CAPTION]) ? $list[0][ExerciseService::CAPTION] : null;?></h2>
-	<p>
-	Owner: <?php echo isset($list[0][ExerciseService::OWNER]) ? $list[0][ExerciseService::OWNER] : null;?>
-	</p>
-	<p>
-	Rate:
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 0){ ?>
-	<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 1){ ?>
-	<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 2){ ?>
-	<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 3){ ?>
-	<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 4){ ?>
-	<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
-	<?php if(isset($list[0][ExerciseService::RATE])){ if($list[0][ExerciseService::RATE] == 5){ ?>
-	<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
-	</p>
-	<p><?php echo isset($list[0][ExerciseService::DESCRIPTION]) ? $list[0][ExerciseService::DESCRIPTION] : null;?></p>
+<?php foreach($list as $key => $value){ ?>
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+	   <div class="pgItemBody">
+	   	<h1><?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?></h1>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>*<?php } } ?> 
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>**<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>***<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>****<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>*****<?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Level:</span><span class="lsValue"><?php //echo isset($value[ExerciseService::LEVEL]) ? $value[ExerciseService::LEVEL] : null;?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Owner:</span><span class="lsValue"><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></span></li>
+	       </ul>
+		 <p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+		</div>
+    </div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
 </div>
-<?php }?>
-<div  class="subMnu">
-<a href="">Start Exercise</a>
-</div>
+<?php } } ?>
+<p><a href="">Start Exercise</a></p>
 <span class="message">
 	Please adjust your web camera position and lighting so that you can clearly see yourself. 
 	You must also see distinctive movement of the volume bar while you are speaking. The image and sound from your 

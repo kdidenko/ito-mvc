@@ -36,6 +36,9 @@ class ContentController extends SecureActionControllerImpl {
 		$courseslist = CourseService::getCoursesList(null, '4');
 		$mvc->addObject ( 'courseslist', $courseslist );
 		
+		$exerciseslist = ExerciseService::getExercisesList ();
+		$mvc->addObject ( 'exerciseslist', $exerciseslist );
+		
 		return $mvc;
 	}
 	public function handleHelp($actionParams, $requestParams) {

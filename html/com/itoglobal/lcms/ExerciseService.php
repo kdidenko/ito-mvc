@@ -26,6 +26,10 @@ class ExerciseService {
 	 */
 	const OWNER = 'owner_id';
 	/**
+	 * @var string defining the course_id field name
+	 */
+	const COURSE_ID = 'course_id';
+	/**
 	 * @var ustring defining the rate field name
 	 */
 	const RATE = 'rate';
@@ -39,7 +43,7 @@ class ExerciseService {
 	 */
 	public static function getExercisesList($where = null, $limit = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE;
+		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID;
 		$from = self::EXERCISES_TABLE;
 		isset ( $where ) ? $where : '';
 		isset ( $limit ) ? $limit : '';
@@ -70,6 +74,28 @@ class ExerciseService {
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete ($from, $where, '', '' );
 	}
+	
+	public static function removeExercise($id, $course_id) {
+		# setting the query variables
+		$fields = self::COURSE_ID;
+		$vals = '0';
+		$from = self::EXERCISES_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	public static function addExercise($id, $course_id) {
+		# setting the query variables
+		$fields = self::COURSE_ID;
+		$vals = $course_id;
+		$from = self::EXERCISES_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	
 	public static function validation($requestParams){
 		$error = array ();
 		$error [] .= self::checkName ( $requestParams [self::CAPTION] );

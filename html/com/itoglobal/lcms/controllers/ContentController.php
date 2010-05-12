@@ -187,9 +187,22 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleCourseDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		isset ( $requestParams [CourseService::REMOVE] ) ? ExerciseService::removeExercise ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
+		isset ( $requestParams [CourseService::ADD] ) ? ExerciseService::addExercise ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+
 		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$list = CourseService::getCoursesList ( $where );
 		$mvc->addObject ( 'list', $list );
+		
+		#for admin
+		$exerciseslist = ExerciseService::getExercisesList();
+		$mvc->addObject ( 'exerciseslist', $exerciseslist );
+		
+		#for users and visitor
+		$where = ExerciseService::COURSE_ID . " = '" . $requestParams [ExerciseService::ID] . "'";
+		$exerciselist = ExerciseService::getExercisesList( $where );
+		$mvc->addObject ( 'exerciselist', $exerciselist);
+		
 		return $mvc;
 	}
 		

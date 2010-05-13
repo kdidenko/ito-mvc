@@ -27,6 +27,7 @@
          	<li><span>Owner:</span><span class="lsValue"><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></span></li>
 	       </ul>
 		 <p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+		 <p><?php echo isset($value[ExerciseService::VIDEO]) ? $value[ExerciseService::VIDEO] : null;?></p>
 		</div>
     </div>
     <?php if($key%2){ ?>
@@ -34,7 +35,7 @@
 	<?php } ?>
 </div>
 <?php } } ?>
-<p><a href="">Start Exercise</a></p>
+<p><a href="start-challenge.html?username=1">Start Challenge</a></p>
 <span class="message">
 	Please adjust your web camera position and lighting so that you can clearly see yourself. 
 	You must also see distinctive movement of the volume bar while you are speaking. The image and sound from your 

@@ -30,6 +30,10 @@ class ExerciseService {
 	 */
 	const COURSE_ID = 'course_id';
 	/**
+	 * @var string defining the video field name
+	 */
+	const VIDEO = 'video';
+	/**
 	 * @var ustring defining the rate field name
 	 */
 	const RATE = 'rate';
@@ -43,7 +47,7 @@ class ExerciseService {
 	 */
 	public static function getExercisesList($where = null, $limit = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID;
+		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID . ', ' . self::VIDEO;
 		$from = self::EXERCISES_TABLE;
 		isset ( $where ) ? $where : '';
 		isset ( $limit ) ? $limit : '';

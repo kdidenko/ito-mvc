@@ -344,10 +344,18 @@ class ContentController extends SecureActionControllerImpl {
 			//server-side validation
 			$error = ExerciseService::validation ( $requestParams );
 			if (isset ( $error ) && count ( $error ) == 0) {
+				/*print_r($_FILES);exit;
+				if (isset ( $_FILES ['file'] ['name'] )) {
+					$file = $_FILES ['file'];
+					$path = 'storage/uploads/exercises/' . $_FILES ['file'] ['name'];
+					StorageService::uploadFile ( $path, $file );
+				}*/
+				
+				
 				// Insert new exercise to DB
-				$fields = ExerciseService::CAPTION . ', ' . ExerciseService::DESCRIPTION . ', ' . ExerciseService::OWNER . ', ' . ExerciseService::CRDATE;
+				$fields = ExerciseService::CAPTION . ', ' . ExerciseService::DESCRIPTION . ', ' . ExerciseService::OWNER . ', ' . ExerciseService::CRDATE . ', ' . ExerciseService::VIDEO;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [ExerciseService::CAPTION] . "','" . $requestParams [ExerciseService::DESCRIPTION] . "','" . $owner_id . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
+				$values = "'" . $requestParams [ExerciseService::CAPTION] . "','" . $requestParams [ExerciseService::DESCRIPTION] . "','" . $owner_id . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $requestParams [ExerciseService::VIDEO] . "'";
 				$into = ExerciseService::EXERCISES_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				

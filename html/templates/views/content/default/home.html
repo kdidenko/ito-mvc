@@ -38,11 +38,11 @@
 <span class="message">No courses available at this moment.</span>
 <?php } else { ?>
 <div class="pgItemsList">
- <div class="pgContentTools">
-	<!--ul>
+ <!--div class="pgContentTools">
+	<ul>
     	<li--><h2>Trainings lists:</h2><!--/li>
-    </ul-->
-</div>
+    </ul>
+</div-->
 <?php foreach($courseslist as $key => $value){ ?>
 	<div class="pgListItem">
 		<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>

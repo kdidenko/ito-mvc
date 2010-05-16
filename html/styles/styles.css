@@ -6,9 +6,9 @@ a:hover {text-decoration:none}
 img {border:0}
 p {font-size:12px; line-height:135%; padding:10px 0}
 
-h1, h2 {font-weight:normal; padding:0 0 10px 0}
+h1, h2 {font-weight:500; color:#333; padding:0 0 10px 0}
 h1 {font-size:22px}
-h2 {font-size:14px; padding-bottom:5px}
+h2 {font-size:16px}
 .pgIntro {font-size:14px; color:#666; padding:10px 0 15px 0}
 /**/.clnr {clear:both; height:1px; overflow:hidden; font-size:1px}
 /**/.brdr {border-top:1px solid #ededed}
@@ -37,8 +37,10 @@ h2 {font-size:14px; padding-bottom:5px}
 		.pgContentTools ul li {float:left; list-style:none; padding:4px 2px}
 
 .pgItemsList {}
+.pgItemsList h2 {padding:5px 10px; background-color:#ededed; float:right}
 .pgListItem {margin:15px 0; width:335px; float:left; b-ackground-color:#CCC}
 /**/.wide {float:none; width:auto}
+.pgListItem  h2 {background:none; padding:0 0 5px 0; float:none}
 .pgListItem .pgItemImg {float:left; padding:3px 10px 5px 0}
 .pgListItem .pgItemBody {display:table; height:1%}
 .pgListItem .pgItemBody  p {padding:0}
@@ -50,7 +52,7 @@ h2 {font-size:14px; padding-bottom:5px}
 .extLink {margin:5px 0 0 0}
 	.sidePageContent {float:right; width:245px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
-	/**/.sidePageContent h2 {font-size:16px; font-weight:normal; padding:0 5px 10px 33px}
+	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none}
 	/**/.sidePageContent ul {padding:0 5px 10px 33px}
 	/**/.sidePageContent ul li {margin:5px 0; b-ackground:url(../images/arr-list.png) no-repeat 0 5px; p-adding:0 0 0 10px}
 

@@ -18,6 +18,16 @@ function showSplash(url, caller) {
 	xmlhttp.send();
 }
 
+function destroySplash(caller){
+	  var splash = document.getElementById(caller);
+	  if(splash == undefined || splash == null){return;}
+	  var len = splash.childNodes.length;
+	  while (splash.hasChildNodes()) {
+		  splash.removeChild(splash.firstChild);
+	  }
+	  splash.style.visibility="hidden";
+}
+
 function createXMLHttp() {
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari

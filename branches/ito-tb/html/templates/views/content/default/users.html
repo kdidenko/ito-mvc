@@ -2,7 +2,26 @@
 	<form class="frmNew">
 		<button onclick="showSplash('/user-new.html','splashCanv');return false">Add New User</button>
 	</form>
-	<form action="/user-search.html" class="search">
+	<form action="" class="search">
+		<button onclick="showSplash('/user-new.html','splashCanv');return false">Synchronize user</button>
+	</form>
+	<br/><br/>
+	<form action="" class="group">
+		<select>
+			<option>Class:</option>
+		</select>
+	</form>
+	<form action="" class="group">
+		<select>
+			<option>Level:</option>
+		</select>
+	</form>
+	<form action="" class="group">
+		<select>
+			<option>Training:</option>
+		</select>
+	</form>
+	<form action="/user-search.html" class="group">
 		<input type="text" name="project" value="" /><input type="submit" value="Search Users" />
 	</form>
 </div>

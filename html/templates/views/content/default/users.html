@@ -1,7 +1,11 @@
-<form>
-	<button onclick="showSplash('/user-new.html')">Add New User</button>
-</form>
-<br>
+<div class="topBlock">
+	<form class="frmNew">
+		<button onclick="showSplash('/user-new.html');return false">Add New User</button>
+	</form>
+	<form action="/user-search.html" class="search">
+		<input type="text" name="project" value="" /><input type="submit" value="Search" />
+	</form>
+</div>
 <table class="genTbl" cellpadding="0" cellspacing="0">
   <tr>
     <th>Last Name</th>
@@ -55,7 +59,7 @@
     </td>
   </tr>
   <tr>
-  <td>Muller</td>
+    <td>Muller</td>
     <td>Frank</td>
     <td>13a</td>
     <td class="option">
@@ -63,7 +67,7 @@
     	<a href="/user-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>
     </td>
   </tr>
-  <tr class="odd">
+    <tr>
     <td>raphaelle</td>
     <td>Keller</td>
     <td>12b</td>
@@ -72,7 +76,7 @@
     	<a href="/user-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>
     </td>
   </tr> 
-  <tr>
+    <tr>
     <td>Schulze</td>
     <td>Dieter</td>
     <td>11c</td>

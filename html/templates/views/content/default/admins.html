@@ -1,7 +1,11 @@
-<form>
-	<button onclick="showSplash('/admin-new.html')">Add New Admin</button>
-</form>
-<br/>
+<div class="topBlock">
+	<form class="frmNew">
+		<button onclick="showSplash('/admin-new.html');return false">Add New Admin</button>
+	</form>
+	<form action="/admin-search.html" class="search">
+		<input type="text" name="project" value="" /><input type="submit" value="Search" />
+	</form>
+</div>
 <table class="genTbl" cellpadding="0" cellspacing="0">
   <tr>
     <th>Last Name</th>
@@ -24,7 +28,7 @@
     <td>Projectleiter</td>
     <td class="option">
     	<a href="/admin-edit.html" title="Edit"><img src="images/edit.png" alt="Copy"/></a>
-    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>
+    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>	    	
     </td>
   </tr>
   <tr class="odd">
@@ -33,7 +37,7 @@
     <td>Lehrer</td>
     <td class="option">
     	<a href="/admin-edit.html" title="Edit"><img src="images/edit.png" alt="Copy"/></a>
-    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>
+    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>	    	
     </td>
   </tr>
   <tr>
@@ -42,7 +46,7 @@
     <td>Administrator</td>
     <td class="option">
     	<a href="/admin-edit.html" title="Edit"><img src="images/edit.png" alt="Copy"/></a>
-    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>
+    	<a href="/admin-delete.html" title="Delete"><img src="images/delete.png" alt="Delete"/></a>	    	
     </td>
   </tr>  
 </table>

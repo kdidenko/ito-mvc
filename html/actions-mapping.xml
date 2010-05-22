@@ -35,6 +35,21 @@
 	</action>
 	<!-- Navigation views mapping end -->
 	
+	<!-- Content views mapping begin -->
+	<action name="/content-*.html" id="content">
+		<controller class="com.itoglobal.lcms.controllers.ContentController" 
+				method="handle$1" />
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/$1.html"/>
+			<role type="UR" path="templates/views/content/users/$1.html"/>
+			<role type="AR" path="templates/views/content/admin/$1.html"/>		
+		</template>	
+		<property name="onsuccess" value="manage-users.html"/>
+		<property name="schoolassigned" value="overview.html"/>
+		<property name="template" value="templates/plain/created-account.txt"/>		
+	</action>
+	<!-- Content views mapping end -->	
+	
 	<!-- Footer views mapping begin -->
 	<action name="/footer-*.html" id="footer-$1">
 		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
@@ -60,6 +75,7 @@
 		<template name="index.html" path="templates/layout-one-column.html"/>
 	</action>
 	
+
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
 
 
@@ -133,7 +149,14 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 
-	
+	<action name="/login.html" id="login">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
+			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
+		</forwards>
+	</action>
 	
 	<action name="/signout.html" id="signout">
 		<controller class="com.itoglobal.users.AuthenticationController" 
@@ -143,7 +166,10 @@
 		</forwards>
 	</action>
 	
-	
+	<action name="/login-failed.html" id="loginfailed">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html"/>
+	</action>
 	
 	<action name="/reset-password.html" id="reset-password">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
@@ -216,21 +242,6 @@
 		</template>	
 	</action>
 	<!-- Sidebar views mapping end -->	
-	
-	<!-- Content views mapping begin -->
-	<action name="/content-*.html" id="content">
-		<controller class="com.itoglobal.lcms.controllers.ContentController" 
-				method="handle$1" />
-		<template name="$1.html">
-			<role type="VR" path="templates/views/content/default/$1.html"/>
-			<role type="UR" path="templates/views/content/users/$1.html"/>
-			<role type="AR" path="templates/views/content/admin/$1.html"/>		
-		</template>	
-		<property name="onsuccess" value="manage-users.html"/>
-		<property name="schoolassigned" value="overview.html"/>
-		<property name="template" value="templates/plain/created-account.txt"/>		
-	</action>
-	<!-- Content views mapping end -->
 	
 	<!--  Schools management actions begin -->
 	<action name="/*-schools.html" id="$1schools">

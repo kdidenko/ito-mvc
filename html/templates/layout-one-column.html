@@ -24,7 +24,7 @@
 	</div>
 <!--  Footer block begin -->
 	<div class="footerWrapper">
-<?php TemplateEngine::inclusion('footer.html', $mvc)?>
+<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc)?>
 	</div>
 <!--  Footer block end -->
 </div>

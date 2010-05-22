@@ -104,10 +104,9 @@ td.option a img {margin-top:5px}
 table.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
 table.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
-.selectList {width: 90%; margin: 0 auto;}
 .selectList select{width: 230px;}
 .selectList div{float: left; margin-left: 20px;}
-.selectList .title{width: 50px;}
+.title {width: 100px; float: left; margin-left: 20px;}
 
 
 div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }

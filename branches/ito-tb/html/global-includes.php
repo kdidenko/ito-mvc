@@ -19,7 +19,6 @@
 	require_once 'com/itoglobal/mail/MailerService.php';
 	require_once 'com/itoglobal/validation/ValidationService.php';
     require_once 'com/itoglobal/lcms/UsersService.php';
-    require_once 'com/itoglobal/lcms/SchoolService.php';
     require_once 'com/itoglobal/lcms/ExerciseService.php';
     require_once 'com/itoglobal/lcms/CourseService.php';
     require_once 'com/itoglobal/lcms/AssignedService.php';

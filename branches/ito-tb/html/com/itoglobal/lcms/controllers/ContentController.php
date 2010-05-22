@@ -8,36 +8,7 @@ class ContentController extends SecureActionControllerImpl {
 	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
-		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
-		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
-		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
-		
-		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		
-		$fields = AssignedService::SCHOOL_ID;
-		$from = AssignedService::SCHOOLS_ASSIGNED;
-		$where = AssignedService::USER_ID . "='" . $user_id . "'";
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-		
-		if (isset($result [0] [AssignedService::SCHOOL_ID])){
-			$where = '';
-			foreach($result as $key => $value){
-				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
-				$where .= $key != count ($result) - 1 ? " OR " : null;
-			}
-			$list = SchoolService::getSchoolsList ($where);
-			$mvc->addObject ( 'list', $list );
-		}
-		
-		$schoolslist = SchoolService::getSchoolsList (null, '4');
-		$mvc->addObject ( 'schoolslist', $schoolslist );
-		
-		$courseslist = CourseService::getCoursesList(null, '4');
-		$mvc->addObject ( 'courseslist', $courseslist );
-		
-		$exerciseslist = ExerciseService::getExercisesList (null, 4);
-		$mvc->addObject ( 'exerciseslist', $exerciseslist );
+		//TODO: just an empty stub
 		
 		return $mvc;
 	}

@@ -68,7 +68,7 @@ p.btns {text-align:right}
 
 .headerForms {float:right; padding:40px 0 0 0; text-align:right}
 form.languages {float:right; margin:1px 0 0 60px}
-form.search {float:right}
+
 
 .footerWrapper {border-top:7px solid #cbcbcb}
 .footerBody {width:960px; margin:0 auto; padding:5px 0 15px 20px}
@@ -100,5 +100,6 @@ td.option{width: 100px;text-align: center;}
 .genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
 .genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
-
-
+div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }
+form.frmNew {display:block;float:left}
+form.search {display:block;float:right}

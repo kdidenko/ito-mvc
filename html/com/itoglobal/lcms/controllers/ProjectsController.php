@@ -9,6 +9,12 @@ class ProjectsController extends SecureActionControllerImpl {
 		//TODO: just an empty stub
 		return $mvc;
 	}
+	
+	public function handleExport($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		//TODO: just an empty stub
+		return $mvc;
+	}	
 
 }
 

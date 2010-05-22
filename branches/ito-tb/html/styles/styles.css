@@ -92,12 +92,12 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 	border:1px solid black;
 }
 
-.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid black}
+.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid #CBCBCB}
 .genTbl th:FIRST-CHILD {border:0}
 
 tr.odd {background-color:#EBEBEB}
 
-.genTbl td {padding-left:10px;border-left:1px solid black;line-height:22px}
+.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px}
 .genTbl td:FIRST-CHILD {border:0;font-weight:bold}
 
 

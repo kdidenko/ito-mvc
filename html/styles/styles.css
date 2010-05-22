@@ -112,6 +112,7 @@ table.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }
 form.frmNew {display:block;float:left}
 form.search {display:block;float:right}
+form.group {display:block;float:right}
 
 #splashCanv {visibility:hidden;background:white url('../images/splash-bg.png') repeat-x center top;
 		display:block;width:720px;height:80%;margin:0 auto;z-index:999;overflow:hidden;position:absolute;top:10%;

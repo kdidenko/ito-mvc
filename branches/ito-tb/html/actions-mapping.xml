@@ -75,6 +75,14 @@
 		<template name="index.html" path="templates/layout-one-column.html"/>
 	</action>
 		
+	<action name="/signout.html" id="signout">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="logout" />
+		<forwards>
+			<target location="/login-form.html" name="loginform" condition="onsuccess"/>
+		</forwards>
+	</action>
+		
 	<action name="/registration.html" id="registration">
 		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
 		<template name="index.html" path="templates/layout-one-column.html" />	
@@ -97,6 +105,15 @@
 	<action name="/check-email.html" id="checkemail">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>
+	
+	<action name="/new-password.html" id="newpassword">
+		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<forwards>
+			<target location="/login-form.html" name="loginform" condition="onsuccess"/>
+			<target location="/reset-password.html" name="resetpassword" condition="onfailure"/>		
+		</forwards>
 	</action>
 	
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
@@ -172,29 +189,12 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/signout.html" id="signout">
-		<controller class="com.itoglobal.users.AuthenticationController" 
-			method="logout" />
-		<forwards>
-			<target location="/index.html" name="home" condition="onsuccess"/>
-		</forwards>
-	</action>
-	
-	<action name="/login-failed.html" id="loginfailed">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html"/>
-	</action>
+
 	
 
 	
-	<action name="/new-password.html" id="new-password">
-		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
-		<template name="index.html" path="templates/layout-one-column.html"/>
-		<forwards>
-			<target location="/login-failed.html" name="login-failed" condition="onsuccess"/>
-			<target location="/reset-password.html" name="reset-password" condition="onfailure"/>		
-		</forwards>
-	</action>
+
+	
 	
 	
 	

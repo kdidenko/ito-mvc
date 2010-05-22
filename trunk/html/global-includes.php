@@ -15,15 +15,11 @@
 	require_once 'com/itoglobal/http/RequestDispatcher.php';	
     require_once 'com/itoglobal/session/SessionService.php';
     require_once 'com/itoglobal/storage/StorageService.php';
-    require_once 'com/itoglobal/context/ContextService.php';
 	require_once 'com/itoglobal/mail/MailerService.php';
 	require_once 'com/itoglobal/validation/ValidationService.php';
+	
     require_once 'com/itoglobal/lcms/UsersService.php';
-    require_once 'com/itoglobal/lcms/SchoolService.php';
-    require_once 'com/itoglobal/lcms/ExerciseService.php';
-    require_once 'com/itoglobal/lcms/CourseService.php';
-    require_once 'com/itoglobal/lcms/AssignedService.php';
-
+    
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';
 	require_once 'com/itoglobal/mvc/core/MVCService.php';

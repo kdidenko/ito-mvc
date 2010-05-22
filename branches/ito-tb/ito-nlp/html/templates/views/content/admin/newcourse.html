@@ -1,0 +1,40 @@
+<h1>New School</h1>
+<div class="center">       
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
+	<form enctype="multipart/form-data" class="reg_form" action="new-course.html" method="post">
+		<dl>
+			<dt>Course Name:</dt>
+			<dd><input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST [CourseService::CAPTION]) ? $_POST [CourseService::CAPTION] : null; ?>"/></dd>
+			<dt>Description:</dt>
+			<dd><textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST [CourseService::DESCRIPTION]) ? $_POST [CourseService::DESCRIPTION] : null; ?></textarea></dd>
+			<dt>Alias:</dt>
+			<dd><input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/></dd>
+			<dt>Level:</dt>
+			<dd>
+			<select name="level" >
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+			</select>
+			</dd>
+			<dt>Avatar(80x80) :</dt>
+			<dd>
+			<input type="file" name="file" size="30" ></input>
+			</dd>
+		</dl>
+		<input type="submit" value="Add School" id="submit" name="submit"></input>
+	</form>
+</div>

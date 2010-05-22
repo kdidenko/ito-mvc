@@ -1,0 +1,18 @@
+Wellcome to YouCademy ###FIRST_NAME### ###LAST_NAME###!
+
+Your account is almost ready!
+
+Your username is ###USERNAME###.
+Please go to:
+
+###CONFIRMATION_URL###
+
+to confirm your registration.
+
+Once your account is fully configured, you can begin
+your trainings.
+
+Get the latest YouCademy updates by reading our blog and following YouCademy on Twitter.
+
+Thanks,
+The YouCademy team

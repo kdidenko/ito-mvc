@@ -1,0 +1,44 @@
+<h1>Browse Exercises</h1>
+<span class="subMnu">
+	<a href="/new-exercise.html" title="Create New Exercise">New...</a>
+</span>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+
+<?php foreach($list as $key => $value){ ?>
+<div class="pgItemsList">
+	<div class="pgListItem">
+	   <div class="pgItemBody">
+	   	<h2><a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
+				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
+			</a></h2>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>*<?php } } ?> 
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>**<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>***<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>****<?php } } ?>
+	       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>*****<?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Level:</span><span class="lsValue"><?php //echo isset($value[ExerciseService::LEVEL]) ? $value[ExerciseService::LEVEL] : null;?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Owner:</span><span class="lsValue"><?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?></span></li>
+	       </ul>
+		 <p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+		 <p class="extLink"><a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>  class="buton">View</a></p>
+		</div>
+    </div>
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
+</div>
+<?php } } ?>

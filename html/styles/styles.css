@@ -92,13 +92,16 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 	border:1px solid black;
 }
 
-.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid #CBCBCB}
-.genTbl th:FIRST-CHILD {border:0}
+table.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid #CBCBCB}
+table.genTbl th:FIRST-CHILD {border:0}
 
 tr.odd {background-color:#EBEBEB}
-td.option{width: 200px;text-align: center;}
-.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
-.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
+td.option{width:140px;text-align: center;}
+
+td.option a img {margin-top:5px}
+
+table.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
+table.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
 .selectList {width: 90%; margin: 0 auto;}
 .selectList select{width: 140px;}
@@ -116,4 +119,4 @@ form.search {display:block;float:right}
 
 p.splashHead {text-indent:10px;font-size:14px;font-weight:bold;color:white;}
 
-div.splashBody {display:block; position:absolute; top:50px;left:3px;right:3px;bottom:3px; border:1px solid #CBCBCB}
+div.splashBody {display:block; position:absolute; top:47px;left:3px;right:3px;bottom:3px; border:1px solid #CBCBCB}

@@ -74,8 +74,31 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html"/>
 	</action>
-	
+		
+	<action name="/registration.html" id="registration">
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+		<template name="index.html" path="templates/layout-one-column.html" />	
+		<forwards>
+			<target location="registration.html" name="registration" condition="onfailure"/>
+			<target location="validation.html" name="validation" condition="onsuccess"/>
+		</forwards>
+		<property name="template" value="templates/plain/email-confirmation.txt"/>
+	</action>
 
+	<action name="/reset-password.html" id="resetpassword">
+		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<forwards>
+			<target location="/check-email.html" name="check-email" condition="onsuccess"/>		
+		</forwards>
+		<property name="template" value="templates/plain/reset-password.txt"/>
+	</action>
+	
+	<action name="/check-email.html" id="checkemail">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>
+	
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
 
 
@@ -162,14 +185,7 @@
 		<template name="index.html" path="templates/layout-two-columns.html"/>
 	</action>
 	
-	<action name="/reset-password.html" id="reset-password">
-		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
-		<template name="index.html" path="templates/layout-one-column.html"/>
-		<forwards>
-			<target location="/check-email.html" name="check-email" condition="onsuccess"/>		
-		</forwards>
-		<property name="template" value="templates/plain/reset-password.txt"/>
-	</action>
+
 	
 	<action name="/new-password.html" id="new-password">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
@@ -180,20 +196,9 @@
 		</forwards>
 	</action>
 	
-	<action name="/check-email.html" id="check-email">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html"/>
-	</action>
 	
-	<action name="/registration.html" id="registration">
-		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
-		<template name="index.html" path="templates/layout-one-column.html" />	
-		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>
-			<target location="validation.html" name="validation" condition="onsuccess"/>
-		</forwards>
-		<property name="template" value="templates/plain/email-confirmation.txt"/>
-	</action>
+	
+	
 
 	<action name="/validation.html" id="validation">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

@@ -37,6 +37,13 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleRegistration($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleResetPassword($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	public function handleCheckEmail($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	
 	
 	
 	public function handleHelp($actionParams, $requestParams) {

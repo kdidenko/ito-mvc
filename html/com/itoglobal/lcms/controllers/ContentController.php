@@ -43,6 +43,9 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleCheckEmail($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleNewPassword($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	
 	
 	
@@ -50,9 +53,7 @@ class ContentController extends SecureActionControllerImpl {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	
-	public function handleLoginFailed($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
-	}
+
 	
 	public function handleAbout($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );

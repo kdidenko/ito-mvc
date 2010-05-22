@@ -106,7 +106,7 @@ table.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
 .selectList select{width: 230px;}
 .selectList div{float: left; margin-left: 20px;}
-.title {width: 100px; float: left; margin-left: 20px;}
+.title {width: 70px; float: left; margin-left: 20px;}
 
 
 div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }

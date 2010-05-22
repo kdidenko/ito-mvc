@@ -46,9 +46,20 @@
 	</action>
 	<!-- Footer views mapping end -->	
 		
+	<action name="/login.html" id="login">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
+			<target location="/login-form.html" name="login-failed" condition="onfailure"/>		
+		</forwards>
+	</action>
 	
+	<action name="/login-form.html" id="loginform">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>
 	
-
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
 
 
@@ -122,14 +133,7 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 
-	<action name="/login.html" id="login">
-		<controller class="com.itoglobal.users.AuthenticationController" 
-			method="login" />
-		<forwards>
-			<target location="/index.html" name="home" condition="onsuccess"/>
-			<target location="/login-failed.html" name="login-failed" condition="onfailure"/>		
-		</forwards>
-	</action>
+	
 	
 	<action name="/signout.html" id="signout">
 		<controller class="com.itoglobal.users.AuthenticationController" 
@@ -139,10 +143,7 @@
 		</forwards>
 	</action>
 	
-	<action name="/login-failed.html" id="loginfailed">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html"/>
-	</action>
+	
 	
 	<action name="/reset-password.html" id="reset-password">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>

@@ -122,3 +122,4 @@ p.splashHead {text-indent:10px;font-size:14px;font-weight:bold;color:white;}
 div.splashBody {display:block;position:absolute;top:47px;left:3px;right:3px;bottom:47px;border:1px solid #CBCBCB;overflow:auto;}
 
 div.splashBottom {position:absolute;bottom:15px;left:10px;}
+h2.warning {color:red;text-align:center;margin-top:10px}  

@@ -6,23 +6,51 @@
 
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-
-	<action name="/schools.html" id="schools">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 
 	<action name="/trainings.html" id="trainings">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
+	
+	<action name="/users.html" id="users">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 
-	<action name="/community.html" id="community">
+	<action name="/admins.html" id="admins">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>	
+	
+	<!-- Navigation views mapping begin -->
+	<action name="/navigation-*.html" id="navigation-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
+			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
+		</template>	
+	</action>
+	<!-- Navigation views mapping end -->
+	
+	<!-- Footer views mapping begin -->
+	<action name="/footer-*.html" id="footer-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/footer.html"/>
+			<role type="UR" path="templates/views/navigation/users/footer.html"/>
+			<role type="AR" path="templates/views/navigation/admin/footer.html"/>		
+		</template>	
+	</action>
+	<!-- Footer views mapping end -->	
+		
+	
+	
+
+	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
+
 
 	<action name="/discussions.html" id="discussions">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
@@ -175,17 +203,6 @@
 			method="deleteScope"/>
 		<template name="scope.html" path="templates/scope.html" />	
 	</action>
-	
-	<!-- Navigation views mapping begin -->
-	<action name="/navigation-*.html" id="navigation-$1">
-		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
-		<template name="$1.html">
-			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
-			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
-			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
-		</template>	
-	</action>
-	<!-- Navigation views mapping end -->	
 	
 	<!-- Sidebar views mapping begin -->
 	<action name="/sidebar-*.html" id="sidebar">

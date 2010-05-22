@@ -96,8 +96,8 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 .genTbl th:FIRST-CHILD {border:0}
 
 tr.odd {background-color:#EBEBEB}
-
-.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px}
+td.option{width: 100px;text-align: center;}
+.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
 .genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
 

@@ -127,7 +127,11 @@
 		</template>	
 	</action>
 	<!-- Project views mapping end -->	
-	
+		
+	<action name="/project-export.html" id="projectexport">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
 	<!-- Training views mapping begin -->
 	<action name="/training-*.html" id="training-$1">
 		<controller class="com.itoglobal.lcms.controllers.TrainingsController"

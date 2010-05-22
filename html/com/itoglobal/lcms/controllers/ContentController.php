@@ -46,6 +46,11 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleNewPassword($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleProjectExport($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	
+	
 	
 	
 	

@@ -1,7 +1,7 @@
-<p class="splashHead">Project Export</p>
 <form class="splashForm">
-<div class="splashBody">
-	<div class="selectList">		
+	<p class="splashHead">Project Export</p>
+	<div class="splashBody">
+		<div class="selectList">
 			<div class="title">Trainigs:</div>
 			<div>
 				<select size="10">
@@ -48,7 +48,10 @@
 				<option>6d</option>
 			</select>
 			</div>
+		</div>
 	</div>
-	<input type="submit" value="Export"/>
-	</form>
-</div>
+	<div class="splashBottom">
+		<input type="submit" name="submit" value="Submit"/>
+		<button onclick="destroySplash('splashCanv');return false;">Cancel</button>
+	</div>
+</form>

@@ -1,4 +1,5 @@
-<p class="splashHead">New Admin Form</p>
+<form>
+<p class="splashHead">New User Form</p>
 <div class="splashBody">
 	<div class="error">
  		<?php
@@ -10,7 +11,6 @@
 			}
 	 	?>
 	</div>
-	<form action="users.html" method="post"  class="selectList">
 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
 		<fieldset>
 			<legend>Personal Data:</legend>
@@ -27,17 +27,6 @@
 		 		<dd>
 		 		<input class="profile" type="text" name="lastname"/>
 				</dd>
-				<dt>Class:</dt>
-		 		<dd>
-			 		<select>
-						<option>6a</option>
-						<option>6b</option>
-						<option>6c</option>
-						<option>6d</option>
-						<option>5a</option>
-						<option>5b</option>
-					</select>
-				</dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -51,48 +40,59 @@
 		</fieldset>
 		<fieldset>
 			<legend>Group:</legend>
-			<div>
-				<select size="10">
-					<option>All</option>
-				</select>
-			</div>
-			<div>
-				<ul>
-				<li><a href="#" title="Add"><img alt="Add" src="images/arr-left.png"></a></li>
-				<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-right.png"></a></li>
-				</ul>
-			</div>
-			<div>
-				<select size="10">
-					<option>Administrator</option>
-					<option>Project leader</option>
-					<option>Class leader</option>
-					<option>Trainer</option>
-				</select>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul>
+					<li><a href="#" title="Add"><img alt="Add" src="images/arr-left.png"></a></li>
+					<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-right.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Training 1</option>
+						<option>Training 2</option>
+						<option>Training 3</option>
+						<option>Training 4</option>
+						<option>Training 5</option>
+						<option>Training 6</option>
+					</select>
+				</div>
 			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Allocation:</legend>
-			<div>
-				<select size="10">
-					<option>All</option>
-				</select>
-			</div>
-			<div>
-				<ul>
-				<li><a href="#" title="Add"><img alt="Add" src="images/arr-left.png"></a></li>
-				<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-right.png"></a></li>
-				</ul>
-			</div>
-			<div>
-				<select size="10">
-					<option>Administrator</option>
-					<option>Project leader</option>
-					<option>Class leader</option>
-					<option>Trainer</option>
-				</select>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul>
+					<li><a href="#" title="Add"><img alt="Add" src="images/arr-left.png"></a></li>
+					<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-right.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Training 1</option>
+						<option>Training 2</option>
+						<option>Training 3</option>
+						<option>Training 4</option>
+						<option>Training 5</option>
+						<option>Training 6</option>
+					</select>
+				</div>
 			</div>
 		</fieldset>
-	<input type="submit" name="submit" value="Submit Changes"/>
-	</form>
 </div>
+	<div class="splashBottom">
+		<input type="submit" name="submit" value="Submit"/>
+		<button onclick="destroySplash('splashCanv');return false;">Cancel</button>
+	</div>	
+</form>

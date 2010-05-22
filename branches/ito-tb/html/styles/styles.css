@@ -110,7 +110,7 @@ form.frmNew {display:block;float:left}
 form.search {display:block;float:right}
 
 #splashCanv {visibility:hidden;background:white url('../images/splash-bg.png') repeat-x center top;
-		display:block;width:600px;height:80%;margin:0 auto;z-index:999;overflow:hidden;position:absolute;top:10%;
+		display:block;width:720px;height:80%;margin:0 auto;z-index:999;overflow:hidden;position:absolute;top:10%;
 			border:1px solid #666666;
 	}
 

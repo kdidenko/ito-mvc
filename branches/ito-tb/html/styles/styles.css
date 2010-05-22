@@ -108,3 +108,12 @@ td.option{width: 100px;text-align: center;}
 div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }
 form.frmNew {display:block;float:left}
 form.search {display:block;float:right}
+
+#splashCanv {visibility:hidden;background:white url('../images/splash-bg.png') repeat-x center top;
+		display:block;width:600px;height:80%;margin:0 auto;z-index:999;overflow:hidden;position:absolute;top:10%;
+			border:1px solid #666666;
+	}
+
+p.splashHead {text-indent:10px;font-size:14px;font-weight:bold;color:white;}
+
+div.splashBody {display:block; position:absolute; top:50px;left:3px;right:3px;bottom:3px; border:1px solid #CBCBCB}

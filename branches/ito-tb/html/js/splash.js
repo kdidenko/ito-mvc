@@ -5,8 +5,11 @@ function showSplash(url, caller) {
 	xmlhttp.onreadystatechange = function() {
 		// check xmlhttp ready state
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			alert(xmlhttp.responseText);
-			//document.getElementById(caller).innerHTML = xmlhttp.responseText;
+			splash = document.getElementById(caller); 
+			splash.innerHTML = xmlhttp.responseText;			
+			var x = (document.body.clientWidth - splash.clientWidth) / 2 + 'px';
+			splash.style.visibility="visible";
+			splash.style.left = x;
 		}
 	};
 	// prepare request

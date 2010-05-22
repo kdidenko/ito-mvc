@@ -128,6 +128,41 @@
 	</action>
 	<!-- Project views mapping end -->	
 	
+	<!-- Training views mapping begin -->
+	<action name="/training-*.html" id="training-$1">
+		<controller class="com.itoglobal.lcms.controllers.TrainingsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/training-$1.html"/>
+			<role type="UR" path="templates/views/content/users/training-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/training-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Training views mapping end -->	
+	
+	<!-- User views mapping begin -->
+	<action name="/user-*.html" id="user-$1">
+		<controller class="com.itoglobal.lcms.controllers.UsersController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/user-$1.html"/>
+			<role type="UR" path="templates/views/content/users/user-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/user-$1.html"/>		
+		</template>	
+	</action>
+	<!-- User views mapping end -->
+	
+	<!-- Admin views mapping begin -->
+	<action name="/admin-*.html" id="admin-$1">
+		<controller class="com.itoglobal.lcms.controllers.AdminsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/admin-$1.html"/>
+			<role type="UR" path="templates/views/content/users/admin-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/admin-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Admin views mapping end -->	
 	
 	
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->

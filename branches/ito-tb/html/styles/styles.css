@@ -96,13 +96,13 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 .genTbl th:FIRST-CHILD {border:0}
 
 tr.odd {background-color:#EBEBEB}
-td.option{width: 100px;text-align: center;}
+td.option{width: 200px;text-align: center;}
 .genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
 .genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
 
-.selectList {width: 75%; margin: 0 auto;}
-.selectList select{width: 150px;}
-.selectList div{float: left; width: 170px;}
+.selectList {width: 90%; margin: 0 auto;}
+.selectList select{width: 140px;}
+.selectList div{float: left; width: 150px;}
 
 
 div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }

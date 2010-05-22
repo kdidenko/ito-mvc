@@ -31,11 +31,13 @@ h2 {font-size:16px}
 			.footerBody ul.mainNav li.current a {background-color:#FFF; font-weight:bold; color:#666}
 
 .pageWrapper {padding:25px 0; width:100%; display:table}
-	.mainPageContent {float:left; width:672px; margin:0 0 0 14px}
+	.mainPageContent {width:auto; margin:0 0 0 14px}
 		.pgContentTools {background:url(../images/pg-content-tool-bg.png) repeat-x left top; clear:both; width:100%; display:table}
 		.pgContentTools ul {float:right; font-size:11px; padding:5px 0 6px 0; margin:0 10px 0 0}
 		.pgContentTools ul li {float:left; list-style:none; padding:4px 2px}
 
+.loginForm {width: 400px; margin: 0 auto;}
+			
 .pgItemsList {}
 .pgItemsList h2 {padding:5px 10px; background-color:#ededed; float:right}
 .pgListItem {margin:15px 0; width:335px; float:left; b-ackground-color:#CCC}

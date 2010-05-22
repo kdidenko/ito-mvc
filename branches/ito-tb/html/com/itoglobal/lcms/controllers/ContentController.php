@@ -30,6 +30,15 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	
+	public function handleLoginForm($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	public function handleRegistration($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	
+	
 	public function handleHelp($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}

@@ -116,6 +116,20 @@
 		</forwards>
 	</action>
 	
+	<!-- Project views mapping begin -->
+	<action name="/project-*.html" id="project-$1">
+		<controller class="com.itoglobal.lcms.controllers.ProjectsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/protject-$1.html"/>
+			<role type="UR" path="templates/views/content/users/protject-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/protject-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Project views mapping end -->	
+	
+	
+	
 	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
 
 

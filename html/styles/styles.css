@@ -40,7 +40,7 @@ h2 {font-size:16px}
 			
 .pgItemsList {}
 .pgItemsList h2 {padding:5px 10px; background-color:#ededed; float:right}
-.pgListItem {margin:15px 0; width:335px; float:left; b-ackground-color:#CCC}
+.pgListItem {margin:15px 0; width:335px; float:left; background-color:#CCC}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:0 0 5px 0; float:none}
 .pgListItem .pgItemImg {float:left; padding:3px 10px 5px 0}
@@ -56,7 +56,7 @@ h2 {font-size:16px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
 	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none}
 	/**/.sidePageContent ul {padding:0 5px 10px 33px}
-	/**/.sidePageContent ul li {margin:5px 0; b-ackground:url(../images/arr-list.png) no-repeat 0 5px; p-adding:0 0 0 10px}
+	/**/.sidePageContent ul li {margin:5px 0; background:url(../images/arr-list.png) no-repeat 0 5px; padding:0 0 0 10px}
 
 .signinForm {padding:0 0 15px 0}
 .signinForm p {font-size:11px; padding:10px 25px 0 33px}
@@ -86,3 +86,19 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 .list {margin: 20px;font-size: 12px;text-align: center;}
 .list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
 .list td{	width: 28%;	border: 1px solid #EFEFEF;}
+.genTbl {
+	width:80%;
+	margin:0 auto;
+	border:1px solid black;
+}
+
+.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid black}
+.genTbl th:FIRST-CHILD {border:0}
+
+tr.odd {background-color:#EBEBEB}
+
+.genTbl td {padding-left:10px;border-left:1px solid black;line-height:22px}
+.genTbl td:FIRST-CHILD {border:0;font-weight:bold}
+
+
+

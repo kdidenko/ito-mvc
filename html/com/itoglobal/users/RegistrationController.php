@@ -1,108 +1,145 @@
 <?php
-
 require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
 
 class RegistrationController extends BaseActionControllerImpl {
 	
-	public static $error = '';
-	
-	const USERNAME = 'username';
-	
-	const FIRSTNAME = 'firstname';
-	
-	const LASTNAME = 'lastname';
-	
-	const EMAIL = 'email';
-	
-	const PASSWORD = 'password';
-	
-	const CONFIRM = 'confirm_password';
-	
-	const CRDATE = 'crdate';
-	
-	const USERS = 'users';
-	
 	public function registration($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		self::$error = '';
-		self::$error .= self::CheckUsername ( $_POST[self::USERNAME] );
-		self::$error .= self::CheckName ( $_POST[self::FIRSTNAME] );
-		self::$error .= self::CheckLastname ( $_POST[self::LASTNAME] );
-		self::$error .= self::CheckEmail ( $_POST[self::EMAIL] );
-		self::$error .= self::CheckPassword ( $_POST[self::PASSWORD] );
-		self::$error .= self::CheckConfirmPassword ( $_POST[self::PASSWORD], $_POST[self::CONFIRM] );
-		//self::$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year);
-		//TODO: create birthday field!        
-		
-		
-		//TODO: error reporting
-		//$error - mistakes
-		if (self::$error != NULL) {
-			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );
+		if (! isset ( $requestParams [UsersService::ID] )) {
+			if (isset ( $requestParams ['submit'] )) {
+				//server-side validation
+				$error = UsersService::validation ( $requestParams );
+				if (count ( $error ) == 0) {
+					// Insert new users to DB
+					$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ROLE;
+					$hash = md5 ( rand ( 1, 9999 ) );
+					$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . $requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . md5 ( $requestParams [UsersService::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','UR'";
+					$into = UsersService::USERS;
+					$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+					
+					$fields = UsersService::ID;
+					$from = UsersService::USERS;
+					$where = UsersService::USERNAME . " = '" . $requestParams [UsersService::USERNAME] . "'";
+					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					$plain = $mvc->getProperty ( 'template' );
+					$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $result [0] [UsersService::ID] . '&validation_id=' . $hash;
+					MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
+					
+					$location = $this->onSuccess ( $actionParams );
+					$this->forwardActionRequest ( $location );
+				} else {
+					$mvc->addObject ( UsersService::ERROR, $error );
+				}
+			}
+		} else {
+			self::confirmRegistration ( $requestParams [UsersService::ID], $requestParams [UsersService::VALIDATION] );
+			$message = 'You completed registration.';
+			$mvc->addObject ( 'message', $message );
 		}
+		return $mvc;
+	
+	}
+	
+	public function resetPassword($actionParams, $requestParams) {
+		// calling parent to get the model
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		// Insert new users to DB
-		$fields = self::FIRSTNAME . ', ' . self::LASTNAME . ', ' . self::EMAIL . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . self::CRDATE;
-		$values = "'" . $_POST [self::FIRSTNAME] . "','" . $_POST [self::LASTNAME] . "','" . $_POST [self::EMAIL] . "','" . $_POST [self::USERNAME] . "','" . $_POST [self::PASSWORD] . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
-		$into = self::USERS;
-		$link = SQLClient::connect ( 'ito_global', 'localhost', 'root', '' );
-		$result = SQLClient::execInsert ( $fields, $values, $into, $link );
-		
+		if (! isset ( $requestParams [UsersService::PASSWORD] )) {
+			if (! isset ( $requestParams [UsersService::VALIDATION] )) {
+				if (isset ( $requestParams [UsersService::EMAIL] )) {
+					$fields = UsersService::FIRSTNAME . ',' . UsersService::LASTNAME . ',' . UsersService::USERNAME . ',' . UsersService::EMAIL;
+					$from = UsersService::USERS;
+					$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
+					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					if (isset ( $result [0] [UsersService::EMAIL]) && $requestParams [UsersService::EMAIL] != NULL ) {
+						
+						$fields = UsersService::VALIDATION;
+						$hash = md5 ( rand ( 1, 9999 ) );
+						$vals = "'" . $hash . "'";
+						DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+						
+						if (isset ( $result [0] [UsersService::FIRSTNAME] )) {
+							$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/new-password.html?email=' . $requestParams [UsersService::EMAIL] . '&validation_id=' . $hash;
+							MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $result [0] [UsersService::USERNAME], $result [0] [UsersService::FIRSTNAME], $result [0] [UsersService::LASTNAME], $actionParams->property ['value'], $url );
+							
+							$location = $this->onSuccess ( $actionParams );
+							$this->forwardActionRequest ( $location );
+						}
+					} else {
+						$mvc->addObject ( UsersService::ERROR, 'Email address not found' );
+					}}
+			} else {
+				$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
+				$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
+			}
+		} else {
+			$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
+			$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
+			# setting the query variables
+			$fields = UsersService::VALIDATION;
+			$from = UsersService::USERS;
+			$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
+			# executing the query
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $requestParams [UsersService::VALIDATION]) {
+				$error = array ();
+				$error [] .= UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] );
+				$error [] .= UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] );
+				$error = array_filter ( $error );
+				if (count ( $error ) == 0) {
+					self::createNewPassword ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::PASSWORD] );
+					$location = $this->onSuccess ( $actionParams );
+					$this->forwardActionRequest ( $location );
+				} else {
+					$mvc->addObject ( UsersService::ERROR, $error );
+				}
+			} else {
+				$location = $this->onFailure ( $actionParams );
+				$this->forwardActionRequest ( $location );
+			}
+		}
 		return $mvc;
 	}
 	
-	
-	private function CheckUsername($username) {
-		if (!$username) {
-			return '<p>Please enter your User Name</p>';
-		}
+	private function createNewPassword($email, $password) {
+		$fields = UsersService::PASSWORD;
+		$from = UsersService::USERS;
+		$vals = "'" . md5 ( $password ) . "'";
+		$where = UsersService::EMAIL . " = '" . $email . "'";
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	private function CheckName($name) {
-		if (!$name) {
-			return '<p>Please enter your First Name</p>';
-		}
-	}
-	
-	private function CheckLastname($lastname) {
-		if (!$lastname) {
-			return '<p>Please enter your Last Name</p>';
-		}
-	}
-	
-	private function CheckEmail($email) {
-		if ($email) {
-			if (! preg_match ( '/^(([^<>()[\]\\.,;:\s@"\']+(\.[^<>()[\]\\.,;:\s@"\']+)*)|("[^"\']+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\d\-]+\.)+[a-zA-Z]{2,}))$/', $email )) {
-				return "<p>Wrong email. Please enter a correct email</p>";
-			}
-		}else{
-			return '<p>Please enter your email address.</p>';
-		}
-	}
-	
-	private function CheckPassword($password) {
-		if ($password) {
-			if (strlen ( $password ) < 6) {
-				return '<p>The password you provided must have at least 6 characters.</p>';
-			}
-		} else {
-			return '<p>Please enter password</p>';
-		}
-	}
-	
-	private function CheckConfirmPassword($password, $confirm_password) {
-		if ($confirm_password) {
-			if ($password != $confirm_password) {
-				return '<p>Confirm Password does not match the password.</p>';
-			}
-		} else {
-			return '<p>Please enter confirm password</p>';
+	public function confirmRegistration($id, $hash) {
+		# setting the query variables
+		$fields = UsersService::VALIDATION . ',' . UsersService::USERNAME;
+		$from = UsersService::USERS;
+		$where = UsersService::ID . " = '" . $id . "'";
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		
+		if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $hash) {
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] );
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile' );
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/trainings' );
+			$path = 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile/avatar.jpg';
+			copy ( 'storage/uploads/default-avatar.jpg', $path );
+			
+			# setting the query variables
+			$fields = array ();
+			$fields [] .= UsersService::ENABLED;
+			$fields [] .= UsersService::AVATAR;
+			$from = UsersService::USERS;
+			$vals = array ();
+			$vals [] .= '1';
+			$vals [] .= $path;
+			$where = UsersService::ID . " = '" . $id . "'";
+			# executing the query
+			DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 		}
 	}
 
 }
+
 
 ?>

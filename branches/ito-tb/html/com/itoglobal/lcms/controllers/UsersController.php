@@ -9,6 +9,18 @@ class UsersController extends SecureActionControllerImpl {
 		//TODO: just an empty stub
 		return $mvc;
 	}
+	
+	public function handleEdit($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		//TODO: just an empty stub
+		return $mvc;
+	}
+
+	public function handleDelete($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		//TODO: just an empty stub
+		return $mvc;
+	}	
 
 }
 

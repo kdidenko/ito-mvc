@@ -1,8 +1,8 @@
 <form>
-<p class="splashHead">Delete Admin User</p>
+<p class="splashHead">Delete User</p>
 <div class="splashBody">
 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-		<h2 class="warning">You are about to delete the following admin user!</h2>
+		<h2 class="warning">You are about to delete the following user!</h2>
 		<fieldset>
 			<legend>Personal Data:</legend>
 			<dl>
@@ -12,21 +12,15 @@
 		 		<dd>John</dd>
 		 		<dt>Last Name:</dt>
 		 		<dd>Smith</dd>
+		 		<dt>Class:</dt>
+		 		<dd>6a</dd>		 		
 			</dl>
 		</fieldset>
 		<fieldset>
-			<legend>Group:</legend>
+			<legend>Assigned trainings:</legend>
 				<ul>
 					<li>Training 2</li>
 					<li>Training 3</li>
-				</ul>
-		</fieldset>
-		<fieldset>
-			<legend>Allocation:</legend>
-				<ul>
-					<li>Training 4</li>
-					<li>Training 5</li>
-					<li>Training 6</li>
 				</ul>
 		</fieldset>
 </div>

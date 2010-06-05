@@ -21,12 +21,12 @@
 
 	<action name="/community.html" id="community">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>	
 
 	<action name="/discussions.html" id="discussions">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>	
 
 	<action name="/help.html" id="help">
@@ -116,7 +116,7 @@
 		<template name="index.html" path="templates/layout-two-columns.html"/>
 	</action>
 	
-	<action name="/reset-password.html" id="reset-password">
+	<action name="/reset-password.html" id="resetpassword">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
 		<template name="index.html" path="templates/layout-one-column.html"/>
 		<forwards>
@@ -125,7 +125,7 @@
 		<property name="template" value="templates/plain/reset-password.txt"/>
 	</action>
 	
-	<action name="/new-password.html" id="new-password">
+	<action name="/new-password.html" id="newpassword">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
 		<template name="index.html" path="templates/layout-one-column.html"/>
 		<forwards>
@@ -134,7 +134,7 @@
 		</forwards>
 	</action>
 	
-	<action name="/check-email.html" id="check-email">
+	<action name="/check-email.html" id="checkemail">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html"/>
 	</action>
@@ -241,11 +241,11 @@
 	
 	<action name="/school-details.html" id="schooldetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	<action name="/edit-school.html" id="editschool">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	<action name="/exercise-details.html" id="exercisedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
@@ -258,7 +258,7 @@
 	
 	<action name="/edit-user.html" id="edituser">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	
 	<action name="/my-profile.html" id="myprofile">

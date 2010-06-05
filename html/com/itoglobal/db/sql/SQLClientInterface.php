@@ -43,6 +43,22 @@ interface SQLClientInterface {
      */
     const SET = ' SET ';
     /**
+     * @var string SQL JOIN statement identifier.
+     */
+    const JOIN = ' JOIN ';
+    /**
+     * @var string SQL ON statement identifier.
+    */
+    const ON = ' ON ';
+    /**
+     * @var string SQL LEFT statement identifier.
+     */
+    const LEFT = ' LEFT ';
+    /**
+     * @var string SQL RIGHT statement identifier.
+     */
+    const RIGHT = ' RIGHT ';
+    /**
      * @var string SQL GROUP BY statement identifier.
      */
     const GROUOPBY = ' GROUP BY ';

@@ -48,12 +48,12 @@ class ExerciseService {
 	public static function getExercisesList($where = null, $limit = null) {
 		# get the exercises list
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID . ', ' . self::VIDEO;
-		$from = self::EXERCISES_TABLE;
-		isset ( $where ) ? $where : '';
-		isset ( $limit ) ? $limit : '';
+		$fields = self::EXERCISES_TABLE . '.' .  self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID . ', ' . self::VIDEO . ', ' . UsersService::USERS . '.' .  UsersService::USERNAME;
+		$from = self::EXERCISES_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . UsersService::USERS . '.' .  UsersService::ID . '=' . self::EXERCISES_TABLE . '.' .  self::OWNER;
+		$where = isset ( $where ) ? self::EXERCISES_TABLE . '.' .  $where : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		
+		/*print_r($result);exit;
 		# resolve real names from IDs
 		$fields = UsersService::USERNAME;		
 		$from = UsersService::USERS;
@@ -61,7 +61,8 @@ class ExerciseService {
 			$where = UsersService::ID . '=' . $result[$i][self::OWNER];
 			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result[$i][self::OWNER] = $res[0][UsersService::USERNAME];
-		}
+		}*/
+		
 		return $result;
 	}
 	public static function updateFields($id, $fields, $vals) {

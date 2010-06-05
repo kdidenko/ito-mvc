@@ -182,7 +182,8 @@
 		<template name="$1.html">
 			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
 			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
-			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
+			<role type="MR" path="templates/views/navigation/moderator/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>
 		</template>	
 	</action>
 	<!-- Navigation views mapping end -->	
@@ -194,6 +195,7 @@
 		<template name="$1.html">
 			<role type="VR" path="templates/views/sidebars/default/login-form.html"/>
 			<role type="UR" path="templates/views/sidebars/users/$1.html"/>
+			<role type="MR" path="templates/views/sidebars/moderator/$1.html"/>
 			<role type="AR" path="templates/views/sidebars/admin/$1.html"/>		
 		</template>	
 	</action>
@@ -206,6 +208,7 @@
 		<template name="$1.html">
 			<role type="VR" path="templates/views/content/default/$1.html"/>
 			<role type="UR" path="templates/views/content/users/$1.html"/>
+			<role type="MR" path="templates/views/content/moderator/$1.html"/>
 			<role type="AR" path="templates/views/content/admin/$1.html"/>		
 		</template>	
 		<property name="onsuccess" value="manage-users.html"/>
@@ -220,6 +223,7 @@
 		<template name="$1.html">
 			<role type="VR" path="templates/views/navigation/default/footer.html"/>
 			<role type="UR" path="templates/views/navigation/users/footer.html"/>
+			<role type="MR" path="templates/views/navigation/moderator/footer.html"/>
 			<role type="AR" path="templates/views/navigation/admin/footer.html"/>		
 		</template>	
 	</action>

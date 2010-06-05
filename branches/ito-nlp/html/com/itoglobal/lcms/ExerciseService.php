@@ -46,21 +46,22 @@ class ExerciseService {
 	 * @return mixed the schools list
 	 */
 	public static function getExercisesList($where = null, $limit = null) {
+		# get the exercises list
 		$result = null;
 		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID . ', ' . self::VIDEO;
 		$from = self::EXERCISES_TABLE;
 		isset ( $where ) ? $where : '';
 		isset ( $limit ) ? $limit : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
-		$fields = UsersService::USERNAME;
 		
+		# resolve real names from IDs
+		$fields = UsersService::USERNAME;		
 		$from = UsersService::USERS;
 		for($i=0;$i<count($result);$i++){
-			$where = $result[$i][self::OWNER] . '=' . UsersService::ID;
+			$where = UsersService::ID . '=' . $result[$i][self::OWNER];
 			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result[$i][self::OWNER] = $res[0][UsersService::USERNAME];
 		}
-				
 		return $result;
 	}
 	public static function updateFields($id, $fields, $vals) {

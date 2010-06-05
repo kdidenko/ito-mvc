@@ -14,7 +14,6 @@ class NavigationController extends SecureActionControllerImpl {
 		return $mvc;		
 	}
 
-
 }
 
 ?>

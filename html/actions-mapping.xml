@@ -214,6 +214,17 @@
 	</action>
 	<!-- Content views mapping end -->
 	
+	<!-- Footer views mapping begin -->
+	<action name="/footer-*.html" id="footer-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/footer.html"/>
+			<role type="UR" path="templates/views/navigation/users/footer.html"/>
+			<role type="AR" path="templates/views/navigation/admin/footer.html"/>		
+		</template>	
+	</action>
+	<!-- Footer views mapping end -->	
+	
 	<!--  Schools management actions begin -->
 	<action name="/*-schools.html" id="$1schools">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>

@@ -46,16 +46,22 @@ class SchoolService {
 	 */
 	const DELETED = 'deleted';
 	/**
+	 * @var string defining the language field name
+	 */
+	const LANGUAGE = 'language';
+	const COURSES = 'courses';
+	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getSchoolsList($where = null, $limit = null) {
+	public static function getSchoolsList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE;
+		$fields = self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::LANGUAGE;
 		$from = self::SCHOOLS_TABLE;
 		isset ( $where ) ? $where : '';
 		isset ( $limit ) ? $limit : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
+		isset ( $orderBy ) ? $orderBy : '';
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}
 	

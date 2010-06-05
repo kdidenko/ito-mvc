@@ -61,13 +61,14 @@ class CourseService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getCoursesList($where = null, $limit = null) {
+	public static function getCoursesList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
 		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::SCHOOL_ID;
 		$from = self::COURSE_TABLE;
 		isset ( $where ) ? $where : '';
 		isset ( $limit ) ? $limit : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
+		isset ( $orderBy ) ? $orderBy : '';
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}
 	
@@ -87,7 +88,7 @@ class CourseService {
 		DBClientHandler::getInstance ()->execDelete ( $from, $where, '', '' );
 	}
 	
-	public static function removeCourse($id, $school_id) {
+/*	public static function removeCourse($id, $school_id) {
 		# setting the query variables
 		$fields = self::SCHOOL_ID;
 		$vals = '0';
@@ -105,7 +106,7 @@ class CourseService {
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
-	}
+	}*/
 	
 	public static function validation($requestParams,  $_FILES) {
 		$error = array ();

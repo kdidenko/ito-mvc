@@ -16,19 +16,15 @@
 <!-- Header block end  -->
 		<div class="pageWrapper">
 <!-- Content block begin -->
-			<!--<div class="mainPageContent">
-<?php TemplateEngine::inclusion('views/' . $mvc->getView() . '.html', $mvc) ?>
-			</div>				
-			-->			
 			<div class="mainPageContent">
 <?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html'); ?>
-			</div>				
+			</div>	
 		</div>
 <!--  Content block end -->
 	</div>
 <!--  Footer block begin -->
 	<div class="footerWrapper">
-<?php TemplateEngine::inclusion('footer.html', $mvc)?>
+<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc)?>
 	</div>
 <!--  Footer block end -->
 </div>

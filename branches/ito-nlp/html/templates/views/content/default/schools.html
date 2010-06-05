@@ -7,8 +7,8 @@
 <div class="pgContentTools">
 	<ul>
     	<li>Sort by:</li>
-        <li><a href="#" title="">rating</a>,</li>
-        <li><a href="#" title="">languages</a>,</li>
+        <li><a href="?<?php echo SchoolService::RATE ?>" title="">rating</a></li>
+        <li><a href="?<?php echo SchoolService::LANGUAGE ?>" title="">languages</a></li>
         <li><a href="#" title="">courses</a></li>
     </ul>
 </div>
@@ -41,7 +41,7 @@
 			</li>
           	<li><span>Students:</span><span class="lsValue">1258</span></li>
           	<li><span>Courses:</span><span class="lsValue">2</span></li>
-         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Language:</span><span class="lsValue"><?php echo isset($value[SchoolService::LANGUAGE]) ? $value[SchoolService::LANGUAGE] : null;?></span></li>
          	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	       </ul>

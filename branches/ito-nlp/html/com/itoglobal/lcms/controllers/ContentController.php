@@ -49,8 +49,14 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$list = SchoolService::getSchoolsList ();
+		
+		//TODO: init sort functionality
+		$order = null;
+		$order = isset($requestParams[SchoolService::RATE]) ? SchoolService::RATE : $order;
+		$order = isset($requestParams[SchoolService::LANGUAGE]) ? SchoolService::LANGUAGE : $order;
+		$list = SchoolService::getSchoolsList (null, null, $order);
 		$mvc->addObject ( 'list', $list );
+		
 		return $mvc;
 	}
 	public function handleSchoolDetails($actionParams, $requestParams) {

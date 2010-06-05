@@ -16,9 +16,13 @@
 <!-- Header block end  -->
 		<div class="pageWrapper">
 <!-- Content block begin -->
-			<div class="mainPageContent">
+			<!--<div class="mainPageContent">
 <?php TemplateEngine::inclusion('views/' . $mvc->getView() . '.html', $mvc) ?>
-			</div>	
+			</div>				
+			-->			
+			<div class="mainPageContent">
+<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html'); ?>
+			</div>				
 		</div>
 <!--  Content block end -->
 	</div>

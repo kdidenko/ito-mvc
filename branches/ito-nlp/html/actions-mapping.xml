@@ -243,6 +243,13 @@
 	</action>
 	<!--  Exercises management actions end -->
 	
+	<!--  Categories management actions begin -->
+	<action name="/*-categories.html" id="$1categories">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<!--  Categories management actions end -->
+	
 	<action name="/school-details.html" id="schooldetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-one-column.html" />
@@ -274,7 +281,10 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-	
+	<action name="/edit-category.html" id="editcategory">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
 	<action name="/new-*.html" id="new$1">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

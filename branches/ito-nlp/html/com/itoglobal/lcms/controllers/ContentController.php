@@ -20,24 +20,32 @@ class ContentController extends SecureActionControllerImpl {
 		$where = AssignedService::USER_ID . "='" . $user_id . "'";
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
+		#for user
 		if (isset($result [0] [AssignedService::SCHOOL_ID])){
 			$where = '';
 			foreach($result as $key => $value){
 				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
 				$where .= $key != count ($result) - 1 ? " OR " : null;
 			}
-			$list = SchoolService::getSchoolsList ($where);
-			$mvc->addObject ( 'list', $list );
+			$usSchList = SchoolService::getSchoolsList ($where);
+			$mvc->addObject ( 'usSchList', $usSchList );
 		}
 		
-		$schoolslist = SchoolService::getSchoolsList (null, '0, 4');
-		$mvc->addObject ( 'schoolslist', $schoolslist );
+		#for moderator
+			$id = SessionService::getAttribute(SessionService::USERS_ID);
+			$where = SchoolService::ADMIN . " = '" . $id . "'";
+			$mrSchList = SchoolService::getSchoolsList ($where);
+			$mvc->addObject ( 'mrSchList', $mrSchList );
 		
-		$courseslist = CourseService::getCoursesList(null, '0, 4');
-		$mvc->addObject ( 'courseslist', $courseslist );
-		
-		$exerciseslist = ExerciseService::getExercisesList (null, '0, 4');
-		$mvc->addObject ( 'exerciseslist', $exerciseslist );
+		#for visitor
+			$schoolslist = SchoolService::getSchoolsList (null, '0, 4');
+			$mvc->addObject ( 'schoolslist', $schoolslist );
+		#for visitor
+			$courseslist = CourseService::getCoursesList(null, '0, 4');
+			$mvc->addObject ( 'courseslist', $courseslist );
+		#for visitor
+			$exerciseslist = ExerciseService::getExercisesList (null, '0, 4');
+			$mvc->addObject ( 'exerciseslist', $exerciseslist );
 		
 		return $mvc;
 	}
@@ -65,10 +73,11 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		//TODO: init sort functionality
+		//TODO: finish sort functionality
 		$order = null;
 		$order = isset($requestParams[SchoolService::RATE]) ? SchoolService::RATE : $order;
 		$order = isset($requestParams[SchoolService::LANGUAGE]) ? SchoolService::LANGUAGE : $order;
+		
 		$list = SchoolService::getSchoolsList (null, null, $order);
 		$mvc->addObject ( 'list', $list );
 		
@@ -251,7 +260,12 @@ class ContentController extends SecureActionControllerImpl {
 	
 	public function handleManageSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		#for admin
+		isset ( $requestParams [UsersService::ENABLED] ) ? SchoolService::updateFields ( $requestParams [SchoolService::ENABLED], SchoolService::ENABLED, '1' ) : '';
+		isset ( $requestParams [UsersService::DISABLE] ) ? SchoolService::updateFields ( $requestParams [SchoolService::DISABLE], SchoolService::ENABLED, '0' ) : '';
 		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
+				
 		$list = SchoolService::getSchoolsList ();
 		$mvc->addObject ( 'list', $list );
 		return $mvc;
@@ -259,6 +273,12 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleNewSchool($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		#moderator list for admin
+		$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'";
+		$mrList = UsersService::getUsersList($where);
+		$mvc->addObject ( 'mrList', $mrList );
+		
 		if (isset ( $requestParams ['submit'] )) {
 			//server-side validation
 			$error = SchoolService::validation ( $requestParams,  $_FILES );
@@ -270,16 +290,16 @@ class ContentController extends SecureActionControllerImpl {
 					StorageService::uploadFile ( $path, $_FILES ['file'] ) :
 						copy ( 'storage/uploads/default-school.jpg', $path );
 
-				$fields = UsersService::ID;
+				/*$fields = UsersService::ID;
 				$from = UsersService::USERS;
 				$where = UsersService::USERNAME . "='" . $requestParams [SchoolService::ADMIN] . "'";
 				$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-				$admin = $result [0] [UsersService::ID];
+				$admin = $result [0] [UsersService::ID];*/
 				
 				// Insert new school to DB
-				$fields = SchoolService::ALIAS . ', ' . SchoolService::CAPTION . ', ' . SchoolService::DESCRIPTION . ', ' . SchoolService::AVATAR . ', ' . SchoolService::CRDATE . ', ' . SchoolService::FEE . ', ' . SchoolService::ADMIN;
+				$fields = SchoolService::ALIAS . ', ' . SchoolService::CAPTION . ', ' . SchoolService::DESCRIPTION . ', ' . SchoolService::AVATAR . ', ' . SchoolService::CRDATE . ', ' . SchoolService::FEE . ', ' . SchoolService::ADMIN . ', ' . SchoolService::LANGUAGE;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [SchoolService::ALIAS] . "','" . $requestParams [SchoolService::CAPTION] . "','" . $requestParams [SchoolService::DESCRIPTION] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0'," . $admin;
+				$values = "'" . $requestParams [SchoolService::ALIAS] . "','" . $requestParams [SchoolService::CAPTION] . "','" . $requestParams [SchoolService::DESCRIPTION] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0','" . $requestParams[SchoolService::ADMIN] . "','" . $requestParams[SchoolService::LANGUAGE] ."'";
 				$into = SchoolService::SCHOOLS_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
@@ -293,6 +313,12 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleEditSchool($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		#moderator list for admin
+		$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
+		$mrList = UsersService::getUsersList($where);
+		$mvc->addObject ( 'mrList', $mrList );
+		
 		if (isset ( $requestParams ['submit'] )) {
 			$error = array ();
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
@@ -313,10 +339,12 @@ class ContentController extends SecureActionControllerImpl {
 			$fields = array ();
 			$fields [] .= SchoolService::CAPTION;
 			$fields [] .= SchoolService::DESCRIPTION;
+			$fields [] .= SchoolService::ADMIN;
 			$vals = array ();
 			$id = $requestParams [SchoolService::ID];
 			$vals [] .= $requestParams [SchoolService::CAPTION];
 			$vals [] .= $requestParams [SchoolService::DESCRIPTION];
+			$vals [] .= $requestParams [SchoolService::ADMIN];			
 			SchoolService::updateFields ( $id, $fields, $vals );
 		}
 		
@@ -327,11 +355,31 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
 		isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
 		isset ( $result [0] [SchoolService::ALIAS] ) ? $mvc->addObject ( SchoolService::ALIAS, $result [0] [SchoolService::ALIAS] ) : null;
+		isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
+		isset ( $result [0] [SchoolService::ADMIN] ) ? $mvc->addObject ( SchoolService::ADMIN, $result [0] [SchoolService::ADMIN] ) : null;
 		return $mvc;
 	}
 	
 	public function handleManageExercises($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		/*if (isset ( $requestParams ['submit'] )) {
+			$fields = array ();
+			$fields [] .= ExerciseService::CAPTION;
+			$fields [] .= ExerciseService::DESCRIPTION;
+			$vals = array ();
+			$id = $requestParams [ExerciseService::ID];
+			$vals [] .= $requestParams [ExerciseService::CAPTION];
+			$vals [] .= $requestParams [ExerciseService::DESCRIPTION];
+			ExerciseService::updateFields ( $id, $fields, $vals );
+		}*/
+		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;
+		$list = ExerciseService::getExercisesList ();
+		$mvc->addObject ( 'list', $list );
+		return $mvc;
+	}
+	public function handleEditExercise($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= ExerciseService::CAPTION;
@@ -342,13 +390,7 @@ class ContentController extends SecureActionControllerImpl {
 			$vals [] .= $requestParams [ExerciseService::DESCRIPTION];
 			ExerciseService::updateFields ( $id, $fields, $vals );
 		}
-		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;
-		$list = ExerciseService::getExercisesList ();
-		$mvc->addObject ( 'list', $list );
-		return $mvc;
-	}
-	public function handleEditExercise($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
 		$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
 		$result = ExerciseService::getExercisesList ( $where );
 		isset ( $result [0] [ExerciseService::ID] ) ? $mvc->addObject ( ExerciseService::ID, $result [0] [ExerciseService::ID] ) : null;
@@ -555,6 +597,49 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		
 		$mvc->addObject ( 'message', $message );
+		
+		return $mvc;
+	}
+	public function handleManageCategories($actionParams, $requestParams) {
+	$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset ( $requestParams ['submit'] )) {
+			$fields = array ();
+			$fields [] .= CategoriesService::NAME;
+			$vals = array ();
+			$id = $requestParams [CategoriesService::ID];
+			$vals [] .= $requestParams [CategoriesService::NAME];
+			CategoriesService::updateFields ( $id, $fields, $vals );
+		}
+		isset ( $requestParams [UsersService::DELETED] ) ? CategoriesService::deleteCategories ( $requestParams [UsersService::DELETED]) : '';
+		
+		$result = CategoriesService::getCategoriesList ();
+		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		return $mvc;
+	}
+	public function handleNewCategory($actionParams, $requestParams) {
+		// calling parent to get the model
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset ( $requestParams ['submit'] )) {
+			if ($requestParams[CategoriesService::NAME] != NULL) {
+				// Insert new categories to DB
+				$fields = CategoriesService::NAME;
+				$values = "'" . $requestParams[CategoriesService::NAME] . "'";
+				$into = CategoriesService::CATEGORIES_TABLE;
+				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+				
+				$mvc->addObject ( 'forward', 'successful' );
+				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
+			} 
+		}
+		return $mvc;
+	}
+	public function handleEditCategory($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
+		$result = CategoriesService::getCategoriesList ( $where );
+		isset ( $result [0] [CategoriesService::ID] ) ? $mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] ) : null;
+		isset ( $result [0] [CategoriesService::NAME] ) ? $mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] ) : null;
 		
 		return $mvc;
 	}

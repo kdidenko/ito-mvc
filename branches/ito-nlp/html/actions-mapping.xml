@@ -254,23 +254,11 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
-	<action name="/edit-school.html" id="editschool">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />
-	</action>
+	
 	<action name="/exercise-details.html" id="exercisedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>	
-	<action name="/edit-exercise.html" id="editexercise">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-	
-	<action name="/edit-user.html" id="edituser">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />
-	</action>
 	
 	<action name="/my-profile.html" id="myprofile">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
@@ -281,13 +269,35 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-	<action name="/edit-category.html" id="editcategory">
+	
+	<!--<action name="/edit-school.html" id="editschool">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
-	<action name="/new-*.html" id="new$1">
+	<action name="/edit-exercise.html" id="editexercise">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<action name="/edit-user.html" id="edituser">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	<action name="/edit-category.html" id="editcategory">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>-->
+	
+	<action name="/edit-*.html" id="edit$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+		<forwards>
+			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+		</forwards>
+	</action>
+	
+	<action name="/new-*.html" id="new$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>

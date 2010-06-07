@@ -49,18 +49,29 @@ class SchoolService {
 	 * @var string defining the language field name
 	 */
 	const LANGUAGE = 'language';
+	/**
+	 * @var string defining the language field name
+	 */
 	const COURSES = 'courses';
+	/**
+	 * @var string defining the enabled field name
+	 */
+	const ENABLED = 'enabled';
+	/**
+	 * @var string defining the enabled field name
+	 */
+	const DISABLE = 'disable';
 	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
 	public static function getSchoolsList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::LANGUAGE;
-		$from = self::SCHOOLS_TABLE;
-		isset ( $where ) ? $where : '';
-		isset ( $limit ) ? $limit : '';
-		isset ( $orderBy ) ? $orderBy : '';
+		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  self::CRDATE . ', ' . self::FEE . ', ' . self::LANGUAGE . ', ' . self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
+		$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . UsersService::USERS . '.' .  UsersService::ID . '=' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
+		$where = isset ( $where ) ? self::SCHOOLS_TABLE . '.' .  $where : '';
+		/*$limit = isset ( $limit ) ? $limit : '';
+		$orderBy = isset ( $orderBy ) ? $orderBy : '';*/
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}
@@ -86,7 +97,7 @@ class SchoolService {
 		$error [] .= self::checkAlias ( $requestParams [self::ALIAS] );
 		$error [] .= $requestParams [self::CAPTION] ? false : 'Please enter caption';
 		$error [] .= $requestParams [self::DESCRIPTION] ? false : 'Please enter description';
-		$error [] .= self::checkAdmin ( $requestParams [self::ADMIN] );
+		/*$error [] .= self::checkAdmin ( $requestParams [self::ADMIN] );*/
 		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		return array_filter ( $error );
 	}
@@ -108,7 +119,7 @@ class SchoolService {
 		return $result;
 	}
 
-	public static function checkAdmin($admin) {
+	/*public static function checkAdmin($admin) {
 		$result = false;
 		if (! $admin) {
 			$result = 'Please enter admin';
@@ -120,7 +131,7 @@ class SchoolService {
 			$result = isset ( $res [0] [UsersService::ID] ) ? false : 'No such user';
 		}
 		return $result;
-	}
+	}*/
 	
 	
 }

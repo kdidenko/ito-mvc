@@ -1,0 +1,46 @@
+<h1>Courses Management</h1>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No courses available at this moment.</span>
+<?php } else { ?>
+
+<table class="list">
+<tr class="title">
+	<td>Caption:</td>
+	<td>Level:</td>
+	<td>Rate:</td>
+	<td>Options:</td>
+</tr>
+<?php foreach($list as $key => $value){ ?>
+	<tr  style="border: 1px solid #EFEFEF">
+		<td>
+			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>>
+				<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
+			</a>
+		</td>
+		<td>
+			<?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?>
+		</td>
+		<td>
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 0){ ?>
+			<a href="">[0]</a> <?php }else{ ?> <a href="">0</a> <?php } } ?> 
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>
+			<a href="">[1]</a> <?php }else{ ?> <a href="">1</a> <?php } } ?>
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>
+			<a href="">[2]</a> <?php }else{ ?> <a href="">2</a> <?php } } ?>
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>
+			<a href="">[3]</a> <?php }else{ ?> <a href="">3</a> <?php } } ?>
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>
+			<a href="">[4]</a> <?php }else{ ?> <a href="">4</a> <?php } } ?>
+			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>
+			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
+		</td>
+		<td>
+			<a href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>edit</a>
+			<a href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>delete</a>
+		</td>
+	</tr>
+<?php } }?>
+</table>

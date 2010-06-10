@@ -1,0 +1,28 @@
+<h1>Manage Categories</h1>
+<?php 		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) {
+?>
+
+
+<table class="list">
+<tr class="title">
+	<td>Name:</td>
+	<td>Delete:</td>
+</tr>
+
+<?php 	for($i = 0; count($message)>$i; $i++){ ?>
+	<tr  style="border: 1px solid #EFEFEF">
+		<td>
+			<a href=<?php echo 'edit-category.html?id=' . $message[$i][CategoriesService::ID];?>>
+				<?php echo isset($message[$i][CategoriesService::NAME]) ? $message[$i][CategoriesService::NAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
+			</a>
+		</td>
+		<td><a href=<?php echo 'manage-categories.html?deleted=' . $message[$i][CategoriesService::ID];?>>delete</a></td>
+	</tr>
+<?php } ?>
+</table> 
+<?php }else{ ?>
+<span class="message">No categories available at this moment.</span>
+<?php } ?>
+

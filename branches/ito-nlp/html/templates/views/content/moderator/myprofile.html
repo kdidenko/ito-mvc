@@ -1,0 +1,55 @@
+<h1>My profile</h1>
+<div class="center">
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
+	<form enctype="multipart/form-data" action="my-profile.html" method="post" >
+		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+		<fieldset>
+			<legend>Change Personal Data:</legend>
+			<dl>
+				<dt>Your First Name:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>" />
+		 		</dd>
+		 		<dt>Your Last Name:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/>
+				</dd>
+				<dt>Your Email:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/>
+				</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Change Password</legend>
+			<dl>
+				<dt>Old Password: </dt>
+				<dd><input type="password" class="profile" name="old_password" id="old_password"></input></dd>
+		 		<dt>New Password: </dt>
+				<dd><input type="password" class="profile" name="password" id="password"></input></dd>
+				<dt>Repeat New Password: </dt>
+				<dd><input type="password" class="profile" name="confirm_password" id="confirm_password"></input></dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Change Avatar</legend>
+			<dl>
+				<dt>Avatar(80x80) :</dt>
+				<dd>
+				<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
+				<input type="file" name="file" size="30" />
+				</dd>
+			</dl>
+		</fieldset>
+	<input type="submit" name="submit" value="Submit Changes"/>
+	</form>
+</div>

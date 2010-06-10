@@ -1,0 +1,35 @@
+<h1>Manage Exercises</h1>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+
+<table class="list">
+<tr class="title">
+	<td>Caption:</td>
+	<td>Owner:</td>
+	<td>Rate:</td>
+	<td>Options:</td>
+</tr>
+<?php foreach($list as $key => $value){ ?>
+<tr  style="border: 1px solid #EFEFEF">
+		<td>
+			<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
+				<?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?>
+			</a>
+		</td>
+		<td>
+			<?php echo isset($value[ExerciseService::OWNER]) ? $value[ExerciseService::OWNER] : null;?>
+		</td>
+		<td>
+			<?php echo isset($value[ExerciseService::RATE]) ? $value[ExerciseService::RATE] : null;?>
+		</td>
+		<td>
+			<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
+			<a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
+		</td>
+	</tr>
+<?php } }?>
+</table>

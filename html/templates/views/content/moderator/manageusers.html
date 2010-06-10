@@ -1,0 +1,39 @@
+<h1>Admins Manage Users:</h1>
+<?php 		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) {
+?>
+
+
+<table class="list">
+<tr class="title">
+	<td>User Name:</td>
+	<td>Name:</td>
+	<td>Status:</td>
+	<td>Role:</td>
+	<td>Delete:</td>
+</tr>
+
+<?php 	for($i = 0; count($message)>$i; $i++){ ?>
+<tr  style="border: 1px solid #EFEFEF">
+		<td><?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></td>
+		<td>
+			<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID];?>>
+				<?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
+			</a>
+		</td>
+		<td>
+			<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '1') {?>
+				<a href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Enable</a>
+			<?php }else{ ?>
+				<a href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Disable</a> 
+			<?php }} ?>
+		</td>
+		<td><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></td>
+		<td><a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>delete</a></td>
+	</tr>
+<?php } ?>
+</table> 
+<?php }else{ ?>
+<span class="message">No users available at this moment.</span>
+<?php } ?>

@@ -1,0 +1,15 @@
+<h1>Edit Category</h1>	
+<div class="center">
+	<form action="manage-categories.html" method="post">
+		<dl>
+			<dt>ID:</dt>
+	 		<dd>
+	 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(CategoriesService::ID);echo isset($message) ? $message : 'id';?>"/>
+	 		<?php $message = $mvc->getObject(CategoriesService::ID);echo isset($message) ? $message : 'id';?>
+	 		</dd>
+	 		<dt>Category Name:</dt> 
+	 		<dd><input type="text" name="name" value="<?php $message = $mvc->getObject(CategoriesService::NAME);echo isset($message) ? $message : 'name';?>"/></dd>
+		</dl>
+		<input type="submit" name="submit" value="Submit Changes"/>
+	</form>	
+</div>

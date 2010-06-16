@@ -114,7 +114,7 @@ class UsersService {
 	/*public static function createUserDirectory($directory){
 		StorageService::createDirectory ( $user_path . $directory );
 		StorageService::createDirectory ( $user_path . $directory . '/profile' );
-		StorageService::createDirectory ( $user_path . $directory . '/trainings' );
+		StorageService::createDirectory ( $user_path . $directory . '/courses' );
 		$path = $user_path . $directory . '/profile/avatar.jpg';
 		copy ( $user_avatar, $path );
 		return $path;

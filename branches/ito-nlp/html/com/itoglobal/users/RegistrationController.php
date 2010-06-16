@@ -121,7 +121,7 @@ class RegistrationController extends BaseActionControllerImpl {
 		if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $hash) {
 			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] );
 			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile' );
-			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/trainings' );
+			StorageService::createDirectory ( 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/courses' );
 			$path = 'storage/uploads/users/' . $result [0] [UsersService::USERNAME] . '/profile/avatar.jpg';
 			copy ( 'storage/uploads/default-avatar.jpg', $path );
 			

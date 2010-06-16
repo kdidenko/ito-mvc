@@ -34,8 +34,6 @@
 				<?php if ($message != 7) { ?> <option>7</option> <?php } ?>
 			</select>
 			</dd>
-			<dt>School:</dt>
-			<dd><input type="text" name="school_id" id="school_id" size="35" value="<?php $message = $mvc->getObject(CourseService::SCHOOL_ID);echo isset($message) ? $message : null;?>"/></dd>
 			<dt>Avatar(80x80) :</dt>
 			<dd>
 			<img alt="none avatar" src="<?php $message = $mvc->getObject(CourseService::AVATAR);echo isset($message) ? $message : null;?>">

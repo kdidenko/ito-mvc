@@ -40,7 +40,8 @@ class RequestDispatcher {
 	private function dispatch($mappingObj) {
 		$result = null;
 		# get the conntroller object instance
-		$controller = MVCService::getController ( ( string ) $mappingObj->controller ['class'] );
+		$mappingObj = MVCService::optimizeMapping($mappingObj);
+		$controller = MVCService::getController ($mappingObj);
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object

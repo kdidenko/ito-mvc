@@ -183,7 +183,7 @@
 			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
 			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
 			<role type="MR" path="templates/views/navigation/moderator/top-menu.html"/>
-			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
 		</template>	
 	</action>
 	<!-- Navigation views mapping end -->	
@@ -203,17 +203,24 @@
 	
 	<!-- Content views mapping begin -->
 	<action name="/content-*.html" id="content">
-		<controller class="com.itoglobal.lcms.controllers.ContentController" 
-				method="handle$1" />
-		<template name="$1.html">
-			<role type="VR" path="templates/views/content/default/$1.html"/>
-			<role type="UR" path="templates/views/content/users/$1.html"/>
-			<role type="MR" path="templates/views/content/moderator/$1.html"/>
-			<role type="AR" path="templates/views/content/admin/$1.html"/>		
-		</template>	
-		<property name="onsuccess" value="manage-users.html"/>
-		<property name="schoolassigned" value="overview.html"/>
-		<property name="template" value="templates/plain/created-account.txt"/>		
+		<role type="AR">
+			<controller class="com.itoglobal.lcms.controllers.AdminContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/admin/$1.html" />
+			<property name="template" value="templates/plain/created-account.txt"/>
+		</role>
+		<role type="MR">
+			<controller class="com.itoglobal.lcms.controllers.ModeratorContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/moderator/$1.html" />
+			<property name="template" value="templates/plain/created-account.txt"/>
+		</role>
+		<role type="UR">
+			<controller class="com.itoglobal.lcms.controllers.UserContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
+		</role>
+		<role type="VR">
+			<controller class="com.itoglobal.lcms.controllers.ContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/default/$1.html" />
+		</role>
 	</action>
 	<!-- Content views mapping end -->
 	
@@ -256,14 +263,14 @@
 	</action>
 	
 	<action name="/exercise-details.html" id="exercisedetails">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>	
-	
-	<action name="/my-profile.html" id="myprofile">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
+	
+	<action name="/my-profile.html" id="myprofile">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>	
 	
 	<action name="/school-assigned.html" id="schoolassigned">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

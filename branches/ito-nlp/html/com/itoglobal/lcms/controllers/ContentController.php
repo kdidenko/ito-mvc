@@ -8,6 +8,7 @@ class ContentController extends SecureActionControllerImpl {
 	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+
 		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
 		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
 		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
@@ -77,7 +78,6 @@ class ContentController extends SecureActionControllerImpl {
 		$order = null;
 		$order = isset($requestParams[SchoolService::RATE]) ? SchoolService::RATE : $order;
 		$order = isset($requestParams[SchoolService::LANGUAGE]) ? SchoolService::LANGUAGE : $order;
-		
 		$list = SchoolService::getSchoolsList (null, null, $order);
 		$mvc->addObject ( 'list', $list );
 		
@@ -265,7 +265,6 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $requestParams [UsersService::ENABLED] ) ? SchoolService::updateFields ( $requestParams [SchoolService::ENABLED], SchoolService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? SchoolService::updateFields ( $requestParams [SchoolService::DISABLE], SchoolService::ENABLED, '0' ) : '';
 		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
-				
 		$list = SchoolService::getSchoolsList ();
 		$mvc->addObject ( 'list', $list );
 		return $mvc;

@@ -2,7 +2,7 @@
 
 require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
-class AdminContentController extends ContentController {
+class UserContentController extends ContentController {
 	//TODO: User functionality here!!!	
 
 }

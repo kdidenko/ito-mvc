@@ -2,7 +2,7 @@
 
 require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
-class AdminContentController extends ContentController {
+class ModeratorContentController extends ContentController {
 	//TODO: Moderator functionality here!!!	
 
 }

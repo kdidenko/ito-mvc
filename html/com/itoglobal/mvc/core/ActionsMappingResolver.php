@@ -1,4 +1,7 @@
 <?php
+
+require_once 'com/itoglobal/xml/XmlElement.php';
+
 class ActionsMappingResolver {
 	
 	const DEFAULT_MAPPING_FILE = 'actions-mapping.xml';
@@ -22,7 +25,7 @@ class ActionsMappingResolver {
 	 */
 	public static function init($mapping = self::DEFAULT_MAPPING_FILE) {
 		$xmlStr = file_get_contents ( $mapping );
-		$xmlObj = new SimpleXMLElement ( $xmlStr );
+		$xmlObj = new XMLElement ( $xmlStr );
 		foreach ( $xmlObj->action as $action ) {
 			self::$actionsMapping [( string ) $action ['name']] = $action;
 		}

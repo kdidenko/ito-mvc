@@ -14,7 +14,7 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 
-	<action name="/trainings.html" id="trainings">
+	<action name="/courses.html" id="courses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>

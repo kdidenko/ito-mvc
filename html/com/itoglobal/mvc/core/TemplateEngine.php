@@ -52,9 +52,14 @@ class TemplateEngine {
 		include_once $path . '/' . $filename;
 	}
 	
-	public static function execute($action) {
+	public static function execute($action, $mvc = null) {
 		$rd = RequestDispatcher::getInstance ();
-		TemplateEngine::run ( $rd->dispatchActionRequest ( $action ) );
+		$result = $rd->dispatchActionRequest($action);
+		if($mvc != null){
+			# append the old values to the new model
+			$result = MVCService::margeModels($result, $mvc);	
+		}
+		TemplateEngine::run ($result);
 	}
 	
 	public static function getView($view) {

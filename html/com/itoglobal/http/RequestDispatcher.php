@@ -22,7 +22,7 @@ class RequestDispatcher {
 			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $action . ' Not found on server' );
 		}
-		return $this->dispatch ( $mappingObj );
+		return $this->dispatch ($mappingObj);
 	}
 	
 	public function dispatchViewRequest($view) {
@@ -45,7 +45,7 @@ class RequestDispatcher {
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object
-		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
+		$result = $controller->$methodName ($mappingObj, $_REQUEST);
 		return $result;
 	}
 	

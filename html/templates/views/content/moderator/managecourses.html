@@ -38,8 +38,8 @@
 			<a href="">[5]</a> <?php }else{ ?> <a href="">5</a> <?php } } ?>
 		</td>
 		<td>
-			<a href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>edit</a>
-			<a href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>delete</a>
+			<a class="button" href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>Edit</a>
+			<a class="button" href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } }?>

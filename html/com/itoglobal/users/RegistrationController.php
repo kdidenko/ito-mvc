@@ -1,7 +1,7 @@
 <?php
-require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
+require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 
-class RegistrationController extends BaseActionControllerImpl {
+class RegistrationController extends SecureActionControllerImpl {
 	
 	public function registration($actionParams, $requestParams) {
 		// calling parent to get the model
@@ -45,13 +45,15 @@ class RegistrationController extends BaseActionControllerImpl {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		if (! isset ( $requestParams [UsersService::PASSWORD] )) {
-			if (! isset ( $requestParams [UsersService::VALIDATION] )) {
+		if (! isset ( $requestParams [UsersService::VALIDATION] )) {
+			
 				if (isset ( $requestParams [UsersService::EMAIL] )) {
+					
 					$fields = UsersService::FIRSTNAME . ',' . UsersService::LASTNAME . ',' . UsersService::USERNAME . ',' . UsersService::EMAIL;
 					$from = UsersService::USERS;
 					$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+					
 					if (isset ( $result [0] [UsersService::EMAIL]) && $requestParams [UsersService::EMAIL] != NULL ) {
 						
 						$fields = UsersService::VALIDATION;
@@ -68,20 +70,29 @@ class RegistrationController extends BaseActionControllerImpl {
 						}
 					} else {
 						$mvc->addObject ( UsersService::ERROR, 'Email address not found' );
-					}}
-			} else {
-				$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
-				$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
+					}
+				
 			}
-		} else {
-			$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
-			$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
+		}
+		return $mvc;
+	}
+	
+	public function newPassword($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+
+		$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
+		$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
+		
+		//print_r($requestParams);exit;
+		if ( isset ( $requestParams [UsersService::PASSWORD] )) {
+			
 			# setting the query variables
 			$fields = UsersService::VALIDATION;
 			$from = UsersService::USERS;
 			$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
 			# executing the query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			print_r($result);print_r($requestParams);exit; 
 			if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $requestParams [UsersService::VALIDATION]) {
 				$error = array ();
 				$error [] .= UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] );
@@ -100,6 +111,7 @@ class RegistrationController extends BaseActionControllerImpl {
 			}
 		}
 		return $mvc;
+		
 	}
 	
 	private function createNewPassword($email, $password) {

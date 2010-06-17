@@ -24,9 +24,6 @@
 	 		<dd>
 	 		<select name="role">
 	 			<option><?php $message = $mvc->getObject(UsersService::ROLE);echo isset($message) ? $message : 'role';?></option>
-	 			<?php if ($message != UsersService::ROLE_UR){ ?>
-	 			<option><?php echo UsersService::ROLE_UR ?></option>
-	 			<?php }?>
 	 			<?php if ($message != UsersService::ROLE_MR){ ?>
 	 			<option><?php echo UsersService::ROLE_MR ?></option>
 	 			<?php }?>

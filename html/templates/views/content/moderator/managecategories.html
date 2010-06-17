@@ -8,17 +8,16 @@
 <table class="list">
 <tr class="title">
 	<td>Name:</td>
-	<td>Delete:</td>
+	<td>Options:</td>
 </tr>
 
 <?php 	for($i = 0; count($message)>$i; $i++){ ?>
 	<tr  style="border: 1px solid #EFEFEF">
+		<td><?php echo isset($message[$i][CategoriesService::NAME]) ? $message[$i][CategoriesService::NAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></td>
 		<td>
-			<a href=<?php echo 'edit-category.html?id=' . $message[$i][CategoriesService::ID];?>>
-				<?php echo isset($message[$i][CategoriesService::NAME]) ? $message[$i][CategoriesService::NAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
-			</a>
+			<a class="button" href=<?php echo 'edit-category.html?id=' . $message[$i][CategoriesService::ID];?>>Edit</a>
+			<a class="button" href=<?php echo 'manage-categories.html?deleted=' . $message[$i][CategoriesService::ID];?>>Delete</a>
 		</td>
-		<td><a href=<?php echo 'manage-categories.html?deleted=' . $message[$i][CategoriesService::ID];?>>delete</a></td>
 	</tr>
 <?php } ?>
 </table> 

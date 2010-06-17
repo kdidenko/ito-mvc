@@ -1,5 +1,9 @@
 <h1>Edit School</h1>	
 <div class="center">
+	<?php $message = $mvc->getObject(SchoolService::ID); if($message == NULL){ ?>
+		<span class="message">No school available at this moment.</span>
+	<?php } else { ?>
+	
 	<div class="error">
  		<?php
 			$errors = $mvc->getObject(UsersService::ERROR);
@@ -12,11 +16,6 @@
 	</div>
 	<form enctype="multipart/form-data" action="edit-school.html" method="post">
 		<dl>
-			<dt>ID:</dt>
-	 		<dd>
-	 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(SchoolService::ID);echo isset($message) ? $message : 'id';?>"/>
-	 		<?php $message = $mvc->getObject(SchoolService::ID);echo isset($message) ? $message : 'id';?>
-	 		</dd>
 			<dt>School Name:</dt>
 			<dd><input type="text" name="caption" id="caption" size="35" value="<?php $message = $mvc->getObject(SchoolService::CAPTION);echo isset($message) ? $message : null;?>"/></dd>
 			<dt>Description:</dt>
@@ -30,6 +29,8 @@
 			<input type="hidden" name="alias" id="alias" value="<?php $message = $mvc->getObject(SchoolService::ALIAS);echo isset($message) ? $message : null;?>"/>
 			</dd>
 		</dl>
+ 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(SchoolService::ID);echo isset($message) ? $message : 'id';?>"/>
 		<input type="submit" name="submit" value="Submit Changes"/>
 	</form>	
+	<?php } ?>
 </div>

@@ -4,7 +4,7 @@ require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class AdminContentController extends ContentController {
 	
-	public function handleManageSchools($actionParams, $requestParams) {
+	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		#for admin
@@ -13,8 +13,22 @@ class AdminContentController extends ContentController {
 		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
 		$list = SchoolService::getSchoolsList ();
 		$mvc->addObject ( 'list', $list );
+		
 		return $mvc;
 	}
+	
+	/*public function handleManageSchools($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		#for admin
+		isset ( $requestParams [UsersService::ENABLED] ) ? SchoolService::updateFields ( $requestParams [SchoolService::ENABLED], SchoolService::ENABLED, '1' ) : '';
+		isset ( $requestParams [UsersService::DISABLE] ) ? SchoolService::updateFields ( $requestParams [SchoolService::DISABLE], SchoolService::ENABLED, '0' ) : '';
+		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
+		$list = SchoolService::getSchoolsList ();
+		$mvc->addObject ( 'list', $list );
+		
+		return $mvc;
+	}*/
 	
 	public function handleNewSchool($actionParams, $requestParams) {
 		// calling parent to get the model

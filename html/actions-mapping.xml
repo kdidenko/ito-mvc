@@ -126,7 +126,7 @@
 	</action>
 	
 	<action name="/new-password.html" id="newpassword">
-		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<controller class="com.itoglobal.users.RegistrationController" method="newPassword"/>
 		<template name="index.html" path="templates/layout-one-column.html"/>
 		<forwards>
 			<target location="/login-failed.html" name="login-failed" condition="onsuccess"/>
@@ -261,6 +261,7 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
+
 	
 	<action name="/exercise-details.html" id="exercisedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />

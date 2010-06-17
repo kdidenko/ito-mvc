@@ -21,13 +21,13 @@
 		<td><?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></td>
 		<td><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></td>
 		<td>
-			<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '1') {?>
-				<a class="button" href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Enable</a>
+			<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '0') {?>
+				<a class="button" href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Enable</a>
 			<?php }else{ ?>
-				<a class="button" href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Disable</a> 
+				<a class="button" href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Disable</a> 
 			<?php }} ?>
-			<a class="button" href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>Delete</a>
 			<a class="button" href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID];?>>Edit</a>
+			<a class="button" href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } ?></table>

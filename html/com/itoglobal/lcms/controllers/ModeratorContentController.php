@@ -23,20 +23,79 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . " = '" . $id . "'";
+		$mrSchList = SchoolService::getSchoolsList ($where);
 		
-		#moderator
-		isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
-		isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+		if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
 		
-		#for all
-		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-		$list = SchoolService::getSchoolsList ( $where );
-		$mvc->addObject ( 'list', $list );
+			#moderator
+			isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
+			isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+			
+			#for all
+			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+			$list = SchoolService::getSchoolsList ( $where );
+			$mvc->addObject ( 'list', $list );
+			
+			#for moderator
+			$courseslist = CourseService::getCoursesList ();
+			$mvc->addObject ( 'courseslist', $courseslist );
+		}
+		return $mvc;
+	}
+	
+	public function handleEditSchool($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#for moderator
-		$courseslist = CourseService::getCoursesList ();
-		$mvc->addObject ( 'courseslist', $courseslist );
 		
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . " = '" . $id . "'";
+		$mrSchList = SchoolService::getSchoolsList ($where);
+		
+		if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
+			#moderator list for admin
+			$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
+			$mrList = UsersService::getUsersList($where);
+			$mvc->addObject ( 'mrList', $mrList );
+			
+			if (isset ( $requestParams ['submit'] )) {
+				$error = array ();
+				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+					$file = $_FILES ['file'];
+					$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
+					
+					$error[] .= ValidationService::checkAvatar ( $file );
+					$error = array_filter ( $error );
+				}
+				
+				if (count ( $error ) == 0) {
+					if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+						StorageService::uploadFile ( $path, $file );
+					}
+				}else{
+					$mvc->addObject ( UsersService::ERROR, $error );
+				}
+				$fields = array ();
+				$fields [] .= SchoolService::CAPTION;
+				$fields [] .= SchoolService::DESCRIPTION;
+				
+				$vals = array ();
+				$id = $requestParams [SchoolService::ID];
+				$vals [] .= $requestParams [SchoolService::CAPTION];
+				$vals [] .= $requestParams [SchoolService::DESCRIPTION];
+				
+				SchoolService::updateFields ( $id, $fields, $vals );
+			}
+			
+			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+			$result = SchoolService::getSchoolsList ( $where );
+			isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
+			isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
+			isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
+			isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
+		}
 		return $mvc;
 	}
 	
@@ -51,6 +110,7 @@ class ModeratorContentController extends ContentController {
 		$mvc->addObject ( 'list', $list );
 		return $mvc;
 	}
+	
 	public function handleNewCourse($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
@@ -136,56 +196,7 @@ class ModeratorContentController extends ContentController {
 		return $mvc;
 	}
 	
-	public function handleEditSchool($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		#moderator list for admin
-		$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
-		$mrList = UsersService::getUsersList($where);
-		$mvc->addObject ( 'mrList', $mrList );
-		
-		if (isset ( $requestParams ['submit'] )) {
-			$error = array ();
-			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-				$file = $_FILES ['file'];
-				$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
-				
-				$error[] .= ValidationService::checkAvatar ( $file );
-				$error = array_filter ( $error );
-			}
-			
-			if (count ( $error ) == 0) {
-				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-					StorageService::uploadFile ( $path, $file );
-				}
-			}else{
-				$mvc->addObject ( UsersService::ERROR, $error );
-			}
-			$fields = array ();
-			$fields [] .= SchoolService::CAPTION;
-			$fields [] .= SchoolService::DESCRIPTION;
-			
-			$vals = array ();
-			$id = $requestParams [SchoolService::ID];
-			$vals [] .= $requestParams [SchoolService::CAPTION];
-			$vals [] .= $requestParams [SchoolService::DESCRIPTION];
-			
-			SchoolService::updateFields ( $id, $fields, $vals );
-		}
-		
-		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-		$result = SchoolService::getSchoolsList ( $where );
-		isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
-		isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
-		isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
-		isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
-		isset ( $result [0] [SchoolService::ALIAS] ) ? $mvc->addObject ( SchoolService::ALIAS, $result [0] [SchoolService::ALIAS] ) : null;
-		isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
-		isset ( $result [0] [SchoolService::ADMIN] ) ? $mvc->addObject ( SchoolService::ADMIN, $result [0] [SchoolService::ADMIN] ) : null;
-		return $mvc;
-	}
-	
-	//TODO: IF this need, remove this method! (course-details^ delete exercises)
+	//TODO: IF this need, remove this method! (course-details: delete exercises)
 	public function handleManageExercises($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		/*if (isset ( $requestParams ['submit'] )) {
@@ -284,7 +295,7 @@ class ModeratorContentController extends ContentController {
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
 		$where = UsersService::DELETED . " = 0";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
+		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id . ' and ' . UsersService::ROLE . " != '" . UsersService::ROLE_AR . "' OR '" . UsersService::ROLE_MR . "'" : '';
 		$result = UsersService::getUsersList ( $where );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 		

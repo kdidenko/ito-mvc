@@ -7,8 +7,8 @@
 <div class="pgContentTools">
 	<ul>
     	<li>Sort by:</li>
-        <li><a href="?<?php echo SchoolService::RATE ?>" title="">rating</a></li>
-        <li><a href="?<?php echo SchoolService::LANGUAGE ?>" title="">languages</a></li>
+        <li><a href="?<?php echo SchoolService::RATE ?>=<?php if (isset($_GET[SchoolService::RATE])){echo $_GET[SchoolService::RATE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">rating</a></li>
+        <li><a href="?<?php echo SchoolService::LANGUAGE ?>=<?php if (isset($_GET[SchoolService::LANGUAGE])){echo $_GET[SchoolService::LANGUAGE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">languages</a></li>
         <li><a href="#" title="">courses</a></li>
     </ul>
 </div>

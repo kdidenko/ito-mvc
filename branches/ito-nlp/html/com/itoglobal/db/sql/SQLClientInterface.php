@@ -66,6 +66,14 @@ interface SQLClientInterface {
      * @var string SQL GROUP BY statement identifier.
      */
     const ORDERBY = ' ORDER BY ';
+    /**
+     * @var string SQL ASC statement identifier.
+     */
+    const ASC = 'ASC';
+    /**
+     * @var string SQL DESC statement identifier.
+     */
+    const DESC = 'DESC';
 
     /**
      * Executes the SQL query and returns the execution result status.

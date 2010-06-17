@@ -1,13 +1,78 @@
-<h1>General ADMIN Overview</h1>
+<h1>Schools Management</h1>
 <div>
-	<p>
-	Jane Doe, you have taken 8 courses in 3 schools and completed
-	11 course levels. You have responded to 5412 challenges. You are
-	wearing titles: NLP Practitioner and Shaman and are posessing
-	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
-	schools and 3 courses:
-	</p>
+	<p>Bellow you may schools details and make some general appearance changes.</p>
+	<p>Click on the school title to view rates, number of students and list of courses.<br/>
+	Click on edit button bellow the school description for appearance changes.<br/>
+	Click on suspend/active button bellow the school description for block this school</p>
 </div>
+
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No schools available at this moment.</span>
+<?php } else { ?>
+
+
+<?php foreach($list as $key => $value){ ?>
+
 <div>
+<div class="leftPageContent">
+ID = <?php echo $value[SchoolService::ID];?>
+<div class="pgItemImg">
+	<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
 </div>
-<h2>To contact us: Frequently Asked Questions (FAQ)</h2>
+<span>
+	<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
+	<a href="#"><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+	<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+	<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 3){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+	<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 4){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+	<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+</span>
+</div>
+<div class="rightPageContent">
+	<div class="pgListItem wide">
+		<div class="pgItemBody">
+			<div>
+				
+				<h2>
+					<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+						<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+					</a>
+				</h2>
+				<div class="description">
+					<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+				</div>
+				<div class="crdate">
+					<img alt="Created" src="images/calendar.png">
+					<?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?>
+				</div>
+				<div class="categories">
+					<b>Categories:</b>
+					<span>
+						<a href="#">NLP</a> 
+						<a href="#">Milton</a> 
+						<a href="#">DHC</a>
+						<a href="#">SHL</a>
+					</span>
+				</div>
+			</div>
+			<div class="pgItemOptions">
+				<a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a>
+				<?php if (isset($value[SchoolService::ENABLED])) { if($value[SchoolService::ENABLED] == '1') { ?>
+					<a class="button" href=<?php echo 'manage-schools.html?disable=' . $value[SchoolService::ID];?>>Activate</a>
+				<?php }else{ ?>
+					<a class="button" href="<?php echo 'manage-schools.html?enabled=' . $value[SchoolService::ID];?>">Suspend</a> 
+				<?php } } ?>
+				<a class="button" href=<?php echo 'manage-schools.html?deleted=' . $value[SchoolService::ID];?>>Delete</a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<?php } } ?>

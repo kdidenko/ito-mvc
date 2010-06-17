@@ -53,9 +53,17 @@ class ContentController extends SecureActionControllerImpl {
 		
 		#for visitor and user
 		//TODO: finish sort functionality
-		$order = null;
-		$order = isset($requestParams[SchoolService::RATE]) ? SchoolService::RATE : $order;
-		$order = isset($requestParams[SchoolService::LANGUAGE]) ? SchoolService::LANGUAGE : $order;
+		
+		$order = NULL;
+		
+		if( isset($requestParams[SchoolService::RATE]) ){
+			$order = $requestParams[SchoolService::RATE] == SQLClient::ASC ? SchoolService::RATE . ' ' . SQLClient::ASC : SchoolService::RATE . ' ' . SQLClient::DESC;
+		}
+		
+		if( isset($requestParams[SchoolService::LANGUAGE]) ){
+			$order = $requestParams[SchoolService::LANGUAGE] == SQLClient::ASC ? SchoolService::LANGUAGE . ' ' . SQLClient::ASC : SchoolService::LANGUAGE . ' ' . SQLClient::DESC;
+		}
+		
 		$list = SchoolService::getSchoolsList (null, null, $order);
 		$mvc->addObject ( 'list', $list );
 		

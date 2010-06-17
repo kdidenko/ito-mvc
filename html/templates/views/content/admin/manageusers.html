@@ -4,35 +4,34 @@
 	if (isset ( $message ) and count($message) != 0) {
 ?>
 
-
 <table class="list">
 <tr class="title">
 	<td>User Name:</td>
 	<td>Name:</td>
-	<td>Status:</td>
 	<td>Role:</td>
-	<td>Delete:</td>
+	<td>Options:</td>
 </tr>
 
 <?php 	for($i = 0; count($message)>$i; $i++){ ?>
 <tr  style="border: 1px solid #EFEFEF">
-		<td><?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></td>
 		<td>
-			<a href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID];?>>
-				<?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?>
+			<a href=<?php echo 'user-details.html?id=' . $message[$i][UsersService::ID];?>>
+				<?php echo isset($message[$i][UsersService::USERNAME]) ? $message[$i][UsersService::USERNAME] : null;?></td>
 			</a>
-		</td>
+		<td><?php echo isset($message[$i][UsersService::FIRSTNAME]) ? $message[$i][UsersService::FIRSTNAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></td>
+		<td><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></td>
 		<td>
 			<?php if (isset($message[$i][UsersService::ENABLED])) { if($message[$i][UsersService::ENABLED] == '1') {?>
-				<a href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Enable</a>
+				<a class="button" href=<?php echo 'manage-users.html?disable=' . $message[$i][UsersService::ID];?>>Enable</a>
 			<?php }else{ ?>
-				<a href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Disable</a> 
+				<a class="button" href=<?php echo 'manage-users.html?enabled=' . $message[$i][UsersService::ID];?>>Disable</a> 
 			<?php }} ?>
+			<a class="button" href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>Delete</a>
+			<a class="button" href=<?php echo 'edit-user.html?id=' . $message[$i][UsersService::ID];?>>Edit</a>
 		</td>
-		<td><?php echo isset($message[$i][UsersService::ROLE]) ? $message[$i][UsersService::ROLE] : null;?></td>
-		<td><a href=<?php echo 'manage-users.html?deleted=' . $message[$i][UsersService::ID];?>>delete</a></td>
 	</tr>
-<?php } }else{ ?>
-<?php } ?>
-</table>
+<?php } ?></table>
+<?php }else{ ?>
 <span class="message">No users available at this moment.</span>
+<?php } ?>
+

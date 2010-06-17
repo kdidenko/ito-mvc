@@ -98,4 +98,4 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 
 .list {margin: 20px;font-size: 12px;text-align: center;}
 .list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
-.list td{	width: 28%;	border: 1px solid #EFEFEF;}
+.list td {width: 25%; padding: 5px; border: 1px solid #EFEFEF;}

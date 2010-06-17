@@ -83,7 +83,6 @@ class RegistrationController extends SecureActionControllerImpl {
 		$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
 		$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
 		
-		//print_r($requestParams);exit;
 		if ( isset ( $requestParams [UsersService::PASSWORD] )) {
 			
 			# setting the query variables
@@ -92,7 +91,6 @@ class RegistrationController extends SecureActionControllerImpl {
 			$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
 			# executing the query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			print_r($result);print_r($requestParams);exit; 
 			if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $requestParams [UsersService::VALIDATION]) {
 				$error = array ();
 				$error [] .= UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] );

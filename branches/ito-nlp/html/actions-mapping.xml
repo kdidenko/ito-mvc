@@ -140,13 +140,27 @@
 	</action>
 	
 	<action name="/registration.html" id="registration">
-		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
-		<template name="index.html" path="templates/layout-one-column.html" />	
-		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>
-			<target location="validation.html" name="validation" condition="onsuccess"/>
-		</forwards>
-		<property name="template" value="templates/plain/email-confirmation.txt"/>
+		<role type="VR">
+			<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+			<template name="index.html" path="templates/layout-one-column.html" />	
+			<forwards>
+				<target location="registration.html" name="registration" condition="onfailure"/>
+				<target location="validation.html" name="validation" condition="onsuccess"/>
+			</forwards>
+			<property name="template" value="templates/plain/email-confirmation.txt"/>
+		</role>
+		<role type="MR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/crash.html" />
+		</role>
+		<role type="AR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/crash.html" />
+		</role>
+		<role type="UR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/crash.html" />
+		</role>
 	</action>
 
 	<action name="/validation.html" id="validation">

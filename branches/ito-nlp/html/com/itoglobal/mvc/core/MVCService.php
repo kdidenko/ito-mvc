@@ -6,7 +6,6 @@ class MVCService {
 	
 	const actionXmlStr = "<action></action>";
 	
-	
 	public static function optimizeMapping($mappingObj) {
 		# check if there are roles restrictions in the mapping
 		if (isset($mappingObj->role)) {			
@@ -20,7 +19,6 @@ class MVCService {
 		}
 		return $mappingObj;	
 	}
-	
 	
 	public static function getController($mappingObj) {
 		$mappingObj = self::optimizeMapping($mappingObj);
@@ -46,6 +44,16 @@ class MVCService {
 			$result->copyChildren($node);
 		}
 		return $result; 
+	}
+	
+	public static function margeModels($mvc1, $mvc2){
+		$keys = $mvc2->getKeyset();
+		foreach ($keys as $name){
+			if(!$mvc1->objectExists($name)){
+				$mvc1->addObject($name, $mvc2->getObject($name));
+			}
+		}
+		return $mvc1;
 	}
 }
 ?>

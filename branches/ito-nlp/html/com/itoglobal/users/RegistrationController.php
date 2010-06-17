@@ -34,7 +34,7 @@ class RegistrationController extends SecureActionControllerImpl {
 			}
 		} else {
 			self::confirmRegistration ( $requestParams [UsersService::ID], $requestParams [UsersService::VALIDATION] );
-			$message = 'You completed registration.';
+			$message = 'You registration complete.';
 			$mvc->addObject ( 'message', $message );
 		}
 		return $mvc;

@@ -71,6 +71,22 @@ class ModelAndView {
 	}
 	
 	/**
+	 * Returns the list of model object names
+	 * @return array of model object keys 
+	 */
+	public function getKeyset() {
+		return array_keys ( $this->model );
+	}
+	
+	/**
+	 * Verifies if object of such name already exists at the model
+	 * @param string $name of the model object
+	 */
+	public function objectExists($name) {
+		return array_key_exists ( $name, $this->model );
+	}
+	
+	/**
 	 * @param $name the $name of the $object to get from $model
 	 * @return the $object
 	 */
@@ -80,13 +96,12 @@ class ModelAndView {
 	
 	public function getProperty($name) {
 		$result = false;
-		$res = $this->model['action_properties'];
-		for ($i=0;$i<count($res);$i++){
-			$result = ($name == $res[$i]['name']) ?  $res[$i]['value'] : $result; 
+		$res = $this->model ['action_properties'];
+		for($i = 0; $i < count ( $res ); $i ++) {
+			$result = ($name == $res [$i] ['name']) ? $res [$i] ['value'] : $result;
 		}
 		return $result;
 	}
-	
 
 }
 

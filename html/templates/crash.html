@@ -12,26 +12,19 @@
 <div class="globalWrapper">
 	<div class="globalSubWrapper">
 <!-- Header block begin  -->
-<?php TemplateEngine::inclusion('header.html', $mvc) ?>
+<?php TemplateEngine::inclusion('header.html', $mvc)?>
 <!-- Header block end  -->
-<!-- Middle block begin -->
 		<div class="pageWrapper">
 <!-- Content block begin -->
 			<div class="mainPageContent">
-<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
-			</div>
-<!-- Content block end -->
-<!-- Sidebar block begin -->
-			<div class="sidePageContent">
-<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc);	?>
-			</div>
-<!-- Sidebar block end -->
+				<b>Error 404:</b> "Page not found"
+			</div>	
 		</div>
 <!--  Content block end -->
-    </div>
+	</div>
 <!--  Footer block begin -->
 	<div class="footerWrapper">
-<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc);?>
+<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc)?>
 	</div>
 <!--  Footer block end -->
 </div>

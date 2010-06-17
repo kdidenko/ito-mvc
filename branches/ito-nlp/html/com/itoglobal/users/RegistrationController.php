@@ -45,7 +45,7 @@ class RegistrationController extends BaseActionControllerImpl {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		if (! isset ($requestParams [UsersService::PASSWORD] )) {
+		if (! isset ( $requestParams [UsersService::PASSWORD] )) {
 			if (! isset ( $requestParams [UsersService::VALIDATION] )) {
 				if (isset ( $requestParams [UsersService::EMAIL] )) {
 					$fields = UsersService::FIRSTNAME . ',' . UsersService::LASTNAME . ',' . UsersService::USERNAME . ',' . UsersService::EMAIL;
@@ -76,15 +76,12 @@ class RegistrationController extends BaseActionControllerImpl {
 		} else {
 			$mvc->addObject ( UsersService::EMAIL, $requestParams [UsersService::EMAIL] );
 			$mvc->addObject ( UsersService::VALIDATION, $requestParams [UsersService::VALIDATION] );
-			
 			# setting the query variables
 			$fields = UsersService::VALIDATION;
 			$from = UsersService::USERS;
 			$where = UsersService::EMAIL . " = '" . $requestParams [UsersService::EMAIL] . "'";
-			
 			# executing the query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			//print_r($result);exit;
 			if (isset ( $result [0] [UsersService::VALIDATION] ) && $result [0] [UsersService::VALIDATION] == $requestParams [UsersService::VALIDATION]) {
 				$error = array ();
 				$error [] .= UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] );

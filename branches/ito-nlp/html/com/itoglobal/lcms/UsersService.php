@@ -95,6 +95,27 @@ class UsersService {
 		return $result;
 	}
 	
+	/**
+	 * Retreives the user data by specified user id.
+	 * @param integer $id the user id.
+	 * @return mixed user data or null if user with such id does not exists. 
+	 */
+	public static function getUser($id) {
+		$result = null;		
+		if(isset($id) && $id != ''){
+			# preparing query
+			$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . 
+						SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . 
+						self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
+			$from = self::USERS;
+			$where = self::ID . '=' . $id;
+			# executing query
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
+		} 
+		return $result;
+	}
+	
 	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables
 		$from = self::USERS;

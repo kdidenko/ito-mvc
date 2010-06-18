@@ -9,7 +9,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 *
 	 * @param $actionParams
 	 * @param $condition
-	 * @return unknown_type
+	 * @return string
 	 */
 	public function getLocationOnCondition($actionParams, $condition) {
 		$result = null;

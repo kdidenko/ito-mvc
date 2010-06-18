@@ -99,3 +99,9 @@ dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 .list {margin: 20px;font-size: 12px;text-align: center;}
 .list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
 .list td {width: 25%; padding: 5px; border: 1px solid #EFEFEF;}
+img.avtr {float:left}
+div.info_sect {border-top:1px solid #EDEDED; margin:10px 0;display:block;float:right;margin:10px 0;width:580px;}
+div.info_sect span {background-color:white;font-weight:bold;padding:10px;position:relative;top:-9px;width:auto;font-size:11px}
+div.info_sect dl {padding-left:40px;font-size:11px}
+div.info_sect dt {width:15%;color:#666666}
+div.info_sect dd {margin-left:10px}

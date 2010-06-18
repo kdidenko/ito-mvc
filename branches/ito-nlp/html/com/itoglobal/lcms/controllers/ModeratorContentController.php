@@ -332,7 +332,7 @@ class ModeratorContentController extends ContentController {
 				if ($value[UsersService::ID] == $requestParams[UsersService::ID]){	
 					$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
 					$result = UsersService::getUsersList ( $where );
-					isset ( $result ) ?	$mvc->addObject ( self::RESULT, $result[0] ) : NULL;
+					$mvc->addObject ( self::RESULT, $result[0] );
 				}
 			}
 		}
@@ -376,7 +376,7 @@ class ModeratorContentController extends ContentController {
 	}
 	
 	public function handleManageCategories($actionParams, $requestParams) {
-	$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= CategoriesService::NAME;
@@ -388,9 +388,10 @@ class ModeratorContentController extends ContentController {
 		isset ( $requestParams [UsersService::DELETED] ) ? CategoriesService::deleteCategories ( $requestParams [UsersService::DELETED]) : '';
 		
 		$result = CategoriesService::getCategoriesList ();
-		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		$mvc->addObject ( self::RESULT, $result );
 		return $mvc;
 	}
+	
 	public function handleNewCategory($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
@@ -418,10 +419,7 @@ class ModeratorContentController extends ContentController {
 				if ($value[CategoriesService::ID] == $requestParams[CategoriesService::ID]){	
 					$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
 					$result = CategoriesService::getCategoriesList ( $where );
-					if (isset ( $result )) {
-						$mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] );
-						$mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] );
-					}
+					$mvc->addObject ( self::RESULT, $result [0] );
 				}
 			}
 		}	
@@ -436,8 +434,10 @@ class ModeratorContentController extends ContentController {
 	 */
 	public function handleUserDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$user = UsersService::getUser($requestParams[UsersService::ID]);
-		$mvc->addObject(self::USER_DETAILS, $user);		
+		if (isset($requestParams[CategoriesService::ID])){
+			$user = UsersService::getUser($requestParams[UsersService::ID]);
+			$mvc->addObject(self::USER_DETAILS, $user);		
+		}
 		return $mvc;	
 	}
 	

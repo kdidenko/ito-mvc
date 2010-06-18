@@ -1,5 +1,7 @@
-<?php $user = $mvc->getObject('USER');?>
 <h1>User Details</h1>
+<?php $user = $mvc->getObject('USER');if($user == NULL){ ?>
+	<span class="message">No user available at this moment.</span>
+<?php } else { ?>
 <div>
 	<img src="<?php echo $user['avatar']?>" class="avtr"/>
 </div>
@@ -38,3 +40,4 @@
 		</dd>		
 	</dl>
 </div>
+<?php } ?>

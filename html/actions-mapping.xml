@@ -74,11 +74,6 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/edit-course.html" id="editcourse">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-	
 	<action name="/course-details.html" id="coursedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />

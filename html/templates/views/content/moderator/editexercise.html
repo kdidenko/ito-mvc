@@ -1,17 +1,17 @@
-<h1>Edit Exercise</h1>	
+<h1>Edit Exercise</h1>
+<?php $result = $mvc->getObject('exrList'); if($result == NULL){ ?>
+	<span class="message">No exercise available at this moment.</span>
+<?php } else { ?>
 <div class="center">
 	<form action="edit-exercise.html" method="post">
 		<dl>
-			<dt>ID:</dt>
-	 		<dd>
-	 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(ExerciseService::ID);echo isset($message) ? $message : 'id';?>"/>
-	 		<?php $message = $mvc->getObject(ExerciseService::ID);echo isset($message) ? $message : 'id';?>
-	 		</dd>
 			<dt>Exercise Name:</dt>
-			<dd><input type="text" name="caption" id="caption" size="35" value="<?php $message = $mvc->getObject(ExerciseService::CAPTION);echo isset($message) ? $message : null;?>"/></dd>
+			<dd><input type="text" name="caption" id="caption" size="35" value="<?php echo $result[ExerciseService::CAPTION]; ?>"/></dd>
 			<dt>Description:</dt>
-			<dd><textarea rows="10" cols="28"  name="description" id="description"><?php $message = $mvc->getObject(ExerciseService::DESCRIPTION);echo isset($message) ? $message : null;?></textarea></dd>
+			<dd><textarea rows="10" cols="28"  name="description" id="description"><?php echo $result[ExerciseService::DESCRIPTION]; ?></textarea></dd>
 		</dl>
+		<input type="hidden" name="id" value="<?php echo $result[ExerciseService::ID]; ?>"/>
 		<input type="submit" name="submit" value="Submit Changes"/>
 	</form>	
 </div>
+<?php } ?>

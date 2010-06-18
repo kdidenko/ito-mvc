@@ -67,14 +67,12 @@
 		</td>
 		<td>
 			<?php if($value[ExerciseService::COURSE_ID] == $list[0][CourseService::ID]){ ?>
-			<a href=<?php echo 'course-details.html?remove=' . $value[ExerciseService::ID] . '&id=' . $list[0][CourseService::ID]; ?>>remove</a>
+			<a class="button" href=<?php echo 'course-details.html?remove=' . $value[ExerciseService::ID] . '&id=' . $list[0][CourseService::ID]; ?>>remove</a>
 			<?php } else { ?>
-			<a href=<?php echo 'course-details.html?add=' . $value[ExerciseService::ID] . '&id=' . $list[0][CourseService::ID];?>>add</a>
+			<a class="button" href=<?php echo 'course-details.html?add=' . $value[ExerciseService::ID] . '&id=' . $list[0][CourseService::ID];?>>add</a>
 			<?php } ?>
-		</td>
-		<td>
-			<a href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
-			<a href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
+			<a class="button" href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
+			<a class="button" href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
 		</td>
 	</tr>
 <?php } } ?>

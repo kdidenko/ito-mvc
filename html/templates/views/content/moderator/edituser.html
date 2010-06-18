@@ -1,38 +1,25 @@
 <h1>Edit User</h1>
-<?php $message = $mvc->getObject(UsersService::ID); if($message == NULL){ ?>
+<?php $user = $mvc->getObject('result'); if($user == NULL){ ?>
 	<span class="message">No user available at this moment.</span>
 <?php } else { ?>
 <div class="center">
 	<form action="manage-users.html" method="post">
 		<dl>
-			<dt>ID:</dt>
-	 		<dd>
-	 		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-	 		<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>
-	 		</dd>
 	 		<dt>User name:</dt> 
-	 		<dd><input type="text" name="username" value="<?php $message = $mvc->getObject(UsersService::USERNAME);echo isset($message) ? $message : 'username';?>"/></dd>
+	 		<dd><input type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/></dd>
 			<dt>First Name:</dt>
-	 		<dd><input type="text" name="firstname" value="<?php $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : 'firstname';?>"/></dd>
+	 		<dd><input type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/></dd>
 	 		<dt>Last Name:</dt>
-	 		<dd><input type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : 'lastname';?>"/></dd>
+	 		<dd><input type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/></dd>
 			<dt>Email:</dt>
-	 		<dd><input type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : 'email';?>"/></dd>
+	 		<dd><input type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/></dd>
 			<dt>Status:</dt>
 	 		<dd>
-	 			<input type="radio" name="enabled" value="1" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? 'checked' : ''; ?>/>Enabled
-				<input type="radio" name="enabled" value="0" <?php $message = $mvc->getObject(UsersService::ENABLED);echo $message == 1 ? '' : 'checked'; ?>/>Disabled<br/>
-			</dd>
-			<dt>Role:</dt>
-	 		<dd>
-	 		<select name="role">
-	 			<option><?php $message = $mvc->getObject(UsersService::ROLE);echo isset($message) ? $message : 'role';?></option>
-	 			<?php if ($message != UsersService::ROLE_UR){ ?>
-	 			<option><?php echo UsersService::ROLE_UR ?></option>
-	 			<?php }?>
-	 		</select>
+	 			<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>Enabled
+				<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>Disabled<br/>
 			</dd>
 		</dl>
+		<input type="hidden" name="id" value="<?php echo $user[UsersService::ID]; ?>"/>
 		<input type="submit" name="submit" value="Submit Changes"/>
 	</form>	
 </div>

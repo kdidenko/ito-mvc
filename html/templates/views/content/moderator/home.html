@@ -6,13 +6,13 @@
 </div>
 
 <?php
-	$mrSchList = $mvc->getObject('mrSchList');
-	if(!isset($mrSchList) || count($mrSchList) == 0){
+	$mrSchlList = $mvc->getObject('mrSchlList');
+	if(!isset($mrSchlList) || count($mrSchlList) == 0){
 ?>
 <span class="message">No schools available at this moment.</span>
 <?php } else { ?>
 
-<?php foreach($mrSchList as $key => $value){ ?>
+<?php foreach($mrSchlList as $key => $value){ ?>
 <div>
 	<div class="leftPageContent">
 	&nbsp;

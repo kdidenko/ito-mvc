@@ -9,7 +9,7 @@
 	$mrSchlList = $mvc->getObject('mrSchlList');
 	if(!isset($mrSchlList) || count($mrSchlList) == 0){
 ?>
-<span class="message">No schools available at this moment.</span>
+<span class="message">There are currently no schools assigned to you. Please, contact your administrator or support team for more information.</span>
 <?php } else { ?>
 
 <?php foreach($mrSchlList as $key => $value){ ?>

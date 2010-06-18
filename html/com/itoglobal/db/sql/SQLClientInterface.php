@@ -74,7 +74,10 @@ interface SQLClientInterface {
      * @var string SQL DESC statement identifier.
      */
     const DESC = 'DESC';
-
+	/**
+	 * @var string SQL NOT IN statement identifier.
+	 */
+	const NOT_IN = ' NOT IN ';
     /**
      * Executes the SQL query and returns the execution result status.
      * @param $sql string - query string to execute.

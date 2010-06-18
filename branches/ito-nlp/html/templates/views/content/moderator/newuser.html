@@ -28,12 +28,6 @@
 		<dd><input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input></dd>
 		<dt>Email:</dt>
 		<dd><input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input></dd>
-		<dt>Role:</dt>
-		<dd>
-			<select name="role" >
-				<option><?php echo UsersService::ROLE_UR ?></option>
-			</select>
-		</dd>
 	</dl>
 	<input type="submit" value="Add user" id="submit" name="submit"/>
 	</form>

@@ -4,20 +4,19 @@ require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class ModeratorContentController extends ContentController {
 	
+	/**
+	 * @var string defines the user details constant
+	 */
+	const USER_DETAILS = 'USER';
+	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#for all
-		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
-		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
-		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
-		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
-		
 		#for moderator
-			$id = SessionService::getAttribute(SessionService::USERS_ID);
-			$where = SchoolService::ADMIN . " = '" . $id . "'";
-			$mrSchList = SchoolService::getSchoolsList ($where);
-			$mvc->addObject ( 'mrSchList', $mrSchList );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . " = '" . $id . "'";
+		$mrSchlList = SchoolService::getSchoolsList ($where);
+		$mvc->addObject ( 'mrSchlList', $mrSchlList );
 			
 		return $mvc;
 	}
@@ -93,10 +92,7 @@ class ModeratorContentController extends ContentController {
 				
 				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 				$result = SchoolService::getSchoolsList ( $where );
-				isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
-				isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
-				isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
-				isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
+				$mvc->addObject ( self::RESULT, $result [0] );
 			}
 		}
 		return $mvc;
@@ -170,14 +166,11 @@ class ModeratorContentController extends ContentController {
 			CourseService::updateFields ( $id, $fields, $vals );
 		}
 		
-		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$result = CourseService::getCoursesList ( $where );
-		isset ( $result [0] [CourseService::ID] ) ? $mvc->addObject ( CourseService::ID, $result [0] [CourseService::ID] ) : null;
-		isset ( $result [0] [CourseService::CAPTION] ) ? $mvc->addObject ( CourseService::CAPTION, $result [0] [CourseService::CAPTION] ) : null;
-		isset ( $result [0] [CourseService::DESCRIPTION] ) ? $mvc->addObject ( CourseService::DESCRIPTION, $result [0] [CourseService::DESCRIPTION] ) : null;
-		isset ( $result [0] [CourseService::LEVEL] ) ? $mvc->addObject ( CourseService::LEVEL, $result [0] [CourseService::LEVEL] ) : null;
-		isset ( $result [0] [CourseService::AVATAR] ) ? $mvc->addObject ( CourseService::AVATAR, $result [0] [CourseService::AVATAR] ) : null;
-		isset ( $result [0] [CourseService::ALIAS] ) ? $mvc->addObject ( CourseService::ALIAS, $result [0] [CourseService::ALIAS] ) : null;
+		if (isset ($requestParams [CourseService::ID])){
+			$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$result = CourseService::getCoursesList ( $where );
+			$mvc->addObject ( self::RESULT, $result [0]);
+		}
 		return $mvc;
 	}
 	public function handleCourseDetails($actionParams, $requestParams) {
@@ -235,10 +228,7 @@ class ModeratorContentController extends ContentController {
 		
 		$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
 		$result = ExerciseService::getExercisesList ( $where );
-		isset ( $result [0] [ExerciseService::ID] ) ? $mvc->addObject ( ExerciseService::ID, $result [0] [ExerciseService::ID] ) : null;
-		isset ( $result [0] [ExerciseService::CAPTION] ) ? $mvc->addObject ( ExerciseService::CAPTION, $result [0] [ExerciseService::CAPTION] ) : null;
-		isset ( $result [0] [ExerciseService::DESCRIPTION] ) ? $mvc->addObject ( ExerciseService::DESCRIPTION, $result [0] [ExerciseService::DESCRIPTION] ) : null;
-		
+		isset ( $result ) ?	$mvc->addObject ( 'exrList', $result[0] ) : NULL;
 		return $mvc;
 	}
 	public function handleNewExercise($actionParams, $requestParams) {
@@ -282,7 +272,6 @@ class ModeratorContentController extends ContentController {
 			$fields [] .= UsersService::LASTNAME;
 			$fields [] .= UsersService::EMAIL;
 			$fields [] .= UsersService::ENABLED;
-			$fields [] .= UsersService::ROLE;
 			$vals = array ();
 			$id = $requestParams [UsersService::ID];
 			$vals [] .= $requestParams [UsersService::USERNAME];
@@ -290,17 +279,44 @@ class ModeratorContentController extends ContentController {
 			$vals [] .= $requestParams [UsersService::LASTNAME];
 			$vals [] .= $requestParams [UsersService::EMAIL];
 			$vals [] .= $requestParams [UsersService::ENABLED];
-			$vals [] .= $requestParams [UsersService::ROLE];
 			UsersService::updateFields ( $id, $fields, $vals );
 		}
-		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
-		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
-		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
-		$where = UsersService::DELETED . " = 0";
+		if (isset( $requestParams [UsersService::ENABLED] )) {
+			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
+			$userList = UsersService::getUsersList($where);
+			foreach($userList as $key => $value){
+				if ($value[UsersService::ID] == $requestParams[UsersService::ENABLED])
+				UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' );
+			}
+		}
+		if (isset( $requestParams [UsersService::DISABLE] )) {
+			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
+			$userList = UsersService::getUsersList($where);
+			foreach($userList as $key => $value){
+				if ($value[UsersService::ID] == $requestParams[UsersService::DISABLE])
+					UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' );
+			}
+		}
+		if (isset( $requestParams [UsersService::DELETED] )) {
+			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
+			$userList = UsersService::getUsersList($where);
+			foreach($userList as $key => $value){
+				if ($value[UsersService::ID] == $requestParams[UsersService::DELETED])
+					UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' );
+				}
+		}
+		
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id . ' and ' . UsersService::ROLE . " != '" . UsersService::ROLE_AR . "' OR '" . UsersService::ROLE_MR . "'" : '';
-		$result = UsersService::getUsersList ( $where );
-		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		
+		#get school id for this moderator 
+		$where = SchoolService::ADMIN . '=' . $id;
+		$result = SchoolService::getSchoolsList( $where );
+		$school_id = $result[0][SchoolService::ID];
+		#get user list from school where this user is moderator
+		$where = UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . UsersService::ID . "!=" . $id . ' AND ' . AssignedService::SCHOOLS_ASSIGNED . '.' . AssignedService::SCHOOL_ID . '=' . $school_id . ' AND ' . UsersService::ROLE . " != '" . UsersService::ROLE_AR . "' OR '" . UsersService::ROLE_MR . "'";
+		$from = UsersService::USERS . SQLClient::JOIN . AssignedService::SCHOOLS_ASSIGNED . SQLClient::ON . UsersService::USERS . '.' . UsersService::ID . '=' . AssignedService::SCHOOLS_ASSIGNED . '.' . AssignedService::USER_ID;
+		$result = UsersService::getUsersList ( $where, $from );
+		$mvc->addObject ( self::RESULT, $result );
 		
 		return $mvc;
 	}
@@ -309,16 +325,15 @@ class ModeratorContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#for admin and moderator
 		if (isset($requestParams[UsersService::ID])){
-			$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
-			$result = UsersService::getUsersList ( $where );
-			isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
-			isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
-			isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
-			isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
-			isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
-			isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
-			isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
-			isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
+			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
+			$userList = UsersService::getUsersList($where);
+			foreach($userList as $key => $value){
+				if ($value[UsersService::ID] == $requestParams[UsersService::ID]){	
+					$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
+					$result = UsersService::getUsersList ( $where );
+					isset ( $result ) ?	$mvc->addObject ( self::RESULT, $result[0] ) : NULL;
+				}
+			}
 		}
 		return $mvc;
 	}
@@ -342,7 +357,7 @@ class ModeratorContentController extends ContentController {
 				
 				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ENABLED . ', ' . UsersService::ROLE . ', ' . UsersService::AVATAR;
 				$hash = md5 ( rand ( 1, 9999 ) );
-				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . $requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','1','" . $requestParams [UsersService::ROLE] . "','" . $path . "'";
+				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . $requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','1','" . UsersService::ROLE_UR . "','" . $path . "'";
 				$into = UsersService::USERS;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
@@ -397,14 +412,34 @@ class ModeratorContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if (isset($requestParams[CategoriesService::ID])){
-			$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
-			$result = CategoriesService::getCategoriesList ( $where );
-			isset ( $result [0] [CategoriesService::ID] ) ? $mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] ) : null;
-			isset ( $result [0] [CategoriesService::NAME] ) ? $mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] ) : null;
-		}
-			
+			$ctgList = CategoriesService::getCategoriesList();
+			foreach($ctgList as $key => $value){
+				if ($value[CategoriesService::ID] == $requestParams[CategoriesService::ID]){	
+					$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
+					$result = CategoriesService::getCategoriesList ( $where );
+					if (isset ( $result )) {
+						$mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] );
+						$mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] );
+					}
+				}
+			}
+		}	
 		return $mvc;
 	}
+	
+	/**
+	 * Handles the user details page request. 
+	 * @param mixed $actionParams
+	 * @param mixed $requestParams
+	 * @return ModelAndView
+	 */
+	public function handleUserDetails($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$user = UsersService::getUser($requestParams[UsersService::ID]);
+		$mvc->addObject(self::USER_DETAILS, $user);		
+		return $mvc;	
+	}
+	
 }
 
 ?>

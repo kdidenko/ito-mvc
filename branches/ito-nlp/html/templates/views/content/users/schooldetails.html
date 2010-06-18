@@ -30,9 +30,9 @@
          	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($value[SchoolService::FEE]) ? $value[SchoolService::FEE] : null;?>$ / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	     	<?php $assign = $mvc->getObject('assign'); if(!isset($assign) || count($assign) == 0){?>
-	     	<li><span>Status:</span><span><a href="<?php echo "/school-assigned.html?signup=" . $value[SchoolService::ID] ?>">SignUp</a></span></li>
+	     	<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signup=" . $value[SchoolService::ID] ?>">SignUp</a></span></li>
 			<?php } else { ?>
-			<li><span>Status:</span><span><a href="<?php echo "/school-assigned.html?signout=" . $value[SchoolService::ID] ?>">SignOut</a></span></li>
+			<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signout=" . $value[SchoolService::ID] ?>">SignOut</a></span></li>
 	   		<?php } ?>
 	    </ul>
 		</div>

@@ -86,10 +86,10 @@ class UsersService {
 	 */
 	const ERROR = 'error';
 	
-	public static function getUsersList($where = null) {
-		$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
-		$from = self::USERS;
-		isset ( $where ) ? $where : '';
+	public static function getUsersList($where = NULL, $from = NULL) {
+		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
+		$from = isset ( $from ) ? $from : self::USERS;
+		//isset ( $where ) ? $where : '';
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		return $result;

@@ -66,9 +66,9 @@
 		</td>
 		<td>
 			<?php if(isset($value[CourseService::SCHOOL_ID])){ if($value[CourseService::SCHOOL_ID] == $list[0][SchoolService::ID]){ ?>
-			<a href=<?php echo 'school-details.html?remove=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID]; ?>>remove</a>
+			<a class="button" href=<?php echo 'school-details.html?remove=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID]; ?>>remove</a>
 			<?php } else { ?>
-			<a href=<?php echo 'school-details.html?add=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID];?>>add</a>
+			<a class="button" href=<?php echo 'school-details.html?add=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID];?>>add</a>
 			<?php } } ?>
 		</td>
 	</tr>

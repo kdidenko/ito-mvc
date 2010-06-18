@@ -3,6 +3,7 @@
 require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class ModeratorContentController extends ContentController {
+	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -27,21 +28,22 @@ class ModeratorContentController extends ContentController {
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
 		$mrSchList = SchoolService::getSchoolsList ($where);
-		
-		if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
-		
-			#moderator
-			isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
-			isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+		if (isset($requestParams[SchoolService::ID])){
+			if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
 			
-			#for all
-			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-			$list = SchoolService::getSchoolsList ( $where );
-			$mvc->addObject ( 'list', $list );
-			
-			#for moderator
-			$courseslist = CourseService::getCoursesList ();
-			$mvc->addObject ( 'courseslist', $courseslist );
+				#moderator
+				isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
+				isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+				
+				#for all
+				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+				$list = SchoolService::getSchoolsList ( $where );
+				$mvc->addObject ( 'list', $list );
+				
+				#for moderator
+				$courseslist = CourseService::getCoursesList ();
+				$mvc->addObject ( 'courseslist', $courseslist );
+			}
 		}
 		return $mvc;
 	}
@@ -49,52 +51,53 @@ class ModeratorContentController extends ContentController {
 	public function handleEditSchool($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
 		$mrSchList = SchoolService::getSchoolsList ($where);
 		
-		if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
-			#moderator list for admin
-			$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
-			$mrList = UsersService::getUsersList($where);
-			$mvc->addObject ( 'mrList', $mrList );
-			
-			if (isset ( $requestParams ['submit'] )) {
-				$error = array ();
-				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-					$file = $_FILES ['file'];
-					$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
-					
-					$error[] .= ValidationService::checkAvatar ( $file );
-					$error = array_filter ( $error );
-				}
+		if (isset($requestParams[SchoolService::ID])){
+			if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
+				#moderator list for admin
+				$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
+				$mrList = UsersService::getUsersList($where);
+				$mvc->addObject ( 'mrList', $mrList );
 				
-				if (count ( $error ) == 0) {
+				if (isset ( $requestParams ['submit'] )) {
+					$error = array ();
 					if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-						StorageService::uploadFile ( $path, $file );
+						$file = $_FILES ['file'];
+						$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
+						
+						$error[] .= ValidationService::checkAvatar ( $file );
+						$error = array_filter ( $error );
 					}
-				}else{
-					$mvc->addObject ( UsersService::ERROR, $error );
+					
+					if (count ( $error ) == 0) {
+						if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+							StorageService::uploadFile ( $path, $file );
+						}
+					}else{
+						$mvc->addObject ( UsersService::ERROR, $error );
+					}
+					$fields = array ();
+					$fields [] .= SchoolService::CAPTION;
+					$fields [] .= SchoolService::DESCRIPTION;
+					
+					$vals = array ();
+					$id = $requestParams [SchoolService::ID];
+					$vals [] .= $requestParams [SchoolService::CAPTION];
+					$vals [] .= $requestParams [SchoolService::DESCRIPTION];
+					
+					SchoolService::updateFields ( $id, $fields, $vals );
 				}
-				$fields = array ();
-				$fields [] .= SchoolService::CAPTION;
-				$fields [] .= SchoolService::DESCRIPTION;
 				
-				$vals = array ();
-				$id = $requestParams [SchoolService::ID];
-				$vals [] .= $requestParams [SchoolService::CAPTION];
-				$vals [] .= $requestParams [SchoolService::DESCRIPTION];
-				
-				SchoolService::updateFields ( $id, $fields, $vals );
+				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+				$result = SchoolService::getSchoolsList ( $where );
+				isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
+				isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
+				isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
+				isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
 			}
-			
-			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-			$result = SchoolService::getSchoolsList ( $where );
-			isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
-			isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
-			isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
-			isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
 		}
 		return $mvc;
 	}
@@ -305,16 +308,18 @@ class ModeratorContentController extends ContentController {
 	public function handleEditUser($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#for admin and moderator
-		$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
-		$result = UsersService::getUsersList ( $where );
-		isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
-		isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
-		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
-		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
-		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
-		isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
-		isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
-		isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
+		if (isset($requestParams[UsersService::ID])){
+			$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
+			$result = UsersService::getUsersList ( $where );
+			isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
+			isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
+			isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
+			isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
+			isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
+			isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
+			isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
+			isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
+		}
 		return $mvc;
 	}
 	
@@ -390,11 +395,14 @@ class ModeratorContentController extends ContentController {
 	}
 	public function handleEditCategory($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
-		$result = CategoriesService::getCategoriesList ( $where );
-		isset ( $result [0] [CategoriesService::ID] ) ? $mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] ) : null;
-		isset ( $result [0] [CategoriesService::NAME] ) ? $mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] ) : null;
 		
+		if (isset($requestParams[CategoriesService::ID])){
+			$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
+			$result = CategoriesService::getCategoriesList ( $where );
+			isset ( $result [0] [CategoriesService::ID] ) ? $mvc->addObject ( CategoriesService::ID, $result [0] [CategoriesService::ID] ) : null;
+			isset ( $result [0] [CategoriesService::NAME] ) ? $mvc->addObject ( CategoriesService::NAME, $result [0] [CategoriesService::NAME] ) : null;
+		}
+			
 		return $mvc;
 	}
 }

@@ -1,4 +1,10 @@
 <h1>Users Management</h1>
+<div class="subHeader">
+	<b>Users List</b>
+	<span>
+		<a href="#" class="current">All</a> | <a href="#">Administrators</a> | <a href="#">Moderators</a>
+	</span>
+</div>
 <?php 		
 	$message = $mvc->getObject ( ContentController::RESULT );
 	if (isset ( $message ) and count($message) != 0) {

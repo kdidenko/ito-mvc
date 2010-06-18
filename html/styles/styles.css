@@ -105,3 +105,7 @@ div.info_sect span {background-color:white;font-weight:bold;padding:10px;positio
 div.info_sect dl {padding-left:40px;font-size:11px}
 div.info_sect dt {width:15%;color:#666666}
 div.info_sect dd {margin-left:10px}
+div.subHeader {background-color:#F8F8F8;color:#666666;font-size:14px;line-height:28px;margin:0 0 30px -17px;text-indent:17px;border:1px solid #EDEDED;}
+div.subHeader span {display:block;float:right;font-size:11px;margin:0 10px}
+div.subHeader span a {color:#666666}
+div.subHeader span a.current {color:#698DB1;text-decoration:none;font-weight:bold;}

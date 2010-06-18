@@ -1,4 +1,7 @@
-<h1>Edit Category</h1>	
+<h1>Edit Category</h1>
+<?php 
+	$message = $mvc->getObject(CategoriesService::ID); 
+	if (isset($message)) { ?>
 <div class="center">
 	<form action="manage-categories.html" method="post">
 		<dl>
@@ -13,3 +16,6 @@
 		<input type="submit" name="submit" value="Submit Changes"/>
 	</form>	
 </div>
+<?php } else {?>
+	<span class="message">No category available at this moment.</span>
+<?php } ?>

@@ -1,0 +1,40 @@
+<?php $user = $mvc->getObject('USER');?>
+<h1>User Details</h1>
+<div>
+	<img src="<?php echo $user['avatar']?>" class="avtr"/>
+</div>
+<div class="info_sect">
+	<span>Personal Info</span>
+	<dl>
+		<dt>First Name:</dt>
+		<dd><?php echo $user['firstname']?></dd>
+		<dt>Last Name:</dt>
+		<dd><?php echo $user['lastname']?></dd>	
+	</dl>
+</div>
+<div class="info_sect">
+	<span>Contact Info</span>
+	<dl>
+		<dt>email:</dt>
+		<dd><a href="mailto:<?php echo $user['email']?>"><?php echo $user['email']?></a></dd>
+	</dl>
+</div>
+<div class="info_sect">
+	<span>System Info</span>
+	<dl>
+		<dt>ID:</dt>
+		<dd><?php echo $user['id']?></dd>
+		<dt>Username:</dt>
+		<dd><?php echo $user['username']?></dd>		
+		<dt>Role:</dt>
+		<dd><?php echo $user['role']?></dd>		
+		<dt>Status:</dt>
+		<dd>
+			<?php if($user['enabled'] == 1){ echo 'Enabled'; } else { echo 'Disabled'; } ?>			
+		</dd>
+		<dt>Deleted:</dt>
+		<dd>
+			<?php if($user['deleted'] == 1){ echo 'Yes'; } else { echo 'No'; } ?>			
+		</dd>		
+	</dl>
+</div>

@@ -103,6 +103,10 @@ class SidebarController extends SecureActionControllerImpl {
 	public function handleEditCategory($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	
+	public function handleUserDetails($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}	
 }
 
 ?>

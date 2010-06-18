@@ -311,9 +311,10 @@ class ModeratorContentController extends ContentController {
 		#get school id for this moderator 
 		$where = SchoolService::ADMIN . '=' . $id;
 		$result = SchoolService::getSchoolsList( $where );
-		$school_id = $result[0][SchoolService::ID];
+		$school_id = isset ($result[0][SchoolService::ID]) ? $result[0][SchoolService::ID] : '0';
 		#get user list from school where this user is moderator
-		$where = UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . UsersService::ID . "!=" . $id . ' AND ' . AssignedService::SCHOOLS_ASSIGNED . '.' . AssignedService::SCHOOL_ID . '=' . $school_id . ' AND ' . UsersService::ROLE . " != '" . UsersService::ROLE_AR . "' OR '" . UsersService::ROLE_MR . "'";
+		$where = UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . UsersService::ID . "!=" . $id . " AND " . AssignedService::SCHOOLS_ASSIGNED . '.' . AssignedService::SCHOOL_ID . "=" . $school_id . " AND " . UsersService::ROLE . SQLClient::NOT_IN . "('" . UsersService::ROLE_AR . "', '" . UsersService::ROLE_MR . "')";
+		
 		$from = UsersService::USERS . SQLClient::JOIN . AssignedService::SCHOOLS_ASSIGNED . SQLClient::ON . UsersService::USERS . '.' . UsersService::ID . '=' . AssignedService::SCHOOLS_ASSIGNED . '.' . AssignedService::USER_ID;
 		$result = UsersService::getUsersList ( $where, $from );
 		$mvc->addObject ( self::RESULT, $result );

@@ -5,35 +5,35 @@
 <span class="message">No school available at this moment.</span>
 <?php } else { ?>
 <div class="pgListItem wide">
-	<h1><?php echo isset($list[0][SchoolService::CAPTION]) ? $list[0][SchoolService::CAPTION] : null;?></h1>
-	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($list[0][SchoolService::AVATAR]) ? $list[0][SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
-	   <div class="pgItemBody">
-	   	<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
-	  	<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
-	   	</a></h2>
-	       <ul>
-       		<li>
-	       		<span>Rating:</span><span class="lsValue">
-	       		<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 1){ ?>
-				<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 2){ ?>
-				<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 3){ ?>
-				<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 4){ ?>
-				<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($list[0][SchoolService::RATE])){ if($list[0][SchoolService::RATE] == 5){ ?>
-				<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				</span>
-			</li>
-          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-          	<li><span>Courses:</span><span class="lsValue">2</span></li>
-         	<li><span>Language:</span><span class="lsValue">English</span></li>
-         	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($list[0][SchoolService::FEE]) ? $list[0][SchoolService::FEE] : null;?>$ / mon</span></li>
-         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-	     	</ul>
+		<h1><?php echo $list[SchoolService::CAPTION];?></h1>
+		<div class="pgItemImg">
+			<img src="<?php echo $list[SchoolService::AVATAR];?>" alt="" title="" />
 		</div>
-	<p><?php echo isset($list[0][SchoolService::DESCRIPTION]) ? $list[0][SchoolService::DESCRIPTION] : null;?></p>
+		<div class="pgItemBody">
+			<ul>
+				<li>
+					<span>Rating:</span>
+					<span class="lsValue">
+						<?php if($list[SchoolService::RATE] >= 1){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 2){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 3){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 4){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 5){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					</span>
+				</li>
+				<li><span>Students:</span><span class="lsValue">1258</span></li>
+				<li><span>Courses:</span><span class="lsValue">2</span></li>
+				<li><span>Language:</span><span class="lsValue">English</span></li>
+				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::FEE];?>$ / mon</span></li>
+				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+			</ul>
+		</div>
+	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
 </div>
 <div>
 <b>Add courses:</b>
@@ -48,28 +48,28 @@
 	<tr  style="border: 1px solid #EFEFEF">
 		<td>
 			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>>
-				<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
+				<?php echo $value[CourseService::CAPTION];?>
 			</a>
 		</td>
-		<td>Level: <?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></td>
+		<td>Level: <?php echo $value[CourseService::LEVEL];?></td>
 		<td>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>
-			<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>
-			<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>
-			<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>
-			<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-			<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>
-			<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+			<?php if($value[CourseService::RATE] >= 1){ ?>
+			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			<?php if($value[CourseService::RATE] >= 2){ ?>
+			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			<?php if($value[CourseService::RATE] >= 3){ ?>
+			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			<?php if($value[CourseService::RATE] >= 4){ ?>
+			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			<?php if($value[CourseService::RATE] >= 5){ ?>
+			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 		</td>
 		<td>
-			<?php if(isset($value[CourseService::SCHOOL_ID])){ if($value[CourseService::SCHOOL_ID] == $list[0][SchoolService::ID]){ ?>
-			<a class="button" href=<?php echo 'school-details.html?remove=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID]; ?>>remove</a>
+			<?php if($value[CourseService::SCHOOL_ID] == $list[SchoolService::ID]){ ?>
+			<a class="button" href=<?php echo 'school-details.html?remove=' . $value[CourseService::ID] . '&id=' . $list[SchoolService::ID]; ?>>remove</a>
 			<?php } else { ?>
-			<a class="button" href=<?php echo 'school-details.html?add=' . $value[CourseService::ID] . '&id=' . $list[0][SchoolService::ID];?>>add</a>
-			<?php } } ?>
+			<a class="button" href=<?php echo 'school-details.html?add=' . $value[CourseService::ID] . '&id=' . $list[SchoolService::ID];?>>add</a>
+			<?php } ?>
 		</td>
 	</tr>
 <?php } } }?>

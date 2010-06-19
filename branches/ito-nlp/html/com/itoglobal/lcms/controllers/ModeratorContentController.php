@@ -37,7 +37,7 @@ class ModeratorContentController extends ContentController {
 				#for all
 				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 				$list = SchoolService::getSchoolsList ( $where );
-				$mvc->addObject ( 'list', $list );
+				$mvc->addObject ( 'list', $list [0]);
 				
 				#for moderator
 				$courseslist = CourseService::getCoursesList ();
@@ -180,12 +180,12 @@ class ModeratorContentController extends ContentController {
 		isset ( $requestParams [CourseService::REMOVE] ) ? ExerciseService::removeExercise ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
 		isset ( $requestParams [CourseService::ADD] ) ? ExerciseService::addExercise ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
 
-		#for moderator
+		#for all
 		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$list = CourseService::getCoursesList ( $where );
 		$mvc->addObject ( 'list', $list );
 		
-		#for moderator
+		#for all
 		$exerciseslist = ExerciseService::getExercisesList();
 		$mvc->addObject ( 'exerciseslist', $exerciseslist );
 		

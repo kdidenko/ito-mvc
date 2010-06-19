@@ -40,7 +40,7 @@ class UserContentController extends ContentController {
 		#for all
 		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 		$list = SchoolService::getSchoolsList ( $where );
-		$mvc->addObject ( 'list', $list );
+		$mvc->addObject ( 'list', $list [0]);
 		
 		#for users and visitor
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";

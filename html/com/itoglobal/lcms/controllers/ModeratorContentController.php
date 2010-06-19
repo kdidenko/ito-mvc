@@ -183,7 +183,7 @@ class ModeratorContentController extends ContentController {
 		#for all
 		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$list = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'list', $list );
+		$mvc->addObject ( 'list', $list [0]);
 		
 		#for all
 		$exerciseslist = ExerciseService::getExercisesList();

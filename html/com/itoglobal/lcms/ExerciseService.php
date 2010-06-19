@@ -53,16 +53,6 @@ class ExerciseService {
 		$where = isset ( $where ) ? self::EXERCISES_TABLE . '.' .  $where : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		
-		/*print_r($result);exit;
-		# resolve real names from IDs
-		$fields = UsersService::USERNAME;		
-		$from = UsersService::USERS;
-		for($i=0;$i<count($result);$i++){
-			$where = UsersService::ID . '=' . $result[$i][self::OWNER];
-			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			$result[$i][self::OWNER] = $res[0][UsersService::USERNAME];
-		}*/
-		
 		return $result;
 	}
 	public static function updateFields($id, $fields, $vals) {

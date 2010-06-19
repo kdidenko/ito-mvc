@@ -4,37 +4,36 @@
 ?>
 <span class="message">No course available at this moment.</span>
 <?php } else { ?>
-<?php foreach($list as $key => $value){ ?>
 <div class="pgListItem wide">
-	<h1><?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?></h1>
-	<div class="pgItemImg"><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></div>
+	<h1><?php echo $list[CourseService::CAPTION];?></h1>
+	<div class="pgItemImg"><img src="<?php echo $list[CourseService::AVATAR];?>" alt="" title="" /></div>
 	   <div class="pgItemBody">
 	       <ul>
        		<li>
 	       		<span>Rating:</span><span class="lsValue">
-	       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>
-				<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>
-				<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>
-				<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>
-				<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-				<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>
-				<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+	       			<?php if($list[CourseService::RATE] >= 1){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[CourseService::RATE] >= 2){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[CourseService::RATE] >= 3){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[CourseService::RATE] >= 4){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[CourseService::RATE] >= 5){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 				</span>
 			</li>
           	<li><span>Students:</span><span class="lsValue">1258</span></li>
           	<li><span>Language:</span><span class="lsValue">English</span></li>
-         	<li><span>Level:</span><span class="lsValue"><?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></span></li>
-         	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span></li>
+         	<li><span>Level:</span><span class="lsValue"><?php echo $list[CourseService::LEVEL];?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::FEE];?>$ / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	     	</ul>
 		</div>
-	<p><?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?></p>
+	<p><?php echo $list[CourseService::DESCRIPTION];?></p>
 </div>
+
 <b>More details:</b>
-<?php } } ?>
 
 <div>
 <?php
@@ -45,30 +44,34 @@
 <?php } else { ?>
 <?php foreach($exerciselist as $key => $value){ ?>
 	<div class="pgListItem">
-		<h1><?php echo isset($value[ExerciseService::CAPTION]) ? $value[ExerciseService::CAPTION] : null;?></h1>
+		<h1>
+			<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+				<?php echo $value[ExerciseService::CAPTION];?>
+			</a>
+		</h1>
 		   <div class="pgItemBody">
 		       <ul>
 	       		<li>
 		       		<span>Rating:</span><span class="lsValue">
-		       		<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 1){ ?>
-					<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-					<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 2){ ?>
-					<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-					<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 3){ ?>
-					<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-					<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 4){ ?>
-					<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
-					<?php if(isset($value[ExerciseService::RATE])){ if($value[ExerciseService::RATE] == 5){ ?>
-					<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+			       		<?php if($value[ExerciseService::RATE] >= 1){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($value[ExerciseService::RATE] >= 2){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($value[ExerciseService::RATE] >= 3){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($value[ExerciseService::RATE] >= 4){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($value[ExerciseService::RATE] >= 5){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 					</span>
 				</li>
 	          	<li><span>Students:</span><span class="lsValue">1258</span></li>
 	          	<li><span>Language:</span><span class="lsValue">English</span></li>
 	         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 		     	</ul>
-			<p><?php echo isset($value[ExerciseService::DESCRIPTION]) ? $value[ExerciseService::DESCRIPTION] : null;?></p>
+			<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
 			</div>
 	</div>
 <?php } } ?>
 </div>
-
+<?php } ?>

@@ -163,9 +163,10 @@ class ContentController extends SecureActionControllerImpl {
 			}
 			
 			if ($requestParams[UsersService::OLDPASSWORD] != null){
-				$error [] .= isset($requestParams [UsersService::PASSWORD])? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
-				$error [] .= isset($requestParams [UsersService::CONFIRM])? UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] ) : false;
+				$error [] .= isset($requestParams [UsersService::PASSWORD]) && $requestParams [UsersService::PASSWORD] != NULL ? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
+				$error [] .= isset($requestParams [UsersService::CONFIRM]) && $requestParams [UsersService::CONFIRM] != NULL ? UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] ) : false;
 			}
+			
 			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
 				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
@@ -177,7 +178,6 @@ class ContentController extends SecureActionControllerImpl {
 					$where = UsersService::ID . " = " . $requestParams[UsersService::ID];
 					# executing the query
 					$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-					//print_r($requestParams[UsersService::ID]); echo " "; print_r(md5($requestParams[UsersService::OLDPASSWORD])); exit;
 					if (md5($requestParams[UsersService::OLDPASSWORD]) == $result[0][UsersService::PASSWORD]){
 						$fields = array ();
 						$fields[] .= UsersService::PASSWORD;

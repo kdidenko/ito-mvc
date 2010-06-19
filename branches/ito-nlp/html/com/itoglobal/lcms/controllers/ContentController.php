@@ -80,7 +80,7 @@ class ContentController extends SecureActionControllerImpl {
 		#for users and visitor
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$courselist = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'courselist', $courselist [0]);
+		$mvc->addObject ( 'courselist', $courselist);
 		
 		return $mvc;
 	}
@@ -114,7 +114,7 @@ class ContentController extends SecureActionControllerImpl {
 		#for users and visitor
 		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$list = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'list', $list );
+		$mvc->addObject ( 'list', $list [0]);
 		#for users and visitor
 		$where = ExerciseService::COURSE_ID . " = '" . $requestParams [ExerciseService::ID] . "'";
 		$exerciselist = ExerciseService::getExercisesList( $where );
@@ -137,7 +137,7 @@ class ContentController extends SecureActionControllerImpl {
 		#for moderator, user, visitor 
 		$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
 		$list = ExerciseService::getExercisesList ( $where );
-		$mvc->addObject ( 'list', $list );
+		$mvc->addObject ( 'list', $list [0]);
 		
 		return $mvc;
 	}

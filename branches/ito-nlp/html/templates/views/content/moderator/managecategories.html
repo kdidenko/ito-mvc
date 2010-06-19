@@ -11,12 +11,12 @@
 	<td>Options:</td>
 </tr>
 
-<?php 	for($i = 0; count($message)>$i; $i++){ ?>
+<?php foreach($message as $key => $value){ ?>
 	<tr  style="border: 1px solid #EFEFEF">
-		<td><?php echo isset($message[$i][CategoriesService::NAME]) ? $message[$i][CategoriesService::NAME] . ' ' : null; echo isset($message[$i][UsersService::LASTNAME]) ? $message[$i][UsersService::LASTNAME] : null;?></td>
+		<td><?php echo $value[CategoriesService::NAME];?></td>
 		<td>
-			<a class="button" href=<?php echo 'edit-category.html?id=' . $message[$i][CategoriesService::ID];?>>Edit</a>
-			<a class="button" href=<?php echo 'manage-categories.html?deleted=' . $message[$i][CategoriesService::ID];?>>Delete</a>
+			<a class="button" href=<?php echo 'edit-category.html?id=' . $value[CategoriesService::ID];?>>Edit</a>
+			<a class="button" href=<?php echo 'manage-categories.html?deleted=' . $value[CategoriesService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } ?>

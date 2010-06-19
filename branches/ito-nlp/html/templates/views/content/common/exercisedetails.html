@@ -1,0 +1,39 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No exercises available at this moment.</span>
+<?php } else { ?>
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+	   <div class="pgItemBody">
+	   	<h1><?php echo $list[ExerciseService::CAPTION];?></h1>
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       			<?php if($list[ExerciseService::RATE] >= 1){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[ExerciseService::RATE] >= 2){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[ExerciseService::RATE] >= 3){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[ExerciseService::RATE] >= 4){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($list[ExerciseService::RATE] >= 5){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Owner:</span><span class="lsValue"><?php echo $list[ExerciseService::OWNER];?></span></li>
+	       </ul>
+		 <p><?php echo $list[ExerciseService::DESCRIPTION];?></p>
+		 <p><?php echo $list[ExerciseService::VIDEO];?></p>
+		</div>
+    </div>
+</div>
+<?php } ?>
+<?php if (SessionService::getRole() == UsersService::ROLE_UR) {?>
+	<p><a class="button" href="start-challenge.html?username=1">Start Challenge</a></p>
+<?php } ?>

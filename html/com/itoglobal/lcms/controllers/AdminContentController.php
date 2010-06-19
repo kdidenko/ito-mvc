@@ -144,7 +144,12 @@ class AdminContentController extends ContentController {
 		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
-		$where = UsersService::DELETED . " = 0";
+		
+		#user sorting
+		$where = isset ( $requestParams ['ar'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_AR . "'" : NULL;
+		$where = isset ( $requestParams ['mr'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" : $where;
+		
+		$where .= $where == NULL ? UsersService::DELETED . " = 0" : ' AND ' . UsersService::DELETED . " = 0";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
 		$result = UsersService::getUsersList ( $where );

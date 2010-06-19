@@ -1,9 +1,11 @@
 <h1>Users Management</h1>
 <div class="subHeader">
 	<b>Users List</b>
-	<span>
-		<a href="#" class="current">All</a> | <a href="#">Administrators</a> | <a href="#">Moderators</a>
-	</span>
+	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
+		<span>
+			<a href="/manage-users.html" class="current">All</a> | <a href="?ar">Administrators</a> | <a href="?mr">Moderators</a>
+		</span>
+	<?php } ?>
 </div>
 <?php 		
 	$message = $mvc->getObject ( ContentController::RESULT );

@@ -12,11 +12,17 @@ class AdminContentController extends ContentController {
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#for admin
+		#schools options
 		isset ( $requestParams [UsersService::ENABLED] ) ? SchoolService::updateFields ( $requestParams [SchoolService::ENABLED], SchoolService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? SchoolService::updateFields ( $requestParams [SchoolService::DISABLE], SchoolService::ENABLED, '0' ) : '';
 		isset ( $requestParams [SchoolService::DELETED] ) ? SchoolService::deleteSchool ( $requestParams [SchoolService::DELETED] ) : null;
-		$list = SchoolService::getSchoolsList ();
+		
+		#schools sorting
+		$orderBy = isset ( $requestParams ['popular'] ) ? SchoolService::RATE . ' ' . SQLClient::DESC : NULL;
+		$orderBy = isset ( $requestParams ['recent'] ) ? SchoolService::CRDATE . ' ' . SQLClient::DESC : $orderBy;
+		
+		#get schools list
+		$list = SchoolService::getSchoolsList ( null, null, $orderBy);
 		$mvc->addObject ( 'list', $list );
 		
 		return $mvc;
@@ -42,12 +48,6 @@ class AdminContentController extends ContentController {
 					StorageService::uploadFile ( $path, $_FILES ['file'] ) :
 						copy ( 'storage/uploads/default-school.jpg', $path );
 
-				/*$fields = UsersService::ID;
-				$from = UsersService::USERS;
-				$where = UsersService::USERNAME . "='" . $requestParams [SchoolService::ADMIN] . "'";
-				$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-				$admin = $result [0] [UsersService::ID];*/
-				
 				// Insert new school to DB
 				$fields = SchoolService::ALIAS . ', ' . SchoolService::CAPTION . ', ' . SchoolService::DESCRIPTION . ', ' . SchoolService::AVATAR . ', ' . SchoolService::CRDATE . ', ' . SchoolService::FEE . ', ' . SchoolService::ADMIN . ', ' . SchoolService::LANGUAGE;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
@@ -70,7 +70,7 @@ class AdminContentController extends ContentController {
 			#for all
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 			$list = SchoolService::getSchoolsList ( $where );
-			$mvc->addObject ( 'list', $list );
+			$mvc->addObject ( 'list', $list[0] );
 		}	
 		return $mvc;
 	}
@@ -89,11 +89,9 @@ class AdminContentController extends ContentController {
 				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 					$file = $_FILES ['file'];
 					$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
-					
 					$error[] .= ValidationService::checkAvatar ( $file );
 					$error = array_filter ( $error );
 				}
-				
 				if (count ( $error ) == 0) {
 					if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 						StorageService::uploadFile ( $path, $file );
@@ -117,13 +115,7 @@ class AdminContentController extends ContentController {
 			
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 			$result = SchoolService::getSchoolsList ( $where );
-			isset ( $result [0] [SchoolService::ID] ) ? $mvc->addObject ( SchoolService::ID, $result [0] [SchoolService::ID] ) : null;
-			isset ( $result [0] [SchoolService::CAPTION] ) ? $mvc->addObject ( SchoolService::CAPTION, $result [0] [SchoolService::CAPTION] ) : null;
-			isset ( $result [0] [SchoolService::DESCRIPTION] ) ? $mvc->addObject ( SchoolService::DESCRIPTION, $result [0] [SchoolService::DESCRIPTION] ) : null;
-			isset ( $result [0] [SchoolService::AVATAR] ) ? $mvc->addObject ( SchoolService::AVATAR, $result [0] [SchoolService::AVATAR] ) : null;
-			isset ( $result [0] [SchoolService::ALIAS] ) ? $mvc->addObject ( SchoolService::ALIAS, $result [0] [SchoolService::ALIAS] ) : null;
-			isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
-			isset ( $result [0] [SchoolService::ADMIN] ) ? $mvc->addObject ( SchoolService::ADMIN, $result [0] [SchoolService::ADMIN] ) : null;
+			$mvc->addObject ( self::RESULT, $result [0] );
 		}
 		return $mvc;
 	}
@@ -156,7 +148,7 @@ class AdminContentController extends ContentController {
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
 		$result = UsersService::getUsersList ( $where );
-		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		$mvc->addObject ( self::RESULT, $result);
 		
 		return $mvc;
 	}
@@ -167,14 +159,7 @@ class AdminContentController extends ContentController {
 			#for admin and moderator
 			$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
 			$result = UsersService::getUsersList ( $where );
-			isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
-			isset ( $result [0] [UsersService::USERNAME] ) ? $mvc->addObject ( UsersService::USERNAME, $result [0] [UsersService::USERNAME] ) : null;
-			isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
-			isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
-			isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
-			isset ( $result [0] [UsersService::ENABLED] ) ? $mvc->addObject ( UsersService::ENABLED, $result [0] [UsersService::ENABLED] ) : null;
-			isset ( $result [0] [UsersService::DELETED] ) ? $mvc->addObject ( UsersService::DELETED, $result [0] [UsersService::DELETED] ) : null;
-			isset ( $result [0] [UsersService::ROLE] ) ? $mvc->addObject ( UsersService::ROLE, $result [0] [UsersService::ROLE] ) : null;
+			$mvc->addObject ( self::RESULT, $result[0] );
 		}
 		return $mvc;
 	}

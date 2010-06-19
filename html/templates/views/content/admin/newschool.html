@@ -35,7 +35,9 @@
 				<option>No moderator</option>
 					<?php } else { ?>
 					<?php foreach($mrList as $key => $value){ ?>
-				<option value="<?php echo $value[UsersService::ID]; ?>"><?php echo $value[UsersService::USERNAME]; ?></option>
+				<option value="<?php echo $value[UsersService::ID]; ?>">
+					<?php echo $value[UsersService::USERNAME]; ?>
+				</option>
 					<?php } } ?>
 				</select>
 			</dd>

@@ -149,7 +149,8 @@ class AdminContentController extends ContentController {
 		$where = isset ( $requestParams ['ar'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_AR . "'" : NULL;
 		$where = isset ( $requestParams ['mr'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" : $where;
 		
-		$where .= $where == NULL ? UsersService::DELETED . " = 0" : ' AND ' . UsersService::DELETED . " = 0";
+		$where .= $where == NULL ? NULL : ' AND ';
+		$where .= UsersService::DELETED . " = 0 AND " . UsersService::ROLE . "!='" . UsersService::ROLE_UR . "'";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
 		$result = UsersService::getUsersList ( $where );

@@ -1,38 +1,29 @@
 <h1>Your personal overview</h1>
-<p>
-	<?php		
-			$message = $mvc->getObject(SessionService::FIRSTNAME);
-			echo isset($message) ? $message . ' ' : 'Jone ';
-			$message = $mvc->getObject(SessionService::LASTNAME);
-			echo isset($message) ? $message : 'Doe';
-	?>
-	, you have taken 8 courses in 3 schools and completed
-	11 course levels. You have responded to 5412 challenges. You are
-	wearing titles: NLP Practitioner and Shaman and are posessing
-	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
-	schools and 3 courses:
-</p>
-
 <?php
 	$usSchList = $mvc->getObject('usSchList');
 	if(!isset($usSchList) || count($usSchList) == 0){
 ?>
-<span class="message">No school available at this moment.</span>
-<?php } else { ?>
-<?php foreach($usSchList as $key => $value){ ?>
+<span class="message">You are currently not signed up for any schools.</span>
+<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<?php 
+	} else { 
+		foreach($usSchList as $key => $value){ ?>
 <div class="pgItemsList">
 	<div class="pgContentTools">
 		<h2>Schools lists:</h2>
 	</div>
 	<div class="pgListItem">
 	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
-	   <div class="pgItemBody">
+		<div class="pgItemBody">
 	   	<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
-	  	<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			  		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			   	</a>
+			</h2>
+			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
 	   	</a></h2>
 	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>...</p>
-	       <ul>
-       		<li>
+			<ul>
+				<li>
 	       		<span>Rating:</span><span class="lsValue">
 	       			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
 					<a href="#"><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
@@ -44,23 +35,20 @@
 					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
 					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
 					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-				</span>
-			</li>
-          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-          	<li><span>Courses:</span><span class="lsValue">2</span></li>
-         	<li><span>Language:</span><span class="lsValue">English</span></li>
-         	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
-         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-	       </ul>
+					</span>
+				</li>
+				<li><span>Students:</span><span class="lsValue">1258</span></li>
+				<li><span>Courses:</span><span class="lsValue">2</span></li>
+				<li><span>Language:</span><span class="lsValue">English</span></li>
+				<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
+				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+			</ul>
 	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">More Details...</a></p>
 		</div>
     </div>
-    
-    
     <?php if($key%2){ ?>
 	<div class="clnr brdr">&nbsp;</div>
 	<?php } ?>
-	
 </div>
-
-<?php } } ?>
+<?php } 
+	} ?>

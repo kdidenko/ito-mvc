@@ -28,6 +28,7 @@ class UserContentController extends ContentController {
 				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
 			}
 			$usSchList = SchoolService::getSchoolsList ($where);
+			$usSchList = self::createTeaser($usSchList);
 			$mvc->addObject ( 'usSchList', $usSchList );
 		}
 		

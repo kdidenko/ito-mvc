@@ -5,13 +5,13 @@
 ?>
 <span class="message">You are currently not signed up for any schools.</span>
 <span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
-<?php 
-	} else { 
-		foreach($usSchList as $key => $value){ ?>
+<?php } else { ?>
 <div class="pgItemsList">
-	<div class="pgContentTools">
-		<h2>Schools lists:</h2>
+	<div class="subHeader">
+		<b>Shools List</b>
 	</div>
+<?php	foreach($usSchList as $key => $value){ ?> 
+
 	<div class="pgListItem">
 	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 		<div class="pgItemBody">
@@ -19,9 +19,7 @@
 			  		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
 			   	</a>
 			</h2>
-			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
-	   	</a></h2>
-	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>...</p>
+			<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>...</p>
 			<ul>
 				<li>
 	       		<span>Rating:</span><span class="lsValue">
@@ -49,6 +47,7 @@
     <?php if($key%2){ ?>
 	<div class="clnr brdr">&nbsp;</div>
 	<?php } ?>
+
+<?php } ?> 
 </div>
-<?php } 
-	} ?>
+<?php } ?>

@@ -93,5 +93,8 @@ class BaseActionControllerImpl implements BaseActionController {
 		return self::getLocationOnCondition ( $actionParams, self::MVC_ON_ABORT );
 	}
 
+	public function setNoCashe() {
+		header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	}
 }
 ?>

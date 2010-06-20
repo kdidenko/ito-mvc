@@ -158,25 +158,32 @@ class ContentController extends SecureActionControllerImpl {
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		$error = array ();
-		if (isset ( $requestParams ['submit'] )) {
-			
+		
+		if (isset ( $requestParams ['pctSbm'] )) {
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 				$file = $_FILES ['file'];
 				$path = 'storage/uploads/users/' . $username . "/profile/avatar.jpg";
 				$error[] .= ValidationService::checkAvatar ( $file );
+				$error = array_filter ( $error );
 			}
-			
-			if ($requestParams[UsersService::OLDPASSWORD] != null){
-				$error [] .= isset($requestParams [UsersService::PASSWORD]) && $requestParams [UsersService::PASSWORD] != NULL ? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
-				$error [] .= isset($requestParams [UsersService::CONFIRM]) && $requestParams [UsersService::CONFIRM] != NULL ? UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] ) : false;
-			}
-			
-			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
 				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 					StorageService::uploadFile ( $path, $file );
+					self::setNoCashe();
 				}
-				if ($requestParams[UsersService::OLDPASSWORD] != null){
+			}else{
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
+		}
+		
+		if (isset ( $requestParams ['pswSbm'] )) {
+			$error [] .= isset($requestParams [UsersService::OLDPASSWORD]) ? UsersService::checkOldPassword ( $requestParams [UsersService::OLDPASSWORD] ) : false;
+			$error [] .= isset($requestParams [UsersService::PASSWORD]) ? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
+			$error [] .= isset($requestParams [UsersService::CONFIRM]) ? UsersService::checkConfirmPassword ( $requestParams [UsersService::PASSWORD], $requestParams [UsersService::CONFIRM] ) : false;
+			$error = array_filter ( $error );
+			
+			if (count ( $error ) == 0) {
+				if (isset($requestParams[UsersService::OLDPASSWORD]) && $requestParams[UsersService::OLDPASSWORD] != null){
 					$fields = UsersService::PASSWORD;
 					$from = UsersService::USERS;
 					$where = UsersService::ID . " = " . $requestParams[UsersService::ID];
@@ -195,7 +202,9 @@ class ContentController extends SecureActionControllerImpl {
 			}else{
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
-				
+		}
+			
+		if (isset ( $requestParams ['personalSbm'] )) {		
 			$fields = array ();
 			$fields [] .= UsersService::FIRSTNAME;
 			$fields [] .= UsersService::LASTNAME;
@@ -207,7 +216,6 @@ class ContentController extends SecureActionControllerImpl {
 			
 			UsersService::updateFields ( $id, $fields, $vals );	
 		}
-		
 		
 		$where = UsersService::ID . " = '" . $id . "'";
 		$result = UsersService::getUsersList ( $where );

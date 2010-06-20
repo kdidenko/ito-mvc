@@ -196,6 +196,14 @@ class UsersService {
 				'Please enter password';
 		return $result;
 	}
+
+	public static  function checkOldPassword($password) {
+		$result = false;
+		$result = $password ?
+			$result = ValidationService::checkPassword($password) :
+				'Please enter your old password';
+		return $result;
+	}
 	
 	public static  function checkConfirmPassword($password, $confirm_password) {
 		$result = false;

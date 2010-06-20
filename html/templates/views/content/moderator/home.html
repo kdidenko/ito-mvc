@@ -1,17 +1,16 @@
 <h1>School Overview</h1>
+<?php
+	$mrSchlList = $mvc->getObject('mrSchlList');
+	if(!isset($mrSchlList) || count($mrSchlList) == 0){
+?>
+<span class="message">There are currently no schools assigned to you.</span>
+<span class="message">Please, contact your administrator or support team for more information.</span>
+<?php } else { ?>
 <div>
 	<p>Bellow you may see your school details and make some general appearance changes according to you preferences.</p>
 	<p>Click on the school title to view rates, number of students and list of courses.<br/>
 	Click on edit button bellow the school description for appearance changes.</p>
 </div>
-
-<?php
-	$mrSchlList = $mvc->getObject('mrSchlList');
-	if(!isset($mrSchlList) || count($mrSchlList) == 0){
-?>
-<span class="message">There are currently no schools assigned to you. Please, contact your administrator or support team for more information.</span>
-<?php } else { ?>
-
 <?php foreach($mrSchlList as $key => $value){ ?>
 <div>
 	<div class="leftPageContent">

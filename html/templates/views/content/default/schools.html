@@ -23,12 +23,13 @@
 
 <div class="pgItemsList">
 	<div class="pgListItem">
+	   	<h2>
+			<a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+			<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>
 	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 	   <div class="pgItemBody">
-	   	<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
-	  	<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
-	   	</a></h2>
-	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
 	       <ul>
        		<li>
 	       		<span>Rating:</span><span class="lsValue">
@@ -45,13 +46,14 @@
          	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	       </ul>
-	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
 		</div>
+	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
     </div>
     
     
     <?php if($key%2){ ?>
-	<div class="clnr brdr">&nbsp;</div>
+	<div class="clnr">&nbsp;</div>
 	<?php } ?>
 	
 </div>

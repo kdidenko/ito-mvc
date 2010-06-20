@@ -111,3 +111,4 @@ div.subHeader span a {color:#666666}
 div.subHeader span a.current {color:#698DB1;text-decoration:none;font-weight:bold;}
 div.about ul, div.about li {list-style:disc outside;margin:5px 0;}
 div.about ul.inner {margin-left:40px}
+span.message {display:block;line-height:14px;font-weight:bold;color:#999999}

@@ -12,11 +12,7 @@
 	certificates: NLPPr_L3 and SHET_L2. Currently you have subscribed to 2
 	schools and 3 courses:
 </p>
-<div class="pgContentTools">
-	<ul>
-    	<li><h2>Your Schools:</h2></li>
-    </ul>
-</div>
+
 <?php
 	$usSchList = $mvc->getObject('usSchList');
 	if(!isset($usSchList) || count($usSchList) == 0){
@@ -25,21 +21,29 @@
 <?php } else { ?>
 <?php foreach($usSchList as $key => $value){ ?>
 <div class="pgItemsList">
+	<div class="pgContentTools">
+		<h2>Schools lists:</h2>
+	</div>
 	<div class="pgListItem">
 	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 	   <div class="pgItemBody">
 	   	<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
 	  	<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
 	   	</a></h2>
-	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+	       <p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>...</p>
 	       <ul>
        		<li>
 	       		<span>Rating:</span><span class="lsValue">
-	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 1){ ?>*<?php } } ?> 
-	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 2){ ?>**<?php } } ?>
-	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 3){ ?>***<?php } } ?>
-	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 4){ ?>****<?php } } ?>
-	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 5){ ?>*****<?php } } ?>
+	       			<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
+					<a href="#"><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 3){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 4){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
 				</span>
 			</li>
           	<li><span>Students:</span><span class="lsValue">1258</span></li>
@@ -48,7 +52,7 @@
          	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	       </ul>
-	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">View</a></p>
+	       <p class="extLink"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">More Details...</a></p>
 		</div>
     </div>
     

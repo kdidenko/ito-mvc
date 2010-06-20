@@ -1,30 +1,38 @@
-<h1>List of YouCademy courses</h1>
+<h1>List of YouCademy schools</h1>
+<p>
+	Here you can select the schools you wish to learn from. Every
+	school has its own rules and fees, please see school details for more
+	information.
+</p>
 <div class="subHeader">
 	<b>Shools List</b>
 	<span>Sort by:
 		<a <?php echo isset($_GET[SchoolService::RATE]) ? "class='current'" : NULL;?> href="?<?php echo SchoolService::RATE ?>=<?php if (isset($_GET[SchoolService::RATE])){echo $_GET[SchoolService::RATE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">rating</a>
+       	<a <?php echo isset($_GET[SchoolService::LANGUAGE]) ? "class='current'" : NULL;?> href="?<?php echo SchoolService::LANGUAGE ?>=<?php if (isset($_GET[SchoolService::LANGUAGE])){echo $_GET[SchoolService::LANGUAGE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">languages</a>
 	</span>
 </div>
 <?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No courses available at this moment.</span>
+<span class="message">No school available at this moment.</span>
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
+
 <div class="pgItemsList">
 	<div class="pgListItem">
-	<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title=""><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></a></div>
+	   	<h2>
+			<a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+			<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>
+	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 	   <div class="pgItemBody">
-	   	<h2><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="School details">
-	  	<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
-	   	</a></h2>
-	       <p><?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?></p>
 	       <ul>
        		<li>
 	       		<span>Rating:</span><span class="lsValue">
-					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
+		       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
 					<a href="#"><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
 					<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
 					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
@@ -37,18 +45,23 @@
 				</span>
 			</li>
           	<li><span>Students:</span><span class="lsValue">1258</span></li>
-         	<li><span>Level:</span><span class="lsValue"><?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></span></li>
+          	<li><span>Courses:</span><span class="lsValue">2</span></li>
+         	<li><span>Language:</span><span class="lsValue"><?php echo isset($value[SchoolService::LANGUAGE]) ? $value[SchoolService::LANGUAGE] : null;?></span></li>
          	<li><span>Base fee:</span><span class="lsValue">$0-$15 / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	       </ul>
-	       <p class="extLink"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">View</a></p>
 		</div>
+	       <p class="extLink">
+			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?>
+			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More Details...</a>
+		</p>
     </div>
     
+    
     <?php if($key%2){ ?>
-	<div class="clnr brdr">&nbsp;</div>
+	<div class="clnr">&nbsp;</div>
 	<?php } ?>
 	
 </div>
 
-<?php } } ?>
+<?php } }?>

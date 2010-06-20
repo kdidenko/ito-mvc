@@ -17,13 +17,12 @@ class ContentController extends SecureActionControllerImpl {
 		
 		#for visitor
 			$schoolslist = SchoolService::getSchoolsList (null, '0, 4');
+			$schoolslist = self::createTeaser($schoolslist);
 			$mvc->addObject ( 'schoolslist', $schoolslist );
 		#for visitor
 			$courseslist = CourseService::getCoursesList(null, '0, 4');
+			$courseslist = self::createTeaser($courseslist);
 			$mvc->addObject ( 'courseslist', $courseslist );
-		#for visitor
-			$exerciseslist = ExerciseService::getExercisesList (null, '0, 4');
-			$mvc->addObject ( 'exerciseslist', $exerciseslist );
 		
 		return $mvc;
 	}
@@ -51,20 +50,18 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#for visitor and user
-		//TODO: finish sort functionality
-		
+		#sorting
 		$order = NULL;
-		
 		if( isset($requestParams[SchoolService::RATE]) ){
 			$order = $requestParams[SchoolService::RATE] == SQLClient::ASC ? SchoolService::RATE . ' ' . SQLClient::ASC : SchoolService::RATE . ' ' . SQLClient::DESC;
 		}
-		
 		if( isset($requestParams[SchoolService::LANGUAGE]) ){
 			$order = $requestParams[SchoolService::LANGUAGE] == SQLClient::ASC ? SchoolService::LANGUAGE . ' ' . SQLClient::ASC : SchoolService::LANGUAGE . ' ' . SQLClient::DESC;
 		}
 		
+		#get schools list
 		$list = SchoolService::getSchoolsList (null, null, $order);
+		$list = self::createTeaser($list);
 		$mvc->addObject ( 'list', $list );
 		
 		return $mvc;
@@ -87,8 +84,15 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleCourses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#for user and visitor
-		$list = CourseService::getCoursesList();
+		#sorting
+		$order = NULL;
+		if( isset($requestParams[CourseService::RATE]) ){
+			$order = $requestParams[CourseService::RATE] == SQLClient::ASC ? CourseService::RATE . ' ' . SQLClient::ASC : CourseService::RATE . ' ' . SQLClient::DESC;
+		}
+		
+		#get course list
+		$list = CourseService::getCoursesList (null, null, $order);
+		$list = self::createTeaser($list);
 		$mvc->addObject ( 'list', $list );
 		
 		return $mvc;
@@ -216,7 +220,13 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
-	
+	public static function createTeaser ($list){
+		foreach($list as $key => $value){
+			$value[SchoolService::DESCRIPTION] = substr($value[SchoolService::DESCRIPTION], 0, 255);
+			$list[$key][SchoolService::DESCRIPTION] = strrev(strstr(strrev($value[SchoolService::DESCRIPTION]), ' '));
+		}
+		return $list;
+	}
 }
 
 ?>

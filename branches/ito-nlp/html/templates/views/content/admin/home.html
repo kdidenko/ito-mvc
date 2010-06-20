@@ -2,10 +2,10 @@
 <div class="subHeader">
 	<b>Shools List</b>
 	<span>
-		<a href="?recent" class="current">Most Recent</a> | <a href="?popular">Most Popular</a>
+		<a <?php echo isset($_GET['recent']) ? "class='current'" : NULL;?> href="?recent" >Most Recent</a> | 
+		<a <?php echo isset($_GET['popular']) ? "class='current'" : NULL;?> href="?popular" >Most Popular</a>
 	</span>
 </div>
-
 
 <?php
 	$list = $mvc->getObject('list');

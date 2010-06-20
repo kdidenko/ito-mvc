@@ -67,14 +67,41 @@ class SchoolService {
 	 */
 	public static function getSchoolsList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
-		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  self::CRDATE . ', ' . self::FEE . ', ' . self::LANGUAGE . ', ' . self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
-		$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . UsersService::USERS . '.' .  UsersService::ID . '=' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
+		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . 
+					self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  
+					self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  
+					self::CRDATE . ', ' . self::FEE . ', ' . self::LANGUAGE . ', ' . 
+					self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  
+					UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
+		$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+					UsersService::USERS . '.' .  UsersService::ID . '=' . 
+					self::SCHOOLS_TABLE . '.' . self::ADMIN;
 		$where = isset ( $where ) ? self::SCHOOLS_TABLE . '.' .  $where : '';
-		/*$limit = isset ( $limit ) ? $limit : '';
-		$orderBy = isset ( $orderBy ) ? $orderBy : '';*/
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}
+	
+	public static function getSchool($id) {
+		$result = null;		
+		if(isset($id) && $id != ''){
+			# preparing query
+			$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . 
+						self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  
+						self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  
+						self::CRDATE . ', ' . self::FEE . ', ' . self::LANGUAGE . ', ' . 
+						self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  
+						UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
+			$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+						UsersService::USERS . '.' .  UsersService::ID . '=' . 
+						self::SCHOOLS_TABLE . '.' . self::ADMIN;
+			$where = self::SCHOOLS_TABLE . '.' . self::ID . '=' . $id;
+			# executing query
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
+		} 
+		return $result;
+	}	
+	
 	
 	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables

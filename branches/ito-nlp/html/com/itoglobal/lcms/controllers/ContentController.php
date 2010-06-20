@@ -68,17 +68,13 @@ class ContentController extends SecureActionControllerImpl {
 	}
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-
-		#for all
-		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-		$list = SchoolService::getSchoolsList ( $where );
-		$mvc->addObject ( 'list', $list [0]);
-		
-		#for users and visitor
+		# getting the school
+		$school = SchoolService::getSchool($requestParams [SchoolService::ID]);
+		$mvc->addObject ('list', $school);
+		# getting list of courses
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$courselist = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'courselist', $courselist);
-		
+		$courselist = CourseService::getCoursesList ($where);
+		$mvc->addObject ('courselist', $courselist);
 		return $mvc;
 	}
 	public function handleCourses($actionParams, $requestParams) {

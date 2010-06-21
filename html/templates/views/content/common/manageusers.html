@@ -1,4 +1,8 @@
 <h1>Users Management</h1>
+<?php 		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) { 
+?>
 <div class="subHeader">
 	<b>Users List</b>
 	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
@@ -9,11 +13,6 @@
 		</span>
 	<?php } ?>
 </div>
-<?php 		
-	$message = $mvc->getObject ( ContentController::RESULT );
-	if (isset ( $message ) and count($message) != 0) { 
-?>
-
 <table class="list">
 <tr class="title">
 	<td>User Name:</td>

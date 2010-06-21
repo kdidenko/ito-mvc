@@ -2,7 +2,8 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No course available at this moment.</span>
+<span class="message">Oops... seems the address you have entered is invalid. There are no courses for such criterias.</span>
+<span class="message">But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.</span>
 <?php } else { ?>
 <div class="pgListItem wide">
 	<h1><?php echo $list[CourseService::CAPTION];?></h1>
@@ -32,45 +33,42 @@
 		</div>
 	<p><?php echo $list[CourseService::DESCRIPTION];?></p>
 </div>
-
-<b>More details:</b>
-
+<div class="subHeader">
+	<b>Exercises Available:</b>
+</div>
 <div>
 <?php
 	$exerciselist = $mvc->getObject('exerciselist');
 	if(!isset($exerciselist) || count($exerciselist) == 0){
 ?>
-<span class="message">No course sign in to school.</span>
+<span class="message">Sorry, there are no course exercises available at this moment.</span>
+<span class="message">Please visit course later. It will be updated very soon.</span>
 <?php } else { ?>
 <?php foreach($exerciselist as $key => $value){ ?>
-	<div class="pgListItem">
-		<h1>
-			<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-				<?php echo $value[ExerciseService::CAPTION];?>
-			</a>
-		</h1>
-		   <div class="pgItemBody">
-		       <ul>
-	       		<li>
-		       		<span>Rating:</span><span class="lsValue">
-			       		<?php if($value[ExerciseService::RATE] >= 1){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[ExerciseService::RATE] >= 2){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[ExerciseService::RATE] >= 3){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[ExerciseService::RATE] >= 4){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[ExerciseService::RATE] >= 5){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					</span>
-				</li>
-	          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-	          	<li><span>Language:</span><span class="lsValue">English</span></li>
-	         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-		     	</ul>
+	<div class="courseList">
+		<div class="pgItemImg">
+			<span class="lsValue">
+       			<?php if($value[ExerciseService::RATE] >= 1){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($value[ExerciseService::RATE] >= 2){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($value[ExerciseService::RATE] >= 3){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($value[ExerciseService::RATE] >= 4){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<?php if($value[ExerciseService::RATE] >= 5){ ?>
+					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			</span>
+		</div>
+	   	<div class="pgItemBody">
+	        <h1>
+				<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+					<?php echo $value[ExerciseService::CAPTION];?>
+				</a>
+			</h1>
+	        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
 			<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
-			</div>
+		</div>
 	</div>
 <?php } } ?>
 </div>

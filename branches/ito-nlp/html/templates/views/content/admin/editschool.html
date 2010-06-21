@@ -38,7 +38,7 @@
 					<?php } else { ?>
 					<?php 
 					foreach($mrList as $key => $value){ 
-					if ($message != $value[UsersService::USERNAME]) {
+					if ($schList[UsersService::USERNAME] != $value[UsersService::USERNAME]) {
 					?>
 				<option value="<?php echo $value[UsersService::ID]; ?>"><?php echo $value[UsersService::USERNAME]; ?></option>
 					<?php } } } ?>

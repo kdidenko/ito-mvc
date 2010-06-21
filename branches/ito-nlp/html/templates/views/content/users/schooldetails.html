@@ -2,7 +2,8 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No school available at this moment.</span>
+<span class="message">Oops... seems the address you have entered is invalid. There are no schools for such criterias.</span>
+<span class="message">But you may still find some schools of interest by browsing our <a href="/schools.html" title="Schools">Schools</a> directory.</span>
 <?php } else { ?>
 <div class="pgListItem wide">
 		<h1><?php echo $list[SchoolService::CAPTION];?></h1>
@@ -40,14 +41,16 @@
 		</div>
 	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
 </div>
-
-<b>More details:</b>
+<div class="subHeader">
+	<b>Courses Available:</b>
+</div>
 <div>
 <?php
 	$courseslist = $mvc->getObject('courselist');
 	if(!isset($courseslist) || count($courseslist) == 0){
 ?>
-<span class="message">No course sign in to school.</span>
+<span class="message">Sorry, there are no school courses available at this moment.</span>
+<span class="message">Please visit our school later. It will be updated very soon.</span>
 <?php } else { ?>
 <?php foreach($courseslist as $key => $value){ ?>
 	<div class="pgListItem">

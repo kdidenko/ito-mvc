@@ -16,7 +16,7 @@
 
 	<action name="/courses.html" id="courses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 
 	<action name="/community.html" id="community">
@@ -71,17 +71,15 @@
 	
 	<action name="/manage-courses.html" id="managecourses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />
+		<forwards>
+			<target location="/home.html" name="home" condition="onfailure"/>
+		</forwards>
 	</action>
 	
 	<action name="/course-details.html" id="coursedetails">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
-	
-	<action name="/manage-exercises.html" id="manageexercises">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
 	<action name="/manage-users.html" id="manageusers">

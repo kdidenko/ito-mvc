@@ -74,6 +74,7 @@ class ContentController extends SecureActionControllerImpl {
 		# getting list of courses
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$courselist = CourseService::getCoursesList ($where);
+		$courselist = self::createTeaser($courselist);
 		$mvc->addObject ('courselist', $courselist);
 		return $mvc;
 	}

@@ -1,46 +1,44 @@
 <p><img src="images/cnt/home-teaser-img.jpg" alt="" title="" /></p>
 <p class="pgIntro">YouCademy.net is a platform for computer aided learning (CAL), that enables schools to transmit their skill building methods to students via internet.&nbsp;<a href="about.html" title="">See more about YouCademy &raquo;</a></p>
-
+<div class="subHeader">
+		<b>Shools List:</b>
+</div>
 <?php
 	$schoolslist = $mvc->getObject('schoolslist');
 	if(!isset($schoolslist) || count($schoolslist) == 0){
 ?>
-<span class="message">No schools available at this moment.</span>
+<span class="message">Sorry, there are no schools available at this moment.</span>
 <?php } else { ?>
 <div class="pgItemsList">
-<div class="pgContentTools">
-	<h2>Schools lists:</h2>
-</div>
-<?php foreach($schoolslist as $key => $value){ ?>
-	<div class="pgListItem">
-		<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
-		<div class="pgItemBody">
-		<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
-		<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
-		</a></h2>
-		<p class="extLink">
-			<?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>
-			<a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">More Details...</a>
-		</p>
-	</div>
-	</div>
-    <?php if($key%2){ ?>
-	<div class="clnr">&nbsp;</div>
+	<?php foreach($schoolslist as $key => $value){ ?>
+		<div class="pgListItem">
+			<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+			<div class="pgItemBody">
+			<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+			<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a></h2>
+			<p class="extLink">
+				<?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?>
+				<a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="View">More Details...</a>
+			</p>
+		</div>
+		</div>
+	    <?php if($key%2){ ?>
+		<div class="clnr">&nbsp;</div>
 	<?php } } } ?>
 </div>
 
-
+<div class="subHeader">
+		<b>Courses List:</b>
+</div>
 <?php
 	$courseslist = $mvc->getObject('courseslist');
 	if(!isset($courseslist) || count($courseslist) == 0){
 ?>
-<span class="message">No courses available at this moment.</span>
+<span class="message">Sorry, there are no courses available at this moment.</span>
 <?php } else { ?>
 <div class="pgItemsList">
-<div class="pgContentTools">
-	<h2>Courses lists:</h2>
-</div>
-<?php foreach($courseslist as $key => $value){ ?>
+	<?php foreach($courseslist as $key => $value){ ?>
 	<div class="pgListItem">
 		<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 		<div class="pgItemBody">

@@ -101,6 +101,12 @@ class ModeratorContentController extends ContentController {
 	public function handleManageCourses($actionParams, $requestParams) {		
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
+		$schAssign = self::hasSchlAssign();
+		if($schAssign == NULL){ 
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );	
+		}
+		
 		#for moderator
 		isset ( $requestParams [CourseService::DELETED] ) ? CourseService::deleteCourse ( $requestParams [CourseService::DELETED] ) : null;
 		
@@ -122,10 +128,19 @@ class ModeratorContentController extends ContentController {
 				isset ( $_FILES ['file'] ) && $_FILES ['file'] ['error'] == 0 ?
 					StorageService::uploadFile ( $path, $_FILES ['file'] ) :
 						copy ( 'storage/uploads/default-course.jpg', $path );
-				// Insert new school to DB
+				
+				//TODO: do method!
+				# get school id where this user is moderator		
+				$fields = SchoolService::ID;
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$where = SchoolService::ADMIN . "= '" . $id . "'";
+				$from = SchoolService::SCHOOLS_TABLE;
+				$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+				$schoolID = $result [0][SchoolService::ID];
+				# Insert new school to DB
 				$fields = CourseService::LEVEL . ', ' . CourseService::CAPTION . ', ' . CourseService::DESCRIPTION . ', ' . CourseService::ALIAS . ', ' . CourseService::AVATAR . ', ' . CourseService::CRDATE . ', ' . CourseService::FEE . ', ' . CourseService::SCHOOL_ID;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0','0'";
+				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0', '" . $schoolID . "'";
 				$into = CourseService::COURSE_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
@@ -440,7 +455,12 @@ class ModeratorContentController extends ContentController {
 		}
 		return $mvc;	
 	}
-	
+	private function hasSchlAssign(){
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . " = '" . $id . "'";
+		$mrSchlList = SchoolService::getSchoolsList ($where);
+		return isset ($mrSchlList) && count($mrSchlList) > 0 ? $mrSchlList[0] : NULL; 
+	}
 }
 
 ?>

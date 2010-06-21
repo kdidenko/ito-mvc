@@ -102,9 +102,11 @@ class ModeratorContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$schAssign = self::hasSchlAssign();
+		
 		if($schAssign == NULL){ 
-			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );	
+			//TODO: use forwardActionRequest method!!!! 
+			header ( "Location: /index.html" );
+			exit ();	
 		}
 		
 		#for moderator
@@ -279,6 +281,17 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$schAssign = self::hasSchlAssign();
+		
+		if($schAssign == NULL){ 
+			//TODO: use forwardActionRequest method!!!!
+			//$location = $this->onFailure ( $actionParams );
+			//$this->forwardActionRequest ( $location );
+			header ( "Location: /index.html" );
+			exit ();
+		}
+		
 		#for admin and moderator
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
@@ -392,6 +405,15 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageCategories($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$schAssign = self::hasSchlAssign();
+		
+		if($schAssign == NULL){ 
+			//TODO: use forwardActionRequest method!!!!
+			header ( "Location: /index.html" );
+			exit ();
+		}
+		
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= CategoriesService::NAME;
@@ -455,11 +477,18 @@ class ModeratorContentController extends ContentController {
 		}
 		return $mvc;	
 	}
+	
 	private function hasSchlAssign(){
+		$result = null;
+		# preparing query
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$fields = SchoolService::ID;
+		$from = SchoolService::SCHOOLS_TABLE;
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
-		$mrSchlList = SchoolService::getSchoolsList ($where);
-		return isset ($mrSchlList) && count($mrSchlList) > 0 ? $mrSchlList[0] : NULL; 
+		# executing query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
+		return $result;
 	}
 }
 

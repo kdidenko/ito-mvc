@@ -46,7 +46,7 @@
 		<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
 		</a></h2>
 		<p class="extLink">
-			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?>
+			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : "ok";?>
 			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More Details...</a>
 		</p>
 	</div>

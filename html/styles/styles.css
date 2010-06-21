@@ -126,3 +126,10 @@ span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
 .myProfileInf dt {color: grey; font-weight: bold; font-size: 11px;line-height: 20px;}
 .myProfileInf dd {}
 .myProfileInf span {color: grey; font-weight: bold; font-size: 11px;}
+
+.courseList{ height: 100px; background-color:  #F6F6F6; border:1px solid #EDEDED; margin: 5px;}
+.courseList .pgItemImg {float: right; margin: 5px; width: 90px;}
+.courseList .pgItemBody {float:left; font-size: 13px;width: 500px; margin: 5px; height: 90px;}
+.courseList .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}
+.courseList .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
+.courseList .pgItemBody span{font-size: 12px; }

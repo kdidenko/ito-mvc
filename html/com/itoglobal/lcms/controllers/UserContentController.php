@@ -84,6 +84,9 @@ class UserContentController extends ContentController {
 		
 		return $mvc;
 	}
+	public function handleMyTrainings($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 }
 
 ?>

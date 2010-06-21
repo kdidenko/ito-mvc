@@ -49,12 +49,12 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
-	<action name="/valuate-responses.html" id="valuateresponses">
+	<action name="/my-trainings.html" id="mytrainings">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
-	</action>
+	</action>	
 	
-	<action name="/browse-exercises.html" id="browseexercises">
+	<action name="/valuate-responses.html" id="valuateresponses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>

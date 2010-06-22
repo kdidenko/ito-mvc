@@ -53,39 +53,31 @@
 <span class="message">Please visit our school later. It will be updated very soon.</span>
 <?php } else { ?>
 <?php foreach($courseslist as $key => $value){ ?>
-	<div class="pgListItem">
-		<h1>
-			<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
-				<?php echo $value[CourseService::CAPTION];?>
-			</a>
-		</h1>
+	<div class="courseList">
 		<div class="pgItemImg">
 			<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>"><img src="<?php echo $value[CourseService::AVATAR];?>" alt="" title="" /></a>
+			<span class="lsValue">
+       			<?php if($value[CourseService::RATE] >= 1){ ?>
+				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<?php if($value[CourseService::RATE] >= 2){ ?>
+				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<?php if($value[CourseService::RATE] >= 3){ ?>
+				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<?php if($value[CourseService::RATE] >= 4){ ?>
+				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<?php if($value[CourseService::RATE] >= 5){ ?>
+				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			</span>
 		</div>
-		   <div class="pgItemBody">
-		       <ul>
-	       		<li>
-		       		<span>Rating:</span><span class="lsValue">
-		       			<?php if($value[CourseService::RATE] >= 1){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[CourseService::RATE] >= 2){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[CourseService::RATE] >= 3){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[CourseService::RATE] >= 4){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($value[CourseService::RATE] >= 5){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					</span>
-				</li>
-	          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-	          	<li><span>Language:</span><span class="lsValue">English</span></li>
-	         	<li><span>Level:</span><span class="lsValue"><?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></span></li>
-	         	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span></li>
-	         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-		     	</ul>
+	   	<div class="pgItemBody">
+	        <h1>
+				<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
+					<?php echo $value[CourseService::CAPTION];?>
+				</a>
+			</h1>
+	        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
 			<p><?php echo $value[CourseService::DESCRIPTION];?></p>
-			</div>
+		</div>
 	</div>
 <?php } } ?>
 </div>

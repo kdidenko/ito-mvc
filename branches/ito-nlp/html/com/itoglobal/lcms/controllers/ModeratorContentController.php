@@ -12,6 +12,12 @@ class ModeratorContentController extends ContentController {
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
+		if (isset ($requestParams['switch']) ) {
+			SessionService::setRole ( SessionService::ROLE_UR );
+			header("Location: /index.html");
+			exit;
+		}
+		
 		#for moderator
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
@@ -28,20 +34,22 @@ class ModeratorContentController extends ContentController {
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
 		$mrSchList = SchoolService::getSchoolsList ($where);
 		if (isset($requestParams[SchoolService::ID])){
-			if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
-			
-				#moderator
-				isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
-				isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+			foreach($mrSchList as $key => $value){
+				if ($value[SchoolService::ID] == $requestParams[SchoolService::ID]){	
 				
-				#for all
-				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-				$list = SchoolService::getSchoolsList ( $where );
-				$mvc->addObject ( 'list', $list [0]);
-				
-				#for moderator
-				$courseslist = CourseService::getCoursesList ();
-				$mvc->addObject ( 'courseslist', $courseslist );
+					#moderator
+					isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
+					isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
+					
+					#for all
+					$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+					$list = SchoolService::getSchoolsList ( $where );
+					$mvc->addObject ( 'list', $list [0]);
+					
+					#for moderator
+					$courseslist = CourseService::getCoursesList ();
+					$mvc->addObject ( 'courseslist', $courseslist );
+				}
 			}
 		}
 		return $mvc;
@@ -55,44 +63,46 @@ class ModeratorContentController extends ContentController {
 		$mrSchList = SchoolService::getSchoolsList ($where);
 		
 		if (isset($requestParams[SchoolService::ID])){
-			if ($mrSchList[0][SchoolService::ID] == $requestParams[SchoolService::ID]){	
-				#moderator list for admin
-				$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
-				$mrList = UsersService::getUsersList($where);
-				$mvc->addObject ( 'mrList', $mrList );
-				
-				if (isset ( $requestParams ['submit'] )) {
-					$error = array ();
-					if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-						$file = $_FILES ['file'];
-						$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
-						
-						$error[] .= ValidationService::checkAvatar ( $file );
-						$error = array_filter ( $error );
-					}
+			foreach($mrSchList as $key => $value){
+				if ($value[SchoolService::ID] == $requestParams[SchoolService::ID]){	
+					#moderator list for admin
+					$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
+					$mrList = UsersService::getUsersList($where);
+					$mvc->addObject ( 'mrList', $mrList );
 					
-					if (count ( $error ) == 0) {
+					if (isset ( $requestParams ['submit'] )) {
+						$error = array ();
 						if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-							StorageService::uploadFile ( $path, $file );
+							$file = $_FILES ['file'];
+							$path = 'storage/uploads/schools/' . $requestParams [SchoolService::ALIAS] . "/avatar.jpg";
+							
+							$error[] .= ValidationService::checkAvatar ( $file );
+							$error = array_filter ( $error );
 						}
-					}else{
-						$mvc->addObject ( UsersService::ERROR, $error );
+						
+						if (count ( $error ) == 0) {
+							if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+								StorageService::uploadFile ( $path, $file );
+							}
+						}else{
+							$mvc->addObject ( UsersService::ERROR, $error );
+						}
+						$fields = array ();
+						$fields [] .= SchoolService::CAPTION;
+						$fields [] .= SchoolService::DESCRIPTION;
+						
+						$vals = array ();
+						$id = $requestParams [SchoolService::ID];
+						$vals [] .= $requestParams [SchoolService::CAPTION];
+						$vals [] .= $requestParams [SchoolService::DESCRIPTION];
+						
+						SchoolService::updateFields ( $id, $fields, $vals );
 					}
-					$fields = array ();
-					$fields [] .= SchoolService::CAPTION;
-					$fields [] .= SchoolService::DESCRIPTION;
 					
-					$vals = array ();
-					$id = $requestParams [SchoolService::ID];
-					$vals [] .= $requestParams [SchoolService::CAPTION];
-					$vals [] .= $requestParams [SchoolService::DESCRIPTION];
-					
-					SchoolService::updateFields ( $id, $fields, $vals );
+					$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+					$result = SchoolService::getSchoolsList ( $where );
+					$mvc->addObject ( self::RESULT, $result [0] );
 				}
-				
-				$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-				$result = SchoolService::getSchoolsList ( $where );
-				$mvc->addObject ( self::RESULT, $result [0] );
 			}
 		}
 		return $mvc;
@@ -131,18 +141,10 @@ class ModeratorContentController extends ContentController {
 					StorageService::uploadFile ( $path, $_FILES ['file'] ) :
 						copy ( 'storage/uploads/default-course.jpg', $path );
 				
-				//TODO: do method!
-				# get school id where this user is moderator		
-				$fields = SchoolService::ID;
-				$id = SessionService::getAttribute(SessionService::USERS_ID);
-				$where = SchoolService::ADMIN . "= '" . $id . "'";
-				$from = SchoolService::SCHOOLS_TABLE;
-				$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-				$schoolID = $result [0][SchoolService::ID];
 				# Insert new school to DB
 				$fields = CourseService::LEVEL . ', ' . CourseService::CAPTION . ', ' . CourseService::DESCRIPTION . ', ' . CourseService::ALIAS . ', ' . CourseService::AVATAR . ', ' . CourseService::CRDATE . ', ' . CourseService::FEE . ', ' . CourseService::SCHOOL_ID;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0', '" . $schoolID . "'";
+				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0', '" . $requestParams [CourseService::SCHOOL_ID] . "'";
 				$into = CourseService::COURSE_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
@@ -152,6 +154,16 @@ class ModeratorContentController extends ContentController {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
 		}
+		
+		//TODO: do method!
+		# get school where this user is moderator		
+		$fields = SchoolService::ID . ", " . SchoolService::CAPTION;
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . "= '" . $id . "'";
+		$from = SchoolService::SCHOOLS_TABLE;
+		$mrSchList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$mvc->addObject ( 'mrSchList' , $mrSchList );
+		
 		return $mvc;
 	}
 	public function handleEditCourse($actionParams, $requestParams) {

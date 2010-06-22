@@ -29,7 +29,9 @@ class AuthenticationController extends BaseActionControllerImpl {
 				SessionService::setAttribute ( SessionService::FIRSTNAME, $result [0] [SessionService::FIRSTNAME] );
 				SessionService::setAttribute ( SessionService::LASTNAME, $result [0] [SessionService::LASTNAME] );
 				SessionService::setAttribute ( SessionService::EMAIL, $result [0] [SessionService::EMAIL] );
-				SessionService::setRole ( $result [0] [UsersService::ROLE] );
+				$result [0] [UsersService::ROLE] == UsersService::ROLE_MR ? 
+					SessionService::setRole ( SessionService::ROLE_UR ) : 
+						SessionService::setRole ( $result [0] [UsersService::ROLE] );
 				if (isset ( $requestParams ['persistent'] )) {
 					$expire = time () + 60 * 60 * 24 * 7;
 					setcookie ( "PHPSESSID", $session, $expire );

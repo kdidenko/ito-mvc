@@ -47,17 +47,18 @@
 <?php foreach($exerciselist as $key => $value){ ?>
 	<div class="courseList">
 		<div class="pgItemImg">
+			<img src="storage/video.jpg" alt="video"></img>
 			<span class="lsValue">
        			<?php if($value[ExerciseService::RATE] >= 1){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($value[ExerciseService::RATE] >= 2){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($value[ExerciseService::RATE] >= 3){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($value[ExerciseService::RATE] >= 4){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($value[ExerciseService::RATE] >= 5){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[ExerciseService::RATE] >= 2){ ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[ExerciseService::RATE] >= 3){ ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[ExerciseService::RATE] >= 4){ ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[ExerciseService::RATE] >= 5){ ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 			</span>
 		</div>
 	   	<div class="pgItemBody">
@@ -66,7 +67,6 @@
 					<?php echo $value[ExerciseService::CAPTION];?>
 				</a>
 			</h1>
-	        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
 			<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
 		</div>
 	</div>

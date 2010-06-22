@@ -80,7 +80,7 @@ class AdminContentController extends ContentController {
 		if (isset($requestParams[SchoolService::ID])){
 		
 			#moderator list for admin
-			$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" ;
+			$where = UsersService::ROLE . " != '" . UsersService::ROLE_AR . "'" ;
 			$mrList = UsersService::getUsersList($where);
 			$mvc->addObject ( 'mrList', $mrList );
 			

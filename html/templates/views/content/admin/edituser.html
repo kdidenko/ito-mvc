@@ -27,10 +27,10 @@
 	 		<dd>
 	 		<select name="role">
 	 			<option><?php echo $user[UsersService::ROLE];?></option>
-	 			<?php if ($message != UsersService::ROLE_MR){ ?>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_MR){ ?>
 	 			<option><?php echo UsersService::ROLE_MR ?></option>
 	 			<?php }?>
-	 			<?php if ($message != UsersService::ROLE_AR){ ?>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_AR){ ?>
 	 			<option><?php echo UsersService::ROLE_AR ?></option>
 	 			<?php }?>
 	 		</select>

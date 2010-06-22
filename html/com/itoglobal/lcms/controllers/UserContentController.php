@@ -3,8 +3,18 @@
 require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class UserContentController extends ContentController {
+	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset ($requestParams['switch']) ) {
+			$role = self::getRole();
+			if ($role == UsersService::ROLE_MR) {
+				SessionService::setRole ( SessionService::ROLE_MR );
+				header("Location: /index.html");
+				exit;
+			}
+		}
 		
 		#for all
 		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
@@ -86,6 +96,18 @@ class UserContentController extends ContentController {
 	}
 	public function handleMyTrainings($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
+	
+	private static function getRole(){
+		#prepeare value for sql query 
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$fields = UsersService::ROLE;
+		$from = UsersService::USERS;		
+		$where = UsersService::ID . "= '" . $id . "'";
+		#get user role 
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;		
+		return $result [UsersService::ROLE] ;
 	}
 }
 

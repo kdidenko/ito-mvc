@@ -78,8 +78,12 @@
 	</action>
 	
 	<action name="/course-details.html" id="coursedetails">
+		<role type="MR">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
+			<template name="index.html" path="templates/layout-two-columns.html" />
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	
 	<action name="/manage-users.html" id="manageusers">
@@ -268,13 +272,25 @@
 	<!--  Categories management actions end -->
 	
 	<action name="/school-details.html" id="schooldetails">
+		<role type="AR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+			<template name="index.html" path="templates/layout-two-columns.html" />
+		</role>
+		<role type="MR">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+			<template name="index.html" path="templates/layout-two-columns.html" />
+		</role>
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 
 	<action name="/exercise-details.html" id="exercisedetails">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<role type="MR">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+			<template name="index.html" path="templates/layout-two-columns.html" />
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	
 	<action name="/user-details.html" id="userdetails">
@@ -307,5 +323,5 @@
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>
 	</action>
-
+	
 </actions>

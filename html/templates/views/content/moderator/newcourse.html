@@ -20,15 +20,31 @@
 			<dd><input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/></dd>
 			<dt>Level:</dt>
 			<dd>
-			<select name="level" >
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-			</select>
+				<select name="level" >
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+				</select>
+			</dd>
+			<dt>Choose school:</dt>
+			<dd>
+				<select name="school_id" >
+					<?php
+					$mrSchList = $mvc->getObject('mrSchList');
+					if(!isset($mrSchList) || count($mrSchList) == 0){
+					?>
+				<option>No School</option>
+					<?php } else { ?>
+					<?php 
+					foreach($mrSchList as $key => $value){ 
+					?>
+				<option value="<?php echo $value[SchoolService::ID]; ?>"><?php echo $value[SchoolService::CAPTION]; ?></option>
+					<?php } } ?>
+				</select>
 			</dd>
 			<dt>Avatar(80x80) :</dt>
 			<dd>

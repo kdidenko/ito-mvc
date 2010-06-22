@@ -26,6 +26,7 @@ h2 {font-size:16px}
 			ul.mainNav li.current a {color:#698DB1; background-color:#FFF}
 			ul.userNav {float:right}
 			ul.userNav li {margin:0 0 0 10px}
+			.switch {margin: 10px}
 			.footerBody ul.mainNav li a {color:#698DB1; font-weight:normal; display:block; text-decoration:none; border:0; padding:0 14px 0 0; text-decoration:underline}
 			.footerBody ul.mainNav li a:hover {color:#666; text-decoration:none}
 			.footerBody ul.mainNav li.current a {background-color:#FFF; font-weight:bold; color:#666}

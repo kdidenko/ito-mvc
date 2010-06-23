@@ -111,6 +111,12 @@ class AdminContentController extends ContentController {
 				$vals [] .= $requestParams [SchoolService::ADMIN];			
 				
 				SchoolService::updateFields ( $id, $fields, $vals );
+				
+				#change moderator
+				$requestParams[SchoolService::OLD_ADMIN] != $requestParams[SchoolService::ADMIN] ?
+					self::changeMR($requestParams [SchoolService::ADMIN], $requestParams [SchoolService::OLD_ADMIN]) : 
+						NULL;
+				
 			}
 			
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
@@ -219,6 +225,22 @@ class AdminContentController extends ContentController {
 		return $mvc;	
 	}
 	
+	private static function changeMR($id, $old_admin){
+		#new moderator
+		$fields [] .= UsersService::ROLE;
+		$vals[] .= UsersService::ROLE_MR;
+		UsersService::updateFields ( $id, $fields, $vals );
+		
+		#old moderator
+		#if old moderator had access to moderate some schools he should be a moderator, else - user
+		$where = SchoolService::ADMIN . "='" . $old_admin . "'";
+		$result = SchoolService::getSchoolsList($where);
+		if ($result == null) {
+			$fields [] .= UsersService::ROLE;
+			$vals[] .= UsersService::ROLE_UR;
+			UsersService::updateFields ( $old_admin, $fields, $vals );
+		}
+	}
 }
 
 ?>

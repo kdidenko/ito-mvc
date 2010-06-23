@@ -62,6 +62,10 @@ class SchoolService {
 	 */
 	const DISABLE = 'disable';
 	/**
+	 * @var string defining the old admin ield name
+	 */
+	const OLD_ADMIN = 'old_admin';
+	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */

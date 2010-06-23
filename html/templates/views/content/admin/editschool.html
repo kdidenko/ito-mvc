@@ -49,10 +49,9 @@
 			<img alt="none avatar" src="<?php echo $schList[SchoolService::AVATAR]; ?>">
 			<input type="file" name="file" size="30" ></input>
 			</dd>
-			<dd>
-			<input type="hidden" name="alias" id="alias" value="<?php echo $schList[SchoolService::ALIAS]; ?>"/>
-			</dd>
 		</dl>
+		<input type="hidden" name="alias" id="alias" value="<?php echo $schList[SchoolService::ALIAS]; ?>"/>
+		<input type="hidden" name="old_admin" id="old_admin" value="<?php echo $schList[SchoolService::ADMIN]; ?>"/>
 		<input type="submit" name="submit" value="Submit Changes"/>
 	</form>	
 </div>

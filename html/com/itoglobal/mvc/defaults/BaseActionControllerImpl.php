@@ -59,6 +59,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 * @return void
 	 */
 	public function forwardActionRequest($location) {
+		@ob_clean();
 		header ( "Location: $location" );
 		exit ();
 	}

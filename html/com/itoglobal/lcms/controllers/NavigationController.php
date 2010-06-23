@@ -11,13 +11,13 @@ class NavigationController extends SecureActionControllerImpl {
 	public function handleActionRequest($actionParams, $requestParams) {
 		$mvc = parent::handleActionRequest($actionParams, $requestParams);
 		
-		$role = self::getRole();
+		$role = self::getUserRole();
 		$mvc->addObject ( 'role', $role);
 		
 		//TODO: put navigation handling here
 		return $mvc;		
 	}
-	public static function getRole(){
+	public static function getUserRole(){
 		#prepeare value for sql query 
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$fields = UsersService::ROLE;

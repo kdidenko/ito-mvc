@@ -134,3 +134,16 @@ span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
 .courseList .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}
 .courseList .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .courseList .pgItemBody span{font-size: 12px; }
+
+.trnList {}
+.trnList .itemMenu li {margin-left: 30px}
+.trnList .itemMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #EDEDED; border: 1px solid #EDEDED; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: black; text-decoration: none;}
+.trnList .itemMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
+.trnList .itemMenu li:hover a{ background-color: white;}
+.trnList .itemBody {clear: both;  height: 300px; border-top: 1px solid #EDEDED; margin: 15px; text-align: center;}
+.trnList .itemBody .itemEx {height: 100px; border:1px solid #B8C9DB; margin: 25px 0;}
+					.itemEx .pgItemImg {float: right; margin: 5px; width: 90px;}
+					.itemEx .pgItemBody {float:left; font-size: 13px;width: 500px; margin: 5px; height: 90px;}
+					.itemEx .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}
+					.itemEx .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
+.trnList .itemBody .itemOption {margin: 50px 0; text-align: center;}

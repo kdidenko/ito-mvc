@@ -110,14 +110,14 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageCourses($actionParams, $requestParams) {		
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		#if no school assigne to moderator than page forward to index.html
 		$schAssign = self::hasSchlAssign();
-		
 		if($schAssign == NULL){ 
 			//TODO: use forwardActionRequest method!!!! 
 			header ( "Location: /index.html" );
 			exit ();	
 		}
+		
 		
 		#for moderator
 		isset ( $requestParams [CourseService::DELETED] ) ? CourseService::deleteCourse ( $requestParams [CourseService::DELETED] ) : null;

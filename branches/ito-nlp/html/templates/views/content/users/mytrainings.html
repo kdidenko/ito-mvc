@@ -1,2 +1,98 @@
 <h1>My Trainings</h1>
-<span class="message">Under construction</span>
+<?php
+	$trainingList = $mvc->getObject('trainingList');
+	if(!isset($trainingList) || count($trainingList) == 0){
+?>
+<span class="message">Please, fix this text :).</span>
+<span class="message">There are no trainings, you may <a href="/new-training.html" title="Trainings">start</a> to create your first training.</span>
+<?php } else { ?>
+<div class="trnList">
+	<div class="itemMenu">
+		<ul>
+			<?php foreach($trainingList as $key => $training){ ?> 
+				<li<?php if(isset($_GET[$training[TrainingsService::ID]])) echo ' class="current"';?>>
+					<a href="?<?php echo $training[TrainingsService::ID];?>">
+						<?php echo $training[TrainingsService::TRN_NAME];?>
+					</a>
+				</li>
+			<?php } ?>
+			<li <?php if($_GET == NULL) echo ' class="current"';?>><a href="my-trainings.html">+</a></li>
+		</ul>
+	</div>
+	<div class="itemBody">
+		<?php if ($_GET == NULL) { ?>
+			<!-- NEW TRAINING: remove to single html page -->
+			<form enctype="multipart/form-data" action="" method="post">
+				<dl>
+					<dt>Training Name:</dt>
+					<dd><input type="text" name="training_name" id="training_name" size="35"/></dd>
+					<dt>Chose Course</dt>
+					<dd>
+						<select size="10" style="width: 250px">
+				 			<optgroup label="School Name 1">
+				 				<option>Course Name 1</option>
+				 				<option>Course Name 2</option>
+				 				<option>Course Name 3</option>
+				 			</optgroup>
+				 			<optgroup label="School Name 2">
+				 				<option>Course Name 4</option>
+				 				<option>Course Name 5</option>
+				 			</optgroup>
+			 			</select>
+					</dd>
+				</dl>
+		 		<input type="hidden" name="id" value="<?php echo $schList[TrainingsService::ID]; ?>"/>
+				<input type="submit" name="submit" value="Submit Changes"/>
+			</form>	
+			<span class="message">Form under construction</span>
+		<?php } else { ?>
+			<?php
+			$exerciselist = $mvc->getObject('exerciselist');
+			if(!isset($exerciselist) || count($exerciselist) == 0){
+			?>
+			<span class="message">Sorry, there are no course exercises available at this moment.</span>
+			<span class="message">Please visit course later. It will be updated very soon.</span>
+			<?php } else { ?>
+			<?php foreach($exerciselist as $key => $value){ ?>
+				<div class="itemEx">
+					<div class="pgItemImg">
+						<img src="storage/video.jpg" alt="video"></img>
+						<span class="lsValue">
+				       		<?php if($value[ExerciseService::RATE] >= 1){ ?>
+							<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($value[ExerciseService::RATE] >= 2){ ?>
+							<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($value[ExerciseService::RATE] >= 3){ ?>
+							<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($value[ExerciseService::RATE] >= 4){ ?>
+							<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($value[ExerciseService::RATE] >= 5){ ?>
+							<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						</span>
+					</div>
+				   	<div class="pgItemBody">
+				        <h1>
+							<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+								<?php echo $value[ExerciseService::CAPTION];?>
+							</a>
+						</h1>
+						<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
+					</div>
+				</div>
+			<?php } } ?>
+			<div class="itemOption">
+				<span><a class="button" href="start-challenge.html?username=1">Previous Exercise</a></span>
+				<span><a class="button" href="start-challenge.html?username=1">Start Challenge</a></span>
+				<span><a class="button" href="start-challenge.html?username=1">Next Exercise</a></span>
+			</div>
+			<span class="message">
+				Please adjust your web camera position and lighting so that you can clearly see yourself. 
+				You must also see distinctive movement of the volume bar while you are speaking. 
+				The image and sound from your web camera  and microphone will be recorded as soon as the 
+				challenge starts. The valuation can be based upon your nonverbal signals during communication, 
+				not only words!
+			</span>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>

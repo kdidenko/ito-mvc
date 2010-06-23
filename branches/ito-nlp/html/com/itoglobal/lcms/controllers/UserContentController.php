@@ -8,7 +8,7 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if (isset ($requestParams['switch']) ) {
-			$role = self::getRole();
+			$role = self::getUserRole();
 			if ($role == UsersService::ROLE_MR) {
 				SessionService::setRole ( SessionService::ROLE_MR );
 				header("Location: /index.html");
@@ -16,11 +16,12 @@ class UserContentController extends ContentController {
 			}
 		}
 		
-		#for all
+		/*#for all
 		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
 		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
 		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
 		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
+		*/
 		
 		#for user
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
@@ -30,8 +31,7 @@ class UserContentController extends ContentController {
 		$where = AssignedService::USER_ID . "='" . $user_id . "'";
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		
-		
-		if (isset($result [0] [AssignedService::SCHOOL_ID])){
+		if ($result != NULL){
 			$where = '';
 			foreach($result as $key => $value){
 				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
@@ -40,6 +40,11 @@ class UserContentController extends ContentController {
 			$usSchList = SchoolService::getSchoolsList ($where);
 			$usSchList = self::createTeaser($usSchList);
 			$mvc->addObject ( 'usSchList', $usSchList );
+			
+			#for users and visitor
+			$where = CourseService::SCHOOL_ID . " = '" . $usSchList [0][CourseService::ID] . "'";
+			$usCourseList = CourseService::getCoursesList ( $where );
+			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
 		
 		return $mvc;
@@ -94,11 +99,28 @@ class UserContentController extends ContentController {
 		
 		return $mvc;
 	}
+	
+	
 	public function handleMyTrainings($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$trainingList = TrainingsService::getTrainingList();
+		$mvc->addObject ( 'trainingList', $trainingList );
+		
+		$where = ExerciseService::ID . " = '11'";
+		$exerciselist = ExerciseService::getExercisesList($where);
+		$mvc->addObject ( 'exerciselist', $exerciselist);
+		
+		return $mvc;
 	}
 	
-	private static function getRole(){
+/*	public function handleNewTraining($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		return $mvc;
+	}
+	*/
+	
+	private static function getUserRole(){
 		#prepeare value for sql query 
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$fields = UsersService::ROLE;

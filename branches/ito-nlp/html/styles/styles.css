@@ -49,13 +49,14 @@ h2 {font-size:16px}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
 .pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 0 0; border:1px solid #ededed}
-.pgListItem .pgItemBody {display:table; height:1%; margin-left:15px}
+.pgListItem .pgItemBody {display:table; height:1%; margin-left:15px;width: 100%;}
 			
-.pgListItem	.pgItemOptions {margin-top: 20px; line-height:30px; border-top: 1px solid #ededed; width: 451px;}
+.pgListItem	.pgItemFooter {margin-top: 20px; line-height:30px; border-top: 1px solid #ededed;}
+			.pgItemFooter div {width: 100%;background-color: #E4F0F5; margin: 10px 0; }
 .pgListItem	.description {border-left: 2px solid #CCC;}
 .pgListItem	.description p {margin: 10px;}
 .pgListItem	.crdate {color: gray; font-size: 11px;}
-.pgListItem	.categories { margin-top: 10px; width: 100%; height: 30px; line-height:30px; background-color: #E4F0F5;}
+.pgListItem	.categories { margin-top: 10px; height: 30px; line-height:30px; background-color: #E4F0F5;}
 .pgListItem	.categories b {margin-left: 10px;}			
 .pgListItem	.categories span {font-size: 11px;}
 			
@@ -140,8 +141,8 @@ span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
 .trnList .itemMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #EDEDED; border: 1px solid #EDEDED; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: black; text-decoration: none;}
 .trnList .itemMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .trnList .itemMenu li:hover a{ background-color: white;}
-.trnList .itemBody {clear: both;  height: 300px; border-top: 1px solid #EDEDED; margin: 15px; text-align: center;}
-.trnList .itemBody .itemForm {margin-top: 30px;}
+.trnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
+.trnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
 .trnList .itemBody .itemEx {height: 100px; border:1px solid #B8C9DB; margin: 25px 0;}
 					.itemEx .pgItemImg {float: right; margin: 5px; width: 90px;}
 					.itemEx .pgItemBody {float:left; font-size: 13px;width: 500px; margin: 5px; height: 90px;}

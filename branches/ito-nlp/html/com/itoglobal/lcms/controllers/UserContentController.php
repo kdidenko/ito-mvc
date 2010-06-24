@@ -41,10 +41,11 @@ class UserContentController extends ContentController {
 			$usSchList = self::createTeaser($usSchList);
 			$mvc->addObject ( 'usSchList', $usSchList );
 			
-			#for users and visitor
+			/*#for users and visitor
 			$where = CourseService::SCHOOL_ID . " = '" . $usSchList [0][CourseService::ID] . "'";
 			$usCourseList = CourseService::getCoursesList ( $where );
-			$mvc->addObject ( 'usCourseList', $usCourseList );
+			$usCourseList = self::createTeaser($usCourseList);
+			$mvc->addObject ( 'usCourseList', $usCourseList );*/
 		}
 		
 		return $mvc;
@@ -66,6 +67,8 @@ class UserContentController extends ContentController {
 		#for user
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$school_id = $requestParams[AssignedService::ID];
+		
+		#sign in / out to school
 		isset($requestParams[AssignedService::SIGNOUT]) ?		
 			$school_id = $requestParams[AssignedService::SIGNOUT] :
 				null;
@@ -104,7 +107,6 @@ class UserContentController extends ContentController {
 	public function handleMyTrainings($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-	
 		#get schools and courses list (assigned to user) for creating new training
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$fields = AssignedService::SCHOOL_ID;
@@ -128,13 +130,15 @@ class UserContentController extends ContentController {
 			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
 		#creating new training
 		if ( isset($requestParams['submit']) ) {
 			//print_r($requestParams);
 			
 			#creatin index for training
 			$where = TrainingsService::USER_ID . '=' . $user_id;
-			$trainingList = TrainingsService::getTrainingList($where);
+			$groupBy = TrainingsService::TRN_ID;
+			$trainingList = TrainingsService::getTrainingList($where, $groupBy);
 			$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1; 
 
 			//echo count($usCourseList);exit;
@@ -155,19 +159,22 @@ class UserContentController extends ContentController {
 		$trainingList = TrainingsService::getTrainingList($where, $groupBy);
 		$mvc->addObject ( 'trainingList', $trainingList );
 		
-		#remove this
-		$where = ExerciseService::ID . " = '11'";
-		$exerciselist = ExerciseService::getExercisesList($where);
-		$mvc->addObject ( 'exerciselist', $exerciselist);
-		
+		#get exercises for training
+		if(isset($requestParams[TrainingsService::ID])){
+			#creating "where" for sql query
+			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
+			$where = NULL;
+			foreach ($training as $key => $value){
+				$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
+				$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
+			}
+			
+			$exerciselist = ExerciseService::getExercisesList($where);
+			$exerciselist = self::createTeaser($exerciselist);
+			$mvc->addObject ( 'exerciselist', $exerciselist);
+		}
 		return $mvc;
 	}
-	
-/*	public function handleNewTraining($actionParams, $requestParams){
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		return $mvc;
-	}
-	*/
 	
 	private static function getUserRole(){
 		#prepeare value for sql query 

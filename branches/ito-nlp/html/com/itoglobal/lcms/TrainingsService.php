@@ -47,10 +47,10 @@ class TrainingsService {
 			$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
 					self::USER_ID . ", " . self::COURSE_ID;
 			$from = self::TRAININGS_TABLE;
-			$where = self::USER_ID . '=' . $id;
+			$where = self::TRN_ID . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
+			$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
 		} 
 		return $result;
 	}

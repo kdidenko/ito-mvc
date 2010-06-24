@@ -67,7 +67,10 @@
 					<?php echo $value[ExerciseService::CAPTION];?>
 				</a>
 			</h1>
-			<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
+			<p>
+				<?php echo $value[ExerciseService::DESCRIPTION];?>
+				<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+			</p>
 		</div>
 	</div>
 <?php } } ?>

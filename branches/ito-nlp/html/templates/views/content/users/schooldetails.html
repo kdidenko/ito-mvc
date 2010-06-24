@@ -76,7 +76,10 @@
 				</a>
 			</h1>
 	        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
-			<p><?php echo $value[CourseService::DESCRIPTION];?></p>
+			<p>
+				<?php echo $value[CourseService::DESCRIPTION];?>
+				<a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+			</p>
 		</div>
 	</div>
 <?php } } ?>

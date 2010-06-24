@@ -64,13 +64,8 @@
 				<?php echo $value[UsersService::USERNAME];?>
 			</td>
 			<td>
-				<?php if($value[ExerciseService::COURSE_ID] == $list[CourseService::ID]){ ?>
-				<a class="button" href=<?php echo 'course-details.html?remove=' . $value[ExerciseService::ID] . '&id=' . $list[CourseService::ID]; ?>>remove</a>
-				<?php } else { ?>
-				<a class="button" href=<?php echo 'course-details.html?add=' . $value[ExerciseService::ID] . '&id=' . $list[CourseService::ID];?>>add</a>
-				<?php } ?>
 				<a class="button" href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>
-				<a class="button" href=<?php echo 'manage-exercises.html?deleted=' . $value[ExerciseService::ID];?>>delete</a>
+				<a class="button" href=<?php echo 'course-details.html?id=' . $_GET['id'] . '&deleted=' . $value[ExerciseService::ID];?>>delete</a>
 			</td>
 		</tr>
 	<?php } ?>

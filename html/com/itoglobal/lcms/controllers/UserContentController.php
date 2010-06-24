@@ -104,9 +104,8 @@ class UserContentController extends ContentController {
 	public function handleMyTrainings($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		$trainingList = TrainingsService::getTrainingList();
-		$mvc->addObject ( 'trainingList', $trainingList );
-		
+	
+		#get schools and courses list (assigned to user) for creating new training
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$fields = AssignedService::SCHOOL_ID;
 		$from = AssignedService::SCHOOLS_ASSIGNED;
@@ -114,20 +113,47 @@ class UserContentController extends ContentController {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		if ($result != NULL){
 			$where = '';
+			$where_course = '';
 			foreach($result as $key => $value){
 				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
 				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
+				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where_course .= $key != count ($result) - 1 ? " OR " . CourseService::COURSE_TABLE . "." : null;
 			}
 			$usSchList = SchoolService::getSchoolsList ($where);
 			$usSchList = self::createTeaser($usSchList);
-			//print_r($usSchList);exit;
 			$mvc->addObject ( 'usSchList', $usSchList );
 		
-			#for users and visitor
-			$usCourseList = CourseService::getCoursesList ();
-			//print_r($usCourseList);exit;
+			$usCourseList = CourseService::getCoursesList ($where_course);
 			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		#creating new training
+		if ( isset($requestParams['submit']) ) {
+			//print_r($requestParams);
+			
+			#creatin index for training
+			$where = TrainingsService::USER_ID . '=' . $user_id;
+			$trainingList = TrainingsService::getTrainingList($where);
+			$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1; 
+
+			//echo count($usCourseList);exit;
+			foreach ($usCourseList as $key => $value) {
+				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
+					# Insert new school to DB
+					$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
+					$values = "'" . $t_index . "', '" . $requestParams [TrainingsService::TRN_NAME] . "', '" . $user_id . "' , '" . $value[CourseService::ID] . "'";
+					$into = TrainingsService::TRAININGS_TABLE;
+					$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
+				}
+			}
+		}		
+		
+		#get trainings list
+		$where = TrainingsService::USER_ID . "= '" . $user_id . "'";
+		$groupBy = "'" . TrainingsService::TRN_ID . "'";
+		$trainingList = TrainingsService::getTrainingList($where, $groupBy);
+		$mvc->addObject ( 'trainingList', $trainingList );
 		
 		#remove this
 		$where = ExerciseService::ID . " = '11'";

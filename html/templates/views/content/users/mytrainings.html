@@ -4,8 +4,8 @@
 	if(!isset($trainingList) || count($trainingList) == 0){
 ?>
 <span class="message">Please, fix this text :).</span>
-<span class="message">There are no trainings, you may <a href="/new-training.html" title="Trainings">start</a> to create your first training.</span>
-<?php } else { ?>
+<span class="message">There are no trainings, you may start to create your first training.</span>
+<?php } ?>
 <div class="trnList">
 	<div class="itemMenu">
 		<ul>
@@ -21,34 +21,8 @@
 	</div>
 	<div class="itemBody">
 		<?php if ($_GET == NULL) { ?>
-			<!-- NEW TRAINING: move to single html page -->
-			<span class="message">Form under construction</span>
-			&nbsp;
-			<form enctype="multipart/form-data" action="" method="post">
-				<dl>
-					<dt>Training Name:</dt>
-					<dd><input type="text" name="training_name" id="training_name" size="35"/></dd>
-					<dt><span class="message">Please, mark courses.</span></dt>
-					<?php
-						$usSchList = $mvc->getObject('usSchList');
-						$usCourseList = $mvc->getObject('usCourseList');
-						if(isset($usSchList) || count($usSchList) > 0){
-					?>
-					<?php foreach($usSchList as $key => $school){ ?> 
-						<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
-						<?php
-						if(isset($usCourseList) || count($usCourseList) > 0){
-						?>
-						<?php foreach($usCourseList as $key => $course){ ?> 
-						<dd><input type="checkbox" name="Course Name"/><?php echo $course[CourseService::CAPTION];?></dd>
-						<dt>&nbsp;</dt>
-						<?php }
-							} }
-						 } ?>
-				</dl>
-		 		<input type="hidden" name="id" value="<?php echo $training[TrainingsService::ID]; ?>"/>
-				<input type="submit" name="submit" value="Submit Changes"/>
-			</form>	
+			<!-- creating training form. -->
+			<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
 		<?php } else { ?>
 			<?php
 			$exerciselist = $mvc->getObject('exerciselist');
@@ -99,4 +73,4 @@
 		<?php } ?>
 	</div>
 </div>
-<?php } ?>
+<?php  ?>

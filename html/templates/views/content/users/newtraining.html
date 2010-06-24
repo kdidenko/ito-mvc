@@ -1,0 +1,28 @@
+<div class="itemForm">
+	<form enctype="multipart/form-data" action="my-trainings.html" method="post">
+		<dl>
+			<dt>Training Name:</dt>
+			<dd><input type="text" name="training_name" id="training_name" size="35"/></dd>
+			<dt><span class="message">Please, mark courses.</span></dt>
+			<?php
+				$usSchList = $mvc->getObject('usSchList');
+						$usCourseList = $mvc->getObject('usCourseList');
+						if(isset($usSchList) || count($usSchList) > 0){
+					?>
+			<?php foreach($usSchList as $key => $school){ ?> 
+				<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
+				<?php
+				if(isset($usCourseList) || count($usCourseList) > 0){
+						?>
+				<?php foreach($usCourseList as $key => $course){ 
+								if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
+						<dd><input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/><?php echo $course[CourseService::CAPTION];?></dd>
+						<dt>&nbsp;</dt>
+						<?php } 
+								}
+						} }
+					} ?>
+		</dl>
+		<input type="submit" name="submit" value="Save Training"/>
+	</form>
+</div>

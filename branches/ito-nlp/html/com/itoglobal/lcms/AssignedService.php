@@ -1,5 +1,5 @@
 <?php
-
+//TODO: rename class to assignments!!
 class AssignedService {
 	#schools_assigned table
 	const SCHOOLS_ASSIGNED = 'schools_assigned';

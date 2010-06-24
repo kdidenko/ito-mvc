@@ -141,6 +141,7 @@ span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
 .trnList .itemMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .trnList .itemMenu li:hover a{ background-color: white;}
 .trnList .itemBody {clear: both;  height: 300px; border-top: 1px solid #EDEDED; margin: 15px; text-align: center;}
+.trnList .itemBody .itemForm {margin-top: 30px;}
 .trnList .itemBody .itemEx {height: 100px; border:1px solid #B8C9DB; margin: 25px 0;}
 					.itemEx .pgItemImg {float: right; margin: 5px; width: 90px;}
 					.itemEx .pgItemBody {float:left; font-size: 13px;width: 500px; margin: 5px; height: 90px;}

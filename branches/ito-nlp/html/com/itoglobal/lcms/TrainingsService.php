@@ -8,7 +8,7 @@ class TrainingsService {
 	/**
 	 * @var  string defining the training_id field name
 	 */
-	const TRN_ID = 'training_id';
+	const TRN_ID = 't_index';
 	/**
 	 * @var string defining the training_name field name
 	 */
@@ -26,11 +26,12 @@ class TrainingsService {
 	 */
 	const TRAININGS_TABLE = 'trainings';
 		
-	public static function getTrainingList($where = NULL) {
-		$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . self::USER_ID . ", " . self::COURSE_ID;
+	public static function getTrainingList($where = NULL, $groupBy = NULL) {
+		$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
+					self::USER_ID . ", " . self::COURSE_ID;
 		$from = self::TRAININGS_TABLE;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 		return $result;
 	}
 	
@@ -39,21 +40,20 @@ class TrainingsService {
 	 * @param integer $id the user id.
 	 * @return mixed user data or null if user with such id does not exists. 
 	 */
-	/*public static function getUser($id) {
+	public static function getTraining($id) {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
-			$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . 
-						SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . 
-						self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
-			$from = self::USERS;
-			$where = self::ID . '=' . $id;
+			$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
+					self::USER_ID . ", " . self::COURSE_ID;
+			$from = self::TRAININGS_TABLE;
+			$where = self::USER_ID . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
 		} 
 		return $result;
-	}*/
+	}
 	
 	public static function updateFields(/*$id, $fields, $vals*/) {
 		/*# setting the query variables

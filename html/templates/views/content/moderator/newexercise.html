@@ -16,6 +16,22 @@
 			<dd><input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST[ExerciseService::CAPTION]) ? $_POST[ExerciseService::CAPTION] : null; ?>"/></dd>
 			<dt>Description:</dt>
 			<dd><textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST[ExerciseService::DESCRIPTION]) ? $_POST[ExerciseService::DESCRIPTION] : null; ?></textarea></dd>
+			<dt>Choose course:</dt>
+			<dd>
+				<select name="course_id" >
+					<?php
+					$courseList = $mvc->getObject('courseList');
+					if(!isset($courseList) || count($courseList) == 0){
+					?>
+				<option>No Courses</option>
+					<?php } else { ?>
+					<?php 
+					foreach($courseList as $key => $value){ 
+					?>
+				<option value="<?php echo $value[CourseService::ID]; ?>"><?php echo $value[CourseService::CAPTION]; ?></option>
+					<?php } } ?>
+				</select>
+			</dd>
 			<dt>Video for exercise:</dt>
 			<dd><input type="text" name="video" id="video" size="35" value="<? echo isset($_POST[ExerciseService::VIDEO]) ? $_POST[ExerciseService::VIDEO] : null; ?>"/></dd>
 		</dl>

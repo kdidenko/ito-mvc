@@ -36,7 +36,9 @@
 	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
 </div>
 <div>
-<b>Add courses:</b>
+<div class="subHeader">
+	<b>Courses List</b>
+</div>
 <?php
 	$courseslist = $mvc->getObject('courseslist');
 	if(!isset($courseslist) || count($courseslist) == 0){
@@ -51,25 +53,24 @@
 				<?php echo $value[CourseService::CAPTION];?>
 			</a>
 		</td>
-		<td>Level: <?php echo $value[CourseService::LEVEL];?></td>
 		<td>
-			<?php if($value[CourseService::RATE] >= 1){ ?>
+			Level: <?php echo $value[CourseService::LEVEL];?>
+		</td>
+		<td>
+			<?php if($value[SchoolService::RATE] >= 1){ ?>
 			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[CourseService::RATE] >= 2){ ?>
+			<?php if($value[SchoolService::RATE] >= 2){ ?>
 			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[CourseService::RATE] >= 3){ ?>
+			<?php if($value[SchoolService::RATE] >= 3){ ?>
 			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[CourseService::RATE] >= 4){ ?>
+			<?php if($value[SchoolService::RATE] >= 4){ ?>
 			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[CourseService::RATE] >= 5){ ?>
+			<?php if($value[SchoolService::RATE] >= 5){ ?>
 			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 		</td>
 		<td>
-			<?php if($value[CourseService::SCHOOL_ID] == $list[SchoolService::ID]){ ?>
-			<a class="button" href=<?php echo 'school-details.html?remove=' . $value[CourseService::ID] . '&id=' . $list[SchoolService::ID]; ?>>remove</a>
-			<?php } else { ?>
-			<a class="button" href=<?php echo 'school-details.html?add=' . $value[CourseService::ID] . '&id=' . $list[SchoolService::ID];?>>add</a>
-			<?php } ?>
+			<a class="button" href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>Edit</a>
+			<a class="button" href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } } }?>

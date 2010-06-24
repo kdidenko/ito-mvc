@@ -119,6 +119,7 @@ class ContentController extends SecureActionControllerImpl {
 		#for users and visitor
 		$where = ExerciseService::COURSE_ID . " = '" . $requestParams [ExerciseService::ID] . "'";
 		$exerciselist = ExerciseService::getExercisesList( $where );
+		$exerciselist = self::createTeaser($exerciselist);
 		$mvc->addObject ( 'exerciselist', $exerciselist);
 		
 		return $mvc;

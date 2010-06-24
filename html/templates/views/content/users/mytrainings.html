@@ -10,13 +10,13 @@
 	<div class="itemMenu">
 		<ul>
 			<?php foreach($trainingList as $key => $training){ ?> 
-				<li<?php if(isset($_GET[$training[TrainingsService::ID]])) echo ' class="current"';?>>
-					<a href="?<?php echo $training[TrainingsService::ID];?>">
+				<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>
+					<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>">
 						<?php echo $training[TrainingsService::TRN_NAME];?>
 					</a>
 				</li>
 			<?php } ?>
-			<li <?php if($_GET == NULL) echo ' class="current"';?>><a href="my-trainings.html">+</a></li>
+			<li <?php if($_GET == NULL) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
 		</ul>
 	</div>
 	<div class="itemBody">
@@ -54,14 +54,17 @@
 								<?php echo $value[ExerciseService::CAPTION];?>
 							</a>
 						</h1>
-						<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
+						<p>
+							<?php echo $value[ExerciseService::DESCRIPTION];?>
+							<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+						</p>
 					</div>
 				</div>
 			<?php } } ?>
 			<div class="itemOption">
-				<span><a class="button" href="start-challenge.html?username=1">Previous Exercise</a></span>
-				<span><a class="button" href="start-challenge.html?username=1">Start Challenge</a></span>
-				<span><a class="button" href="start-challenge.html?username=1">Next Exercise</a></span>
+				<span><a class="button" href="#">Previous Exercise</a></span>
+				<span><a class="button" href="start-challenge.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>
+				<span><a class="button" href="#">Next Exercise</a></span>
 			</div>
 			<span class="message">
 				Please adjust your web camera position and lighting so that you can clearly see yourself. 

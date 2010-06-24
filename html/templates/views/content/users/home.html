@@ -55,45 +55,9 @@
 						</span>
 					</div>
 				</div>
-				<div class="pgItemOptions">
+				<div class="pgItemFooter">
+					<div><span class="message">NEWS:</span></div>
 				</div>
-			</div>
-			<div>
-				<?php
-				$usCourseList = $mvc->getObject('usCourseList');
-				if(!isset($usCourseList) || count($usCourseList) == 0){
-				?>
-					<span class="message">Sorry, there are no school courses available at this moment.</span>
-					<span class="message">Please visit our school later. It will be updated very soon.</span>
-					<?php } else { ?>
-					<?php foreach($usCourseList as $key => $value){ ?>
-						<div class="courseList">
-							<div class="pgItemImg">
-								<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>"><img src="<?php echo $value[CourseService::AVATAR];?>" alt="" title="" /></a>
-								<span class="lsValue">
-					       			<?php if($value[CourseService::RATE] >= 1){ ?>
-									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-									<?php if($value[CourseService::RATE] >= 2){ ?>
-									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-									<?php if($value[CourseService::RATE] >= 3){ ?>
-									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-									<?php if($value[CourseService::RATE] >= 4){ ?>
-									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-									<?php if($value[CourseService::RATE] >= 5){ ?>
-									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-								</span>
-							</div>
-						   	<div class="pgItemBody" style="width: 400px;">
-						        <h1>
-									<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
-										<?php echo $value[CourseService::CAPTION];?>
-									</a>
-								</h1>
-						        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
-								<p><?php echo $value[CourseService::DESCRIPTION];?></p>
-							</div>
-						</div>
-				<?php } } ?>
 			</div>
 		</div>
 	</div>

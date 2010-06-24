@@ -29,11 +29,6 @@
          	<li><span>Level:</span><span class="lsValue"><?php echo $list[CourseService::LEVEL];?></span></li>
          	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::FEE];?>$ / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-         	<?php $assign = $mvc->getObject('assign'); if(!isset($assign) || count($assign) == 0){?>
-	     	<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/course-assigned.html?signup=" . $list[CourseService::ID] ?>">SignUp</a></span></li>
-			<?php } else { ?>
-			<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/course-assigned.html?signout=" . $list[CourseService::ID] ?>">SignOut</a></span></li>
-	   		<?php } ?>
 	     	</ul>
 		</div>
 	<p><?php echo $list[CourseService::DESCRIPTION];?></p>
@@ -72,7 +67,10 @@
 					<?php echo $value[ExerciseService::CAPTION];?>
 				</a>
 			</h1>
-			<p><?php echo $value[ExerciseService::DESCRIPTION];?></p>
+			<p>
+				<?php echo $value[ExerciseService::DESCRIPTION];?>
+				<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+			</p>
 		</div>
 	</div>
 <?php } } ?>

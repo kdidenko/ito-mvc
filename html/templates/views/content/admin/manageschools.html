@@ -55,7 +55,7 @@ ID = <?php echo $value[SchoolService::ID];?>
 					</span>
 				</div>
 			</div>
-			<div class="pgItemOptions">
+			<div class="pgItemFooter">
 				<a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a>
 				<?php  if($value[SchoolService::ENABLED] == '1') { ?>
 					<a class="button" href=<?php echo 'manage-schools.html?disable=' . $value[SchoolService::ID];?>>Activate</a>

@@ -88,7 +88,7 @@ class CourseService {
 		DBClientHandler::getInstance ()->execDelete ( $from, $where, '', '' );
 	}
 	
-	public static function removeCourse($id, $school_id) {
+	/*public static function removeCourse($id, $school_id) {
 		# setting the query variables
 		$fields = self::SCHOOL_ID;
 		$vals = '0';
@@ -106,7 +106,7 @@ class CourseService {
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
-	}
+	}*/
 	
 	public static function validation($requestParams,  $_FILES) {
 		$error = array ();

@@ -38,6 +38,7 @@ h2 {font-size:16px}
 			.button {padding:3px; margin-top:500px; background-color: #ededed; border: 1px solid grey; color: black; text-decoration: none; }
 			.button:hover {width: 30px; background-color: #CCC; border: 1px solid grey; color: black; }
 	.mainPageContent {float:left; width:672px; margin:0 0 0 14px}
+	/**/.wide {float:none; width:auto}
 		.pgContentTools {clear:both; width:100%; display:table; border:1px solid #ededed; background-color:#F9F9F9}
 		.pgContentTools h2 {font-size:14px; font-weight:600}
 		.pgContentTools ul {float:right; font-size:11px; padding:5px 0 6px 0; margin:1px 10px 1px 1px}
@@ -45,7 +46,7 @@ h2 {font-size:16px}
 
 .pgItemsList {}
 .pgItemsList h2 {padding:5px 10px; background-color:#F9F9F9; font-size:14px}
-.pgListItem {margin:15px 0; width:335px; float:left; b-ackground-color:#CCC}
+.pgListItem {margin:15px 0; width:335px; float:left;}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
 .pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 0 0; border:1px solid #ededed}
@@ -71,7 +72,7 @@ h2 {font-size:16px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
 	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none; font-weight:600}
 	/**/.sidePageContent ul {padding:0 5px 10px 33px}
-	/**/.sidePageContent ul li {margin:5px 0; b-ackground:url(../images/arr-list.png) no-repeat 0 5px; p-adding:0 0 0 10px}
+	/**/.sidePageContent ul li {margin:5px 0; background:url(../images/arr-list.png) no-repeat 0 5px; padding:0 0 0 10px}
 
 .signinForm {padding:0 0 15px 0}
 .signinForm p {font-size:11px; padding:10px 25px 0 33px}
@@ -142,6 +143,7 @@ span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
 .trnList .itemMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .trnList .itemMenu li:hover a{ background-color: white;}
 .trnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
+.trnList .itemBody .itemBodyContent {margin: 0 100px; }
 .trnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
 .trnList .itemBody .itemEx {height: 100px; border:1px solid #B8C9DB; margin: 25px 0;}
 					.itemEx .pgItemImg {float: right; margin: 5px; width: 90px;}

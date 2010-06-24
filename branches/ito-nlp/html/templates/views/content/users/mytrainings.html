@@ -11,7 +11,7 @@
 		<ul>
 			<?php foreach($trainingList as $key => $training){ ?> 
 				<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>
-					<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>">
+					<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>&ex=1">
 						<?php echo $training[TrainingsService::TRN_NAME];?>
 					</a>
 				</li>
@@ -62,9 +62,9 @@
 				</div>
 			<?php } } ?>
 			<div class="itemOption">
-				<span><a class="button" href="#">Previous Exercise</a></span>
+				<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Exercise</a></span>
 				<span><a class="button" href="start-challenge.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>
-				<span><a class="button" href="#">Next Exercise</a></span>
+				<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Exercise</a></span>
 			</div>
 			<span class="message">
 				Please adjust your web camera position and lighting so that you can clearly see yourself. 

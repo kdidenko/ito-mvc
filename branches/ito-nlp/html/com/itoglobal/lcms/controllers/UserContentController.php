@@ -168,8 +168,8 @@ class UserContentController extends ContentController {
 				$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
 				$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
 			}
-			
-			$exerciselist = ExerciseService::getExercisesList($where);
+			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
+			$exerciselist = ExerciseService::getExercisesList($where, $limit);
 			$exerciselist = self::createTeaser($exerciselist);
 			$mvc->addObject ( 'exerciselist', $exerciselist);
 		}

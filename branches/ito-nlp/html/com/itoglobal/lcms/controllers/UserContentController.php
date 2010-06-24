@@ -176,6 +176,11 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleStartChallenge($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		return $mvc;
+	}
+	
 	private static function getUserRole(){
 		#prepeare value for sql query 
 		$id = SessionService::getAttribute(SessionService::USERS_ID);

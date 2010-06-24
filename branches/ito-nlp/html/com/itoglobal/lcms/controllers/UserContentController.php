@@ -107,6 +107,29 @@ class UserContentController extends ContentController {
 		$trainingList = TrainingsService::getTrainingList();
 		$mvc->addObject ( 'trainingList', $trainingList );
 		
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$fields = AssignedService::SCHOOL_ID;
+		$from = AssignedService::SCHOOLS_ASSIGNED;
+		$where = AssignedService::USER_ID . "='" . $user_id . "'";
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		if ($result != NULL){
+			$where = '';
+			foreach($result as $key => $value){
+				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
+			}
+			$usSchList = SchoolService::getSchoolsList ($where);
+			$usSchList = self::createTeaser($usSchList);
+			//print_r($usSchList);exit;
+			$mvc->addObject ( 'usSchList', $usSchList );
+		
+			#for users and visitor
+			$usCourseList = CourseService::getCoursesList ();
+			//print_r($usCourseList);exit;
+			$mvc->addObject ( 'usCourseList', $usCourseList );
+		}
+		
+		#remove this
 		$where = ExerciseService::ID . " = '11'";
 		$exerciselist = ExerciseService::getExercisesList($where);
 		$mvc->addObject ( 'exerciselist', $exerciselist);

@@ -6,7 +6,8 @@
 		 					 
     <alias name="/r_login.php" target="/components/r_login.php" />		 					 
     <alias name="/finished.php" target="/components/finished.php" />    
-		 					 
+	<alias name="/recorded_videos.php" target="/components/recorded_videos.php" />
+	<alias name="/streamplay.php" target="/components/streamplay.php" />
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

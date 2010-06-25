@@ -3,7 +3,8 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No courses available at this moment.</span>
+	<span class="message">Sorry, there are no school courses available at this moment.</span>
+	<span class="message">You can create <a href="new-course.html">new</a> course.</span>
 <?php } else { ?>
 
 <table class="list">

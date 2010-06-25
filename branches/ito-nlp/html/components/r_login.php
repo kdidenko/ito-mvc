@@ -1,8 +1,7 @@
 <?php
 include("inc.php");
-//if (isset($_COOKIE["username"])) $username=$_COOKIE["username"];
-//$username=substr($username,0,32);
-$username=substr("astabryn",0,32);
+if (isset($_COOKIE["usname"])) $username=$_COOKIE["usname"];
+$username=substr($username,0,32);
 $msg="";
 if (!$username) $msg="No recording name provided!";
 

@@ -331,9 +331,14 @@
 		</role>
 	</action>
 	
-	<action name="/videorecorder.php" id="videorecorder">
+	<action name="/videorecorder.html" id="videorecorder">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="misc/videorecorder.php" />
+		<template name="index.html" path="components/videorecorder.php" />
 	</action>
+	
+	<action name="/components/*" id="$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="components/$1" />
+	</action>	
 	
 </actions>

@@ -31,9 +31,9 @@
 					<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
 				<?php } else { ?>
 					<?php
-					$exerciselist = $mvc->getObject('exerciselist');
-			if(!isset($exerciselist) || count($exerciselist) == 0){
-			?>
+						$exerciselist = $mvc->getObject('exerciselist');
+						if(!isset($exerciselist) || count($exerciselist) == 0){
+					?>
 					<span class="message">Sorry, there are no course exercises available at this moment.</span>
 					<span class="message">Please visit course later. It will be updated very soon.</span>
 					<?php } else { ?>

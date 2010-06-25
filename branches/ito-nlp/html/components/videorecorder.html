@@ -1,32 +1,41 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<? echo XML_CONTENT_DEFINITION ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>YouCademy</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="../styles/styles.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" language="javascript" src="../js/videorecorder.js"></script>
-	
 </head>
-<body bgcolor="#666666">
+<body>
+<div class="globalSubWrapper">
+<!-- Header block begin  -->
+<?php TemplateEngine::inclusion('../templates/header.html', $mvc)?>
+<!-- Header block end  -->
+</div>
 	<script language="JavaScript" type="text/javascript">
 		AC_FL_RunContent(
 			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
 			'width', '100%',
-			'height', '100%',
+			'height', '500px',
 			'src', 'videorecorder',
 			'quality', 'high',
 			'pluginspage', 'http://www.adobe.com/go/getflashplayer',
-			'align', 'center',
+			'align', 'middle',
 			'play', 'true',
 			'loop', 'true',
 			'scale', 'noscale',
 			'wmode', 'window',
 			'devicefont', 'false',
 			'id', 'videorecorder',
-			'bgcolor', '#666666',
+			'bgcolor', '#FFFFFF',
 			'name', 'videorecorder',
 			'menu', 'true',
 			'allowFullScreen', 'true',
 			'allowScriptAccess','sameDomain',
-			'movie', 'videorecorder',
+			'movie', 'components/videorecorder',
 			'salign', ''
 			); //end AC code
 	</script>
@@ -41,11 +50,11 @@
 			<param name="movie" value="videorecorder.swf" />
 			<param name="quality" value="high" />
 			<param name="scale" value="noscale" />
-			<param name="bgcolor" value="#666666" />	
-			<embed src="videorecorder.swf" 
+			<param name="bgcolor" value="#FFFFFF" />	
+			<embed src="components/videorecorder.swf" 
 					quality="high" 
 					scale="noscale" 
-					bgcolor="#666666"
+					bgcolor="#FFFFFF"
 					width="100%" 
 					height="100%" 
 					name="videorecorder" 
@@ -56,5 +65,10 @@
 					pluginspage="http://www.adobe.com/go/getflashplayer" />
 		</object>
 	</noscript>
+<!--  Footer block begin -->
+	<div class="footerWrapper">
+		<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc)?>
+	</div>
+<!--  Footer block end -->
 </body>
 </html>

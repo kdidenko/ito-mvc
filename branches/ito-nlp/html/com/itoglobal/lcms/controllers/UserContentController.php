@@ -128,6 +128,9 @@ class UserContentController extends ContentController {
 		
 			$usCourseList = CourseService::getCoursesList ($where_course);
 			$mvc->addObject ( 'usCourseList', $usCourseList );
+		} else {
+			#if no assigne school
+			$mvc->addObject ( 'noSchAssigne', NULL ); 
 		}
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		

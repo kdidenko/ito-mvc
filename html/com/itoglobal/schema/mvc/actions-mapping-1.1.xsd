@@ -2,6 +2,13 @@
 <xsd:schema xmlns="http://www.ito-global.com/schema/mvc"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ito-global.com/schema/mvc">
 	
+	<xsd:element name="alias">
+		<xsd:complexType>
+			<xsd:attribute name="name" use="required" />
+			<xsd:attribute name="target" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+	
 	<xsd:group name="actElems">
 		<xsd:sequence>
 			<xsd:element ref="controller" maxOccurs="1" minOccurs="0" />
@@ -127,6 +134,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="action" maxOccurs="unbounded" />
+				<xsd:element ref="alias" maxOccurs="unbounded" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

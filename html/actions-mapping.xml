@@ -3,7 +3,10 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.1.xsd  
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.1.xsd" >
-
+		 					 
+    <alias name="/r_login.php" target="/components/r_login.php" />		 					 
+    <alias name="/finished.php" target="/components/finished.php" />    
+		 					 
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

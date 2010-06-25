@@ -23,6 +23,14 @@ class AssignedService {
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete ( $from, $where, '', '' );
 	}
+	
+	public static function getSchool($id, $where = NULL){
+		$fields = AssignedService::SCHOOL_ID;
+		$from = AssignedService::SCHOOLS_ASSIGNED;
+		$where = isset ($where) ? $where : AssignedService::USER_ID . "='" . $id . "'";
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		return $result != NULL ? $result : NULL;
+	}
 }
 
 ?>

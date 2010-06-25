@@ -25,12 +25,12 @@ class UserContentController extends ContentController {
 		
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
-		$result = AssignedService::getSchool($user_id);
+		$result = AssignmentsService::getSchool($user_id);
 		
 		if ($result != NULL){
 			$where = '';
 			foreach($result as $key => $value){
-				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where .= SchoolService::ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
 				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
 			}
 			$usSchList = SchoolService::getSchoolsList ($where);
@@ -62,17 +62,17 @@ class UserContentController extends ContentController {
 		
 		#for user
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$school_id = $requestParams[AssignedService::ID];
+		$school_id = $requestParams[AssignmentsService::ID];
 		
 		#sign in / out to school
-		isset($requestParams[AssignedService::SIGNOUT]) ?		
-			$school_id = $requestParams[AssignedService::SIGNOUT] :
+		isset($requestParams[AssignmentsService::SIGNOUT]) ?		
+			$school_id = $requestParams[AssignmentsService::SIGNOUT] :
 				null;
 		
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$where = AssignedService::SCHOOL_ID . " = '" . $school_id . "' AND " . AssignedService::USER_ID . " = '" . $user_id . "'";
+		$where = AssignmentsService::SCHOOL_ID . " = '" . $school_id . "' AND " . AssignmentsService::USER_ID . " = '" . $user_id . "'";
 		#checking schools assigned
-		$result = AssignedService::getSchool($user_id, $where);
+		$result = AssignmentsService::getSchool($user_id, $where);
 		$mvc->addObject ( 'assign', $result );
 		
 		return $mvc;
@@ -82,15 +82,15 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
-		if (isset($requestParams[AssignedService::SIGNUP])){
-			$school_id = $requestParams[AssignedService::SIGNUP];
-			AssignedService::SignUpSchool($school_id, $user_id);
+		if (isset($requestParams[AssignmentsService::SIGNUP])){
+			$school_id = $requestParams[AssignmentsService::SIGNUP];
+			AssignmentsService::SignUpSchool($school_id, $user_id);
 			$message = 'You succesfully signed up to this school'; 
 		}
 		
-		if (isset($requestParams[AssignedService::SIGNOUT])){ 
-			$school_id = $requestParams[AssignedService::SIGNOUT];
-			AssignedService::SignOutSchool($school_id, $user_id);
+		if (isset($requestParams[AssignmentsService::SIGNOUT])){ 
+			$school_id = $requestParams[AssignmentsService::SIGNOUT];
+			AssignmentsService::SignOutSchool($school_id, $user_id);
 			$message = 'You succesfully signed out from this school'; 
 		}
 		
@@ -104,15 +104,15 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
-		$result = AssignedService::getSchool($user_id);
+		$result = AssignmentsService::getSchool($user_id);
 		if ($result != NULL){
 			#get schools and courses list (assigned to user) for creating new training
 			$where = '';
 			$where_course = '';
 			foreach($result as $key => $value){
-				$where .= SchoolService::ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where .= SchoolService::ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
 				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
-				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignedService::SCHOOL_ID] . "'";
+				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
 				$where_course .= $key != count ($result) - 1 ? " OR " . CourseService::COURSE_TABLE . "." : null;
 			}
 			$usSchList = SchoolService::getSchoolsList ($where);

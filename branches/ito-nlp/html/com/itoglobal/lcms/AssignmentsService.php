@@ -1,6 +1,5 @@
 <?php
-//TODO: rename class to assignments!!
-class AssignedService {
+class AssignmentsService {
 	#schools_assigned table
 	const SCHOOLS_ASSIGNED = 'schools_assigned';
 	const ID = 'id';
@@ -25,9 +24,9 @@ class AssignedService {
 	}
 	
 	public static function getSchool($id, $where = NULL){
-		$fields = AssignedService::SCHOOL_ID;
-		$from = AssignedService::SCHOOLS_ASSIGNED;
-		$where = isset ($where) ? $where : AssignedService::USER_ID . "='" . $id . "'";
+		$fields = self::SCHOOL_ID;
+		$from = self::SCHOOLS_ASSIGNED;
+		$where = isset ($where) ? $where : self::USER_ID . "='" . $id . "'";
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		return $result != NULL ? $result : NULL;
 	}

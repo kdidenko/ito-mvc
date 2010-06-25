@@ -22,7 +22,7 @@
     require_once 'com/itoglobal/lcms/SchoolService.php';
     require_once 'com/itoglobal/lcms/ExerciseService.php';
     require_once 'com/itoglobal/lcms/CourseService.php';
-    require_once 'com/itoglobal/lcms/AssignedService.php';
+    require_once 'com/itoglobal/lcms/AssignmentsService.php';
     require_once 'com/itoglobal/lcms/CategoriesService.php';
     require_once 'com/itoglobal/lcms/TrainingsService.php';
 

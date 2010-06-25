@@ -1,6 +1,6 @@
 <?php
 
-$rtmp_server="rtmp://192.168.0.101";
+$rtmp_server="rtmp://192.168.0.104/oflaDemo";
 // rtmp://your-server-ip-or-domain/application
 
 $rtmp_amf="AMF3";

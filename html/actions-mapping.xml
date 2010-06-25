@@ -333,7 +333,7 @@
 	
 	<action name="/videorecorder.html" id="videorecorder">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="components/videorecorder.php" />
+		<template name="index.html" path="components/videorecorder.html" />
 	</action>
 	
 	<action name="/components/*" id="$1">

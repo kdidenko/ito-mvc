@@ -325,8 +325,10 @@
 	</action>
 	
 	<action name="/start-challenge.html" id="startchallenge">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />
+		<role type="UR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/layout-one-column.html" />
+		</role>
 	</action>
 	
 	<action name="/videorecorder.php" id="videorecorder">

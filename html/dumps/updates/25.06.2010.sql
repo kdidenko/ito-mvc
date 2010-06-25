@@ -1,0 +1,2 @@
+ALTER TABLE  `trainings` CHANGE  `training_id`  `t_index` INT( 11 ) NOT NULL;
+ALTER TABLE  `trainings` CHANGE  `training_name`  `training_name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL

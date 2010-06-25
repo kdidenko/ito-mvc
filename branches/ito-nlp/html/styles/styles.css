@@ -35,7 +35,8 @@ h2 {font-size:16px}
 			
 	.leftPageContent {float: left; width: 120px; height:auto; line-height:25px; text-align:center; background-color: #F6F6F6; border-bottom: 1px solid gray; }
 	.rightPageContent {float: left; width: 545px; height:auto; border-left: 1px solid gray; border-bottom: 1px solid #ededed; margin-bottom: 40px;}
-			.button {padding:3px; margin-top:500px; background-color: #ededed; border: 1px solid grey; color: black; text-decoration: none; }
+	.rightPageContent .pgListItem .pgItemBody {display:table; height:1%; margin-left:15px;width: 100%;}		
+	.button {padding:3px; margin-top:500px; background-color: #ededed; border: 1px solid grey; color: black; text-decoration: none; }
 			.button:hover {width: 30px; background-color: #CCC; border: 1px solid grey; color: black; }
 	.mainPageContent {float:left; width:672px; margin:0 0 0 14px}
 	/**/.wide {float:none; width:auto}
@@ -50,7 +51,6 @@ h2 {font-size:16px}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
 .pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 0 0; border:1px solid #ededed}
-.pgListItem .pgItemBody {display:table; height:1%; margin-left:15px;width: 100%;}
 			
 .pgListItem	.pgItemFooter {margin-top: 20px; line-height:30px; border-top: 1px solid #ededed;}
 			.pgItemFooter div {width: 100%;background-color: #E4F0F5; margin: 10px 0; }

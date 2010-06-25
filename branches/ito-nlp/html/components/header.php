@@ -32,4 +32,4 @@ input {
 -->
 </style>
 <BODY>
-<div style="background-color:#333; padding:10px; font-size:17px"><font color="#CCCCCC">VideoWhisper <a href="http://www.videowhisper.com/?p=Video+Recorder">Video Recorder</a></font></div>
+<div style="background-color:#333; padding:10px; font-size:17px"><font color="#CCCCCC">YouCademy</font></div>

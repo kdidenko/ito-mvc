@@ -1,6 +1,7 @@
 <?php
 include("inc.php");
-if (isset($_COOKIE["usname"])) $username=$_COOKIE["usname"];
+$id = SessionService::getAttribute(SessionService::USERNAME);
+$username=$id . rand(100,999);
 $username=substr($username,0,32);
 $msg="";
 if (!$username) $msg="No recording name provided!";

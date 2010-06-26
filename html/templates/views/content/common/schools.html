@@ -1,5 +1,5 @@
 <h1>List of YouCademy schools</h1>
-<p>
+<p class="pgIntro">
 	Here you can select the schools you wish to learn from. Every
 	school has its own rules and fees, please see school details for more
 	information.
@@ -15,8 +15,8 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-	<span class="message">Sorry, there are no schools available at this moment.</span>
-	<span class="message">Please, visit later. It will be updated very soon.</span>
+	<span class="message warning">Sorry, there are no schools available at this moment.</span>
+	<span class="message warning">Please, visit later. It will be updated very soon.</span>
 <?php } else { ?>
 
 <?php foreach($list as $key => $value){ ?>
@@ -60,7 +60,7 @@
     
     
     <?php if($key%2){ ?>
-	<div class="clnr">&nbsp;</div>
+	<div class="clnr brdr">&nbsp;</div>
 	<?php } ?>
 	
 </div>

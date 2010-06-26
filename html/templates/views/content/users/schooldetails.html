@@ -10,7 +10,7 @@
 		<div class="pgItemImg">
 			<img src="<?php echo $list[SchoolService::AVATAR];?>" alt="" title="" />
 		</div>
-		<div class="pgItemBody">
+		<div class="pgItemBody" style="display:table">
 			<ul>
 				<li>
 					<span>Rating:</span>
@@ -33,13 +33,13 @@
 				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::FEE];?>$ / mon</span></li>
 				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 		     	<?php $assign = $mvc->getObject('assign'); if(!isset($assign) || count($assign) == 0){?>
-		     	<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signup=" . $list[SchoolService::ID] ?>">SignUp</a></span></li>
+		     	<li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signup=" . $list[SchoolService::ID] ?>">SignUp</a></span></li>
 				<?php } else { ?>
-				<br/><li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signout=" . $list[SchoolService::ID] ?>">SignOut</a></span></li>
+				<li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signout=" . $list[SchoolService::ID] ?>">SignOut</a></span></li>
 		   		<?php } ?>
 			</ul>
-		</div>
-	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
+			<p class="extLink"><?php echo  $list[SchoolService::DESCRIPTION];?></p>
+		</div>	
 </div>
 <div class="subHeader">
 	<b>Courses Available:</b>
@@ -53,9 +53,18 @@
 <span class="message">Please visit our school later. It will be updated very soon.</span>
 <?php } else { ?>
 <?php foreach($courseslist as $key => $value){ ?>
-	<div class="courseList">
-		<div class="pgItemImg">
-			<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>"><img src="<?php echo $value[CourseService::AVATAR];?>" alt="" title="" /></a>
+<div class="pgListItem wide">
+    <h2>
+		<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
+			<?php echo $value[CourseService::CAPTION];?>
+		</a>
+	</h2>
+	<div class="pgItemImg">
+		<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>"><img src="<?php echo $value[CourseService::AVATAR];?>" alt="" title="" /></a>
+	</div>
+	<div class="pgItemBody">
+		<ul>
+			<li>
 			<span class="lsValue">
        			<?php if($value[CourseService::RATE] >= 1){ ?>
 				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
@@ -68,20 +77,15 @@
 				<?php if($value[CourseService::RATE] >= 5){ ?>
 				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 			</span>
-		</div>
-	   	<div class="pgItemBody">
-	        <h1>
-				<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
-					<?php echo $value[CourseService::CAPTION];?>
-				</a>
-			</h1>
-	        <span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span>
-			<p>
-				<?php echo $value[CourseService::DESCRIPTION];?>
-				<a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
-			</p>
-		</div>
+			</li>
+		</ul>
+		<p class="extLink">
+			<?php echo $value[CourseService::DESCRIPTION];?>
+			<a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+		</p>
 	</div>
+</div>
+
 <?php } } ?>
 </div>
 <?php } ?>

@@ -65,7 +65,7 @@ h2 {font-size:16px}
 .pgListItem .pgItemBody ul li span {color:#999; padding:0 10px 0 0; width:60px; display:inline-block}
 .pgListItem .pgItemBody ul li span.lsValue {color:#000; width:auto}
 .pgListItem .pgItemBody p {padding:0 15px 0 0}
-.pgListItem .pgItemBody p.btns {padding:15px 0 0 0}
+.pgListItem .pgItemBody p.btns {padding:15px 0 0 0; clear:none}
 .extLink a {display:block}
 	.sidePageContent {float:right; width:245px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
@@ -73,17 +73,25 @@ h2 {font-size:16px}
 	/**/.sidePageContent ul {padding:0 5px 10px 33px}
 	/**/.sidePageContent ul li {margin:5px 0; b-ackground:url(../images/arr-list.png) no-repeat 0 5px; p-adding:0 0 0 10px}
 
-.signinForm {padding:0 0 15px 0}
-.signinForm p {font-size:11px; padding:10px 25px 0 33px}
+form {padding:0 0 15px 0}
+form p {border-bottom:1px solid #ededed; padding:10px 0}
+.signinForm p {font-size:11px; padding:10px 25px 0 33px; border:0}
+.signinForm label {font-weight:normal; }
 
-.defBtn {background-color:#184877; font-size:11px; font-family:Tahoma; font-weight:bold; color:#fff; visibility:visible; border:1px solid #666; padding:3px 10px; height:26px; line-height:16px; cursor:pointer}
-.defBtn:hover {background-color:#fff; font-size:11px; font-family:Tahoma; font-weight:bold; color:#184877; visibility:visible; border:1px solid #184877; padding:3px 10px; height:26px; line-height:16px; cursor:hand}
+form dl {width:75%}
+form dt {width:150px; float:left; padding:0 10px 0 0; font-weight:bold; text-align:left}
+form dd {display:table: height:1%}
+
+.defBtn {background-color:#184877; font-size:11px; font-family:Tahoma; font-weight:bold; color:#fff; visibility:visible; border:1px solid #666; padding:0 10px; height:26px; line-height:18px; cursor:pointer}
+.defBtn:hover {background-color:#fff; color:#184877; border:1px solid #184877}
 	.button {padding:3px 5px; background-color: #7496B9; border: 1px solid #ccc; color: white; text-decoration: none; font-size:11px}
 	.button:hover { background-color: white; border: 1px solid #7496B9; color: #7496B9 }
-.inpTxt {width:100%; border-top:1px solid #666; border-left:1px solid #666; border-right:1px solid #ccc; border-bottom:1px solid #ccc}
+.inpTxt {border-top:1px solid #666; border-left:1px solid #666; border-right:1px solid #ccc; border-bottom:1px solid #ccc}
+textarea {border-top:1px solid #666; border-left:1px solid #666; border-right:1px solid #ccc; border-bottom:1px solid #ccc; width:400px}
+.signinForm .inpTxt {width:100%}
 .inpChk {vertical-align:middle; margin:0 5px 0 0}
-label {vertical-align:middle}
-p.btns {text-align:right}
+label {vertical-align:middle; font-size:11px; font-weight:bold; padding:0 0 5px 0}
+p.btns {text-align:right; clear:both}
 
 .headerForms {float:right; padding:40px 0 0 0; text-align:right}
 form.languages {float:right; margin:1px 0 0 60px}
@@ -136,7 +144,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .myProfileInf dd {}
 .myProfileInf span {color: grey; font-weight: bold; font-size: 11px;}
 
-.courseList{ height: 100px; background-color:  #F6F6F6; border:1px solid #EDEDED; margin: 5px;}
+.courseList{}
 .courseList .pgItemImg {float: right; margin: 5px; width: 90px;}
 .courseList .pgItemBody {float:left; font-size: 13px;width: 500px; margin: 5px; height: 90px;}
 .courseList .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}

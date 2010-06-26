@@ -19,7 +19,7 @@
 	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
 	
 	# get Request Dispatcher
-	$rd = RequestDispatcher::getInstance();
+	$rd = RequestDispatcher::getInstance();//print_r($_SERVER);
 	$mvc = $rd->dispatchHttpRequest($_SERVER);
 	
 	# initialize the Messages Service

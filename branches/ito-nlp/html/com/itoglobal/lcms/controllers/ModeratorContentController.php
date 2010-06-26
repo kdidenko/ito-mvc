@@ -355,9 +355,23 @@ class ModeratorContentController extends ContentController {
 		#get school id for this moderator 
 		$where = SchoolService::ADMIN . '=' . $id;
 		$result = SchoolService::getSchoolsList( $where );
-		$school_id = isset ($result[0][SchoolService::ID]) ? $result[0][SchoolService::ID] : '0';
+		#creating SQL WHERE for below query 
+		$where = NULL;
+		if( count($result) >0 ){
+			$where .= AssignmentsService::SCHOOLS_ASSIGNED . '.' .
+				AssignmentsService::SCHOOL_ID . SQLClient::IN . "(";
+			foreach ($result as $key => $value){  
+				$where .= "'" . $value[SchoolService::ID] . "'";
+				$where .= $key+1 < count($result) ? ", " : NULL;
+				
+			}
+			$where .= ") AND " ;
+		}
 		#get user list from school where this user is moderator
-		$where = UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . UsersService::ID . "!=" . $id . " AND " . AssignmentsService::SCHOOLS_ASSIGNED . '.' . AssignmentsService::SCHOOL_ID . "=" . $school_id . " AND " . UsersService::ROLE . SQLClient::NOT_IN . "('" . UsersService::ROLE_AR . "', '" . UsersService::ROLE_MR . "')";
+		$where .= UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . 
+				UsersService::ID . "!=" . $id . " AND " . 
+				UsersService::ROLE . SQLClient::NOT . SQLClient::IN . "('" . 
+				UsersService::ROLE_AR . "', '" . UsersService::ROLE_MR . "')";
 		
 		$from = UsersService::USERS . SQLClient::JOIN . AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . UsersService::USERS . '.' . UsersService::ID . '=' . AssignmentsService::SCHOOLS_ASSIGNED . '.' . AssignmentsService::USER_ID;
 		$result = UsersService::getUsersList ( $where, $from );

@@ -85,6 +85,22 @@ class SchoolService {
 		return $result;
 	}
 	
+	public static function countStudents(){
+		/*SELECT schools.id, schools.caption, COUNT(schools_assigned.school_id) as students
+		FROM schools JOIN schools_assigned ON schools_assigned.school_id=schools.id
+		WHERE schools_assigned.school_id=2
+		GROUP BY schools_assigned.school_id*/
+	}
+	
+	public static function countCourses(){
+		/*SELECT schools.id, schools.caption, COUNT(courses.school_id) as students
+		FROM schools JOIN courses ON courses.school_id=schools.id
+		WHERE courses.school_id=2
+		GROUP BY courses.school_id*/
+	}
+	
+	
+	
 	public static function getSchool($id) {
 		$result = null;		
 		if(isset($id) && $id != ''){

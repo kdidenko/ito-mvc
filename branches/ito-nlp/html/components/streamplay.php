@@ -2,7 +2,6 @@
 include("header.php");
 include("inc.php");
 $vid = $mvc->getParam('vid');
-print_r($vid);
 $swfurl="components/streamplayer.swf?streamName=" . urlencode($vid) . 
 		"&serverRTMP=".urlencode($rtmp_server) . 
 		"&templateURL=";

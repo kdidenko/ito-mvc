@@ -1,4 +1,4 @@
-body {padding:0; margin:0; background:url('../images/global-bg.png') repeat-x center top; font-family:Tahoma, Geneva, sans-serif; font-size:12px}
+body {padding:0; margin:0; background:url('../images/global-bg.png') repeat-x center top; font-family:Tahoma, Geneva, sans-serif; font-size:12px; line-height:135%}
 
 ul, li, p, form, h1, h2, h3, h4, h5, h6, dl, dd {padding:0; margin:0; list-style:none}
 a {color:#6387AC}
@@ -9,7 +9,7 @@ p {font-size:12px; line-height:135%; padding:0 0 10px 0}
 h1, h2 {font-weight:500; color:#333; padding:0 0 10px 0}
 h1 {font-size:22px}
 h2 {font-size:16px}
-.pgIntro {font-size:14px; color:#666; padding:10px 0 15px 0}
+.pgIntro {font-size:12px; color:#666; padding:10px 0 15px 0}
 /**/.clnr {clear:both; height:1px; overflow:hidden; font-size:1px}
 /**/.brdr {border-top:1px solid #ededed}
 .globalSubWrapper {width:960px; margin:0 auto}
@@ -36,8 +36,6 @@ h2 {font-size:16px}
 	.leftPageContent {float: left; width: 120px; height:auto; line-height:25px; text-align:center; background-color: #F6F6F6; border-bottom: 1px solid gray; }
 	.rightPageContent {float: left; width: 545px; height:auto; border-left: 1px solid gray; border-bottom: 1px solid #ededed; margin-bottom: 40px;}
 	.rightPageContent .pgListItem .pgItemBody {display:table; height:1%; margin-left:15px;width: 100%;}		
-	.button {padding:3px; margin-top:500px; background-color: #ededed; border: 1px solid grey; color: black; text-decoration: none; }
-			.button:hover {width: 30px; background-color: #CCC; border: 1px solid grey; color: black; }
 	.mainPageContent {float:left; width:672px; margin:0 0 0 14px}
 	/**/.wide {float:none; width:auto}
 		.pgContentTools {clear:both; width:100%; display:table; border:1px solid #ededed; background-color:#F9F9F9}
@@ -47,7 +45,7 @@ h2 {font-size:16px}
 
 .pgItemsList {}
 .pgItemsList h2 {padding:5px 10px; background-color:#F9F9F9; font-size:14px}
-.pgListItem {margin:15px 0; width:335px; float:left;}
+.pgListItem {margin:10px 0; width:335px; float:left;}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
 .pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 0 0; border:1px solid #ededed}
@@ -67,16 +65,21 @@ h2 {font-size:16px}
 .pgListItem .pgItemBody ul li span {color:#999; padding:0 10px 0 0; width:60px; display:inline-block}
 .pgListItem .pgItemBody ul li span.lsValue {color:#000; width:auto}
 .pgListItem .pgItemBody p {padding:0 15px 0 0}
-.extLink {}
+.pgListItem .pgItemBody p.btns {padding:15px 0 0 0}
+.extLink a {display:block}
 	.sidePageContent {float:right; width:245px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
 	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none; font-weight:600}
 	/**/.sidePageContent ul {padding:0 5px 10px 33px}
-	/**/.sidePageContent ul li {margin:5px 0; background:url(../images/arr-list.png) no-repeat 0 5px; padding:0 0 0 10px}
+	/**/.sidePageContent ul li {margin:5px 0; b-ackground:url(../images/arr-list.png) no-repeat 0 5px; p-adding:0 0 0 10px}
 
 .signinForm {padding:0 0 15px 0}
 .signinForm p {font-size:11px; padding:10px 25px 0 33px}
 
+.defBtn {background-color:#184877; font-size:11px; font-family:Tahoma; font-weight:bold; color:#fff; visibility:visible; border:1px solid #666; padding:3px 10px; height:26px; line-height:16px; cursor:pointer}
+.defBtn:hover {background-color:#fff; font-size:11px; font-family:Tahoma; font-weight:bold; color:#184877; visibility:visible; border:1px solid #184877; padding:3px 10px; height:26px; line-height:16px; cursor:hand}
+	.button {padding:3px 5px; background-color: #7496B9; border: 1px solid #ccc; color: white; text-decoration: none; font-size:11px}
+	.button:hover { background-color: white; border: 1px solid #7496B9; color: #7496B9 }
 .inpTxt {width:100%; border-top:1px solid #666; border-left:1px solid #666; border-right:1px solid #ccc; border-bottom:1px solid #ccc}
 .inpChk {vertical-align:middle; margin:0 5px 0 0}
 label {vertical-align:middle}
@@ -108,13 +111,16 @@ div.info_sect span {background-color:white;font-weight:bold;padding:10px;positio
 div.info_sect dl {padding-left:40px;font-size:11px}
 div.info_sect dt {width:15%;color:#666666}
 div.info_sect dd {margin-left:10px}
-div.subHeader {background-color:#F8F8F8;color:#666666;font-size:14px;line-height:28px;margin:0 0 30px -17px;text-indent:17px;border:1px solid #EDEDED;}
-div.subHeader span {display:block;float:right;font-size:11px;margin:0 10px}
+.subHeader {background-color:#F8F8F8; color:#666666; font-size:14px; border:1px solid #EDEDED; padding:8px 10px}
+div.subHeader {margin:10px 0 0 0; width:100%; display:table; padding:8px 0}
+div.subHeader b {float:left; padding-left:10px}
+div.subHeader span {float:right; font-size:11px; margin:0 10px}
 div.subHeader span a {color:#666666}
 div.subHeader span a.current {color:#698DB1;text-decoration:none;font-weight:bold;}
 div.about ul, div.about li {list-style:disc outside;margin:5px 0;}
 div.about ul.inner {margin-left:40px}
-span.message {display:block;line-height:14px;font-weight:bold;color:#999999}
+span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
+.warning {background-color:#FFFFB5; padding:10px; border:1px solid #ccc}
 
 .myProfile {float: left;}
 .myProfile .myProfileimg { width: 130px; margin-bottom:10px; text-align: center; }

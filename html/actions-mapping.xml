@@ -8,6 +8,9 @@
     <alias name="/finished.php" target="/components/finished.php" />    
 	<alias name="/recorded_videos.php" target="/components/recorded_videos.php" />
 	<alias name="/streamplay.php" target="/components/streamplay.php" />
+	<alias name="/recorded.php" target="/components/recorded.php" />
+	<alias name="/translation.php" target="/components/translation.php" />
+	<alias name="/r_snapshots.php" target="/components/r_snapshots.php" />
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

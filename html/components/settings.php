@@ -1,7 +1,7 @@
 <?php
 
 $rtmp_server="rtmp://192.168.0.104/oflaDemo";
-// rtmp://your-server-ip-or-domain/application
+// rtmp://192.168.0.104/oflaDemo
 
 $rtmp_amf="AMF3";
 // AMF3 : Red5, Wowza, FMIS3, FMIS3.5

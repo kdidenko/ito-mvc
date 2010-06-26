@@ -8,7 +8,7 @@ New Video</a><br />
 $dir = "components/recordings";
 $handle = opendir ( $dir );
 while ( ($file = readdir ( $handle )) !== false )
-	if ((substr ( $file, - 3 ) == "flv") && (! is_dir ( "$dir/" . $file ))) {
+	if ((substr ( $file, - 3 ) == "vwr") && (! is_dir ( "$dir/" . $file ))) {
 		$vid = substr ( $file, 0, - 4 );
 		$params = explode ( ";;;", implode ( file ( "$dir/" . $file ) ) );
 		if (count ( $params )) {

@@ -10,7 +10,7 @@ if (isset($GLOBALS["HTTP_RAW_POST_DATA"]))
 	$jpg = $GLOBALS["HTTP_RAW_POST_DATA"];
 
 	// save file
-  $fp=fopen("snapshots/$stream.jpg","w");
+  $fp=fopen("components/snapshots/$stream.jpg","w");
   if ($fp)
   {
     fwrite($fp,$jpg);

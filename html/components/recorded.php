@@ -3,7 +3,6 @@ if (strstr($_POST['recording'],"/")) exit;
 if (strstr($_POST['stream'],"/")) exit;
 if (strstr($_POST['recording'],"..")) exit;
 if (strstr($_POST['stream'],"..")) exit;
-echo "<form><input  type='hidden' name='vid' value=" . $_POST['stream'] ."/></form>";
   // save file
   //$fp=fopen("components/recordings/".$_POST['recording'].".vwr","w");
   $fp=fopen("components/recordings/". $_POST['stream'] .".vwr","w");

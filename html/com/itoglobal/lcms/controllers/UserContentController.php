@@ -16,13 +16,6 @@ class UserContentController extends ContentController {
 			}
 		}
 		
-		/*#for all
-		$firstname = SessionService::getAttribute ( SessionService::FIRSTNAME );
-		isset ( $firstname ) ? $mvc->addObject ( SessionService::FIRSTNAME, $firstname ) : null;
-		$lastname = SessionService::getAttribute ( SessionService::LASTNAME );
-		isset ( $lastname ) ? $mvc->addObject ( SessionService::LASTNAME, $lastname ) : null;
-		*/
-		
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
@@ -36,12 +29,6 @@ class UserContentController extends ContentController {
 			$usSchList = SchoolService::getSchoolsList ($where);
 			$usSchList = self::createTeaser($usSchList);
 			$mvc->addObject ( 'usSchList', $usSchList );
-			
-			/*#for users and visitor
-			$where = CourseService::SCHOOL_ID . " = '" . $usSchList [0][CourseService::ID] . "'";
-			$usCourseList = CourseService::getCoursesList ( $where );
-			$usCourseList = self::createTeaser($usCourseList);
-			$mvc->addObject ( 'usCourseList', $usCourseList );*/
 		}
 		
 		return $mvc;
@@ -60,11 +47,9 @@ class UserContentController extends ContentController {
 		$courselist = CourseService::getCoursesList ( $where );
 		$mvc->addObject ( 'courselist', $courselist );
 		
-		#for user
+		#sign in / out to school
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$school_id = $requestParams[AssignmentsService::ID];
-		
-		#sign in / out to school
 		isset($requestParams[AssignmentsService::SIGNOUT]) ?		
 			$school_id = $requestParams[AssignmentsService::SIGNOUT] :
 				null;
@@ -182,8 +167,8 @@ class UserContentController extends ContentController {
 		$where = UsersService::ID . "= '" . $id . "'";
 		#get user role 
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;		
-		return $result [UsersService::ROLE] ;
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0][UsersService::ROLE] : null;		
+		return $result;
 	}
 }
 

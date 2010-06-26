@@ -11,6 +11,7 @@
 	<alias name="/recorded.php" target="/components/recorded.php" />
 	<alias name="/translation.php" target="/components/translation.php" />
 	<alias name="/r_snapshots.php" target="/components/r_snapshots.php" />
+	<alias name="/snapshots" target="/components/snapshots" />
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

@@ -1,17 +1,21 @@
 <h1>Users Management</h1>
+<div class="subHeader">
+	<b>Users List</b>
+	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
+		<span>
+			<a <?php echo !isset($_GET['ar']) && !isset($_GET['mr']) && !isset($_GET['ur']) ? "class='current'" : NULL;?> href="/manage-users.html">All</a> | 
+			<a <?php echo isset($_GET['ar']) ? "class='current'" : NULL;?> href="?ar">Administrators</a> | 
+			<a <?php echo isset($_GET['mr']) ? "class='current'" : NULL;?>  href="?mr">Moderators</a> |
+			<a <?php echo isset($_GET['ur']) ? "class='current'" : NULL;?>  href="?ur">Users</a>
+		</span>
+	<?php } ?>
+</div>
 <?php 		
 	$message = $mvc->getObject ( ContentController::RESULT );
 	if (isset ( $message ) and count($message) != 0) { 
 ?>
 <div class="subHeader">
-	<b>Users List</b>
-	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
-		<span>
-			<a <?php echo !isset($_GET['ar']) && !isset($_GET['mr']) ? "class='current'" : NULL;?> href="/manage-users.html">All</a> | 
-			<a <?php echo isset($_GET['ar']) ? "class='current'" : NULL;?> href="?ar">Administrators</a> | 
-			<a <?php echo isset($_GET['mr']) ? "class='current'" : NULL;?>  href="?mr">Moderators</a>
-		</span>
-	<?php } ?>
+	<span>A | B | C | D | E | F | G</span>
 </div>
 <table class="list">
 <tr class="title">
@@ -41,6 +45,6 @@
 	</tr>
 <?php } ?></table>
 <?php }else{ ?>
-<span class="message">No users available at this moment.</span>
+<span class="message warning">Sorry, there are no user.</span>
 <?php } ?>
 

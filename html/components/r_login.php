@@ -9,7 +9,7 @@ if (!$username) $msg="No recording name provided!";
 $recordingId="-".base_convert(time(),10,36);
 
 $layoutCode=<<<layoutEND
-id=0&label=Video&x=346&y=10&width=326&height=298; id=1&label=Camcorder&x=10&y=10&width=326&height=298
+id=0&label=Video&x=346&y=10000&width=326&height=298; id=1&label=Camcorder&x=200&y=10&width=326&height=298
 layoutEND;
 
 ?>

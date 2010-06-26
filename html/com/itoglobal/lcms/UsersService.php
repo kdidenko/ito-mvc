@@ -89,7 +89,6 @@ class UsersService {
 	public static function getUsersList($where = NULL, $from = NULL) {
 		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
 		$from = isset ( $from ) ? $from : self::USERS;
-		//isset ( $where ) ? $where : '';
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		return $result;
@@ -113,6 +112,24 @@ class UsersService {
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
 		} 
+		return $result;
+	}
+	
+	/**
+	 * Retreives the user data by specified user id.
+	 * @param text $field the field in which creaing character scroller.
+	 * @return mixed user data or null if users does not exists. 
+	 */
+	public static function chrScroller($field){
+		/*SELECT DISTINCT UCASE( LEFT( lastname, 1 ) ) AS scroller, lastname
+		FROM users
+		ORDER BY lastname*/
+		$fields = "DISTINCT USCASE (" . SQLClient::LEFT . "(" . $field . ", 1 ) AS) scroller" . self::ID;
+		$from = self::USERS;
+		$orderBy = self::LASTNAME;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', $orderBy, '', '' );
+		$result = $result!= null && count($result) >0 ? $result : null ;
 		return $result;
 	}
 	

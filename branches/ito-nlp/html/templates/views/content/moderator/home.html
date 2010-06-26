@@ -3,8 +3,8 @@
 	$mrSchlList = $mvc->getObject('mrSchlList');
 	if(!isset($mrSchlList) || count($mrSchlList) == 0){
 ?>
-<span class="message">There are currently no schools assigned to you.</span>
-<span class="message">Please, contact your administrator or support team for more information.</span>
+<span class="message warning">There are currently no schools assigned to you.</span>
+<span class="message warning">Please, contact your administrator or support team for more information.</span>
 <?php } else { ?>
 <div>
 	<p>Bellow you may see your school details and make some general appearance changes according to you preferences.</p>
@@ -12,56 +12,47 @@
 	Click on edit button bellow the school description for appearance changes.</p>
 </div>
 <?php foreach($mrSchlList as $key => $value){ ?>
-<div>
-	<div class="leftPageContent">
-	&nbsp;
-	<div class="pgItemImg">
-		<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
-	</div>
-	<span>
-		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
-		<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
-		<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 3){ ?>
-		<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 4){ ?>
-		<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
-		<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-	</span>
-	</div>
-	<div class="rightPageContent">
-		<div class="pgListItem wide">
-			<div class="pgItemBody">
-				<div>
-					
-					<h2>
-						<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
-							<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
-						</a>
-					</h2>
-					<div class="description">
-						<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
-					</div>
-					<div class="crdate">
-						<img alt="Created" src="images/calendar.png">
-						<?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?>
-					</div>
-					<div class="categories">
-						<b>Categories:</b>
-						<span>
-							<a href="#">NLP</a> 
-							<a href="#">Milton</a> 
-							<a href="#">DHC</a>
-						</span>
-					</div>
-				</div>
-				<div class="pgItemFooter">
-					<a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a>
-				</div>
-			</div>
+
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+		<h2>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+				<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>	
+		<div class="pgItemImg">
+			<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
+		</div>
+		<div class="pagepgItemBody">
+			<ul>
+				<li>
+					<span class="lsValue">
+						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 3){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 4){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+					</span>				
+				</li>
+				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>
+				<li><span>Categories:</span><span class="lsValue">
+						<a href="#">NLP</a> 
+						<a href="#">Milton</a> 
+						<a href="#">DHC</a>
+						<a href="#">SHL</a>
+					</span>
+				</li>
+			</ul>
+			<p class="extLink"><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+			<p class="btns"><a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a></p>
 		</div>
 	</div>
+	<div class="clnr brdr">&nbsp;</div>
 </div>
+
 <?php } } ?>

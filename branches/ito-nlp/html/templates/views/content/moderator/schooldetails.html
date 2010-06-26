@@ -2,7 +2,7 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No school available at this moment.</span>
+<span class="message warning">No school available at this moment.</span>
 <?php } else { ?>
 <div class="pgListItem wide">
 		<h1><?php echo $list[SchoolService::CAPTION];?></h1>

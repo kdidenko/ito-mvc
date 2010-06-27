@@ -38,6 +38,10 @@ class CourseService {
 	 */
 	const FEE = 'fee_id';
 	/**
+	 * @var string defining the base_fee field name
+	 */
+	const BASE_FEE = 'base_fee';
+	/**
 	 * @var string defining the enabled field name
 	 */
 	const CRDATE = 'crdate';
@@ -63,11 +67,8 @@ class CourseService {
 	 */
 	public static function getCoursesList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::FEE . ', ' . self::SCHOOL_ID;
+		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::BASE_FEE . ', ' . self::SCHOOL_ID;
 		$from = self::COURSE_TABLE;
-		isset ( $where ) ? $where : '';
-		isset ( $limit ) ? $limit : '';
-		isset ( $orderBy ) ? $orderBy : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}

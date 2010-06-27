@@ -2,34 +2,41 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No exercises available at this moment.</span>
+	<span class="message">No exercises available at this moment.</span>
 <?php } else { ?>
-<div class="pgItemsList">
-	<div class="pgListItem wide">
-	   <div class="pgItemBody">
-	   	<h1><?php echo $list[ExerciseService::CAPTION];?></h1>
-	       <ul>
-       		<li>
-	       		<span>Rating:</span><span class="lsValue">
-	       			<?php if($list[ExerciseService::RATE] >= 1){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($list[ExerciseService::RATE] >= 2){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($list[ExerciseService::RATE] >= 3){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($list[ExerciseService::RATE] >= 4){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-					<?php if($list[ExerciseService::RATE] >= 5){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-				</span>
-			</li>
-          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
-         	<li><span>Owner:</span><span class="lsValue"><?php echo $list[UsersService::USERNAME];?></span></li>
-	       </ul>
-		 <p><?php echo $list[ExerciseService::DESCRIPTION];?></p>
-		 <p><?php echo $list[ExerciseService::VIDEO];?></p>
+	<div class="pgItemsList">
+		<div class="pgListItem wide">
+			<div class="pgItemBody">
+				<h1><?php echo $list[ExerciseService::CAPTION];?></h1>
+				<ul>
+					<li>
+						<span>Rating:</span>
+						<span class="lsValue"> 
+							<?php if($list[ExerciseService::RATE] >= 1){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?> 
+							<?php if($list[ExerciseService::RATE] >= 2){ ?><a href=""><img src="images/star.png" /></a> 
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 3){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 4){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 5){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?> 
+						</span>
+					</li>
+					<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+					<li><span>Owner:</span><span class="lsValue"><?php echo $list[UsersService::USERNAME];?></span></li>
+				</ul>
+				<span><b>Description:</b></span>
+				<div class="pgItemDsc"><?php echo $list[ExerciseService::DESCRIPTION];?></div>
+				<div class="pgItemVideo"><?php echo $list[ExerciseService::VIDEO];?></div>
+				<span><b>Instruction:</b></span>
+				<ul>
+					<li>1. Read the Description.</li>
+					<li>2. Watch the video.</li>
+					<li>3. Begin to record the responses.</li>
+				</ul>
+			</div>
 		</div>
-    </div>
-</div>
+	</div>
 <?php } ?>

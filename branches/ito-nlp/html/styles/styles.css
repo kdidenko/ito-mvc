@@ -132,6 +132,8 @@ div.about ul.inner {margin-left:40px}
 span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .warning {background-color:#FFFFB5; padding:10px; border:1px solid #ccc}
 
+.chrScroller {text-align: right; margin: 5px;}
+
 .myProfile {float: left;}
 .myProfile .myProfileimg { width: 130px; margin-bottom:10px; text-align: center; }
 .myProfile .menu a {color: #5C5C5C; text-decoration: none;margin: 5px; }

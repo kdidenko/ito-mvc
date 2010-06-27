@@ -18,15 +18,18 @@ class NavigationController extends SecureActionControllerImpl {
 		return $mvc;		
 	}
 	public static function getUserRole(){
-		#prepeare value for sql query 
+		#prepeare value for sql query
+		$result = NULL; 
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		$fields = UsersService::ROLE;
-		$from = UsersService::USERS;		
-		$where = UsersService::ID . "= '" . $id . "'";
-		#get user role 
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;		
-		return $result[UsersService::ROLE];
+		if($id != NULL){
+			$fields = UsersService::ROLE;
+			$from = UsersService::USERS;
+			$where = UsersService::ID . "= '" . $id . "'";
+			#get user role 
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = $result != null && isset($result) && count($result) > 0 ? $result[0][UsersService::ROLE] : null;		
+		}
+		return $result;
 	}
 }
 

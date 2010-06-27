@@ -18,18 +18,13 @@
 	$message = $mvc->getObject ( ContentController::RESULT );
 	if (isset ( $message ) and count($message) != 0) { 
 ?>
-<div class="subHeader">
-	<span>
+<div class="chrScroller">
 		<?php foreach($scroller as $key => $value){ ?>
-			<a <?php if(isset($_GET[UsersService::SCROLLER]))
-					echo $_GET[UsersService::SCROLLER]==$value[UsersService::SCROLLER] ? 
-						"class='current'" : NULL;?>
-			href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+			<a class="button scroller" href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
 							echo "scroller=".$value[UsersService::SCROLLER];?>">
 				<?php echo $value[UsersService::SCROLLER];?>
 			</a>&nbsp;
 		<?php } ?>
-	</span>
 </div>
 <table class="list">
 <tr class="title">

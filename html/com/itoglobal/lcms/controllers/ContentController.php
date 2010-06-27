@@ -53,23 +53,27 @@ class ContentController extends SecureActionControllerImpl {
 		#sorting
 		$order = NULL;
 		if( isset($requestParams[SchoolService::RATE]) ){
-			$order = $requestParams[SchoolService::RATE] == SQLClient::ASC ? SchoolService::RATE . ' ' . SQLClient::ASC : SchoolService::RATE . ' ' . SQLClient::DESC;
+			$order = $requestParams[SchoolService::RATE] == SQLClient::ASC ? 
+				SchoolService::RATE . ' ' . SQLClient::ASC : 
+					SchoolService::RATE . ' ' . SQLClient::DESC;
 		}
 		if( isset($requestParams[SchoolService::LANGUAGE]) ){
-			$order = $requestParams[SchoolService::LANGUAGE] == SQLClient::ASC ? SchoolService::LANGUAGE . ' ' . SQLClient::ASC : SchoolService::LANGUAGE . ' ' . SQLClient::DESC;
+			$order = $requestParams[SchoolService::LANGUAGE] == SQLClient::ASC ? 
+				SchoolService::LANGUAGE . ' ' . SQLClient::ASC : 
+					SchoolService::LANGUAGE . ' ' . SQLClient::DESC;
 		}
 		
 		#get schools list
 		$list = SchoolService::getSchoolsList (null, null, $order);
 		$list = self::createTeaser($list);
 		$mvc->addObject ( 'list', $list );
-		
 		return $mvc;
 	}
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		# getting the school
-		$school = SchoolService::getSchool($requestParams [SchoolService::ID]);
+		$school = SchoolService::getSchoolsList(NULL, NULL, NULL, $requestParams [SchoolService::ID]);
+		$school = $school[0];
 		$mvc->addObject ('list', $school);
 		# getting list of courses
 		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";

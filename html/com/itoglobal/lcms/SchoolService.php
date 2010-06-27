@@ -34,6 +34,10 @@ class SchoolService {
 	 */
 	const FEE = 'fee_id';
 	/**
+	 * @var string defining the base_fee field name
+	 */
+	const BASE_FEE = 'base_fee';
+	/**
 	 * @var string defining the enabled field name
 	 */
 	const CRDATE = 'crdate';
@@ -62,44 +66,79 @@ class SchoolService {
 	 */
 	const DISABLE = 'disable';
 	/**
-	 * @var string defining the old admin ield name
+	 * @var string defining the old admin field name
 	 */
 	const OLD_ADMIN = 'old_admin';
+	/**
+	 * @var string defining the students field name
+	 */
+	const CNT_STUDENTS = 'students';
+	/**
+	 * @var string defining the courses field name
+	 */
+	const CNT_COURSES = 'courses';
 	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
-	public static function getSchoolsList($where = null, $limit = null, $orderBy = null) {
+	public static function getSchoolsList($where = null, $limit = null, $orderBy = null, $id = null) {
+	/* generation sql query
+	SELECT t1.*, COUNT(c.id) as courses FROM
+	 (SELECT s.id, s.alias, s.caption AS caption, s.description, s.avatar, s.rate, s.crdate, 
+	   s.fee_id, s.language, s.enabled, u.username AS moderator, COUNT(a.user_id) AS users
+	  FROM `schools` AS s
+	  LEFT JOIN schools_assigned AS a ON a.school_id = s.id
+	  LEFT JOIN users AS u ON s.admin_id = u.id
+	  GROUP BY s.id
+	 ) AS t1
+	LEFT JOIN courses AS c ON c.school_id = t1.id
+	GROUP BY t1.id 
+	*/
 		$result = null;
-		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . 
-					self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  
-					self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  
-					self::CRDATE . 's, ' . self::FEE . ', ' . self::LANGUAGE . ', ' . 
-					self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  
-					UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
-		$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
-					UsersService::USERS . '.' .  UsersService::ID . '=' . 
-					self::SCHOOLS_TABLE . '.' . self::ADMIN;
-		$where = isset ( $where ) ? self::SCHOOLS_TABLE . '.' .  $where : '';
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
+		#creating table1
+		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::ALIAS . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::CAPTION . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::DESCRIPTION . ', ' . 
+					self::SCHOOLS_TABLE . '.' .	self::AVATAR . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::RATE . ', ' . 
+					self::SCHOOLS_TABLE . '.' .	self::CRDATE . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::BASE_FEE . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::LANGUAGE . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::ENABLED . ', ' . 
+					UsersService::USERS . '.' .	UsersService::USERNAME . ', ' . 
+					self::SCHOOLS_TABLE . '.' .  self::ADMIN . ', ' . 
+					SQLClient::COUNT . '(' . AssignmentsService::SCHOOLS_ASSIGNED . '.' . 
+					AssignmentsService::USER_ID . ')' . SQLClient::SQL_AS . self::CNT_STUDENTS;
+		$from = self::SCHOOLS_TABLE . SQLClient::LEFT . SQLClient::JOIN . 
+				AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . 
+				AssignmentsService::SCHOOLS_ASSIGNED . '.' . AssignmentsService::SCHOOL_ID . '=' . 
+				self::SCHOOLS_TABLE . '.' . self::ID . SQLClient::LEFT . SQLClient::JOIN .
+				UsersService::USERS . SQLClient::ON . self::SCHOOLS_TABLE . '.' . self::ADMIN . '=' .
+				UsersService::USERS . '.' .  UsersService::ID;
+		$groupBy = self::SCHOOLS_TABLE . '.' . self::ID;
+		$table = '(' . SQLClient::SELECT . $fields . SQLClient::FROM . $from;
+		#if isset param $where
+		$table .= isset ( $where ) ? SQLClient::WHERE . self::SCHOOLS_TABLE . '.' .  $where : NULL;
+		#if isset param $id
+		$table .= isset ($id) && $id != NULL ? SQLClient::WHERE . self::SCHOOLS_TABLE . '.' . self::ID . '=' . $id : NULL;
+		$table .= SQLClient::GROUOPBY . $groupBy;
+		#if isset param $limit
+		$table .= isset ( $limit ) ? SQLClient::LIMIT . $limit : NULL;
+		$table .= ')' . SQLClient::SQL_AS . 't1';
+		#creating full sql query
+		$fields = 't1.*, ' . SQLClient::COUNT . '(' . CourseService::COURSE_TABLE . '.' . 
+					CourseService::ID . ')' . SQLClient::SQL_AS . self::CNT_COURSES;
+		$from = $table . SQLClient::LEFT . SQLClient::JOIN . 
+				CourseService::COURSE_TABLE . SQLClient::ON . 
+				CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . '=' . 't1.' . self::ID;
+		$groupBy = 't1.' . self::ID;
+		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . SQLClient::GROUOPBY . $groupBy;
+		$sql .= isset ( $orderBy ) ? SQLClient::ORDERBY . 't1' . '.' .  $orderBy : NULL;
+		$result = DBClientHandler::getInstance ()->exec  ( $sql );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
 		return $result;
 	}
-	
-	public static function countStudents(){
-		/*SELECT schools.id, schools.caption, COUNT(schools_assigned.school_id) as students
-		FROM schools JOIN schools_assigned ON schools_assigned.school_id=schools.id
-		WHERE schools_assigned.school_id=2
-		GROUP BY schools_assigned.school_id*/
-	}
-	
-	public static function countCourses(){
-		/*SELECT schools.id, schools.caption, COUNT(courses.school_id) as students
-		FROM schools JOIN courses ON courses.school_id=schools.id
-		WHERE courses.school_id=2
-		GROUP BY courses.school_id*/
-	}
-	
-	
 	
 	public static function getSchool($id) {
 		$result = null;		

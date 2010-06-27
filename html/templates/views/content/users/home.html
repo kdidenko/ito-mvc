@@ -21,9 +21,9 @@
 		<div class="pgItemImg">
 			<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
 		</div>
-		<div class="pagepgItemBody">
+		<div class="pgItemBody">
 			<ul>
-				<li>
+				<li><span>Rating:</span>
 					<span class="lsValue">
 						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
 						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>

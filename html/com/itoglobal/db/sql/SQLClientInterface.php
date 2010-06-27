@@ -83,6 +83,14 @@ interface SQLClientInterface {
 	 */
 	const IN = ' IN ';
     /**
+     * @var string SQL COUNT statement identifier.
+     */
+    const COUNT = ' COUNT';
+    /**
+     * @var string SQL AS statement identifier.
+     */
+    const SQL_AS = ' AS ';
+    /**
      * Executes the SQL query and returns the execution result status.
      * @param $sql string - query string to execute.
      * @param $into mixed - db link to use for execution

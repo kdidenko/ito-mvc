@@ -49,9 +49,16 @@ class AdminContentController extends ContentController {
 						copy ( 'storage/uploads/default-school.jpg', $path );
 
 				// Insert new school to DB
-				$fields = SchoolService::ALIAS . ', ' . SchoolService::CAPTION . ', ' . SchoolService::DESCRIPTION . ', ' . SchoolService::AVATAR . ', ' . SchoolService::CRDATE . ', ' . SchoolService::FEE . ', ' . SchoolService::ADMIN . ', ' . SchoolService::LANGUAGE;
+				$fields = SchoolService::ALIAS . ', ' . SchoolService::CAPTION . ', ' . 
+						SchoolService::DESCRIPTION . ', ' . SchoolService::AVATAR . ', ' . 
+						SchoolService::CRDATE . ', ' . SchoolService::BASE_FEE . ', ' . 
+						SchoolService::ADMIN . ', ' . SchoolService::LANGUAGE;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [SchoolService::ALIAS] . "','" . $requestParams [SchoolService::CAPTION] . "','" . $requestParams [SchoolService::DESCRIPTION] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0','" . $requestParams[SchoolService::ADMIN] . "','" . $requestParams[SchoolService::LANGUAGE] ."'";
+				$values = "'" . $requestParams [SchoolService::ALIAS] . "','" . 
+						$requestParams [SchoolService::CAPTION] . "','" . 
+						$requestParams [SchoolService::DESCRIPTION] . "','" . $path . "','" . 
+						gmdate ( "Y-m-d H:i:s" ) . "','0','" . $requestParams[SchoolService::ADMIN] . "','" . 
+						$requestParams[SchoolService::LANGUAGE] ."'";
 				$into = SchoolService::SCHOOLS_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				

@@ -26,10 +26,10 @@
 						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 					</span>
 				</li>
-				<li><span>Students:</span><span class="lsValue">1258</span></li>
-				<li><span>Courses:</span><span class="lsValue">2</span></li>
-				<li><span>Language:</span><span class="lsValue">English</span></li>
-				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::FEE];?>$ / mon</span></li>
+				<li><span>Students:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_STUDENTS];?></span></li>
+				<li><span>Courses:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_COURSES];?></span></li>
+				<li><span>Language:</span><span class="lsValue"><?php echo $list[SchoolService::LANGUAGE];?></span></li>
+				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::BASE_FEE];?>$ / mon</span></li>
 				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 			</ul>
 		</div>

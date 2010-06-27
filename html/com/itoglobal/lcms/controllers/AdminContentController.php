@@ -151,18 +151,22 @@ class AdminContentController extends ContentController {
 		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
 		
+		$where = NULL;
 		#user sorting
-		$where = isset ( $requestParams ['ar'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_AR . "'" : NULL;
-		$where = isset ( $requestParams ['mr'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'" : $where;
-		$where = isset ( $requestParams ['ur'] ) ? UsersService::ROLE . "= '" . UsersService::ROLE_UR . "'" : $where;
-		
+		$where .= isset ( $requestParams [UsersService::ROLE]) ? 
+				UsersService::ROLE . "= '" . $requestParams [UsersService::ROLE] . "'" : NULL;
 		$where .= $where == NULL ? NULL : ' AND ';
+		$where .= isset ( $requestParams [UsersService::SCROLLER]) ? 
+				"UCASE( LEFT (lastname, 1 ) )" . "= '" . $requestParams [UsersService::SCROLLER] . "' AND " : NULL;
+		
 		$where .= UsersService::DELETED . " = 0";// AND " . UsersService::ROLE . "!='" . UsersService::ROLE_UR . "'";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		isset ( $id ) ? $where .= " and " . UsersService::ID . "!=" . $id : '';
+		$where .= " and " . UsersService::ID . "!=" . $id;
 		$result = UsersService::getUsersList ( $where );
 		$mvc->addObject ( self::RESULT, $result);
-		
+		$role = isset($requestParams [UsersService::ROLE]) ? $requestParams [UsersService::ROLE] : NULL;
+		$scroller = $result != NULL ? UsersService::chrScroller(UsersService::LASTNAME, $role) : NULL ;
+		$mvc->addObject ( 'scroller', $scroller);
 		return $mvc;
 	}
 	

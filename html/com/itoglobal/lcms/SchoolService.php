@@ -74,7 +74,7 @@ class SchoolService {
 		$fields = self::SCHOOLS_TABLE . '.' .  self::ID . ', ' . self::ALIAS . ', ' . 
 					self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::SCHOOLS_TABLE . '.' .  
 					self::AVATAR . ', ' . self::RATE . ', ' . self::SCHOOLS_TABLE . '.' .  
-					self::CRDATE . ', ' . self::FEE . ', ' . self::LANGUAGE . ', ' . 
+					self::CRDATE . 's, ' . self::FEE . ', ' . self::LANGUAGE . ', ' . 
 					self::SCHOOLS_TABLE . '.' .  self::ENABLED . ', ' . UsersService::USERS . '.' .  
 					UsersService::USERNAME . ', ' . self::SCHOOLS_TABLE . '.' .  self::ADMIN;
 		$from = self::SCHOOLS_TABLE . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
@@ -144,7 +144,6 @@ class SchoolService {
 		$error [] .= self::checkAlias ( $requestParams [self::ALIAS] );
 		$error [] .= $requestParams [self::CAPTION] ? false : 'Please enter caption';
 		$error [] .= $requestParams [self::DESCRIPTION] ? false : 'Please enter description';
-		/*$error [] .= self::checkAdmin ( $requestParams [self::ADMIN] );*/
 		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		return array_filter ( $error );
 	}
@@ -166,21 +165,6 @@ class SchoolService {
 		return $result;
 	}
 
-	/*public static function checkAdmin($admin) {
-		$result = false;
-		if (! $admin) {
-			$result = 'Please enter admin';
-		} else {
-			$fields = UsersService::ID;
-			$from = UsersService::USERS;
-			$where = UsersService::USERNAME . "='" . $admin . "'";
-			$res = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			$result = isset ( $res [0] [UsersService::ID] ) ? false : 'No such user';
-		}
-		return $result;
-	}*/
-	
-	
 }
 
 ?>

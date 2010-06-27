@@ -3,19 +3,33 @@
 	<b>Users List</b>
 	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
 		<span>
-			<a <?php echo !isset($_GET['ar']) && !isset($_GET['mr']) && !isset($_GET['ur']) ? "class='current'" : NULL;?> href="/manage-users.html">All</a> | 
-			<a <?php echo isset($_GET['ar']) ? "class='current'" : NULL;?> href="?ar">Administrators</a> | 
-			<a <?php echo isset($_GET['mr']) ? "class='current'" : NULL;?>  href="?mr">Moderators</a> |
-			<a <?php echo isset($_GET['ur']) ? "class='current'" : NULL;?>  href="?ur">Users</a>
+			<a <?php echo !isset($_GET[UsersService::ROLE]) ? "class='current'" : NULL;?> href="/manage-users.html">All</a> | 
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_AR ? "class='current'" : NULL;?> href="?role=AR">Administrators</a> | 
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_MR ? "class='current'" : NULL;?>  href="?role=MR">Moderators</a> |
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_UR ? "class='current'" : NULL;?>  href="?role=UR">Users</a>
 		</span>
 	<?php } ?>
 </div>
-<?php 		
+<?php
+	$scroller = $mvc->getObject ( UsersService::SCROLLER );		
 	$message = $mvc->getObject ( ContentController::RESULT );
 	if (isset ( $message ) and count($message) != 0) { 
 ?>
 <div class="subHeader">
-	<span>A | B | C | D | E | F | G</span>
+	<span>
+		<?php foreach($scroller as $key => $value){ ?>
+			<a <?php if(isset($_GET[UsersService::SCROLLER]))
+					echo $_GET[UsersService::SCROLLER]==$value[UsersService::SCROLLER] ? 
+						"class='current'" : NULL;?>
+			href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+							echo "scroller=".$value[UsersService::SCROLLER];?>">
+				<?php echo $value[UsersService::SCROLLER];?>
+			</a>&nbsp;
+		<?php } ?>
+	</span>
 </div>
 <table class="list">
 <tr class="title">

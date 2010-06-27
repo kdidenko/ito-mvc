@@ -24,16 +24,17 @@
 				</span>
 			</li>
           	<li><span>Students:</span><span class="lsValue">1258</span></li>
-          	<li><span>Language:</span><span class="lsValue">English</span></li>
          	<li><span>Level:</span><span class="lsValue"><?php echo $list[CourseService::LEVEL];?></span></li>
-         	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::FEE];?>$ / mon</span></li>
+         	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::BASE_FEE];?>$ / mon</span></li>
          	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
 	     	</ul>
 		</div>
 	<p><?php echo $list[CourseService::DESCRIPTION];?></p>
 </div>
 <div>
-	<b>Add exercises:</b>
+<div class="subHeader">
+	<b>Exercises Available:</b>
+</div>
 	<?php
 		$exerciseslist = $mvc->getObject('exerciseslist');
 		if(!isset($exerciseslist) || count($exerciseslist) == 0){

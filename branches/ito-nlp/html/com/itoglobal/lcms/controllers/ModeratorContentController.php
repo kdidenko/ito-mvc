@@ -367,6 +367,10 @@ class ModeratorContentController extends ContentController {
 			}
 			$where .= ") AND " ;
 		}
+		#creating SQL WHERE for geting user from scroller
+		$where .= isset ( $requestParams [UsersService::SCROLLER]) ? 
+				"UCASE( LEFT (lastname, 1 ) )" . "= '" . $requestParams [UsersService::SCROLLER] . "' AND " : NULL;
+		
 		#get user list from school where this user is moderator
 		$where .= UsersService::DELETED . " = 0 AND " . UsersService::USERS . '.' . 
 				UsersService::ID . "!=" . $id . " AND " . 
@@ -376,6 +380,10 @@ class ModeratorContentController extends ContentController {
 		$from = UsersService::USERS . SQLClient::JOIN . AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . UsersService::USERS . '.' . UsersService::ID . '=' . AssignmentsService::SCHOOLS_ASSIGNED . '.' . AssignmentsService::USER_ID;
 		$result = UsersService::getUsersList ( $where, $from );
 		$mvc->addObject ( self::RESULT, $result );
+		#get scroller
+		$NoRole = "'" . UsersService::ROLE_AR . "', '" . UsersService::ROLE_MR . "'";
+		$scroller = $result != NULL ? UsersService::chrScroller(UsersService::LASTNAME, NULL, $NoRole) : NULL ;
+		$mvc->addObject ( 'scroller', $scroller);
 		
 		return $mvc;
 	}

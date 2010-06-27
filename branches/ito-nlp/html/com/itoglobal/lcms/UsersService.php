@@ -85,6 +85,10 @@ class UsersService {
 	 * @var string defining the name of object
 	 */
 	const ERROR = 'error';
+	/**
+	  * @var string defining the scroller of object
+	 */
+	const SCROLLER = 'scroller';
 	
 	public static function getUsersList($where = NULL, $from = NULL) {
 		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
@@ -92,8 +96,7 @@ class UsersService {
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		return $result;
-	}
-	
+	}	
 	/**
 	 * Retreives the user data by specified user id.
 	 * @param integer $id the user id.
@@ -116,19 +119,27 @@ class UsersService {
 	}
 	
 	/**
-	 * Retreives the user data by specified user id.
+	 * Retreives the user data by specified database field.
 	 * @param text $field the field in which creaing character scroller.
+	 * @param text $role
+	 * @param text $NoRole
 	 * @return mixed user data or null if users does not exists. 
 	 */
-	public static function chrScroller($field){
-		/*SELECT DISTINCT UCASE( LEFT( lastname, 1 ) ) AS scroller, lastname
-		FROM users
-		ORDER BY lastname*/
-		$fields = "DISTINCT USCASE (" . SQLClient::LEFT . "(" . $field . ", 1 ) AS) scroller" . self::ID;
+	public static function chrScroller($field, $role = NULL, $NoRole = NULL){
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$fields = "DISTINCT UCASE(" . SQLClient::LEFT . "(" . $field . ", 1 ) ) AS scroller";
 		$from = self::USERS;
+		#without present user 
+		$where = UsersService::ID . "!=" . $id;
+		#only for one user role
+		$where .= $role != NULL ? " AND " . UsersService::ROLE . "='" . $role . "'": NULL;
+		#without some user role
+		$where .= $NoRole != NULL ? " AND " . UsersService::ROLE . SQLClient::NOT . SQLClient::IN . 
+									"(" . $NoRole . ")" : 
+														NULL;
 		$orderBy = self::LASTNAME;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', $orderBy, '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, '' );
 		$result = $result!= null && count($result) >0 ? $result : null ;
 		return $result;
 	}

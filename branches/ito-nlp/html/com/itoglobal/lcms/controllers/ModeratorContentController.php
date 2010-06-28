@@ -14,8 +14,8 @@ class ModeratorContentController extends ContentController {
 		
 		if (isset ($requestParams['switch']) ) {
 			SessionService::setRole ( SessionService::ROLE_UR );
-			header("Location: /index.html");
-			exit;
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );
 		}
 		
 		#for moderator
@@ -111,13 +111,13 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageCourses($actionParams, $requestParams) {		
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		/*
 		#if no school assigne to moderator than page forward to index.html
 		$schAssign = self::hasSchlAssign();
 		if($schAssign == NULL){ 
-			//TODO: use forwardActionRequest method!!!! 
-			header ( "Location: /index.html" );
-			exit ();	
-		}
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );	
+		}*/
 		
 		
 		#for moderator
@@ -206,7 +206,7 @@ class ModeratorContentController extends ContentController {
 	public function handleCourseDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		#option for exerco
+		#delete courses
 		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;
 		/*
 		isset ( $requestParams [CourseService::REMOVE] ) ? ExerciseService::removeExercise ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
@@ -297,17 +297,13 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		/*
 		$schAssign = self::hasSchlAssign();
-		
 		if($schAssign == NULL){ 
-			//TODO: use forwardActionRequest method!!!!
-			//$location = $this->onFailure ( $actionParams );
-			//$this->forwardActionRequest ( $location );
-			header ( "Location: /index.html" );
-			exit ();
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );
 		}
-		
+		*/
 		#for admin and moderator
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
@@ -443,15 +439,13 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageCategories($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		/*
 		$schAssign = self::hasSchlAssign();
-		
 		if($schAssign == NULL){ 
-			//TODO: use forwardActionRequest method!!!!
-			header ( "Location: /index.html" );
-			exit ();
+			$location = $this->onFailure ( $actionParams );
+			$this->forwardActionRequest ( $location );
 		}
-		
+		*/
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= CategoriesService::NAME;
@@ -516,7 +510,7 @@ class ModeratorContentController extends ContentController {
 		return $mvc;	
 	}
 	
-	private function hasSchlAssign(){
+	/*private function hasSchlAssign(){
 		$result = null;
 		# preparing query
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
@@ -527,7 +521,7 @@ class ModeratorContentController extends ContentController {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
 		return $result;
-	}
+	}*/
 }
 
 ?>

@@ -58,6 +58,28 @@ class ExerciseService {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		return $result;
 	}
+	
+	public static function getAccessEx($id) {
+		/* sql query
+			SELECT e.caption, e.id
+			FROM exercises AS e
+			LEFT JOIN trainings AS t ON t.course_id = e.course_id
+			WHERE t.user_id = " .  $id . " GROUP BY e.id
+		*/
+		$fields = ExerciseService::EXERCISES_TABLE . '.*';
+		$from = ExerciseService::EXERCISES_TABLE;
+		$join = SQLClient::LEFT . SQLClient::JOIN . TrainingsService::TRAININGS_TABLE . SQLClient::ON .
+				TrainingsService::TRAININGS_TABLE . '.' . TrainingsService::COURSE_ID . '=' . 
+				ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::COURSE_ID;
+		$where = TrainingsService::USER_ID . "='" . $id . "'";
+		$groupBy = ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::ID;
+		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
+				SQLClient::WHERE . $where . SQLClient::GROUOPBY . $groupBy; 
+		
+		$result = DBClientHandler::getInstance ()->exec ($sql);
+		$result = isset ($result) || $result!= NULL ? $result : NULL;
+		return $result;
+	}
 	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables
 		$from = self::EXERCISES_TABLE;

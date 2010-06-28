@@ -12,6 +12,7 @@
 	<alias name="/translation.php" target="/components/translation.php" />
 	<alias name="/r_snapshots.php" target="/components/r_snapshots.php" />
 	<alias name="/snapshots" target="/components/snapshots" />
+	
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
@@ -157,18 +158,8 @@
 			</forwards>
 			<property name="template" value="templates/plain/email-confirmation.txt"/>
 		</role>
-		<role type="MR">
-			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-			<template name="index.html" path="templates/crash.html" />
-		</role>
-		<role type="AR">
-			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-			<template name="index.html" path="templates/crash.html" />
-		</role>
-		<role type="UR">
-			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-			<template name="index.html" path="templates/crash.html" />
-		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
 	</action>
 
 	<action name="/validation.html" id="validation">
@@ -234,10 +225,16 @@
 			<controller class="com.itoglobal.lcms.controllers.ModeratorContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/moderator/$1.html" />
 			<property name="template" value="templates/plain/created-account.txt"/>
+			<forwards>
+				<target location="/index.html" name="home" condition="onfailure"/>
+			</forwards>
 		</role>
 		<role type="UR">
 			<controller class="com.itoglobal.lcms.controllers.UserContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
+			<forwards>
+				<target location="/index.html" name="home" condition="onfailure"/>
+			</forwards>
 		</role>
 		<role type="VR">
 			<controller class="com.itoglobal.lcms.controllers.ContentController" method="handle$1" />

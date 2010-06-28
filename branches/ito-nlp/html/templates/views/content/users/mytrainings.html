@@ -11,7 +11,7 @@
 		$trainingList = $mvc->getObject('trainingList');
 		if(isset($trainingList) && count($trainingList) > 0){
 	?>
-		<div class="itemMenu">
+		<div class="tabMenu">
 			<ul>
 				<?php foreach($trainingList as $key => $training){ ?> 
 					<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>

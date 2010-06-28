@@ -52,8 +52,8 @@ class ExerciseService {
 					self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::RATE . ', ' . self::COURSE_ID . ', ' . 
 					self::VIDEO . ', ' . UsersService::USERS . '.' .  UsersService::USERNAME;
 		$from = self::EXERCISES_TABLE . SQLClient::JOIN . UsersService::USERS . 
-				SQLClient::ON . UsersService::USERS . '.' .  UsersService::ID . '=' . self::EXERCISES_TABLE . '.' .  
-				self::OWNER;
+				SQLClient::ON . UsersService::USERS . '.' .  UsersService::ID . '=' . 
+				self::EXERCISES_TABLE . '.' . self::OWNER;
 		$where = isset ( $where ) ? self::EXERCISES_TABLE . '.' .  $where : '';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', $limit );
 		return $result;

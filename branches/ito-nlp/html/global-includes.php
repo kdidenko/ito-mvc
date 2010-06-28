@@ -25,7 +25,7 @@
     require_once 'com/itoglobal/lcms/AssignmentsService.php';
     require_once 'com/itoglobal/lcms/CategoriesService.php';
     require_once 'com/itoglobal/lcms/TrainingsService.php';
-
+	require_once 'com/itoglobal/lcms/ValuationsService.php';
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';
 	require_once 'com/itoglobal/mvc/core/MVCService.php';

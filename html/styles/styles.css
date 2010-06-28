@@ -155,11 +155,10 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .courseList .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .courseList .pgItemBody span{font-size: 12px; }
 
-.trnList {}
-.trnList .itemMenu li {margin-left: 30px}
-.trnList .itemMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #EDEDED; border: 1px solid #EDEDED; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: black; text-decoration: none;}
-.trnList .itemMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
-.trnList .itemMenu li:hover a{ background-color: white;}
+.tabMenu li {margin-left: 30px}
+.tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #EDEDED; border: 1px solid #EDEDED; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: black; text-decoration: none;}
+.tabMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
+.tabMenu li:hover a{ background-color: white;}
 .trnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
 .trnList .itemBody .itemBodyContent {margin: 0 100px; }
 .trnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
@@ -169,3 +168,15 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 					.itemEx .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}
 					.itemEx .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .trnList .itemBody .itemOption {margin: 50px 0; text-align: center;}
+
+.vlnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
+.vlnList .itemBody .itemBodyContent {margin: 20px 40px; }
+.vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
+.preview span{text-align: center;}
+		.item {float:left; height: 290px; width:23%; border:1px solid #B8C9DB; margin: 5px 5px 20px 5px;}
+		.item img { margin: 0 60px;}
+		.item span { margin: 5px; font-weight: bold;}
+		.item h1{font-size: 13px; margin: 5px; padding: 0; font-weight: bold;}
+		.item p{font-size: 12px; margin: 5px 10px;}
+		.item ul{font-size: 12px; margin: 5px 10px;}
+.vlnList .itemBody .itemOption {margin:20px 0; text-align: center;}

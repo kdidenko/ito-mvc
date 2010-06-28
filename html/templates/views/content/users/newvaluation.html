@@ -1,0 +1,38 @@
+<div class="itemForm">
+	<form enctype="multipart/form-data" action="valuate-responses.html" method="post">
+		<dl>
+			<dt>Valuation Name:</dt>
+			<dd><input type="text" name="v_name" id="v_name" size="35"/></dd>
+			<dt><span class="message">Please, mark courses.</span></dt>
+<?php
+			$usSchList = $mvc->getObject('usSchList');
+			$usCourseList = $mvc->getObject('usCourseList');
+			if(isset($usSchList) || count($usSchList) > 0){
+				foreach($usSchList as $key => $school){ 
+?> 
+					<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
+<?php				if(isset($usCourseList) && count($usCourseList) > 0){
+						foreach($usCourseList as $key => $course){
+							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
+								<dd><input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/><?php echo $course[CourseService::CAPTION];?></dd>
+								<dt>&nbsp;</dt>
+<?php						} else { ?>
+								<dd>
+									<span class="message">Sorry, there are no course exercises available at this moment.
+									Please, visit course later. It will be updated very soon.</span>
+								</dd>
+<?php						} 
+						}
+					} else { ?>
+						<dd>
+							<span class="message">Sorry, there are no course exercises available at this moment.
+							Please, visit course later. It will be updated very soon.</span>
+						</dd> 
+<?php				}
+				}
+			}
+?>
+		</dl>
+		<input type="submit" name="submit" value="Save Valuation"/>
+	</form>
+</div>

@@ -1,2 +1,115 @@
 <h1>Valuate Other Students Responses</h1>
-<span class="message">Under construction</span>
+<?php
+	$noSchAssigne = $mvc->getObject('noSchAssigne');
+	if($noSchAssigne == TRUE){
+?>
+<span class="message">You are currently not signed up for any schools.</span>
+<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<?php } else { ?>
+	<div class="vlnList">
+	<?php
+		$valuationsList = $mvc->getObject('valuationsList');
+		if(isset($valuationsList) && count($valuationsList) > 0){
+	?>
+		<div class="tabMenu">
+			<ul>
+				<?php foreach($valuationsList as $key => $valuation){ ?> 
+					<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$valuation[ValuationsService::V_ID] ? " class='current'": NULL;?>>
+						<a href="?id=<?php echo $valuation[ValuationsService::V_ID];?>&ex=1">
+							<?php echo $valuation[ValuationsService::V_NAME];?>
+						</a>
+					</li>
+				<?php } ?>
+				<li <?php if($_GET == NULL) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
+			</ul>
+		</div>
+	<?php } ?>
+		<div class="itemBody">
+			<div class="itemBodyContent">
+				<?php if ($_GET == NULL) { ?>
+					<!-- creating training form. -->
+					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
+				<?php } else { ?>
+					<?php
+						$exerciselist = $mvc->getObject('exerciselist');
+						if(!isset($exerciselist) || count($exerciselist) == 0){
+					?>
+						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
+						<span class="message">Please visit later. It will be updated very soon.</span>
+					<?php } else { ?>
+						<?php foreach($exerciselist as $key => $value){ ?>
+							<div class="preview">
+								<div class="item">
+							        <span>Exercise:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<img src="storage/video.jpg" alt="video"></img>
+								</div>
+								<div class="item">
+							        <span>Challenge:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<img src="storage/video.jpg" alt="video"></img>
+								</div>
+								<div class="item">
+							        <span>Response:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<img src="storage/video.jpg" alt="video"></img>
+								</div>
+								<div class="item">
+							        <span>Valuation:</span>
+							        <ul>
+							        	<li>Number of votes:<span>2</span></li>
+								        <li>Your own points:<span>0.89</span></li>
+								        <li>Contribution points:<span>6</span></li>
+							        </ul>
+								</div>
+							</div>
+<?php 					} ?>
+				<span><b>Created: </b></span><span class="lsValue">Apr 05 2010 10:24</span>
+				<div class="itemOption">
+					<span><b>Valuate Responses:</b></span>
+					<a class="button" href="#">-2</a>
+					<a class="button" href="#">-1</a>
+					<a class="button" href="#">0</a>
+					<a class="button" href="#">1</a>
+					<a class="button" href="#">2</a>
+				</div> 
+<?php				} ?>
+				<div class="itemOption">
+					<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Response</a>
+					<a class="button" href="videorecorder.html?id=<?php echo $value[CourseService::ID]?>">Browse Challenge</a>
+					<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Response</a>
+				</div>
+				<span class="message">
+					Note: The maximum achievable number of contribution points depends 
+					on your own response quality  for this exercise and the number of previous votes. 
+					You will be able to see the valuation statistics for this response after you have valuated.
+				</span>
+<?php			} ?>
+			</div>
+		</div>
+	</div>
+<?php  } ?>

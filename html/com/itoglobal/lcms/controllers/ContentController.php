@@ -107,13 +107,6 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleAbout($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
-	public function handleMyResponses($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
-	}
-	public function handleValuateResponses($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
-	}
-	
 	public function handleCourseDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#for users and visitor

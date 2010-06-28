@@ -11,8 +11,8 @@ class UserContentController extends ContentController {
 			$role = self::getUserRole();
 			if ($role == UsersService::ROLE_MR) {
 				SessionService::setRole ( SessionService::ROLE_MR );
-				header("Location: /index.html");
-				exit;
+				$location = $this->onFailure ( $actionParams );
+				$this->forwardActionRequest ( $location );
 			}
 		}
 		
@@ -158,7 +158,7 @@ class UserContentController extends ContentController {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
 	public function handleValuateResponses($actionParams, $requestParams) {
-			$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
@@ -230,7 +230,35 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		return $mvc;
 	}
-	
+	public function handleMyChallenges($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		#checking schools assigned
+		$result = AssignmentsService::getSchool($user_id);
+		if ($result != NULL){
+			#get schools and courses list (assigned to user) for creating new challenge
+			$where = '';
+			$where_course = '';
+			foreach($result as $key => $value){
+				$where .= SchoolService::ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
+				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
+				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
+				$where_course .= $key != count ($result) - 1 ? " OR " . CourseService::COURSE_TABLE . "." : null;
+			}
+			$usSchList = SchoolService::getSchoolsList ($where);
+			$usSchList = self::createTeaser($usSchList);
+			$mvc->addObject ( 'usSchList', $usSchList );
+		
+			$usCourseList = CourseService::getCoursesList ($where_course);
+			$mvc->addObject ( 'usCourseList', $usCourseList );
+			
+			#get all exercises witch user can view
+			$exList = ExerciseService::getAccessEx($user_id);
+			$mvc->addObject ( 'exList', $exList);
+		}
+		return $mvc;
+	}
 	private static function getUserRole(){
 		#prepeare value for sql query 
 		$id = SessionService::getAttribute(SessionService::USERS_ID);

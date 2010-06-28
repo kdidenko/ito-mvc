@@ -1,2 +1,17 @@
 <h1>My challenges</h1>
+<?php
+		$exList = $mvc->getObject('exList');
+		if(!isset($exList) || count($exList) == 0) { ?>
+<span class="message">Opps...</span>
+<?php	} else { ?>
+			<form>	
+<?php			foreach($exList as $key => $exercise){ ?>
+					<input type="radio" name="id" value="<?php echo $exercise[ExerciseService::ID]; ?>">
+						<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>"><?php echo $exercise[ExerciseService::CAPTION]; ?></a>
+					</input><br/>
+<?php			} ?>
+			<input type="submit" class="button"/>
+			</form>
+			
+<?php	} ?>
 <span class="message">Under construction</span>

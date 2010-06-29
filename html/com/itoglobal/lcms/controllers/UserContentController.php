@@ -234,6 +234,11 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		if ( isset($requestParams['submit']) ){
+			ChallengesService::newChallenge($requestParams);
+		}
+		
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
 		if ($result != NULL){

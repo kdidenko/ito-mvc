@@ -16,19 +16,9 @@
 							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
 								<dd><input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/><?php echo $course[CourseService::CAPTION];?></dd>
 								<dt>&nbsp;</dt>
-<?php						} else { ?>
-								<dd>
-									<span class="message">Sorry, there are no course exercises available at this moment.
-									Please, visit course later. It will be updated very soon.</span>
-								</dd>
 <?php						} 
 						}
-					} else { ?>
-						<dd>
-							<span class="message">Sorry, there are no course exercises available at this moment.
-							Please, visit course later. It will be updated very soon.</span>
-						</dd> 
-<?php				}
+					}
 				}
 			}
 ?>

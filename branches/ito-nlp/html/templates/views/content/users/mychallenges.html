@@ -1,17 +1,47 @@
-<h1>My challenges</h1>
+<h1>My challenges<span class="message">Under construction: new challenge</span></h1>
 <?php
 		$exList = $mvc->getObject('exList');
 		if(!isset($exList) || count($exList) == 0) { ?>
-<span class="message">Opps...</span>
+<span class="message">You are currently not signed up for any schools.</span>
+<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
 <?php	} else { ?>
-			<form>	
-<?php			foreach($exList as $key => $exercise){ ?>
-					<input type="radio" name="id" value="<?php echo $exercise[ExerciseService::ID]; ?>">
-						<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>"><?php echo $exercise[ExerciseService::CAPTION]; ?></a>
-					</input><br/>
-<?php			} ?>
-			<input type="submit" class="button"/>
-			</form>
-			
+		<form enctype="multipart/form-data" action="my-challenges.html" method="post">
+			<dl>
+			<?php
+			$usSchList = $mvc->getObject('usSchList');
+			$usCourseList = $mvc->getObject('usCourseList');
+			if(isset($usSchList) || count($usSchList) > 0){
+				foreach($usSchList as $key => $school){ 
+?> 
+					<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
+<?php				if(isset($usCourseList) && count($usCourseList) > 0){
+						foreach($usCourseList as $key => $course){
+							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
+								<dd><?php echo $course[CourseService::CAPTION];?></dd>
+								<dt>&nbsp;</dt>
+<?php							foreach($exList as $key => $exercise){
+									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
+										<dd>
+											<input type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>">
+												<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
+													<?php echo $exercise[ExerciseService::CAPTION]; ?>
+												</a>
+											</input>
+										</dd>
+										<dt>&nbsp;</dt>
+<?php								}   
+								} ?>
+<?php						} 
+						}
+					}
+				}
+			}
+?>
+			<dt>Challenge Name:</dt>
+			<dd><input type="text" name="name" id="name" size="35"/></dd>
+			<dt>Challenge Description:</dt>
+			</dl>
+			<textarea name="description" cols="10" rows="10"></textarea><br/>
+			<input class="button" type="submit" name="submit" value="Record"/>
+		</form>
 <?php	} ?>
-<span class="message">Under construction</span>

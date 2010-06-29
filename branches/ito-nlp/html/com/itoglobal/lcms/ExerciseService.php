@@ -59,7 +59,7 @@ class ExerciseService {
 		return $result;
 	}
 	
-	public static function getAccessEx($id) {
+	public static function getAccessEx($id, $where = NULL) {
 		/* sql query
 			SELECT e.caption, e.id
 			FROM exercises AS e
@@ -71,7 +71,8 @@ class ExerciseService {
 		$join = SQLClient::LEFT . SQLClient::JOIN . TrainingsService::TRAININGS_TABLE . SQLClient::ON .
 				TrainingsService::TRAININGS_TABLE . '.' . TrainingsService::COURSE_ID . '=' . 
 				ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::COURSE_ID;
-		$where = TrainingsService::USER_ID . "='" . $id . "'";
+		$where = $where != NULL ? $where . " AND ": NULL;
+		$where .= TrainingsService::USER_ID . "='" . $id . "'";
 		$groupBy = ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::ID;
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				SQLClient::WHERE . $where . SQLClient::GROUOPBY . $groupBy; 

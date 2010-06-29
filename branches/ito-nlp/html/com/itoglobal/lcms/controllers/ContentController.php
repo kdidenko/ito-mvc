@@ -133,15 +133,15 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleExerciseDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
-		$result = ExerciseService::getAccessEx($user_id);
-		for ($i=0; $i<count($result); ++$i) {
-			if ($result[$i][ExerciseService::ID] == $requestParams [ExerciseService::ID]){
-				#for moderator, user, visitor
-				$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
-				$list = ExerciseService::getExercisesList ( $where );
-				$mvc->addObject ( 'list', $list [0]);
-			}			
-		}
+		$where = ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::ID . "='" . 
+					$requestParams [ExerciseService::ID] . "'";
+		$result = ExerciseService::getAccessEx($user_id, $where);
+		if (count($result)){
+			#for moderator, user, visitor
+			$where = ExerciseService::ID . " = '" . $requestParams [ExerciseService::ID] . "'";
+			$list = ExerciseService::getExercisesList ( $where );
+			$mvc->addObject ( 'list', $list [0]);
+		}			
 		return $mvc;
 	}
 	public function handleMyProfile($actionParams, $requestParams) {

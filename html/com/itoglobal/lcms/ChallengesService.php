@@ -27,7 +27,7 @@ class ChallengesService {
 	const CH_TABLE = 'challenges';
 		
 	public static function getChallengesList($where = NULL, $groupBy = NULL) {
-		$fields = self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
+		$fields = self::ID . ', ' . self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
 		$from = self::CH_TABLE;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
@@ -51,13 +51,13 @@ class ChallengesService {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
-			$fields = self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
+			$fields = self::ID . ', ' .  self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
 			$from = self::CH_TABLE;
 			$where = self::EX_INDEX . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
-		}
+		} 
 		return $result;
 	}
 	

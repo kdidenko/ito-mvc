@@ -68,10 +68,13 @@
 						</div>
 					<?php } } ?>
 					<div class="itemOption">
-						<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Exercise</a></span>
-						<!--<span><a class="button" href="videorecorder.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>-->
-						<span><a class="button" href="start-challenge.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>
-						<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Exercise</a></span>
+						<?php if($_GET["ex"]>1){?>
+							<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Exercise</a></span>
+						<?php } 
+						if(isset($exerciselist) && count($exerciselist) > 0){ ?>
+							<span><a class="button" href="start-challenge.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>
+							<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Exercise</a></span>
+						<?php } ?>
 					</div>
 					<span class="message">
 						Please adjust your web camera position and lighting so that you can clearly see yourself. 

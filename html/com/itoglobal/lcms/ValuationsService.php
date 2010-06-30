@@ -63,12 +63,12 @@ class ValuationsService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );*/
 	}
 	
-	public static function deleteTrainig(/*$id, $fields, $vals*/) {
-		/*# setting the query variables
-		$from = self::USERS;
-		$where = self::ID . " = '" . $id . "'";
+	public static function deleteValuation($id) {
+		# setting the query variables
+		$from = self::V_TABLE;
+		$where = self::V_ID . " = '" . $id . "'";
 		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );*/
+		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
 	}
 
 }

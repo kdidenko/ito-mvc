@@ -48,27 +48,28 @@ class TrainingsService {
 					self::USER_ID . ", " . self::COURSE_ID;
 			$from = self::TRAININGS_TABLE;
 			$where = self::TRN_ID . '=' . $id;
+			$order =  self::ID . ' ' .SQLClient::ASC;
 			# executing query
-			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $order, '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
 		} 
 		return $result;
 	}
 	
-	public static function updateFields(/*$id, $fields, $vals*/) {
-		/*# setting the query variables
-		$from = self::USERS;
-		$where = self::ID . " = '" . $id . "'";
+	public static function updateFields($id, $fields, $vals) {
+		# setting the query variables
+		$from = self::TRAININGS_TABLE;
+		$where = self::TRN_ID . " = '" . $id . "'";
 		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );*/
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function deleteTrainig(/*$id, $fields, $vals*/) {
-		/*# setting the query variables
-		$from = self::USERS;
-		$where = self::ID . " = '" . $id . "'";
+	public static function deleteTrainig($id) {
+		# setting the query variables
+		$from = self::TRAININGS_TABLE;
+		$where = self::TRN_ID . " = '" . $id . "'";
 		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );*/
+		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
 	}
 
 }

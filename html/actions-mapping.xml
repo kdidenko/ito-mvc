@@ -45,7 +45,7 @@
 
 	<action name="/about.html" id="about">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>	
 	
 	<action name="/overview.html" id="home">
@@ -60,12 +60,17 @@
 	
 	<action name="/my-trainings.html" id="mytrainings">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />	
-	</action>	
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/edit-training.html" id="edittraining">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
 	
 	<action name="/valuate-responses.html" id="valuateresponses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />	
+		<template name="index.html" path="templates/layout-two-columns.html" />	
 	</action>
 	
 	<action name="/my-challenges.html" id="mychallenges">
@@ -234,6 +239,7 @@
 			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
 			<forwards>
 				<target location="/index.html" name="home" condition="onfailure"/>
+				<target location="/my-trainings.html" name="mytrainings" condition="onsuccess"/>
 			</forwards>
 		</role>
 		<role type="VR">

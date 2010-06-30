@@ -61,6 +61,7 @@ class CourseService {
 	 * @var string defining the add
 	 */
 	const ADD = 'add';
+	const COURSE_CAPTION = 'course_caption';
 	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
@@ -79,6 +80,31 @@ class CourseService {
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	public static function getAccessCourses($id, $where = NULL) {
+		/* sql query
+			SELECT c.caption, c.id, s.caption FROM courses AS c
+			LEFT JOIN schools AS s ON s.id=c.school_id
+			LEFT JOIN schools_assigned AS a ON a.school_id=s.id
+			WHERE a.user_id=40
+		*/
+		$fields = self::COURSE_TABLE . '.' . self::CAPTION . SQLClient::SQL_AS . self::COURSE_CAPTION . ', ' . self::COURSE_TABLE . '.' . self::ID . ', ' . 
+				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::CAPTION;
+		$from = self::COURSE_TABLE;
+		$join = SQLClient::LEFT . SQLClient::JOIN . SchoolService::SCHOOLS_TABLE . SQLClient::ON .
+				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::ID . '=' . 
+				self::COURSE_TABLE . '.' . self::SCHOOL_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . 
+				AssignmentsService::SCHOOLS_ASSIGNED  . '.' . AssignmentsService::SCHOOL_ID . '=' . 
+				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::ID;
+		$where = $where != NULL ? $where . " AND ": NULL;
+		$where .= AssignmentsService::USER_ID . "='" . $id . "'";
+		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
+				SQLClient::WHERE . $where; 
+		$result = DBClientHandler::getInstance ()->exec ($sql);
+		$result = isset ($result) || $result!= NULL ? $result : NULL;
+		return $result;
 	}
 	
 	public static function deleteCourse($id) {

@@ -1,4 +1,10 @@
 <div class="sidePgItem">
 	<h2>Navigation</h2>    
-	<?php include_once 'navigation.html'; ?>
+	<ul>
+		<li>&raquo;&nbsp;<a href="/valuate-responses.html">New Valuation</a></li>
+		<?php if (isset($_GET['id'])){ ?> 
+		<li>&raquo;&nbsp;<a href="/edit-valuation.html?id=<?php echo $_GET['id']?>">Edit Valuation</a></li>
+		<li>&raquo;&nbsp;<a href="/valuate-responses.html?delete=<?php echo $_GET['id']?>">Delete Valuation</a></li>
+		<?php } ?>
+	</ul>
 </div>

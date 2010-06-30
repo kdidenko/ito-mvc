@@ -10,11 +10,15 @@
 		<div class="itemBody">
 			<div class="itemBodyContent">
 					<div class="itemOption">
-						<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
-						<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
+						<?php $exerciselist = $mvc->getObject('exerciselist'); ?>
+						<?php if(isset($_GET["id"]) && $_GET["id"]>=1 ){?>
+							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
+						<?php } 
+						if(isset($exerciselist) && count($exerciselist) > 0){ ?>
+							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
+						<?php } ?>
 					</div>
 					<?php
-						$exerciselist = $mvc->getObject('exerciselist');
 						if(!isset($exerciselist) || count($exerciselist) == 0){	?>
 							<span class="message">FIX THIS TEXT.</span>
 							<span class="message">Sorry, there are no more responses available at this moment.</span>
@@ -23,7 +27,7 @@
 						<?php foreach($exerciselist as $key => $value){ ?>
 							<span><b>Created: </b></span>
 							<span class="lsValue">Apr 05 2010 10:24</span>
-							<div class="preview">
+							<div class="preview wide">
 								<div class="item">
 							        <span>Exercise:</span>
 							        <h1>

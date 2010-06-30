@@ -3,7 +3,9 @@
 require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class UserContentController extends ContentController {
-	
+	const RTMP = 'rtmp';
+	const RESP = 'resp';
+	const CHLG = 'chlg';
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -88,70 +90,96 @@ class UserContentController extends ContentController {
 	public function handleMyTrainings($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		#checking schools assigned
-		$result = AssignmentsService::getSchool($user_id);
-		if ($result != NULL){
-			#get schools and courses list (assigned to user) for creating new training
-			$where = '';
-			$where_course = '';
-			foreach($result as $key => $value){
-				$where .= SchoolService::ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
-				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
-				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
-				$where_course .= $key != count ($result) - 1 ? " OR " . CourseService::COURSE_TABLE . "." : null;
-			}
-			$usSchList = SchoolService::getSchoolsList ($where);
-			$usSchList = self::createTeaser($usSchList);
-			$mvc->addObject ( 'usSchList', $usSchList );
 		
-			$usCourseList = CourseService::getCoursesList ($where_course);
-			$mvc->addObject ( 'usCourseList', $usCourseList );
+		if(isset($requestParams['delete'])){
+			TrainingsService::deleteTrainig($requestParams['delete']);
+			$location = $this->onSuccess ( $actionParams );
+			$this->forwardActionRequest($location);
+		}
+		#get schools and courses list (assigned to user) for creating new training
+		$usCourseList = CourseService::getAccessCourses($user_id);
+		$mvc->addObject ( 'usCourseList', $usCourseList );
+		
+		#update training
+		if ( isset($requestParams['update']) ) {
+			#creatin index for training
+			$id = $requestParams ["edit_id"];
+			$fields = array ();
+			$fields [] .= TrainingsService::TRN_NAME;
+			$vals = array ();
+			$vals [] .= $requestParams [TrainingsService::TRN_NAME];
+			TrainingsService::updateFields( $id, $fields, $vals );
 			
-			#creating new training
-			if ( isset($requestParams['submit']) ) {
-				#creatin index for training
-				$where = TrainingsService::USER_ID . '=' . $user_id;
-				$groupBy = TrainingsService::TRN_ID;
-				$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
-				$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1; 
-	
-				foreach ($usCourseList as $key => $value) {
-					if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
-						# Insert new school to DB
-						$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
-						$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training' : $requestParams [TrainingsService::TRN_NAME];
-						$values = "'" . $t_index . "', '" . $t_name . "', '" . $user_id . "' , '" . $value[CourseService::ID] . "'";
-						$into = TrainingsService::TRAININGS_TABLE;
-						DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
-					}
+			foreach ($usCourseList as $key => $value) {
+				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
+					# Insert new school to DB
+					$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
+					$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training' : $requestParams [TrainingsService::TRN_NAME];
+					$values = "'" . $id . "', '" . $t_name . "', '" . $user_id . "' , '" . $value[CourseService::ID] . "'";
+					$into = TrainingsService::TRAININGS_TABLE;
+					DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
 				}
-			}		
-			
-			#get trainings list
-			$where = TrainingsService::USER_ID . "= '" . $user_id . "'";
-			$groupBy = "'" . TrainingsService::TRN_ID . "'";
-			$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
-			$mvc->addObject ( 'trainingList', $trainingList );
-				
-			#get exercises for training
-			if(isset($requestParams[TrainingsService::ID])){
-				#creating "where" for sql query
-				$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
-				$where = NULL;
-				foreach ($training as $key => $value){
-					$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
-					$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
-				}
-				$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
-				$exerciselist = ExerciseService::getExercisesList($where, $limit);
-				$exerciselist = self::createTeaser($exerciselist);
-				$mvc->addObject ( 'exerciselist', $exerciselist);
 			}
-		} else {
-			#if no assigne school
-			$mvc->addObject ( 'noSchAssigne', TRUE ); 
 		}
 		
+		#creating new training
+		if ( isset($requestParams['submit']) ) {
+			#creatin index for training
+			$where = TrainingsService::USER_ID . '=' . $user_id;
+			$groupBy = TrainingsService::TRN_ID;
+			$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
+			$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1;
+
+			foreach ($usCourseList as $key => $value) {
+				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
+					# Insert new school to DB
+					$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
+					$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training' : $requestParams [TrainingsService::TRN_NAME];
+					$values = "'" . $t_index . "', '" . $t_name . "', '" . $user_id . "' , '" . $value[CourseService::ID] . "'";
+					$into = TrainingsService::TRAININGS_TABLE;
+					DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
+				}
+			}
+		}
+		
+		#get trainings list
+		$where = TrainingsService::USER_ID . "= '" . $user_id . "'";
+		$groupBy = "'" . TrainingsService::TRN_ID . "'";
+		$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
+		$mvc->addObject ( 'trainingList', $trainingList );
+			
+		#get exercises for training
+		if(isset($requestParams[TrainingsService::ID])){
+			#creating "where" for sql query
+			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
+			$where = NULL;
+			foreach ($training as $key => $value){
+				$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
+				$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
+			}
+			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
+			$exerciselist = ExerciseService::getExercisesList($where, $limit);
+			$exerciselist = self::createTeaser($exerciselist);
+			$mvc->addObject ( 'exerciselist', $exerciselist);
+		}
+		/*$challenge = ChallengesService::getChallenge($requestParams[ExerciseService::ID]);
+		$mvc->addObject ( 'challenge', $challenge );*/
+		return $mvc;
+	}
+	public function handleEditTraining($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams['submit'])){
+			TrainingsService::updateFields($requestParams['edit']);
+		}
+		if(isset($requestParams[TrainingsService::ID])){
+			$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+			#get schools and courses list (assigned to user) for creating new training
+			$usCourseList = CourseService::getAccessCourses($user_id);
+			$mvc->addObject ( 'usCourseList', $usCourseList );
+			
+			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
+			$mvc->addObject('training', $training);
+		}
 		return $mvc;
 	}
 	public function handleMyResponses($actionParams, $requestParams) {
@@ -162,7 +190,7 @@ class UserContentController extends ContentController {
 		if ($result != NULL){
 			#get exercises for training
 				#creating "where" for sql query
-				$limit = !isset($requestParams[ExerciseService::ID])||$requestParams[ExerciseService::ID] <= 0 ? '0, 1' : $requestParams[ExerciseService::ID]-1 . ', 1';
+				$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
 				$exerciselist = ExerciseService::getExercisesList(NULL, $limit);
 				$exerciselist = self::createTeaser($exerciselist);
 				$mvc->addObject ( 'exerciselist', $exerciselist);
@@ -177,6 +205,14 @@ class UserContentController extends ContentController {
 	public function handleValuateResponses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		if(isset($requestParams['delete'])){
+			ValuationsService::deleteValuation($requestParams['delete']);
+			//TODO: remode hard code
+			$location = "valuate-responses.html";
+			$this->forwardActionRequest($location);
+		}
+		
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
 		if ($result != NULL){
@@ -243,13 +279,37 @@ class UserContentController extends ContentController {
 		
 		return $mvc;
 	}
+	public function handleEditValuation($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams['submit'])){
+			TrainingsService::updateFields($requestParams['edit']);
+		}
+		if(isset($requestParams[TrainingsService::ID])){
+			$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+			#get schools and courses list (assigned to user) for creating new training
+			$usCourseList = CourseService::getAccessCourses($user_id);
+			$mvc->addObject ( 'usCourseList', $usCourseList );
+			
+			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
+			$mvc->addObject('training', $training);
+		}
+		return $mvc;
+	}
 	public function handleStartChallenge($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if (isset($requestParams[ExerciseService::ID])){
+			$mvc->addObject(self::RTMP, '192.168.0.104');
+			$username = SessionService::getAttribute(SessionService::USERNAME);
 			$challenge = ChallengesService::getChallenge($requestParams[ExerciseService::ID]);
-			//here must be ->select randomly challenge for recording response
-			$mvc->addObject ( 'challenge', $challenge ); 
+			#random select challenges
+			$random = rand(0,count($challenge)) ;
+			$chlg_index = $challenge[$random][ChallengesService::ID];
+			$time = time();
+			$resp = $username . '-' . $chlg_index . '-' . $time;
+			$mvc->addObject(self::RESP, $resp);
+			$challenge = $challenge[0][ChallengesService::NAME];
+			$mvc->addObject ( self::CHLG, $challenge ); 
 		}
 		
 		return $mvc;

@@ -6,42 +6,48 @@
 <span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
 <?php	} else { ?>
 		<form enctype="multipart/form-data" action="my-challenges.html" method="post">
-			<dl>
-			<?php
+			<div style="float:left;width:40%;">
+				<dl>
+					<dt>Challenge Name:</dt>
+						<dd><input type="text" name="name" id="name" size="35"/></dd>
+						<dt>Challenge Description:</dt>
+				</dl>
+				<textarea name="description" cols="10" rows="10"></textarea>
+				<a href="start-challenge.html" class="button">Record Video</a>
+				<a href="#" class="button">Discard</a>
+				<input class="button" type="submit" name="submit" value="Save"/>
+			</div>
+			<div style="float:left;width:60%;">
+				<dl style="float:right">
+				<?php
 			$usSchList = $mvc->getObject('usSchList');
 			$usCourseList = $mvc->getObject('usCourseList');
 			if(isset($usSchList) || count($usSchList) > 0){
-				foreach($usSchList as $key => $school){ 
-?> 
-					<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
+				foreach($usSchList as $key => $school){	?> 
+						<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
 <?php				if(isset($usCourseList) && count($usCourseList) > 0){
 						foreach($usCourseList as $key => $course){
 							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
-								<dd><?php echo $course[CourseService::CAPTION];?></dd>
-								<dt>&nbsp;</dt>
+									<dd><?php echo $course[CourseService::CAPTION];?></dd>
+									<dt>&nbsp;</dt>
 <?php							foreach($exList as $key => $exercise){
 									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
-										<dd>
-											<input type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>">
-												<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
-													<?php echo $exercise[ExerciseService::CAPTION]; ?>
-												</a>
-											</input>
-										</dd>
-										<dt>&nbsp;</dt>
+											<dd>
+												<input type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>">
+													<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
+														<?php echo $exercise[ExerciseService::CAPTION]; ?>
+													</a>
+												</input>
+											</dd>
+											<dt>&nbsp;</dt>
 <?php								}   
-								} ?>
-<?php						} 
+								}
+							} 
 						}
 					}
 				}
-			}
-?>
-			<dt>Challenge Name:</dt>
-			<dd><input type="text" name="name" id="name" size="35"/></dd>
-			<dt>Challenge Description:</dt>
-			</dl>
-			<textarea name="description" cols="10" rows="10"></textarea><br/>
-			<input class="button" type="submit" name="submit" value="Record"/>
+			} ?>
+				</dl>
+			</div>			
 		</form>
-<?php	} ?>
+<?php } ?>

@@ -37,6 +37,7 @@
 						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
 						<span class="message">Please visit later. It will be updated very soon.</span>
 					<?php } else { ?>
+						<span><b>Created: </b></span><span class="lsValue">Apr 05 2010 10:24</span>
 						<?php foreach($exerciselist as $key => $value){ ?>
 							<div class="preview">
 								<div class="item">
@@ -50,7 +51,9 @@
 										<?php echo $value[ExerciseService::DESCRIPTION];?>
 										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
 									</p>
-									<img src="storage/video.jpg" alt="video"></img>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
 								</div>
 								<div class="item">
 							        <span>Challenge:</span>
@@ -63,7 +66,9 @@
 										<?php echo $value[ExerciseService::DESCRIPTION];?>
 										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
 									</p>
-									<img src="storage/video.jpg" alt="video"></img>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
 								</div>
 								<div class="item">
 							        <span>Response:</span>
@@ -76,7 +81,9 @@
 										<?php echo $value[ExerciseService::DESCRIPTION];?>
 										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
 									</p>
-									<img src="storage/video.jpg" alt="video"></img>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
 								</div>
 								<div class="item">
 							        <span>Valuation:</span>
@@ -88,7 +95,6 @@
 								</div>
 							</div>
 <?php 					} ?>
-				<span><b>Created: </b></span><span class="lsValue">Apr 05 2010 10:24</span>
 				<div class="itemOption">
 					<span><b>Valuate Responses:</b></span>
 					<a class="button" href="#">-2</a>

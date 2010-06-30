@@ -1,1 +1,29 @@
-<?php TemplateEngine::inclusion('../../../../components/index.php', $mvc) ?>
+<?php
+$challenge = $mvc->getObject('challenge');
+if(!isset($challenge) || count($challenge) == 0) { ?>
+	<span class="message">Sorry, there are no exercise challenges available at this moment.</span>
+	<span class="message">Please visit course later. It will be updated very soon.</span>
+<?php	} else { ?>
+	<script src="components/AC_OETags.js" language="javascript"></script>
+	<script src="components/history/history.js" language="javascript"></script>
+	<script src="components/component.js" language="javascript"></script>
+	<noscript>
+	  	<object classid="recorder"
+				id="publisher" width="100%" height="100%"
+				codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+				<param name="movie" value="publisher.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#FFFFFF" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<embed src="components/publisher.swf" quality="high" bgcolor="#FFFFFF"
+					width="500px" height="600px" name="publisher" align="middle"
+					play="true"
+					loop="false"
+					quality="high"
+					allowScriptAccess="sameDomain"
+					type="application/x-shockwave-flash"
+					pluginspage="http://www.adobe.com/go/getflashplayer">
+				</embed>
+		</object>
+	</noscript>
+<?php } ?>

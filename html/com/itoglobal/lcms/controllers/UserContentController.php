@@ -155,7 +155,24 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	public function handleMyResponses($actionParams, $requestParams) {
-		return $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		#checking schools assigned
+		$result = AssignmentsService::getSchool($user_id);
+		if ($result != NULL){
+			#get exercises for training
+				#creating "where" for sql query
+				$limit = !isset($requestParams[ExerciseService::ID])||$requestParams[ExerciseService::ID] <= 0 ? '0, 1' : $requestParams[ExerciseService::ID]-1 . ', 1';
+				$exerciselist = ExerciseService::getExercisesList(NULL, $limit);
+				$exerciselist = self::createTeaser($exerciselist);
+				$mvc->addObject ( 'exerciselist', $exerciselist);
+		} else {
+			#if no assigne school
+			$mvc->addObject ( 'noSchAssigne', TRUE ); 
+		}
+		
+		return $mvc;
+		
 	}
 	public function handleValuateResponses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
@@ -228,6 +245,13 @@ class UserContentController extends ContentController {
 	}
 	public function handleStartChallenge($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset($requestParams[ExerciseService::ID])){
+			$challenge = ChallengesService::getChallenge($requestParams[ExerciseService::ID]);
+			//here must be ->select randomly challenge for recording response
+			$mvc->addObject ( 'challenge', $challenge ); 
+		}
+		
 		return $mvc;
 	}
 	public function handleMyChallenges($actionParams, $requestParams) {

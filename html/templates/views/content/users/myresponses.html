@@ -1,2 +1,108 @@
-<h1>Valuations of my responses</h1>
-<span class="message">Under construction</span>
+<h1>Valuations of my responses<span class="message">Under construction</span></h1>
+<?php
+	$noSchAssigne = $mvc->getObject('noSchAssigne');
+	if($noSchAssigne == TRUE){
+?>
+<span class="message">You are currently not signed up for any schools.</span>
+<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<?php } else { ?>
+	<div class="vlnList">
+		<div class="itemBody">
+			<div class="itemBodyContent">
+					<div class="itemOption">
+						<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
+						<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
+					</div>
+					<?php
+						$exerciselist = $mvc->getObject('exerciselist');
+						if(!isset($exerciselist) || count($exerciselist) == 0){	?>
+							<span class="message">FIX THIS TEXT.</span>
+							<span class="message">Sorry, there are no more responses available at this moment.</span>
+							<span class="message">Please, continue your <a href="/my-trainings.html" title"Youcademy Trainings">training</a>.</span>
+					<?php } else { ?>
+						<?php foreach($exerciselist as $key => $value){ ?>
+							<span><b>Created: </b></span>
+							<span class="lsValue">Apr 05 2010 10:24</span>
+							<div class="preview">
+								<div class="item">
+							        <span>Exercise:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Challenge:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Response:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+											<?php echo $value[ExerciseService::CAPTION];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ExerciseService::DESCRIPTION];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Valuation:</span>
+							        <ul>
+							        	<li>Number of votes:<span>2</span></li>
+								        <li>Your own points:<span>0.89</span></li>
+								        <li>Contribution points:<span>6</span></li>
+							        </ul>
+							        <div class="image">
+							        	<img src="images/valuation.png" alt="valuation"></img>
+							        </div>
+								</div>
+							</div>
+							<div class="comments">
+								<div class="cmItem">
+									<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
+									<span>On the brink of a fault.</span>
+									<span>points 0</span>
+								</div>
+								<div class="cmItem">
+									<img src="storage/uploads/users/user1/profile/avatar.jpg"></img>
+									<span>I like this video...</span>
+									<span>points +2</span>
+								</div>
+								<div class="cmItem">
+									<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
+									<span>Good calibration, but not the best solution.</span>
+									<span>points +1</span>
+								</div>
+								<a class="button" href="#">See All</a>
+							</div>
+<?php 					} 
+				 	}
+				} ?>
+			</div>
+		</div>
+	</div>
+<?php   ?>

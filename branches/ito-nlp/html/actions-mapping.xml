@@ -55,7 +55,7 @@
 	
 	<action name="/my-responses.html" id="myresponses">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 	
 	<action name="/my-trainings.html" id="mytrainings">
@@ -70,7 +70,7 @@
 	
 	<action name="/my-challenges.html" id="mychallenges">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />	
+		<template name="index.html" path="templates/layout-one-column.html" />	
 	</action>
 	
 	<action name="/messages.html" id="messages">

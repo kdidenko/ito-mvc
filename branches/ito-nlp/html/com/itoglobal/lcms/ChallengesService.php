@@ -18,15 +18,17 @@ class ChallengesService {
 	 */
 	const OWNER = 'owner';
 	/**
-	 * @var  string defining the ex_index table name
+	 * @var  string defining the ex_index field name
 	 */
 	const EX_INDEX = 'ex_index';
-	const CHALLENGES = 'challenges';
+	/**
+	 * @var  string defining the challenges table name
+	 */
+	const CH_TABLE = 'challenges';
 		
 	public static function getChallengesList($where = NULL, $groupBy = NULL) {
-		$fields = self::V_TABLE . "." . self::ID . ", " . self::V_ID . ", " . self::V_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID;
-		$from = self::V_TABLE;
+		$fields = self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
+		$from = self::CH_TABLE;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 		return $result;
@@ -37,26 +39,25 @@ class ChallengesService {
 		$fields = self::NAME . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::EX_INDEX;
 		$values = "'" . $requestParams[self::NAME] . "', '" . $requestParams[self::DESCRIPTION] . "', '" . 
 					$user_id . "', '" . $requestParams[self::EX_INDEX] . "'";
-		$into = self::CHALLENGES;
+		$into = self::CH_TABLE;
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 	}
 	/**
-	 * Retreives the user data by specified user id.
+	 * Retreives the challenge data by specified exercises id.
 	 * @param integer $id the user id.
 	 * @return mixed user data or null if user with such id does not exists. 
 	 */
-	public static function getValuation($id) {
+	public static function getChallenge($id) {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
-			$fields = self::V_TABLE . "." . self::ID . ", " . self::V_ID . ", " . self::V_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID;
-			$from = self::V_TABLE;
-			$where = self::V_ID . '=' . $id;
+			$fields = self::NAME . ", " . self::DESCRIPTION . ", " . self::OWNER . ", " . self::EX_INDEX;
+			$from = self::CH_TABLE;
+			$where = self::EX_INDEX . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
-		} 
+		}
 		return $result;
 	}
 	

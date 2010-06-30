@@ -59,6 +59,9 @@ h2 {font-size:16px}
 .pgListItem	.categories b {margin-left: 10px;}			
 .pgListItem	.categories span {font-size: 11px;}
 .pgListItem .pgItemBody	.pgItemDsc {margin:5px; font-size:11px}
+						.pgItemDsc b {font-size: 13px;}
+.pgListItem .pgItemBody	.pgItemIns ul li{list-style: inside decimal; margin-left: 20px;}
+						.pgItemIns b {font-size: 13px;}
 .pgListItem .pgItemBody  p {padding:0}
 .pgListItem .pgItemBody  h1 {font-size:20px; color: #666666;}
 .pgListItem .pgItemBody ul {padding:5px 0 10px 0; font-size:11px}
@@ -173,10 +176,14 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .vlnList .itemBody .itemBodyContent {margin: 20px 40px; }
 .vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
 .preview span{text-align: center;}
-		.item {float:left; height: 290px; width:23%; border:1px solid #B8C9DB; margin: 5px 5px 20px 5px;}
-		.item img { margin: 0 60px;}
+		.item {float:left; height: 290px; width:23%; border:1px solid #B8C9DB; margin: 5px 5px 20px 5px;background-color:#F8F8F8;}
+		.item .image { text-align: center;}
 		.item span { margin: 5px; font-weight: bold;}
 		.item h1{font-size: 13px; margin: 5px; padding: 0; font-weight: bold;}
 		.item p{font-size: 12px; margin: 5px 10px;}
 		.item ul{font-size: 12px; margin: 5px 10px;}
+.comments {float:right; display: block; clear: both; margin-right:25px;}
+.comments .cmItem {width: 600px; height: 80px; border:1px solid #D9D9D9; background-color:#G0G0G0; margin-bottom: 5px;}
+.comments .cmItem span {margin: 10px;}
+.comments .cmItem img {float:left; margin: 0 5px;}
 .vlnList .itemBody .itemOption {margin:20px 0; text-align: center;}

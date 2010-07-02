@@ -45,8 +45,9 @@ class TrainingsService {
 		if(isset($id) && $id != ''){
 			# preparing query
 			$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID;
-			$from = self::TRAININGS_TABLE;
+					self::USER_ID . ", " . self::COURSE_ID . ", " . CourseService::CAPTION;
+			$from = self::TRAININGS_TABLE . SQLClient::LEFT . SQLClient::JOIN . CourseService::COURSE_TABLE . SQLClient::ON . 
+					self::COURSE_ID . '=' . CourseService::COURSE_TABLE . '.' . CourseService::ID;
 			$where = self::TRN_ID . '=' . $id;
 			$order =  self::ID . ' ' .SQLClient::ASC;
 			# executing query
@@ -64,12 +65,22 @@ class TrainingsService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function deleteTrainig($id) {
+	public static function deleteTrainig($id, $where=NULL) {
 		# setting the query variables
 		$from = self::TRAININGS_TABLE;
-		$where = self::TRN_ID . " = '" . $id . "'";
+		$where = $where==NULL ? self::TRN_ID . " = '" . $id . "'" : $where;
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
+	}
+	
+	public static function addTraining($requestParams, $t_index, $course_id){
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		# Insert new school to DB
+		$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
+		$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training' : $requestParams [TrainingsService::TRN_NAME];
+		$values = "'" . $t_index . "', '" . $t_name . "', '" . $user_id . "' , '" . $course_id . "'";
+		$into = TrainingsService::TRAININGS_TABLE;
+		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
 	}
 
 }

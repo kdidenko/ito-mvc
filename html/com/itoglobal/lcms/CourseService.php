@@ -82,13 +82,20 @@ class CourseService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function getAccessCourses($id, $where = NULL) {
+	public static function getAccessCourses($where = NULL) {
+		$sql = self::createQuery($where);
+		$result = DBClientHandler::getInstance ()->exec ($sql);
+		$result = isset ($result) || $result!= NULL ? $result : NULL;
+		return $result;
+	}
+	private static function createQuery($where=NULL){
 		/* sql query
 			SELECT c.caption, c.id, s.caption FROM courses AS c
 			LEFT JOIN schools AS s ON s.id=c.school_id
 			LEFT JOIN schools_assigned AS a ON a.school_id=s.id
 			WHERE a.user_id=40
 		*/
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$fields = self::COURSE_TABLE . '.' . self::CAPTION . SQLClient::SQL_AS . self::COURSE_CAPTION . ', ' . self::COURSE_TABLE . '.' . self::ID . ', ' . 
 				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::CAPTION;
 		$from = self::COURSE_TABLE;
@@ -102,10 +109,33 @@ class CourseService {
 		$where .= AssignmentsService::USER_ID . "='" . $id . "'";
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				SQLClient::WHERE . $where; 
+		return $sql;
+	}
+	public static function getOtherCourses(){
+		/*
+		 SELECT t1.* FROM
+			(
+			SELECT c.caption AS course_caption, c.id, s.caption FROM courses AS c
+			LEFT JOIN schools AS s ON s.id=c.school_id
+			LEFT JOIN schools_assigned AS a ON a.school_id=s.id
+			WHERE a.user_id=37
+			)
+			AS t1
+		LEFT JOIN trainings AS t ON t.course_id=t1.id
+		WHERE t.course_id IS NULL
+		 */
+		$begin = SQLClient::SELECT . "t1.*" . SQLClient::FROM . '(';
+		$sql = self::createQuery();
+		$end = ')AS t1' . SQLClient::LEFT . SQLClient::JOIN . TrainingsService::TRAININGS_TABLE . 
+				SQLClient::ON . TrainingsService::TRAININGS_TABLE . '.' . TrainingsService::COURSE_ID . '=' . 
+				't1.' . CourseService::ID . SQLClient::WHERE . TrainingsService::TRAININGS_TABLE . '.' . 
+				TrainingsService::COURSE_ID . SQLClient::IS_NULL;
+		$sql = $begin . $sql . $end;
 		$result = DBClientHandler::getInstance ()->exec ($sql);
 		$result = isset ($result) || $result!= NULL ? $result : NULL;
 		return $result;
 	}
+	
 	
 	public static function deleteCourse($id) {
 		# setting the query variables

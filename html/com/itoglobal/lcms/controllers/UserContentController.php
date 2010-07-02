@@ -277,7 +277,7 @@ class UserContentController extends ContentController {
 			
 			if (isset($requestParams['del'])){
 				$where = ValuationsService::COURSE_ID . '=' . $requestParams['del'];
-				ValuationsService::deleteTrainig($requestParams[ValuationsService::ID], $where);
+				ValuationsService::deleteValuation($requestParams[ValuationsService::ID], $where);
 			}
 			
 			#get schools and courses list (assigned to user) for creating new training

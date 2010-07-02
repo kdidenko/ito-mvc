@@ -20,7 +20,7 @@
 						<dt>Your courses:</dt>
 <?php					foreach($valuation as $key => $trn){ ?>
 							<dd>
-								<a class="button" href="edit-training.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&del=<?php echo $trn[ValuationsService::COURSE_ID] ?>">Del</a>
+								<a class="button" href="edit-valuation.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&del=<?php echo $trn[ValuationsService::COURSE_ID] ?>">Del</a>
 								<?php echo $trn[CourseService::CAPTION] ?>
 							</dd>
 							<dt>&nbsp;</dt>
@@ -34,7 +34,7 @@
 					<span class="message">Please, mark the courses, wich you want to learn.</span>
 					<dl>
 <?php				$usCourseList = $mvc->getObject('usCourseList');
-					if(isset($usCourseList) && count($usCourseList) > 0){
+					if(isset($usCourseList) && count($usCourseList) > 0){ print_r($usCourseList);
 						foreach($usCourseList as $key => $course){ 
 							$old = isset ($old)? $old : NULL;
 							if ($course[SchoolService::CAPTION] != $old){?> 

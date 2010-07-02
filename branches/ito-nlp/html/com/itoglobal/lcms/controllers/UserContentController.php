@@ -332,7 +332,10 @@ class UserContentController extends ContentController {
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
 		if ( isset($requestParams['submit']) ){
-			ChallengesService::newChallenge($requestParams);
+			$username = SessionService::getAttribute(SessionService::USERNAME);
+			$time = time();
+			$name = $username . '-' . $requestParams[ChallengesService::EX_INDEX] . '-' . $time;
+			ChallengesService::newChallenge($requestParams, $name);
 		}
 		
 		#checking schools assigned

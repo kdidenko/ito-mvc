@@ -6,6 +6,10 @@ class ChallengesService {
 	 */
 	const ID = 'id';
 	/**
+	 * @var string defining the caption field name
+	 */
+	const CAPTION = 'caption';
+	/**
 	 * @var string defining the name field name
 	 */
 	const NAME = 'name';
@@ -34,10 +38,10 @@ class ChallengesService {
 		return $result;
 	}
 	
-	public static function newChallenge($requestParams){
+	public static function newChallenge($requestParams,$name){
 		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
-		$fields = self::NAME . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::EX_INDEX;
-		$values = "'" . $requestParams[self::NAME] . "', '" . $requestParams[self::DESCRIPTION] . "', '" . 
+		$fields = self::NAME . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::OWNER . ', ' . self::EX_INDEX;
+		$values = "'" . $name . "', '" . $requestParams[self::CAPTION] . "', '" . $requestParams[self::DESCRIPTION] . "', '" . 
 					$user_id . "', '" . $requestParams[self::EX_INDEX] . "'";
 		$into = self::CH_TABLE;
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );

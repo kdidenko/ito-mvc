@@ -170,11 +170,20 @@ class UserContentController extends ContentController {
 			}
 			
 			#get schools and courses list (assigned to user) for creating new training
-			$usCourseList = CourseService::getOtherCourses();
-			$mvc->addObject ( 'usCourseList', $usCourseList );
-			
 			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
 			$mvc->addObject('training', $training);
+			$where = NULL;
+			if (count($training)>0){
+				$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . SQLClient::NOT . 
+							SQLClient::IN . '(';
+				foreach($training as $key =>$value){
+				 $where .= $value[TrainingsService::COURSE_ID];
+				 $where .= count($training)>$key+1 ? ', ' : NULL;
+				}
+				$where .= ')';
+			}
+			$usCourseList = CourseService::getAccessCourses($where);
+			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
 		return $mvc;
 		
@@ -280,12 +289,21 @@ class UserContentController extends ContentController {
 				ValuationsService::deleteValuation($requestParams[ValuationsService::ID], $where);
 			}
 			
-			#get schools and courses list (assigned to user) for creating new training
-			$usCourseList = CourseService::getOtherCourses();
-			$mvc->addObject ( 'usCourseList', $usCourseList );
-			
 			$valuation = ValuationsService::getValuation($requestParams[ValuationsService::ID]);
 			$mvc->addObject('valuation', $valuation);
+			#get schools and courses list (assigned to user) for creating new training
+			$where = NULL;
+			if (count($valuation)>0){
+				$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . SQLClient::NOT . 
+							SQLClient::IN . '(';
+				foreach($valuation as $key =>$value){
+				 $where .= $value[TrainingsService::COURSE_ID];
+				 $where .= count($valuation)>$key+1 ? ', ' : NULL;
+				}
+				$where .= ')';
+			}
+			$usCourseList = CourseService::getAccessCourses($where);
+			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
 		return $mvc;
 	}

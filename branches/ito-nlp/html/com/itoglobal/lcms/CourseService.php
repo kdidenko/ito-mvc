@@ -111,7 +111,7 @@ class CourseService {
 				SQLClient::WHERE . $where; 
 		return $sql;
 	}
-	public static function getOtherCourses(){
+	public static function getOtherCourses($t_index){
 		/*
 		 SELECT t1.* FROM
 			(

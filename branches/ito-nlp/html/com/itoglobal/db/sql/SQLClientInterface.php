@@ -91,6 +91,10 @@ interface SQLClientInterface {
      */
     const SQL_AS = ' AS ';
     /**
+     * @var string SQL IS NULL statement identifier.
+     */
+    const IS_NULL = ' IS NULL ';
+    /**
      * Executes the SQL query and returns the execution result status.
      * @param $sql string - query string to execute.
      * @param $into mixed - db link to use for execution

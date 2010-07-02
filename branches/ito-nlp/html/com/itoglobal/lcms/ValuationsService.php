@@ -64,10 +64,10 @@ class ValuationsService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function deleteValuation($id) {
+	public static function deleteValuation($id, $where=NULL) {
 		# setting the query variables
 		$from = self::V_TABLE;
-		$where = self::V_ID . " = '" . $id . "'";
+		$where = $where==NULL ? self::V_ID . " = '" . $id . "'" : $where;
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
 	}

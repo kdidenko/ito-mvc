@@ -49,6 +49,9 @@ class ResponsesService {
 		 * FROM `responses` AS r
 		 * LEFT JOIN challenges AS c ON c.id=r.chlg_index
 		 * LEFT JOIN exercises AS e ON e.id=c.ex_index
+		 * [LEFT JOIN valuations AS v ON v.course_id=e.course_id
+		 * WHERE v.v_index=2]
+		 * WHERE r.owner=37
 		 */
 		$fields = self::RESP_TABLE . '.' . self::ID . ', ' . 
 				self::RESP_TABLE . '.' . self::DESCRIPTION . ', ' . 
@@ -70,11 +73,11 @@ class ResponsesService {
 					ValuationsService::V_TABLE . '.' . ValuationsService::COURSE_ID . '=' . 
 					ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::COURSE_ID : 
 						NULL; 
-		$where = isset($owner) ? self::RESP_TABLE . '.' . self::OWNER . '=' . $owner : NULL;
-		$where = isset($v_index) ? ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index : NULL;
+		$where = isset($owner) ? SQLClient::WHERE . self::RESP_TABLE . '.' . self::OWNER . '=' . $owner : NULL;
+		$where = isset($v_index) ? SQLClient::WHERE . ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index : NULL;
 		# executing the query
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
-				SQLClient::WHERE . $where . SQLClient::LIMIT . $limit;  
+				$where . SQLClient::LIMIT . $limit;  
 		$result = DBClientHandler::getInstance ()->exec ( $sql );
 		$result = count($result)>0 && $result!=NULL ? $result : NULL;
 		return $result;

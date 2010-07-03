@@ -194,12 +194,11 @@ class UserContentController extends ContentController {
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
 		if ($result != NULL){
-			#get exercises for training
-				#creating "where" for sql query
-				$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
-				$resp = ResponsesService::getResponses($user_id, $limit);
-				//$resp = self::createTeaser($resp);
-				$mvc->addObject ( 'resp', $resp );
+			#get responses
+			$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
+			$resp = ResponsesService::getResponses($user_id, $limit);
+			//$resp = self::createTeaser($resp);
+			$mvc->addObject ( 'resp', $resp );
 		} else {
 			#if no assigne school
 			$mvc->addObject ( 'noSchAssigne', TRUE ); 
@@ -273,9 +272,10 @@ class UserContentController extends ContentController {
 				$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
 			}
 			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
-			$exerciselist = ExerciseService::getExercisesList($where, $limit);
-			$exerciselist = self::createTeaser($exerciselist);
-			$mvc->addObject ( 'exerciselist', $exerciselist);
+			$v_index = $requestParams[ValuationsService::ID];
+			$resp = ResponsesService::getResponses(NULL, $limit, $v_index);
+			//$resp = self::createTeaser($resp);
+			$mvc->addObject ( 'resp', $resp );
 		}
 		return $mvc;
 	}

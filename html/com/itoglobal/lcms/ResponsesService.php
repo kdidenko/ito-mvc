@@ -69,7 +69,7 @@ class ResponsesService {
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				SQLClient::WHERE . $where . SQLClient::LIMIT . $limit;  
 		$result = DBClientHandler::getInstance ()->exec ( $sql );
-		$result = count($result)>0 && $result!=NULL : $result : NULL;
+		$result = count($result)>0 && $result!=NULL ? $result : NULL;
 		return $result;
 	}
 	

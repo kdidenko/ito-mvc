@@ -31,25 +31,25 @@
 					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
 				<?php } else { ?>
 					<?php
-						$exerciselist = $mvc->getObject('exerciselist');
-						if(!isset($exerciselist) || count($exerciselist) == 0){
+						$resp = $mvc->getObject('resp');
+						if(!isset($resp) || count($resp) == 0){
 					?>
 						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
 						<span class="message">Please visit later. It will be updated very soon.</span>
 					<?php } else { ?>
 						<span><b>Created: </b></span><span class="lsValue">Apr 05 2010 10:24</span>
-						<?php foreach($exerciselist as $key => $value){ ?>
+						<?php foreach($resp as $key => $value){ ?>
 							<div class="preview">
 								<div class="item">
 							        <span>Exercise:</span>
 							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[ResponsesService::EX_ID] ?>">
+											<?php echo $value[ResponsesService::EX_NAME];?>
 										</a>
 									</h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::EX_DESC];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ResponsesService::EX_ID];?>" title="View">More...</a>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -57,14 +57,9 @@
 								</div>
 								<div class="item">
 							        <span>Challenge:</span>
-							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
-										</a>
-									</h1>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::CHLG_DESC];?>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -72,14 +67,9 @@
 								</div>
 								<div class="item">
 							        <span>Response:</span>
-							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
-										</a>
-									</h1>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::DESCRIPTION];?>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -92,6 +82,9 @@
 								        <li>Your own points:<span>0.89</span></li>
 								        <li>Contribution points:<span>6</span></li>
 							        </ul>
+							        <div class="image">
+							        	<img src="images/valuation.png" alt="valuation"></img>
+							        </div>
 								</div>
 							</div>
 <?php 					} ?>
@@ -108,7 +101,7 @@
 					<?php if($_GET["ex"]>1){?>
 						<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Response</a>
 					<?php } 
-					if(isset($exerciselist) && count($exerciselist) > 0){ ?>
+					if(isset($resp) && count($resp) > 0){ ?>
 						<a class="button" href="videorecorder.html?id=<?php echo $value[CourseService::ID]?>">View Challenge</a>
 						<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Response</a>
 					<?php } ?>

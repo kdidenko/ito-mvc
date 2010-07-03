@@ -37,12 +37,13 @@ class ResponsesService {
 	const EX_ID = 'ex_id';
 	
 	/**
-	 * Retreives the responses data by specified user id.
+	 * Retreives the responses data by specified user id or valuation id.
 	 * @param integer $owner the user id.
+	 * @param integer $v_index the valuation index.
 	 * @param integer $limit the limit of responses.
 	 * @return mixed responses data or null if responses with such user id does not exists. 
 	 */	
-	public static function getResponses($owner=NULL, $limit = null) {
+	public static function getResponses($owner=NULL, $limit = null, $v_index = NULL) {
 		/* SQL QUERY:
 		 * SELECT r.id, r.name, r.description AS r_descr, c.id AS ch_id, c.caption AS ch_name, c.description AS ch_descr, e.id AS e_id, e.caption AS e_name, e.description AS e_descr
 		 * FROM `responses` AS r
@@ -64,7 +65,13 @@ class ResponsesService {
 				SQLClient::LEFT . SQLClient::JOIN . ExerciseService::EXERCISES_TABLE . SQLClient::ON . 
 				ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::ID . '=' . 
 				ChallengesService::CH_TABLE . '.' . ChallengesService::EX_INDEX;
+		$join .= isset($v_index) ? 
+					SQLClient::LEFT . SQLClient::JOIN . ValuationsService::V_TABLE . SQLClient::ON . 
+					ValuationsService::V_TABLE . '.' . ValuationsService::COURSE_ID . '=' . 
+					ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::COURSE_ID : 
+						NULL; 
 		$where = isset($owner) ? self::RESP_TABLE . '.' . self::OWNER . '=' . $owner : NULL;
+		$where = isset($v_index) ? ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index : NULL;
 		# executing the query
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				SQLClient::WHERE . $where . SQLClient::LIMIT . $limit;  

@@ -1,7 +1,7 @@
-	<script src="components/AC_OETags.js" language="javascript"></script>
-	<script src="components/history/history.js" language="javascript"></script>
-	<script src="components/component.js" language="javascript"></script>
-	<noscript>
+<script src="components/AC_OETags.js" language="javascript"></script>
+<script src="components/history/history.js" language="javascript"></script>
+<script src="components/component.js" language="javascript"></script>
+<noscript>
   	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
 			id="challenge}" width="100%" height="100%"
 			codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
@@ -20,3 +20,12 @@
 			</embed>
 	</object>
 </noscript>
+<form action="start-challenge.html" method="post">
+<?php $resp = $mvc->getObject(UserContentController::RESP); ?>
+<?php $chlg = $mvc->getObject(ResponsesService::CHLG_INDEX); ?>
+	<input type="hidden" name="<?php echo ResponsesService::NAME ?>" value="<?php echo $resp ?>"/>
+	<input type="hidden" name="<?php echo ResponsesService::CHLG_INDEX ?>" value="<?php echo $chlg ?>"/>
+	<input type="hidden" name="<?php echo ResponsesService::EX_INDEX ?>" value="<?php echo $_GET['id'] ?>"/>
+	<textarea rows="2" cols="10"name="<?php echo ResponsesService::DESCRIPTION ?>"></textarea>
+	<input class="button" type="submit" name="submit" value="Save"/>
+</form>

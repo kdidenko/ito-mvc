@@ -197,9 +197,9 @@ class UserContentController extends ContentController {
 			#get exercises for training
 				#creating "where" for sql query
 				$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
-				$exerciselist = ExerciseService::getExercisesList(NULL, $limit);
-				$exerciselist = self::createTeaser($exerciselist);
-				$mvc->addObject ( 'exerciselist', $exerciselist);
+				$resp = ResponsesService::getResponses($user_id, $limit);
+				//$resp = self::createTeaser($resp);
+				$mvc->addObject ( 'resp', $resp );
 		} else {
 			#if no assigne school
 			$mvc->addObject ( 'noSchAssigne', TRUE ); 
@@ -315,13 +315,20 @@ class UserContentController extends ContentController {
 			$username = SessionService::getAttribute(SessionService::USERNAME);
 			$challenge = ChallengesService::getChallenge($requestParams[ExerciseService::ID]);
 			#random select challenges
-			$random = rand(0,count($challenge)) ;
+			$random = rand(0,count($challenge)-1) ;
 			$chlg_index = $challenge[$random][ChallengesService::ID];
 			$time = time();
 			$resp = $username . '-' . $chlg_index . '-' . $time;
 			$mvc->addObject(self::RESP, $resp);
-			$challenge = $challenge[0][ChallengesService::NAME];
-			$mvc->addObject ( self::CHLG, $challenge ); 
+			$chlg_name = $challenge[0][ChallengesService::NAME];
+			$mvc->addObject ( self::CHLG, $chlg_name );
+			$chlg_index = $challenge[0][ChallengesService::ID];
+			$mvc->addObject ( ResponsesService::CHLG_INDEX, $chlg_index );
+		}
+		
+		#for a while
+		if (isset($requestParams['submit'])){
+			ResponsesService::newResponse($requestParams);
 		}
 		
 		return $mvc;

@@ -1,4 +1,4 @@
-<h1>Valuations of my responses<span class="message">Under construction</span></h1>
+<h1>Valuations of my responses</h1>
 <?php
 	$noSchAssigne = $mvc->getObject('noSchAssigne');
 	if($noSchAssigne == TRUE){
@@ -10,34 +10,35 @@
 		<div class="itemBody">
 			<div class="itemBodyContent">
 					<div class="itemOption">
-						<?php $exerciselist = $mvc->getObject('exerciselist'); ?>
+						<?php $respList = $mvc->getObject('resp'); ?>
 						<?php if(isset($_GET["id"]) && $_GET["id"]>=1 ){?>
 							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
 						<?php } 
-						if(isset($exerciselist) && count($exerciselist) > 0){ ?>
+						if(isset($respList) && count($respList) > 0){ ?>
+							<a class="button" href="#component">Replay</a>
 							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
 						<?php } ?>
 					</div>
 					<?php
-						if(!isset($exerciselist) || count($exerciselist) == 0){	?>
+						if(!isset($respList) || count($respList) == 0){	?>
 							<span class="message">FIX THIS TEXT.</span>
 							<span class="message">Sorry, there are no more responses available at this moment.</span>
 							<span class="message">Please, continue your <a href="/my-trainings.html" title"Youcademy Trainings">training</a>.</span>
 					<?php } else { ?>
-						<?php foreach($exerciselist as $key => $value){ ?>
+						<?php foreach($respList as $key => $value){ ?>
 							<span><b>Created: </b></span>
 							<span class="lsValue">Apr 05 2010 10:24</span>
 							<div class="preview wide">
 								<div class="item">
 							        <span>Exercise:</span>
 							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[ResponsesService::EX_ID] ?>">
+											<?php echo $value[ResponsesService::EX_NAME];?>
 										</a>
 									</h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::EX_DESC];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ResponsesService::EX_ID];?>" title="View">More...</a>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -45,14 +46,9 @@
 								</div>
 								<div class="item">
 							        <span>Challenge:</span>
-							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
-										</a>
-									</h1>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::CHLG_DESC];?>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -60,14 +56,9 @@
 								</div>
 								<div class="item">
 							        <span>Response:</span>
-							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-											<?php echo $value[ExerciseService::CAPTION];?>
-										</a>
-									</h1>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
 									<p>
-										<?php echo $value[ExerciseService::DESCRIPTION];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+										<?php echo $value[ResponsesService::DESCRIPTION];?>
 									</p>
 									<div class="image">
 										<img src="storage/video.jpg" alt="video"></img>
@@ -85,7 +76,7 @@
 							        </div>
 								</div>
 							</div>
-							<div class="comments">
+							<div class="comments"><span class="message">comments functionality under construction</span>
 								<div class="cmItem">
 									<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
 									<span>On the brink of a fault.</span>

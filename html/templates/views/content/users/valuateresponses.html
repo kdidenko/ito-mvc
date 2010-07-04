@@ -30,10 +30,17 @@
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
 				<?php } else { ?>
-					<?php
-						$resp = $mvc->getObject('resp');
-						if(!isset($resp) || count($resp) == 0){
-					?>
+					<div class="itemOption">
+<?php					$resp = $mvc->getObject('resp');
+					 	if($_GET["ex"]>1){?>
+							<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Response</a>
+<?php 					} 
+						if(isset($resp) && count($resp) > 0){ ?>
+							<a class="button" href="videorecorder.html?id=<?php echo $resp[0][CourseService::ID]?>">View Challenge</a>
+							<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Response</a>
+<?php 					} ?>
+					</div>
+					<?php if(!isset($resp) || count($resp) == 0){ ?>
 						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
 						<span class="message">Please visit later. It will be updated very soon.</span>
 					<?php } else { ?>
@@ -89,28 +96,30 @@
 							</div>
 <?php 					} ?>
 				<div class="itemOption">
-					<span><b>Valuate Responses:</b></span>
-					<a class="button" href="#">-2</a>
-					<a class="button" href="#">-1</a>
-					<a class="button" href="#">0</a>
-					<a class="button" href="#">1</a>
-					<a class="button" href="#">2</a>
+					
+					<form method="post" action="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">
+						<fieldset>
+							<label><b>Valuate Responses:</b></label>
+							<input type="radio" name="valuate" value=-2 />-2
+							<input type="radio" name="valuate" value=-1 />-1
+							<input type="radio" name="valuate" value=0 />0
+							<input type="radio" name="valuate" value=1 />1
+							<input type="radio" name="valuate" value=2 />2
+						</fieldset>
+						<fieldset>
+							<label><b>Your textual comments:</b></label>
+							<textarea rows="5" cols="10" name="comment"></textarea>
+						</fieldset>
+						<input type="hidden" name="resp_index" value="<?php echo $resp[0][CourseService::ID]?>"/>
+						<input type="submit" name="submit" value="Save" class="button"/>
+					</form>
 				</div> 
-<?php				} ?>
-				<div class="itemOption">
-					<?php if($_GET["ex"]>1){?>
-						<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Response</a>
-					<?php } 
-					if(isset($resp) && count($resp) > 0){ ?>
-						<a class="button" href="videorecorder.html?id=<?php echo $value[CourseService::ID]?>">View Challenge</a>
-						<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Response</a>
-					<?php } ?>
-				</div>
 				<span class="message">
 					Note: The maximum achievable number of contribution points depends 
 					on your own response quality  for this exercise and the number of previous votes. 
 					You will be able to see the valuation statistics for this response after you have valuated.
 				</span>
+<?php				} ?>
 <?php			} ?>
 			</div>
 		</div>

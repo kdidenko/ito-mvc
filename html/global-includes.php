@@ -28,6 +28,7 @@
 	require_once 'com/itoglobal/lcms/ValuationsService.php';
 	require_once 'com/itoglobal/lcms/ChallengesService.php';
 	require_once 'com/itoglobal/lcms/ResponsesService.php';
+	require_once 'com/itoglobal/lcms/ValuateService.php';
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';
 	require_once 'com/itoglobal/mvc/core/MVCService.php';

@@ -188,4 +188,6 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .comments .cmItem {width: 600px; height: 80px; border:1px solid #D9D9D9; background-color:#G0G0G0; margin-bottom: 5px;}
 .comments .cmItem span {margin: 10px;}
 .comments .cmItem img {float:left; margin: 0 5px;}
-.vlnList .itemBody .itemOption {margin:20px 0; text-align: center;}
+.vlnList .itemBody .itemOption {margin:20px 0; text-align: center; width: 645px;}
+.itemOption form fieldset {background-color: #FFFF66;}
+.itemOption form fieldset b{vertical-align: top; float: left;}

@@ -22,40 +22,28 @@ class ValuateService {
 	 */
 	const VALUATE = 'valuate';
 	/**
+	 * @var string defining the count field name
+	 */
+	const COUNT = 'count';
+	/**
 	 * @var  string defining the trainings table name
 	 */
 	const VALUATIONS_TBL = 'valuations';
 		
 	public static function getValuateList($resp_index) {
-		$fields = self::ID . "," . self::RESP_ID . ", " . self::COMMENT . ", " . self::USER_ID . ", " . self::VALUATE;
-		$from = self::VALUATIONS_TBL;
+		$fields = self::VALUATIONS_TBL . '.' . self::ID . "," . self::RESP_ID . ", " . self::COMMENT . ", " . 
+				self::VALUATE . ", " . self::USER_ID . ", " . 
+				UsersService::USERS . '.' . UsersService::FIRSTNAME . ", " .
+				UsersService::USERS . '.' . UsersService::LASTNAME . ", " . 
+				UsersService::USERS . '.' . UsersService::AVATAR;
+		$from = self::VALUATIONS_TBL . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+				self::VALUATIONS_TBL . '.' . self::USER_ID . '=' . UsersService::USERS . '.' . UsersService::ID ;
 		$where = isset($resp_index) ? self::RESP_ID . '=' . $resp_index : NULL;
+		$orderBy = self::ID . ' ' . SQLClient::DESC;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, NULL, NULL, NULL );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, NULL, $orderBy, NULL );
+		$result = isset($result) && count($result)>0 ? $result : NULL;
 		return $result;
-	}
-	
-	/**
-	 * Retreives the user data by specified user id.
-	 * @param integer $id the user id.
-	 * @return mixed user data or null if user with such id does not exists. 
-	 */
-	public static function getValuation($id) {
-		/*
-		$result = null;		
-		if(isset($id) && $id != ''){
-			# preparing query
-			$fields = self::V_TABLE . "." . self::ID . ", " . self::V_ID . ", " . self::V_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID . ", " . self::COURSE_ID . ", " . CourseService::CAPTION;
-			$from = self::V_TABLE . SQLClient::LEFT . SQLClient::JOIN . CourseService::COURSE_TABLE . SQLClient::ON . 
-					self::COURSE_ID . '=' . CourseService::COURSE_TABLE . '.' . CourseService::ID;
-			$where = self::V_ID . '=' . $id;
-			# executing query
-			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
-			$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
-		} 
-		return $result;
-		*/
 	}
 	 
 	public static function valuateResp($resp_id, $comment, $valuate){
@@ -64,6 +52,25 @@ class ValuateService {
 		$values = "'" . $resp_id . "', '" . $comment . "', '" . $user_id . "' , '" . $valuate . "'";
 		$into = self::VALUATIONS_TBL;
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
+	}
+	
+	public static function countVotes($resp_id){
+		/*
+		 * SELECT valuate, count(valuate)
+		 * FROM `valuations` 
+		 * WHERE `resp_index`=1
+		 * GROUP BY valuate
+		 * ORDER BY valuate DESC
+		 */
+		$fields = self::VALUATE . ", " . SQLClient::COUNT . '(' . self::VALUATE . ')' . SQLClient::SQL_AS . self::COUNT; 
+		$from = self::VALUATIONS_TBL;
+		$where = isset($resp_id) ? self::RESP_ID . '=' . $resp_id : NULL;
+		$groupBy = self::VALUATE;
+		$groupBy = self::VALUATE . ' ' . SQLClient::DESC;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, NULL, NULL );
+		$result = isset($result) && count($result)>0 ? $result : NULL;
+		return $result;
 	}
 }
 

@@ -305,6 +305,10 @@
 	</action>
 	
 	<action name="/user-details.html" id="userdetails">
+		<role type="UR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/layout-one-column.html" />
+		</role>
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>	

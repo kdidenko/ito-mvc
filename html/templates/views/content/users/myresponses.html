@@ -65,35 +65,53 @@
 							<div class="item">
 						        <span>Valuation:</span>
 						        <ul>
-						        	<li>Number of votes:<span>2</span></li>
-							        <li>Your own points:<span>0.89</span></li>
-							        <li>Contribution points:<span>6</span></li>
+						        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum;?></span></li>
+							        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points;?></span></li>
+							        <li>Contribution points:<span>I don't know :)</span></li>
 						        </ul>
 						        <div class="image">
 						        	<img src="images/valuation.png" alt="valuation"></img>
 						        </div>
+						        <table>
+						        	<tr>
+						        		<td>-2</td>
+						        		<td>-1</td>
+						        		<td>0</td>
+						        		<td>1</td>
+						        		<td>2</td>
+						        	</tr>
+						        <?php  $votes = $mvc->getObject("votes");
+										foreach($votes as $key => $vote){
+						        ?>
+						        	<tr>
+						        		<td><?php echo $vote[ValuateService::COUNT]; ?></td>
+						        	</tr>
+										<?php } ?>
+						        </table>
 							</div>
 						</div>
-						<div class="comments"><span class="message">comments functionality under construction</span>
-							<?php 
-					$comment = $mvc->getObject("votes");
-					print_r($comment); ?>
+						<div class="comments">
+<?php 				$comment = $mvc->getObject("comments");
+					if (count($comment)>0 && $comment!=NULL){
+						foreach($comment as $key => $value){ ?>
 							<div class="cmItem">
-								<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
-								<span>On the brink of a fault.</span>
-								<span>points 0</span>
+								<img src="<?php echo $value[UsersService::AVATAR] ?>"></img>
+								<div class="head">
+									<ul>
+									<li><a href="user-details.html?id=<?php echo $value[ValuateService::USER_ID]; ?>">
+										<?php echo $value[UsersService::FIRSTNAME] ?>
+										<?php echo $value[UsersService::LASTNAME] ?>
+									</a></li>
+									<li><b>Points:<?php echo $value[ValuateService::VALUATE] ?></b></li>
+									</ul>
+								</div>
+								<span><?php echo $value[ValuateService::COMMENT] ?></span>
 							</div>
-							<div class="cmItem">
-								<img src="storage/uploads/users/user1/profile/avatar.jpg"></img>
-								<span>I like this video...</span>
-								<span>points +2</span>
-							</div>
-							<div class="cmItem">
-								<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
-								<span>Good calibration, but not the best solution.</span>
-								<span>points +1</span>
-							</div>
+					<?php } ?> 
 							<a class="button" href="#">See All</a>
+					<?php } else { ?>
+						<span class="message">FIX THE TEXT: There are no valuate</span>
+					<?php } ?>
 						</div>
 <?php			 	}
 				} ?>

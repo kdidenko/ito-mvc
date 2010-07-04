@@ -26,12 +26,12 @@ class ValuateService {
 	 */
 	const VALUATIONS_TBL = 'valuations';
 		
-	public static function getValuateList($where = NULL, $groupBy = NULL) {
-		$fields = self::ID . "." . self::RESP_ID . ", " . self::COMMENT . ", " . self::VALUATE . ", " . 
-					self::USER_ID;
+	public static function getValuateList($resp_index) {
+		$fields = self::ID . "," . self::RESP_ID . ", " . self::COMMENT . ", " . self::USER_ID . ", " . self::VALUATE;
 		$from = self::VALUATIONS_TBL;
+		$where = isset($resp_index) ? self::RESP_ID . '=' . $resp_index : NULL;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, NULL, NULL, NULL );
 		return $result;
 	}
 	

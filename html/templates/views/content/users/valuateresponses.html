@@ -44,8 +44,8 @@
 						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
 						<span class="message">Please visit later. It will be updated very soon.</span>
 					<?php } else { ?>
-						<span><b>Created: </b></span><span class="lsValue">Apr 05 2010 10:24</span>
 						<?php foreach($resp as $key => $value){ ?>
+						<span><b>Created: </b></span><span class="lsValue"><?php echo $value[ResponsesService::CRDATE];?></span>
 							<div class="preview">
 								<div class="item">
 							        <span>Exercise:</span>
@@ -96,7 +96,6 @@
 							</div>
 <?php 					} ?>
 				<div class="itemOption">
-					
 					<form method="post" action="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">
 						<fieldset>
 							<label><b>Valuate Responses:</b></label>

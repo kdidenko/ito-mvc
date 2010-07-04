@@ -198,7 +198,10 @@ class UserContentController extends ContentController {
 			$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
 			$resp = ResponsesService::getResponses($user_id, $limit);
 			//$resp = self::createTeaser($resp);
-			$mvc->addObject ( 'resp', $resp );
+			$mvc->addObject ( 'resp', $resp[0] );
+			$resp_index = $resp[0][ResponsesService::ID];
+			$votes = ValuateService::getValuateList($resp_index);
+			$mvc->addObject ( 'votes', $votes );			
 		} else {
 			#if no assigne school
 			$mvc->addObject ( 'noSchAssigne', TRUE ); 

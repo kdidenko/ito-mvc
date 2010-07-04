@@ -197,11 +197,23 @@ class UserContentController extends ContentController {
 			#get responses
 			$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
 			$resp = ResponsesService::getResponses($user_id, $limit);
-			//$resp = self::createTeaser($resp);
 			$mvc->addObject ( 'resp', $resp[0] );
 			$resp_index = $resp[0][ResponsesService::ID];
-			$votes = ValuateService::getValuateList($resp_index);
-			$mvc->addObject ( 'votes', $votes );			
+			$limit = '0, 5';
+			$comments = ValuateService::getValuateList($resp_index, $limit);
+			$mvc->addObject ( 'comments', $comments );
+			$votes = ValuateService::countVotes($resp_index);
+			$mvc->addObject ( 'votes', $votes );
+			#count number of votes and skill points
+			$sum = NULL;
+			$points = NULL;
+			foreach ($votes as $key =>$value){
+				$sum = $sum + $value[ValuateService::COUNT];
+				$points = $points + ($value[ValuateService::COUNT]*$value[ValuateService::VALUATE]);
+			}
+			$points = $points/$sum;
+			$mvc->addObject ( 'sum', $sum );
+			$mvc->addObject ( 'points', $points );
 		} else {
 			#if no assigne school
 			$mvc->addObject ( 'noSchAssigne', TRUE ); 

@@ -4,11 +4,6 @@ require_once 'com/itoglobal/lcms/controllers/ContentController.php';
 
 class ModeratorContentController extends ContentController {
 	
-	/**
-	 * @var string defines the user details constant
-	 */
-	const USER_DETAILS = 'USER';
-	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -495,20 +490,6 @@ class ModeratorContentController extends ContentController {
 		return $mvc;
 	}
 	
-	/**
-	 * Handles the user details page request. 
-	 * @param mixed $actionParams
-	 * @param mixed $requestParams
-	 * @return ModelAndView
-	 */
-	public function handleUserDetails($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		if (isset($requestParams[CategoriesService::ID])){
-			$user = UsersService::getUser($requestParams[UsersService::ID]);
-			$mvc->addObject(self::USER_DETAILS, $user);		
-		}
-		return $mvc;	
-	}
 	
 	/*private function hasSchlAssign(){
 		$result = null;

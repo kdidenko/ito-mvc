@@ -83,7 +83,7 @@ class ResponsesService {
 		$where = isset($v_index) ? 
 					SQLClient::WHERE . ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index . 
 					' AND ' .  ValuationsService::V_TABLE . '.' . ValuationsService::USER_ID . '!=' . $user_id
-						: NULL;
+						: $where;
 		# executing the query
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				$where . SQLClient::LIMIT . $limit;  

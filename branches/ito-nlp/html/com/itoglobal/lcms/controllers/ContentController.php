@@ -5,6 +5,10 @@ require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 class ContentController extends SecureActionControllerImpl {
 	
 	const RESULT = 'result';
+	/**
+	 * @var string defines the user details constant
+	 */
+	const USER_DETAILS = 'USER';
 	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
@@ -195,7 +199,7 @@ class ContentController extends SecureActionControllerImpl {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
 		}
-			
+		
 		if (isset ( $requestParams ['personalSbm'] )) {		
 			$fields = array ();
 			$fields [] .= UsersService::FIRSTNAME;
@@ -218,6 +222,21 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
 		
 		return $mvc;
+	}
+	
+	/**
+	 * Handles the user details page request. 
+	 * @param mixed $actionParams
+	 * @param mixed $requestParams
+	 * @return ModelAndView
+	 */
+	public function handleUserDetails($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset($requestParams[CategoriesService::ID])){
+			$user = UsersService::getUser($requestParams[UsersService::ID]);
+			$mvc->addObject(self::USER_DETAILS, $user);		
+		}
+		return $mvc;	
 	}
 	
 	public static function createTeaser ($list){

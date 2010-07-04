@@ -26,6 +26,10 @@ class ResponsesService {
 	 */
 	const DESCRIPTION = 'description';
 	/**
+	 * @var string defining the crdate field name
+	 */
+	const CRDATE = 'crdate';
+	/**
 	 * @var string defining the responses table name
 	 */
 	const RESP_TABLE = 'responses';
@@ -53,8 +57,10 @@ class ResponsesService {
 		 * WHERE v.v_index=2]
 		 * WHERE r.owner=37
 		 */
+		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$fields = self::RESP_TABLE . '.' . self::ID . ', ' . 
-				self::RESP_TABLE . '.' . self::DESCRIPTION . ', ' . 
+				self::RESP_TABLE . '.' . self::DESCRIPTION . ', ' .
+				self::RESP_TABLE . '.' . self::CRDATE . ', ' .
 				//ChallengesService::CH_TABLE . '.' . ChallengesService::ID . ', ' . 
 				ChallengesService::CH_TABLE . '.' . ChallengesService::CAPTION . SQLClient::SQL_AS . self::CHLG_NAME . ', ' . 
 				ChallengesService::CH_TABLE . '.' . ChallengesService::DESCRIPTION . SQLClient::SQL_AS . self::CHLG_DESC . ', ' . 
@@ -74,7 +80,10 @@ class ResponsesService {
 					ExerciseService::EXERCISES_TABLE . '.' . ExerciseService::COURSE_ID : 
 						NULL; 
 		$where = isset($owner) ? SQLClient::WHERE . self::RESP_TABLE . '.' . self::OWNER . '=' . $owner : NULL;
-		$where = isset($v_index) ? SQLClient::WHERE . ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index : NULL;
+		$where = isset($v_index) ? 
+					SQLClient::WHERE . ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index . 
+					' AND ' .  ValuationsService::V_TABLE . '.' . ValuationsService::USER_ID . '!=' . $user_id
+						: NULL;
 		# executing the query
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
 				$where . SQLClient::LIMIT . $limit;  
@@ -85,9 +94,12 @@ class ResponsesService {
 	
 	public static function newResponse($requestParams){
 		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
-		$fields = self::NAME . ', ' . self::CHLG_INDEX . ', ' . self::OWNER . ', ' . self::EX_INDEX . ', ' . self::DESCRIPTION;
+		$crdate = gmdate ( "Y-m-d H:i:s" );
+		$fields = self::NAME . ', ' . self::CHLG_INDEX . ', ' . self::OWNER . ', ' . self::EX_INDEX . ', ' . 
+					self::DESCRIPTION . ', ' . self::CRDATE;
 		$values = "'" . $requestParams[self::NAME] . "', '" . $requestParams[self::CHLG_INDEX] . "', '" .
-					$user_id . "', '" . $requestParams[self::EX_INDEX] . "', '" . $requestParams[self::DESCRIPTION] . "'";
+					$user_id . "', '" . $requestParams[self::EX_INDEX] . "', '" . 
+					$requestParams[self::DESCRIPTION] . "', '" . $crdate . "'";
 		$into = self::RESP_TABLE;
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 	}

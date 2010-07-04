@@ -25,77 +25,77 @@
 							<span class="message">Sorry, there are no more responses available at this moment.</span>
 							<span class="message">Please, continue your <a href="/my-trainings.html" title"Youcademy Trainings">training</a>.</span>
 					<?php } else { ?>
-						<?php foreach($respList as $key => $value){ ?>
-							<span><b>Created: </b></span>
-							<span class="lsValue">Apr 05 2010 10:24</span>
-							<div class="preview wide">
-								<div class="item">
-							        <span>Exercise:</span>
-							        <h1>
-										<a href="<?php echo "/exercise-details.html?id=" . $value[ResponsesService::EX_ID] ?>">
-											<?php echo $value[ResponsesService::EX_NAME];?>
-										</a>
-									</h1>
-									<p>
-										<?php echo $value[ResponsesService::EX_DESC];?>
-										<a href="<?php echo 'exercise-details.html?id=' . $value[ResponsesService::EX_ID];?>" title="View">More...</a>
-									</p>
-									<div class="image">
-										<img src="storage/video.jpg" alt="video"></img>
-									</div>
-								</div>
-								<div class="item">
-							        <span>Challenge:</span>
-							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
-									<p>
-										<?php echo $value[ResponsesService::CHLG_DESC];?>
-									</p>
-									<div class="image">
-										<img src="storage/video.jpg" alt="video"></img>
-									</div>
-								</div>
-								<div class="item">
-							        <span>Response:</span>
-							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
-									<p>
-										<?php echo $value[ResponsesService::DESCRIPTION];?>
-									</p>
-									<div class="image">
-										<img src="storage/video.jpg" alt="video"></img>
-									</div>
-								</div>
-								<div class="item">
-							        <span>Valuation:</span>
-							        <ul>
-							        	<li>Number of votes:<span>2</span></li>
-								        <li>Your own points:<span>0.89</span></li>
-								        <li>Contribution points:<span>6</span></li>
-							        </ul>
-							        <div class="image">
-							        	<img src="images/valuation.png" alt="valuation"></img>
-							        </div>
+						<span><b>Created: </b></span><span class="lsValue"><?php echo $respList[ResponsesService::CRDATE];?></span>
+						<div class="preview wide">
+							<div class="item">
+						        <span>Exercise:</span>
+						        <h1>
+									<a href="<?php echo "/exercise-details.html?id=" . $respList[ResponsesService::EX_ID] ?>">
+										<?php echo $respList[ResponsesService::EX_NAME];?>
+									</a>
+								</h1>
+								<p>
+									<?php echo $respList[ResponsesService::EX_DESC];?>
+									<a href="<?php echo 'exercise-details.html?id=' . $respList[ResponsesService::EX_ID];?>" title="View">More...</a>
+								</p>
+								<div class="image">
+									<img src="storage/video.jpg" alt="video"></img>
 								</div>
 							</div>
-							<div class="comments"><span class="message">comments functionality under construction</span>
-								<div class="cmItem">
-									<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
-									<span>On the brink of a fault.</span>
-									<span>points 0</span>
+							<div class="item">
+						        <span>Challenge:</span>
+						        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
+								<p>
+									<?php echo $respList[ResponsesService::CHLG_DESC];?>
+								</p>
+								<div class="image">
+									<img src="storage/video.jpg" alt="video"></img>
 								</div>
-								<div class="cmItem">
-									<img src="storage/uploads/users/user1/profile/avatar.jpg"></img>
-									<span>I like this video...</span>
-									<span>points +2</span>
-								</div>
-								<div class="cmItem">
-									<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
-									<span>Good calibration, but not the best solution.</span>
-									<span>points +1</span>
-								</div>
-								<a class="button" href="#">See All</a>
 							</div>
-<?php 					} 
-				 	}
+							<div class="item">
+						        <span>Response:</span>
+						        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
+								<p>
+									<?php echo $respList[ResponsesService::DESCRIPTION];?>
+								</p>
+								<div class="image">
+									<img src="storage/video.jpg" alt="video"></img>
+								</div>
+							</div>
+							<div class="item">
+						        <span>Valuation:</span>
+						        <ul>
+						        	<li>Number of votes:<span>2</span></li>
+							        <li>Your own points:<span>0.89</span></li>
+							        <li>Contribution points:<span>6</span></li>
+						        </ul>
+						        <div class="image">
+						        	<img src="images/valuation.png" alt="valuation"></img>
+						        </div>
+							</div>
+						</div>
+						<div class="comments"><span class="message">comments functionality under construction</span>
+							<?php 
+					$comment = $mvc->getObject("votes");
+					print_r($comment); ?>
+							<div class="cmItem">
+								<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
+								<span>On the brink of a fault.</span>
+								<span>points 0</span>
+							</div>
+							<div class="cmItem">
+								<img src="storage/uploads/users/user1/profile/avatar.jpg"></img>
+								<span>I like this video...</span>
+								<span>points +2</span>
+							</div>
+							<div class="cmItem">
+								<img src="storage/uploads/users/moderator/profile/avatar.jpg"></img>
+								<span>Good calibration, but not the best solution.</span>
+								<span>points +1</span>
+							</div>
+							<a class="button" href="#">See All</a>
+						</div>
+<?php			 	}
 				} ?>
 			</div>
 		</div>

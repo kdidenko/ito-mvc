@@ -240,9 +240,16 @@ class UserContentController extends ContentController {
 				}
 			}
 		}
-		
-		#creating new valuation
+		#valuate responses
 		if ( isset($requestParams['submit']) ) {
+			$resp_id = $requestParams[ValuateService::RESP_ID];
+			$comment = $requestParams[ValuateService::COMMENT];
+			$valuate = $requestParams[ValuateService::VALUATE];
+			//print_r($valuate);exit;
+			ValuateService::valuateResp($resp_id, $comment, $valuate);
+		}
+		#creating new valuation
+		if ( isset($requestParams['new']) ) {
 			#creatin index for training
 			$where = ValuationsService::USER_ID . '=' . $user_id;
 			$groupBy = ValuationsService::V_ID;

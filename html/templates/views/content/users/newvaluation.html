@@ -10,7 +10,9 @@
 							<dt>&nbsp;</dt>
 							<dd>
 								<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
-								<?php echo $course[CourseService::CAPTION];?>
+								<a href="/course-details.html?id=<?php echo $course[TrainingsService::COURSE_ID]; ?>" title="Course Details">
+									<?php echo $course[CourseService::CAPTION];?>
+								</a>
 							</dd>
 <?php
 						}

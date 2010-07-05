@@ -82,11 +82,11 @@ class ResponsesService {
 		$where = isset($owner) ? SQLClient::WHERE . self::RESP_TABLE . '.' . self::OWNER . '=' . $owner : NULL;
 		$where = isset($v_index) ? 
 					SQLClient::WHERE . ValuationsService::V_TABLE . '.' . ValuationsService::V_ID . '=' . $v_index . 
-					' AND ' .  ValuationsService::V_TABLE . '.' . ValuationsService::USER_ID . '!=' . $user_id
+					' AND ' .  self::RESP_TABLE . '.' . self::OWNER . '!=' . $user_id
 						: $where;
 		# executing the query
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
-				$where . SQLClient::LIMIT . $limit;  
+				$where . SQLClient::LIMIT . $limit;  print_r($sql);
 		$result = DBClientHandler::getInstance ()->exec ( $sql );
 		$result = count($result)>0 && $result!=NULL ? $result : NULL;
 		return $result;

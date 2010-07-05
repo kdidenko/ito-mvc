@@ -234,7 +234,10 @@ class UserContentController extends ContentController {
 		}
 		
 		#get schools and courses list (assigned to user) for creating new training
-		$usCourseList = CourseService::getAccessCourses();
+		//$usCourseList = CourseService::getAccessCourses();
+		$where = TrainingsService::USER_ID . '=' . $user_id;
+		$groupBy = TrainingsService::COURSE_ID;
+		$usCourseList = TrainingsService::getTrainingsList($where, $groupBy);
 		$mvc->addObject ( 'usCourseList', $usCourseList );
 		
 		#update valuatin
@@ -260,7 +263,6 @@ class UserContentController extends ContentController {
 			$resp_id = $requestParams[ValuateService::RESP_ID];
 			$comment = $requestParams[ValuateService::COMMENT];
 			$valuate = $requestParams[ValuateService::VALUATE];
-			//print_r($valuate);exit;
 			ValuateService::valuateResp($resp_id, $comment, $valuate);
 		}
 		#creating new valuation
@@ -272,8 +274,8 @@ class UserContentController extends ContentController {
 			$v_index = $valuationsList == NULL ? 1 : count($valuationsList) + 1; 
 
 			foreach ($usCourseList as $key => $value) {
-				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
-					ValuationsService::addValuations($requestParams, $v_index, $value[CourseService::ID]);
+				if ( isset ($requestParams['course' . $value[TrainingsService::COURSE_ID]]) ) {
+					ValuationsService::addValuations($requestParams, $v_index, $value[TrainingsService::COURSE_ID]);
 				}
 			}
 		}		
@@ -296,7 +298,6 @@ class UserContentController extends ContentController {
 			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
 			$v_index = $requestParams[ValuationsService::ID];
 			$resp = ResponsesService::getResponses(NULL, $limit, $v_index);
-			//$resp = self::createTeaser($resp);
 			$mvc->addObject ( 'resp', $resp );
 		}
 		return $mvc;

@@ -28,17 +28,18 @@ class TrainingsService {
 		
 	public static function getTrainingsList($where = NULL, $groupBy = NULL) {
 		$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID;
-		$from = self::TRAININGS_TABLE;
+					self::USER_ID . ", " . self::COURSE_ID . ", " . CourseService::CAPTION;
+		$from = self::TRAININGS_TABLE . SQLClient::LEFT . SQLClient::JOIN . CourseService::COURSE_TABLE . SQLClient::ON . 
+					self::COURSE_ID . '=' . CourseService::COURSE_TABLE . '.' . CourseService::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 		return $result;
 	}
 	
 	/**
-	 * Retreives the user data by specified user id.
-	 * @param integer $id the user id.
-	 * @return mixed user data or null if user with such id does not exists. 
+	 * Retreives the trainings data by specified id.
+	 * @param integer $id the training id.
+	 * @return mixed training data or null if training with such id does not exists. 
 	 */
 	public static function getTraining($id) {
 		$result = null;		

@@ -72,22 +72,12 @@
 						        <div class="image">
 						        	<img src="images/valuation.png" alt="valuation"></img>
 						        </div>
-						        <table>
-						        	<tr>
-						        		<td>-2</td>
-						        		<td>-1</td>
-						        		<td>0</td>
-						        		<td>1</td>
-						        		<td>2</td>
-						        	</tr>
 						        <?php  $votes = $mvc->getObject("votes");
 										foreach($votes as $key => $vote){
 						        ?>
-						        	<tr>
-						        		<td><?php echo $vote[ValuateService::COUNT]; ?></td>
-						        	</tr>
-										<?php } ?>
-						        </table>
+						        <?php echo $vote[ValuateService::VALUATE]; ?> votes
+						       	<?php echo $vote[ValuateService::COUNT]; ?> <br/>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="comments">

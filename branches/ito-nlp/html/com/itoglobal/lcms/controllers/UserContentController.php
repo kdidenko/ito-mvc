@@ -204,14 +204,9 @@ class UserContentController extends ContentController {
 			$mvc->addObject ( 'comments', $comments );
 			$votes = ValuateService::countVotes($resp_index);
 			$mvc->addObject ( 'votes', $votes );
-			#count number of votes and skill points
-			$sum = NULL;
-			$points = NULL;
-			foreach ($votes as $key =>$value){
-				$sum = $sum + $value[ValuateService::COUNT];
-				$points = $points + ($value[ValuateService::COUNT]*$value[ValuateService::VALUATE]);
-			}
-			$points = $points/$sum;
+			
+			$sum = ValuateService::countNumberVotes($votes);
+			$points = ValuateService::countPoints($votes, $sum);
 			$mvc->addObject ( 'sum', $sum );
 			$mvc->addObject ( 'points', $points );
 		} else {

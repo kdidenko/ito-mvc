@@ -72,6 +72,24 @@ class ValuateService {
 		$result = isset($result) && count($result)>0 ? $result : NULL;
 		return $result;
 	}
+	
+	public static function countPoints($votes, $sum){
+		#count skill points
+		$points = NULL;
+		foreach ($votes as $key =>$value){
+			$points = $points + ($value[ValuateService::COUNT]*$value[ValuateService::VALUATE]);
+		}
+		$points = $points/$sum;
+		return $points;
+	}
+	public static function countNumberVotes($votes){
+		#count number of votes
+		$sum = NULL;
+		foreach ($votes as $key =>$value){
+			$sum = $sum + $value[ValuateService::COUNT];
+		}
+		return $sum;
+	}
 }
 
 ?>

@@ -6,13 +6,14 @@
 			<dt><span class="message">Please, mark courses.</span></dt>
 <?php				$usCourseList = $mvc->getObject('usCourseList');
 					if(isset($usCourseList) && count($usCourseList) > 0){
-						foreach($usCourseList as $key => $course){?> 
+						foreach($usCourseList as $key => $course){ 
+							$old = isset ($old)? $old : NULL;
+							if ($course[SchoolService::CAPTION] != $old){?> 
+							<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
+							<?php } ?>
+							<dd><input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/><?php echo $course[CourseService::COURSE_CAPTION];?></dd>
 							<dt>&nbsp;</dt>
-							<dd>
-								<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
-								<?php echo $course[CourseService::CAPTION];?>
-							</dd>
-<?php
+<?php						$old = $course[SchoolService::CAPTION];
 						}
 					}
 ?>

@@ -11,7 +11,12 @@
 							if ($course[SchoolService::CAPTION] != $old){?> 
 							<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
 							<?php } ?>
-							<dd><input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/><?php echo $course[CourseService::COURSE_CAPTION];?></dd>
+							<dd>
+								<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/>
+								<a href="/course-details.html?id=<?php echo $course[CourseService::ID]; ?>" title="Course Details">
+									<?php echo $course[CourseService::COURSE_CAPTION];?>
+								</a>
+							</dd>
 							<dt>&nbsp;</dt>
 <?php						$old = $course[SchoolService::CAPTION];
 						}

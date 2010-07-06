@@ -3,8 +3,10 @@
 	$usSchList = $mvc->getObject('usSchList');
 	if(!isset($usSchList) || count($usSchList) == 0){
 ?>
-<span class="message">You are currently not signed up for any schools.</span>
-<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<span class="message warning">
+	You are currently not signed up for any schools.<br/>
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
 <?php } else { ?>
 <div class="subHeader">
 	<b>Shools List</b>

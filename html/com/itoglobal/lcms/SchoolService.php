@@ -203,6 +203,15 @@ class SchoolService {
 		}
 		return $result;
 	}
+	public static function rateSchool($id){
+		# setting the query variables
+		$fields = self::RATE;
+		$vals = 1;
+		$from = self::SCHOOLS_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
 
 }
 

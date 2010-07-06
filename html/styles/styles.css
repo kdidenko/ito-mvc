@@ -175,7 +175,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .vlnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
 .vlnList .itemBody .itemBodyContent {margin: 20px 10px; }
 .vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
-.preview {width: 650px}
+.preview {width: 650px; height: 350px; }
 /**/.wide{width: auto;}
 .preview span{text-align: center;}
 		.item {float:left; height: 330px; width:23%; border:1px solid #B8C9DB; margin: 5px 5px 20px 5px;background-color:#F8F8F8;}

@@ -246,5 +246,10 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		return $list;
 	}
+	public static function createTeaserWord ($word){
+		$word = substr($word, 0, 255);
+		$word = strrev(strstr(strrev($word), ' '));
+		return $word;
+	}
 }
 ?>

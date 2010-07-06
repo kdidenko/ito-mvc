@@ -3,8 +3,10 @@
 	$noSchAssigne = $mvc->getObject('noSchAssigne');
 	if($noSchAssigne == TRUE){
 ?>
-<span class="message">You are currently not signed up for any schools.</span>
-<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<span class="message warning">
+	You are currently not signed up for any schools.<br />
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
 <?php } else { ?>
 	<div class="vlnList">
 	<?php
@@ -41,8 +43,10 @@
 <?php 					} ?>
 					</div>
 					<?php if(!isset($resp) || count($resp) == 0){ ?>
-						<span class="message">Sorry, there are no more course challenges available at this moment.</span>
-						<span class="message">Please visit later. It will be updated very soon.</span>
+						<span class="message warning">
+							Sorry, there are no more course challenges available at this moment. <br />
+							Please visit later. It will be updated very soon.
+						</span>
 					<?php } else { ?>
 						<?php foreach($resp as $key => $value){ ?>
 						<span><b>Created: </b></span><span class="lsValue"><?php echo $value[ResponsesService::CRDATE];?></span>
@@ -96,22 +100,28 @@
 							</div>
 <?php 					} ?>
 				<div class="itemOption">
-					<form method="post" action="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">
-						<fieldset>
-							<label><b>Valuate Responses:</b></label>
-							<input type="radio" name="valuate" value=-2 />-2
-							<input type="radio" name="valuate" value=-1 />-1
-							<input type="radio" name="valuate" value=0 />0
-							<input type="radio" name="valuate" value=1 />1
-							<input type="radio" name="valuate" value=2 />2
-						</fieldset>
-						<fieldset>
-							<label><b>Your textual comments:</b></label>
-							<textarea rows="5" cols="10" name="comment"></textarea>
-						</fieldset>
-						<input type="hidden" name="resp_index" value="<?php echo $resp[0][CourseService::ID]?>"/>
-						<input type="submit" name="submit" value="Save" class="button"/>
-					</form>
+					<?php $valuate = $mvc->getObject('valuate'); if (count($valuate)<=0){?>
+						<form method="post" action="">
+						<!-- ?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?> -->
+							<fieldset>
+								<label><b>Valuate Responses:</b></label>
+								<input type="radio" name="valuate" value=-2 />-2
+								<input type="radio" name="valuate" value=-1 />-1
+								<input type="radio" name="valuate" value=0 />0
+								<input type="radio" name="valuate" value=1 />1
+								<input type="radio" name="valuate" value=2 />2
+							</fieldset>
+							<fieldset>
+								<label><b>Your textual comments:</b></label>
+								<textarea rows="5" cols="10" name="comment"></textarea>
+							</fieldset>
+							<input type="hidden" name="resp_index" value="<?php echo $resp[0][CourseService::ID]?>"/>
+							<input type="submit" name="submit" value="Save" class="button"/>
+						</form>
+					<?php } else { ?>
+						<span class="message warning">You already valuate this response. Please, continue valuation with next response.</span>
+						
+					<?php } ?>
 				</div> 
 				<span class="message">
 					Note: The maximum achievable number of contribution points depends 

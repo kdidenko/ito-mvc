@@ -197,17 +197,22 @@ class UserContentController extends ContentController {
 			#get responses
 			$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
 			$resp = ResponsesService::getResponses($user_id, $limit);
-			$mvc->addObject ( 'resp', $resp[0] );
-			$resp_index = $resp[0][ResponsesService::ID];
+			$resp = $resp[0];
+			$resp[ResponsesService::CHLG_DESC] = self::createTeaserWord($resp[ResponsesService::CHLG_DESC]);
+			$resp[ResponsesService::EX_DESC] = self::createTeaserWord($resp[ResponsesService::EX_DESC]);
+			$mvc->addObject ( 'resp', $resp );
+			$resp_index = $resp[ResponsesService::ID];
 			$limit = '0, 5';
-			$comments = ValuateService::getValuateList($resp_index, $limit);
+			$comments = ValuateService::getValuateList($resp_index, NULL, $limit);
 			$mvc->addObject ( 'comments', $comments );
-			$votes = ValuateService::countVotes($resp_index);
-			$mvc->addObject ( 'votes', $votes );
-			$sum = ValuateService::countNumberVotes($votes);
-			$points = ValuateService::countPoints($votes, $sum);
-			$mvc->addObject ( 'sum', $sum );
-			$mvc->addObject ( 'points', $points );
+			if(count($comments)>0){
+				$votes = ValuateService::countVotes($resp_index);
+				$mvc->addObject ( 'votes', $votes );
+				$sum = ValuateService::countNumberVotes($votes);
+				$points = ValuateService::countPoints($votes, $sum);
+				$mvc->addObject ( 'sum', $sum );
+				$mvc->addObject ( 'points', $points );
+			}
 		} else {
 			#if no assigne school
 			$mvc->addObject ( 'noSchAssigne', TRUE ); 
@@ -254,10 +259,12 @@ class UserContentController extends ContentController {
 		}
 		#valuate responses
 		if ( isset($requestParams['submit']) ) {
-			$resp_id = $requestParams[ValuateService::RESP_ID];
-			$comment = $requestParams[ValuateService::COMMENT];
-			$valuate = $requestParams[ValuateService::VALUATE];
-			ValuateService::valuateResp($resp_id, $comment, $valuate);
+			if($requestParams[ValuateService::COMMENT]!=NULL && $requestParams[ValuateService::VALUATE]!=NULL){
+				$resp_id = $requestParams[ValuateService::RESP_ID];
+				$comment = $requestParams[ValuateService::COMMENT];
+				$valuate = $requestParams[ValuateService::VALUATE];
+				ValuateService::valuateResp($resp_id, $comment, $valuate);
+			}
 		}
 		#creating new valuation
 		if ( isset($requestParams['new']) ) {
@@ -292,6 +299,14 @@ class UserContentController extends ContentController {
 			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
 			$v_index = $requestParams[ValuationsService::ID];
 			$resp = ResponsesService::getResponses(NULL, $limit, $v_index);
+			if (count($resp)>0){
+				foreach($resp as $key => $value){
+					$resp[$key][ResponsesService::CHLG_DESC] = self::createTeaserWord($value[ResponsesService::CHLG_DESC]);
+					$resp[$key][ResponsesService::EX_DESC] = self::createTeaserWord($value[ResponsesService::EX_DESC]);
+				}
+				$valuate = ValuateService::getValuateList($resp[0][ResponsesService::ID], $user_id);
+				$mvc->addObject ( 'valuate', $valuate );
+			}
 			$mvc->addObject ( 'resp', $resp );
 		}
 		return $mvc;

@@ -1,4 +1,4 @@
-RENAME TABLE  `youcademy`.`valuations` TO  `youcademy`.`valuation_assignments` ;
+RENAME TABLE  `valuations` TO  `valuation_assignments` ;
 ALTER TABLE  `responses` ADD  `crdate` DATETIME NOT NULL ;
 
 CREATE TABLE  `valuations` (

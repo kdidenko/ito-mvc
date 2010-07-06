@@ -136,7 +136,7 @@ class UserContentController extends ContentController {
 		
 		#get trainings list
 		$where = TrainingsService::USER_ID . "= '" . $user_id . "'";
-		$groupBy = "'" . TrainingsService::TRN_ID . "'";
+		$groupBy = TrainingsService::TRN_ID;
 		$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
 		$mvc->addObject ( 'trainingList', $trainingList );
 			
@@ -283,7 +283,7 @@ class UserContentController extends ContentController {
 		
 		#get valuation list
 		$where = ValuationsService::USER_ID . "= '" . $user_id . "'";
-		$groupBy = "'" . ValuationsService::V_ID . "'";
+		$groupBy = ValuationsService::V_ID;
 		$valuationsList = ValuationsService::getValuationsList($where, $groupBy);
 		$mvc->addObject ( 'valuationsList', $valuationsList );
 			

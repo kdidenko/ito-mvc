@@ -166,10 +166,10 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .courseList .pgItemBody span{font-size: 12px; }
 
 .tabMenu li {margin-left: 30px}
-.tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #EDEDED; border: 1px solid #EDEDED; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: black; text-decoration: none;}
+.tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #7496B9; border: 1px solid #7496B9; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: #FFF; text-decoration: none;}
 .tabMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
-.tabMenu li:hover a{ background-color: white;}
-.trnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
+.tabMenu li:hover a{ background-color: white; color: black}
+.trnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}
 .trnList .itemBody .itemBodyContent {margin: 0 10px; }
 .trnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
 .trnList .itemBody .itemEx {height: 100px; border:1px solid #B8C9DB; margin: 25px 0;}
@@ -179,7 +179,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 					.itemEx .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .trnList .itemBody .itemOption {margin: 50px 0; text-align: center;}
 
-.vlnList .itemBody {clear: both;  border-top: 1px solid #EDEDED; margin: 15px;}
+.vlnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}
 .vlnList .itemBody .itemBodyContent {margin: 20px 10px; }
 .vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
 .preview {width: 650px; height: 350px; }

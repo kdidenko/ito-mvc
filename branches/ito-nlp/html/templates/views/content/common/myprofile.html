@@ -6,17 +6,17 @@
 	<ul class="menu">
 		<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='current'" : NULL;?>>
 			<a href="/my-profile.html">
-				<img src="images/info_base.png">Personal Data</img>
+				<img src="images/info_base.png" alt="Avatar" title="Personal Data">Personal Data</img>
 			</a>
 		</li>
 		<li <?php echo isset($_GET['picture']) ? "class='current'" : NULL;?>>
 			<a href="?picture">
-				<img src="images/info_pict.png">Profile Picture</img>
+				<img src="images/info_pict.png" alt="Avatar" title="Profile Picture">Profile Picture</img>
 			</a>
 		</li>
 		<li <?php echo isset($_GET['password']) ? "class='current'" : NULL;?>>
 			<a href="?password">
-				<img src="images/info_psw.png">Change Password</img>
+				<img src="images/info_psw.png" alt="Avatar" title="Change Password">Change Password</img>
 			</a>
 		</li>
 	</ul>

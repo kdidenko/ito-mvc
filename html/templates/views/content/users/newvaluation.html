@@ -1,24 +1,28 @@
 <div class="itemForm">
-	<form enctype="multipart/form-data" action="valuate-responses.html" method="post">
-		<dl>
-			<dt>Valuation Name:</dt>
-			<dd><input type="text" name="v_name" id="v_name" size="35"/></dd>
-			<dt><span class="message">Please, mark courses.</span></dt>
-<?php				$usCourseList = $mvc->getObject('usCourseList');
-					if(isset($usCourseList) && count($usCourseList) > 0){
-						foreach($usCourseList as $key => $course){?> 
-							<dt>&nbsp;</dt>
-							<dd>
-								<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
-								<a href="/course-details.html?id=<?php echo $course[TrainingsService::COURSE_ID]; ?>" title="Course Details">
-									<?php echo $course[CourseService::CAPTION];?>
-								</a>
-							</dd>
-<?php
-						}
-					}
-?>
-		</dl>
-		<input type="submit" name="new" value="Save Valuation"/>
-	</form>
+	<?php				
+	$usCourseList = $mvc->getObject('usCourseList');
+	if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+		<span class="message warning">
+			Sorry, there are no courses available at this moment.<br/>
+			Please visit YouCademy <a href="my-trainings.html" title="YouCademy Trainings">trainings</a>, for subscribe to courses.
+		</span>
+	<?php }else{ ?>
+		<form enctype="multipart/form-data" action="valuate-responses.html" method="post">
+			<dl>
+				<dt>Valuation Name:</dt>
+				<dd><input type="text" name="v_name" id="v_name" size="35"/></dd>
+				<dt><span class="message">Please, mark courses.</span></dt>
+<?php			foreach($usCourseList as $key => $course){?> 
+					<dt>&nbsp;</dt>
+					<dd>
+						<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
+						<a href="/course-details.html?id=<?php echo $course[TrainingsService::COURSE_ID]; ?>" title="Course Details">
+							<?php echo $course[CourseService::CAPTION];?>
+						</a>
+					</dd>
+<?php			} ?>
+			</dl>
+			<input type="submit" name="new" value="Save Valuation"/>
+		</form>
+	<?php } ?>
 </div>

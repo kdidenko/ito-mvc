@@ -41,7 +41,7 @@ if ( hasProductInstall && !hasRequestedVersion ) {
     	AC_FL_RunContent(
     			"src", "components/challenge",
     			"width", "100%",
-    			"height", "1000px",
+    			"height", "800px",
     			"align", "middle",
     			"id", "challenge}",
     			"quality", "high",

@@ -4,9 +4,21 @@
 		<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
 	</div>
 	<ul class="menu">
-		<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='current'" : NULL;?>><a href="/my-profile.html">Personal Data</a></li>
-		<li <?php echo isset($_GET['picture']) ? "class='current'" : NULL;?>><a href="?picture">Profile Picture</a></li>
-		<li <?php echo isset($_GET['password']) ? "class='current'" : NULL;?>><a href="?password">Change Password</a></li>
+		<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='current'" : NULL;?>>
+			<a href="/my-profile.html">
+				<img src="images/info_base.png">Personal Data</img>
+			</a>
+		</li>
+		<li <?php echo isset($_GET['picture']) ? "class='current'" : NULL;?>>
+			<a href="?picture">
+				<img src="images/info_pict.png">Profile Picture</img>
+			</a>
+		</li>
+		<li <?php echo isset($_GET['password']) ? "class='current'" : NULL;?>>
+			<a href="?password">
+				<img src="images/info_psw.png">Change Password</img>
+			</a>
+		</li>
 	</ul>
 </div>
 
@@ -23,6 +35,7 @@
 	</div>
 	
 		<?php if (!isset($_GET['picture']) && !isset($_GET['password'])){?>
+				<span class="message warning">Basic information is open to everyone. Please, entered real data.</span>
 			<form enctype="multipart/form-data" action="my-profile.html" method="post" >
 				<dl>
 					<dt>First Name:</dt>
@@ -39,12 +52,16 @@
 					</dd>
 				</dl>
 			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-			<input class="sbButton" type="submit" name="personalSbm" value="Submit Changes"/>
+			<p class="btns"><input type="submit" name="personalSbm" value="Submit Changes" class="defBtn" /></p>
 			</form>
 		<?php } ?>
 		
 		<?php if(isset($_GET['password'])){ ?>
 			<form enctype="multipart/form-data" action="my-profile.html?password" method="post" >
+				<span class="message warning">
+					Your password must be at least 6 characters long.<br/>
+					You can use upper case, lower case, numbers, and non-alphanumeric characters.
+				</span>
 				<dl>
 					<dt>Old Password: </dt>
 					<dd><input type="password" class="profile" name="old_password" id="old_password"></input></dd>
@@ -54,20 +71,19 @@
 					<dd><input type="password" class="profile" name="confirm_password" id="confirm_password"></input></dd>
 				</dl>
 			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-			<input class="sbButton" type="submit" name="pswSbm" value="Submit Changes"/>
+			<p class="btns"><input type="submit" name="pswSbm" value="Submit Changes" class="defBtn" /></p>
 			</form>
 		<?php } ?>
 		<?php if(isset($_GET['picture'])){ ?>	
 			<form enctype="multipart/form-data" action="my-profile.html?picture" method="post" >
-				<span>Select an image file on your computer (max-size: 80x80):</span>
+				<span class="message warning">Select an image file on your computer (max-size: 80x80):</span>
 				<dl>
-					<dt></dt>
 					<dd>
 					<input type="file" name="file" size="30" />
 					</dd>
 				</dl>
 			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-			<input class="sbButton" type="submit" name="pctSbm" value="Submit Changes"/>
+			<p class="btns"><input type="submit" name="pctSbm" value="Submit Changes" class="defBtn" /></p>
 			</form>
 		<?php } ?>
 </div>

@@ -3,8 +3,10 @@
 	$noSchAssigne = $mvc->getObject('noSchAssigne');
 	if($noSchAssigne == TRUE){
 ?>
-<span class="message">You are currently not signed up for any schools.</span>
-<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+<span class="message warning">
+	You are currently not signed up for any schools.<br />
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
 <?php } else { ?>
 	<div class="trnList">
 	<?php
@@ -34,8 +36,10 @@
 						$exerciselist = $mvc->getObject('exerciselist');
 						if(!isset($exerciselist) || count($exerciselist) == 0){
 					?>
-					<span class="message">Sorry, there are no course exercises available at this moment.</span>
-					<span class="message">Please visit course later. It will be updated very soon.</span>
+					<span class="message warning">
+						Sorry, there are no course exercises available at this moment.<br />
+						Please visit course later. It will be updated very soon.
+					</span>
 					<?php } else { ?>
 					<?php foreach($exerciselist as $key => $value){ ?>
 						<div class="itemEx">

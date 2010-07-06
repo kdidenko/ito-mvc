@@ -33,6 +33,9 @@
 	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_AR){ ?>
 	 			<option><?php echo UsersService::ROLE_AR ?></option>
 	 			<?php }?>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_UR){ ?>
+	 			<option><?php echo UsersService::ROLE_UR ?></option>
+	 			<?php }?>
 	 		</select>
 			</dd>
 		</dl>

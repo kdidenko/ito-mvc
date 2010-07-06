@@ -38,30 +38,30 @@ class UserContentController extends ContentController {
 	
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-
-		#for all
-		$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
-		$list = SchoolService::getSchoolsList ( $where );
-		$mvc->addObject ( 'list', $list [0]);
-		
-		#for users and visitor
-		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$courselist = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'courselist', $courselist );
-		
-		#sign in / out to school
-		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$school_id = $requestParams[AssignmentsService::ID];
-		isset($requestParams[AssignmentsService::SIGNOUT]) ?		
-			$school_id = $requestParams[AssignmentsService::SIGNOUT] :
-				null;
-		
-		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$where = AssignmentsService::SCHOOL_ID . " = '" . $school_id . "' AND " . AssignmentsService::USER_ID . " = '" . $user_id . "'";
-		#checking schools assigned
-		$result = AssignmentsService::getSchool($user_id, $where);
-		$mvc->addObject ( 'assign', $result );
-		
+		if (isset($requestParams[SchoolService::ID])){
+			#for all
+			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
+			$list = SchoolService::getSchoolsList ( $where );
+			$mvc->addObject ( 'list', $list [0]);
+			
+			#for users and visitor
+			$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$courselist = CourseService::getCoursesList ( $where );
+			$mvc->addObject ( 'courselist', $courselist );
+			
+			#sign in / out to school
+			$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+			$school_id = $requestParams[AssignmentsService::ID];
+			isset($requestParams[AssignmentsService::SIGNOUT]) ?		
+				$school_id = $requestParams[AssignmentsService::SIGNOUT] :
+					null;
+			
+			$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
+			$where = AssignmentsService::SCHOOL_ID . " = '" . $school_id . "' AND " . AssignmentsService::USER_ID . " = '" . $user_id . "'";
+			#checking schools assigned
+			$result = AssignmentsService::getSchool($user_id, $where);
+			$mvc->addObject ( 'assign', $result );
+		}
 		return $mvc;
 	}
 	

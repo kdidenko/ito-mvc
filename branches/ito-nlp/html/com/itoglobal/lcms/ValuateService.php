@@ -80,6 +80,7 @@ class ValuateService {
 			$points = $points + ($value[ValuateService::COUNT]*$value[ValuateService::VALUATE]);
 		}
 		$points = $points/$sum;
+		$points = round($points, 2);
 		return $points;
 	}
 	public static function countNumberVotes($votes){

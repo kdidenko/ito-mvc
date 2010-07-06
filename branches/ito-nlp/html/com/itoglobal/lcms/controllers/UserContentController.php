@@ -204,7 +204,6 @@ class UserContentController extends ContentController {
 			$mvc->addObject ( 'comments', $comments );
 			$votes = ValuateService::countVotes($resp_index);
 			$mvc->addObject ( 'votes', $votes );
-			
 			$sum = ValuateService::countNumberVotes($votes);
 			$points = ValuateService::countPoints($votes, $sum);
 			$mvc->addObject ( 'sum', $sum );

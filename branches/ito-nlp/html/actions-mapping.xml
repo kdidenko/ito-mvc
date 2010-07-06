@@ -315,7 +315,7 @@
 	
 	<action name="/my-profile.html" id="myprofile">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>	
 	
 	<action name="/school-assigned.html" id="schoolassigned">

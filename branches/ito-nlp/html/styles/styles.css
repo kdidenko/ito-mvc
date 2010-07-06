@@ -138,18 +138,20 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .chrScroller {text-align: right; margin: 5px;}
 
 .myProfile {float: left;}
-.myProfile .myProfileimg { width: 130px; margin-bottom:10px; text-align: center; }
+.myProfile .myProfileimg { margin-bottom:10px; text-align: center; }
+.myProfile .myProfileimg img {border:1px solid #ededed;padding:3px; }
 .myProfile .menu a {color: #5C5C5C; text-decoration: none;margin: 5px; }
-.myProfile .menu li {margin: 3px; background-color:#F8F8F8; border: 1px solid gray; line-height: 15px;width:130px; height: 15px;}
+.myProfile .menu li {margin-bottom: 3px; line-height: 25px;width:160px; height: 25px;}
+.myProfile .menu li img {vertical-align: middle; margin-right: 5px} 
 .myProfile .menu li:hover {background-color:#cbcbcb;}
-.myProfile .menu .current {font-weight: bold; background-color: #cbcbcb; }
-.myProfile .menu .current a {color: #5C5C5C; }
-.myProfileInf {float: right; border-left: 1px solid #cbcbcb; width: 500px; height: 250px;  text-align: center;}
-.myProfileInf .sbButton {margin-top:50px; background-color:#F8F8F8; border: 1px solid gray;}
-.myProfileInf .sbButton:hover {background-color:#cbcbcb;}
-.myProfileInf dt {color: grey; font-weight: bold; font-size: 11px;line-height: 20px;}
+.myProfile .menu .current {font-weight: bold; background-color: #184877; }
+.myProfile .menu .current:hover {background-color:#184877;}
+.myProfile .menu .current a {color: #FFFFFF;}
+.myProfileInf {float: left; border-left: 3px solid #184877; width: 500px; height: 300px;}
+.myProfileInf dl {margin-left: 30px}
+.myProfileInf dt {color: #5C5C5C; font-weight: bold; font-size: 12px;line-height: 20px;}
 .myProfileInf dd {}
-.myProfileInf span {color: grey; font-weight: bold; font-size: 11px;}
+.myProfileInf span {margin-left: 10px;}
 
 .courseList{}
 .courseList .pgItemImg {float: right; margin: 5px; width: 90px;}

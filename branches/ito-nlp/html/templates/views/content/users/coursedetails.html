@@ -51,9 +51,18 @@
 <span class="message">Please visit course later. It will be updated very soon.</span>
 <?php } else { ?>
 <?php foreach($exerciselist as $key => $value){ ?>
-	<div class="courseList">
+	<div class="pgListItem wide">
+        <h2>
+			<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+				<?php echo $value[ExerciseService::CAPTION];?>
+			</a>
+		</h2>
 		<div class="pgItemImg">
 			<img src="storage/video.jpg" alt="video"></img>
+		</div>
+	   	<div class="pgItemBody">
+	   	<ul>
+			<li><span>Rating:</span>
 			<span class="lsValue">
 	       		<?php if($value[ExerciseService::RATE] >= 1){ ?>
 				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
@@ -66,13 +75,8 @@
 				<?php if($value[ExerciseService::RATE] >= 5){ ?>
 				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
 			</span>
-		</div>
-	   	<div class="pgItemBody">
-	        <h1>
-				<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-					<?php echo $value[ExerciseService::CAPTION];?>
-				</a>
-			</h1>
+			</li>
+		</ul>
 			<p>
 				<?php echo $value[ExerciseService::DESCRIPTION];?>
 				<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>

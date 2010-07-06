@@ -130,6 +130,11 @@
 		<template name="index.html" path="templates/layout-two-columns.html"/>
 	</action>
 	
+	<action name="/sign-in.html" id="signin">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html"/>
+	</action>
+	
 	<action name="/reset-password.html" id="resetpassword">
 		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
 		<template name="index.html" path="templates/layout-one-column.html"/>

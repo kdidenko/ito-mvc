@@ -42,6 +42,9 @@ class AuthenticationController extends BaseActionControllerImpl {
 		} else {
 			$location = $this->onFailure ( $actionParams );
 		}
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$mvc->addObject ( UsersService::ERROR, 'ss' );
+		print_r ($mvc);
 		$this->forwardActionRequest ( $location );
 	}
 	

@@ -1,16 +1,15 @@
 <h1>Hi! Ready to register with YouCademy?</h1>
 <p>It's your typical registration - it's free and fairly simple to complete.
 Already registered or want to make changes to your account? <a href="login.html" title="Sign in to YouCademy account">Sign in</a></p>
-<div class="error">
-	<?php
+<?php
 		$errors = $mvc->getObject(UsersService::ERROR);
-		if (isset($errors)){
-			foreach ($errors as $key => $value){
-				echo '<p>' . $value . '</p>';
-			}
-		}
-	?>
-</div>
+		if (isset($errors)){?>
+			<span class="message warning">
+<?php		foreach ($errors as $key => $value){
+				echo $value . '<br/>';
+			}?>
+			</span>
+<?php 	} ?>
 <h2>Tell us about yourselft</h2>
 <div class="signinForm">
 	<form action="registration.html" method="post">

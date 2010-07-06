@@ -26,9 +26,9 @@ class AdminContentController extends ContentController {
 	public function handleNewSchool($actionParams, $requestParams) {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+
 		#moderator list for admin
-		$where = UsersService::ROLE . "= '" . UsersService::ROLE_MR . "'";
+		$where = UsersService::ROLE . " != '" . UsersService::ROLE_AR . "'" ;
 		$mrList = UsersService::getUsersList($where);
 		$mvc->addObject ( 'mrList', $mrList );
 		
@@ -52,8 +52,8 @@ class AdminContentController extends ContentController {
 				$values = "'" . $requestParams [SchoolService::ALIAS] . "','" . 
 						$requestParams [SchoolService::CAPTION] . "','" . 
 						$requestParams [SchoolService::DESCRIPTION] . "','" . $path . "','" . 
-						gmdate ( "Y-m-d H:i:s" ) . "','0','" . $requestParams[SchoolService::ADMIN] . "','" . 
-						$requestParams[SchoolService::LANGUAGE] ."'";
+						gmdate ( "Y-m-d H:i:s" ) . "','" . $requestParams[SchoolService::BASE_FEE] . "','" . 
+						$requestParams[SchoolService::ADMIN] . "','" . $requestParams[SchoolService::LANGUAGE] ."'";
 				$into = SchoolService::SCHOOLS_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				
@@ -105,13 +105,13 @@ class AdminContentController extends ContentController {
 				$fields [] .= SchoolService::CAPTION;
 				$fields [] .= SchoolService::DESCRIPTION;
 				$fields [] .= SchoolService::ADMIN;
-				
+				$fields [] .= SchoolService::BASE_FEE;
 				$vals = array ();
 				$id = $requestParams [SchoolService::ID];
 				$vals [] .= $requestParams [SchoolService::CAPTION];
 				$vals [] .= $requestParams [SchoolService::DESCRIPTION];
 				$vals [] .= $requestParams [SchoolService::ADMIN];			
-				
+				$vals [] .= $requestParams [SchoolService::BASE_FEE];
 				SchoolService::updateFields ( $id, $fields, $vals );
 				
 				#change moderator

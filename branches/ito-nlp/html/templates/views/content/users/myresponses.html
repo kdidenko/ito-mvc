@@ -65,19 +65,19 @@
 							<div class="item">
 						        <span>Valuation:</span>
 						        <ul>
-						        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum;?></span></li>
-							        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points;?></span></li>
+						        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
+							        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
 							        <li>Contribution points:<span>I don't know :)</span></li>
 						        </ul>
 						        <div class="image">
 						        	<img src="images/valuation.png" alt="valuation"></img>
 						        </div>
-						        <?php  $votes = $mvc->getObject("votes");
+						        <?php  $votes = $mvc->getObject("votes");if (count($votes)>0){
 										foreach($votes as $key => $vote){
 						        ?>
 						        <?php echo $vote[ValuateService::VALUATE]; ?> votes
 						       	<?php echo $vote[ValuateService::COUNT]; ?> <br/>
-								<?php } ?>
+								<?php } } ?>
 							</div>
 						</div>
 						<div class="comments">

@@ -30,7 +30,7 @@ class ValuateService {
 	 */
 	const VALUATIONS_TBL = 'valuations';
 		
-	public static function getValuateList($resp_index) {
+	public static function getValuateList($resp_index, $user_id = NULL, $limit = NULL) {
 		$fields = self::VALUATIONS_TBL . '.' . self::ID . "," . self::RESP_ID . ", " . self::COMMENT . ", " . 
 				self::VALUATE . ", " . self::USER_ID . ", " . 
 				UsersService::USERS . '.' . UsersService::FIRSTNAME . ", " .
@@ -39,9 +39,10 @@ class ValuateService {
 		$from = self::VALUATIONS_TBL . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
 				self::VALUATIONS_TBL . '.' . self::USER_ID . '=' . UsersService::USERS . '.' . UsersService::ID ;
 		$where = isset($resp_index) ? self::RESP_ID . '=' . $resp_index : NULL;
+		$where .= isset($user_id) ? ' AND ' . self::USER_ID . '=' . $user_id : NULL;
 		$orderBy = self::ID . ' ' . SQLClient::DESC;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, NULL, $orderBy, NULL );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, NULL, $orderBy, $limit );
 		$result = isset($result) && count($result)>0 ? $result : NULL;
 		return $result;
 	}

@@ -1,12 +1,18 @@
 <div class="itemForm">
-	<form enctype="multipart/form-data" action="my-trainings.html" method="post">
+	<?php				
+	$usCourseList = $mvc->getObject('usCourseList');
+	if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+		<span class="message warning">
+			You are currently not signed up for any schools or your school have not courses.<br/>
+			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+		</span>
+	<?php }else{ ?>
+		<form enctype="multipart/form-data" action="my-trainings.html" method="post">
 		<dl>
 			<dt>Training Name:</dt>
 			<dd><input type="text" name="training_name" id="training_name" size="35"/></dd>
 			<dt><span class="message">Please, mark courses.</span></dt>
-<?php				$usCourseList = $mvc->getObject('usCourseList');
-					if(isset($usCourseList) && count($usCourseList) > 0){
-						foreach($usCourseList as $key => $course){ 
+<?php				foreach($usCourseList as $key => $course){
 							$old = isset ($old)? $old : NULL;
 							if ($course[SchoolService::CAPTION] != $old){?> 
 							<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
@@ -19,10 +25,9 @@
 							</dd>
 							<dt>&nbsp;</dt>
 <?php						$old = $course[SchoolService::CAPTION];
-						}
-					}
-?>
+						} ?>
 		</dl>
 		<input type="submit" name="submit" value="Save Training"/>
-	</form>
+		</form>
+	<?php } ?>
 </div>

@@ -13,45 +13,51 @@
 		<div class="itemBodyContent">
 			<div class="itemForm">
 			<?php if(!isset($_GET['add'])){ ?>
-				<form enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
-					<dl>
-						<dt>Training Name:</dt>
-						<dd><input type="text" name="training_name" id="training_name" size="35" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/></dd>
-						<dt>Your courses:</dt>
+				<form class="edit" enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+						<span>Training Name:</span>
+						<input type="text" name="training_name" id="training_name" size="35" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/>
+						<div class="clnr brdr">&nbsp;</div>
+						<span>Your courses:</span>
 <?php					foreach($training as $key => $trn){ ?>
-							<dd>
 								<a class="button" href="edit-training.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&del=<?php echo $trn[TrainingsService::COURSE_ID] ?>">Del</a>
 								<?php echo $trn[CourseService::CAPTION] ?>
-							</dd>
-							<dt>&nbsp;</dt>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
 <?php 					} ?>
-					</dl>
+						<div class="clnr brdr">&nbsp;</div>
 					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
-					<input type="submit" name="updateCurrent" value="Save Training"/>
+					<p class="btns"><input type="submit" name="updateCurrent" value="Save Training" class="defBtn" /></p>
 				</form>							
 			<?php } else {?>
-				<form enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
-					<span class="message">Please, mark the courses, wich you want to learn.</span>
-					<dl>
 <?php				$usCourseList = $mvc->getObject('usCourseList');
-					if(isset($usCourseList) && count($usCourseList) > 0){
-						foreach($usCourseList as $key => $course){ 
-							$old = isset ($old)? $old : NULL;
-							if ($course[SchoolService::CAPTION] != $old){?> 
-									<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
-									<?php } ?>
-									<dd>
-										<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>" />
-										<?php echo $course[CourseService::COURSE_CAPTION];?>
-									</dd>
-										
-<?php 						$old = $course[SchoolService::CAPTION];		
-						}
+					if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+						<span class="message warning">
+							Sorry, there are no courses available at this moment. It will be updated very soon.<br />
+							Also, you can browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one more school.
+						</span>
+<?php 				} else { ?>					
+					<span class="message">Please, mark the courses, wich you want to learn.</span>
+					<form class="edit" enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+<?php					foreach($usCourseList as $key => $course){
+						$old = isset ($old)? $old : NULL;
+						if ($course[SchoolService::CAPTION] != $old){?>
+							<div class="clnr brdr">&nbsp;</div>
+							<span><?php echo $course[SchoolService::CAPTION];?>:</span>
+						<?php } else { ?>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
+						<?php }?>
+						<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/>
+						<a href="/course-details.html?id=<?php echo $course[CourseService::ID]; ?>" title="Course Details">
+							<?php echo $course[CourseService::COURSE_CAPTION];?>
+						</a>
+<?php					$old = $course[SchoolService::CAPTION];
 					} ?>
-					</dl>
+		<div class="clnr brdr">&nbsp;</div>
 					<input type="hidden" name="training_name" id="training_name" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/>
 					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
-					<input type="submit" name="update" value="Save Training"/>
+					<p class="btns"><input type="submit" name="update" value="Save Training" class="defBtn" /></p>
+<?php				} ?>
 				</form>
 			<?php } ?>
 			</div>

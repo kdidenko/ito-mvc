@@ -12,7 +12,6 @@
 	<b>Shools List</b>
 </div>
 <?php	foreach($usSchList as $key => $value){ ?> 
-
 <div class="pgItemsList">
 	<div class="pgListItem wide">
 		<h2>
@@ -27,16 +26,21 @@
 			<ul>
 				<li><span>Rating:</span>
 					<span class="lsValue">
-						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 1){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 2){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 3){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 4){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
-						<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] >= 5){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } } ?>
+						<a href="?valuate=1&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 1){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=2&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 2){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=3&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 3){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=4&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 4){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=5&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 5){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
 					</span>				
 				</li>
 				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>

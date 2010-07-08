@@ -17,16 +17,21 @@
 				<li>
 					<span>Rating:</span>
 					<span class="lsValue">
-						<?php if($list[SchoolService::RATE] >= 1){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[SchoolService::RATE] >= 2){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[SchoolService::RATE] >= 3){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[SchoolService::RATE] >= 4){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[SchoolService::RATE] >= 5){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<a href="?valuate=1&id=<?php echo $list[SchoolService::ID] ?>"><?php if($list[SchoolService::RATE] >= 1){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=2&id=<?php echo $list[SchoolService::ID] ?>"><?php if($list[SchoolService::RATE] >= 2){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=3&id=<?php echo $list[SchoolService::ID] ?>"><?php if($list[SchoolService::RATE] >= 3){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=4&id=<?php echo $list[SchoolService::ID] ?>"><?php if($list[SchoolService::RATE] >= 4){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=5&id=<?php echo $list[SchoolService::ID] ?>"><?php if($list[SchoolService::RATE] >= 5){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
 					</span>
 				</li>
 				<li><span>Students:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_STUDENTS];?></span></li>
@@ -71,15 +76,15 @@
 			<li><span>Rating:</span>
 			<span class="lsValue">
        			<?php if($value[CourseService::RATE] >= 1){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[CourseService::RATE] >= 2){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[CourseService::RATE] >= 3){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[CourseService::RATE] >= 4){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[CourseService::RATE] >= 5){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 			</span>
 			</li>
 		</ul>

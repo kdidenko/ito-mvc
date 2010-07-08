@@ -85,6 +85,22 @@ class SchoolService {
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
 	 */
+	
+	/* begin of schools_rate table fields nsme */
+	/**
+	 * @var  string defining the schools table name
+	 */
+	const SCH_RATE_TABLE = 'schools_rate';
+	/**
+	 * @var  string defining the schools fields name
+	 */
+	const SCHOOL_ID = 'school_id';
+	/**
+	 * @var  string defining the schools fields name
+	 */
+	const USER_ID = 'user_id';
+	/* end of schools_rate table fields nsme */
+	
 	public static function getSchoolsList($where = null, $limit = null, $orderBy = null, $id = null) {
 	/* generation sql query
 	SELECT t1.*, COUNT(c.id) as courses FROM
@@ -207,14 +223,43 @@ class SchoolService {
 		}
 		return $result;
 	}
-	public static function rateSchool($id){
+	public static function rateSchool($schoo_id, $rate){
+		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
 		# setting the query variables
 		$fields = self::RATE;
-		$vals = 1;
-		$from = self::SCHOOLS_TABLE;
-		$where = self::ID . " = '" . $id . "'";
+		$from = self::SCH_RATE_TABLE;
+		$where = self::SCHOOL_ID . '=' . $schoo_id . ' AND ' . self::USER_ID . '=' . $user_id;
 		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		if (count($result)==0){
+			$fields = self::SCHOOL_ID . ", " . self::USER_ID . ", " . self::RATE;
+			$values = $schoo_id . ", " . $user_id . ", " . $rate;
+			$into = self::SCH_RATE_TABLE;
+			# executing the query
+			DBClientHandler::getInstance ()->execInsert($fields, $values, $into);
+			self::updateSchoolRate($schoo_id);
+		}
+	}
+	public static function updateSchoolRate($schoo_id){
+		# setting the query variables
+		$fields = self::RATE;
+		$from = self::SCH_RATE_TABLE;
+		$where = self::SCHOOL_ID . '=' . $schoo_id;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
+		if ($result!=NULL){
+			$rate = null;
+			foreach ($result as $key => $value){
+				$rate = $value[self::RATE] + $rate;
+			}
+			$rate = round($rate/count($result),1);
+			$fileds = self::RATE;
+			$vals = $rate;
+			#school update
+			self::updateFields($schoo_id, $fields, $vals);
+		}
+		return $result;
 	}
 
 }

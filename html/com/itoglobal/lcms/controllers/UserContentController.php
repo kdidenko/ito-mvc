@@ -18,6 +18,11 @@ class UserContentController extends ContentController {
 			}
 		}
 		
+		#school rate
+			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
+					NULL;
+					
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
@@ -35,11 +40,40 @@ class UserContentController extends ContentController {
 		
 		return $mvc;
 	}
-	
+	public function handleSchools($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		#school rate
+			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
+					NULL;
+		#sorting
+		$order = NULL;
+		if( isset($requestParams[SchoolService::RATE]) ){
+			$order = $requestParams[SchoolService::RATE] == SQLClient::ASC ? 
+				SchoolService::RATE . ' ' . SQLClient::ASC : 
+					SchoolService::RATE . ' ' . SQLClient::DESC;
+		}
+		if( isset($requestParams[SchoolService::LANGUAGE]) ){
+			$order = $requestParams[SchoolService::LANGUAGE] == SQLClient::ASC ? 
+				SchoolService::LANGUAGE . ' ' . SQLClient::ASC : 
+					SchoolService::LANGUAGE . ' ' . SQLClient::DESC;
+		}
+		
+		#get schools list
+		$list = SchoolService::getSchoolsList (null, null, $order);
+		$list = self::createTeaser($list);
+		$mvc->addObject ( 'list', $list );
+		return $mvc;
+	}
 	public function handleSchoolDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[SchoolService::ID])){
-			#for all
+			#school rate
+			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
+					NULL;
+		
+			#get school
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 			$list = SchoolService::getSchoolsList ( $where );
 			$mvc->addObject ( 'list', $list [0]);

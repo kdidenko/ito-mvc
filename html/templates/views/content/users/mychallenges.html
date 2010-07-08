@@ -1,4 +1,12 @@
-<h1>My challenges<span class="message">Under construction: new challenge</span></h1>
+<script> 
+function foo() { 
+document.getElementById("caption").disabled = false;
+document.getElementById("caption").value = '';
+document.getElementById("description").disabled = false;
+} 
+</script> 
+
+<h1>My challenges</h1>
 <?php
 		$exList = $mvc->getObject('exList');
 		if(!isset($exList) || count($exList) == 0) { ?>
@@ -7,49 +15,55 @@
 			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
 	</span>
 <?php	} else { ?>
-		<form enctype="multipart/form-data" action="my-challenges.html" method="post">
-			<div style="float:left;width:40%;">
-				<dl>
-					<dt>Challenge Name:</dt>
-						<dd><input type="text" name="caption" id="caption" size="35"/></dd>
-						<dt>Challenge Description:</dt>
-				</dl>
-				<textarea name="description" cols="10" rows="10"></textarea>
-				<a href="start-challenge.html" class="button">Record Video</a>
-				<a href="#" class="button">Discard</a>
-				<input class="button" type="submit" name="submit" value="Save"/>
-			</div>
-			<div style="float:left;width:60%;">
-				<dl style="float:right">
-				<?php
-			$usSchList = $mvc->getObject('usSchList');
+
+		<form enctype="multipart/form-data" action="my-challenges.html" method="post" class="edit">
+		<div class="popUP" style="display:none;" id="exercise_hide">
+<?php		$usSchList = $mvc->getObject('usSchList');
 			$usCourseList = $mvc->getObject('usCourseList');
 			if(isset($usSchList) || count($usSchList) > 0){
 				foreach($usSchList as $key => $school){	?> 
-						<dt><?php echo $school[SchoolService::CAPTION];?>:</dt>
+						<span><?php echo $school[SchoolService::CAPTION];?>:</span>
+						<div class="clnr brdr">&nbsp;</div>
 <?php				if(isset($usCourseList) && count($usCourseList) > 0){
 						foreach($usCourseList as $key => $course){
 							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
-									<dd><?php echo $course[CourseService::CAPTION];?></dd>
-									<dt>&nbsp;</dt>
+									<span><i><?php echo $course[CourseService::CAPTION];?></i></span>
+									<ul>
 <?php							foreach($exList as $key => $exercise){
 									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
-											<dd>
-												<input type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>">
+												<li>
+												<input onclick="foo();document.getElementById('exercise_hide').style.display='none';document.getElementById('exercise').style.display='';return false;" type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>"/>
 													<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
 														<?php echo $exercise[ExerciseService::CAPTION]; ?>
 													</a>
-												</input>
-											</dd>
-											<dt>&nbsp;</dt>
+												</li>
+												<span>&nbsp;</span>
 <?php								}   
-								}
-							} 
+								} ?>
+									</ul>
+									<div class="clnr brdr">&nbsp;</div>
+<?php						} 
 						}
 					}
 				}
 			} ?>
-				</dl>
 			</div>			
+			<div >
+				<div id="exercise">
+					<a href="#" onClick="document.getElementById('exercise').style.display='none';document.getElementById('exercise_hide').style.display='';return false;">Select Exercise...</a>
+					<div class="clnr brdr">&nbsp;</div>
+				</div>
+				<span>Challenge Name:</span>
+				<input type="text" name="caption" id="caption" size="35" disabled value="Please Select Exercise"/>
+				<div class="clnr brdr">&nbsp;</div>
+				<span>Challenge Description:</span>
+				<textarea name="description" id="description" cols="10" rows="10" disabled ></textarea>
+				<div class="clnr brdr">&nbsp;</div>
+				<span>&nbsp;</span>
+				<a href="start-challenge.html" class="button">Record Video</a>
+				<a href="my-challenges.html" class="button">Discard</a>
+				<p>Note: Recorde video dosn't work. Please wait the update.</p>
+				<p class="btns"><input type="submit" name="submit" value="Save Challenge" class="defBtn" /></p>
+			</div>
 		</form>
 <?php } ?>

@@ -193,11 +193,13 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 		.item p{font-size: 12px; margin: 5px 10px;}
 		.item ul{font-size: 12px; margin: 5px 10px;}
 .comments {float:right; display: block; clear: both; margin-right:25px;}
-.comments .cmItem {width: 550px; height: 80px; border:1px solid #D9D9D9; background-color:#G0G0G0; margin-bottom: 5px;}
-.comments .cmItem img {float:left; margin: 0 5px; width: 80px; height: 80px;}
-.comments .cmItem .head {float:left; height: 35px; width: 460px;background-color: #FFFFB5; border-bottom: 1px solid #ccc}
-.comments .cmItem .head b {color: #CC0000;margin-left:10px;}
+.comments .cmItem {display:block; clear:both; width: 520px; height: auto; border-top:1px solid #184877; margin-bottom: 20px; padding-top: 2px}
+.comments .cmItem img {float:left; margin: 0 5px; width: 70px; height: 70px; border:1px solid #ededed;padding:3px; }
+.comments .cmItem .head {float:left; height: 35px; width: 430px;background-color: #FFFFB5; border-bottom: 1px solid #7496B9}
+.comments .cmItem .head ul {float:left}
+.comments .cmItem .head b {float: right; color: #CC0000; margin:5px; width: 20px; height: 20px; background-color: white;text-align: center;border:1px solid gray;}
 .comments .cmItem .head a {margin-left:10px; text-decoration: none; font-weight: bold;}
+.comments .cmItem .head span {font-size: 10px;}
 .comments .cmItem span {margin: 10px; color:#5C5C5C}
 .vlnList .itemBody .itemOption {margin:20px 0; text-align: center; width: 645px;}
 .itemOption form fieldset {background-color: #FFFFB5;}

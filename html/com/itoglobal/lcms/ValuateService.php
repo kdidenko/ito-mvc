@@ -22,6 +22,10 @@ class ValuateService {
 	 */
 	const VALUATE = 'valuate';
 	/**
+	 * @var string defining the crdate field name
+	 */
+	const CRDATE = 'crdate';
+	/**
 	 * @var string defining the count field name
 	 */
 	const COUNT = 'count';
@@ -32,7 +36,7 @@ class ValuateService {
 		
 	public static function getValuateList($resp_index, $user_id = NULL, $limit = NULL) {
 		$fields = self::VALUATIONS_TBL . '.' . self::ID . "," . self::RESP_ID . ", " . self::COMMENT . ", " . 
-				self::VALUATE . ", " . self::USER_ID . ", " . 
+				self::VALUATE . ", " . self::USER_ID . ", " . self::VALUATIONS_TBL . '.' . self::CRDATE . ", " . 
 				UsersService::USERS . '.' . UsersService::FIRSTNAME . ", " .
 				UsersService::USERS . '.' . UsersService::LASTNAME . ", " . 
 				UsersService::USERS . '.' . UsersService::AVATAR;
@@ -49,8 +53,9 @@ class ValuateService {
 	 
 	public static function valuateResp($resp_id, $comment, $valuate){
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$fields = self::RESP_ID . ", " . self::COMMENT . ", " . self::USER_ID . ", " . self::VALUATE;
-		$values = "'" . $resp_id . "', '" . $comment . "', '" . $user_id . "' , '" . $valuate . "'";
+		$crdate = gmdate ( "Y-m-d H:i:s" );
+		$fields = self::RESP_ID . ", " . self::COMMENT . ", " . self::USER_ID . ", " . self::VALUATE . ", " . self::CRDATE;
+		$values = "'" . $resp_id . "', '" . $comment . "', '" . $user_id . "' , '" . $valuate . "' , '" . $crdate . "'";
 		$into = self::VALUATIONS_TBL;
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					
 	}

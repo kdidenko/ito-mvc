@@ -2,8 +2,10 @@
 <?php
 		$exList = $mvc->getObject('exList');
 		if(!isset($exList) || count($exList) == 0) { ?>
-<span class="message">You are currently not signed up for any schools.</span>
-<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
+	<span class="message warning">
+			You are currently not signed up for any schools or your school have not courses.<br/>
+			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+	</span>
 <?php	} else { ?>
 		<form enctype="multipart/form-data" action="my-challenges.html" method="post">
 			<div style="float:left;width:40%;">

@@ -1,86 +1,79 @@
 <h1>Valuations of my responses</h1>
-<?php
-	$noSchAssigne = $mvc->getObject('noSchAssigne');
-	if($noSchAssigne == TRUE){
-?>
-<span class="message">You are currently not signed up for any schools.</span>
-<span class="message">Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.</span>
-<?php } else { ?>
-	<div class="vlnList">
-		<div class="itemBody">
-			<div class="itemBodyContent">
-					<div class="itemOption">
-						<?php $respList = $mvc->getObject('resp'); ?>
-						<?php if(isset($_GET["id"]) && $_GET["id"]>=1 ){?>
-							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
-						<?php } 
-						if(isset($respList) && count($respList) > 0){ ?>
-							<a class="button" href="#component">Replay</a>
-							<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
-						<?php } ?>
+<div class="vlnList">
+	<div class="itemBody">
+		<div class="itemBodyContent">
+			<div class="itemOption">
+<?php 			$respList = $mvc->getObject('resp'); ?>
+<?php 			if(isset($_GET["id"]) && $_GET["id"]>=1 ){?>
+					<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]-1 : 0; ?>">Previous Response</a>
+<?php 			} 
+				if(isset($respList) && count($respList) > 0){ ?>
+					<a class="button" href="#component">Replay</a>
+					<a class="button" href="?id=<?php echo isset($_GET["id"]) ? $_GET["id"]+1 : 1; ?>">Next Response</a>
+<?php 			} ?>
+			</div>
+<?php		if(!isset($respList) || count($respList) == 0){	?>
+				<span class="message warning">
+					Sorry, there are no more responses available at this moment.<br />
+					Please, continue your <a href="/my-trainings.html" title"Youcademy Trainings">training</a>.
+				</span>
+<?php 		} else { ?>
+				<span><b>Created: </b></span><span class="lsValue"><?php echo $respList[ResponsesService::CRDATE];?></span>
+				<div class="preview wide">
+					<div class="item">
+				        <span>Exercise:</span>
+				        <h1>
+							<a href="<?php echo "/exercise-details.html?id=" . $respList[ResponsesService::EX_ID] ?>">
+								<?php echo $respList[ResponsesService::EX_NAME];?>
+							</a>
+						</h1>
+						<p>
+							<?php echo $respList[ResponsesService::EX_DESC];?>
+							<a href="<?php echo 'exercise-details.html?id=' . $respList[ResponsesService::EX_ID];?>" title="View">More...</a>
+						</p>
+						<div class="image">
+							<img src="storage/video.jpg" alt="video"></img>
+						</div>
 					</div>
-					<?php
-						if(!isset($respList) || count($respList) == 0){	?>
-							<span class="message">FIX THIS TEXT.</span>
-							<span class="message">Sorry, there are no more responses available at this moment.</span>
-							<span class="message">Please, continue your <a href="/my-trainings.html" title"Youcademy Trainings">training</a>.</span>
-					<?php } else { ?>
-						<span><b>Created: </b></span><span class="lsValue"><?php echo $respList[ResponsesService::CRDATE];?></span>
-						<div class="preview wide">
-							<div class="item">
-						        <span>Exercise:</span>
-						        <h1>
-									<a href="<?php echo "/exercise-details.html?id=" . $respList[ResponsesService::EX_ID] ?>">
-										<?php echo $respList[ResponsesService::EX_NAME];?>
-									</a>
-								</h1>
-								<p>
-									<?php echo $respList[ResponsesService::EX_DESC];?>
-									<a href="<?php echo 'exercise-details.html?id=' . $respList[ResponsesService::EX_ID];?>" title="View">More...</a>
-								</p>
-								<div class="image">
-									<img src="storage/video.jpg" alt="video"></img>
-								</div>
-							</div>
-							<div class="item">
-						        <span>Challenge:</span>
-						        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
-								<p>
-									<?php echo $respList[ResponsesService::CHLG_DESC];?>
-								</p>
-								<div class="image">
-									<img src="storage/video.jpg" alt="video"></img>
-								</div>
-							</div>
-							<div class="item">
-						        <span>Response:</span>
-						        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
-								<p>
-									<?php echo $respList[ResponsesService::DESCRIPTION];?>
-								</p>
-								<div class="image">
-									<img src="storage/video.jpg" alt="video"></img>
-								</div>
-							</div>
-							<div class="item">
-						        <span>Valuation:</span>
-						        <ul>
-						        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
-							        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
-							        <li>Contribution points:<span>I don't know :)</span></li>
-						        </ul>
-						        <div class="image">
-						        	<img src="images/valuation.png" alt="valuation"></img>
-						        </div>
-						        <?php  $votes = $mvc->getObject("votes");if (count($votes)>0){
+					<div class="item">
+				        <span>Challenge:</span>
+				        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
+						<p>
+							<?php echo $respList[ResponsesService::CHLG_DESC];?>
+						</p>
+						<div class="image">
+							<img src="storage/video.jpg" alt="video"></img>
+						</div>
+					</div>
+					<div class="item">
+				        <span>Response:</span>
+				        <h1><?php echo $respList[ResponsesService::CHLG_NAME];?></h1>
+						<p>
+							<?php echo $respList[ResponsesService::DESCRIPTION];?>
+						</p>
+						<div class="image">
+							<img src="storage/video.jpg" alt="video"></img>
+						</div>
+					</div>
+					<div class="item">
+				        <span>Valuation:</span>
+				        <ul>
+				        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
+					        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
+					        <li>Contribution points:<span>I don't know :)</span></li>
+				        </ul>
+				        <div class="image">
+				        	<img src="images/diagram.php" alt="diagram"></img>
+				        </div>
+				        <?php  $votes = $mvc->getObject("votes");if (count($votes)>0){
 										foreach($votes as $key => $vote){
 						        ?>
-						        <?php echo $vote[ValuateService::VALUATE]; ?> votes
-						       	<?php echo $vote[ValuateService::COUNT]; ?> <br/>
-								<?php } } ?>
-							</div>
-						</div>
-						<div class="comments">
+				        <?php echo $vote[ValuateService::VALUATE]; ?> votes
+				       	<?php echo $vote[ValuateService::COUNT]; ?> <br/>
+						<?php } } ?>
+					</div>
+				</div>
+				<div class="comments">
 <?php 				$comment = $mvc->getObject("comments");
 					if (count($comment)>0 && $comment!=NULL){
 						foreach($comment as $key => $value){ ?>
@@ -88,24 +81,31 @@
 								<img src="<?php echo $value[UsersService::AVATAR] ?>"></img>
 								<div class="head">
 									<ul>
-									<li><a href="user-details.html?id=<?php echo $value[ValuateService::USER_ID]; ?>">
-										<?php echo $value[UsersService::FIRSTNAME] ?>
-										<?php echo $value[UsersService::LASTNAME] ?>
-									</a></li>
-									<li><b>Points:<?php echo $value[ValuateService::VALUATE] ?></b></li>
+										<li>
+											<a href="user-details.html?id=<?php echo $value[ValuateService::USER_ID]; ?>">
+												<?php echo $value[UsersService::FIRSTNAME] ?>
+												<?php echo $value[UsersService::LASTNAME] ?>
+											</a>
+										</li>
+										<li><span><?php echo $value[ValuateService::CRDATE] ?></span></li>
 									</ul>
+									<b><?php echo $value[ValuateService::VALUATE] ?></b>
 								</div>
 								<span><?php echo $value[ValuateService::COMMENT] ?></span>
 							</div>
-					<?php } ?> 
-							<a class="button" href="#">See All</a>
-					<?php } else { ?>
-						<span class="message">FIX THE TEXT: There are no valuate</span>
-					<?php } ?>
-						</div>
-<?php			 	}
-				} ?>
-			</div>
+<?php 					} ?> 
+<?php 				$scroller = $mvc->getObject("scroller");
+					for ($i=1;$i<=$scroller;$i++) { ?>
+						<a class="button " href="?page=<?php echo $i; echo isset($_GET['id'])? '&id='.$_GET['id']:null;?>"><?php echo $i?></a>
+<?php 				}
+					} else { ?>
+					<span class="message warning">
+						Your response has not yet been assessed.
+						Please wait while the some one will appreciate your response.
+					</span>
+<?php 				} ?>
+				</div>
+<?php			} ?>
 		</div>
 	</div>
-<?php   ?>
+</div>

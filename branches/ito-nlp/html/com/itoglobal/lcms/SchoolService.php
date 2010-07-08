@@ -46,6 +46,10 @@ class SchoolService {
 	 */
 	const RATE = 'rate';
 	/**
+	 * @var ustring defining the number_rate field name
+	 */
+	const RATE_VOTES = 'number_rate';
+	/**
 	 * @var string defining the deleted field name
 	 */
 	const DELETED = 'deleted';

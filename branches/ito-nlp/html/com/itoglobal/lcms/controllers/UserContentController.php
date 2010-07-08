@@ -122,10 +122,14 @@ class UserContentController extends ContentController {
 		#creating new training
 		if ( isset($requestParams['submit']) ) {
 			#creatin index for training
-			$where = TrainingsService::USER_ID . '=' . $user_id;
-			$groupBy = TrainingsService::TRN_ID;
-			$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
-			$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1;
+			$fields = "MAX(" . TrainingsService::TRN_ID . ")" . SQLClient::SQL_AS . 'max';
+			$from = TrainingsService::TRAININGS_TABLE;
+			$trainingList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, null, null, '', '' );
+			$t_index = $trainingList == NULL ? 1 : $trainingList[0]['max'] + 1;
+			//$where = TrainingsService::USER_ID . '=' . $user_id;
+			//$groupBy = TrainingsService::TRN_ID;
+			//$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
+			//$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1;
 
 			foreach ($usCourseList as $key => $value) {
 				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
@@ -191,18 +195,18 @@ class UserContentController extends ContentController {
 	public function handleMyResponses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
-		#checking schools assigned
-		$result = AssignmentsService::getSchool($user_id);
-		if ($result != NULL){
-			#get responses
-			$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
-			$resp = ResponsesService::getResponses($user_id, $limit);
+		#get responses
+		$limit = !isset($requestParams[ExerciseService::ID]) ? '0, 1' : $requestParams[ExerciseService::ID] . ', 1';
+		$resp = ResponsesService::getResponses($user_id, $limit);
+		if ($resp != NULL){
 			$resp = $resp[0];
 			$resp[ResponsesService::CHLG_DESC] = self::createTeaserWord($resp[ResponsesService::CHLG_DESC]);
 			$resp[ResponsesService::EX_DESC] = self::createTeaserWord($resp[ResponsesService::EX_DESC]);
 			$mvc->addObject ( 'resp', $resp );
 			$resp_index = $resp[ResponsesService::ID];
-			$limit = '0, 5';
+			$pageTo = isset($requestParams['page']) ? $requestParams['page']*5 : 5;
+			$pageFrom = isset($requestParams['page']) ? ($requestParams['page']-1)*5 : 0;
+			$limit = "$pageFrom, $pageTo";
 			$comments = ValuateService::getValuateList($resp_index, NULL, $limit);
 			$mvc->addObject ( 'comments', $comments );
 			if(count($comments)>0){
@@ -212,12 +216,10 @@ class UserContentController extends ContentController {
 				$points = ValuateService::countPoints($votes, $sum);
 				$mvc->addObject ( 'sum', $sum );
 				$mvc->addObject ( 'points', $points );
+				$scroller = ceil($sum/5);
+				$mvc->addObject ( 'scroller', $scroller );
 			}
-		} else {
-			#if no assigne school
-			$mvc->addObject ( 'noSchAssigne', TRUE ); 
 		}
-		
 		return $mvc;
 		
 	}

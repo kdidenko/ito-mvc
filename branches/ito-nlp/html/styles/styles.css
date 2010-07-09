@@ -205,5 +205,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .itemOption form fieldset {background-color: #FFFFB5;}
 .itemOption form fieldset b{vertical-align: top; float: left;}
 
-.popUP {border: 2px solid #7496B9;width: 450px;padding: 10px;position: absolute;background-color: #F8F8F8;}
+.popUP {border: 2px solid #7496B9;width: 500px;padding: 10px;position: absolute;background-color: #F8F8F8;}
 .popUP .clnr {width: 100%}
+.popUP .caption {width: auto}
+.popUP .subCaption {width: auto; margin-left: 15px; font-weight: normal;}

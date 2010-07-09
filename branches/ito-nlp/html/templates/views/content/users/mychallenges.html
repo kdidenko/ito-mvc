@@ -22,12 +22,13 @@ document.getElementById("description").disabled = false;
 			$usCourseList = $mvc->getObject('usCourseList');
 			if(isset($usSchList) || count($usSchList) > 0){
 				foreach($usSchList as $key => $school){	?> 
-						<span><?php echo $school[SchoolService::CAPTION];?>:</span>
+						<span class="caption"><?php echo $school[SchoolService::CAPTION];?>:</span>
 						<div class="clnr brdr">&nbsp;</div>
 <?php				if(isset($usCourseList) && count($usCourseList) > 0){
 						foreach($usCourseList as $key => $course){
 							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
-									<span><i><?php echo $course[CourseService::CAPTION];?></i></span>
+									<span class="subCaption"><?php echo $course[CourseService::CAPTION];?></span>
+									<div class="clnr brdr">&nbsp;</div>
 									<ul>
 <?php							foreach($exList as $key => $exercise){
 									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
@@ -37,7 +38,6 @@ document.getElementById("description").disabled = false;
 														<?php echo $exercise[ExerciseService::CAPTION]; ?>
 													</a>
 												</li>
-												<span>&nbsp;</span>
 <?php								}   
 								} ?>
 									</ul>

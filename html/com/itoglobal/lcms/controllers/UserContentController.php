@@ -422,8 +422,12 @@ class UserContentController extends ContentController {
 		if ( isset($requestParams['submit']) ){
 			//server-side validation
 			$error = array ();
-			$error [] .= $requestParams [ChallengesService::CAPTION] ? false : 'Please enter caption';
-			$error [] .= $requestParams [ChallengesService::DESCRIPTION] ? false : 'Please enter description';
+			$error [] .= isset($requestParams [ChallengesService::CAPTION])&&$requestParams [ChallengesService::CAPTION] ? 
+							false : 
+								'Please enter caption';
+			$error [] .= isset($requestParams [ChallengesService::DESCRIPTION])&&$requestParams [ChallengesService::DESCRIPTION] ? 
+							false : 
+								'Please enter description';
 			$error = array_filter ( $error );
 			if (isset ( $error ) && count ( $error ) == 0) {
 				#submit new challenge to db

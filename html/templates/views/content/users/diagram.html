@@ -4,11 +4,10 @@
 	<div class="clnr">&nbsp;</div>
 <?php  $votes = $mvc->getObject("votes");if (count($votes)>0){
 		$j = 2;
-		for($i=-2;$i<=2;$i++){ 
-		$vote = $votes[$i+$j];?>
+		for($i=-2;$i<=2;$i++){?>
 			<div class="dHead"><?php echo $i ?></div>
-			<?php if(isset( $vote[ValuateService::VALUATE] ) && $vote[ValuateService::VALUATE] == $i) { ?>
-				<div class="dInfo" style="width:<?php echo 87/$sum*$vote[ValuateService::COUNT] ?>%; " ><?php echo $vote[ValuateService::COUNT]; ?></div>
+			<?php if(isset( $votes[$i+$j][ValuateService::VALUATE] ) && $votes[$i+$j][ValuateService::VALUATE] == $i) { ?>
+				<div class="dInfo" style="width:<?php echo 87/$sum*$votes[$i+$j][ValuateService::COUNT] ?>%; " ><?php echo $votes[$i+$j][ValuateService::COUNT]; ?></div>
 			<?php } else { ?>
 				<div class="dInfo" >-</div>
 			<?php $j = $j-1; ?>

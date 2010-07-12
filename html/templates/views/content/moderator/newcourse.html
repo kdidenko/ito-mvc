@@ -1,15 +1,14 @@
 <h1>New Course</h1>
 <div class="center">       
-	<div class="error">
- 		<?php
-			$errors = $mvc->getObject(UsersService::ERROR);
-			if (isset($errors)){
-				foreach ($errors as $key => $value){
-					echo '<p>' . $value . '</p>';
-				}
-			}
-	 	?>
-	</div>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
 	<form enctype="multipart/form-data" class="reg_form" action="new-course.html" method="post">
 		<dl>
 			<dt>Course Name:</dt>

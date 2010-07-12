@@ -3,16 +3,15 @@
 	<span class="message">No school available at this moment.</span>
 <?php } else { ?>	
 <div class="center">
-	<div class="error">
- 		<?php
-			$errors = $mvc->getObject(UsersService::ERROR);
-			if (isset($errors)){
-				foreach ($errors as $key => $value){
-					echo '<p>' . $value . '</p>';
-				}
-			}
-	 	?>
-	</div>
+	<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
 	<form enctype="multipart/form-data" action="edit-course.html" method="post">
 		<dl>
 			<dt>Course Name:</dt>

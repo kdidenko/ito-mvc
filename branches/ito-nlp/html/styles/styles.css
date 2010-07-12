@@ -194,7 +194,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 		.item ul{font-size: 12px; margin: 5px 10px;}
 		.item .diagram {background-color: white; padding: 5px; border: 1px solid black; margin: 5px;}
 		.item .dHead{background-color:#E60000;color:white;float:left;border: 1px solid gray;width: 10%;}
-		.item .dInfo{background-color:#9966FF ;float:left;border: 1px solid #9966FF; width:5%;}
+		.item .dInfo{background-color:#9966FF ;float:left;border: 1px solid gray; width:5%;}
 .comments {float:right; display: block; clear: both; margin-right:25px;}
 .comments .cmItem {display:block; clear:both; width: 520px; height: auto; border-top:1px solid #184877; margin-bottom: 20px; padding-top: 2px}
 .comments .cmItem img {float:left; margin: 0 5px; width: 70px; height: 70px; border:1px solid #ededed;padding:3px; }

@@ -3,10 +3,23 @@ function foo() {
 document.getElementById("caption").disabled = false;
 document.getElementById("caption").value = '';
 document.getElementById("description").disabled = false;
+document.getElementById('exercise_hide').style.display='none';
+document.getElementById('exercise').style.display='';
+return false;
 } 
 </script> 
 
 <h1>My challenges</h1>
+<div class="error">
+<?php
+	$errors = $mvc->getObject(UsersService::ERROR);
+	if (isset($errors)){
+		foreach ($errors as $key => $value){
+			echo '<p>' . $value . '</p>';
+		}
+	}
+?>
+</div>
 <?php
 		$exList = $mvc->getObject('exList');
 		if(!isset($exList) || count($exList) == 0) { ?>
@@ -33,7 +46,7 @@ document.getElementById("description").disabled = false;
 <?php							foreach($exList as $key => $exercise){
 									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
 												<li>
-												<input onclick="foo();document.getElementById('exercise_hide').style.display='none';document.getElementById('exercise').style.display='';return false;" type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>"/>
+												<input onclick="foo();" type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>"/>
 													<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
 														<?php echo $exercise[ExerciseService::CAPTION]; ?>
 													</a>

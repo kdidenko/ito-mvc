@@ -13,47 +13,49 @@
 		<div class="itemBodyContent">
 			<div class="itemForm">
 			<?php if(!isset($_GET['add'])){ ?>
-				<form enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
-					<dl>
-						<dt>Training Name:</dt>
-						<dd><input type="text" name="v_name" id="v_name" size="35" value="<?php echo $valuation[0][ValuationsService::V_NAME];?>"/></dd>
-						<dt>Your courses:</dt>
+				<form class="edit" enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
+						<span>Training Name:</span>
+						<input type="text" name="v_name" id="v_name" size="35" value="<?php echo $valuation[0][ValuationsService::V_NAME];?>"/>
+						<div class="clnr brdr">&nbsp;</div>
+						<span>Your courses:</span>
 <?php					foreach($valuation as $key => $trn){ ?>
-							<dd>
 								<a class="button" href="edit-valuation.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&del=<?php echo $trn[ValuationsService::COURSE_ID] ?>">Del</a>
 								<?php echo $trn[CourseService::CAPTION] ?>
-							</dd>
-							<dt>&nbsp;</dt>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
 <?php 					} ?>
-					</dl>
+					<div class="clnr brdr">&nbsp;</div>
 					<input type="hidden" name="edit_id" value="<?php print_r($valuation[0][ValuationsService::V_ID]); ?>">
-					<input type="submit" name="updateCurrent" value="Save Valuation"/>
+					<p class="btns"><input type="submit" name="updateCurrent" value="Save Valuation" class="defBtn" /></p>
 				</form>							
 			<?php } else {?>
-				<form enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
-					<span class="message">Please, mark the courses, wich you want to learn.</span>
-					<dl>
 <?php				$usCourseList = $mvc->getObject('usCourseList');
-					if(isset($usCourseList) && count($usCourseList) > 0){
-						foreach($usCourseList as $key => $course){ 
-							$old = isset ($old)? $old : NULL;
-							if ($course[SchoolService::CAPTION] != $old){?> 
-									<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
-									<?php } ?>
-									<dd>
-										<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>" />
-										<?php echo $course[CourseService::COURSE_CAPTION];?>
-									</dd>
-										
-<?php 						$old = $course[SchoolService::CAPTION];		
-						}
-					} ?>
-					</dl>
+					if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+						<span class="message warning">
+							Sorry, there are no courses available at this moment.<br/>
+							Please visit YouCademy <a href="my-trainings.html" title="YouCademy Trainings">trainings</a>, for subscribe to courses.
+						</span>
+<?php 				} else { ?>					
+					<span class="message">Please, mark the courses, wich you want to valuate.</span>			
+			<form class="edit" enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
+					<div class="clnr brdr">&nbsp;</div>
+					<ul>
+<?php			foreach($usCourseList as $key => $course){?> 
+						<li>
+							<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
+							<a href="/course-details.html?id=<?php echo $course[TrainingsService::COURSE_ID]; ?>" title="Course Details">
+								<?php echo $course[CourseService::CAPTION];?>
+							</a>
+						</li>
+<?php			} ?>
+					</ul>
+					<div class="clnr brdr">&nbsp;</div>
 					<input type="hidden" name="v_name" id="v_name" value="<?php echo $valuation[0][ValuationsService::V_NAME];?>"/>
 					<input type="hidden" name="edit_id" value="<?php print_r($valuation[0][ValuationsService::V_ID]); ?>">
-					<input type="submit" name="update" value="Save Valuation"/>
+					<p class="btns"><input type="submit" name="update" value="Save Valuation" class="defBtn" /></p>
 				</form>
-			<?php } ?>
+			<?php } 
+				} ?>
 			</div>
 		</div>
 	</div>

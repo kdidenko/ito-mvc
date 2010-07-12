@@ -87,6 +87,7 @@ form p {border-bottom:1px solid #ededed; padding:10px 0}
 .edit .clnr {width:75%; margin: 10px 0;}
 .edit {vertical-align: middle; }
 .edit img {border:1px solid #ededed;padding:3px; }
+.edit ul {float: left; margin-left: 30px; text-align: left;}
 
 form dl {width:75%}
 form dt {width:150px; float:left; padding:0 10px 0 0; font-weight:bold; text-align:left}

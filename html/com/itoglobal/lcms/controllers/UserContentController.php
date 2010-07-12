@@ -289,8 +289,8 @@ class UserContentController extends ContentController {
 		if ( isset($requestParams['update']) ) {
 			$v_index = $requestParams ["edit_id"];
 			foreach ($usCourseList as $key => $value) {
-				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
-					ValuationsService::addValuations($requestParams, $v_index, $value[CourseService::ID]);
+				if ( isset ($requestParams['course' . $value[TrainingsService::COURSE_ID]]) ) {
+					ValuationsService::addValuations($requestParams, $v_index, $value[TrainingsService::COURSE_ID]);
 				}
 			}
 		}
@@ -306,11 +306,10 @@ class UserContentController extends ContentController {
 		#creating new valuation
 		if ( isset($requestParams['new']) ) {
 			#creatin index for training
-			$where = ValuationsService::USER_ID . '=' . $user_id;
-			$groupBy = ValuationsService::V_ID;
-			$valuationsList = ValuationsService::getValuationsList($where, $groupBy);
-			$v_index = $valuationsList == NULL ? 1 : count($valuationsList) + 1; 
-
+			$fields = "MAX(" . ValuationsService::V_ID . ")" . SQLClient::SQL_AS . 'max';
+			$from = ValuationsService::V_TABLE;
+			$valuationsList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, null, null, '', '' );
+			$v_index = $valuationsList == NULL ? 1 : $valuationsList[0]['max'] + 1;
 			foreach ($usCourseList as $key => $value) {
 				if ( isset ($requestParams['course' . $value[TrainingsService::COURSE_ID]]) ) {
 					ValuationsService::addValuations($requestParams, $v_index, $value[TrainingsService::COURSE_ID]);
@@ -363,15 +362,17 @@ class UserContentController extends ContentController {
 			#get schools and courses list (assigned to user) for creating new training
 			$where = NULL;
 			if (count($valuation)>0){
-				$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . SQLClient::NOT . 
+				$where = TrainingsService::TRAININGS_TABLE . '.' . TrainingsService::COURSE_ID . SQLClient::NOT . 
 							SQLClient::IN . '(';
 				foreach($valuation as $key =>$value){
 				 $where .= $value[TrainingsService::COURSE_ID];
 				 $where .= count($valuation)>$key+1 ? ', ' : NULL;
 				}
-				$where .= ')';
+				$where .= ') AND ';
 			}
-			$usCourseList = CourseService::getAccessCourses($where);
+			$where .= TrainingsService::USER_ID . '=' . $user_id;
+			$groupBy = TrainingsService::COURSE_ID;
+			$usCourseList = TrainingsService::getTrainingsList($where, $groupBy);
 			$mvc->addObject ( 'usCourseList', $usCourseList );
 		}
 		return $mvc;
@@ -408,10 +409,20 @@ class UserContentController extends ContentController {
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
 		if ( isset($requestParams['submit']) ){
-			$username = SessionService::getAttribute(SessionService::USERNAME);
-			$time = time();
-			$name = $username . '-' . $requestParams[ChallengesService::EX_INDEX] . '-' . $time;
-			ChallengesService::newChallenge($requestParams, $name);
+			//server-side validation
+			$error = array ();
+			$error [] .= $requestParams [ChallengesService::CAPTION] ? false : 'Please enter caption';
+			$error [] .= $requestParams [ChallengesService::DESCRIPTION] ? false : 'Please enter description';
+			$error = array_filter ( $error );
+			if (isset ( $error ) && count ( $error ) == 0) {
+				#submit new challenge to db
+				$username = SessionService::getAttribute(SessionService::USERNAME);
+				$time = time();
+				$name = $username . '-' . $requestParams[ChallengesService::EX_INDEX] . '-' . $time;
+				ChallengesService::newChallenge($requestParams, $name);
+			} else {
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
 		}
 		
 		#checking schools assigned

@@ -72,7 +72,7 @@ class ValuateService {
 		$from = self::VALUATIONS_TBL;
 		$where = isset($resp_id) ? self::RESP_ID . '=' . $resp_id : NULL;
 		$groupBy = self::VALUATE;
-		$groupBy = self::VALUATE . ' ' . SQLClient::DESC;
+		$groupBy = self::VALUATE . ' ' . SQLClient::ASC;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, NULL, NULL );
 		$result = isset($result) && count($result)>0 ? $result : NULL;

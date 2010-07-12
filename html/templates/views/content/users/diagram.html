@@ -1,0 +1,19 @@
+<div class="diagram">
+	<div class="dHead">&Sigma;</div>
+	<div class="dInfo" style="width: 87%;"><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></div>
+	<div class="clnr">&nbsp;</div>
+<?php  $votes = $mvc->getObject("votes");if (count($votes)>0){
+		$j = 2;
+		for($i=-2;$i<=2;$i++){ 
+		$vote = $votes[$i+$j];?>
+			<div class="dHead"><?php echo $i ?></div>
+			<?php if(isset( $vote[ValuateService::VALUATE] ) && $vote[ValuateService::VALUATE] == $i) { ?>
+				<div class="dInfo" style="width:<?php echo 87/$sum*$vote[ValuateService::COUNT] ?>%; " ><?php echo $vote[ValuateService::COUNT]; ?></div>
+			<?php } else { ?>
+				<div class="dInfo" >-</div>
+			<?php $j = $j-1; ?>
+			<?php } ?>
+			<div class="clnr">&nbsp;</div>
+		<?php } 
+	} ?>
+</div>

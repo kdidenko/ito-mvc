@@ -89,12 +89,12 @@
 								<div class="item">
 							        <span>Valuation:</span>
 							        <ul>
-							        	<li>Number of votes:<span>2</span></li>
-								        <li>Your own points:<span>0.89</span></li>
-								        <li>Contribution points:<span>6</span></li>
+							        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
+								        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
+								        <li>Contribution points:<span>I don't know :)</span></li>
 							        </ul>
-							        <div class="image">
-							        	<img src="images/valuation.png" alt="valuation"></img>
+									<div class="image">
+										<?php TemplateEngine::inclusion('/diagram.html', $mvc) ?>
 							        </div>
 								</div>
 							</div>

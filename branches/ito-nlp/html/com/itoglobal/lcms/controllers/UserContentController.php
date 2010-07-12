@@ -344,6 +344,17 @@ class UserContentController extends ContentController {
 				$mvc->addObject ( 'valuate', $valuate );
 			}
 			$mvc->addObject ( 'resp', $resp );
+			
+			#count responses votes 
+			$resp_index = $resp[0][ResponsesService::ID];
+			$votes = ValuateService::countVotes($resp_index);
+			if($votes!=NULL){
+				$mvc->addObject ( 'votes', $votes );
+				$sum = ValuateService::countNumberVotes($votes);
+				$points = ValuateService::countPoints($votes, $sum);
+				$mvc->addObject ( 'sum', $sum );
+				$mvc->addObject ( 'points', $points );
+			}
 		}
 		return $mvc;
 	}

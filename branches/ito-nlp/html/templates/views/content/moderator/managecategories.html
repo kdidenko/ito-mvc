@@ -17,7 +17,7 @@
 		<td><?php echo $value[CategoriesService::NAME];?></td>
 		<td>
 			<a class="button" href=<?php echo 'edit-category.html?id=' . $value[CategoriesService::ID];?>>Edit</a>
-			<a class="button" href=<?php echo 'manage-categories.html?deleted=' . $value[CategoriesService::ID];?>>Delete</a>
+			<a class="button" onclick="return confirm('You sure you want to delete?');" href=<?php echo 'manage-categories.html?deleted=' . $value[CategoriesService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } ?>

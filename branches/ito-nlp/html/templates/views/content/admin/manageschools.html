@@ -62,7 +62,7 @@ ID = <?php echo $value[SchoolService::ID];?>
 				<?php } else { ?>
 					<a class="button" href="<?php echo 'manage-schools.html?enabled=' . $value[SchoolService::ID];?>">Suspend</a> 
 				<?php } ?>
-				<a class="button" href=<?php echo 'manage-schools.html?deleted=' . $value[SchoolService::ID];?>>Delete</a>
+				<a class="button" onclick="return confirm('You sure you want to delete?');" href=<?php echo 'manage-schools.html?deleted=' . $value[SchoolService::ID];?>>Delete</a>
 			</div>
 		</div>
 	</div>

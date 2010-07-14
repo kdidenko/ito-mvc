@@ -38,7 +38,7 @@
 		</td>
 		<td>
 			<a class="button" href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>Edit</a>
-			<a class="button" href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>Delete</a>
+			<a class="button" onclick="return confirm('You sure you want to delete?');"  href=<?php echo 'manage-courses.html?deleted=' . $value[CourseService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } ?> 

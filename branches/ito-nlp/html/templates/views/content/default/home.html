@@ -37,16 +37,16 @@
 <div class="pgItemsList">
 	<?php foreach($courseslist as $key => $value){ ?>
 	<div class="pgListItem wide">
-		<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 		<div class="pgItemBody">
-		<h2><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="School details">
-		<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
-		</a></h2>
-		<p class="extLink">
-			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : "ok";?>
-			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
-		</p>
-	</div>
+			<div class="pgItemImg"><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+			<h2><a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="School details">
+			<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
+			</a></h2>
+			<p class="extLink">
+				<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : "ok";?>
+				<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+			</p>
+		</div>
 	</div>
 	<div class="clnr brdr">&nbsp;</div>
 	<?php } } ?>

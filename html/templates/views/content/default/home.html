@@ -11,7 +11,6 @@
 <div class="pgItemsList">
 	<?php foreach($schoolslist as $key => $value){ ?>
 		<div class="pgListItem">
-		<div class="clnr brdr">&nbsp;</div>
 			<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
 			<div class="pgItemBody">
 				<h2><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">

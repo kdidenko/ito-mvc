@@ -20,10 +20,8 @@
 ?>
 <div class="chrScroller">
 		<?php foreach($scroller as $key => $value){ ?>
-			<a class="button scroller" href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
-							echo "scroller=".$value[UsersService::SCROLLER];?>">
-				<?php echo $value[UsersService::SCROLLER];?>
-			</a>&nbsp;
+			<a class="button" href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+			echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a>
 		<?php } ?>
 </div>
 <table class="list">
@@ -49,7 +47,7 @@
 				<a class="button" href=<?php echo 'manage-users.html?disable=' . $value[UsersService::ID];?>>Disable</a> 
 			<?php }} ?>
 			<a class="button" href=<?php echo 'edit-user.html?id=' . $value[UsersService::ID];?>>Edit</a>
-			<a class="button" href=<?php echo 'manage-users.html?deleted=' . $value[UsersService::ID];?>>Delete</a>
+			<a class="button" onclick="return confirm('You sure you want to delete?');"  href=<?php echo 'manage-users.html?deleted=' . $value[UsersService::ID];?>>Delete</a>
 		</td>
 	</tr>
 <?php } ?></table>

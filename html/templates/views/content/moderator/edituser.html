@@ -1,26 +1,34 @@
 <h1>Edit User</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <?php $user = $mvc->getObject('result'); if($user == NULL){ ?>
-	<span class="message">No user available at this moment.</span>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no schools for such criterias.<br />
+		But you may still chose another user of interest by browsing our <a href="/manage-users.html" title="Users">Users</a> directory.
+	</span>
 <?php } else { ?>
-<div class="center">
-	<form action="manage-users.html" method="post">
-		<dl>
-	 		<dt>User name:</dt> 
-	 		<dd><input type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/></dd>
-			<dt>First Name:</dt>
-	 		<dd><input type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/></dd>
-	 		<dt>Last Name:</dt>
-	 		<dd><input type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/></dd>
-			<dt>Email:</dt>
-	 		<dd><input type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/></dd>
-			<dt>Status:</dt>
-	 		<dd>
-	 			<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>Enabled
-				<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>Disabled<br/>
-			</dd>
-		</dl>
+	<form action="manage-users.html" method="post" class="edit">
+ 		<span>User name:</span> 
+ 		<input type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/>
+		<div class="clnr brdr">&nbsp;</div>
+		<span>First Name:</span>
+ 		<input type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/>
+ 		<div class="clnr brdr">&nbsp;</div>
+ 		<span>Last Name:</span>
+ 		<input type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/>
+ 		<div class="clnr brdr">&nbsp;</div>
+		<span>Email:</span>
+ 		<input type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/>
+ 		<div class="clnr brdr">&nbsp;</div>
+		<span>Status:</span>
+			<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>Enabled
+		<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>Disabled<br/>
+		<div class="clnr brdr">&nbsp;</div>
 		<input type="hidden" name="id" value="<?php echo $user[UsersService::ID]; ?>"/>
-		<input type="submit" name="submit" value="Submit Changes"/>
+		<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
 	</form>	
-</div>
 <?php } ?>

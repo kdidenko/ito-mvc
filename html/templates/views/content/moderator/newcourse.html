@@ -1,5 +1,10 @@
 <h1>New Course</h1>
-<div class="center">       
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -9,47 +14,52 @@
 				</ul>
 			</div>
 <?php 	} ?>
-	<form enctype="multipart/form-data" class="reg_form" action="new-course.html" method="post">
-		<dl>
-			<dt>Course Name:</dt>
-			<dd><input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST [CourseService::CAPTION]) ? $_POST [CourseService::CAPTION] : null; ?>"/></dd>
-			<dt>Description:</dt>
-			<dd><textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST [CourseService::DESCRIPTION]) ? $_POST [CourseService::DESCRIPTION] : null; ?></textarea></dd>
-			<dt>Alias:</dt>
-			<dd><input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/></dd>
-			<dt>Level:</dt>
-			<dd>
-				<select name="level" >
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-				</select>
-			</dd>
-			<dt>Choose school:</dt>
-			<dd>
-				<select name="school_id" >
-					<?php
-					$mrSchList = $mvc->getObject('mrSchList');
-					if(!isset($mrSchList) || count($mrSchList) == 0){
+	<form class="edit" enctype="multipart/form-data" class="reg_form" action="new-course.html" method="post">
+		<span>Course Name:</span>
+			<input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST [CourseService::CAPTION]) ? $_POST [CourseService::CAPTION] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Description:</span>
+			<textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST [CourseService::DESCRIPTION]) ? $_POST [CourseService::DESCRIPTION] : null; ?></textarea>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Alias:</span>
+			<input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Subject:</span>
+			<select name="category_id" >
+				<?php
+				$mrCategList = $mvc->getObject('mrCategList');
+					if(!isset($mrCategList) || count($mrCategList) == 0){?>
+						<option value="0">No Categories</option>
+				<?php } else { ?>
+				<?php 
+				foreach($mrCategList as $key => $value){ 
 					?>
-				<option>No School</option>
-					<?php } else { ?>
-					<?php 
-					foreach($mrSchList as $key => $value){ 
+			<option value="<?php echo $value[CategoriesService::ID]; ?>"><?php echo $value[CategoriesService::NAME]; ?></option>
+				<?php } } ?>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Choose school:</span>
+			<select name="school_id" >
+				<?php
+				$mrSchList = $mvc->getObject('mrSchList');
+					if(!isset($mrSchList) || count($mrSchList) == 0){?>
+						<option>No School</option>
+				<?php } else { ?>
+				<?php 
+				foreach($mrSchList as $key => $value){ 
 					?>
-				<option value="<?php echo $value[SchoolService::ID]; ?>"><?php echo $value[SchoolService::CAPTION]; ?></option>
-					<?php } } ?>
-				</select>
-			</dd>
-			<dt>Avatar(80x80) :</dt>
-			<dd>
+			<option value="<?php echo $value[SchoolService::ID]; ?>"><?php echo $value[SchoolService::CAPTION]; ?></option>
+				<?php } } ?>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Base fee:</span>
+			<input type="text" onkeyup="javascript:this.value=this.value.replace(/[^0-9]/g, '');" name="base_fee" id="base_fee" size="5" value="15"/> $/month
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Avatar(80x80) :</span>
 			<input type="file" name="file" size="30" ></input>
-			</dd>
-		</dl>
-		<input type="submit" value="Add Course" id="submit" name="submit"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<p class="btns">
+			<a class="button" href="/new-course.html" >Discard</a>
+			<input type="submit" name="submit" value="Add Course" class="defBtn" />
+		</p>
 	</form>
-</div>

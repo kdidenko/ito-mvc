@@ -79,7 +79,7 @@ class UserContentController extends ContentController {
 			$mvc->addObject ( 'list', $list [0]);
 			
 			#for users and visitor
-			$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$where = CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 			$courselist = CourseService::getCoursesList ( $where );
 			$courselist = self::createTeaser($courselist);
 			$mvc->addObject ( 'courselist', $courselist );
@@ -456,8 +456,8 @@ class UserContentController extends ContentController {
 			foreach($result as $key => $value){
 				$where .= SchoolService::ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
 				$where .= $key != count ($result) - 1 ? " OR " . SchoolService::SCHOOLS_TABLE . "." : null;
-				$where_course .= CourseService::SCHOOL_ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
-				$where_course .= $key != count ($result) - 1 ? " OR " . CourseService::COURSE_TABLE . "." : null;
+				$where_course .= CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . " = '" . $value[AssignmentsService::SCHOOL_ID] . "'";
+				$where_course .= $key != count ($result) - 1 ? " OR " : null;
 			}
 			$usSchList = SchoolService::getSchoolsList ($where);
 			$usSchList = self::createTeaser($usSchList);

@@ -2,7 +2,10 @@
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-<span class="message">No course available at this moment.</span>
+<span class="message warning">
+	Oops... seems the address you have entered is invalid. There are no courses for such criterias.<br />
+	But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.
+</span>
 <?php } else { ?>
 <div class="pgListItem wide">
 	<h1><?php echo $list[CourseService::CAPTION];?></h1>
@@ -12,21 +15,25 @@
        		<li>
 	       		<span>Rating:</span><span class="lsValue">
 	       			<?php if($list[CourseService::RATE] >= 1){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 					<?php if($list[CourseService::RATE] >= 2){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 					<?php if($list[CourseService::RATE] >= 3){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 					<?php if($list[CourseService::RATE] >= 4){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 					<?php if($list[CourseService::RATE] >= 5){ ?>
-					<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				</span>
 			</li>
-          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-         	<li><span>Level:</span><span class="lsValue"><?php echo $list[CourseService::LEVEL];?></span></li>
          	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::BASE_FEE];?>$ / mon</span></li>
-         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Subjects:</span>
+	         		<span class="lsValue">
+	         			<a href="/manage-courses.html?id=<?php echo $list[CourseService::CATEGORY_ID];?>">
+			 				<?php echo $list[CategoriesService::NAME];?>
+			 			</a>
+	         		</span>
+				</li>
 	     	</ul>
 		</div>
 	<p><?php echo $list[CourseService::DESCRIPTION];?></p>
@@ -39,11 +46,14 @@
 		$exerciseslist = $mvc->getObject('exerciseslist');
 		if(!isset($exerciseslist) || count($exerciseslist) == 0){
 	?>
-	<span class="message">No course sign in to school.</span>
+	<span class="message warning">
+		Sorry, there are no course exercises available at this moment.<br />
+		You can create new <a href="/new-exercise.html" title="New Exercise">exercise.</a>
+	</span>
 	<?php } else { ?>
 	<table class="list">
 	<?php foreach($exerciseslist as $key => $value){ ?>
-		<tr  style="border: 1px solid #EFEFEF">
+		<tr <?php if($key%2)echo "class='pair'" ?>>
 			<td>
 				<a href=<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>>
 					<?php echo $value[ExerciseService::CAPTION];?>
@@ -51,18 +61,20 @@
 			</td>
 			<td>
 				<?php if($value[ExerciseService::RATE] >= 1){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[ExerciseService::RATE] >= 2){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[ExerciseService::RATE] >= 3){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[ExerciseService::RATE] >= 4){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				<?php if($value[ExerciseService::RATE] >= 5){ ?>
-				<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 			</td>
 			<td>
-				<?php echo $value[UsersService::USERNAME];?>
+				<a href=<?php echo 'user-details.html?id=' . $value[ExerciseService::OWNER];?>>
+					<?php echo $value[UsersService::USERNAME];?>
+				</a>
 			</td>
 			<td>
 				<a class="button" href=<?php echo 'edit-exercise.html?id=' . $value[ExerciseService::ID];?>>edit</a>

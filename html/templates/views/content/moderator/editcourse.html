@@ -1,8 +1,16 @@
 <h1>Edit Course</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <?php $result = $mvc->getObject('result'); if($result == NULL){ ?>
-	<span class="message">No school available at this moment.</span>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no schools for such criterias.<br />
+		But you may still chose another course of interest by browsing our <a href="/manage-courses.html" title="Courses">Courses</a> directory.
+	</span>
 <?php } else { ?>	
-<div class="center">
 	<?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -12,36 +20,39 @@
 				</ul>
 			</div>
 <?php 	} ?>
-	<form enctype="multipart/form-data" action="edit-course.html" method="post">
-		<dl>
-			<dt>Course Name:</dt>
-			<dd><input type="text" name="caption" id="caption" size="35" value="<?php echo $result[CourseService::CAPTION];?>"/></dd>
-			<dt>Description:</dt>
-			<dd><textarea rows="10" cols="28"  name="description" id="description"><?php echo $result[CourseService::DESCRIPTION];?></textarea></dd>
-			<dt>Level:</dt>
-			<dd>
-			<select name="level" >
-				<option><?php echo $result[CourseService::LEVEL];?></option>
-				<?php if ($result[CourseService::LEVEL] != 1) { ?> <option>1</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 2) { ?> <option>2</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 3) { ?> <option>3</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 4) { ?> <option>4</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 5) { ?> <option>5</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 6) { ?> <option>6</option> <?php } ?>
-				<?php if ($result[CourseService::LEVEL] != 7) { ?> <option>7</option> <?php } ?>
+	<form class="edit" enctype="multipart/form-data" action="edit-course.html" method="post">
+		<span>Course Name:</span>
+			<input type="text" name="caption" id="caption" size="35" value="<?php echo $result[CourseService::CAPTION];?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Description:</span>
+			<textarea rows="10" cols="28"  name="description" id="description"><?php echo $result[CourseService::DESCRIPTION];?></textarea>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Subject:</span>
+			<select name="category_id" >
+				<option value="0"><?php echo $result[CategoriesService::NAME];?></option>
+				<?php
+				$mrCategList = $mvc->getObject('mrCategList');
+					if(isset($mrCategList) && count($mrCategList) > 0){?>
+						<?php 
+						foreach($mrCategList as $key => $value){ 
+							if ($value[CategoriesService::ID]!=$result[CourseService::CATEGORY_ID]){?>
+								<option value="<?php echo $value[CategoriesService::ID]; ?>">
+									<?php echo $value[CategoriesService::NAME]; ?>
+								</option>
+						<?php } 
+						} 
+					} ?>
 			</select>
-			</dd>
-			<dt>Avatar(80x80) :</dt>
-			<dd>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Base Fee:</span>
+			<input type="text" onkeyup="javascript:this.value=this.value.replace(/[^0-9]/g, '');" name="base_fee" id="base_fee" size="8" value="<?php echo $result[CourseService::BASE_FEE]; ?>"/> $/month
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Avatar(80x80) :</span>
 			<img alt="none avatar" src="<?php echo $result[CourseService::AVATAR];?>">
 			<input type="file" name="file" size="30" ></input>
-			</dd>
-			<dd>
-			<input type="hidden" name="alias" id="alias" value="<?php echo $result[CourseService::ALIAS];?>"/>
-			</dd>
-		</dl>
+			<div class="clnr brdr">&nbsp;</div>
+		<input type="hidden" name="alias" id="alias" value="<?php echo $result[CourseService::ALIAS];?>"/>
 		<input type="hidden" name="id" value="<?php echo $result[CourseService::ID];?>"/>
-		<input type="submit" name="submit" value="Submit Changes"/>
+		<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
 	</form>	
-</div>
-<?php } ?>
+<?php } ?> 

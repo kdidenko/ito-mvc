@@ -83,7 +83,7 @@ class ContentController extends SecureActionControllerImpl {
 		$school = $school[0];
 		$mvc->addObject ('list', $school);
 		# getting list of courses
-		$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$where = CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$courselist = CourseService::getCoursesList ($where);
 		$courselist = self::createTeaser($courselist);
 		$mvc->addObject ('courselist', $courselist);
@@ -118,7 +118,7 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[CourseService::ID])){
 			#for users and visitor
-			$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 			$list = CourseService::getCoursesList ( $where );
 			$mvc->addObject ( 'list', $list [0]);
 			#for users and visitor

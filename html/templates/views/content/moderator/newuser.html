@@ -1,12 +1,16 @@
 <h1>New User</h1>
-<div class="center">    
+<h1>New Course</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 	<?php
 		$errors = $mvc->getObject('forward');
 		if (isset($errors)){
 	?>
-	<div class="registration">
-	        <p>User registration successful.</p>
-	</div>
+		<span class="message warning">User registration successful.</span>
 	<?php }else{ ?>  
 <?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
@@ -17,19 +21,23 @@
 				</ul>
 			</div>
 <?php 	} ?>
-	<form class="reg_form" action="new-user.html" method="post">
-	<dl>
-		<dt>User Name:</dt>
-		<dd><input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input></dd>
-		<dt>First Name:</dt>
-		<dd><input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input></dd>
-		<dt>Last Name:</dt>
-		<dd><input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input></dd>
-		<dt>Email:</dt>
-		<dd><input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input></dd>
-	</dl>
-	<input type="submit" value="Add user" id="submit" name="submit"/>
+	<form class="edit" action="new-user.html" method="post">
+		<span>User Name:</span>
+			<input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>First Name:</span>
+			<input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Last Name:</span>
+			<input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Email:</span>
+			<input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<p class="btns">
+			<a class="button" href="/new-user.html" >Discard</a>
+			<input type="submit" name="submit" value="Add user" class="defBtn" />
+		</p>
 	</form>
-	<span class="message">Note: user should get email.</span>
-	<?php } ?>	
-</div>
+	<span class="message warning">Note: After registration new user, he should get email with registration confirmation.</span>
+<?php } ?>	

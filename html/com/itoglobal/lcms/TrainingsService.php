@@ -74,11 +74,11 @@ class TrainingsService {
 		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
 	}
 	
-	public static function addTraining($requestParams, $t_index, $course_id){
+	public static function addTraining($requestParams, $t_index, $course_id, $user_t_index){
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		# Insert new school to DB
 		$fields = TrainingsService::TRN_ID . ", " . TrainingsService::TRN_NAME . ", " . TrainingsService::USER_ID . ", " . TrainingsService::COURSE_ID;
-		$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training' : $requestParams [TrainingsService::TRN_NAME];
+		$t_name = $requestParams [TrainingsService::TRN_NAME] == NULL ? 'Training ' . $user_t_index : $requestParams [TrainingsService::TRN_NAME];
 		$values = "'" . $t_index . "', '" . $t_name . "', '" . $user_id . "' , '" . $course_id . "'";
 		$into = TrainingsService::TRAININGS_TABLE;
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					

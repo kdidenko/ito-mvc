@@ -168,7 +168,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .courseList .pgItemBody span{font-size: 12px; }
 
 .tabMenu li {margin-left: 30px}
-.tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #7496B9; border: 1px solid #7496B9; border-bottom: none; height: 30px; line-height: 30px; text-align: center; color: #FFF; text-decoration: none;}
+.tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #7496B9; border: 1px solid #7496B9; border-bottom: none; line-height: 23px; text-align: center; color: #FFF; text-decoration: none;}
 .tabMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .tabMenu li:hover a{ background-color: white; color: black}
 .trnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}

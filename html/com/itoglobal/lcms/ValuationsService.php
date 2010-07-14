@@ -72,11 +72,11 @@ class ValuationsService {
 		DBClientHandler::getInstance ()->execDelete ($from, $where, NULL, NULL);
 	}
 	
-	public static function addValuations($requestParams, $v_index, $course_id){
+	public static function addValuations($requestParams, $v_index, $course_id, $user_v_index){
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		# Insert new school to DB
 		$fields = ValuationsService::V_ID . ", " . ValuationsService::V_NAME . ", " . ValuationsService::USER_ID . ", " . ValuationsService::COURSE_ID;
-		$v_name = $requestParams [ValuationsService::V_NAME] == NULL ? 'Valuation' : $requestParams [ValuationsService::V_NAME];
+		$v_name = $requestParams [ValuationsService::V_NAME] == NULL ? 'Valuation ' . $user_v_index : $requestParams [ValuationsService::V_NAME];
 		$values = "'" . $v_index . "', '" . $v_name . "', '" . $user_id . "' , '" . $course_id . "'";
 		$into = ValuationsService::V_TABLE;
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );					

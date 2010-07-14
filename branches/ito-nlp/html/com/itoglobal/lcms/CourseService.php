@@ -50,6 +50,10 @@ class CourseService {
 	 */
 	const RATE = 'rate';
 	/**
+	 * @var ustring defining the category_id field name
+	 */
+	const CATEGORY_ID = 'category_id';
+	/**
 	 * @var string defining the deleted field name
 	 */
 	const DELETED = 'deleted';
@@ -68,11 +72,38 @@ class CourseService {
 	 */
 	public static function getCoursesList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
-		$fields = self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::LEVEL . ', ' . self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::BASE_FEE . ', ' . self::SCHOOL_ID;
-		$from = self::COURSE_TABLE;
+		$fields = self::COURSE_TABLE . '.' . self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::CRDATE . ', ' . 
+				self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::BASE_FEE . ', ' . 
+				self::COURSE_TABLE . '.' . self::SCHOOL_ID . ', ' . self::CATEGORY_ID . ', ' . CategoriesService::CATEGORIES_TABLE . '.' . 
+				CategoriesService::NAME;
+		$from = self::COURSE_TABLE . SQLClient::LEFT . SQLClient::JOIN . 
+				CategoriesService::CATEGORIES_TABLE . SQLClient::ON .
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . '=' . 
+				self::COURSE_TABLE . '.' . self::CATEGORY_ID ;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	}
+	/*
+	 $result = null;
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$fields = self::COURSE_TABLE . '.' . self::ID . ', ' . self::COURSE_TABLE . '.' . self::CAPTION . ', ' . 
+				self::COURSE_TABLE . '.' . self::DESCRIPTION . ', ' . self::COURSE_TABLE . '.' . self::CRDATE . ', ' . 
+				self::COURSE_TABLE . '.' . self::ALIAS . ', ' . self::COURSE_TABLE . '.' . self::AVATAR . ', ' . 
+				self::COURSE_TABLE . '.' . self::RATE . ', ' . self::COURSE_TABLE . '.' . self::BASE_FEE . ', ' . 
+				self::COURSE_TABLE . '.' . self::SCHOOL_ID . ', ' . self::CATEGORY_ID . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' .	CategoriesService::NAME;
+		$from = self::COURSE_TABLE . SQLClient::LEFT . SQLClient::JOIN . 
+				CategoriesService::CATEGORIES_TABLE . SQLClient::ON .
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . '=' . 
+				self::COURSE_TABLE . '.' . self::CATEGORY_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . SchoolService::SCHOOLS_TABLE . SQLClient::ON . 
+				SchoolService::SCHOOLS_TABLE  . '.' . SchoolService::ID . '=' . 
+				self::COURSE_TABLE . '.' . self::SCHOOL_ID;
+		$where = $where != NULL ? $where . " AND ": NULL;
+		$where .= SchoolService::SCHOOLS_TABLE  . '.' . SchoolService::ALIAS . "='" . $id . "'";
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
+		return $result;
+	 */
 	
 	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables
@@ -147,19 +178,20 @@ class CourseService {
 	public static function validation($requestParams,  $_FILES) {
 		$error = array ();
 		$error [] .= self::checkAlias ( $requestParams [self::ALIAS] );
-		$error [] .= $requestParams [self::CAPTION] ? false : 'Please enter caption';
-		$error [] .= $requestParams [self::DESCRIPTION] ? false : 'Please enter description';
+		$error [] .= $requestParams [self::CAPTION] ? false : 'Please enter caption.';
+		$error [] .= $requestParams [self::DESCRIPTION] ? false : 'Please enter description.';
+		$error [] .= $requestParams [self::CATEGORY_ID]!=0 ? false : 'First, please, you must create a category.';
 		$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		return array_filter ( $error );
 	}
 	public static function checkAlias($alias) {
 		$result = false;
 		if (! $alias) {
-			$result = 'Please enter alias';
+			$result = 'Please enter alias.';
 		} else {
 			$result = ValidationService::alphaNumeric ( $alias ) ? 
 				false : 
-					'Wrong alias. Please enter a correct email';
+					'Wrong alias. Please enter a correct alias.';
 		}
 		if (! $result) {
 			$where = self::ALIAS . " = '" . $alias . "'";

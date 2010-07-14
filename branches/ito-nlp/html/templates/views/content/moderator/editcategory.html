@@ -2,14 +2,11 @@
 <?php $result = $mvc->getObject('result'); if($result == NULL){ ?>
 	<span class="message">No category available at this moment.</span>
 <?php } else { ?>
-<div class="center">
-	<form action="manage-categories.html" method="post">
-		<dl>
-	 		<dt>Category Name:</dt> 
-	 		<dd><input type="text" name="name" value="<?php echo $result[CategoriesService::NAME];?>"/></dd>
-		</dl>
+	<form class="edit" action="manage-categories.html" method="post">
+ 		<span>Category Name:</span> 
+ 		<input type="text" name="name" value="<?php echo $result[CategoriesService::NAME];?>"/>
 		<input type="hidden" name="id" value="<?php echo $result[CategoriesService::ID];?>"/>
-		<input type="submit" name="submit" value="Submit Changes"/>
-	</form>	
-</div>
+		<div class="clnr brdr">&nbsp;</div>
+	<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
+	</form>
 <?php } ?>

@@ -4,7 +4,7 @@
 ?>
 <span class="message warning">
 	Oops... seems the address you have entered is invalid. There are no courses for such criterias.<br />
-	But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.
+	But you may still find some courses of interest by browsing our <a href="/schools.html" title="Schools">Schools</a> directory.
 </span>
 <?php } else { ?>
 <div class="pgListItem wide">
@@ -26,10 +26,14 @@
 					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 				</span>
 			</li>
-          	<li><span>Students:</span><span class="lsValue">1258</span></li>
-         	<li><span>Level:</span><span class="lsValue"><?php echo $list[CourseService::LEVEL];?></span></li>
          	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::BASE_FEE];?>$ / mon</span></li>
-         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+         	<li><span>Subjects:</span>
+	         		<span class="lsValue">
+	         			<a href="/courses.html?id=<?php echo $list[CourseService::CATEGORY_ID];?>">
+	         				<?php echo $list[CategoriesService::NAME];?>
+	         			</a>
+	         		</span>
+				</li>
 	     	</ul>
 		</div>
 	<p><?php echo $list[CourseService::DESCRIPTION];?></p>

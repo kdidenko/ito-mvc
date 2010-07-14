@@ -1,28 +1,37 @@
 <h1>Courses Management</h1>
+<div class="subHeader">
+	<b>Courses List</b>
+</div>
 <?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>
-	<span class="message">Sorry, there are no school courses available at this moment.</span>
-	<span class="message">You can create <a href="new-course.html">new</a> course.</span>
+	<span class="message warning">
+		Sorry, there are no courses available at this moment.<br />
+		You can create new <a href="/new-course.html" title="New Course">Course.</a>
+	</span>
 <?php } else { ?>
 
 <table class="list">
-<tr class="title">
-	<td>Caption:</td>
-	<td>Level:</td>
-	<td>Rate:</td>
-	<td>Options:</td>
-</tr>
+	<tr>
+		<th>Caption:</th>
+		<th>Create Date:</th>
+		<th>Subject:</th>
+		<th>Rate:</th>
+		<th>Options:</th>
+	</tr>
 <?php foreach($list as $key => $value){ ?>
-	<tr  style="border: 1px solid #EFEFEF">
+	<tr <?php if($key%2)echo "class='pair'" ?>>
 		<td>
 			<a href=<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>>
 				<?php echo $value[CourseService::CAPTION];?>
 			</a>
 		</td>
+		<td><?php echo $value[CourseService::CRDATE];?></td>
 		<td>
-			Level: <?php echo $value[CourseService::LEVEL];?>
+			<a href="/manage-courses.html?id=<?php echo $value[CourseService::CATEGORY_ID];?>">
+ 				<?php echo $value[CategoriesService::NAME];?>
+ 			</a>
 		</td>
 		<td>
 			<?php if($value[SchoolService::RATE] >= 1){ ?>

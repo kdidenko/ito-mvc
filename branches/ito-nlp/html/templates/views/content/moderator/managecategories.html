@@ -6,15 +6,20 @@
 <div class="subHeader">
 	<b>Categories List</b>
 </div>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <table class="list">
-<tr class="title">
-	<td>Name:</td>
-	<td>Options:</td>
-</tr>
-
+	<tr>
+		<th>Name:</th>
+		<th>Options:</th>
+	</tr>
 <?php foreach($message as $key => $value){ ?>
-	<tr  style="border: 1px solid #EFEFEF">
-		<td><?php echo $value[CategoriesService::NAME];?></td>
+	<tr <?php if($key%2)echo "class='pair'" ?>>
+		<td><b><?php echo $value[CategoriesService::NAME];?></b></td>
 		<td>
 			<a class="button" href=<?php echo 'edit-category.html?id=' . $value[CategoriesService::ID];?>>Edit</a>
 			<a class="button" onclick="return confirm('You sure you want to delete?');" href=<?php echo 'manage-categories.html?deleted=' . $value[CategoriesService::ID];?>>Delete</a>
@@ -23,6 +28,8 @@
 <?php } ?>
 </table> 
 <?php }else{ ?>
-	<span class="message">Sorry, there are no categories available at this moment.</span>
-	<span class="message">You can create <a href="new-category.html">new</a> category.</span>
+	<span class="message warning">
+		Sorry, there are no categories available at this moment.<br />
+		You can create <a href="new-category.html">new</a> category.
+	</span>
 <?php } ?>

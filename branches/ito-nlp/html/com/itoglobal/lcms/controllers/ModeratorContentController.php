@@ -17,6 +17,7 @@ class ModeratorContentController extends ContentController {
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		$where = SchoolService::ADMIN . " = '" . $id . "'";
 		$mrSchlList = SchoolService::getSchoolsList ($where);
+		//$mrSchlList = SchoolService::getSubjectSchool($mrSchlList);
 		$mvc->addObject ( 'mrSchlList', $mrSchlList );
 			
 		return $mvc;
@@ -32,17 +33,13 @@ class ModeratorContentController extends ContentController {
 			foreach($mrSchList as $key => $value){
 				if ($value[SchoolService::ID] == $requestParams[SchoolService::ID]){	
 				
-					/*#moderator
-					isset ( $requestParams [CourseService::REMOVE] ) ? CourseService::removeCourse ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
-					isset ( $requestParams [CourseService::ADD] ) ? CourseService::addCourse ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;*/		
-					
-					#for all
+					#get school list
 					$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 					$list = SchoolService::getSchoolsList ( $where );
 					$mvc->addObject ( 'list', $list [0]);
 					
-					#for moderator
-					$where = CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
+					#get course list
+					$where = CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . " = '" . $requestParams [CourseService::ID] . "'";
 					$courseslist = CourseService::getCoursesList ($where);
 					$mvc->addObject ( 'courseslist', $courseslist );
 				}
@@ -114,12 +111,36 @@ class ModeratorContentController extends ContentController {
 			$this->forwardActionRequest ( $location );	
 		}*/
 		
-		
-		#for moderator
+		#remove course
 		isset ( $requestParams [CourseService::DELETED] ) ? CourseService::deleteCourse ( $requestParams [CourseService::DELETED] ) : null;
 		
-		#for moderator
-		$list = CourseService::getCoursesList();
+		#get courses
+		$where = isset ($requestParams [CourseService::ID] ) ? CourseService::CATEGORY_ID . '=' . $requestParams [CourseService::ID] . " AND " : NULL ; 
+		//$where .= 
+		//$list = CourseService::getCoursesList($where);
+		//TODO: fix this
+		#get courses list (assigned to moderator) for creating new exercise
+		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
+		$fields = CourseService::COURSE_TABLE . '.' . CourseService::ID . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::CAPTION . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::DESCRIPTION . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::CRDATE . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::ALIAS . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::AVATAR . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::RATE . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::BASE_FEE . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . ', ' . CourseService::CATEGORY_ID . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' .	CategoriesService::NAME;
+		$from = CourseService::COURSE_TABLE . SQLClient::JOIN . SchoolService::SCHOOLS_TABLE . 
+				SQLClient::ON . SchoolService::SCHOOLS_TABLE . "." . SchoolService::ID . "=" .
+				CourseService::COURSE_TABLE . "." . CourseService::SCHOOL_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . 
+				CategoriesService::CATEGORIES_TABLE . SQLClient::ON .
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . '=' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID;
+		$where .= SchoolService::ADMIN . " = '" . $user_id . "'";
+		# executing query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$list = $result != null && isset($result) && count($result) > 0 ? $result : null;
+		
+		//$list = CourseService::getAccessCourses();
+		//print_r($list);exit;
 		$mvc->addObject ( 'list', $list );
 		return $mvc;
 	}
@@ -138,26 +159,23 @@ class ModeratorContentController extends ContentController {
 						copy ( 'storage/uploads/default-course.jpg', $path );
 				
 				# Insert new school to DB
-				$fields = CourseService::LEVEL . ', ' . CourseService::CAPTION . ', ' . CourseService::DESCRIPTION . ', ' . CourseService::ALIAS . ', ' . CourseService::AVATAR . ', ' . CourseService::CRDATE . ', ' . CourseService::FEE . ', ' . CourseService::SCHOOL_ID;
+				$fields = CourseService::CATEGORY_ID . ', ' . CourseService::CAPTION . ', ' . CourseService::DESCRIPTION . ', ' . CourseService::ALIAS . ', ' . CourseService::AVATAR . ', ' . CourseService::CRDATE . ', ' . CourseService::BASE_FEE . ', ' . CourseService::SCHOOL_ID;
 				$owner_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$values = "'" . $requestParams [CourseService::LEVEL] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','0', '" . $requestParams [CourseService::SCHOOL_ID] . "'";
+				$values = "'" . $requestParams [CourseService::CATEGORY_ID] . "','" . $requestParams [CourseService::CAPTION] . "','" . $requestParams [CourseService::DESCRIPTION] . "','" . $requestParams [CourseService::ALIAS] . "','" . $path . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $requestParams [CourseService::BASE_FEE] . "', '" . $requestParams [CourseService::SCHOOL_ID] . "'";
 				$into = CourseService::COURSE_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-				
+				$mvc->addObject ( 'forward', 'successful' );
 				//$mvc->addObject ( 'forward', 'successful' );
 				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
 			} else {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
 		}
-		
-		//TODO: do method!
-		# get school where this user is moderator		
-		$fields = SchoolService::ID . ", " . SchoolService::CAPTION;
-		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		$where = SchoolService::ADMIN . "= '" . $id . "'";
-		$from = SchoolService::SCHOOLS_TABLE;
-		$mrSchList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		#get categories
+		$mrCategList = CategoriesService::getCategoriesList ();
+		$mvc->addObject ( 'mrCategList' , $mrCategList );
+		#get schools
+		$mrSchList = SchoolService::getMrSchools();
 		$mvc->addObject ( 'mrSchList' , $mrSchList );
 		
 		return $mvc;
@@ -182,34 +200,39 @@ class ModeratorContentController extends ContentController {
 			$fields = array ();
 			$fields [] .= CourseService::CAPTION;
 			$fields [] .= CourseService::DESCRIPTION;
-			$fields [] .= CourseService::LEVEL;
+			$fields [] .= CourseService::BASE_FEE;
+			$fields [] .= CourseService::CATEGORY_ID;
 			$vals = array ();
 			$id = $requestParams [CourseService::ID];
 			$vals [] .= $requestParams [CourseService::CAPTION];
 			$vals [] .= $requestParams [CourseService::DESCRIPTION];
-			$vals [] .= $requestParams [CourseService::LEVEL];
+			$vals [] .= $requestParams [CourseService::BASE_FEE];
+			$vals [] .= $requestParams [CourseService::CATEGORY_ID];
 			CourseService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( 'forward', 'successful' );
 		}
 		
 		if (isset ($requestParams [CourseService::ID])){
-			$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 			$result = CourseService::getCoursesList ( $where );
 			$mvc->addObject ( self::RESULT, $result [0]);
+			#get categories
+			$mrCategList = CategoriesService::getCategoriesList ();
+			$mvc->addObject ( 'mrCategList' , $mrCategList );
 		}
+		
 		return $mvc;
 	}
 	public function handleCourseDetails($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		/*
 		#delete courses
 		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;
-		/*
-		isset ( $requestParams [CourseService::REMOVE] ) ? ExerciseService::removeExercise ( $requestParams [CourseService::REMOVE], $requestParams [CourseService::ID] ) : null;
 		isset ( $requestParams [CourseService::ADD] ) ? ExerciseService::addExercise ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
 		*/
 		
 		#get courses list
-		$where = CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+		$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 		$list = CourseService::getCoursesList ( $where );
 		$mvc->addObject ( 'list', $list [0]);
 		
@@ -274,7 +297,7 @@ class ModeratorContentController extends ContentController {
 			}
 		}
 		
-		
+		//TODO: do method from this
 		#get courses list (assigned to moderator) for creating new exercise
 		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
 		$fields = CourseService::COURSE_TABLE . "." . CourseService::ID . ", " . 
@@ -299,7 +322,7 @@ class ModeratorContentController extends ContentController {
 			$this->forwardActionRequest ( $location );
 		}
 		*/
-		#for admin and moderator
+		#edit user
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= UsersService::USERNAME;
@@ -315,7 +338,9 @@ class ModeratorContentController extends ContentController {
 			$vals [] .= $requestParams [UsersService::EMAIL];
 			$vals [] .= $requestParams [UsersService::ENABLED];
 			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( 'forward', 'successful' );
 		}
+		#eneble user
 		if (isset( $requestParams [UsersService::ENABLED] )) {
 			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
 			$userList = UsersService::getUsersList($where);
@@ -324,6 +349,7 @@ class ModeratorContentController extends ContentController {
 				UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' );
 			}
 		}
+		#disable user
 		if (isset( $requestParams [UsersService::DISABLE] )) {
 			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
 			$userList = UsersService::getUsersList($where);
@@ -332,6 +358,7 @@ class ModeratorContentController extends ContentController {
 					UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' );
 			}
 		}
+		#remove user
 		if (isset( $requestParams [UsersService::DELETED] )) {
 			$where = UsersService::ROLE . " = '" . UsersService::ROLE_UR . "'";
 			$userList = UsersService::getUsersList($where);
@@ -371,7 +398,7 @@ class ModeratorContentController extends ContentController {
 		$from = UsersService::USERS . SQLClient::JOIN . AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . UsersService::USERS . '.' . UsersService::ID . '=' . AssignmentsService::SCHOOLS_ASSIGNED . '.' . AssignmentsService::USER_ID;
 		$result = UsersService::getUsersList ( $where, $from );
 		$mvc->addObject ( self::RESULT, $result );
-		#get scroller
+		#get scroller for displayed users
 		$NoRole = "'" . UsersService::ROLE_AR . "', '" . UsersService::ROLE_MR . "'";
 		$scroller = $result != NULL ? UsersService::chrScroller(UsersService::LASTNAME, NULL, $NoRole) : NULL ;
 		$mvc->addObject ( 'scroller', $scroller);
@@ -434,13 +461,8 @@ class ModeratorContentController extends ContentController {
 	
 	public function handleManageCategories($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		/*
-		$schAssign = self::hasSchlAssign();
-		if($schAssign == NULL){ 
-			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );
-		}
-		*/
+		
+		#edit category
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= CategoriesService::NAME;
@@ -448,9 +470,16 @@ class ModeratorContentController extends ContentController {
 			$id = $requestParams [CategoriesService::ID];
 			$vals [] .= $requestParams [CategoriesService::NAME];
 			CategoriesService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( 'forward', 'successful' );
 		}
+		
+		#remove category
 		isset ( $requestParams [UsersService::DELETED] ) ? CategoriesService::deleteCategories ( $requestParams [UsersService::DELETED]) : '';
 		
+		$mrSchList = SchoolService::getMrSchools();
+		$mvc->addObject ( 'mrSchList' , $mrSchList );
+		
+		#get user list from school where this user is moderator
 		$result = CategoriesService::getCategoriesList ();
 		$mvc->addObject ( self::RESULT, $result );
 		return $mvc;
@@ -460,17 +489,20 @@ class ModeratorContentController extends ContentController {
 		// calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
+		$mrSchList = SchoolService::getMrSchools();
+		$mvc->addObject ( 'mrSchList' , $mrSchList );
+		
 		if (isset ( $requestParams ['submit'] )) {
 			if ($requestParams[CategoriesService::NAME] != NULL) {
 				// Insert new categories to DB
-				$fields = CategoriesService::NAME;
-				$values = "'" . $requestParams[CategoriesService::NAME] . "'";
+				$fields = CategoriesService::NAME . ", " . CategoriesService::SCHOOL_ID;
+				$values = "'" . $requestParams[CategoriesService::NAME] . "', '" . $requestParams[CategoriesService::SCHOOL_ID] . "'";
 				$into = CategoriesService::CATEGORIES_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-				
 				$mvc->addObject ( 'forward', 'successful' );
-				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
-			} 
+			} else {
+				$mvc->addObject ( UsersService::ERROR, 'error' );
+			}
 		}
 		return $mvc;
 	}
@@ -481,7 +513,7 @@ class ModeratorContentController extends ContentController {
 			$ctgList = CategoriesService::getCategoriesList();
 			foreach($ctgList as $key => $value){
 				if ($value[CategoriesService::ID] == $requestParams[CategoriesService::ID]){	
-					$where = CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
+					$where = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . " = '" . $requestParams [CategoriesService::ID] . "'";
 					$result = CategoriesService::getCategoriesList ( $where );
 					$mvc->addObject ( self::RESULT, $result [0] );
 				}

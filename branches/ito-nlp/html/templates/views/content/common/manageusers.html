@@ -24,15 +24,21 @@
 			echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a>
 		<?php } ?>
 </div>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <table class="list">
-<tr class="title">
-	<td>User Name:</td>
-	<td>Name:</td>
-	<td>Role:</td>
-	<td>Options:</td>
+<tr>
+	<th>User Name:</th>
+	<th>Name:</th>
+	<th>Role:</th>
+	<th>Options:</th>
 </tr>
 <?php foreach($message as $key => $value){ ?>
-	<tr  style="border: 1px solid #EFEFEF">
+	<tr <?php if($key%2)echo "class='pair'" ?>>
 		<td>
 			<a href=<?php echo 'user-details.html?id=' . $value[UsersService::ID];?>>
 				<?php echo $value[UsersService::USERNAME];?>

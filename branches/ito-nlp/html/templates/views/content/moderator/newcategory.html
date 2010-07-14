@@ -1,19 +1,33 @@
 <h1>New Category</h1>
-<div class="center">    
-	<?php
-		$errors = $mvc->getObject('forward');
-		if (isset($errors)){
-	?>
-	<div class="registration">
-		<p>Category was created.</p>
-	</div>
-	<?php }else{ ?>  
-	<form class="reg_form" action="new-category.html" method="post">
-		<dl>
-			<dt>Category Name:</dt>
-			<dd><input type="text" name="name" id="name" size="35" value="<? if(isset($_POST['name'])) echo $_POST['name']; ?>"></input></dd>
-		</dl>
-		<input type="submit" value="Add Category" id="submit" name="submit"/>
-	</form>
-	<?php } ?>	
-</div>
+<?php
+	$error = $mvc->getObject('error');
+	if (isset($error)){ ?>
+		<div class="error"><ul><li>Please enter name for category.</li></ul></div>
+<?php }?>  
+<?php
+	$forward = $mvc->getObject('forward');
+		if (isset($forward)){ ?>
+<span class="message warning">Category was created.</span>
+<?php }else{ ?>  
+<form class="edit" action="new-category.html" method="post">
+	<span>Category Name:</span>
+	<input type="text" name="name" id="name" size="35" />
+	<div class="clnr brdr">&nbsp;</div>
+	<span>Choose school:</span>
+	<select name="school_id" >
+		<?php
+		$mrSchList = $mvc->getObject('mrSchList');
+					if(!isset($mrSchList) || count($mrSchList) == 0){
+					?>
+	<option>No School</option>
+		<?php } else { ?>
+		<?php 
+		foreach($mrSchList as $key => $value){ 
+					?>
+	<option value="<?php echo $value[SchoolService::ID]; ?>"><?php echo $value[SchoolService::CAPTION]; ?></option>
+		<?php } } ?>
+	</select>
+	<div class="clnr brdr">&nbsp;</div>
+	<p class="btns"><input type="submit" name="submit" value="Add Category" class="defBtn" /></p>
+</form>
+<?php } ?>	

@@ -181,6 +181,32 @@ class SchoolService {
 		return $result;
 	}	
 	
+	public function getMrSchools(){
+		# get school where this user is moderator		
+		$fields = SchoolService::ID . ", " . SchoolService::CAPTION;
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$where = SchoolService::ADMIN . "= '" . $id . "'";
+		$from = SchoolService::SCHOOLS_TABLE;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = count($result)>0 ? $result : NULL;
+		return $result;
+	}
+	public function getSubjectSchool($list){
+		foreach ($list as $key => $value) {
+			$fields = CategoriesService::NAME;
+			$id = $value[SchoolService::ID];
+			$where = CategoriesService::SCHOOL_ID . "= '" . $id . "'";
+			$from = CategoriesService::CATEGORIES_TABLE;
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = count($result)>0 ? $result : NULL;
+			print_r($result);
+			foreach ($result as $key_sub => $sub){
+				$list[$key]['subject'][] .= $sub[CategoriesService::NAME];
+			}  
+		}
+		print_r($list);
+		return $list;
+	}
 	
 	public static function updateFields($id, $fields, $vals) {
 		# setting the query variables

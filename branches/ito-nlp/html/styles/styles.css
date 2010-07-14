@@ -122,9 +122,11 @@ dl {overflow: hidden;}
 dt {clear:both; float:left; text-align:right; width:35%; margin: 2px;}
 dd {float:left;	text-align:left; width:58%;	margin: 2px;}
 
-.list {margin: 20px;font-size: 12px;text-align: center;}
-.list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
-.list td {width: 25%; padding: 5px; border: 1px solid #EFEFEF;}
+.list {margin: 20px;font-size: 12px;text-align: center; width: 95%;}
+.list th {padding: 5px;font-size:13px; border: 1px solid #EFEFEF;background-color: #7496B9; color: white}
+.list td {width: 21%; padding: 3px; border: 1px solid #EFEFEF; color: grey; font-size:11px;}
+.list .pair {background-color: #F8F8F8}
+/*7496B9 184877*/
 div.avtr {float:left; height: 300px;}
 div.info_sect {float:left;border-top:1px solid #EDEDED; margin:10px 0;display:block;margin:10px 0;width:580px;}
 div.info_sect span {background-color:white;font-weight:bold;padding:10px;position:relative;top:-9px;width:auto;font-size:11px}

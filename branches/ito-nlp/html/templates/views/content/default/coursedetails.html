@@ -48,9 +48,18 @@
 </span>
 <?php } else { ?>
 <?php foreach($exerciselist as $key => $value){ ?>
-	<div class="courseList">
+	<div class="pgListItem wide">
+        <h2>
+			<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+				<?php echo $value[ExerciseService::CAPTION];?>
+			</a>
+		</h2>
 		<div class="pgItemImg">
 			<img src="storage/video.jpg" alt="video"></img>
+		</div>
+	   	<div class="pgItemBody">
+	   	<ul>
+			<li><span>Rating:</span>
 			<span class="lsValue">
        			<?php if($value[ExerciseService::RATE] >= 1){ ?>
 				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
@@ -63,19 +72,15 @@
 				<?php if($value[ExerciseService::RATE] >= 5){ ?>
 				<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 			</span>
-		</div>
-	   	<div class="pgItemBody">
-	        <h1>
-				<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
-					<?php echo $value[ExerciseService::CAPTION];?>
-				</a>
-			</h1>
+			</li>
+		</ul>
 			<p>
 				<?php echo $value[ExerciseService::DESCRIPTION];?>
 				<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
 			</p>
 		</div>
 	</div>
+	<div class="clnr brdr">&nbsp;</div>
 <?php } } ?>
 </div>
 <?php } ?>

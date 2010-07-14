@@ -48,7 +48,7 @@ h2 {font-size:16px}
 .pgListItem {margin:10px 0; width:335px; float:left;}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
-.pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 0 0; border:1px solid #ededed}
+.pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 5px 0; border:1px solid #ededed}
 			
 .pgListItem	.pgItemFooter {margin-top: 20px; line-height:30px; border-top: 1px solid #ededed;}
 			.pgItemFooter div {width: 100%;background-color: #E4F0F5; margin: 10px 0; }

@@ -161,14 +161,15 @@ class UserContentController extends ContentController {
 			$from = TrainingsService::TRAININGS_TABLE;
 			$trainingList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, null, null, '', '' );
 			$t_index = $trainingList == NULL ? 1 : $trainingList[0]['max'] + 1;
-			//$where = TrainingsService::USER_ID . '=' . $user_id;
-			//$groupBy = TrainingsService::TRN_ID;
-			//$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
-			//$t_index = $trainingList == NULL ? 1 : count($trainingList) + 1;
+			
+			$where = TrainingsService::USER_ID . '=' . $user_id;
+			$groupBy = TrainingsService::TRN_ID;
+			$trainingList = TrainingsService::getTrainingsList($where, $groupBy);
+			$user_t_index = $trainingList == NULL ? 1 : count($trainingList) + 1;
 
 			foreach ($usCourseList as $key => $value) {
 				if ( isset ($requestParams['course' . $value[CourseService::ID]]) ) {
-					TrainingsService::addTraining($requestParams, $t_index, $value[CourseService::ID]);					
+					TrainingsService::addTraining($requestParams, $t_index, $value[CourseService::ID], $user_t_index);					
 				}
 			}
 		}
@@ -310,9 +311,15 @@ class UserContentController extends ContentController {
 			$from = ValuationsService::V_TABLE;
 			$valuationsList = DBClientHandler::getInstance ()->execSelect ( $fields, $from, null, null, '', '' );
 			$v_index = $valuationsList == NULL ? 1 : $valuationsList[0]['max'] + 1;
+			
+			$where = ValuationsService::USER_ID . '=' . $user_id;
+			$groupBy = ValuationsService::V_ID;
+			$valuationsList = ValuationsService::getValuationsList($where, $groupBy);
+			$user_v_index = $valuationsList == NULL ? 1 : count($valuationsList) + 1;
+			
 			foreach ($usCourseList as $key => $value) {
 				if ( isset ($requestParams['course' . $value[TrainingsService::COURSE_ID]]) ) {
-					ValuationsService::addValuations($requestParams, $v_index, $value[TrainingsService::COURSE_ID]);
+					ValuationsService::addValuations($requestParams, $v_index, $value[TrainingsService::COURSE_ID], $user_v_index);
 				}
 			}
 		}		

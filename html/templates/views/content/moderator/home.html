@@ -46,9 +46,10 @@
 				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>
 				<li><span>Categories:</span>
 					<span class="lsValue">
-					<!-- <?php foreach($value['subject'] as $key_sub => $subject){ ?>
-						<?php echo $subject; ?>
-					<? } ?> -->
+					<?php foreach($value['subject'] as $key_sub => $subject){ ?>
+						<a href="/manage-courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+						<?php echo $subject[CategoriesService::NAME]; ?></a>
+					<? } ?>
 					</span>
 				</li>
 			</ul>

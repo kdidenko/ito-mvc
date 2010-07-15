@@ -156,6 +156,8 @@ class SchoolService {
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . SQLClient::GROUOPBY . $groupBy;
 		$sql .= isset ( $orderBy ) ? SQLClient::ORDERBY . 't1' . '.' .  $orderBy : NULL;
 		$result = DBClientHandler::getInstance ()->exec  ( $sql );
+		#get subject
+		$result = self::getSubjectSchool($result);
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
 		return $result;
 	}
@@ -193,18 +195,23 @@ class SchoolService {
 	}
 	public function getSubjectSchool($list){
 		foreach ($list as $key => $value) {
-			$fields = CategoriesService::NAME;
+			$fields = CategoriesService::NAME . ', ' . CategoriesService::ID;
 			$id = $value[SchoolService::ID];
 			$where = CategoriesService::SCHOOL_ID . "= '" . $id . "'";
 			$from = CategoriesService::CATEGORIES_TABLE;
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = count($result)>0 ? $result : NULL;
-			print_r($result);
+			$list[$key]['subject'] = $result;
+			/*
 			foreach ($result as $key_sub => $sub){
-				$list[$key]['subject'][] .= $sub[CategoriesService::NAME];
-			}  
+				$list[$key]['subject'] = array();
+				$list[$key]['subject'][$key_sub]['id'] = array();
+				$list[$key]['subject'][$key_sub]['name'] = array();
+				$list[$key]['subject'][$key_sub]['id'] = $sub[CategoriesService::ID];
+				$list[$key]['subject'][$key_sub]['name'] = $sub[CategoriesService::NAME];
+			} */ 
 		}
-		print_r($list);
+		//print_r($list);
 		return $list;
 	}
 	

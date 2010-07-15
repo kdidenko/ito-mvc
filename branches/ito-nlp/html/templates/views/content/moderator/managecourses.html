@@ -16,7 +16,7 @@
 	<tr>
 		<th>Caption:</th>
 		<th>Create Date:</th>
-		<th>Subject:</th>
+		<th>Category:</th>
 		<th>Rate:</th>
 		<th>Options:</th>
 	</tr>
@@ -34,16 +34,16 @@
  			</a>
 		</td>
 		<td>
-			<?php if($value[SchoolService::RATE] >= 1){ ?>
-			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[SchoolService::RATE] >= 2){ ?>
-			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[SchoolService::RATE] >= 3){ ?>
-			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[SchoolService::RATE] >= 4){ ?>
-			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-			<?php if($value[SchoolService::RATE] >= 5){ ?>
-			<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+			<?php if($value[CourseService::RATE] >= 1){ ?>
+			<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+			<?php if($value[CourseService::RATE] >= 2){ ?>
+			<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+			<?php if($value[CourseService::RATE] >= 3){ ?>
+			<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+			<?php if($value[CourseService::RATE] >= 4){ ?>
+			<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+			<?php if($value[CourseService::RATE] >= 5){ ?>
+			<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
 		</td>
 		<td>
 			<a class="button" href=<?php echo 'edit-course.html?id=' . $value[CourseService::ID];?>>Edit</a>

@@ -93,8 +93,9 @@ class UsersService {
 	public static function getUsersList($where = NULL, $from = NULL) {
 		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
 		$from = isset ( $from ) ? $from : self::USERS;
+		$groupBy = self::USERS . '.' . self::ID;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
 		return $result;
 	}	
 	/**

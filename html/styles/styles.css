@@ -134,9 +134,9 @@ div.info_sect dl {padding-left:40px;font-size:11px}
 div.info_sect dt {width:15%;color:#666666}
 div.info_sect dd {margin-left:10px}
 .subHeader {background-color:#F8F8F8; color:#666666; font-size:14px; border:1px solid #EDEDED; padding:8px 10px}
-div.subHeader {margin:10px 0 0 0; width:100%; display:table; padding:8px 0}
+div.subHeader {margin:10px 0 0 0; width:100%; display:table; padding:8px 0;}
 div.subHeader b {float:left; padding-left:10px}
-div.subHeader span {float:right; font-size:11px; margin:0 10px}
+div.subHeader span {float:right; font-size:11px; margin:0 10px;  width: auto; font-weight: normal;}
 div.subHeader span a {color:#666666}
 div.subHeader span a.current {color:#698DB1;text-decoration:none;font-weight:bold;}
 div.about ul, div.about li {list-style:disc outside;margin:5px 0;}

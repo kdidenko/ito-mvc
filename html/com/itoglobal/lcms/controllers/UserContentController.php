@@ -145,7 +145,7 @@ class UserContentController extends ContentController {
 			$location = $this->onSuccess ( $actionParams );
 			$this->forwardActionRequest($location);
 		}
-		$where = isset($requestParams["cat"]) ? CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID . '=' . $requestParams["cat"] : NULL;
+		$where = isset($requestParams["cat"]) ? CategoriesService::CATEGORIES_TABLE. '.' . CategoriesService::NAME . "='" . $requestParams["cat"] . "'" : NULL;
 		#get schools and courses list (assigned to user) for creating new training
 		$usCourseList = CourseService::getAccessCourses($where);
 		$mvc->addObject ( 'usCourseList', $usCourseList );
@@ -153,7 +153,7 @@ class UserContentController extends ContentController {
 		#get category of courses(assigned to user) for creating new training
 		$fields = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . ', ' . 
 				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
-		$groupBy = CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID;
+		$groupBy = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
 		$usGategoriesList = CourseService::getAccessCourses(NULL, $fields, $groupBy);
 		$mvc->addObject ( 'usGategoriesList', $usGategoriesList );
 		

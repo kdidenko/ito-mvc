@@ -33,7 +33,13 @@
 				<li><span>Courses:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_COURSES];?></span></li>
 				<li><span>Language:</span><span class="lsValue"><?php echo $list[SchoolService::LANGUAGE];?></span></li>
 				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::BASE_FEE];?>$ / mon</span></li>
-				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+				<li><span>Subjects:</span>
+				<span class="lsValue">
+					<?php foreach($list['subject'] as $key_sub => $subject){ ?>
+						<a href="/manage-courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+						<?php echo $subject[CategoriesService::NAME]; ?></a>
+					<? } ?>
+				</span>
 			</ul>
 		</div>
 	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>

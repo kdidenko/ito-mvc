@@ -33,12 +33,24 @@
 							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 						</a>
 					</span>
+					<span class="lsValue">
+						<?php echo $list[SchoolService::RATE]?>/<?php echo $list[SchoolService::NUMBER_RATE]?>
+					</span>
 				</li>
 				<li><span>Students:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_STUDENTS];?></span></li>
 				<li><span>Courses:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_COURSES];?></span></li>
 				<li><span>Language:</span><span class="lsValue"><?php echo $list[SchoolService::LANGUAGE];?></span></li>
 				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::BASE_FEE];?>$ / mon</span></li>
-				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+				<li><span>Categories:</span>
+					<span class="lsValue">
+					<?php if (isset($list['subject'])){ 
+							foreach($list['subject'] as $key_sub => $subject){ ?>
+							<a href="/courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+							<?php echo $subject[CategoriesService::NAME]; ?></a>
+						<? } 
+						}?>
+					</span>
+				</li>
 		     	<?php $assign = $mvc->getObject('assign'); if(!isset($assign) || count($assign) == 0){?>
 		     	<li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signup=" . $list[SchoolService::ID] ?>">SignUp</a></span></li>
 				<?php } else { ?>

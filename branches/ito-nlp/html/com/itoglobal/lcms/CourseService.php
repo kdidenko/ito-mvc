@@ -104,15 +104,30 @@ class CourseService {
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', $orderBy, $limit );
 		return $result;
 	 */
-	
-	public static function updateFields($id, $fields, $vals) {
-		# setting the query variables
-		$from = self::COURSE_TABLE;
-		$where = self::ID . " = '" . $id . "'";
-		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	public static function getAccessMRcourses($where){
+		#get courses list (assigned to moderator) for creating new exercise
+		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
+		$fields = CourseService::COURSE_TABLE . '.' . CourseService::ID . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::CAPTION . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::DESCRIPTION . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::CRDATE . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::ALIAS . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::AVATAR . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::RATE . ', ' . CourseService::COURSE_TABLE . '.' . CourseService::BASE_FEE . ', ' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::SCHOOL_ID . ', ' . CourseService::CATEGORY_ID . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' .	CategoriesService::NAME;
+		$from = CourseService::COURSE_TABLE . SQLClient::JOIN . SchoolService::SCHOOLS_TABLE . 
+				SQLClient::ON . SchoolService::SCHOOLS_TABLE . "." . SchoolService::ID . "=" .
+				CourseService::COURSE_TABLE . "." . CourseService::SCHOOL_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . 
+				CategoriesService::CATEGORIES_TABLE . SQLClient::ON .
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . '=' . 
+				CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID;
+		$where .= SchoolService::ADMIN . " = '" . $user_id . "'";
+		# executing query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$list = $result != null && isset($result) && count($result) > 0 ? $result : null;
+		return $list;
 	}
 	
+	#get list of access courses for user
 	public static function getAccessCourses($where = NULL) {
 		$sql = self::createQuery($where);
 		$result = DBClientHandler::getInstance ()->exec ($sql);
@@ -142,6 +157,7 @@ class CourseService {
 				SQLClient::WHERE . $where; 
 		return $sql;
 	}
+	#get list of access courses witch user don't sign in
 	public static function getOtherCourses($t_index){
 		/*
 		 SELECT t1.* FROM
@@ -166,7 +182,13 @@ class CourseService {
 		$result = isset ($result) || $result!= NULL ? $result : NULL;
 		return $result;
 	}
-	
+	public static function updateFields($id, $fields, $vals) {
+		# setting the query variables
+		$from = self::COURSE_TABLE;
+		$where = self::ID . " = '" . $id . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
 	public static function deleteCourse($id) {
 		# setting the query variables
 		$from = self::COURSE_TABLE;

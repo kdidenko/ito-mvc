@@ -42,13 +42,19 @@
 							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
 						</a>
 					</span>				
+					<span class="lsValue">
+						<?php echo $value[SchoolService::RATE]?>/<?php echo $value[SchoolService::NUMBER_RATE]?>
+					</span>
 				</li>
 				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>
-				<li><span>Categories:</span><span class="lsValue">
-						<a href="#">NLP</a> 
-						<a href="#">Milton</a> 
-						<a href="#">DHC</a>
-						<a href="#">SHL</a>
+				<li><span>Categories:</span>
+					<span class="lsValue">
+					<?php if (isset($value['subject'])){ 
+							foreach($value['subject'] as $key_sub => $subject){ ?>
+							<a href="/courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+							<?php echo $subject[CategoriesService::NAME]; ?></a>
+						<? } 
+						}?>
 					</span>
 				</li>
 			</ul>

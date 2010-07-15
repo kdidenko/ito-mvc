@@ -40,6 +40,20 @@ class UserContentController extends ContentController {
 		
 		return $mvc;
 	}
+	public function handleCourses($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		#get courses only for 1 category
+		$where = isset ($requestParams [CourseService::ID] ) ? CourseService::CATEGORY_ID . '=' . $requestParams [CourseService::ID] : NULL ; 
+		#get courses list (assigned to moderator) for creating new exercise
+		$courselist = CourseService::getCoursesList($where);
+		$courselist = self::createTeaser($courselist);
+		$mvc->addObject ( 'list', $courselist );
+		
+		#get user list from school where this user is moderator
+		$result = CategoriesService::getCategoriesList ();
+		$mvc->addObject ( self::RESULT, $result );
+		return $mvc;
+	}
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#school rate

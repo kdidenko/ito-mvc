@@ -48,6 +48,10 @@ class SchoolService {
 	/**
 	 * @var ustring defining the number_rate field name
 	 */
+	const NUMBER_RATE = 'number_rate';
+	/**
+	 * @var ustring defining the number_rate field name
+	 */
 	const RATE_VOTES = 'number_rate';
 	/**
 	 * @var string defining the deleted field name
@@ -122,6 +126,7 @@ class SchoolService {
 					self::SCHOOLS_TABLE . '.' . self::DESCRIPTION . ', ' . 
 					self::SCHOOLS_TABLE . '.' .	self::AVATAR . ', ' . 
 					self::SCHOOLS_TABLE . '.' . self::RATE . ', ' . 
+					self::SCHOOLS_TABLE . '.' . self::NUMBER_RATE . ', ' . 
 					self::SCHOOLS_TABLE . '.' .	self::CRDATE . ', ' . 
 					self::SCHOOLS_TABLE . '.' . self::BASE_FEE . ', ' . 
 					self::SCHOOLS_TABLE . '.' . self::LANGUAGE . ', ' . 
@@ -287,8 +292,12 @@ class SchoolService {
 				$rate = $value[self::RATE] + $rate;
 			}
 			$rate = round($rate/count($result),1);
-			$fileds = self::RATE;
-			$vals = $rate;
+			$fields = array ();
+			$fields [] .= self::RATE;
+			$fields [] .= self::NUMBER_RATE;
+			$vals = array ();
+			$vals[] .= $rate;
+			$vals[] .= count($result);
 			#school update
 			self::updateFields($schoo_id, $fields, $vals);
 		}

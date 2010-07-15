@@ -128,13 +128,13 @@ class CourseService {
 	}
 	
 	#get list of access courses for user
-	public static function getAccessCourses($where = NULL) {
-		$sql = self::createQuery($where);
+	public static function getAccessCourses($where = NULL, $fields = NULL, $groupBy = NULL) {
+		$sql = self::createQuery($where, $fields, $groupBy);
 		$result = DBClientHandler::getInstance ()->exec ($sql);
 		$result = isset ($result) || $result!= NULL ? $result : NULL;
 		return $result;
 	}
-	private static function createQuery($where=NULL){
+	private static function createQuery($where=NULL, $fields = NULL, $groupBy = NULL){
 		/* sql query
 			SELECT c.caption, c.id, s.caption FROM courses AS c
 			LEFT JOIN schools AS s ON s.id=c.school_id
@@ -142,19 +142,26 @@ class CourseService {
 			WHERE a.user_id=40
 		*/
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		$fields = self::COURSE_TABLE . '.' . self::CAPTION . SQLClient::SQL_AS . self::COURSE_CAPTION . ', ' . self::COURSE_TABLE . '.' . self::ID . ', ' . 
-				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::CAPTION;
+		$fieldsDef = self::COURSE_TABLE . '.' . self::CAPTION . SQLClient::SQL_AS . 
+				self::COURSE_CAPTION . ', ' . self::COURSE_TABLE . '.' . self::ID . ', ' . 
+				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::CAPTION . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
+		$fields = isset($fields) ? $fields : $fieldsDef;
 		$from = self::COURSE_TABLE;
 		$join = SQLClient::LEFT . SQLClient::JOIN . SchoolService::SCHOOLS_TABLE . SQLClient::ON .
 				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::ID . '=' . 
 				self::COURSE_TABLE . '.' . self::SCHOOL_ID . 
 				SQLClient::LEFT . SQLClient::JOIN . AssignmentsService::SCHOOLS_ASSIGNED . SQLClient::ON . 
 				AssignmentsService::SCHOOLS_ASSIGNED  . '.' . AssignmentsService::SCHOOL_ID . '=' . 
-				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::ID;
+				SchoolService::SCHOOLS_TABLE . '.' . SchoolService::ID .
+				SQLClient::LEFT . SQLClient::JOIN . CategoriesService::CATEGORIES_TABLE . SQLClient::ON . 
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . '=' . 
+				self::COURSE_TABLE . '.' . self::CATEGORY_ID;
 		$where = $where != NULL ? $where . " AND ": NULL;
 		$where .= AssignmentsService::USER_ID . "='" . $id . "'";
+		$groupBy = isset($groupBy) ? SQLClient::GROUOPBY . $groupBy : NULL;
 		$sql = SQLClient::SELECT . $fields . SQLClient::FROM . $from . $join . 
-				SQLClient::WHERE . $where; 
+				SQLClient::WHERE . $where . $groupBy;
 		return $sql;
 	}
 	#get list of access courses witch user don't sign in

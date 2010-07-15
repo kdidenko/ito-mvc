@@ -1,7 +1,8 @@
+<?php $id = $mvc->getParam('id');?>
 <div class="sidePgItem">
 	<h2>Navigation</h2>    
 	<ul>
 		<li>&raquo;&nbsp;<a href="/new-course.html" title="Create New Course">New Course</a></li>
-		<li>&raquo;&nbsp;<a href=<?php echo 'edit-school.html?id=' . $_GET[SchoolService::ID];?>>Edit School</a></li>
+		<li>&raquo;&nbsp;<a href="edit-school.html?id="<?php echo $id ?>>Edit School</a></li>
 	</ul>
 </div>

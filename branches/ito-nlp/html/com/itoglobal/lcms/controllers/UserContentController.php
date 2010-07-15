@@ -145,9 +145,17 @@ class UserContentController extends ContentController {
 			$location = $this->onSuccess ( $actionParams );
 			$this->forwardActionRequest($location);
 		}
+		$where = isset($requestParams["cat"]) ? CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID . '=' . $requestParams["cat"] : NULL;
 		#get schools and courses list (assigned to user) for creating new training
-		$usCourseList = CourseService::getAccessCourses();
+		$usCourseList = CourseService::getAccessCourses($where);
 		$mvc->addObject ( 'usCourseList', $usCourseList );
+		
+		#get category of courses(assigned to user) for creating new training
+		$fields = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
+		$groupBy = CourseService::COURSE_TABLE . '.' . CourseService::CATEGORY_ID;
+		$usGategoriesList = CourseService::getAccessCourses(NULL, $fields, $groupBy);
+		$mvc->addObject ( 'usGategoriesList', $usGategoriesList );
 		
 		#update training
 		if ( isset($requestParams['updateCurrent']) ) {
@@ -198,18 +206,18 @@ class UserContentController extends ContentController {
 		if(isset($requestParams[TrainingsService::ID])){
 			#creating "where" for sql query
 			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
-			$where = NULL;
-			foreach ($training as $key => $value){
-				$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
-				$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
+			if (count($training)>0){ 
+				$where = NULL;
+				foreach ($training as $key => $value){
+					$where .= ExerciseService::COURSE_ID . " ='". $value[TrainingsService::COURSE_ID] ."'";
+					$where .= $key != count ($training) - 1 ? " OR " . ExerciseService::EXERCISES_TABLE . "." : null;			
+				}
+				$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
+				$exerciselist = ExerciseService::getExercisesList($where, $limit);
+				$exerciselist = self::createTeaser($exerciselist);
+				$mvc->addObject ( 'exerciselist', $exerciselist);
 			}
-			$limit = $requestParams['ex'] <= 0 ? '0, 1' : $requestParams['ex']-1 . ', 1';
-			$exerciselist = ExerciseService::getExercisesList($where, $limit);
-			$exerciselist = self::createTeaser($exerciselist);
-			$mvc->addObject ( 'exerciselist', $exerciselist);
 		}
-		/*$challenge = ChallengesService::getChallenge($requestParams[ExerciseService::ID]);
-		$mvc->addObject ( 'challenge', $challenge );*/
 		return $mvc;
 	}
 	public function handleEditTraining($actionParams, $requestParams){

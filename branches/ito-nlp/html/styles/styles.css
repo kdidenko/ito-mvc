@@ -174,6 +174,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .tabMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .tabMenu li:hover a{ background-color: white; color: black}
 .trnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}
+.trnList .cat ul {float: none; margin-left: 30px; text-align: none;}
 .trnList .itemBody .itemBodyContent {margin: 0 10px; }
 /*.trnList .itemBody .itemForm {margin-top: 30px; text-align: center;}*/
 .trnList .itemBody .itemForm {margin-top: 30px;}
@@ -183,7 +184,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 					.itemEx .pgItemBody h1{font-size: 13px; margin: 0; padding: 0; font-weight: bold;}
 					.itemEx .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .trnList .itemBody .itemOption {margin: 50px 0; text-align: center;}
-
+.trnList .itemForm .itemBody {padding-top: 20px;}
 .vlnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}
 .vlnList .itemBody .itemBodyContent {margin: 20px 10px; }
 .vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}

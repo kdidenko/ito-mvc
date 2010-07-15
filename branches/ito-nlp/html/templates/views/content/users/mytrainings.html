@@ -22,13 +22,13 @@
 						</a>
 					</li>
 				<?php } ?>
-				<li <?php if($_GET == NULL) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
+				<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
 			</ul>
 		</div>
 	<?php } ?>
 		<div class="itemBody">
 			<div class="itemBodyContent">
-				<?php if ($_GET == NULL) { ?>
+				<?php if ($_GET == NULL || isset($_GET["cat"])) { ?>
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
 				<?php } else { ?>
@@ -72,7 +72,7 @@
 						</div>
 					<?php } } ?>
 					<div class="itemOption">
-						<?php if($_GET["ex"]>1){?>
+						<?php if(isset($_GET["ex"]) && $_GET["ex"]>1){?>
 							<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Exercise</a></span>
 						<?php } 
 						if(isset($exerciselist) && count($exerciselist) > 0){ ?>

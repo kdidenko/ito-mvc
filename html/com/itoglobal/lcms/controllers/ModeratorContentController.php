@@ -230,17 +230,17 @@ class ModeratorContentController extends ContentController {
 		isset ( $requestParams [ExerciseService::DELETED] ) ? ExerciseService::deleteExercise ( $requestParams [ExerciseService::DELETED] ) : null;
 		isset ( $requestParams [CourseService::ADD] ) ? ExerciseService::addExercise ( $requestParams [CourseService::ADD], $requestParams [CourseService::ID]  ) : null;		
 		*/
-		
-		#get courses list
-		$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$list = CourseService::getCoursesList ( $where );
-		$mvc->addObject ( 'list', $list [0]);
-		
-		#get exercises list
-		$where = ExerciseService::COURSE_ID . " = '" . $requestParams [CourseService::ID] . "'";
-		$exerciseslist = ExerciseService::getExercisesList($where);
-		$mvc->addObject ( 'exerciseslist', $exerciseslist );
-		
+		if (isset($requestParams[CourseService::ID])){
+			#get courses list
+			$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$list = CourseService::getCoursesList ( $where );
+			$mvc->addObject ( 'list', $list [0]);
+			
+			#get exercises list
+			$where = ExerciseService::COURSE_ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$exerciseslist = ExerciseService::getExercisesList($where);
+			$mvc->addObject ( 'exerciseslist', $exerciseslist );
+		}
 		return $mvc;
 	}
 	

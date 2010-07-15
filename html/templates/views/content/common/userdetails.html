@@ -1,6 +1,6 @@
 <h1>User Details</h1>
 <?php $user = $mvc->getObject('USER');if($user == NULL){ ?>
-	<span class="message">No user available at this moment.</span>
+	<span class="message warning">No user available at this moment.</span>
 <?php } else { ?>
 <div class="avtr">
 	<img src="<?php echo $user['avatar']?>"/>

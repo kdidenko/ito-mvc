@@ -57,6 +57,16 @@
 				<li><span>Status:</span><span><a class="button" href="<?php echo "/school-assigned.html?signout=" . $list[SchoolService::ID] ?>">SignOut</a></span></li>
 		   		<?php } ?>
 			</ul>
+		   		
+		   		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+		   		<input type="hidden" name="cmd" value="_cart"> <input type="hidden" name="upload" value="1"> 
+		   		<input type="hidden" name="business" value="seller@designerfotos.com"> 
+		   		<input type="hidden" name="item_name_1" value="<?php echo $list[SchoolService::CAPTION];?>"> 
+		   		<input type="hidden" name="amount_1" value="1.00"> 
+		   		<input type="submit" class="defBtn" value="pay with PayPal"> 
+		   		</form>
+		   		
+		   		
 			<p class="extLink"><?php echo  $list[SchoolService::DESCRIPTION];?></p>
 		</div>	
 </div>

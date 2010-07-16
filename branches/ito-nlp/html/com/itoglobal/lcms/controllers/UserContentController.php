@@ -145,6 +145,7 @@ class UserContentController extends ContentController {
 			$location = $this->onSuccess ( $actionParams );
 			$this->forwardActionRequest($location);
 		}
+		#get courses for 1 category
 		$where = isset($requestParams["cat"]) ? CategoriesService::CATEGORIES_TABLE. '.' . CategoriesService::NAME . "='" . $requestParams["cat"] . "'" : NULL;
 		#get schools and courses list (assigned to user) for creating new training
 		$usCourseList = CourseService::getAccessCourses($where);
@@ -291,13 +292,20 @@ class UserContentController extends ContentController {
 			$location = "valuate-responses.html";
 			$this->forwardActionRequest($location);
 		}
-		
+		#get courses for 1 category
+		$where = isset($requestParams["cat"]) ? CategoriesService::CATEGORIES_TABLE. '.' . CategoriesService::NAME . "='" . $requestParams["cat"] . "' AND " : NULL;
 		#get schools and courses list (assigned to user) for creating new training
-		//$usCourseList = CourseService::getAccessCourses();
-		$where = TrainingsService::USER_ID . '=' . $user_id;
+		$where .= TrainingsService::USER_ID . '=' . $user_id;
 		$groupBy = TrainingsService::COURSE_ID;
 		$usCourseList = TrainingsService::getTrainingsList($where, $groupBy);
 		$mvc->addObject ( 'usCourseList', $usCourseList );
+		
+		#get category of courses(assigned to user) for creating new training
+		$fields = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID . ', ' . 
+				CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
+		$groupBy = CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::NAME;
+		$usGategoriesList = CourseService::getAccessCourses(NULL, $fields, $groupBy);
+		$mvc->addObject ( 'usGategoriesList', $usGategoriesList );
 		
 		#update valuatin
 		if ( isset($requestParams['updateCurrent']) ) {

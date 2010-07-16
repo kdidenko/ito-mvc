@@ -28,9 +28,11 @@ class TrainingsService {
 		
 	public static function getTrainingsList($where = NULL, $groupBy = NULL) {
 		$fields = self::TRAININGS_TABLE . "." . self::ID . ", " . self::TRN_ID . ", " . self::TRN_NAME . ", " . 
-					self::USER_ID . ", " . self::COURSE_ID . ", " . CourseService::CAPTION;
+					self::USER_ID . ", " . self::COURSE_ID . ", " . CourseService::CAPTION . ", " . CategoriesService::NAME;
 		$from = self::TRAININGS_TABLE . SQLClient::LEFT . SQLClient::JOIN . CourseService::COURSE_TABLE . SQLClient::ON . 
-					self::COURSE_ID . '=' . CourseService::COURSE_TABLE . '.' . CourseService::ID;
+					self::COURSE_ID . '=' . CourseService::COURSE_TABLE . '.' . CourseService::ID . 
+					SQLClient::LEFT . SQLClient::JOIN . CategoriesService::CATEGORIES_TABLE . SQLClient::ON . 
+					CourseService::CATEGORY_ID . '=' . CategoriesService::CATEGORIES_TABLE . '.' . CategoriesService::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 		return $result;

@@ -1,3 +1,11 @@
+<script type="text/javascript"> 
+function commentResp() { 
+	document.getElementById("comment").disabled = false;
+	document.getElementById('comment').value = '';
+	return false;
+} 
+</script> 
+
 <h1>Valuate Other Students Responses</h1>
 <?php
 	$noSchAssigne = $mvc->getObject('noSchAssigne');
@@ -22,13 +30,13 @@
 						</a>
 					</li>
 				<?php } ?>
-				<li <?php if($_GET == NULL) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
+				<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
 			</ul>
 		</div>
 	<?php } ?>
 		<div class="itemBody">
 			<div class="itemBodyContent">
-				<?php if ($_GET == NULL) { ?>
+				<?php if ($_GET == NULL || isset($_GET["cat"])) { ?>
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
 				<?php } else { ?>
@@ -90,7 +98,7 @@
 							        <span>Valuation:</span>
 							        <ul>
 							        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
-								        <li>Your own points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
+								        <li>Number of points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
 								        <li>Contribution points:<span>I don't know :)</span></li>
 							        </ul>
 									<div class="image">
@@ -105,29 +113,28 @@
 						<!-- ?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?> -->
 							<fieldset>
 								<label><b>Valuate Responses:</b></label>
-								<input type="radio" name="valuate" value=-2 />-2
-								<input type="radio" name="valuate" value=-1 />-1
-								<input type="radio" name="valuate" value=0 />0
-								<input type="radio" name="valuate" value=1 />1
-								<input type="radio" name="valuate" value=2 />2
+								<input onclick="commentResp();" type="radio" name="valuate" value=-2 />-2
+								<input onclick="commentResp();" type="radio" name="valuate" value=-1 />-1
+								<input onclick="commentResp();" type="radio" name="valuate" value=0 />0
+								<input onclick="commentResp();" type="radio" name="valuate" value=1 />1
+								<input onclick="commentResp();" type="radio" name="valuate" value=2 />2
 							</fieldset>
 							<fieldset>
 								<label><b>Your textual comments:</b></label>
-								<textarea rows="5" cols="10" name="comment"></textarea>
+								<textarea rows="5" cols="10" name="comment" id="comment" disabled>First valuate response.</textarea>
 							</fieldset>
 							<input type="hidden" name="resp_index" value="<?php echo $resp[0][CourseService::ID]?>"/>
 							<input type="submit" name="submit" value="Save" class="button"/>
 						</form>
 					<?php } else { ?>
 						<span class="message warning">You already valuate this response. Please, continue valuation with next response.</span>
-						
 					<?php } ?>
-				</div> 
-				<span class="message">
+				<span class="message warning">
 					Note: The maximum achievable number of contribution points depends 
 					on your own response quality  for this exercise and the number of previous votes. 
 					You will be able to see the valuation statistics for this response after you have valuated.
 				</span>
+				</div> 
 <?php				} ?>
 <?php			} ?>
 			</div>

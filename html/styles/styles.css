@@ -45,7 +45,7 @@ h2 {font-size:16px}
 
 .pgItemsList {}
 .pgItemsList h2 {padding:5px 10px; background-color:#F9F9F9; font-size:14px}
-.pgListItem {margin:10px 0; width:335px; float:left;}
+.pgListItem {margin:10px 0; width:330px; float:left;margin-right: 5px;}
 /**/.wide {float:none; width:auto}
 .pgListItem  h2 {background:none; padding:5px 0 5px 0; float:none; font-weight:bold}
 .pgListItem .pgItemImg {float:left; padding:3px; margin:8px 10px 5px 0; border:1px solid #ededed}
@@ -68,10 +68,11 @@ h2 {font-size:16px}
 .pgListItem .pgItemBody ul li {margin:1px 0}
 .pgListItem .pgItemBody ul li span {color:#999; padding:0 10px 0 0; width:60px; display:inline-block}
 .pgListItem .pgItemBody ul li span.lsValue {color:#000; width:auto}
+.pgListItem .pgItemBody ul li span.rate {color:gray;font-weight: bold;line-height: 10px; background: #FFFFB5; padding: 3px;border-left: 1px solid #7496B9}
 .pgListItem .pgItemBody p {padding:0 15px 0 0}
 .pgListItem .pgItemBody p.btns {padding:15px 0 0 0; clear:none}
 .pgListItem .pgItemVideo {text-align: center; margin: 20px;}
-.extLink a {display:block}
+.extLink a {display:block;}
 	.sidePageContent {float:right; width:245px}
 	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
 	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none; font-weight:600}
@@ -187,7 +188,7 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .trnList .itemForm .itemBody {padding-top: 20px;}
 .vlnList .itemBody {clear: both;  border-top: 1px solid #7496B9; margin: 15px;}
 .vlnList .itemBody .itemBodyContent {margin: 20px 10px; }
-.vlnList .itemBody .itemForm {margin-top: 30px; text-align: center;}
+.vlnList .itemBody .itemForm {margin-top: 30px;}
 .preview {width: 650px; height: 350px; }
 /**/.wide{width: auto;}
 .preview span{text-align: center;}

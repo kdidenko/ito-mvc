@@ -131,7 +131,7 @@ class UsersService {
 		$fields = "DISTINCT UCASE(" . SQLClient::LEFT . "(" . $field . ", 1 ) ) AS scroller";
 		$from = self::USERS;
 		#without present user 
-		$where = UsersService::ID . "!=" . $id;
+		$where = UsersService::ID . "!=" . $id . ' AND ' . UsersService::DELETED . '=0';
 		#only for one user role
 		$where .= $role != NULL ? " AND " . UsersService::ROLE . "='" . $role . "'": NULL;
 		#without some user role

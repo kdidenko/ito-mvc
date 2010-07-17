@@ -1,6 +1,9 @@
 <h1>Edit School</h1>
 <?php $training = $mvc->getObject('training'); if($training == NULL){ ?>
-	<span class="message">No school available at this moment.</span>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no training for such criterias.<br />
+		But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.
+	</span>
 <?php } else { ?>
 <div class="trnList">
 	<div class="tabMenu">

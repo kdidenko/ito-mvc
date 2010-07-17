@@ -14,22 +14,30 @@
 			<ul>
 				<li>
 		       		<span>Rating:</span><span class="lsValue">
-		       			<?php if($list[CourseService::RATE] >= 1){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[CourseService::RATE] >= 2){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[CourseService::RATE] >= 3){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[CourseService::RATE] >= 4){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
-						<?php if($list[CourseService::RATE] >= 5){ ?>
-						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+		       			<a href="?valuate=1&id=<?php echo $list[CourseService::ID] ?>"><?php if($list[CourseService::RATE] >= 1){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=2&id=<?php echo $list[CourseService::ID] ?>"><?php if($list[CourseService::RATE] >= 2){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=3&id=<?php echo $list[CourseService::ID] ?>"><?php if($list[CourseService::RATE] >= 3){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=4&id=<?php echo $list[CourseService::ID] ?>"><?php if($list[CourseService::RATE] >= 4){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=5&id=<?php echo $list[CourseService::ID] ?>"><?php if($list[CourseService::RATE] >= 5){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+					</span>
+					<span class="lsValue rate">
+						<?php echo $list[CourseService::RATE]?>/<?php echo $list[CourseService::NUMBER_RATE]?>
 					</span>
 				</li>
 	         	<li><span>Base fee:</span><span class="lsValue"><?php echo $list[CourseService::BASE_FEE];?>$ / mon</span></li>
 	         	<li><span>Subjects:</span>
 	         		<span class="lsValue">
-	         			<a href="/courses.html?id=<?php echo $list[CourseService::CATEGORY_ID];?>">
+	         			<a href="/courses.html?cat=<?php echo $list[CategoriesService::NAME];?>">
 	         				<?php echo $list[CategoriesService::NAME];?>
 	         			</a>
 	         		</span>

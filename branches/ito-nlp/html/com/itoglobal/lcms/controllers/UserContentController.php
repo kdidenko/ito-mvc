@@ -42,16 +42,41 @@ class UserContentController extends ContentController {
 	}
 	public function handleCourses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		#course rate
+			isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
+				CourseService::rateCourse($requestParams['course_id'], $requestParams['valuate']) : 
+					NULL;
 		#get courses only for 1 category
-		$where = isset ($requestParams [CourseService::ID] ) ? CourseService::CATEGORY_ID . '=' . $requestParams [CourseService::ID] : NULL ; 
+		$where = isset ($requestParams ['cat'] ) ? CategoriesService::NAME . "='" . $requestParams ['cat'] . "'" : NULL ; 
 		#get courses list (assigned to moderator) for creating new exercise
 		$courselist = CourseService::getCoursesList($where);
 		$courselist = self::createTeaser($courselist);
 		$mvc->addObject ( 'list', $courselist );
 		
 		#get user list from school where this user is moderator
-		$result = CategoriesService::getCategoriesList ();
+		$groupBy = CategoriesService::NAME;
+		$result = CourseService::getAccessCourses (NULL, NULL, $groupBy);
 		$mvc->addObject ( self::RESULT, $result );
+		return $mvc;
+	}
+	
+	public function handleCourseDetails($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset($requestParams[CourseService::ID])){
+			#course rate
+			isset($requestParams['valuate'])&&isset($requestParams[CourseService::ID])&&$requestParams[CourseService::ID]!=NULL ? 
+				CourseService::rateCourse($requestParams[CourseService::ID], $requestParams['valuate']) : 
+					NULL;
+			#for users and visitor
+			$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
+			$list = CourseService::getCoursesList ( $where );
+			$mvc->addObject ( 'list', $list [0]);
+			#for users and visitor
+			$where = ExerciseService::COURSE_ID . " = '" . $requestParams [ExerciseService::ID] . "'";
+			$exerciselist = ExerciseService::getExercisesList( $where );
+			$exerciselist = self::createTeaser($exerciselist);
+			$mvc->addObject ( 'exerciselist', $exerciselist);
+		}
 		return $mvc;
 	}
 	public function handleSchools($actionParams, $requestParams) {
@@ -86,7 +111,12 @@ class UserContentController extends ContentController {
 			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
 				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
 					NULL;
-		
+			
+			#course rate
+			isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
+				CourseService::rateCourse($requestParams['course_id'], $requestParams['valuate']) : 
+					NULL;
+					
 			#get school
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 			$list = SchoolService::getSchoolsList ( $where );

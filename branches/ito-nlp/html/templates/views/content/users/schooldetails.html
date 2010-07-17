@@ -45,7 +45,7 @@
 					<span class="lsValue">
 					<?php if (isset($list['subject'])){ 
 							foreach($list['subject'] as $key_sub => $subject){ ?>
-							<a href="/courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+							<a href="/courses.html?cat=<?php echo $subject[CategoriesService::NAME];?>">
 							<?php echo $subject[CategoriesService::NAME]; ?></a>
 						<? } 
 						}?>
@@ -65,7 +65,6 @@
 		   		<input type="hidden" name="amount_1" value="1.00"> 
 		   		<input type="submit" class="defBtn" value="pay with PayPal"> 
 		   		</form>
-		   		
 		   		
 			<p class="extLink"><?php echo  $list[SchoolService::DESCRIPTION];?></p>
 		</div>	
@@ -97,16 +96,24 @@
 		<ul>
 			<li><span>Rating:</span>
 			<span class="lsValue">
-       			<?php if($value[CourseService::RATE] >= 1){ ?>
-				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
-				<?php if($value[CourseService::RATE] >= 2){ ?>
-				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
-				<?php if($value[CourseService::RATE] >= 3){ ?>
-				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
-				<?php if($value[CourseService::RATE] >= 4){ ?>
-				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
-				<?php if($value[CourseService::RATE] >= 5){ ?>
-				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				<a href="?valuate=1&id=<?php echo $mvc->getParam('id');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 1){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				</a>
+				<a href="?valuate=2&id=<?php echo $mvc->getParam('id');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 2){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				</a>
+				<a href="?valuate=3&id=<?php echo $mvc->getParam('id');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 3){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				</a>
+				<a href="?valuate=4&id=<?php echo $mvc->getParam('id');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 4){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				</a>
+				<a href="?valuate=5&id=<?php echo $mvc->getParam('id');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 5){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				</a>
+			</span>
+			<span class="lsValue rate">
+				<?php echo $value[CourseService::RATE]?>/<?php echo $value[CourseService::NUMBER_RATE]?>
 			</span>
 			</li>
 		</ul>

@@ -50,6 +50,10 @@ class CourseService {
 	 */
 	const RATE = 'rate';
 	/**
+	 * @var ustring defining the number_rate field name
+	 */
+	const NUMBER_RATE = 'number_rate';
+	/**
 	 * @var ustring defining the category_id field name
 	 */
 	const CATEGORY_ID = 'category_id';
@@ -66,6 +70,23 @@ class CourseService {
 	 */
 	const ADD = 'add';
 	const COURSE_CAPTION = 'course_caption';
+	
+	/* begin of schools_rate table fields nsme */
+	/**
+	 * @var  string defining the schools table name
+	 */
+	const COURSE_RATE_TABLE = 'schools_rate';
+	/**
+	 * @var  string defining the schools fields name
+	 */
+	const COURSE_ID = 'school_id';
+	/**
+	 * @var  string defining the schools fields name
+	 */
+	const USER_ID = 'user_id';
+	/* end of schools_rate table fields nsme */
+	
+	
 	/**
 	 * Populates the complete list of existing schools. 
 	 * @return mixed the schools list
@@ -73,7 +94,7 @@ class CourseService {
 	public static function getCoursesList($where = null, $limit = null, $orderBy = null) {
 		$result = null;
 		$fields = self::COURSE_TABLE . '.' . self::ID . ', ' . self::CAPTION . ', ' . self::DESCRIPTION . ', ' . self::CRDATE . ', ' . 
-				self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::BASE_FEE . ', ' . 
+				self::ALIAS . ', ' . self::AVATAR . ', ' . self::RATE . ', ' . self::NUMBER_RATE . ', ' . self::BASE_FEE . ', ' . 
 				self::COURSE_TABLE . '.' . self::SCHOOL_ID . ', ' . self::CATEGORY_ID . ', ' . CategoriesService::CATEGORIES_TABLE . '.' . 
 				CategoriesService::NAME;
 		$from = self::COURSE_TABLE . SQLClient::LEFT . SQLClient::JOIN . 
@@ -226,6 +247,49 @@ class CourseService {
 			$where = self::ALIAS . " = '" . $alias . "'";
 			$res = DBClientHandler::getInstance ()->execSelect ( self::ALIAS, self::COURSE_TABLE, $where, '', '', '' );
 			$result = isset ( $res [0] [self::ALIAS] ) ? 'Such alias already exists.' : false;
+		}
+		return $result;
+	}
+	
+	public static function rateCourse($course_id, $rate){
+		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
+		# setting the query variables
+		$fields = self::RATE;
+		$from = self::COURSE_RATE_TABLE;
+		$where = self::COURSE_ID . '=' . $course_id . ' AND ' . self::USER_ID . '=' . $user_id;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		if (count($result)==0){
+			$fields = self::COURSE_ID . ", " . self::USER_ID . ", " . self::RATE;
+			$values = $course_id . ", " . $user_id . ", " . $rate;
+			$into = self::COURSE_RATE_TABLE;
+			# executing the query
+			DBClientHandler::getInstance ()->execInsert($fields, $values, $into);
+			self::updateCourseRate($course_id);
+		}
+	}
+	public static function updateCourseRate($course_id){
+		# setting the query variables
+		$fields = self::RATE;
+		$from = self::COURSE_RATE_TABLE;
+		$where = self::COURSE_ID . '=' . $course_id;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : null;
+		if ($result!=NULL){
+			$rate = null;
+			foreach ($result as $key => $value){
+				$rate = $value[self::RATE] + $rate;
+			}
+			$rate = round($rate/count($result),1);
+			$fields = array ();
+			$fields [] .= self::RATE;
+			$fields [] .= self::NUMBER_RATE;
+			$vals = array ();
+			$vals[] .= $rate;
+			$vals[] .= count($result);
+			#school update
+			self::updateFields($course_id, $fields, $vals);
 		}
 		return $result;
 	}

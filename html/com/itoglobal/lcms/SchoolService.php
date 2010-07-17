@@ -85,10 +85,6 @@ class SchoolService {
 	 * @var string defining the courses field name
 	 */
 	const CNT_COURSES = 'courses';
-	/**
-	 * Populates the complete list of existing schools. 
-	 * @return mixed the schools list
-	 */
 	
 	/* begin of schools_rate table fields nsme */
 	/**
@@ -104,7 +100,11 @@ class SchoolService {
 	 */
 	const USER_ID = 'user_id';
 	/* end of schools_rate table fields nsme */
-	
+
+	/**
+	 * Populates the complete list of existing schools. 
+	 * @return mixed the schools list
+	 */
 	public static function getSchoolsList($where = null, $limit = null, $orderBy = null, $id = null) {
 	/* generation sql query
 	SELECT t1.*, COUNT(c.id) as courses FROM

@@ -51,7 +51,7 @@
 					<span class="lsValue">
 					<?php if (isset($value['subject'])){ 
 							foreach($value['subject'] as $key_sub => $subject){ ?>
-							<a href="/courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+							<a href="/courses.html?cat=<?php echo $subject[CategoriesService::NAME];?>">
 							<?php echo $subject[CategoriesService::NAME]; ?></a>
 						<? } 
 						}?>

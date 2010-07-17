@@ -301,7 +301,6 @@ class SchoolService {
 			#school update
 			self::updateFields($schoo_id, $fields, $vals);
 		}
-		return $result;
 	}
 
 }

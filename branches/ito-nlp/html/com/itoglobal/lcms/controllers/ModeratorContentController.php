@@ -88,8 +88,8 @@ class ModeratorContentController extends ContentController {
 						$id = $requestParams [SchoolService::ID];
 						$vals [] .= $requestParams [SchoolService::CAPTION];
 						$vals [] .= $requestParams [SchoolService::DESCRIPTION];
-						
 						SchoolService::updateFields ( $id, $fields, $vals );
+						$mvc->addObject ( 'forward', 'successful' );
 					}
 					
 					$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";

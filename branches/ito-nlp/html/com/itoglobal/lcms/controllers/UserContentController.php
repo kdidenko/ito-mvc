@@ -19,9 +19,9 @@ class UserContentController extends ContentController {
 		}
 		
 		#school rate
-			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
-				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
-					NULL;
+		isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+			SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
+				NULL;
 					
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned

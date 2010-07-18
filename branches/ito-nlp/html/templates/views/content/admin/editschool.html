@@ -1,4 +1,10 @@
-<h1>Edit School</h1>	
+<h1>Edit School</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <?php $schList = $mvc->getObject('result'); if($schList == NULL){ ?>
 	<span class="message warning">
 		Oops... seems the address you have entered is invalid. There are no schools for such criterias.<br />

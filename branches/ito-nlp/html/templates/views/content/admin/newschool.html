@@ -1,5 +1,10 @@
 <h1>New School</h1>
-<div class="center">       
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 <?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -9,44 +14,43 @@
 				</ul>
 			</div>
 <?php 	} ?>
-	<form enctype="multipart/form-data" class="reg_form" action="new-school.html" method="post">
-		<dl>
-			<dt>School Name:</dt>
-			<dd><input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST [SchoolService::CAPTION]) ? $_POST [SchoolService::CAPTION] : null; ?>"/></dd>
-			<dt>Alias:</dt>
-			<dd><input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/></dd>
-			<dt>Description:</dt>
-			<dd><textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST [SchoolService::DESCRIPTION]) ? $_POST [SchoolService::DESCRIPTION] : null; ?></textarea></dd>
-			<dt>Base fee:</dt>
-			<dd><input type="text" onkeyup="javascript:this.value=this.value.replace(/[^0-9]/g, '');" name="base_fee" id="base_fee" size="5" value="15"/> $/month</dd>
-			<dt>Language:</dt>
-			<dd>
-				<select name="language">
-					<option>English</option>
-					<option>Russian</option>
-				</select>
-			</dd>
-			<dt>Moderator:</dt>
-			<dd>
-				<select  name="admin_id" id="admin_id">
-					<?php
-					$mrList = $mvc->getObject('mrList');
-					if(!isset($mrList) || count($mrList) == 0){
-					?>
-				<option>No moderator</option>
-					<?php } else { ?>
-					<?php foreach($mrList as $key => $value){ ?>
-				<option value="<?php echo $value[UsersService::ID]; ?>">
-					<?php echo $value[UsersService::USERNAME]; ?>
-				</option>
-					<?php } } ?>
-				</select>
-			</dd>
-			<dt>Avatar(80x80) :</dt>
-			<dd>
+	<form enctype="multipart/form-data" class="edit" action="new-school.html" method="post">
+		<span>School Name:</span>
+			<input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST [SchoolService::CAPTION]) ? $_POST [SchoolService::CAPTION] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Alias:</span>
+			<input type="text" name="alias" id="alias" size="35" value="<? echo isset($_POST [SchoolService::ALIAS]) ? $_POST [SchoolService::ALIAS] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Description:</span>
+			<textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST [SchoolService::DESCRIPTION]) ? $_POST [SchoolService::DESCRIPTION] : null; ?></textarea>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Base fee:</span>
+			<input type="text" onkeyup="javascript:this.value=this.value.replace(/[^0-9]/g, '');" name="base_fee" id="base_fee" size="5" value="15"/> $/month
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Language:</span>
+			<select name="language">
+				<option>English</option>
+				<option>Russian</option>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Moderator:</span>
+			<select  name="admin_id" id="admin_id">
+				<?php
+				$mrList = $mvc->getObject('mrList');
+				if(!isset($mrList) || count($mrList) == 0){
+				?>
+			<option>No moderator</option>
+				<?php } else { ?>
+				<?php foreach($mrList as $key => $value){ ?>
+			<option value="<?php echo $value[UsersService::ID]; ?>">
+				<?php echo $value[UsersService::USERNAME]; ?>
+			</option>
+				<?php } } ?>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Avatar(80x80) :</span>
 			<input type="file" name="file" size="30" ></input>
-			</dd>
-		</dl>
-		<input type="submit" value="Add School" id="submit" name="submit"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<p class="btns"><input type="submit" name="submit" value="Add School" class="defBtn" /></p>
 	</form>
 </div>

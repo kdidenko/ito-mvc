@@ -56,9 +56,7 @@ class AdminContentController extends ContentController {
 						$requestParams[SchoolService::ADMIN] . "','" . $requestParams[SchoolService::LANGUAGE] ."'";
 				$into = SchoolService::SCHOOLS_TABLE;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-				
-				//$mvc->addObject ( 'forward', 'successful' );
-				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
+				$mvc->addObject ( 'forward', 'successful' );
 			} else {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
@@ -113,6 +111,7 @@ class AdminContentController extends ContentController {
 				$vals [] .= $requestParams [SchoolService::ADMIN];			
 				$vals [] .= $requestParams [SchoolService::BASE_FEE];
 				SchoolService::updateFields ( $id, $fields, $vals );
+				$mvc->addObject ( 'forward', 'successful' );
 				
 				#change moderator
 				$requestParams[SchoolService::OLD_ADMIN] != $requestParams[SchoolService::ADMIN] ?
@@ -130,7 +129,7 @@ class AdminContentController extends ContentController {
 	
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		#for admin and moderator
+		#update users info
 		if (isset ( $requestParams ['submit'] )) {
 			$fields = array ();
 			$fields [] .= UsersService::USERNAME;
@@ -148,6 +147,7 @@ class AdminContentController extends ContentController {
 			$vals [] .= $requestParams [UsersService::ENABLED];
 			$vals [] .= $requestParams [UsersService::ROLE];
 			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( 'forward', 'successful' );
 		}
 		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
@@ -211,7 +211,6 @@ class AdminContentController extends ContentController {
 				
 				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 				$mvc->addObject ( 'forward', 'successful' );
-				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
 			} else {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}

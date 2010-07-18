@@ -169,6 +169,7 @@ class ContentController extends SecureActionControllerImpl {
 			if (count ( $error ) == 0) {
 				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 					StorageService::uploadFile ( $path, $file );
+					$mvc->addObject ( 'forward', 'successful' );
 					self::setNoCashe();
 				}
 			}else{
@@ -195,8 +196,10 @@ class ContentController extends SecureActionControllerImpl {
 						$vals = array ();
 						$vals [] .= md5($requestParams [UsersService::PASSWORD]);
 						UsersService::updateFields ( $id, $fields, $vals );
-						$error[] = 'Your password successfully changed';
-						$mvc->addObject ( UsersService::ERROR, $error ); 
+						$mvc->addObject ( 'forward', 'successful' );
+					} else {
+						$error [] .= 'You enter wrong old password. Please try again.';
+						$mvc->addObject ( UsersService::ERROR, $error );
 					}
 				}
 			}else{
@@ -214,7 +217,8 @@ class ContentController extends SecureActionControllerImpl {
 			$vals [] .= $requestParams [UsersService::LASTNAME];
 			$vals [] .= $requestParams [UsersService::EMAIL];
 			
-			UsersService::updateFields ( $id, $fields, $vals );	
+			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( 'forward', 'successful' );
 		}
 		
 		$where = UsersService::ID . " = '" . $id . "'";

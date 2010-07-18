@@ -32,6 +32,12 @@
 				</ul>
 			</div>
 <?php 	} ?>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
 		<?php if (!isset($_GET['picture']) && !isset($_GET['password'])){?>
 				<span class="message warning">Basic information is open to everyone. Please, entered real data.</span>
 			<form enctype="multipart/form-data" action="my-profile.html" method="post" >
@@ -74,7 +80,10 @@
 		<?php } ?>
 		<?php if(isset($_GET['picture'])){ ?>	
 			<form enctype="multipart/form-data" action="my-profile.html?picture" method="post" >
-				<span class="message warning">Select an image file on your computer (max-size: 80x80):</span>
+				<span class="message warning">
+					Here you can change your profile picture.<br/>
+					Select an image file on your computer (max-size: 80x80, 512 Kb)
+				</span>
 				<dl>
 					<dd>
 					<input type="file" name="file" size="30" />

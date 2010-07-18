@@ -5,12 +5,6 @@ if (isset($forward)){
 ?>
 	<span class="message warning">Successfully Saved.</span>
 <?php } ?>
-	<?php
-		$errors = $mvc->getObject('forward');
-		if (isset($errors)){
-	?>
-		<span class="message warning">User registration successful.</span>
-	<?php }else{ ?>  
 <?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -39,4 +33,3 @@ if (isset($forward)){
 		</p>
 	</form>
 	<span class="message warning">Note: After registration new user, he should get email with registration confirmation.</span>
-<?php } ?>	

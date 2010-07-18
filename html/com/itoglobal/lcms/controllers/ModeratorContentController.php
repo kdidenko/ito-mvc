@@ -428,7 +428,6 @@ class ModeratorContentController extends ContentController {
 				
 				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url);
 				$mvc->addObject ( 'forward', 'successful' );
-				//$this->forwardActionRequest ( $mvc->getProperty('onsuccess') );
 			} else {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}

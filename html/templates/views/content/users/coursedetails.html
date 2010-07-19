@@ -1,4 +1,10 @@
 <?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
+<?php
 	$list = $mvc->getObject('list');
 	if(!isset($list) || count($list) == 0){
 ?>

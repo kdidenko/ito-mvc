@@ -1,4 +1,10 @@
 <h1>List of YouCademy courses</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
 <div class="subHeader">
 	<b>Courses List</b>
 	<span>
@@ -57,7 +63,7 @@
          	<li><span>Base fee:</span><span class="lsValue"><?php echo $value[CourseService::BASE_FEE]?>$/ mon</span></li>
          	<li><span>Subjects:</span>
 				<span class="lsValue">
-					<a href="/courses.html?id=<?php echo $value[CourseService::CATEGORY_ID];?>">
+					<a href="/courses.html?cat=<?php echo $value[CategoriesService::NAME];?>">
  						<?php echo $value[CategoriesService::NAME];?></a>
 				</span>
 				</li>

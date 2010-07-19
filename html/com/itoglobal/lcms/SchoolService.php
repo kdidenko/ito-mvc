@@ -276,6 +276,8 @@ class SchoolService {
 			# executing the query
 			DBClientHandler::getInstance ()->execInsert($fields, $values, $into);
 			self::updateSchoolRate($schoo_id);
+		}else{
+			return true;
 		}
 	}
 	public static function updateSchoolRate($schoo_id){

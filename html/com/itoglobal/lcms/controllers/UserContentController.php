@@ -6,6 +6,9 @@ class UserContentController extends ContentController {
 	const RTMP = 'rtmp';
 	const RESP = 'resp';
 	const CHLG = 'chlg';
+	const SCHOOL_RATE = 'You already rated this school';
+	const COURSE_RATE = 'You already rated this course';
+	
 	public function handleHome($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -19,10 +22,11 @@ class UserContentController extends ContentController {
 		}
 		
 		#school rate
-		isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+		$rateSchool = isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
 			SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
 				NULL;
-					
+		$rateSchool == true ? $mvc->addObject ( 'forward', self::SCHOOL_RATE ): NULL;
+				
 		$user_id = SessionService::getAttribute ( SessionService::USERS_ID );
 		#checking schools assigned
 		$result = AssignmentsService::getSchool($user_id);
@@ -43,9 +47,10 @@ class UserContentController extends ContentController {
 	public function handleCourses($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#course rate
-			isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
-				CourseService::rateCourse($requestParams['course_id'], $requestParams['valuate']) : 
-					NULL;
+		$rateCourse = isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
+			CourseService::rateCourse($requestParams['course_id'], $requestParams['valuate']) : 
+				NULL;
+		$rateCourse == true ? $mvc->addObject ( 'forward', self::COURSE_RATE ): NULL;
 		#get courses only for 1 category
 		$where = isset ($requestParams ['cat'] ) ? CategoriesService::NAME . "='" . $requestParams ['cat'] . "'" : NULL ; 
 		#get courses list (assigned to moderator) for creating new exercise
@@ -64,9 +69,10 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[CourseService::ID])){
 			#course rate
-			isset($requestParams['valuate'])&&isset($requestParams[CourseService::ID])&&$requestParams[CourseService::ID]!=NULL ? 
+			$rateCourse  = isset($requestParams['valuate'])&&isset($requestParams[CourseService::ID])&&$requestParams[CourseService::ID]!=NULL ? 
 				CourseService::rateCourse($requestParams[CourseService::ID], $requestParams['valuate']) : 
 					NULL;
+			$rateCourse == true ? $mvc->addObject ( 'forward', self::COURSE_RATE ): NULL;
 			#for users and visitor
 			$where = CourseService::COURSE_TABLE . '.' . CourseService::ID . " = '" . $requestParams [CourseService::ID] . "'";
 			$list = CourseService::getCoursesList ( $where );
@@ -82,9 +88,11 @@ class UserContentController extends ContentController {
 	public function handleSchools($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#school rate
-			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+		$rateSchool = isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
 				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
 					NULL;
+		$rateSchool == true ? $mvc->addObject ( 'forward', self::SCHOOL_RATE ): NULL;
+		
 		#sorting
 		$order = NULL;
 		if( isset($requestParams[SchoolService::RATE]) ){
@@ -108,15 +116,15 @@ class UserContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[SchoolService::ID])){
 			#school rate
-			isset($requestParams['valuate'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
+			$rateSchool = isset($requestParams['valuate'])&&!isset($requestParams['course_id'])&&isset($requestParams[SchoolService::ID])&&$requestParams[SchoolService::ID]!=NULL ? 
 				SchoolService::rateSchool($requestParams[SchoolService::ID], $requestParams['valuate']) : 
 					NULL;
-			
+			$rateSchool == true ? $mvc->addObject ( 'forward', self::SCHOOL_RATE ): NULL;
 			#course rate
-			isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
+			$rateCourse = isset($requestParams['valuate'])&&isset($requestParams['course_id'])&&$requestParams['course_id']!=NULL ? 
 				CourseService::rateCourse($requestParams['course_id'], $requestParams['valuate']) : 
 					NULL;
-					
+			$rateCourse == true ? $mvc->addObject ( 'forward', self::COURSE_RATE ): NULL;	
 			#get school
 			$where = SchoolService::ID . " = '" . $requestParams [SchoolService::ID] . "'";
 			$list = SchoolService::getSchoolsList ( $where );

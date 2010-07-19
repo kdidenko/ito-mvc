@@ -43,9 +43,9 @@
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
 				<?php } else { ?>
-			<div class="subHeader">
-				<b><?php $training = $mvc->getObject('training');echo $training;?></b>
-			</div>
+					<div class="subHeader">
+						<b><?php $training = $mvc->getObject('training');echo $training;?></b>
+					</div>
 					<?php
 						$exerciselist = $mvc->getObject('exerciselist');
 						if(!isset($exerciselist) || count($exerciselist) == 0){

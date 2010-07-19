@@ -394,6 +394,8 @@ class UserContentController extends ContentController {
 			
 		#get exercises for valuation
 		if(isset($requestParams[ValuationsService::ID])){
+			$valName = ValuationsService::getValuation($requestParams[ValuationsService::ID]);
+			$mvc->addObject ( 'valuation', $valName [0][ValuationsService::V_NAME]);
 			#creating "where" for sql query
 			$training = ValuationsService::getValuation($requestParams[ValuationsService::ID]);
 			$where = NULL;

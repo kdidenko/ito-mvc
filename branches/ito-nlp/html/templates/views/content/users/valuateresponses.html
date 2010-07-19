@@ -1,4 +1,5 @@
-<script type="text/javascript"> 
+<script type="text/javascript" src="js/scrollDiv.js"></script>
+<script type="text/javascript">
 function commentResp() { 
 	document.getElementById("comment").disabled = false;
 	document.getElementById('comment').value = '';
@@ -22,16 +23,22 @@ function commentResp() {
 		if(isset($valuationsList) && count($valuationsList) > 0){
 	?>
 		<div class="tabMenu">
-			<ul>
-				<?php foreach($valuationsList as $key => $valuation){ ?> 
-					<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$valuation[ValuationsService::V_ID] ? " class='current'": NULL;?>>
-						<a href="?id=<?php echo $valuation[ValuationsService::V_ID];?>&ex=1">
-							<?php echo $valuation[ValuationsService::V_NAME];?>
-						</a>
-					</li>
-				<?php } ?>
-				<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
-			</ul>
+			<a href="#null" class="tabMenuBtnLeft" onmouseover="scrollDivRight('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-lft.gif"></a>
+			<a href="#null" class="tabMenuBtnRt" onmouseover="scrollDivLeft('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-rt.gif"></a>
+			<div id="container" class="container">
+				<div id="scroller" class="scroller">
+					<ul>
+						<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
+						<?php foreach($valuationsList as $key => $valuation){ ?> 
+							<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$valuation[ValuationsService::V_ID] ? " class='current'": NULL;?>>
+								<a href="?id=<?php echo $valuation[ValuationsService::V_ID];?>&ex=1">
+									<?php echo $valuation[ValuationsService::V_NAME];?>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
 		</div>
 	<?php } ?>
 		<div class="itemBody">
@@ -40,6 +47,9 @@ function commentResp() {
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
 				<?php } else { ?>
+					<div class="subHeader">
+						<b><?php $valuation = $mvc->getObject('valuation');echo $valuation;?></b>
+					</div>
 					<div class="itemOption">
 <?php					$resp = $mvc->getObject('resp');
 					 	if($_GET["ex"]>1){?>

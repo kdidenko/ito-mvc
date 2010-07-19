@@ -235,6 +235,8 @@ class UserContentController extends ContentController {
 			
 		#get exercises for training
 		if(isset($requestParams[TrainingsService::ID])){
+			$trainingName = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
+			$mvc->addObject ( 'training', $trainingName[0][TrainingsService::TRN_NAME]);
 			#creating "where" for sql query
 			$training = TrainingsService::getTraining($requestParams[TrainingsService::ID]);
 			if (count($training)>0){ 

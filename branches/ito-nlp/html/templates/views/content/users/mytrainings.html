@@ -1,3 +1,4 @@
+<script type="text/javascript" src="js/scrollDiv.js"></script>
 <h1>My Trainings</h1>
 <?php
 	$noSchAssigne = $mvc->getObject('noSchAssigne');
@@ -13,17 +14,27 @@
 		$trainingList = $mvc->getObject('trainingList');
 		if(isset($trainingList) && count($trainingList) > 0){
 	?>
+<!-- 
+<a href="#null" onclick="toLeft('container')">first</a>|
+<a href="#null" onclick="toRight('container')">last</a>
+ -->
 		<div class="tabMenu">
-			<ul>
-				<?php foreach($trainingList as $key => $training){ ?> 
-					<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>
-						<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>&ex=1">
-							<?php echo $training[TrainingsService::TRN_NAME];?>
-						</a>
-					</li>
-				<?php } ?>
-				<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
-			</ul>
+			<a href="#null" class="tabMenuBtnLeft" onmouseover="scrollDivRight('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-lft.gif"></a>
+			<a href="#null" class="tabMenuBtnRt" onmouseover="scrollDivLeft('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-rt.gif"></a>
+			<div id="container" class="container">
+				<div id="scroller" class="scroller">
+					<ul>
+						<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
+						<?php foreach($trainingList as $key => $training){ ?> 
+							<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>
+								<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>&ex=1">
+									<?php echo $training[TrainingsService::TRN_NAME];?>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
 		</div>
 	<?php } ?>
 		<div class="itemBody">
@@ -32,6 +43,9 @@
 					<!-- creating training form. -->
 					<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
 				<?php } else { ?>
+			<div class="subHeader">
+				<b><?php $training = $mvc->getObject('training');echo $training;?></b>
+			</div>
 					<?php
 						$exerciselist = $mvc->getObject('exerciselist');
 						if(!isset($exerciselist) || count($exerciselist) == 0){

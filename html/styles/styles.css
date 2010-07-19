@@ -170,7 +170,12 @@ span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
 .courseList .pgItemBody p{font-size: 12px; margin-left: 10px; margin-top: 5px;}
 .courseList .pgItemBody span{font-size: 12px; }
 
-.tabMenu li {margin-left: 30px}
+
+.tabMenu {width: 90%;margin: 0 30px}
+.tabMenu .container {overflow: hidden;margin-bottom: -16px;padding: 0;}
+.tabMenu .scroller {width: 2000px; /* = width + margin left + margin right + padding*2 + border*2  from the content rule */}
+.tabMenu .tabMenuBtn { float:left;}
+.tabMenu .tabMenuBtnRt { float:right;}
 .tabMenu li a {margin: 0 0 -1px 5px; padding: 0 10px; float: left; background-color: #7496B9; border: 1px solid #7496B9; border-bottom: none; line-height: 23px; text-align: center; color: #FFF; text-decoration: none;}
 .tabMenu .current a{ background-color: white; font-weight:bold; color: #666666;}
 .tabMenu li:hover a{ background-color: white; color: black}

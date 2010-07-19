@@ -26,7 +26,7 @@
 <?php				foreach($usCourseList as $key => $course){
 						$old = isset ($old)? $old : NULL;
 						if ($course[SchoolService::CAPTION] != $old){?>
-							</ul>
+							<?php if($key%2){ ?></ul><?php } ?>
 							<div class="clnr">&nbsp;</div>							
 							<span><?php echo $course[SchoolService::CAPTION];?>:</span>
 							<div class="clnr">&nbsp;</div>

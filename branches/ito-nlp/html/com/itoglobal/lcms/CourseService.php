@@ -266,6 +266,8 @@ class CourseService {
 			# executing the query
 			DBClientHandler::getInstance ()->execInsert($fields, $values, $into);
 			self::updateCourseRate($course_id);
+		}else{
+			return true;
 		}
 	}
 	public static function updateCourseRate($course_id){

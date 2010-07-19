@@ -4,6 +4,12 @@
 	school has its own rules and fees, please see school details for more
 	information.
 </p>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
 <div class="subHeader">
 	<b>Shools List</b>
 	<span>Sort by:
@@ -63,7 +69,7 @@
 					<span class="lsValue">
 					<?php if (isset($value['subject'])){ 
 							foreach($value['subject'] as $key_sub => $subject){ ?>
-							<a href="/courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+							<a href="/courses.html?cat=<?php echo $subject[CategoriesService::NAME];?>">
 							<?php echo $subject[CategoriesService::NAME]; ?></a>
 						<? } 
 						}?>

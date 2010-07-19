@@ -1,5 +1,11 @@
 <h1>Your personal overview</h1>
 <?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
+<?php
 	$usSchList = $mvc->getObject('usSchList');
 	if(!isset($usSchList) || count($usSchList) == 0){
 ?>

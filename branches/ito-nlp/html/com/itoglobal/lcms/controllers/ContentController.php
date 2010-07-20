@@ -212,10 +212,16 @@ class ContentController extends SecureActionControllerImpl {
 			$fields [] .= UsersService::FIRSTNAME;
 			$fields [] .= UsersService::LASTNAME;
 			$fields [] .= UsersService::EMAIL;
+			$fields [] .= UsersService::BIRTHDAY;
+			$fields [] .= UsersService::SKYPE;
+			$fields [] .= UsersService::GENDER;
 			$vals = array ();
 			$vals [] .= $requestParams [UsersService::FIRSTNAME];
 			$vals [] .= $requestParams [UsersService::LASTNAME];
 			$vals [] .= $requestParams [UsersService::EMAIL];
+			$vals [] .= $requestParams [UsersService::BIRTHDAY];
+			$vals [] .= $requestParams [UsersService::SKYPE];
+			$vals [] .= $requestParams [UsersService::GENDER];
 			
 			UsersService::updateFields ( $id, $fields, $vals );
 			$mvc->addObject ( 'forward', 'successful' );
@@ -223,12 +229,16 @@ class ContentController extends SecureActionControllerImpl {
 		
 		$where = UsersService::ID . " = '" . $id . "'";
 		$result = UsersService::getUsersList ( $where );
-		isset ( $result [0] [UsersService::ID] ) ? $mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] ) : null;
-		isset ( $result [0] [UsersService::AVATAR] ) ? $mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] ) : null;
-		isset ( $result [0] [UsersService::LASTNAME] ) ? $mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] ) : null;
-		isset ( $result [0] [UsersService::FIRSTNAME] ) ? $mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] ) : null;
-		isset ( $result [0] [UsersService::EMAIL] ) ? $mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] ) : null;
-		
+		if(isset ( $result [0] )){
+			$mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] );
+			$mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] );
+			$mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] );
+			$mvc->addObject ( UsersService::FIRSTNAME, $result [0] [UsersService::FIRSTNAME] );
+			$mvc->addObject ( UsersService::EMAIL, $result [0] [UsersService::EMAIL] );
+			$mvc->addObject ( UsersService::BIRTHDAY, $result [0] [UsersService::BIRTHDAY] );
+			$mvc->addObject ( UsersService::SKYPE, $result [0] [UsersService::SKYPE] );
+			$mvc->addObject ( UsersService::GENDER, $result [0] [UsersService::GENDER] );
+		}
 		return $mvc;
 	}
 	
@@ -242,7 +252,16 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[CategoriesService::ID])){
 			$user = UsersService::getUser($requestParams[UsersService::ID]);
-			$mvc->addObject(self::USER_DETAILS, $user);		
+			
+			list($year,$month,$day) = explode("-",$user[UsersService::BIRTHDAY]);
+		    $year_diff  = date("Y") - $year;
+		    $month_diff = date("m") - $month;
+		    $day_diff   = date("d") - $day;
+		    if ($day_diff < 0 || $month_diff < 0)
+		      $year_diff--;
+			$age = $year_diff;
+			$user['age'] = $age; 
+			$mvc->addObject(self::USER_DETAILS, $user);	
 		}
 		return $mvc;	
 	}

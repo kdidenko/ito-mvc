@@ -12,7 +12,17 @@
 			<dt>First Name:</dt>
 			<dd><?php echo $user['firstname']?></dd>
 			<dt>Last Name:</dt>
-			<dd><?php echo $user['lastname']?></dd>	
+			<dd><?php echo $user['lastname']?></dd>
+		<?php if ($user['birthday']!=NULL) {?>
+			<dt>Age</dt>
+			<dd><?php echo $user['age']?></dd>
+			<dt>Birthday:</dt>
+			<dd><?php echo $user['birthday']?></dd>
+		<?php } ?>
+		<?php if ($user['gender']!=NULL) {?>
+			<dt>Gender:</dt>
+			<dd><?php echo $user['gender']?></dd>
+		<?php } ?>
 		</dl>
 	</div>
 	<div class="info_sect">
@@ -20,6 +30,10 @@
 		<dl>
 			<dt>email:</dt>
 			<dd><a href="mailto:<?php echo $user['email']?>"><?php echo $user['email']?></a></dd>
+		<?php if ($user['skype']!=NULL) {?>
+			<dt>Skype:</dt>
+			<dd><?php echo $user['skype']?></dd>
+		<?php } ?>
 		</dl>
 	</div>
 	<div class="info_sect">

@@ -58,6 +58,18 @@ class UsersService {
 	 */
 	const VALIDATION = 'validation_id';
 	/**
+	 * @var string defining the birthday field name
+	 */
+	const BIRTHDAY = 'birthday';
+	/**
+	 * @var string defining the gender field name
+	 */
+	const GENDER = 'gender';
+	/**
+	 * @var string defining the skype field name
+	 */
+	const SKYPE = 'skype';
+	/**
 	 * @var string defining the role field name
 	 */
 	const ROLE = 'role';
@@ -91,7 +103,10 @@ class UsersService {
 	const SCROLLER = 'scroller';
 	
 	public static function getUsersList($where = NULL, $from = NULL) {
-		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
+		$fields = self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . 
+				SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
+				self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
+				 . ', ' . self::SKYPE . ', ' . self::GENDER;
 		$from = isset ( $from ) ? $from : self::USERS;
 		$groupBy = self::USERS . '.' . self::ID;
 		# executing the query
@@ -109,7 +124,8 @@ class UsersService {
 			# preparing query
 			$fields = self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . 
 						SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . 
-						self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR;
+						self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . 
+						self::BIRTHDAY . ', ' . self::SKYPE . ', ' . self::GENDER;
 			$from = self::USERS;
 			$where = self::ID . '=' . $id;
 			# executing query

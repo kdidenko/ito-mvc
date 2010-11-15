@@ -7,7 +7,8 @@
 	
 
     require_once 'global-settings.php';
-	
+	//TODO: need to refactoring
+	require_once 'aliases.php';
 	# set MVC libraries include path
 	//set_include_path(get_include_path() . PATH_SEPARATOR . 'D:\Work\www\ito-mvc\html');
 
@@ -18,7 +19,7 @@
 	require_once 'com/itoglobal/mail/MailerService.php';
 	require_once 'com/itoglobal/validation/ValidationService.php';
 	
-    require_once 'com/itoglobal/lcms/UsersService.php';
+    require_once 'com/itoglobal/eb4u/UsersService.php';
     
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';

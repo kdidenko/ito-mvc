@@ -1,41 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions xmlns="http://www.ito-global.com/schema/mvc" 
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.0.xsd  
-		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.0.xsd" >
+		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.2.xsd  
+		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd" >
 
-	<action name="/index.html" id="home">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />
-		<!-- forwards id="navigation">
-			<target name="Start" location="/start-operating.html" />
-			<target name="Help" location="/help-start-operating.html" />
-			<target name="Cancel" location="/index.html" id="navCncl" />
-		</forwards-->
-	</action>
 	
-	<action name="/login.html" id="home">
-		<controller class="com.itoglobal.users.AuthenticationController" 
-			method="login" />
-		<template name="home.html" path="templates/home.html"/>
-		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
-		</forwards>
+	<action name="/swithLanguage.html" id="swithLanguage">
+		<controller class="com.itoglobal.i18n.LocalizationController"	
+			method="switchLocale" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>	
 	
+	<!-- Navigation views mapping begin -->
+	<action name="/navigation-*.html" id="navigation-$1">
+		<controller class="com.itoglobal.eb4u.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
+			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>
+			<role type="TR" path="templates/views/navigation/tradesman/top-menu.html"/>
+			<role type="PR" path="templates/views/navigation/promoter/top-menu.html"/>		
+			<role type="BR" path="templates/views/navigation/bookkeeper/top-menu.html"/>				
+		</template>	
+	</action>
+	<!-- Navigation views mapping end -->	
 	
-	<action name="/registration.html" id="home">
+	<!-- Sub header views mapping begin -->
+	<action name="/sub-header-*.html" id="sub-header-$1">
+		<controller class="com.itoglobal.eb4u.controllers.SubHeaderController"/>
+		<template name="$1.html" path="templates/views/sub-header/common/home.html" />
+			<!-- 
+			<role type="VR" path="templates/views/sub-header/default/$1.html"/>
+			<role type="UR" path="templates/views/sub-header/users/$1.html"/>
+			<role type="AR" path="templates/views/sub-header/admin/$1.html"/>
+			<role type="TR" path="templates/views/sub-header/tradesman/$1.html"/>
+			<role type="PR" path="templates/views/sub-header/promoter/$1.html"/>		
+			<role type="BR" path="templates/views/sub-header/bookkeeper/$1.html"/>				
+		</template>	
+		 -->
+	</action>
+	<!-- Sub header views mapping end -->	
+	
+	<!-- Sidebar views mapping begin -->
+	<action name="/sidebar-*.html" id="sidebar">
+		<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
+				method="handle$1" />
+		<template name="$1.html">
+			<role type="VR" path="templates/views/sidebars/default/$1.html"/>
+			<role type="UR" path="templates/views/sidebars/users/$1.html"/>
+			<role type="AR" path="templates/views/sidebars/admin/$1.html"/>
+			<role type="TR" path="templates/views/sidebars/tradesman/$1.html"/>
+			<role type="PR" path="templates/views/sidebars/promoter/$1.html"/>		
+			<role type="BR" path="templates/views/sidebars/bookkeeper/$1.html"/>	
+		</template>	
+	</action>
+	<!-- Sidebar views mapping end -->
+	
+	<!-- Content views mapping begin -->
+	<action name="/content-*.html" id="content">
+		<role type="TR">
+			<controller class="com.itoglobal.eb4u.controllers.TradesmanContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/tradesman/$1.html" />
+		</role>
+		<role type="PR">
+			<controller class="com.itoglobal.eb4u.controllers.PromoterContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/promoter/$1.html" />
+			<property name="template" value="templates/plain/created-account.txt"/>
+		</role>
+		<role type="BR">
+			<controller class="com.itoglobal.eb4u.controllers.BookkeeperContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/bookkeeper/$1.html" />
+		</role>
+		<role type="AR">
+			<controller class="com.itoglobal.eb4u.controllers.AdminContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/admin/$1.html" />
+			<property name="template" value="templates/plain/created-account.txt"/>
+		</role>
+		<role type="UR">
+			<controller class="com.itoglobal.eb4u.controllers.UserContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
+			<forwards>
+				<target location="/index.html" name="home" condition="onfailure"/>
+				<target location="/my-trainings.html" name="mytrainings" condition="onsuccess"/>
+			</forwards>
+		</role>
+		<role type="VR">
+			<controller class="com.itoglobal.eb4u.controllers.ContentController" method="handle$1" />
+			<template name="content-$1.html" path="templates/views/content/default/$1.html" />
+		</role>
+	</action>
+	<!-- Content views mapping end -->
+	
+	<!-- Footer views mapping begin -->
+	<action name="/footer-*.html" id="footer-$1">
+		<controller class="com.itoglobal.eb4u.controllers.NavigationController"/>
+		<template name="$1.html" path="templates/views/navigation/common/footer.html" />
+	</action>
+	<!-- Footer views mapping end -->
+	
+	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="registration.html" path="templates/registration.html" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	
-	<action name="/registr.html" id="home">
-		<controller class="com.itoglobal.users.RegistrationController" 
-			method="registration"/>
-		<template name="home.html" path="templates/home.html" />
+	<action name="/manage-users.html" id="manageusers">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
 		<forwards>
-			<target location="registration.html" name="registration" condition="onfailure"/>		
+			<target location="/index.html" name="home" condition="onfailure"/>
 		</forwards>
 	</action>
 	
+	<action name="/new-*.html" id="new$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+		<forwards>
+			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+		</forwards>
+	</action>
+	
+	<action name="/edit-*.html" id="edit$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+		<forwards>
+			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+		</forwards>
+	</action>
+	
+	<action name="/my-profile.html" id="myprofile">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>	
+	
+	<!-- start user log in -->
+	<action name="/login.html" id="login">
+		<role type="VR">
+			<controller class="com.itoglobal.users.AuthenticationController" 
+				method="login" />
+			<template name="login.html" path="templates/layout-two-columns.html"/>	
+			<forwards>
+				<target location="/index.html" name="home" condition="onsuccess"/>
+			</forwards>
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
+	</action>
+	<!-- end user log in -->
+	
+	<!-- start user log out -->
+	<action name="/logout.html" id="logout">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="logout" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
+		</forwards>
+	</action>
+	<!-- end user log out -->
+	
+	<!-- start confirm registration -->
+	<action name="/registration.html" id="registration">
+		<role type="VR">
+			<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+			<template name="index.html" path="templates/layout-one-column.html" />	
+			<property name="template" value="templates/plain/email-confirmation.txt"/>
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
+	</action>
+	
+	<action name="/confirm-registration.html" id="confirmregistration">
+		<role type="VR">
+			<controller class="com.itoglobal.users.RegistrationController" method="confirmRegistration"/>
+			<template name="index.html" path="templates/layout-one-column.html" />	
+			<property name="template" value="templates/plain/email-confirmation.txt"/>
+			<forwards>
+				<target location="/registration.html" name="registration" condition="onfailure"/>
+			</forwards>
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
+	</action>
+	<!-- end confirm registration -->
+	
+	<!-- start changing password -->
+	<action name="/forgot-password.html" id="resetpassword">
+		<role type="VR">
+			<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+			<template name="index.html" path="templates/layout-one-column.html"/>
+			<property name="template" value="templates/plain/reset-password.txt"/>
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
+	</action>
+	
+	<action name="/new-password.html" id="newpassword">
+		<role type="VR">
+			<controller class="com.itoglobal.users.RegistrationController" method="newPassword"/>
+			<template name="index.html" path="templates/layout-one-column.html"/>
+		</role>
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/crash.html" />
+	</action>
+	<!-- end changing password -->
+
 </actions>

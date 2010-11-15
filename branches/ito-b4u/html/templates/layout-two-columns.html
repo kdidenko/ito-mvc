@@ -1,0 +1,49 @@
+<? echo XML_CONTENT_DEFINITION ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>eBids4U</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="styles/style.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+
+<div class="wrapHeader">
+	<div class="wrapInner">
+		<?php TemplateEngine::inclusion('header.html', $mvc) ?>
+	</div>
+</div>
+<div class="wrapNav">
+	<div class="wrapInner">
+		<?php TemplateEngine::execute('/navigation-' . $mvc->getView() . '.html', $mvc)?>
+	</div>
+</div>
+<div class="wrapHome">
+	<div class="wrapInner">
+		<!-- title and extra link on -->
+			<?php TemplateEngine::execute('/sub-header-' . $mvc->getView() . '.html', $mvc); ?>
+		<!-- title and extra link off -->
+		<!-- content on -->
+		<div class="stationContent">
+			<div class="wrapMain">
+				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			</div>
+			<div class="wrapSide">
+			<!-- catalog on -->	
+				<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>
+			<!-- catalog off -->
+			</div>
+		</div>
+		<!-- content off -->
+	</div>
+</div>
+<div class="wrapFooter">
+	<div class="wrapInner">
+		<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc);?>
+	</div>
+</div>
+<div class="wrapBtmLine"><div class="wrapInner"></div></div>
+</body>
+</html>

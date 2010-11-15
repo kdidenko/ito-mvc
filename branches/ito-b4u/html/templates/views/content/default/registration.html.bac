@@ -1,0 +1,41 @@
+<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+		if (isset($message) && $message!=NULL){?>
+			<span class="message warning"><?php echo $message; ?></span>
+<?php	} else { ?>
+
+<h1>_i18n{Hi! Ready to register with eBids4U?}</h1>
+<p>_i18n{It's your typical registration - it's free and fairly simple to complete.}</p>
+<p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p>
+<h2>_i18n{Tell us about yourself}</h2>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+<div class="signinForm">
+	<form action="registration.html" method="post" name="registration">
+		<p>
+			<label>_i18n{Type}:</label><br />
+			<ul>
+				<li><input type="radio" class="wide inpTxt" name="role" value="1" <? if(!isset($_POST['role']) || $_POST['role']==1) echo 'checked'; ?>/>_i18n{For private person (post a job)}</li>
+				<li><input type="radio" class="wide inpTxt" name="role" value="2" <? if(isset($_POST['role'])&& $_POST['role']==2) echo 'checked'; ?>/>_i18n{For entrepreneur (find a job)}</li>
+			</ul>
+		</p>
+		<p><label>_i18n{Username}:</label><br /><input type="text" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"/></p>
+		<p><label>_i18n{First Name}:</label><br /><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></p>
+		<p><label>_i18n{Last Name}:</label><br /><input type="text" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></p>
+		<p><label>_i18n{Your Email}:</label><br /><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></p>
+		<p><label>_i18n{Password}:</label><br /><input type="password" class="inpTxt" name="password"/></p>
+		<p><label>_i18n{Repeat Password}:</label><br /><input type="password" class="inpTxt" name="confirm_password"/></p>
+		<p><input type="checkbox" class="wide inpTxt" name="agreement"/>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</p>
+		<p class="btns">
+			<input class="defBtn" type="button" name="Cancel" value="_i18n{Cancel}" onclick="window.location = '/' " />
+			<input class="defBtn" type="submit" value="_i18n{Sign Up}"  value="Sign up" id="submit" name="submit"/>
+		</p>
+	</form>
+</div>
+<?php } ?>

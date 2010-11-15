@@ -1,0 +1,14 @@
+Willkommen bei www.Angebotholen.at, ###FIRST_NAME### ###LAST_NAME###!
+
+Ihr Benutzerkonto ist fast fertig eingerichtet.
+
+Der Benutzername ist ###USERNAME###.
+
+BBitte bestätigen Sie hier Ihre Benutzerregistrierung:
+###CONFIRMATION_URL###
+
+Wenn Ihr Benutzerkonto eingerichtet ist, können Sie die Services sofort nutzen und loslegen.
+
+Vielen Dank!
+
+Ihr Supportteam von www.angebotholen.at

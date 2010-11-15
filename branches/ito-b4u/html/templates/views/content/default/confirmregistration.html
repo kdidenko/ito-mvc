@@ -1,0 +1,30 @@
+<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+		if (isset($message) && $message!=NULL){?>
+			<span class="message warning"><?php echo $message; ?></span>
+<?php	} else { ?>
+
+<h1>_i18n{Your account is almost ready!}</h1>
+<p>_i18n{Please, continue registration your acoount.}</p>
+<p>_i18n{Fill al required fields (*).}</p>
+
+<!-- start display errors -->
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors) && $errors == true){?>
+			<div class="error">
+				<ul>
+					<li>_i18n{Please, fill in all required fields (*).}</li>
+				</ul>
+			</div>
+<?php 	} ?>
+<!-- end display errors -->
+
+<!-- start include registration form --> 
+<?php	$role = $mvc->getObject(UsersService::ROLE); 
+		if ($role == 'TR'){
+			TemplateEngine::inclusion('/trademanregistration.html', $mvc);
+		} else {
+			TemplateEngine::inclusion('/userregistration.html', $mvc);
+		}
+?>
+ <!-- finish include registration form -->
+<?php } ?>

@@ -2,6 +2,8 @@
 
 class SessionService {
 	
+	const LOCALE = 'locale';
+
 	const USERS_ID = 'user_id';
 	
 	const USERNAME = 'username';

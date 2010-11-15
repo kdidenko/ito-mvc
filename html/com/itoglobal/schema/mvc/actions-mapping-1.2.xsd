@@ -30,8 +30,10 @@
 					<xsd:restriction base="xsd:string">
 						<xsd:enumeration value="VR"/>
 						<xsd:enumeration value="UR"/>
-						<xsd:enumeration value="MR"/>
 						<xsd:enumeration value="AR"/>
+						<xsd:enumeration value="TR"/>
+						<xsd:enumeration value="PR"/>
+						<xsd:enumeration value="BR"/>
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:attribute>

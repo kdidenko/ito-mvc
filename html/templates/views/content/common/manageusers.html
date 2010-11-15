@@ -1,0 +1,71 @@
+<h1>Users Management</h1>
+<div class="subHeader">
+	<b>Users List</b>
+		<span>
+			<a <?php echo !isset($_REQUEST[UsersService::ROLE]) ? "class='current'" : NULL;?> href="/manage-users.html">_i18n{All}</a> | 
+			<a <?php if(isset($_REQUEST[UsersService::ROLE]))
+					echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_AR ? "class='current'" : NULL;?> href="?role=AR">_i18n{Administrators}</a> | 
+			<a <?php if(isset($_REQUEST[UsersService::ROLE]))
+					echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_BR ? "class='current'" : NULL;?>  href="?role=BR">_i18n{Bookkeeper}</a> |
+			<a <?php if(isset($_REQUEST[UsersService::ROLE]))
+					echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_PR ? "class='current'" : NULL;?>  href="?role=PR">_i18n{Promoter}</a> |
+			<a <?php if(isset($_REQUEST[UsersService::ROLE]))
+					echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_TR ? "class='current'" : NULL;?>  href="?role=TR">_i18n{Tradesman}</a> |
+			<a <?php if(isset($_REQUEST[UsersService::ROLE]))
+					echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_UR ? "class='current'" : NULL;?>  href="?role=UR">_i18n{Users}</a>
+		</span>
+</div>
+<?php
+	$scroller = $mvc->getObject ( UsersService::SCROLLER );		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) { 
+?>
+<div class="chrScroller">
+		<?php foreach($scroller as $key => $value){ ?>
+			<a class="button" href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+			echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a>
+		<?php } ?>
+</div>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">_i18n{Successfully Saved.}</span>
+<?php } ?>
+<table class="list">
+<tr>
+	<th>_i18n{User Name}:</th>
+	<th>_i18n{Name}:</th>
+	<th>_i18n{Role}:</th>
+	<th>_i18n{Options}:</th>
+</tr>
+<?php foreach($message as $key => $value){ ?>
+	<tr <?php if($key%2)echo "class='pair'" ?>>
+		<td>
+			<a href=<?php echo 'user-details.html?id=' . $value[UsersService::ID];?>>
+				<?php echo $value[UsersService::USERNAME];?>
+			</a>
+		</td>
+		<td><?php echo $value[UsersService::FIRSTNAME] . ' ' . $value[UsersService::LASTNAME]?></td>
+		<td><?php echo $value[UsersService::ROLE];?></td>
+		<td>
+			<?php if (isset($value[UsersService::ENABLED])) { if($value[UsersService::ENABLED] == '0') {?>
+				<a class="button" href="manage-users.html?
+				<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+				echo isset($_GET[UsersService::SCROLLER]) ? "scroller=".$_GET[UsersService::SCROLLER]."&" : NULL;
+				echo "enabled=". $value[UsersService::ID];?>">_i18n{Enable}</a>
+			<?php }else{ ?>
+				<a class="button" href="manage-users.html?
+				<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+				echo isset($_GET[UsersService::SCROLLER]) ? "scroller=".$_GET[UsersService::SCROLLER]."&" : NULL;
+				echo "disable=". $value[UsersService::ID];?>">_i18n{Disable}</a> 
+			<?php }} ?>
+			<a class="button" href=<?php echo 'edit-user.html?id=' . $value[UsersService::ID];?>>_i18n{Edit}</a>
+			<a class="button" onclick="return confirm('_i18n{You sure you want to delete?}');"  href=<?php echo 'manage-users.html?deleted=' . $value[UsersService::ID];?>>Delete</a>
+		</td>
+	</tr>
+<?php } ?></table>
+<?php }else{ ?>
+<span class="message warning">_i18n{There are no registered users at this moment.}</span>
+<?php } ?>
+

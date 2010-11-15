@@ -1,0 +1,12 @@
+Hallo ###FIRST_NAME### ###LAST_NAME###!
+
+Für Sie haben wir ein Benutzerkonto eingerichtet.
+
+Ihr Benutzername lautet ###USERNAME###.
+
+Legen Sie Ihr Passwort fest indem Sie die folgende URL besuchen:
+###CONFIRMATION_URL###
+
+Viel Erfolg!
+
+Ihr Supportteam von www.angebotholen.at

@@ -1,0 +1,132 @@
+body {margin:0; padding:0; text-align:center; font-family:"Lucida Sans", "Lucida Grande", sans-serif; font-size:12px; line-height:140%; background:#fff; color:#393939}
+
+h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style:none}
+img {border:none}
+a {color:#393939; text-decoration:none}
+a:hover {text-decoration:underline}
+input, select, button {font-family:"Lucida Sans", "Lucida Grande"; font-size:12px; padding:0; margin:0}
+button::-moz-focus-inner {border:0; padding:0}
+button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; position:relative; cursor:pointer}
+	button span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px; position:relative}
+	button span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
+
+.wrapInner {width:1005px; margin:0 auto; text-align:left; overflow:hidden}
+/* header style */
+.wrapHeader {}
+	.wrapHeader .unitLogo {float:left; padding:25px 0 25px 20px}
+	.wrapHeader .unitSlogan {float:right; width:700px; height:175px; background:url(../images/headerSloganBg.gif) no-repeat 0 20px}
+	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
+/* navigation style */
+.wrapNav {background:url(../images/navBg.png) repeat-x 0 1px}
+	.wrapNav .wrapInner {padding:0 40px 0 60px; width:905px; overflow:auto; margin:0 auto -5px auto; position:relative; z-index:10}
+.mainNav {float:left; overflow:hidden}
+	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:5}
+	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
+	.mainNav li a:hover {background:#850208}
+	.mainNav li.itemActive {padding:0; z-index:6}
+	.mainNav li.itemActive a {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
+.userNav {float:right}
+	.userNav li {float:left; padding:9px 0 0 20px}
+	.userNav li a {color:#fff; text-decoration:underline}
+	.userNav li a:hover {text-decoration:none}
+/* footer style */
+.wrapFooter {}
+	.wrapFooter .wrapInner {border-top:1px solid #EDEDED}
+	.wrapFooter dl {float:left; padding:10px 0 10px 25px}
+	.wrapFooter dt {font-size:14px; font-weight:bold; color:#9f0307; padding:0 0 8px 0}
+	.wrapFooter dd {}
+.wrapBtmLine {border-top:7px solid #850208; height:20px}
+
+.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; padding:20px}
+	.greyBox .peopleFace {width:312px; height:98px; position:absolute; top:-98px; right:0; background:url(../images/contentImg07.jpg) no-repeat 0 0}
+	.greyBox .peopleHand {width:23px; height:28px; position:absolute; top:115px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
+	.greyBox .lineHide {width:652px; overflow:hidden; height:1px}
+
+.angleT {height:9px; font-size:1px; line-height:1px; overflow:hidden}
+.angleB {height:12px; font-size:1px; line-height:1px; overflow:hidden}
+
+.stationTitle {float:left; width:1005px}
+	.stationTitle h1 {float:left; width:380px; padding:30px 0 10px 20px; line-height:normal; font-size:22px}
+.viewExtra {float:right; width:212px; padding:10px 40px 0 0; text-align:right}
+	.viewExtra p {font-size:14px; color:#9F0307; line-height:18px}
+	.viewExtra p a {color:#9F0307; text-decoration:underline}
+	.viewExtra ul {float:right; padding:15px 0}
+	.viewExtra li {float:left; padding:0 0 0 2px}
+	.viewExtra li a {display:block; float:left; text-indent:99px; overflow:hidden; width:22px; height:22px}
+	.viewExtra li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
+	.viewExtra li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
+	.viewExtra li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
+
+.stationContent {float:left; width:965px}
+.wrapMain {float:left; width:692px}
+.wrapSide {float:right; width:213px}
+/* catalog style */
+.viewCatalog {float:left; background:url(../images/shadowBg.png) repeat-y 0 0; width:213px; margin:10px 0}
+	.viewCatalog .angleT {background:url(../images/shadowTBg.png) no-repeat 0 0}
+	.viewCatalog .angleB {background:url(../images/shadowBBg.png) no-repeat 0 0}
+	.viewCatalog h2 {font-size:18px; line-height:normal; padding:5px 18px}
+	.viewCatalog ul {padding:5px 18px}
+	.viewCatalog li {border-top:1px solid #EDECEC; padding:7px 0}
+	.viewCatalog li.itemFirst {border-top:none}
+	.viewCatalog li a {text-decoration:none; display:block; height:1%}
+	.viewCatalog li img {vertical-align:text-bottom; padding:0 3px 0 0}
+/* box red border style */
+.viewHomeBox {float:left; background:url(../images/shadowBg.png) repeat-y -213px 0; width:442px; margin:10px 0 0 0}
+	.viewHomeBox .angleT {background:url(../images/shadowTBg.png) no-repeat -213px 0}
+	.viewHomeBox .angleB {background:url(../images/shadowBBg.png) no-repeat -213px 0}
+	.viewHomeBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 18px}
+	.viewHomeBox form {padding:5px 5px 5px 18px; overflow:hidden}
+	.viewHomeBox form p {float:left; width:205px; padding:0 0 5px 0}
+	.viewHomeBox form p.itemBtn {text-align:right; width:400px}
+	.viewHomeBox form label {display:block; padding:5px 0 0 0}
+	.viewHomeBox form select {width:195px}
+	.viewHomeBox ol {overflow:hidden; width:442px; padding:5px 0}
+	.viewHomeBox li {float:left; width:129px; padding:0 0 5px 18px}
+	.viewHomeBox li span {display:block; color:#616161}
+/* two list style */
+.viewHomeList {float:left; width:422px}
+	.viewHomeList ul {float:left; width:193px; padding:10px 0 0 18px}
+
+.viewAdvantages {float:right; width:185px}
+	.viewAdvantages h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
+	.viewAdvantages ul {padding:0 5px 0 12px}
+	.viewAdvantages li {background:url(../images/listBullet.gif) no-repeat 0 5px; padding:0 0 0 10px}
+
+.viewVideoBox {float:right; background:url(../images/shadowBg.png) repeat-y -655px 0; width:185px; margin:10px 0 0 0}
+	.viewVideoBox .angleT {background:url(../images/shadowTBg.png) no-repeat -655px 0}
+	.viewVideoBox .angleB {background:url(../images/shadowBBg.png) no-repeat -655px 0}
+	.viewVideoBox h3 {font-size:14px; padding:0 12px 5px 12px}
+	.viewVideoBox .itemVideo {border:2px solid #D1CFCF; background:#fff; margin:0 12px 5px 12px}
+.viewPageBox {float:right; background:url(../images/shadowBg.png) repeat-y -655px 0; width:185px; margin:10px 0 0 0}
+	.viewPageBox .angleT {background:url(../images/shadowTBg.png) no-repeat -655px 0}
+	.viewPageBox .angleB {background:url(../images/shadowBBg.png) no-repeat -840px 0}
+	.viewPageBox h3 {font-size:14px; padding:0 12px 5px 12px}
+	.viewPageBox p {padding:0 0 5px 0}
+	.viewPageBox form {padding:0 12px}
+	.viewPageBox form label {display:block}
+	.viewPageBox form select {width:160px}
+	.viewPageBox button span {background-position:right -78px}
+	.viewPageBox button span strong {background-position:left -52px; color:#292929}
+/* home page style */
+.wrapHome {}
+	.wrapHome .stationContent {border-bottom:1px solid #850208}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+span.message {display:block;l-ine-height:14px;font-weight:bold;color:#999999}
+.warning {background-color:#FFFFB5; padding:10px; border:1px solid #ccc; margin:5px 0;}
+.error {background-color:#FFFFB5; padding:10px; border:1px solid #ccc; margin: 10px;}
+.error li {margin:0; padding:0; color:red; text-align:left; list-style: disc inside;}

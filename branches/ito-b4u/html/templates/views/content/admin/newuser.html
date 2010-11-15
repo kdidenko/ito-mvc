@@ -1,0 +1,43 @@
+<h1>_i18n{New User}</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">_i18n{User should get email with registration confirmation.}</span>
+<?php } else { ?>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+	<form class="edit" action="new-user.html" method="post">
+		<span>_i18n{User Name}:</span>
+			<input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>_i18n{First Name}:</span>
+			<input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>_i18n{Last Name}:</span>
+			<input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>_i18n{Email}:</span>
+			<input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>_i18n{Role}:</span>
+			<select name="role" >
+				<option value="<?php echo UsersService::ROLE_PR ?>">_i18n{Promoter}</option>
+				<option value="<?php echo UsersService::ROLE_BR ?>">_i18n{Bookkeeper}</option>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<p><input type="checkbox" class="wide inpTxt" name="agreement"/>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</p>
+		<p class="btns">
+			<input class="defBtn" type="button" name="Cancel" value="_i18n{Cancel}" onclick="window.location = '/manage-users.html' " />
+			<input type="submit" name="submit" value="_i18n{Add user}" class="defBtn" />
+		</p>
+	</form>
+	<span class="message warning">_i18n{Note: After registration new user, he should get email with registration confirmation.}</span>
+<?php } ?>

@@ -1,0 +1,96 @@
+<form>
+<p class="splashHead">New Admin Form</p>
+<div class="splashBody">
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
+		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+		<fieldset>
+			<legend>Personal Data:</legend>
+			<dl>
+				<dt>ID:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="id"/>
+		 		</dd>
+				<dt>First Name:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="firstname"/>
+		 		</dd>
+		 		<dt>Last Name:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="lastname"/>
+				</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Password:</legend>
+			<dl>
+		 		<dt>Password: </dt>
+				<dd><input type="password" class="profile" name="password" id="password"></input></dd>
+				<dt>Repeat Password: </dt>
+				<dd><input type="password" class="profile" name="confirm_password" id="confirm_password"></input></dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Group:</legend>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Administrator</option>
+						<option>Project Leader</option>
+						<option>Class Leader</option>
+						<option>Trainer</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Allocation:</legend>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Training 1</option>
+						<option>Training 2</option>
+						<option>Training 3</option>
+						<option>Training 4</option>
+						<option>Training 5</option>
+						<option>Training 6</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+</div>
+	<div class="splashBottom">
+		<input type="submit" name="submit" value="Submit"/>
+		<button onclick="destroySplash('splashCanv');return false;">Cancel</button>
+	</div>	
+</form>

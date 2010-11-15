@@ -1,0 +1,71 @@
+<h1>Schools Management</h1>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No schools available at this moment.</span>
+<?php } else { ?>
+
+
+<?php foreach($list as $key => $value){ ?>
+
+<div>
+<div class="leftPageContent">
+ID = <?php echo $value[SchoolService::ID];?>
+<div class="pgItemImg">
+	<img src="<?php echo $value[SchoolService::AVATAR]);?>" alt="" title="" />
+</div>
+<span>
+	<?php if($value[SchoolService::RATE] >= 1){ ?>
+	<a href="#"><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+	<?php if($value[SchoolService::RATE] >= 2){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+	<?php if($value[SchoolService::RATE] >= 3){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+	<?php if($value[SchoolService::RATE] >= 4){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+	<?php if($value[SchoolService::RATE] >= 5){ ?>
+	<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+</span>
+</div>
+<div class="rightPageContent">
+	<div class="pgListItem wide">
+		<div class="pgItemBody">
+			<div>
+				
+				<h2>
+					<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+						<?php echo $value[SchoolService::CAPTION]?>
+					</a>
+				</h2>
+				<div class="description">
+					<p><?php echo $value[SchoolService::DESCRIPTION]?></p>
+				</div>
+				<div class="crdate">
+					<img alt="Created" src="images/calendar.png">
+					<?php echo $value[SchoolService::CRDATE]?>
+				</div>
+				<div class="categories">
+					<b>Categories:</b>
+					<span>
+						<a href="#">NLP</a> 
+						<a href="#">Milton</a> 
+						<a href="#">DHC</a>
+						<a href="#">SHL</a>
+					</span>
+				</div>
+			</div>
+			<div class="pgItemFooter">
+				<a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a>
+				<?php  if($value[SchoolService::ENABLED] == '1') { ?>
+					<a class="button" href=<?php echo 'manage-schools.html?disable=' . $value[SchoolService::ID];?>>Activate</a>
+				<?php } else { ?>
+					<a class="button" href="<?php echo 'manage-schools.html?enabled=' . $value[SchoolService::ID];?>">Suspend</a> 
+				<?php } ?>
+				<a class="button" onclick="return confirm('You sure you want to delete?');" href=<?php echo 'manage-schools.html?deleted=' . $value[SchoolService::ID];?>>Delete</a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<?php } } ?>

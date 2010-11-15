@@ -1,0 +1,38 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No school available at this moment.</span>
+<?php } else { ?>
+<div class="pgListItem wide">
+		<h1><?php echo $list[SchoolService::CAPTION];?></h1>
+		<div class="pgItemImg">
+			<img src="<?php echo $list[SchoolService::AVATAR];?>" alt="" title="" />
+		</div>
+		<div class="pgItemBody">
+			<ul>
+				<li>
+					<span>Rating:</span>
+					<span class="lsValue">
+						<?php if($list[SchoolService::RATE] >= 1){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 2){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 3){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 4){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 5){ ?>
+						<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+					</span>
+				</li>
+				<li><span>Students:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_STUDENTS];?></span></li>
+				<li><span>Courses:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_COURSES];?></span></li>
+				<li><span>Language:</span><span class="lsValue"><?php echo $list[SchoolService::LANGUAGE];?></span></li>
+				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::BASE_FEE];?>$ / mon</span></li>
+				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+			</ul>
+		</div>
+	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
+</div>
+<?php }?>

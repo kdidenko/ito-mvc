@@ -1,0 +1,68 @@
+<div class="topBlock">
+	<form class="frmNew">
+		<button onclick="showSplash('/admin-new.html','splashCanv');return false">Add New Admin</button>
+	</form>
+	<form action="/admin-search.html" class="search">
+		<input type="text" name="project" value="" /><input type="submit" value="Search Admins" />
+	</form>
+</div>
+<table class="genTbl" cellpadding="0" cellspacing="0">
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Group</th>    
+    <th>Options</th>    
+  </tr>
+  <tr class="odd">
+    <td>Arnet</td>
+    <td>Friederich</td>
+    <td>Kursleiter</td>
+    <td class="option">
+    	<a href="/admin-edit.html" title="Edit" onclick="showSplash('/admin-edit.html','splashCanv');return false">
+    		<img src="images/edit.png" alt="Edit"/>
+    	</a>
+    	<a href="/admin-delete.html" title="Delete" onclick="showSplash('/admin-delete.html','splashCanv');return false">
+    		<img src="images/delete.png" alt="Delete"/>
+    	</a>
+    </td>
+  </tr>
+  <tr>
+    <td>Fuerst</td>
+    <td>Christian</td>
+    <td>Projectleiter</td>
+    <td class="option">
+    	<a href="/admin-edit.html" title="Edit" onclick="showSplash('/admin-edit.html','splashCanv');return false">
+    		<img src="images/edit.png" alt="Edit"/>
+    	</a>
+    	<a href="/admin-delete.html" title="Delete" onclick="showSplash('/admin-delete.html','splashCanv');return false">
+    		<img src="images/delete.png" alt="Delete"/>
+    	</a>	    	
+    </td>
+  </tr>
+  <tr class="odd">
+    <td>Keck</td>
+    <td>Katarina</td>
+    <td>Lehrer</td>
+    <td class="option">
+    	<a href="/admin-edit.html" title="Edit" onclick="showSplash('/admin-edit.html','splashCanv');return false">
+    		<img src="images/edit.png" alt="Edit"/>
+    	</a>
+    	<a href="/admin-delete.html" title="Delete" onclick="showSplash('/admin-delete.html','splashCanv');return false">
+    		<img src="images/delete.png" alt="Delete"/>
+    	</a>	    	
+    </td>
+  </tr>
+  <tr>
+    <td>Meissner</td>
+    <td>Thomas</td>
+    <td>Administrator</td>
+    <td class="option">
+    	<a href="/admin-edit.html" title="Edit" onclick="showSplash('/admin-edit.html','splashCanv');return false">
+    		<img src="images/edit.png" alt="Edit"/>
+    	</a>
+    	<a href="/admin-delete.html" title="Delete" onclick="showSplash('/admin-delete.html','splashCanv');return false">
+    		<img src="images/delete.png" alt="Delete"/>
+    	</a>	    	
+    </td>
+  </tr>  
+</table>

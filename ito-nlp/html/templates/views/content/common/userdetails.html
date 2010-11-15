@@ -1,0 +1,59 @@
+<h1>User Details</h1>
+<?php $user = $mvc->getObject('USER');if($user == NULL){ ?>
+	<span class="message warning">No user available at this moment.</span>
+<?php } else { ?>
+<div class="avtr">
+	<img src="<?php echo $user['avatar']?>"/>
+</div>
+<div class="infoContent">
+	<div class="info_sect">
+		<span>Personal Info</span>
+		<dl>
+			<dt>First Name:</dt>
+			<dd><?php echo $user['firstname']?></dd>
+			<dt>Last Name:</dt>
+			<dd><?php echo $user['lastname']?></dd>
+		<?php if ($user['birthday']!=NULL) {?>
+			<dt>Age</dt>
+			<dd><?php echo $user['age']?></dd>
+			<dt>Birthday:</dt>
+			<dd><?php echo $user['birthday']?></dd>
+		<?php } ?>
+		<?php if ($user['gender']!=NULL) {?>
+			<dt>Gender:</dt>
+			<dd><?php echo $user['gender']?></dd>
+		<?php } ?>
+		</dl>
+	</div>
+	<div class="info_sect">
+		<span>Contact Info</span>
+		<dl>
+			<dt>email:</dt>
+			<dd><a href="mailto:<?php echo $user['email']?>"><?php echo $user['email']?></a></dd>
+		<?php if ($user['skype']!=NULL) {?>
+			<dt>Skype:</dt>
+			<dd><?php echo $user['skype']?></dd>
+		<?php } ?>
+		</dl>
+	</div>
+	<div class="info_sect">
+		<span>System Info</span>
+		<dl>
+			<dt>ID:</dt>
+			<dd><?php echo $user['id']?></dd>
+			<dt>Username:</dt>
+			<dd><?php echo $user['username']?></dd>		
+			<dt>Role:</dt>
+			<dd><?php echo $user['role']?></dd>		
+			<dt>Status:</dt>
+			<dd>
+				<?php if($user['enabled'] == 1){ echo 'Enabled'; } else { echo 'Disabled'; } ?>			
+			</dd>
+			<dt>Deleted:</dt>
+			<dd>
+				<?php if($user['deleted'] == 1){ echo 'Yes'; } else { echo 'No'; } ?>			
+			</dd>		
+		</dl>
+	</div>
+</div>
+<?php } ?>

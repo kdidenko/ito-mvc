@@ -1,0 +1,153 @@
+<script type="text/javascript" src="js/scrollDiv.js"></script>
+<script type="text/javascript">
+function commentResp() { 
+	document.getElementById("comment").disabled = false;
+	document.getElementById('comment').value = '';
+	return false;
+} 
+</script> 
+
+<h1>Valuate Other Students Responses</h1>
+<?php
+	$noSchAssigne = $mvc->getObject('noSchAssigne');
+	if($noSchAssigne == TRUE){
+?>
+<span class="message warning">
+	You are currently not signed up for any schools.<br />
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
+<?php } else { ?>
+	<div class="vlnList">
+	<?php
+		$valuationsList = $mvc->getObject('valuationsList');
+		if(isset($valuationsList) && count($valuationsList) > 0){
+	?>
+		<div class="tabMenu">
+			<a href="#null" class="tabMenuBtnLeft" onmouseover="scrollDivRight('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-lft.gif"></a>
+			<a href="#null" class="tabMenuBtnRt" onmouseover="scrollDivLeft('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-rt.gif"></a>
+			<div id="container" class="container">
+				<div id="scroller" class="scroller">
+					<ul>
+						<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="valuate-responses.html">+</a></li>
+						<?php foreach($valuationsList as $key => $valuation){ ?> 
+							<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$valuation[ValuationsService::V_ID] ? " class='current'": NULL;?>>
+								<a href="?id=<?php echo $valuation[ValuationsService::V_ID];?>&ex=1">
+									<?php echo $valuation[ValuationsService::V_NAME];?>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+		<div class="itemBody">
+			<div class="itemBodyContent">
+				<?php if ($_GET == NULL || isset($_GET["cat"])) { ?>
+					<!-- creating training form. -->
+					<?php TemplateEngine::inclusion('/newvaluation.html', $mvc) ?>
+				<?php } else { ?>
+					<div class="subHeader">
+						<b><?php $valuation = $mvc->getObject('valuation');echo $valuation;?></b>
+					</div>
+					<div class="itemOption">
+<?php					$resp = $mvc->getObject('resp');
+					 	if($_GET["ex"]>1){?>
+							<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Response</a>
+<?php 					} 
+						if(isset($resp) && count($resp) > 0){ ?>
+							<a class="button" href="videorecorder.html?id=<?php echo $resp[0][CourseService::ID]?>">View Challenge</a>
+							<a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Response</a>
+<?php 					} ?>
+					</div>
+					<?php if(!isset($resp) || count($resp) == 0){ ?>
+						<span class="message warning">
+							Sorry, there are no more course challenges available at this moment. <br />
+							Please visit later. It will be updated very soon.
+						</span>
+					<?php } else { ?>
+						<?php foreach($resp as $key => $value){ ?>
+						<span><b>Created: </b></span><span class="lsValue"><?php echo $value[ResponsesService::CRDATE];?></span>
+							<div class="preview">
+								<div class="item">
+							        <span>Exercise:</span>
+							        <h1>
+										<a href="<?php echo "/exercise-details.html?id=" . $value[ResponsesService::EX_ID] ?>">
+											<?php echo $value[ResponsesService::EX_NAME];?>
+										</a>
+									</h1>
+									<p>
+										<?php echo $value[ResponsesService::EX_DESC];?>
+										<a href="<?php echo 'exercise-details.html?id=' . $value[ResponsesService::EX_ID];?>" title="View">More...</a>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Challenge:</span>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
+									<p>
+										<?php echo $value[ResponsesService::CHLG_DESC];?>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Response:</span>
+							        <h1><?php echo $value[ResponsesService::CHLG_NAME];?></h1>
+									<p>
+										<?php echo $value[ResponsesService::DESCRIPTION];?>
+									</p>
+									<div class="image">
+										<img src="storage/video.jpg" alt="video"></img>
+									</div>
+								</div>
+								<div class="item">
+							        <span>Valuation:</span>
+							        <ul>
+							        	<li>Number of votes:<span><?php $sum = $mvc->getObject("sum"); echo $sum!=NULL? $sum : 0 ;?></span></li>
+								        <li>Number of points:<span><?php $points = $mvc->getObject("points"); echo $points!=NULL? $points : 0 ;?></span></li>
+								        <li>Contribution points:<span>I don't know :)</span></li>
+							        </ul>
+									<div class="image">
+										<?php TemplateEngine::inclusion('/diagram.html', $mvc) ?>
+							        </div>
+								</div>
+							</div>
+<?php 					} ?>
+				<div class="itemOption">
+					<?php $valuate = $mvc->getObject('valuate'); if (count($valuate)<=0){?>
+						<form method="post" action="">
+						<!-- ?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?> -->
+							<fieldset>
+								<label><b>Valuate Responses:</b></label>
+								<input onclick="commentResp();" type="radio" name="valuate" value=-2 />-2
+								<input onclick="commentResp();" type="radio" name="valuate" value=-1 />-1
+								<input onclick="commentResp();" type="radio" name="valuate" value=0 />0
+								<input onclick="commentResp();" type="radio" name="valuate" value=1 />1
+								<input onclick="commentResp();" type="radio" name="valuate" value=2 />2
+							</fieldset>
+							<fieldset>
+								<label><b>Your textual comments:</b></label>
+								<textarea rows="5" cols="10" name="comment" id="comment" disabled>First valuate response.</textarea>
+							</fieldset>
+							<input type="hidden" name="resp_index" value="<?php echo $resp[0][CourseService::ID]?>"/>
+							<input type="submit" name="submit" value="Save" class="button"/>
+						</form>
+					<?php } else { ?>
+						<span class="message warning">You already valuate this response. Please, continue valuation with next response.</span>
+					<?php } ?>
+				<span class="message warning">
+					Note: The maximum achievable number of contribution points depends 
+					on your own response quality  for this exercise and the number of previous votes. 
+					You will be able to see the valuation statistics for this response after you have valuated.
+				</span>
+				</div> 
+<?php				} ?>
+<?php			} ?>
+			</div>
+		</div>
+	</div>
+<?php  } ?>

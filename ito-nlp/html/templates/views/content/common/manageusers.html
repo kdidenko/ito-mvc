@@ -1,0 +1,63 @@
+<h1>Users Management</h1>
+<div class="subHeader">
+	<b>Users List</b>
+	<?php if (SessionService::getRole() != UsersService::ROLE_MR) {?>
+		<span>
+			<a <?php echo !isset($_GET[UsersService::ROLE]) ? "class='current'" : NULL;?> href="/manage-users.html">All</a> | 
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_AR ? "class='current'" : NULL;?> href="?role=AR">Administrators</a> | 
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_MR ? "class='current'" : NULL;?>  href="?role=MR">Moderators</a> |
+			<a <?php if(isset($_GET[UsersService::ROLE]))
+					echo $_GET[UsersService::ROLE]==UsersService::ROLE_UR ? "class='current'" : NULL;?>  href="?role=UR">Users</a>
+		</span>
+	<?php } ?>
+</div>
+<?php
+	$scroller = $mvc->getObject ( UsersService::SCROLLER );		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) { 
+?>
+<div class="chrScroller">
+		<?php foreach($scroller as $key => $value){ ?>
+			<a class="button" href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+			echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a>
+		<?php } ?>
+</div>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
+<table class="list">
+<tr>
+	<th>User Name:</th>
+	<th>Name:</th>
+	<th>Role:</th>
+	<th>Options:</th>
+</tr>
+<?php foreach($message as $key => $value){ ?>
+	<tr <?php if($key%2)echo "class='pair'" ?>>
+		<td>
+			<a href=<?php echo 'user-details.html?id=' . $value[UsersService::ID];?>>
+				<?php echo $value[UsersService::USERNAME];?>
+			</a>
+		</td>
+		<td><?php echo $value[UsersService::FIRSTNAME] . ' ' . $value[UsersService::LASTNAME]?></td>
+		<td><?php echo $value[UsersService::ROLE];?></td>
+		<td>
+			<?php if (isset($value[UsersService::ENABLED])) { if($value[UsersService::ENABLED] == '0') {?>
+				<a class="button" href=<?php echo 'manage-users.html?enabled=' . $value[UsersService::ID];?>>Enable</a>
+			<?php }else{ ?>
+				<a class="button" href=<?php echo 'manage-users.html?disable=' . $value[UsersService::ID];?>>Disable</a> 
+			<?php }} ?>
+			<a class="button" href=<?php echo 'edit-user.html?id=' . $value[UsersService::ID];?>>Edit</a>
+			<a class="button" onclick="return confirm('You sure you want to delete?');"  href=<?php echo 'manage-users.html?deleted=' . $value[UsersService::ID];?>>Delete</a>
+		</td>
+	</tr>
+<?php } ?></table>
+<?php }else{ ?>
+<span class="message warning">There are no registered users at this moment.</span>
+<?php } ?>
+

@@ -1,0 +1,42 @@
+<h1>Edit User</h1>
+<?php $user = $mvc->getObject('result'); if($user == NULL){ ?>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no schools for such criterias.<br />
+		But you may still chose another user of interest by browsing our <a href="/manage-users.html" title="Users">Users</a> directory.
+	</span>
+<?php } else { ?>
+	<form action="manage-users.html" method="post" class="edit">
+		<span>User name:</span> 
+	 		<input type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>First Name:</span>
+	 		<input type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/>
+	 		<div class="clnr brdr">&nbsp;</div>
+ 		<span>Last Name:</span>
+	 		<input type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/>
+	 		<div class="clnr brdr">&nbsp;</div>
+		<span>Email:</span>
+	 		<input type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/>
+	 		<div class="clnr brdr">&nbsp;</div>
+		<span>Status:</span>
+			<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>Enabled
+			<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>Disabled<br/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Role:</span>
+	 		<select name="role">
+	 			<option><?php echo $user[UsersService::ROLE];?></option>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_MR){ ?>
+	 			<option><?php echo UsersService::ROLE_MR ?></option>
+	 			<?php }?>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_AR){ ?>
+	 			<option><?php echo UsersService::ROLE_AR ?></option>
+	 			<?php }?>
+	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_UR){ ?>
+	 			<option><?php echo UsersService::ROLE_UR ?></option>
+	 			<?php }?>
+	 		</select>
+	 		<div class="clnr brdr">&nbsp;</div>
+		<input type="hidden" name="id" value="<?php echo $user[UsersService::ID]; ?>"/>
+		<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
+	</form>	
+<?php } ?>

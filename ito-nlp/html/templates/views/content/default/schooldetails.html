@@ -1,0 +1,88 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">Oops... seems the address you have entered is invalid. There are no schools for such criterias.</span>
+<span class="message">But you may still find some schools of interest by browsing our <a href="/schools.html" title="Schools">Schools</a> directory.</span>
+<?php } else { ?>
+<div class="pgListItem wide">
+		<h1><?php echo $list[SchoolService::CAPTION];?></h1>
+		<div class="pgItemImg">
+			<img src="<?php echo $list[SchoolService::AVATAR];?>" alt="" title="" />
+		</div>
+		<div class="pgItemBody">
+			<ul>
+				<li>
+					<span>Rating:</span>
+					<span class="lsValue">
+						<?php if($list[SchoolService::RATE] >= 1){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 2){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 3){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 4){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($list[SchoolService::RATE] >= 5){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					</span>
+				</li>
+				<li><span>Students:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_STUDENTS];?></span></li>
+				<li><span>Courses:</span><span class="lsValue"><?php echo $list[SchoolService::CNT_COURSES];?></span></li>
+				<li><span>Language:</span><span class="lsValue"><?php echo $list[SchoolService::LANGUAGE];?></span></li>
+				<li><span>Base fee:</span><span class="lsValue"><?php echo $list[SchoolService::BASE_FEE];?>$ / mon</span></li>
+				<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+			</ul>
+		</div>
+	<p><?php echo  $list[SchoolService::DESCRIPTION];?></p>
+</div>
+<div class="subHeader">
+	<b>Courses Available:</b>
+</div>
+<div>
+<?php
+	$courseslist = $mvc->getObject('courselist');
+	if(!isset($courseslist) || count($courseslist) == 0){
+?>
+<span class="message warning">
+	Sorry, there are no school courses available at this moment.<br />
+	Please visit our school later. It will be updated very soon.
+</span>
+<?php } else { ?>
+<?php foreach($courseslist as $key => $value){ ?>
+<div class="pgListItem wide">
+    <h2>
+		<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>">
+			<?php echo $value[CourseService::CAPTION];?>
+		</a>
+	</h2>
+	<div class="pgItemImg">
+		<a href="<?php echo "/course-details.html?id=" . $value[CourseService::ID] ?>"><img src="<?php echo $value[CourseService::AVATAR];?>" alt="" title="" /></a>
+	</div>
+	<div class="pgItemBody">
+		<ul>
+			<li><span>Rating:</span>
+			<span class="lsValue">
+       			<?php if($value[CourseService::RATE] >= 1){ ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[CourseService::RATE] >= 2){ ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[CourseService::RATE] >= 3){ ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[CourseService::RATE] >= 4){ ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+				<?php if($value[CourseService::RATE] >= 5){ ?>
+				<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+			</span>
+			</li>
+		</ul>
+		<p class="extLink">
+			<?php echo $value[CourseService::DESCRIPTION];?>
+			<a href="<?php echo 'course-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+		</p>
+	</div>
+</div>
+<div class="clnr brdr">&nbsp;</div>
+<?php } } ?>
+</div>
+<?php } ?>

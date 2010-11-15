@@ -1,0 +1,113 @@
+<script language="JavaScript" src="js/calendar_us.js"></script>
+<link rel="stylesheet" href="styles/calendar.css">
+<h1>My profile</h1>
+<div class="myProfile">
+	<div class="myProfileimg">
+		<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo isset($message) ? $message : 'email';?>">
+	</div>
+	<ul class="menu">
+		<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='current'" : NULL;?>>
+			<a href="/my-profile.html">
+				<img src="images/info_base.png" alt="Avatar" title="Personal Data">Personal Data</img>
+			</a>
+		</li>
+		<li <?php echo isset($_GET['picture']) ? "class='current'" : NULL;?>>
+			<a href="?picture">
+				<img src="images/info_pict.png" alt="Avatar" title="Profile Picture">Profile Picture</img>
+			</a>
+		</li>
+		<li <?php echo isset($_GET['password']) ? "class='current'" : NULL;?>>
+			<a href="?password">
+				<img src="images/info_psw.png" alt="Avatar" title="Change Password">Change Password</img>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="myProfileInf">
+	<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
+		<?php if (!isset($_GET['picture']) && !isset($_GET['password'])){?>
+				<span class="message warning">Basic information is open to everyone. Please, entered real data.</span>
+			<form enctype="multipart/form-data" action="my-profile.html" method="post" name="myprofile">
+				<dl>
+					<dt>First Name:</dt>
+			 			<dd><input class="profile" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : NULL;?>" /></dd>
+			 		<dt>Last Name:</dt>
+			 			<dd><input class="profile" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : NULL;?>"/></dd>
+					<dt>Email:</dt>
+			 			<dd><input class="profile" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : NULL;?>"/></dd>
+					<dt>Birthday:</dt>
+						<dd><input class="profile" type="text" name="birthday" id="birthday"  value="<?php $message = $mvc->getObject(UsersService::BIRTHDAY);echo isset($message) ? $message : NULL;?>""/>
+						<script language="JavaScript">
+							new tcal ({/* form name */'formname': 'myprofile',	/* input name*/	'controlname': 'birthday'});
+						</script>
+						</dd>
+					<dt>Gender:</dt>
+			 			<dd>
+			 				<?php $message = $mvc->getObject(UsersService::GENDER);?>
+				 			<select class="profile" name="gender" >
+				 				<option value="<?php echo $message==NULL ? NULL : $message;?>"><?php echo $message==NULL ? 'Please select gender' : $message;?></option>
+				 				<?php if($message!=Male){?>
+				 				<option>Male</option>
+				 				<?php }?>
+				 				<?php if($message!=Female){?>
+				 				<option>Female</option>
+				 				<?php } ?>
+				 			</select>
+			 			</dd>
+					<dt>Skype:</dt>
+			 			<dd><input class="profile" type="text" name="skype" value="<?php $message = $mvc->getObject(UsersService::SKYPE);echo isset($message) ? $message : NULL;?>"/></dd>
+				</dl>
+			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+			<p class="btns"><input type="submit" name="personalSbm" value="Submit Changes" class="defBtn" /></p>
+			</form>
+		<?php } ?>
+		
+		<?php if(isset($_GET['password'])){ ?>
+			<form enctype="multipart/form-data" action="my-profile.html?password" method="post" >
+				<span class="message warning">
+					Your password must be at least 6 characters long.<br/>
+					You can use upper case, lower case, numbers, and non-alphanumeric characters.
+				</span>
+				<dl>
+					<dt>Old Password: </dt>
+					<dd><input type="password" class="profile" name="old_password" id="old_password"></input></dd>
+			 		<dt>New Password: </dt>
+					<dd><input type="password" class="profile" name="password" id="password"></input></dd>
+					<dt>Repeat New Password: </dt>
+					<dd><input type="password" class="profile" name="confirm_password" id="confirm_password"></input></dd>
+				</dl>
+			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+			<p class="btns"><input type="submit" name="pswSbm" value="Submit Changes" class="defBtn" /></p>
+			</form>
+		<?php } ?>
+		<?php if(isset($_GET['picture'])){ ?>	
+			<form enctype="multipart/form-data" action="my-profile.html?picture" method="post" >
+				<span class="message warning">
+					Here you can change your profile picture.<br/>
+					Select an image file on your computer (max-size: 80x80, 512 Kb)
+				</span>
+				<dl>
+					<dd>
+					<input type="file" name="file" size="30" />
+					</dd>
+				</dl>
+			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+			<p class="btns"><input type="submit" name="pctSbm" value="Submit Changes" class="defBtn" /></p>
+			</form>
+		<?php } ?>
+</div>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns="http://www.ito-global.com/schema/mvc" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.1.xsd  
+		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.1.xsd" >
+
+	<action name="/index.html" id="home">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+
+	<action name="/trainings.html" id="trainings">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
+	
+	<action name="/users.html" id="users">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
+
+	<action name="/admins.html" id="admins">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>	
+	
+	<!-- Navigation views mapping begin -->
+	<action name="/navigation-*.html" id="navigation-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/top-menu.html"/>
+			<role type="UR" path="templates/views/navigation/users/top-menu.html"/>
+			<role type="AR" path="templates/views/navigation/admin/top-menu.html"/>		
+		</template>	
+	</action>
+	<!-- Navigation views mapping end -->
+	
+	<!-- Content views mapping begin -->
+	<action name="/content-*.html" id="content">
+		<controller class="com.itoglobal.lcms.controllers.ContentController" 
+				method="handle$1" />
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/$1.html"/>
+			<role type="UR" path="templates/views/content/users/$1.html"/>
+			<role type="AR" path="templates/views/content/admin/$1.html"/>		
+		</template>	
+		<property name="onsuccess" value="manage-users.html"/>
+		<property name="schoolassigned" value="overview.html"/>
+		<property name="template" value="templates/plain/created-account.txt"/>		
+	</action>
+	<!-- Content views mapping end -->	
+	
+	<!-- Footer views mapping begin -->
+	<action name="/footer-*.html" id="footer-$1">
+		<controller class="com.itoglobal.lcms.controllers.NavigationController"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/navigation/default/footer.html"/>
+			<role type="UR" path="templates/views/navigation/users/footer.html"/>
+			<role type="AR" path="templates/views/navigation/admin/footer.html"/>		
+		</template>	
+	</action>
+	<!-- Footer views mapping end -->	
+		
+	<action name="/login.html" id="login">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
+			<target location="/login-form.html" name="loginform" condition="onfailure"/>		
+		</forwards>
+	</action>
+	
+	<action name="/login-form.html" id="loginform">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>
+		
+	<action name="/signout.html" id="signout">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="logout" />
+		<forwards>
+			<target location="/login-form.html" name="loginform" condition="onsuccess"/>
+		</forwards>
+	</action>
+		
+	<action name="/registration.html" id="registration">
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+		<template name="index.html" path="templates/layout-one-column.html" />	
+		<forwards>
+			<target location="registration.html" name="registration" condition="onfailure"/>
+			<target location="validation.html" name="validation" condition="onsuccess"/>
+		</forwards>
+		<property name="template" value="templates/plain/email-confirmation.txt"/>
+	</action>
+
+	<action name="/reset-password.html" id="resetpassword">
+		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<forwards>
+			<target location="/check-email.html" name="check-email" condition="onsuccess"/>		
+		</forwards>
+		<property name="template" value="templates/plain/reset-password.txt"/>
+	</action>
+	
+	<action name="/check-email.html" id="checkemail">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html"/>
+	</action>
+	
+	<action name="/new-password.html" id="newpassword">
+		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<forwards>
+			<target location="/login-form.html" name="loginform" condition="onsuccess"/>
+			<target location="/reset-password.html" name="resetpassword" condition="onfailure"/>		
+		</forwards>
+	</action>
+	
+	<!-- Project views mapping begin -->
+	<action name="/project-*.html" id="project-$1">
+		<controller class="com.itoglobal.lcms.controllers.ProjectsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/project-$1.html"/>
+			<role type="UR" path="templates/views/content/users/project-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/project-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Project views mapping end -->	
+		
+	<!-- Training views mapping begin -->
+	<action name="/training-*.html" id="training-$1">
+		<controller class="com.itoglobal.lcms.controllers.TrainingsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/training-$1.html"/>
+			<role type="UR" path="templates/views/content/users/training-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/training-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Training views mapping end -->	
+	
+	<!-- User views mapping begin -->
+	<action name="/user-*.html" id="user-$1">
+		<controller class="com.itoglobal.lcms.controllers.UsersController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/user-$1.html"/>
+			<role type="UR" path="templates/views/content/users/user-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/user-$1.html"/>		
+		</template>	
+	</action>
+	<!-- User views mapping end -->
+	
+	<!-- Admin views mapping begin -->
+	<action name="/admin-*.html" id="admin-$1">
+		<controller class="com.itoglobal.lcms.controllers.AdminsController"
+			method="handle$1"/>
+		<template name="$1.html">
+			<role type="VR" path="templates/views/content/default/admin-$1.html"/>
+			<role type="UR" path="templates/views/content/users/admin-$1.html"/>
+			<role type="AR" path="templates/views/content/admin/admin-$1.html"/>		
+		</template>	
+	</action>
+	<!-- Admin views mapping end -->	
+	
+	
+	<!--  END OF TRAININGS BOOCKING MAPPINGS!!!!!! -->
+
+
+	<action name="/discussions.html" id="discussions">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>	
+
+	<action name="/help.html" id="help">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+
+	<action name="/about.html" id="about">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>	
+	
+	<action name="/overview.html" id="home">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/my-responses.html" id="myresponses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/valuate-responses.html" id="valuateresponses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/browse-exercises.html" id="browseexercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/my-challenges.html" id="mychallenges">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/messages.html" id="messages">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/manage-courses.html" id="managecourses">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/edit-course.html" id="editcourse">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/course-details.html" id="coursedetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/manage-exercises.html" id="manageexercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+	<action name="/manage-users.html" id="manageusers">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />	
+	</action>
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+
+	<action name="/validation.html" id="validation">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
+	
+	<action name="/confirm-registration.html" id="loginfailed">
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+
+	<action name="/scope.html" id="scope">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />	
+	</action>
+
+	<action name="/scope-create.html" id="scope-create">
+		<controller class="com.itoglobal.scopes.ScopeController" 
+			method="createScope"/>
+		<template name="scope.html" path="templates/scope.html" />	
+	</action>
+
+	<action name="/scope-delete.html" id="scope-delete">
+		<controller class="com.itoglobal.scopes.ScopeController" 
+			method="deleteScope"/>
+		<template name="scope.html" path="templates/scope.html" />	
+	</action>
+	
+	<!-- Sidebar views mapping begin -->
+	<action name="/sidebar-*.html" id="sidebar">
+		<controller class="com.itoglobal.lcms.controllers.SidebarController" 
+				method="handle$1" />
+		<template name="$1.html">
+			<role type="VR" path="templates/views/sidebars/default/login-form.html"/>
+			<role type="UR" path="templates/views/sidebars/users/$1.html"/>
+			<role type="AR" path="templates/views/sidebars/admin/$1.html"/>		
+		</template>	
+	</action>
+	<!-- Sidebar views mapping end -->	
+	
+	<!--  Schools management actions begin -->
+	<action name="/*-schools.html" id="$1schools">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<!--  Schools management actions end -->	
+	
+	<!--  Exercises management actions begin -->
+	<action name="/*-exercises.html" id="$1exercises">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<!--  Exercises management actions end -->
+	
+	<action name="/school-details.html" id="schooldetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<action name="/edit-school.html" id="editschool">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<action name="/exercise-details.html" id="exercisedetails">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>	
+	<action name="/edit-exercise.html" id="editexercise">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/edit-user.html" id="edituser">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/my-profile.html" id="myprofile">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/school-assigned.html" id="schoolassigned">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
+	<action name="/new-*.html" id="new$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+		<forwards>
+			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+		</forwards>
+	</action>
+
+</actions>

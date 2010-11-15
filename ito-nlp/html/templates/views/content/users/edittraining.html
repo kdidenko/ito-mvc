@@ -1,0 +1,70 @@
+<h1>Edit School</h1>
+<?php $training = $mvc->getObject('training'); if($training == NULL){ ?>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no training for such criterias.<br />
+		But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.
+	</span>
+<?php } else { ?>
+<div class="trnList">
+	<div class="tabMenu">
+		<ul>
+			<li <?php if(!isset($_GET['add'])) echo " class='current'";?>><a href="edit-training.html?id=<?php echo $_GET['id']?>">current</a></li>
+			<li <?php if(isset($_GET['add'])) echo " class='current'";?>><a href="edit-training.html?add&id=<?php echo $_GET['id']?>">add new courses</a></li>
+		</ul>
+	</div>
+	<div class="itemBody">
+		<div class="itemBodyContent">
+			<div class="itemForm">
+			<?php if(!isset($_GET['add'])){ ?>
+				<form class="edit" enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+						<span>Training Name:</span>
+						<input type="text" name="training_name" id="training_name" size="35" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/>
+						<div class="clnr brdr">&nbsp;</div>
+						<span>Your courses:</span>
+<?php					foreach($training as $key => $trn){ ?>
+								<a class="button" href="edit-training.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&del=<?php echo $trn[TrainingsService::COURSE_ID] ?>">Del</a>
+								<?php echo $trn[CourseService::CAPTION] ?>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
+<?php 					} ?>
+						<div class="clnr brdr">&nbsp;</div>
+					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
+					<p class="btns"><input type="submit" name="updateCurrent" value="Save Training" class="defBtn" /></p>
+				</form>							
+			<?php } else {?>
+<?php				$usCourseList = $mvc->getObject('usCourseList');
+					if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+						<span class="message warning">
+							Sorry, there are no courses available at this moment. It will be updated very soon.<br />
+							Also, you can browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one more school.
+						</span>
+<?php 				} else { ?>					
+					<span class="message">Please, mark the courses, wich you want to learn.</span>
+					<form class="edit" enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+<?php					foreach($usCourseList as $key => $course){
+						$old = isset ($old)? $old : NULL;
+						if ($course[SchoolService::CAPTION] != $old){?>
+							<div class="clnr brdr">&nbsp;</div>
+							<span><?php echo $course[SchoolService::CAPTION];?>:</span>
+						<?php } else { ?>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
+						<?php }?>
+						<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/>
+						<a href="/course-details.html?id=<?php echo $course[CourseService::ID]; ?>" title="Course Details">
+							<?php echo $course[CourseService::COURSE_CAPTION];?>
+						</a>
+<?php					$old = $course[SchoolService::CAPTION];
+					} ?>
+		<div class="clnr brdr">&nbsp;</div>
+					<input type="hidden" name="training_name" id="training_name" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/>
+					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
+					<p class="btns"><input type="submit" name="update" value="Save Training" class="defBtn" /></p>
+				</form>
+<?php				} ?>
+			<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>

@@ -1,0 +1,77 @@
+<h1>List of YouCademy schools</h1>
+<p class="pgIntro">
+	Here you can select the schools you wish to learn from. Every
+	school has its own rules and fees, please see school details for more
+	information.
+</p>
+<div class="subHeader">
+	<b>Shools List</b>
+	<span>Sort by:
+		<a <?php echo isset($_GET[SchoolService::RATE]) ? "class='current'" : NULL;?> href="?<?php echo SchoolService::RATE ?>=<?php if (isset($_GET[SchoolService::RATE])){echo $_GET[SchoolService::RATE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">rating</a>
+       	<a <?php echo isset($_GET[SchoolService::LANGUAGE]) ? "class='current'" : NULL;?> href="?<?php echo SchoolService::LANGUAGE ?>=<?php if (isset($_GET[SchoolService::LANGUAGE])){echo $_GET[SchoolService::LANGUAGE]==SQLClient::DESC ? SQLClient::ASC : SQLClient::DESC;} else {echo SQLClient::DESC;} ?>" title="">languages</a>
+	</span>
+</div>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+	<span class="message warning">
+		Sorry, there are no schools available at this moment.<br />
+		Please, visit later. It will be updated very soon.
+	</span>
+<?php } else { ?>
+
+<?php foreach($list as $key => $value){ ?>
+
+<div class="pgItemsList">
+	<div class="pgListItem">
+	   	<h2>
+			<a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="School details">
+			<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>
+	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>" title="avatar"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></a></div>
+	   <div class="pgItemBody">
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+		       		<?php if($value[SchoolService::RATE] >= 1){ ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					<?php if($value[SchoolService::RATE] >= 2){ ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					<?php if($value[SchoolService::RATE] >= 3){ ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					<?php if($value[SchoolService::RATE] >= 4){ ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					<?php if($value[SchoolService::RATE] >= 5){ ?>
+					<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue"><?php echo $value[SchoolService::CNT_STUDENTS]?></span></li>
+          	<li><span>Courses:</span><span class="lsValue"><?php echo $value[SchoolService::CNT_COURSES]?></span></li>
+         	<li><span>Language:</span><span class="lsValue"><?php echo $value[SchoolService::LANGUAGE]?></span></li>
+         	<li><span>Base fee:</span><span class="lsValue"><?php echo $value[SchoolService::BASE_FEE]?>$/ mon</span></li>
+         	<li><span>Subjects:</span>
+				<span class="lsValue">
+					<a href="#">NLP</a> 
+					<a href="#">Milton</a> 
+					<a href="#">DHC</a>
+					<a href="#">SHL</a>
+				</span>
+				</li>
+	       </ul>
+		</div>
+	       <p class="extLink">
+			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?>
+			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+		</p>
+    </div>
+    
+    
+    <?php if($key%2){ ?>
+	<div class="clnr brdr">&nbsp;</div>
+	<?php } ?>
+	
+</div>
+
+<?php } }?>

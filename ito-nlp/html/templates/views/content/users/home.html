@@ -1,0 +1,74 @@
+<h1>Your personal overview</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
+<?php
+	$usSchList = $mvc->getObject('usSchList');
+	if(!isset($usSchList) || count($usSchList) == 0){
+?>
+<span class="message warning">
+	You are currently not signed up for any schools.<br/>
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
+<?php } else { ?>
+<div class="subHeader">
+	<b>Shools List</b>
+</div>
+<?php	foreach($usSchList as $key => $value){ ?> 
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+		<h2>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+				<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>
+		<div class="pgItemImg">
+			<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
+		</div>
+		<div class="pgItemBody">
+			<ul>
+				<li><span>Rating:</span>
+					<span class="lsValue">
+						<a href="?valuate=1&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 1){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=2&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 2){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=3&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 3){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=4&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 4){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+						<a href="?valuate=5&id=<?php echo $value[SchoolService::ID] ?>"><?php if($value[SchoolService::RATE] >= 5){ ?>
+							<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+						</a>
+					</span>				
+					<span class="lsValue rate">
+						<?php echo $value[SchoolService::RATE]?>/<?php echo $value[SchoolService::NUMBER_RATE]?>
+					</span>
+				</li>
+				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>
+				<li><span>Categories:</span>
+					<span class="lsValue">
+					<?php if (isset($value['subject'])){ 
+							foreach($value['subject'] as $key_sub => $subject){ ?>
+							<a href="/courses.html?cat=<?php echo $subject[CategoriesService::NAME];?>">
+							<?php echo $subject[CategoriesService::NAME]; ?></a>
+						<? } 
+						}?>
+					</span>
+				</li>
+			</ul>
+			<p class="extLink"><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+		</div>
+	</div>
+	<div class="clnr brdr">&nbsp;</div>
+</div>
+
+
+<?php } } ?>

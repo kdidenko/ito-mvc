@@ -1,0 +1,108 @@
+<script type="text/javascript" src="js/scrollDiv.js"></script>
+<h1>My Trainings</h1>
+<?php
+	$noSchAssigne = $mvc->getObject('noSchAssigne');
+	if($noSchAssigne == TRUE){
+?>
+<span class="message warning">
+	You are currently not signed up for any schools.<br />
+	Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+</span>
+<?php } else { ?>
+	<div class="trnList">
+	<?php
+		$trainingList = $mvc->getObject('trainingList');
+		if(isset($trainingList) && count($trainingList) > 0){
+	?>
+<!-- 
+<a href="#null" onclick="toLeft('container')">first</a>|
+<a href="#null" onclick="toRight('container')">last</a>
+ -->
+		<div class="tabMenu">
+			<a href="#null" class="tabMenuBtnLeft" onmouseover="scrollDivRight('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-lft.gif"></a>
+			<a href="#null" class="tabMenuBtnRt" onmouseover="scrollDivLeft('container')" onmouseout="stopMe()"><img alt="left" src="images/tri-rt.gif"></a>
+			<div id="container" class="container">
+				<div id="scroller" class="scroller">
+					<ul>
+						<li <?php if($_GET == NULL || isset($_GET["cat"])) echo " class='current'";?>><a href="my-trainings.html">+</a></li>
+						<?php foreach($trainingList as $key => $training){ ?> 
+							<li <?php if(isset($_GET["id"])) echo $_GET["id"]==$training[TrainingsService::TRN_ID] ? " class='current'": NULL;?>>
+								<a href="?id=<?php echo $training[TrainingsService::TRN_ID];?>&ex=1">
+									<?php echo $training[TrainingsService::TRN_NAME];?>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+		<div class="itemBody">
+			<div class="itemBodyContent">
+				<?php if ($_GET == NULL || isset($_GET["cat"])) { ?>
+					<!-- creating training form. -->
+					<?php TemplateEngine::inclusion('/newtraining.html', $mvc) ?>
+				<?php } else { ?>
+					<div class="subHeader">
+						<b><?php $training = $mvc->getObject('training');echo $training;?></b>
+					</div>
+					<?php
+						$exerciselist = $mvc->getObject('exerciselist');
+						if(!isset($exerciselist) || count($exerciselist) == 0){
+					?>
+					<span class="message warning">
+						Sorry, there are no course exercises available at this moment.<br />
+						Please visit course later. It will be updated very soon.
+					</span>
+					<?php } else { ?>
+					<?php foreach($exerciselist as $key => $value){ ?>
+						<div class="itemEx">
+							<div class="pgItemImg">
+								<img src="storage/video.jpg" alt="video"></img>
+								<span class="lsValue">
+						       		<?php if($value[ExerciseService::RATE] >= 1){ ?>
+									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+									<?php if($value[ExerciseService::RATE] >= 2){ ?>
+									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+									<?php if($value[ExerciseService::RATE] >= 3){ ?>
+									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+									<?php if($value[ExerciseService::RATE] >= 4){ ?>
+									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+									<?php if($value[ExerciseService::RATE] >= 5){ ?>
+									<a href=""><img src="images/star.png" /></a> <?php }else{ ?> <a href=""><img src="images/gray-star.png" /></a><?php } ?>
+								</span>
+							</div>
+						   	<div class="pgItemBody">
+						        <h1>
+									<a href="<?php echo "/exercise-details.html?id=" . $value[CourseService::ID] ?>">
+										<?php echo $value[ExerciseService::CAPTION];?>
+									</a>
+								</h1>
+								<p>
+									<?php echo $value[ExerciseService::DESCRIPTION];?>
+									<a href="<?php echo 'exercise-details.html?id=' . $value[ExerciseService::ID];?>" title="View">More...</a>
+								</p>
+							</div>
+						</div>
+					<?php } } ?>
+					<div class="itemOption">
+						<?php if(isset($_GET["ex"]) && $_GET["ex"]>1){?>
+							<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]-1 ?>">Previous Exercise</a></span>
+						<?php } 
+						if(isset($exerciselist) && count($exerciselist) > 0){ ?>
+							<span><a class="button" href="start-challenge.html?id=<?php echo $value[CourseService::ID]?>">Start Challenge</a></span>
+							<span><a class="button" href="?id=<?php echo $_GET["id"] ?>&ex=<?php echo $_GET["ex"]+1 ?>">Next Exercise</a></span>
+						<?php } ?>
+					</div>
+					<span class="message warning">
+						Note: Please adjust your web camera position and lighting so that you can clearly see yourself. 
+						You must also see distinctive movement of the volume bar while you are speaking. 
+						The image and sound from your web camera  and microphone will be recorded as soon as the 
+						challenge starts. The valuation can be based upon your nonverbal signals during communication, 
+						not only words!
+					</span>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+<?php  } ?>

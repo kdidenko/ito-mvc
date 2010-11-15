@@ -1,0 +1,10 @@
+<div class="sidePgItem">
+	<h2>Navigation</h2>    
+	<ul>
+		<li>&raquo;&nbsp;<a href="my-trainings.html">New Training</a></li>
+		<?php if (isset($_GET['id'])){ ?> 
+		<li>&raquo;&nbsp;<a href="edit-training.html?id=<?php echo $_GET['id']?>">Edit Training</a></li>
+		<li>&raquo;&nbsp;<a href="my-trainings.html?delete=<?php echo $_GET['id']?>">Delete Training</a></li>
+		<?php } ?>
+	</ul>
+</div>

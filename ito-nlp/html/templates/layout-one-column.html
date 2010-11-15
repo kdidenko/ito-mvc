@@ -1,0 +1,32 @@
+<? echo XML_CONTENT_DEFINITION ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>YouCademy</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="styles/styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div class="globalWrapper">
+	<div class="globalSubWrapper">
+<!-- Header block begin  -->
+<?php TemplateEngine::inclusion('header.html', $mvc)?>
+<!-- Header block end  -->
+		<div class="pageWrapper">
+<!-- Content block begin -->
+			<div class="mainPageContent wide">
+<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			</div>	
+		</div>
+<!--  Content block end -->
+	</div>
+<!--  Footer block begin -->
+	<div class="footerWrapper">
+<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc)?>
+	</div>
+<!--  Footer block end -->
+</div>
+</body>
+</html>

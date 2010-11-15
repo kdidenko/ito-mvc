@@ -25,8 +25,7 @@ class LocalizationFactory {
         self::$instance = self::$instance == null ? new LocalizationFactory() : self::$instance;
         return self::$instance;
     }
-
-
+	
 
 
 }

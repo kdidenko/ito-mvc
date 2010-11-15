@@ -114,8 +114,11 @@ class MessageService {
     }
 
     private static function lineConvert($line){
+    	$k = ''; $v = '';    	
         $line = rtrim($line, "\r\n");
-        list($k, $v) = explode('=', $line, 2);
+        if(strpos($line, '=')){
+        	list($k, $v) = explode('=', $line, 2);
+        }		
         return array($k => $v);
     }
 

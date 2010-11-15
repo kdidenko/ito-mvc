@@ -1,0 +1,16 @@
+Hello ###FIRST_NAME### ###LAST_NAME###!
+
+The user administrator has created an account for you.
+
+
+Your username is ###USERNAME###.
+
+In order to complete your registration, visit the following URL (make sure it is
+entered as the single line) and set your own access password:
+
+###CONFIRMATION_URL###
+
+
+
+Thanks,
+The YouCademy team

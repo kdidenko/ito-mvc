@@ -1,0 +1,84 @@
+<script type="text/javascript"> 
+function foo() { 
+document.getElementById("caption").disabled = false;
+document.getElementById("caption").value = '';
+document.getElementById("description").disabled = false;
+document.getElementById('exercise_hide').style.display='none';
+document.getElementById('exercise').style.display='';
+return false;
+} 
+</script> 
+
+<h1>My challenges</h1>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+<?php
+		$exList = $mvc->getObject('exList');
+		if(!isset($exList) || count($exList) == 0) { ?>
+	<span class="message warning">
+			You are currently not signed up for any schools or your school have not courses.<br/>
+			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+	</span>
+<?php	} else { ?>
+
+		<form enctype="multipart/form-data" action="my-challenges.html" method="post" class="edit">
+		<div class="popUP" style="display:none;" id="exercise_hide">
+<?php		$usSchList = $mvc->getObject('usSchList');
+			$usCourseList = $mvc->getObject('usCourseList');
+			if(isset($usSchList) || count($usSchList) > 0){
+				foreach($usSchList as $key => $school){	?> 
+						<span class="caption"><?php echo $school[SchoolService::CAPTION];?>:</span>
+						<div class="clnr brdr">&nbsp;</div>
+<?php				if(isset($usCourseList) && count($usCourseList) > 0){
+						foreach($usCourseList as $key => $course){
+							if ($course[CourseService::SCHOOL_ID] == $school[SchoolService::ID]) { ?> 
+									<span class="subCaption"><?php echo $course[CourseService::CAPTION];?></span>
+									<div class="clnr brdr">&nbsp;</div>
+									<ul>
+<?php							foreach($exList as $key => $exercise){
+									if ($course[CourseService::ID] == $exercise[ExerciseService::COURSE_ID]) { ?>
+												<li>
+												<input onclick="foo();" type="radio" name="ex_index" value="<?php echo $exercise[ExerciseService::ID]; ?>"/>
+													<a href="exercise-details.html?id=<?php echo $exercise[ExerciseService::ID]; ?>">
+														<?php echo $exercise[ExerciseService::CAPTION]; ?>
+													</a>
+												</li>
+<?php								}   
+								} ?>
+									</ul>
+									<div class="clnr brdr">&nbsp;</div>
+<?php						} 
+						}
+					}
+				}
+			} ?>
+			</div>			
+			<div >
+				<div id="exercise">
+					<a href="#" onClick="document.getElementById('exercise').style.display='none';document.getElementById('exercise_hide').style.display='';return false;">Select Exercise...</a>
+					<div class="clnr brdr">&nbsp;</div>
+				</div>
+				<span>Challenge Name:</span>
+				<input type="text" name="caption" id="caption" size="35" disabled value="Please Select Exercise"/>
+				<div class="clnr brdr">&nbsp;</div>
+				<span>Challenge Description:</span>
+				<textarea name="description" id="description" cols="10" rows="10" disabled ></textarea>
+				<div class="clnr brdr">&nbsp;</div>
+				<span>&nbsp;</span>
+				<a href="start-challenge.html" class="button">Record Video</a>
+				
+				<p>Note: Recorde video dosn't work. Please wait the update.</p>
+				<p class="btns">
+					<button class="defBtn">Discard</button>
+					<input type="submit" name="submit" value="Save Challenge" class="defBtn" />
+				</p>
+			</div>
+		</form>
+<?php } ?>

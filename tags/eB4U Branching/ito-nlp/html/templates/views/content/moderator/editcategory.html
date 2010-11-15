@@ -1,0 +1,12 @@
+<h1>Edit Category</h1>
+<?php $result = $mvc->getObject('result'); if($result == NULL){ ?>
+	<span class="message">No category available at this moment.</span>
+<?php } else { ?>
+	<form class="edit" action="manage-categories.html" method="post">
+ 		<span>Category Name:</span> 
+ 		<input type="text" name="name" value="<?php echo $result[CategoriesService::NAME];?>"/>
+		<input type="hidden" name="id" value="<?php echo $result[CategoriesService::ID];?>"/>
+		<div class="clnr brdr">&nbsp;</div>
+	<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
+	</form>
+<?php } ?>

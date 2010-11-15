@@ -1,0 +1,145 @@
+<form>
+<p class="splashHead">Edit Training</p>
+<div class="splashBody">
+	<div class="error">
+ 		<?php
+			$errors = $mvc->getObject(UsersService::ERROR);
+			if (isset($errors)){
+				foreach ($errors as $key => $value){
+					echo '<p>' . $value . '</p>';
+				}
+			}
+	 	?>
+	</div>
+		<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+		<fieldset>
+			<legend>Personal Data:</legend>
+			<dl>
+				<dt>Title:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="title"/>
+		 		</dd>
+				<dt>Project:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="project"/>
+		 		</dd>
+		 		<dt>Participants min:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="min"/>
+		 		</dd>
+		 		<dt>Participants max:</dt>
+		 		<dd>
+		 		<input class="profile" type="text" name="max"/>
+				</dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Level:</legend>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Admin:</legend>
+			<div class="selectList">
+				<div>
+					<select size="10">
+						<option>All</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Arnet Friederich</option>
+						<option>Fuerst Christian</option>
+						<option>Keck Katarina</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Participants:</legend>
+			<div class="selectList">
+				<div class="presetCtrl">
+					<label for="presetL">Preset:</label>
+					<select>
+						<option>Level</option>
+					</select>
+					<select>
+						<option>class</option>
+					</select>
+				</div>					
+				<div>
+					<select size="10" name="presetL" id="presetL">
+						<option>Muller Frank</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Ermer Lisa</option>
+						<option>Kasch Simone</option>
+						<option>Lage Klaus</option>
+						<option>Mayer Stefan</option>
+					</select>
+				</div>
+			<div class="presetCtrl">
+				<label >Preset:</label>
+			</div>	
+				<div>
+					<select size="10">
+						<option>Ermer Lisa</option>
+					</select>
+				</div>
+				<div>
+					<ul class="switch">
+						<li><a href="#" title="Add"><img alt="Add" src="images/arr-right.png"></a></li>
+						<li><a href="#" title="Remove"><img alt="Remove" src="images/arr-left.png"></a></li>
+					</ul>
+				</div>
+				<div>
+					<select size="10">
+						<option>Muller Frank</option>
+						<option>Kasch Simone</option>
+						<option>Lage Klaus</option>
+						<option>Mayer Stefan</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+</div>
+	<div class="splashBottom">
+		<input type="submit" name="submit" value="Submit"/>
+		<button onclick="destroySplash('splashCanv');return false;">Cancel</button>
+	</div>	
+</form>

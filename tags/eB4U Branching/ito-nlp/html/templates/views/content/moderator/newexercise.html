@@ -1,0 +1,37 @@
+<h1>New Exercise</h1>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+	<form class="edit" action="new-exercise.html" method="post">
+		<span>Exercise Name:</span>
+			<input type="text" name="caption" id="caption" size="35" value="<? echo isset($_POST[ExerciseService::CAPTION]) ? $_POST[ExerciseService::CAPTION] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Description:</span>
+			<textarea rows="10" cols="28"  name="description" id="description"><? echo isset($_POST[ExerciseService::DESCRIPTION]) ? $_POST[ExerciseService::DESCRIPTION] : null; ?></textarea>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Choose course:</span>
+			<select name="course_id" >
+				<?php
+				$courseList = $mvc->getObject('courseList');
+					if(!isset($courseList) || count($courseList) == 0){
+					?>
+			<option>No Courses</option>
+				<?php } else { ?>
+				<?php 
+				foreach($courseList as $key => $value){ 
+					?>
+			<option value="<?php echo $value[CourseService::ID]; ?>"><?php echo $value[CourseService::CAPTION]; ?></option>
+				<?php } } ?>
+			</select>
+			<div class="clnr brdr">&nbsp;</div>
+		<span>Video for exercise:</span>
+			<input type="text" name="video" id="video" size="35" value="<? echo isset($_POST[ExerciseService::VIDEO]) ? $_POST[ExerciseService::VIDEO] : null; ?>"/>
+			<div class="clnr brdr">&nbsp;</div>
+		<p class="btns"><input type="submit" name="submit" value="Add Exersice" class="defBtn" /></p>
+	</form>

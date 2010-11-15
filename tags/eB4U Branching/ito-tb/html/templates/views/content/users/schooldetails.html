@@ -1,0 +1,82 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+<span class="message">No schools available at this moment.</span>
+<?php } else { ?>
+<?php foreach($list as $key => $value){ ?>
+<div class="pgListItem wide">
+	<h1><?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?></h1>
+	<div class="pgItemImg"><img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" /></div>
+	   <div class="pgItemBody">
+		<ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+	       		<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 1){ ?>
+				<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+				<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 2){ ?>
+				<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+				<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 3){ ?>
+				<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+				<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 4){ ?>
+				<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+				<?php if(isset($value[SchoolService::RATE])){ if($value[SchoolService::RATE] == 5){ ?>
+				<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+				</span>
+			</li>
+          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+          	<li><span>Courses:</span><span class="lsValue">2</span></li>
+         	<li><span>Language:</span><span class="lsValue">English</span></li>
+         	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($value[SchoolService::FEE]) ? $value[SchoolService::FEE] : null;?>$ / mon</span></li>
+         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+	     	<?php $assign = $mvc->getObject('assign'); if(!isset($assign) || count($assign) == 0){?>
+	     	<li><span>Status:</span><span><a href="<?php echo "/school-assigned.html?signup=" . $value[SchoolService::ID] ?>">SignUp</a></span></li>
+			<?php } else { ?>
+			<li><span>Status:</span><span><a href="<?php echo "/school-assigned.html?signout=" . $value[SchoolService::ID] ?>">SignOut</a></span></li>
+	   		<?php } ?>
+	    </ul>
+		</div>
+	<p><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+</div>
+<b>More details:</b>
+<?php } } ?>
+
+<div>
+<?php
+	$courseslist = $mvc->getObject('courselist');
+	if(!isset($courseslist) || count($courseslist) == 0){
+?>
+<span class="message">No course sign in to school.</span>
+<?php } else { ?>
+<?php foreach($courseslist as $key => $value){ ?>
+	<div class="pgListItem">
+		<h1><?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?></h1>
+		<div class="pgItemImg"><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></div>
+		   <div class="pgItemBody">
+		       <ul>
+	       		<li>
+		       		<span>Rating:</span><span class="lsValue">
+		       		<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 1){ ?>
+					<a href="">[1]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+					<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 2){ ?>
+					<a href="">[2]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+					<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 3){ ?>
+					<a href="">[3]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+					<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 4){ ?>
+					<a href="">[4]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+					<?php if(isset($value[CourseService::RATE])){ if($value[CourseService::RATE] == 5){ ?>
+					<a href="">[5]</a> <?php }else{ ?> <a href="">*</a> <?php } } ?>
+					</span>
+				</li>
+	          	<li><span>Students:</span><span class="lsValue">1258</span></li>
+	          	<li><span>Language:</span><span class="lsValue">English</span></li>
+	         	<li><span>Level:</span><span class="lsValue"><?php echo isset($value[CourseService::LEVEL]) ? $value[CourseService::LEVEL] : null;?></span></li>
+	         	<li><span>Base fee:</span><span class="lsValue"><?php echo isset($value[CourseService::FEE]) ? $value[CourseService::FEE] : null;?>$ / mon</span></li>
+	         	<li><span>Subjects:</span><span class="lsValue">NLP, DHE, SHE</span></li>
+		     	</ul>
+			<p><?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?></p>
+			</div>
+	</div>
+<?php } } ?>
+</div>
+

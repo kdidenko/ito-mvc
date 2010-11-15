@@ -1,0 +1,35 @@
+<h1>Manage Categories</h1>
+<?php 		
+	$message = $mvc->getObject ( ContentController::RESULT );
+	if (isset ( $message ) and count($message) != 0) {
+?>
+<div class="subHeader">
+	<b>Categories List</b>
+</div>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
+<table class="list">
+	<tr>
+		<th>Name:</th>
+		<th>Options:</th>
+	</tr>
+<?php foreach($message as $key => $value){ ?>
+	<tr <?php if($key%2)echo "class='pair'" ?>>
+		<td><b><?php echo $value[CategoriesService::NAME];?></b></td>
+		<td>
+			<a class="button" href=<?php echo 'edit-category.html?id=' . $value[CategoriesService::ID];?>>Edit</a>
+			<a class="button" onclick="return confirm('You sure you want to delete?');" href=<?php echo 'manage-categories.html?deleted=' . $value[CategoriesService::ID];?>>Delete</a>
+		</td>
+	</tr>
+<?php } ?>
+</table> 
+<?php }else{ ?>
+	<span class="message warning">
+		Sorry, there are no categories available at this moment.<br />
+		You can create <a href="new-category.html">new</a> category.
+	</span>
+<?php } ?>

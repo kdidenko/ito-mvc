@@ -1,0 +1,14 @@
+<?php $crnt = $mvc->getView();?>
+<div class="footerBody">
+	<div>
+		<ul class="mainNav">
+			<li<?php if($crnt == 'footer-home') echo ' class="current"';?>><a href="/" title="Home"  title="Overview">Overview</a></li>
+			<li<?php if($crnt == 'footer-schools') echo ' class="current"';?>><a href="schools.html"  title="Schools">Schools</a></li>
+			<li<?php if($crnt == 'footer-mytrainings') echo ' class="current"';?>><a href="my-trainings.html"  title="My Trainings">My Trainings</a></li>
+			<li<?php if($crnt == 'footer-valuateresponses') echo ' class="current"';?>><a href="valuate-responses.html" title="My Valuations">My Valuations</a></li>
+			<li<?php if($crnt == 'footer-community') echo ' class="current"';?>><a href="community.html" title="Community">Community</a></li>
+			<li<?php if($crnt == 'footer-myprofile') echo ' class="current"';?>><a href="my-profile.html" title="My profile">My profile</a></li>
+		</ul>
+	</div>
+	<p>(c) Copyright 2010 YouCademy. All rights reserved.</p>
+</div>

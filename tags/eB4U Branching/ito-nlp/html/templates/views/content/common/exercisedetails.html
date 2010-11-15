@@ -1,0 +1,44 @@
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+	<span class="message warning">You have no access to view this exercise.</span>
+<?php } else { ?>
+	<div class="pgItemsList">
+		<div class="pgListItem wide">
+			<div class="pgItemBody">
+				<h1><?php echo $list[ExerciseService::CAPTION];?></h1>
+				<ul>
+					<li>
+						<span>Rating:</span>
+						<span class="lsValue"> 
+							<?php if($list[ExerciseService::RATE] >= 1){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?> 
+							<?php if($list[ExerciseService::RATE] >= 2){ ?><a href=""><img src="images/star.png" /></a> 
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 3){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 4){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?>
+							<?php if($list[ExerciseService::RATE] >= 5){ ?><a href=""><img src="images/star.png" /></a>
+								<?php }else{ ?><a href=""><img src="images/gray-star.png" /></a><?php } ?> 
+						</span>
+					</li>
+					<li><span>Owner:</span><span class="lsValue"><?php echo $list[UsersService::USERNAME];?></span></li>
+				</ul>
+				
+				<div class="pgItemDsc"><b>Description: </b><?php echo $list[ExerciseService::DESCRIPTION];?></div>
+				<div class="pgItemVideo"><?php echo $list[ExerciseService::VIDEO];?></div>
+				<div class="pgItemIns">
+					<b>Instructions:</b>
+					<ul>
+						<li>Listen the clients sentence, and identify the complex equivalence or cause effect.</li>
+						<li>In your mind, modify the order of the complex equivalence into the form "External Behavior, meens Internal State".</li>
+						<li>Ask your self: "What is the positive purpose, or intertion of this belief?", "How is this valuable to them?", and "How is this important to them?".</li>
+						<li>Ask or tell the other person about the positive intention behind their belif.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>

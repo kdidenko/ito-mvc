@@ -1,0 +1,14 @@
+<?php 
+	$crnt = $mvc->getView();
+	$usr = SessionService::getAttribute(SessionService::USERNAME);
+?>
+<ul class="mainNav">
+	<li <?php if($crnt == 'navigation-home') echo 'class="current"';?>><a href="index.html" title="Manage Schools">Manage Schools</a></li>
+	<li <?php if($crnt == 'navigation-manageusers') echo 'class="current"';?>><a href="manage-users.html">Manage Users</a></li>
+	<li <?php if($crnt == 'navigation-community') echo 'class="current"';?>><a href="community.html" title="">Community</a></li>
+	<li <?php if($crnt == 'navigation-myprofile') echo 'class="current"';?>><a href="my-profile.html" title="">My profile</a></li>
+</ul>
+<ul class="userNav">
+	<li>You are logged in as <b><?php echo $usr;?></b>.</li>
+	<li><a href="signout.html" title="Sign out">Sign out</a></li>
+</ul>

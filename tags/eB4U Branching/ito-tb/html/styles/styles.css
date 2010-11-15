@@ -1,0 +1,133 @@
+body {padding:0; margin:0; background:url('../images/global-bg.png') repeat-x center top; font-family:Tahoma, Geneva, sans-serif; font-size:12px}
+
+ul, li, p, form, h1, h2, h3, h4, h5, h6, dl, dd {padding:0; margin:0; list-style:none}
+fieldset {border: 1px solid #CBCBCB;margin:10px}
+legend {color:#698DB1;font-weight:bolder;}
+a {color:#6387AC}
+a:hover {text-decoration:none}
+img {border:0}
+p {font-size:12px; line-height:135%; padding:10px 0}
+
+h1, h2 {font-weight:500; color:#333; padding:0 0 10px 0}
+h1 {font-size:22px}
+h2 {font-size:16px}
+.pgIntro {font-size:14px; color:#666; padding:10px 0 15px 0}
+/**/.clnr {clear:both; height:1px; overflow:hidden; font-size:1px}
+/**/.brdr {border-top:1px solid #ededed}
+.globalSubWrapper {width:960px; margin:0 auto}
+
+.headerWrapper {display:table; width:100%}
+	.headerLogo {height:88px; float:left}
+	.headerMenu, .footerBody div {width:100%; display:table}
+	.headerMenu {overflow:hidden}
+		.headerMenu ul {list-style:none; font-size:12px; float:left; margin:0 0 0 -1px}
+		.footerBody ul {list-style:none; font-size:12px; float:left; margin:0 0 5px 0}
+		.headerMenu ul li, .footerBody ul li {float:left; line-height:28px}
+			ul.mainNav li a {color:#666; display:block; text-decoration:none; font-weight:bold; border-left:1px solid #CCC; padding:0 14px}
+			ul.mainNav li a:hover {color:#698DB1; background-color:#FFF}
+			ul.mainNav li.current a {color:#698DB1; background-color:#FFF}
+			ul.userNav {float:right}
+			ul.userNav li {margin:0 0 0 10px}
+			.footerBody ul.mainNav li a {color:#698DB1; font-weight:normal; display:block; text-decoration:none; border:0; padding:0 14px 0 0; text-decoration:underline}
+			.footerBody ul.mainNav li a:hover {color:#666; text-decoration:none}
+			.footerBody ul.mainNav li.current a {background-color:#FFF; font-weight:bold; color:#666}
+
+.pageWrapper {padding:25px 0; width:100%; display:table}
+	.mainPageContent {width:auto; margin:0 0 0 14px}
+		.pgContentTools {background:url(../images/pg-content-tool-bg.png) repeat-x left top; clear:both; width:100%; display:table}
+		.pgContentTools ul {float:right; font-size:11px; padding:5px 0 6px 0; margin:0 10px 0 0}
+		.pgContentTools ul li {float:left; list-style:none; padding:4px 2px}
+
+.loginForm {width: 400px; margin: 0 auto;}
+			
+.pgItemsList {}
+.pgItemsList h2 {padding:5px 10px; background-color:#ededed; float:right}
+.pgListItem {margin:15px 0; width:335px; float:left; background-color:#CCC}
+/**/.wide {float:none; width:auto}
+.pgListItem  h2 {background:none; padding:0 0 5px 0; float:none}
+.pgListItem .pgItemImg {float:left; padding:3px 10px 5px 0}
+.pgListItem .pgItemBody {display:table; height:1%}
+.pgListItem .pgItemBody  p {padding:0}
+.pgListItem .pgItemBody ul {padding:5px 0 0 0; font-size:11px}
+.pgListItem .pgItemBody ul li {margin:1px 0}
+.pgListItem .pgItemBody ul li span {color:#999; padding:0 10px 0 0; width:60px; display:inline-block}
+.pgListItem .pgItemBody ul li span.lsValue {color:#000; width:auto}
+.pgListItem .pgItemBody p {padding:0 15px 0 0}
+.extLink {margin:5px 0 0 0}
+	.sidePageContent {float:right; width:245px}
+	.sidePgItem {background:url('../images/side-pg-bg.png') repeat-x top left #fff; border-bottom:1px solid #ededed; padding:15px 0; margin:0 0 15px 0}
+	/**/.sidePageContent h2 {padding:0 5px 10px 33px; background:none; float:none}
+	/**/.sidePageContent ul {padding:0 5px 10px 33px}
+	/**/.sidePageContent ul li {margin:5px 0; background:url(../images/arr-list.png) no-repeat 0 5px; padding:0 0 0 10px}
+
+.signinForm {padding:0 0 15px 0}
+.signinForm p {font-size:11px; padding:10px 25px 0 33px}
+
+.inpTxt {width:100%; border-top:1px solid #666; border-left:1px solid #666; border-right:1px solid #ccc; border-bottom:1px solid #ccc}
+.inpChk {vertical-align:middle; margin:0 5px 0 0}
+label {vertical-align:middle}
+p.btns {text-align:right}
+
+.headerForms {float:right; padding:40px 0 0 0; text-align:right}
+form.languages {float:right; margin:1px 0 0 60px}
+
+
+.footerWrapper {border-top:7px solid #cbcbcb}
+.footerBody {width:960px; margin:0 auto; padding:5px 0 15px 20px}
+.footerBody p {font-size:11px; color:#666; padding:0}
+
+.error p {margin:0; padding:0; color:red; text-align:center;}
+.profile {border: 1px solid #999999;}
+.center {text-align: center;}
+
+dl {overflow: hidden;}
+dt {clear:both; float:left; text-align:right; width:35%; margin: 2px;}
+dd {float:left;	text-align:left; width:58%;	margin: 2px;}
+
+.list {margin: 20px;font-size: 12px;text-align: center;}
+.list tr {margin: 0; padding: 0; border: 1px solid #EFEFEF;}
+.list td{	width: 28%;	border: 1px solid #EFEFEF;}
+.genTbl {
+	width:80%;
+	margin:0 auto;
+	border:1px solid black;
+}
+
+table.genTbl th {background-color: #CBCBCB;padding:3px;border-left:1px solid #CBCBCB}
+table.genTbl th:FIRST-CHILD {border:0}
+
+tr.odd {background-color:#EBEBEB}
+td.option{width:140px;text-align: center;}
+
+td.option a img {margin-top:5px}
+
+table.genTbl td {padding-left:10px;border-left:1px solid #CBCBCB;line-height:22px;}
+table.genTbl td:FIRST-CHILD {border:0;font-weight:bold;color:#666666}
+
+.selectList select{width: 265px;margin:10px auto}
+.selectList div{float: left; margin-left: 20px;}
+ul.switch {margin-top:50px}
+ul.switch li {margin-top:20px}
+
+div.presetCtrl {width:100%;clear:both;margin-top:10px}
+div.presetCtrl select {float:right;margin:0 45px 0 0;width:60px}
+
+.title {width: 70px; float: left; margin-left: 20px;}
+
+
+div.topBlock {display:block;width:100%;overflow:hidden;margin-bottom:20px; }
+form.frmNew {display:block;float:left}
+form.search {display:block;float:right}
+form.group {display:block;float:right}
+
+#splashCanv {visibility:hidden;background:#EBEBEB url('../images/splash-bg.png') repeat-x center top;
+		display:block;width:720px;height:80%;margin:0 auto;z-index:999;overflow:hidden;position:absolute;top:10%;
+			border:1px solid #666666;
+	}
+
+p.splashHead {text-indent:10px;font-size:14px;font-weight:bold;color:white;}
+div.splashBody {display:block;position:absolute;top:47px;left:3px;right:3px;bottom:47px;border:1px solid #CBCBCB;overflow:auto;background-color:white;}
+
+div.splashBottom {position:absolute;bottom:10px;left:10px;}
+h2.warning {color:red;text-align:center;margin-top:10px}
+fieldset dl {margin:10px}

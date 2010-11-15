@@ -1,0 +1,61 @@
+<h1>Edit School</h1>
+<?php $training = $mvc->getObject('training'); if($training == NULL){ ?>
+	<span class="message">No school available at this moment.</span>
+<?php } else { ?>
+<div class="trnList">
+	<div class="tabMenu">
+		<ul>
+			<li <?php if(!isset($_GET['add'])) echo " class='current'";?>><a href="edit-training.html?id=<?php echo $_GET['id']?>">current</a></li>
+			<li <?php if(isset($_GET['add'])) echo " class='current'";?>><a href="edit-training.html?add&id=<?php echo $_GET['id']?>">add new courses</a></li>
+		</ul>
+	</div>
+	<div class="itemBody">
+		<div class="itemBodyContent">
+			<div class="itemForm">
+			<?php if(!isset($_GET['add'])){ ?>
+				<form enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+					<dl>
+						<dt>Training Name:</dt>
+						<dd><input type="text" name="training_name" id="training_name" size="35" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/></dd>
+						<dt>Your courses:</dt>
+<?php					foreach($training as $key => $trn){ ?>
+							<dd>
+								<a class="button" href="edit-training.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&del=<?php echo $trn[TrainingsService::COURSE_ID] ?>">Del</a>
+								<?php echo $trn[CourseService::CAPTION] ?>
+							</dd>
+							<dt>&nbsp;</dt>
+<?php 					} ?>
+					</dl>
+					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
+					<input type="submit" name="updateCurrent" value="Save Training"/>
+				</form>							
+			<?php } else {?>
+				<form enctype="multipart/form-data" action="my-trainings.html?id=<?php echo($training[0][TrainingsService::TRN_ID]); ?>&ex=1" method="post">
+					<span class="message">Please, mark the courses, wich you want to learn.</span>
+					<dl>
+<?php				$usCourseList = $mvc->getObject('usCourseList');
+					if(isset($usCourseList) && count($usCourseList) > 0){
+						foreach($usCourseList as $key => $course){ 
+							$old = isset ($old)? $old : NULL;
+							if ($course[SchoolService::CAPTION] != $old){?> 
+									<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
+									<?php } ?>
+									<dd>
+										<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>" />
+										<?php echo $course[CourseService::COURSE_CAPTION];?>
+									</dd>
+										
+<?php 						$old = $course[SchoolService::CAPTION];		
+						}
+					} ?>
+					</dl>
+					<input type="hidden" name="training_name" id="training_name" value="<?php echo $training[0][TrainingsService::TRN_NAME];?>"/>
+					<input type="hidden" name="edit_id" value="<?php print_r($training[0][TrainingsService::TRN_ID]); ?>">
+					<input type="submit" name="update" value="Save Training"/>
+				</form>
+			<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>

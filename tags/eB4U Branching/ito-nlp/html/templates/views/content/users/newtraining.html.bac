@@ -1,0 +1,33 @@
+<div class="itemForm">
+	<?php				
+	$usCourseList = $mvc->getObject('usCourseList');
+	if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+		<span class="message warning">
+			You are currently not signed up for any schools or your school have not courses.<br/>
+			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+		</span>
+	<?php }else{ ?>
+		<form enctype="multipart/form-data" action="my-trainings.html" method="post">
+		<dl>
+			<dt>Training Name:</dt>
+			<dd><input type="text" name="training_name" id="training_name" size="35"/></dd>
+			<dt><span class="message">Please, mark courses.</span></dt>
+<?php				foreach($usCourseList as $key => $course){
+							$old = isset ($old)? $old : NULL;
+							if ($course[SchoolService::CAPTION] != $old){?> 
+							<dt><?php echo $course[SchoolService::CAPTION];?>:</dt>
+							<?php } ?>
+							<dd>
+								<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/>
+								<a href="/course-details.html?id=<?php echo $course[CourseService::ID]; ?>" title="Course Details">
+									<?php echo $course[CourseService::COURSE_CAPTION];?>
+								</a>
+							</dd>
+							<dt>&nbsp;</dt>
+<?php						$old = $course[SchoolService::CAPTION];
+						} ?>
+		</dl>
+		<input type="submit" name="submit" value="Save Training"/>
+		</form>
+	<?php } ?>
+</div>

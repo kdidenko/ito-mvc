@@ -1,0 +1,63 @@
+<h1>School Overview</h1>
+<?php
+	$mrSchlList = $mvc->getObject('mrSchlList');
+	//if(!isset($mrSchlList) || count($mrSchlList) == 0){
+?>
+<!--
+<span class="message warning">There are currently no schools assigned to you.</span>
+<span class="message warning">Please, contact your administrator or support team for more information.</span>
+<?php //} else { ?>
+-->
+<div>
+	<p>Bellow you may see your school details and make some general appearance changes according to you preferences.</p>
+	<p>Click on the school title to view rates, number of students and list of courses.<br/>
+	Click on edit button bellow the school description for appearance changes.</p>
+</div>
+<div class="subHeader">
+	<b>Schools List</b>
+</div>
+<?php foreach($mrSchlList as $key => $value){ ?>
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+		<h2>
+			<a href=<?php echo 'school-details.html?id=' . $value[SchoolService::ID];?>>
+				<?php echo isset($value[SchoolService::CAPTION]) ? $value[SchoolService::CAPTION] : null;?>
+			</a>
+		</h2>	
+		<div class="pgItemImg">
+			<img src="<?php echo isset($value[SchoolService::AVATAR]) ? $value[SchoolService::AVATAR] : null;?>" alt="" title="" />
+		</div>
+		<div class="pgItemBody">
+			<ul>
+				<li><span>Rating:</span>
+					<span class="lsValue">
+						<?php if($value[SchoolService::RATE] >= 1){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($value[SchoolService::RATE] >= 2){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($value[SchoolService::RATE] >= 3){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($value[SchoolService::RATE] >= 4){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+						<?php if($value[SchoolService::RATE] >= 5){ ?>
+						<img src="images/star.png" /> <?php }else{ ?> <img src="images/gray-star.png" /><?php } ?>
+					</span>				
+				</li>
+				<li><span>Created:</span><span class="lsValue"><?php echo isset($value[SchoolService::CRDATE]) ? $value[SchoolService::CRDATE] : null;?></span></li>
+				<li><span>Categories:</span>
+					<span class="lsValue">
+					<?php foreach($value['subject'] as $key_sub => $subject){ ?>
+						<a href="/manage-courses.html?id=<?php echo $subject[CategoriesService::ID];?>">
+						<?php echo $subject[CategoriesService::NAME]; ?></a>
+					<? } ?>
+					</span>
+				</li>
+			</ul>
+			<p class="extLink"><?php echo isset($value[SchoolService::DESCRIPTION]) ? $value[SchoolService::DESCRIPTION] : null;?></p>
+			<p class="btns"><a class="button" href=<?php echo 'edit-school.html?id=' . $value[SchoolService::ID];?>>Edit</a></p>
+		</div>
+	</div>
+	<div class="clnr brdr">&nbsp;</div>
+</div>
+
+<?php } //} ?>

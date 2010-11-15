@@ -1,0 +1,49 @@
+<div class="itemForm">
+	<?php
+	$usCourseList = $mvc->getObject('usCourseList');
+	if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+		<span class="message warning">
+			You are currently not signed up for any schools or your school have not courses.<br/>
+			Please, browse <a href="/schools.html" title"YouCademy Schools">our schools</a> directory to select one you want to start.
+		</span>
+	<?php }else{ ?>
+		<form class="edit" enctype="multipart/form-data" action="my-trainings.html" method="post">
+			<span>Training Name:</span>
+			<input type="text" name="training_name" id="training_name" size="35"/>
+			<div class="subHeader">
+				<b>Courses List:</b>
+				<span>
+					<a <?php echo $_GET == NULL ? "class='current'" : NULL;?> href="/my-trainings.html">All</a> |
+					<?php
+						$usGategoriesList = $mvc->getObject('usGategoriesList');
+							foreach($usGategoriesList as $key => $category){ ?> 
+							<a <?php if(isset($_GET["cat"]))
+								echo $_GET["cat"]==$category[CategoriesService::NAME] ? "class='current'" : NULL;?> href="?cat=<?php echo $category[CategoriesService::NAME] ?>"><?php echo $category[CategoriesService::NAME] ?></a>
+								<?php echo $key+1!=count($usGategoriesList) ? "|" : NULL;?>
+					<?php } ?>
+				</span>
+			</div>
+<?php				foreach($usCourseList as $key => $course){
+						$old = isset ($old)? $old : NULL;
+						if ($course[SchoolService::CAPTION] != $old){?>
+							<?php if($key%2){ ?></ul><?php } ?>
+							<div class="clnr">&nbsp;</div>							
+							<span><?php echo $course[SchoolService::CAPTION];?>:</span>
+							<div class="clnr">&nbsp;</div>
+							<ul>
+						<?php } ?>
+						<li>
+						<input type="checkbox" name="course<?php echo $course[CourseService::ID];?>"/>
+						<a href="/course-details.html?id=<?php echo $course[CourseService::ID]; ?>" title="Course Details">
+							<?php echo $course[CourseService::COURSE_CAPTION];?>
+						</a>
+						</li>
+<?php					$old = $course[SchoolService::CAPTION];
+					} ?>
+		</ul>
+		<div class="clnr">&nbsp;</div>
+		<p class="btns"><input type="submit" name="submit" value="Save Training"class="defBtn" /></p>
+		</form>
+		<span class="message warning">Note: Please select courses wich are interesting for you. And start challange!</span>
+	<?php } ?>
+</div>

@@ -1,0 +1,63 @@
+<h1>Edit School</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning">Successfully Saved.</span>
+<?php } ?>
+<?php $schList = $mvc->getObject('result'); if($schList == NULL){ ?>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no schools for such criterias.<br />
+		But you may still find some schools of interest by browsing our <a href="/schools.html" title="Schools">Schools</a> directory.
+	</span>
+<?php } else { ?>
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+			<div class="error">
+				<ul>
+<?php			foreach ($errors as $key => $value){
+					echo '<li>' . $value . '</li>'; }?>
+				</ul>
+			</div>
+<?php 	} ?>
+	<form enctype="multipart/form-data" action="edit-school.html" method="post" class="edit">
+		<span>ID:</span>
+		<input type="hidden" name="id" value="<?php echo $schList[SchoolService::ID]; ?>"><b><?php echo $schList[SchoolService::ID]; ?></b></input>
+ 		<div class="clnr brdr">&nbsp;</div>
+		<span>School Name:</span>
+		<input type="text" name="caption" id="caption" class="inpTxt" size="62" value="<?php echo $schList[SchoolService::CAPTION]; ?>"/>
+		<div class="clnr brdr">&nbsp;</div>	
+		<span>Description:</span>
+		<textarea rows="10" cols="28"  name="description" id="description"><?php echo $schList[SchoolService::DESCRIPTION]; ?></textarea>
+		<div class="clnr brdr">&nbsp;</div>
+		<span>Base fee:</span>
+		<input type="text" onkeyup="javascript:this.value=this.value.replace(/[^0-9]/g, '');" name="base_fee" id="base_fee" size="8" value="<?php echo $schList[SchoolService::BASE_FEE]; ?>"/> $/month
+		<div class="clnr brdr">&nbsp;</div>
+		<span>Moderator:</span>
+		<select  name="admin_id" id="admin_id">
+			<option  value="<?php echo $schList[SchoolService::ADMIN]; ?>">
+				<?php echo $schList[UsersService::USERNAME]; ?>
+			</option>
+				<?php
+				$mrList = $mvc->getObject('mrList');
+					if(!isset($mrList) || count($mrList) == 0){
+					?>
+			<option>No moderator</option>
+				<?php } else { ?>
+				<?php 
+				foreach($mrList as $key => $value){ 
+					if ($schList[UsersService::USERNAME] != $value[UsersService::USERNAME]) {
+					?>
+			<option value="<?php echo $value[UsersService::ID]; ?>"><?php echo $value[UsersService::USERNAME]; ?></option>
+				<?php } } } ?>
+		</select>
+		<div class="clnr brdr">&nbsp;</div>
+		<span>Avatar:</span>
+		<img alt="none avatar" src="<?php echo $schList[SchoolService::AVATAR]; ?>" style="margin-top:10px" />
+		<input type="file" name="file" size="30" ></input>
+		<div class="clnr brdr">&nbsp;</div>
+	<p class="btns"><input type="submit" name="submit" value="Submit Changes" class="defBtn" /></p>
+	<input type="hidden" name="alias" id="alias" value="<?php echo $schList[SchoolService::ALIAS]; ?>"/>
+	<input type="hidden" name="old_admin" id="old_admin" value="<?php echo $schList[SchoolService::ADMIN]; ?>"/>
+	</form>
+<?php } ?>

@@ -1,0 +1,66 @@
+<h1>Edit Valuations</h1>
+<?php $valuation = $mvc->getObject('valuation'); if($valuation == NULL){ ?>
+	<span class="message warning">
+		Oops... seems the address you have entered is invalid. There are no valuations for such criterias.<br />
+		But you may still find some courses of interest by browsing our <a href="/courses.html" title="Courses">Courses</a> directory.
+	</span>
+<?php } else { ?>
+<div class="trnList">
+	<div class="tabMenu">
+		<ul>
+			<li <?php if(!isset($_GET['add'])) echo " class='current'";?>><a href="edit-valuation.html?id=<?php echo $_GET['id']?>">current</a></li>
+			<li <?php if(isset($_GET['add'])) echo " class='current'";?>><a href="edit-valuation.html?add&id=<?php echo $_GET['id']?>">add new courses</a></li>
+		</ul>
+	</div>
+	<div class="itemBody">
+		<div class="itemBodyContent">
+			<div class="itemForm">
+			<?php if(!isset($_GET['add'])){ ?>
+				<form class="edit" enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
+						<span>Training Name:</span>
+						<input type="text" name="v_name" id="v_name" size="35" value="<?php echo $valuation[0][ValuationsService::V_NAME];?>"/>
+						<div class="clnr brdr">&nbsp;</div>
+						<span>Your courses:</span>
+<?php					foreach($valuation as $key => $trn){ ?>
+								<a class="button" href="edit-valuation.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&del=<?php echo $trn[ValuationsService::COURSE_ID] ?>">Del</a>
+								<?php echo $trn[CourseService::CAPTION] ?>
+							<div >&nbsp;</div>
+							<span>&nbsp;</span>
+<?php 					} ?>
+					<div class="clnr brdr">&nbsp;</div>
+					<input type="hidden" name="edit_id" value="<?php print_r($valuation[0][ValuationsService::V_ID]); ?>">
+					<p class="btns"><input type="submit" name="updateCurrent" value="Save Valuation" class="defBtn" /></p>
+				</form>							
+			<?php } else {?>
+<?php				$usCourseList = $mvc->getObject('usCourseList');
+					if(!isset($usCourseList) || count($usCourseList) <= 0){ ?>
+						<span class="message warning">
+							Sorry, there are no courses available at this moment.<br/>
+							Please visit YouCademy <a href="my-trainings.html" title="YouCademy Trainings">trainings</a>, for subscribe to courses.
+						</span>
+<?php 				} else { ?>					
+					<span class="message">Please, mark the courses, wich you want to valuate.</span>			
+			<form class="edit" enctype="multipart/form-data" action="valuate-responses.html?id=<?php echo($valuation[0][ValuationsService::V_ID]); ?>&ex=1" method="post">
+					<div class="clnr brdr">&nbsp;</div>
+					<ul>
+<?php			foreach($usCourseList as $key => $course){?> 
+						<li>
+							<input type="checkbox" name="course<?php echo $course[TrainingsService::COURSE_ID];?>"/>
+							<a href="/course-details.html?id=<?php echo $course[TrainingsService::COURSE_ID]; ?>" title="Course Details">
+								<?php echo $course[CourseService::CAPTION];?>
+							</a>
+						</li>
+<?php			} ?>
+					</ul>
+					<div class="clnr brdr">&nbsp;</div>
+					<input type="hidden" name="v_name" id="v_name" value="<?php echo $valuation[0][ValuationsService::V_NAME];?>"/>
+					<input type="hidden" name="edit_id" value="<?php print_r($valuation[0][ValuationsService::V_ID]); ?>">
+					<p class="btns"><input type="submit" name="update" value="Save Valuation" class="defBtn" /></p>
+				</form>
+			<?php } 
+				} ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>

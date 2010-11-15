@@ -1,0 +1,23 @@
+<?php 
+	$crnt = $mvc->getView();
+	$usr = SessionService::getAttribute(SessionService::USERNAME);
+?>
+<ul class="mainNav">
+	<li <?php if($crnt == 'navigation-home') echo 'class="current"';?>><a href="index.html" title="School Overview">School Overview</a></li>
+	<li <?php if($crnt == 'navigation-managecourses') echo 'class="current"';?>><a href="manage-courses.html">Courses</a></li>
+	<li <?php if($crnt == 'navigation-manageusers') echo 'class="current"';?>><a href="manage-users.html">Users</a></li>
+	<li <?php if($crnt == 'navigation-managecategories') echo 'class="current"';?>><a href="manage-categories.html">Categories</a></li>
+	<li <?php if($crnt == 'navigation-community') echo 'class="current"';?>><a href="community.html" title="">Community</a></li>
+	<li <?php if($crnt == 'navigation-myprofile') echo 'class="current"';?>><a href="my-profile.html" title="">My profile</a></li>
+</ul>
+<ul class="userNav">
+	<li>You are logged in as <b><?php echo $usr;?></b>.</li>
+	<li><a href="signout.html" title="Sign out">Sign out</a></li>
+	<?php 
+	$role = SessionService::getAttribute(SessionService::ROLE);
+	if ($role == UsersService::ROLE_MR) { ?> 
+		<li><a class="button" href="index.html?switch" title="Sign out">user</a></li>
+	<?php } else { ?>
+		<li><a class="button" href="index.html?switch" title="Sign out">moderator</a></li>
+	<?php } ?>
+</ul>

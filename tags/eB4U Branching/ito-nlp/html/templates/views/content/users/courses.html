@@ -1,0 +1,80 @@
+<h1>List of YouCademy courses</h1>
+<?php
+$forward = $mvc->getObject('forward');
+if (isset($forward)){
+?>
+	<span class="message warning"><?php echo $forward;?></span>
+<?php } ?>
+<div class="subHeader">
+	<b>Courses List</b>
+	<span>
+		<?php
+			$result = $mvc->getObject('result');
+			foreach($result as $key => $value){ ?>
+				<a <?php echo isset($_GET['cat']) && $_GET['cat']==$value[CategoriesService::NAME] ? "class='current'" : NULL;?> href="/courses.html?cat=<?php echo $value[CategoriesService::NAME];?>">
+ 				<?php echo $value[CategoriesService::NAME];?></a>&nbsp;
+ 		<?php } ?>
+	</span>
+</div>
+<?php
+	$list = $mvc->getObject('list');
+	if(!isset($list) || count($list) == 0){
+?>
+	<span class="message warning">
+		Sorry, there are no courses available at this moment.<br />
+		Please, visit later. It will be updated very soon.
+	</span>
+<?php } else { ?>
+
+<?php foreach($list as $key => $value){ ?>
+
+<div class="pgItemsList">
+	<div class="pgListItem wide">
+	   	<h2>
+			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="School details">
+			<?php echo isset($value[CourseService::CAPTION]) ? $value[CourseService::CAPTION] : null;?>
+			</a>
+		</h2>
+	<div class="pgItemImg"><a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="avatar"><img src="<?php echo isset($value[CourseService::AVATAR]) ? $value[CourseService::AVATAR] : null;?>" alt="" title="" /></a></div>
+	   <div class="pgItemBody">
+	       <ul>
+       		<li>
+	       		<span>Rating:</span><span class="lsValue">
+		       		<a href="?valuate=1&cat=<?php echo $mvc->getParam('cat');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 1){ ?>
+					<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+					</a>
+					<a href="?valuate=2&cat=<?php echo $mvc->getParam('cat');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 2){ ?>
+						<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+					</a>
+					<a href="?valuate=3&cat=<?php echo $mvc->getParam('cat');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 3){ ?>
+						<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+					</a>
+					<a href="?valuate=4&cat=<?php echo $mvc->getParam('cat');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 4){ ?>
+						<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+					</a>
+					<a href="?valuate=5&cat=<?php echo $mvc->getParam('cat');?>&course_id=<?php echo $value[CourseService::ID] ?>"><?php if($value[CourseService::RATE] >= 5){ ?>
+						<img src="images/star.png" /><?php }else{ ?><img src="images/gray-star.png" /><?php } ?>
+					</a>
+				</span>
+				<span class="lsValue rate">
+					<?php echo $value[CourseService::RATE]?>/<?php echo $value[CourseService::NUMBER_RATE]?>
+				</span>
+			</li>
+         	<li><span>Base fee:</span><span class="lsValue"><?php echo $value[CourseService::BASE_FEE]?>$/ mon</span></li>
+         	<li><span>Subjects:</span>
+				<span class="lsValue">
+					<a href="/courses.html?cat=<?php echo $value[CategoriesService::NAME];?>">
+ 						<?php echo $value[CategoriesService::NAME];?></a>
+				</span>
+				</li>
+	       </ul>
+		</div>
+	    <p class="extLink">
+			<?php echo isset($value[CourseService::DESCRIPTION]) ? $value[CourseService::DESCRIPTION] : null;?>
+			<a href="<?php echo 'school-details.html?id=' . $value[CourseService::ID];?>" title="View">More...</a>
+		</p>
+    </div>
+	<div class="clnr brdr">&nbsp;</div>
+</div>
+
+<?php } }?>

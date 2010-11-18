@@ -5,7 +5,6 @@
 //TODO: needs reimplementation for dynamic class inclusion since each
 //      class name change requires changes at this file!
 	
-
     require_once 'global-settings.php';
 	//TODO: need to refactoring
 	require_once 'aliases.php';

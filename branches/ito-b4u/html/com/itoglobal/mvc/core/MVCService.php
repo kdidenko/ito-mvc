@@ -25,7 +25,7 @@ class MVCService {
 		# process the mapping data
 		$className = (string) $mappingObj->controller ['class'];
 		# use the classname to extract class path and type
-		$tokens = split ( '\.', $className );
+		$tokens = explode ( '.', $className );
 		$classPath = implode ( '/', $tokens ) . '.php';
 		$classType = array_pop ( $tokens );
 		

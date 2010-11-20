@@ -203,4 +203,10 @@
 	</action>
 	<!-- end changing password -->
 
+
+	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	
 </actions>

@@ -13,6 +13,9 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleHome($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}
+	public function handleForEntrepreneurs($actionParams, $requestParams) {
+		return $this->handleActionRequest ( $actionParams, $requestParams );
+	}
 	public function handleRegistration($actionParams, $requestParams) {
 		return $this->handleActionRequest ( $actionParams, $requestParams );
 	}

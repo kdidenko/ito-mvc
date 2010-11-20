@@ -13,12 +13,7 @@
 
 	# session may be started now
 	SessionService::startSession();
-	
-	# localization
-	$ln = SessionService::getAttribute(SessionService::LOCALE);
-	$ln = $ln && $ln!=NULL ? $ln : 'de';
-	define('DEFAULT_LOCALE', $ln);
-	
+		
 	# initialize the DAO object
 	$dao = DBClientHandler::getInstance();
 	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
@@ -27,12 +22,17 @@
 	$rd = RequestDispatcher::getInstance();
 	$mvc = $rd->dispatchHttpRequest($_SERVER);
 	
+	# get current locale
+	$locale = SessionService::getAttribute(SessionService::LOCALE);
+	$locale = $locale ? $locale : DEFAULT_LOCALE;
+	
 	# initialize the Messages Service
-	//TODO: temporary disabled
 	$messages = MessageService::getInstance();
-	$messages->loadMessages(DEFAULT_LOCALE);
+	$messages->loadMessages($locale);
+	
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.
+    
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!

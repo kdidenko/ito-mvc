@@ -28,7 +28,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 /* navigation style */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
 	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
-.mainNav {float:left; over3flow:hidden}
+.mainNav {float:left;overflow:hidden}
 	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
 	.mainNav li a:hover {background:#850208; text-decoration:none}

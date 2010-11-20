@@ -44,7 +44,7 @@ class MessageService {
      * @return the $path
      */
     public function getPath () {
-        return isset($this->path) ? $this->path : self::DEFAULT_PATH;
+        return isset($this->path) ? $this->path : DOCUMENT_ROOT . self::DEFAULT_PATH;
     }
 	/**
      * @param $locale the $locale to set
@@ -101,8 +101,9 @@ class MessageService {
      * @param $path [otional] defines the dictionary search path
      * @return void
      */
-    public function loadMessages ($locale = self::DEFAULT_LOCALE, $path = self::DEFAULT_PATH) {
+    public function loadMessages ($locale = self::DEFAULT_LOCALE, $path = null) {
         // compose the filename
+        $path = isset($path) ? $path : DOCUMENT_ROOT . self::DEFAULT_PATH; 
         $file = "$path/$locale." . self::EXT_MESSAGES;
         if (file_exists($file)) {
             // update the working path and locale properties

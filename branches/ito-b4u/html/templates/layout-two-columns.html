@@ -28,21 +28,19 @@
 		<?php TemplateEngine::execute('/navigation-' . $mvc->getView() . '.html', $mvc)?>
 	</div>
 </div>
-<div class="wrapHome">
+<div class="wrapContent">
 	<div class="wrapInner">
 		<!-- title and extra link on -->
 			<?php TemplateEngine::execute('/sub-header-' . $mvc->getView() . '.html', $mvc); ?>
 		<!-- title and extra link off -->
 		<!-- content on -->
 		<div class="stationContent">
-			<div class="wrapMain">
+			<!-- main content on -->	
 				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
-			</div>
-			<div class="wrapSide">
-			<!-- catalog on -->	
+			<!-- main content of -->	
+			<!-- right sidebar on -->	
 				<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>
-			<!-- catalog off -->
-			</div>
+			<!-- right sidebar off -->
 		</div>
 		<!-- content off -->
 		<div class="stationCarousel">

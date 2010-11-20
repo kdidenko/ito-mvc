@@ -26,14 +26,14 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.wrapHeader .unitSlogan {float:right; width:680px; height:175px; background:url(../images/headerSloganBg.gif) no-repeat 0 20px}
 	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
 /* navigation style */
-.wrapNav {background:url(../images/navBg.png) repeat-x 0 1px}
-	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto}
-.mainNav {float:left; overflow:hidden}
-	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:11}
+.wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
+	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
+.mainNav {float:left; over3flow:hidden}
+	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
-	.mainNav li a:hover {background:#850208}
-	.mainNav li.itemActive {padding:0; z-index:12}
-	.mainNav li.itemActive a {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
+	.mainNav li a:hover {background:#850208; text-decoration:none}
+	.mainNav li.itemActive {padding:0; z-index:102}
+	.mainNav li.itemActive a, .mainNav li.itemActive a:hover {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
 .userNav {float:right}
 	.userNav li {float:left; padding:9px 0 0 20px}
 	.userNav li a {color:#fff; text-decoration:underline}
@@ -46,7 +46,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.wrapFooter dd {}
 .wrapBtmLine {border-top:7px solid #850208; height:20px}
 
-.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; padding:20px 20px 10px 20px; width:652px}
+.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:20px; width:652px}
 	.greyBox .peopleFace {width:312px; height:98px; position:absolute; z-index:1; top:-98px; right:0; background:url(../images/contentImg07.jpg) no-repeat 0 0}
 	.greyBox .peopleHand {width:23px; height:28px; position:absolute; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
 	.greyBox .lineHide {width:652px; overflow:hidden; height:1px}
@@ -54,12 +54,13 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 .angleT {height:9px; font-size:1px; line-height:1px; overflow:hidden}
 .angleB {height:12px; font-size:1px; line-height:1px; overflow:hidden}
 
-.stationTitle {float:left; width:970px}
-	.stationTitle h1 {float:left; width:380px; padding:30px 0 10px 20px; line-height:normal; font-size:22px}
+.stationTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
+	.stationTitle h1 {float:left; width:380px; padding:30px 0 5px 20px; line-height:normal; font-size:22px}
+	.stationTitle h1 span {font-size:14px; display:block; padding:5px 0 0 0}
 .viewExtra {float:right; width:212px; padding:10px 0 0 0; text-align:right}
 	.viewExtra p {font-size:14px; color:#9F0307; line-height:18px}
 	.viewExtra p a {color:#9F0307; text-decoration:underline}
-	.viewExtra ul {float:right; padding:15px 0}
+	.viewExtra ul {float:right; padding:15px 0 0 0}
 	.viewExtra li {float:left; padding:0 0 0 2px}
 	.viewExtra li a {display:block; float:left; text-indent:99px; overflow:hidden; width:22px; height:22px}
 	.viewExtra li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
@@ -69,6 +70,8 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 .stationContent {float:left; width:970px}
 .wrapMain {float:left; width:692px}
 .wrapSide {float:right; width:213px}
+	.wrapSide .stationTitle {width:270px; margin:-95px 0 0 0}
+	.wrapSide .stationTitle h1 {width:auto}
 /* catalog style */
 .viewCatalog {float:left; background:url(../images/shadowBg.png) repeat-y 0 0; width:213px; margin:10px 0}
 	.viewCatalog .angleT {background:url(../images/shadowTBg.png) no-repeat 0 0}
@@ -92,14 +95,22 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.viewHomeBox ol {overflow:hidden; width:442px; padding:5px 0}
 	.viewHomeBox li {float:left; width:129px; padding:0 0 5px 18px}
 	.viewHomeBox li span {display:block; color:#616161}
-/* two list style */
+/* list style */
 .viewHomeList {float:left; width:422px}
 	.viewHomeList ul {float:left; width:193px; padding:10px 0 0 18px}
+.viewEnterpriseList {float:right; width:182px; padding:14px 0 0 0}
+	.viewEnterpriseList h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
+	.viewEnterpriseList ul a {text-decoration:underline}
 
 .viewAdvantages {float:right; width:185px}
 	.viewAdvantages h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
 	.viewAdvantages ul {padding:0 5px 0 12px}
 	.viewAdvantages li {background:url(../images/listBullet.gif) no-repeat 0 5px; padding:0 0 0 10px}
+
+.viewPlatform {float:left; width:442px; position:relative; padding:15px 0 0 0}
+	.viewPlatform p {font-size:17px; font-weight:bold; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
+	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
+	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
 
 .viewVideoBox {float:right; background:url(../images/shadowBg.png) repeat-y -655px 0; width:185px; margin:10px 0 0 0}
 	.viewVideoBox .angleT {background:url(../images/shadowTBg.png) no-repeat -655px 0}
@@ -129,5 +140,14 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	
 /* home page style */
 .wrapHome {}
+.wrapEnterprise {}
+	.wrapEnterprise .wrapMain {width:482px}
+	.wrapEnterprise .wrapSide {width:482px}
+	.wrapEnterprise .greyBox {width:442px; padding:20px 20px 100px 20px}
+		.wrapEnterprise .wrapSide .greyBox {padding:20px}
+	.wrapEnterprise .greyBox .peopleFace {background-image:url(../images/headImg03.jpg); height:125px; width:251px}
+	.wrapEnterprise .viewAdvantages {float:left; padding:14px 0 0 6px; width:230px}
+	.wrapEnterprise .greyBox .lineHide {width:442px}
+	
 
 

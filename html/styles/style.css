@@ -10,7 +10,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	button span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
 	button span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
 
-.feedbackLink {position:fixed; left:0; top:50%; z-index:20}
+.feedbackLink {position:fixed; left:0; top:50%; z-index:500}
 	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
 /* fix for IE6 */
 * html .feedbackLink {position:absolute}
@@ -28,7 +28,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 /* navigation style */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
 	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
-.mainNav {float:left;overflow:hidden}
+.mainNav {float:left; over3flow:hidden}
 	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
 	.mainNav li a:hover {background:#850208; text-decoration:none}
@@ -70,8 +70,8 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 .stationContent {float:left; width:970px}
 .wrapMain {float:left; width:692px}
 .wrapSide {float:right; width:213px}
-	.wrapSide .stationTitle {width:270px; margin:-95px 0 0 0}
-	.wrapSide .stationTitle h1 {width:auto}
+	.wrapEnterpriseRight .stationTitle {width:270px; margin:-95px 0 0 0}
+	.wrapEnterpriseRight .stationTitle h1 {width:auto}
 /* catalog style */
 .viewCatalog {float:left; background:url(../images/shadowBg.png) repeat-y 0 0; width:213px; margin:10px 0}
 	.viewCatalog .angleT {background:url(../images/shadowTBg.png) no-repeat 0 0}
@@ -139,15 +139,14 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.stationCarousel li span.itemImg {width:117px; height:75px}
 	
 /* home page style */
-.wrapHome {}
-.wrapEnterprise {}
-	.wrapEnterprise .wrapMain {width:482px}
-	.wrapEnterprise .wrapSide {width:482px}
-	.wrapEnterprise .greyBox {width:442px; padding:20px 20px 100px 20px}
-		.wrapEnterprise .wrapSide .greyBox {padding:20px}
-	.wrapEnterprise .greyBox .peopleFace {background-image:url(../images/headImg03.jpg); height:125px; width:251px}
-	.wrapEnterprise .viewAdvantages {float:left; padding:14px 0 0 6px; width:230px}
-	.wrapEnterprise .greyBox .lineHide {width:442px}
+.wrapHome {float:left; width:692px}
+.wrapEnterpriseLeft {float:left; width:482px}
+.wrapEnterpriseRight {float:right; width:482px}
+	.wrapEnterpriseLeft .greyBox, .wrapEnterpriseRight .greyBox {width:442px; padding:20px 20px 100px 20px}
+		.wrapEnterpriseRight .greyBox {padding:20px}
+	.wrapEnterpriseLeft .greyBox .peopleFace {background-image:url(../images/headImg03.jpg); height:125px; width:251px}
+	.wrapEnterpriseLeft .viewAdvantages, .wrapEnterpriseRight .viewAdvantages {float:left; padding:14px 0 0 6px; width:230px}
+	.wrapEnterpriseLeft .greyBox .lineHide, .wrapEnterpriseRight .greyBox .lineHide {width:442px}
 	
 
 

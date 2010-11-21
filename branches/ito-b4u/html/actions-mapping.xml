@@ -5,7 +5,7 @@
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd" >
 
 	
-	<action name="/swithLanguage.html" id="swithLanguage">
+	<action name="/switchLanguage.html" id="switchLanguage">
 		<controller class="com.itoglobal.i18n.LocalizationController"	
 			method="switchLocale" />
 		<template name="index.html" path="templates/layout-one-column.html" />

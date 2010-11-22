@@ -28,8 +28,11 @@
 	<!-- Sub header views mapping begin -->
 	<action name="/sub-header-*.html" id="sub-header-$1">
 		<controller class="com.itoglobal.eb4u.controllers.SubHeaderController"/>
-		<template name="$1.html" path="templates/views/sub-header/common/home.html" />
-			<!-- 
+		<template name="$1.html" >
+		<role type="VR" path="templates/views/sub-header/common/$1.html"/>
+		</template>
+		<!--<template name="$1.html" path="templates/views/sub-header/common/home.html" />
+			 
 			<role type="VR" path="templates/views/sub-header/default/$1.html"/>
 			<role type="UR" path="templates/views/sub-header/users/$1.html"/>
 			<role type="AR" path="templates/views/sub-header/admin/$1.html"/>

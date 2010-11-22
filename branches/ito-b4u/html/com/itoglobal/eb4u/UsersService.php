@@ -71,63 +71,63 @@ class UsersService {
 	const SKYPE = 'skype';
 	
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the company field name
 	 */
 	const COMPANY = 'company';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the vat field name
 	 */
 	const VAT = 'vat';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the address field name
 	 */
 	const ADDRESS = 'address';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the zip field name
 	 */
 	const ZIP = 'zip';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the location field name
 	 */
 	const LOCATION = 'location';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the region field name
 	 */
 	const REGION = 'region';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the country field name
 	 */
 	const COUNTRY = 'country';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the phone field name
 	 */
 	const PHONE = 'phone';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the homepage field name
 	 */
 	const HOMEPAGE = 'homepage';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the send job field name
 	 */
 	const SEND_JOB = 'send_job';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the newsletter field name
 	 */
 	const NEWSLETTER = 'newsletter';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the bank field name
 	 */
 	const BANK = 'bank';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the bank code field name
 	 */
 	const BANK_CODE = 'bank_code';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the account number field name
 	 */
 	const ACCOUNT_NUMBER = 'account_number';
 	/**
-	 * @var string defining the gender field name
+	 * @var string defining the payment field name
 	 */
 	const PAYMENT = 'payment';
 	
@@ -255,12 +255,15 @@ class UsersService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function deleteUser($id, $fields, $vals) {
+	public static function deleteUser($id) {
 		# setting the query variables
 		$from = self::USERS;
 		$where = self::ID . " = '" . $id . "'";
+		$orderBy = null;
+		$limit = null;
 		# executing the query
-		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+		#DBClientHandler::getInstance ()->execDelete ( $fields, $from, $vals, $where, '', '' );
+		DBClientHandler::getInstance ()->execDelete($from, $where, $orderBy, $limit);
 	}
 	
 	/*public static function createUserDirectory($directory){

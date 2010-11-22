@@ -4,7 +4,9 @@ h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style
 img {border:none}
 a {color:#393939; text-decoration:none}
 a:hover {text-decoration:underline}
-input, select, button {font-family:"Lucida Sans", "Lucida Grande"; font-size:12px; padding:0; margin:0}
+input, select, button {font-family:"Lucida Sans", "Lucida Grande"; font-size:12px; padding:0; margin:0; vertical-align:middle}
+input.inpTxt, select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
+input.inpChk {margin:2px 0 0 0}
 button::-moz-focus-inner {border:0; padding:0}
 button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer}
 	button span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
@@ -14,7 +16,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
 /* fix for IE6 */
 * html .feedbackLink {position:absolute}
-	* html .feedbackLink a {background:url(../images/feedbackBg.gif) no-repeat 0 0}
+	* html .feedbackLink a {background-image:url(../images/feedbackBg.gif)}
 
 .wrapInner {width:970px; margin:0 auto; text-align:left; overflow:hidden}
 /* banner style */
@@ -28,13 +30,13 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 /* navigation style */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
 	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
-.mainNav {float:left; over3flow:hidden}
+.mainNav {float:left; overflow:hidden}
 	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
 	.mainNav li a:hover {background:#850208; text-decoration:none}
 	.mainNav li.itemActive {padding:0; z-index:102}
 	.mainNav li.itemActive a, .mainNav li.itemActive a:hover {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
-.userNav {float:right}
+.userNav {float:right; color:#fff}
 	.userNav li {float:left; padding:9px 0 0 20px}
 	.userNav li a {color:#fff; text-decoration:underline}
 	.userNav li a:hover {text-decoration:none}
@@ -51,8 +53,12 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.greyBox .peopleHand {width:23px; height:28px; position:absolute; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
 	.greyBox .lineHide {width:652px; overflow:hidden; height:1px}
 
-.angleT {height:9px; font-size:1px; line-height:1px; overflow:hidden}
-.angleB {height:12px; font-size:1px; line-height:1px; overflow:hidden}
+.angleB {background-image:url(../images/shadowBBg.png); background-repeat:no-repeat; height:12px; font-size:1px; line-height:1px; overflow:hidden}
+	* html .angleB {background-image:url(../images/shadowBBg.gif)}
+.angleT {background-image:url(../images/shadowTBg.png); background-repeat:no-repeat; height:9px; font-size:1px; line-height:1px; overflow:hidden}
+	* html .angleT {background-image:url(../images/shadowTBg.gif)}
+.bodyBox {background-image:url(../images/shadowBg.png); background-repeat:repeat-y; overflow:hidden; width:100%}
+	* html .bodyBox {background-image:url(../images/shadowBg.gif)}
 
 .stationTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
 	.stationTitle h1 {float:left; width:380px; padding:30px 0 5px 20px; line-height:normal; font-size:22px}
@@ -73,9 +79,8 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.wrapEnterpriseRight .stationTitle {width:270px; margin:-95px 0 0 0}
 	.wrapEnterpriseRight .stationTitle h1 {width:auto}
 /* catalog style */
-.viewCatalog {float:left; background:url(../images/shadowBg.png) repeat-y 0 0; width:213px; margin:10px 0}
-	.viewCatalog .angleT {background:url(../images/shadowTBg.png) no-repeat 0 0}
-	.viewCatalog .angleB {background:url(../images/shadowBBg.png) no-repeat 0 0}
+.viewCatalog {float:left; width:213px; margin:10px 0}
+	.viewCatalog .angleT, .viewCatalog .angleB, .viewCatalog .bodyBox {background-position:0 0}
 	.viewCatalog h2 {font-size:18px; line-height:normal; padding:5px 18px}
 	.viewCatalog ul {padding:5px 18px}
 	.viewCatalog li {border-top:1px solid #EDECEC; padding:7px 0}
@@ -83,11 +88,10 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.viewCatalog li a {text-decoration:none; display:block; height:1%}
 	.viewCatalog li img {vertical-align:text-bottom; padding:0 3px 0 0}
 /* box red border style */
-.viewHomeBox {float:left; background:url(../images/shadowBg.png) repeat-y -213px 0; width:442px; margin:10px 0 0 0}
-	.viewHomeBox .angleT {background:url(../images/shadowTBg.png) no-repeat -213px 0}
-	.viewHomeBox .angleB {background:url(../images/shadowBBg.png) no-repeat -213px 0}
+.viewHomeBox {float:left; width:442px; margin:10px 0 0 0}
+	.viewHomeBox .angleT, .viewHomeBox .angleB, .viewHomeBox .bodyBox {background-position:-213px 0}
 	.viewHomeBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 18px}
-	.viewHomeBox form {padding:5px 5px 5px 18px; overflow:hidden; width:419px}
+	.viewHomeBox form {padding:5px 1px 5px 14px; margin:0 4px; overflow:hidden; width:419px}
 	.viewHomeBox form p {float:left; width:205px; padding:0 0 5px 0}
 	.viewHomeBox form p.itemBtn {text-align:right; width:400px}
 	.viewHomeBox form label {display:block; padding:5px 0 0 0}
@@ -112,14 +116,12 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
 	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
 
-.viewVideoBox {float:right; background:url(../images/shadowBg.png) repeat-y -655px 0; width:185px; margin:10px 0 0 0}
-	.viewVideoBox .angleT {background:url(../images/shadowTBg.png) no-repeat -655px 0}
-	.viewVideoBox .angleB {background:url(../images/shadowBBg.png) no-repeat -655px 0}
+.viewVideoBox {float:right; width:185px; margin:10px 0 0 0}
+	.viewVideoBox .angleT, .viewVideoBox .angleB, .viewVideoBox .bodyBox {background-position:-655px 0}
 	.viewVideoBox h3 {font-size:14px; padding:0 12px 5px 12px}
 	.viewVideoBox .itemVideo {border:2px solid #D1CFCF; background:#fff; margin:0 12px 5px 12px}
-.viewPageBox {float:right; background:url(../images/shadowBg.png) repeat-y -655px 0; width:185px; margin:10px 0 0 0}
-	.viewPageBox .angleT {background:url(../images/shadowTBg.png) no-repeat -655px 0}
-	.viewPageBox .angleB {background:url(../images/shadowBBg.png) no-repeat -1810px 0}
+.viewPageBox {float:right; width:185px; margin:10px 0 0 0}
+	.viewPageBox .angleT, .viewPageBox .angleB, .viewPageBox .bodyBox {background-position:-655px 0}
 	.viewPageBox h3 {font-size:14px; padding:0 12px 5px 12px}
 	.viewPageBox p {padding:0 0 5px 0}
 	.viewPageBox form {padding:0 12px}
@@ -129,15 +131,19 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.viewPageBox button span strong {background-position:left -52px; color:#292929}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
-	.stationCarousel .viewCarousel {background:url(../images/shadowBg.png) repeat-y -840px 0}
-	.stationCarousel .angleT {background:url(../images/shadowTBg.png) no-repeat -840px 0}
-	.stationCarousel .angleB {background:url(../images/shadowBBg.png) no-repeat -840px 0}
+	.stationCarousel .viewCarousel {}
+	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-840px 0}
 	.stationCarousel .itemClip {margin:5px 17px; height:95px; width:936px; overflow:hidden; position:relative}
 	.stationCarousel ul {width:1000em; position:absolute; left:0}
 	.stationCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
 	.stationCarousel li span, .stationCarousel li a {display:block}
 	.stationCarousel li span.itemImg {width:117px; height:75px}
-	
+
+.stationForm {}
+	.stationForm .unitForm {overflow:hidden; width:350px; padding:3px 0}
+	.stationForm form label {float:left; width:150px; text-align:right; padding:4px 0 0 0}
+	.stationForm .itemData {float:right; width:190px}
+		.stationForm .itemData label {float:none; display:inline; vertical-align:middle; padding:3px 10px 0 3px}
 /* home page style */
 .wrapHome {float:left; width:692px}
 .wrapEnterpriseLeft {float:left; width:482px}

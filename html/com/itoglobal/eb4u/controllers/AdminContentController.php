@@ -3,12 +3,6 @@
 require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 
 class AdminContentController extends ContentController {
-
-	public function handleHome($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		return $mvc;
-	}
 	
 	public function handleNewSchool($actionParams, $requestParams) {
 		// calling parent to get the model
@@ -138,7 +132,10 @@ class AdminContentController extends ContentController {
 		}
 		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
-		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
+		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::deleteUser ( $requestParams [UsersService::DELETED]) : '';
+		#isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
+		
+		
 		
 		$where = NULL;
 		#user sorting
@@ -225,3 +222,4 @@ class AdminContentController extends ContentController {
 }
 
 ?>
+

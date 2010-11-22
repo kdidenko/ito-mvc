@@ -44,6 +44,7 @@ class RequestDispatcher {
 		$controller = MVCService::getController ($mappingObj);
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
+		$methodName = method_exists($controller, $methodName) ? $methodName : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object
 		$result = $controller->$methodName ($mappingObj, $_REQUEST);
 		return $result;

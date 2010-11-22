@@ -34,10 +34,9 @@
 		<!-- title and extra link off -->
 		<!-- content on -->
 		<div class="stationContent">
-			<!-- main content on -->	
-				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
-			<!-- main content of -->	
-			<!-- right sidebar on -->	
+			<!-- main content on --><?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			<!-- main content off -->
+			<!-- right sidebar on -->
 				<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>
 			<!-- right sidebar off -->
 		</div>
@@ -45,81 +44,83 @@
 		<div class="stationCarousel">
 			<div class="viewCarousel">
 				<div class="angleT"></div>
-				<div class="itemClip">
-					<ul>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg10.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="25% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg11.gif" alt="25% Rabatt" /></span>
-								<span>25% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="35% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
-								<span>35% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="25% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
-								<span>25% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="35% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg16.gif" alt="35% Rabatt" /></span>
-								<span>35% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg17.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="35% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
-								<span>35% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="15% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
-								<span>15% Rabatt</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" title="25% Rabatt">
-								<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
-								<span>25% Rabatt</span>
-							</a>
-						</li>
-					</ul>
+				<div class="bodyBox">
+					<div class="itemClip">
+						<ul>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg10.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg11.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg16.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg17.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="angleB"></div>
 			</div>

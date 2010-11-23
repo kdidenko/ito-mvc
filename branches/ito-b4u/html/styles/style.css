@@ -6,11 +6,12 @@ a {color:#393939; text-decoration:none}
 a:hover {text-decoration:underline}
 input, select, button {font-family:"Lucida Sans", "Lucida Grande"; font-size:12px; padding:0; margin:0; vertical-align:middle}
 input.inpTxt, select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
-input.inpChk {margin:2px 0 0 0}
+input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
 button::-moz-focus-inner {border:0; padding:0}
-button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer}
-	button span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
-	button span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
+button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
+	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
+	button span strong, a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
+	a.linkBtn:hover {color:#fff; text-decoration:none}
 
 .feedbackLink {position:fixed; left:0; top:50%; z-index:500}
 	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
@@ -51,7 +52,7 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 .greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:20px; width:652px}
 	.greyBox .peopleFace {width:312px; height:98px; position:absolute; z-index:1; top:-98px; right:0; background:url(../images/contentImg07.jpg) no-repeat 0 0}
 	.greyBox .peopleHand {width:23px; height:28px; position:absolute; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
-	.greyBox .lineHide {width:652px; overflow:hidden; height:1px}
+	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
 
 .angleB {background-image:url(../images/shadowBBg.png); background-repeat:no-repeat; height:12px; font-size:1px; line-height:1px; overflow:hidden}
 	* html .angleB {background-image:url(../images/shadowBBg.gif)}
@@ -91,9 +92,10 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 .viewHomeBox {float:left; width:442px; margin:10px 0 0 0}
 	.viewHomeBox .angleT, .viewHomeBox .angleB, .viewHomeBox .bodyBox {background-position:-213px 0}
 	.viewHomeBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 18px}
-	.viewHomeBox form {padding:5px 1px 5px 14px; margin:0 4px; overflow:hidden; width:419px}
+	.viewHomeBox form {padding:5px 5px 5px 18px; overflow:hidden; width:419px}
 	.viewHomeBox form p {float:left; width:205px; padding:0 0 5px 0}
-	.viewHomeBox form p.itemBtn {text-align:right; width:400px}
+	.viewHomeBox form p.itemBtn {width:400px}
+	.viewHomeBox form p.itemBtn button {float:right}
 	.viewHomeBox form label {display:block; padding:5px 0 0 0}
 	.viewHomeBox form select {width:195px}
 	.viewHomeBox ol {overflow:hidden; width:442px; padding:5px 0}
@@ -139,20 +141,27 @@ button {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cur
 	.stationCarousel li span, .stationCarousel li a {display:block}
 	.stationCarousel li span.itemImg {width:117px; height:75px}
 
-.stationForm {}
-	.stationForm .unitForm {overflow:hidden; width:350px; padding:3px 0}
+.stationForm {border-top:1px dotted #393939; margin:0 4px; padding:5px 1px 5px 14px}
+	.stationForm .unitForm {overflow:hidden; width:419px; padding:3px 0}
+	.stationForm h3 {font-size:13px}
+	.stationForm form {padding:0}
 	.stationForm form label {float:left; width:150px; text-align:right; padding:4px 0 0 0}
-	.stationForm .itemData {float:right; width:190px}
-		.stationForm .itemData label {float:none; display:inline; vertical-align:middle; padding:3px 10px 0 3px}
+	.stationForm .itemData {float:right; width:265px}
+		.stationForm .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
+		
+.itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 13px 5px 0; padding:7px 10px 4px 24px}
+	.stationForm .itemBtn {width:344px; overflow:hidden; padding:3px 0}
+	.stationForm .itemBtn a {float:right; margin:5px 15px 0 0}
+	.stationForm .itemBtn button, .stationForm .itemBtn a.linkBtn {float:right; margin:0 0 0 5px}
 /* home page style */
 .wrapHome {float:left; width:692px}
-.wrapEnterpriseLeft {float:left; width:482px}
-.wrapEnterpriseRight {float:right; width:482px}
-	.wrapEnterpriseLeft .greyBox, .wrapEnterpriseRight .greyBox {width:442px; padding:20px 20px 100px 20px}
+.wrapEnterpriseLeft, .wrapFormLeft {float:left; width:482px}
+.wrapEnterpriseRight, .wrapFormRight {float:right; width:482px}
+	.wrapEnterpriseLeft .greyBox, .wrapEnterpriseRight .greyBox, .wrapFormLeft .greyBox, .wrapFormRight .greyBox {width:442px; padding:20px 20px 100px 20px}
 		.wrapEnterpriseRight .greyBox {padding:20px}
 	.wrapEnterpriseLeft .greyBox .peopleFace {background-image:url(../images/headImg03.jpg); height:125px; width:251px}
 	.wrapEnterpriseLeft .viewAdvantages, .wrapEnterpriseRight .viewAdvantages {float:left; padding:14px 0 0 6px; width:230px}
-	.wrapEnterpriseLeft .greyBox .lineHide, .wrapEnterpriseRight .greyBox .lineHide {width:442px}
+
 	
 
 

@@ -1,30 +1,10 @@
-<div class="wrapSide">
-	<div class="sidePgItem">
-		<?php	
-			$message = $mvc->getObject('message');
-		if(isset($message)){
-			echo '<p>' . $message . '</p>';
-		} else {
-	?>
-			<h2>_i18n{Welcome, Guest!}</h2>
-			<h4>_i18n{Please, sign in}:</h4>
-		<?php }	?>
-		<div class="signinForm">
-			<form action="login.html" method="post">
-				<p><label>_i18n{Username}:</label><br /><input type="text" class="inpTxt" name="username"/></p>
-				<p><label>_i18n{Password}:</label><br /><input type="password" class="inpTxt" name="password"/></p>
-				<p><input type="checkbox" class="inpChk" id="remember" name="persistent"/><label for="remember">_i18n{Remember me}</label></p>
-				<p class="btns">
-					<input type="submit" value="Sign In" class="defBtn" />
-					<?php echo !isset($message) ? '<a href="forgot-password.html">_i18n{Forgot password?}</a>' : null; ?>
-				</p>
-				<br/>
-				<h4>_i18n{If you have not free accaunt yet}:</h4>
-				<p class="btns">
-				<a href="/registration.html" class="defBtn" >_i18n{Register}>></a>
-				</p>
-			</form>
-			
-		</div>
+<div class="wrapFormRight">
+	<div class="greyBox">
+		<p>_i18n{Ready for challenge? Register }<a href="registration.html" title="_i18n{Register your eBids4U account}">_i18n{here}</a></p> 
+		<p>_i18n{Join the millions of people who are already a part of the eBids4U family. Don't worry, we have room for one more.}</p>
+		<span>_i18n{Register as an eBids4U Member and enjoy privileges including:}</span>
+		<ul>
+			<li>_i18n{Privileges}</li>
+		</ul>
 	</div>
 </div>

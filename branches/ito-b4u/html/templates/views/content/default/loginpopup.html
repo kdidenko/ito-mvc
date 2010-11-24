@@ -1,0 +1,52 @@
+<div class="viewHomeBox">
+	<div class="angleT"></div>
+	<div class="bodyBox">
+		<?php	
+		$message = $mvc->getObject('message');
+			if(isset($message)){
+				echo '<p>' . $message . '</p>';
+			} else {
+			?>
+			<h2>_i18n{Welcome, Guest!}</h2>
+		<?php }	?>
+		<div class="stationForm">
+			<form action="login.html" method="post">
+				<h3>_i18n{Please, sign in}:</h3>
+				<?php $errors = $mvc->getObject(UsersService::ERROR);
+						if (isset($errors)){?>
+					<div class="itemWarning">
+						<?php echo $errors; ?>
+					</div>
+				<?php } ?>
+				<div class="unitForm">
+					<label for="frmUser">_i18n{Username}:</label>
+					<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username"/></span>
+				</div>
+				<div class="unitForm">
+					<label for="frmPass">_i18n{Password}:</label>
+					<span class="itemData"><input type="password" id="frmPass" class="inpTxt" name="password"/></span>
+				</div>
+				<div class="unitForm">
+					<span class="itemData">
+						<input type="checkbox" class="inpChk" id="frmRemember" name="persistent"/>
+						<label for="frmRemember">_i18n{Remember me}</label>
+					</span>
+				</div>
+				<div class="itemBtn">
+					<button type="submit"><span><strong>Sign In</strong></span></button>
+					<?php echo !isset($message) ? '<a href="forgot-password.html">_i18n{Forgot password?}</a>' : null; ?>
+				</div>
+			</form>
+		</div>
+		<div class="stationForm">
+			<h3>_i18n{If you have not free accaunt yet}:</h3>
+			<div class="itemBtn">
+				<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Register}</strong></span></a>
+			</div>
+		</div>
+	</div>
+	<div class="angleB"></div>
+</div>
+<!-- fix gradient on -->
+<div class="lineHide"></div>
+<!-- fix gradient off -->

@@ -144,6 +144,11 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/crash.html" />
 	</action>
+	<action name="/login-popup.html" id="loginpopup">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<template name="login.html" path="templates/views/content/default/loginpopup.html" />
+	</action>
 	<!-- end user log in -->
 	
 	<!-- start user log out -->

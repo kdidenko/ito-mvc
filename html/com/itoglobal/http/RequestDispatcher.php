@@ -29,9 +29,9 @@ class RequestDispatcher {
 		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
-		$mappingObj = ActionsMappingResolver::getViewMapping ( $view );
+		$mappingObj = ActionsMappingResolver::getViewMapping ($view);
 		if (! isset ( $mappingObj )) {
-			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
+			error_log ( "Could not resolve the Action Mapping for request path: $view \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $view . ' Not found on server' );
 		}
 		return $this->dispatch ( $mappingObj );

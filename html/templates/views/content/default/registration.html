@@ -2,7 +2,7 @@
 <p>_i18n{It's your typical registration - it's free and fairly simple to complete.}</p>
 <p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p>
 
-<?php	$errors = $mvc->getObject(UsersService::ERROR);
+<?php	/* $errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
 				<ul>
@@ -10,7 +10,7 @@
 					echo '<li>' . $value . '</li>'; }?>
 				</ul>
 			</div>
-<?php 	} ?>
+<?php 	} */ ?>
 <div class="wrapFormLeft">
 	<div class="greyBox">
 		<div class="viewHomeBox">
@@ -20,6 +20,15 @@
 				<div class="stationForm">
 					<form action="registration.html" method="post" name="registration">
 					<h3></h3>
+						<?php $errors = $mvc->getObject(UsersService::ERROR);
+						if (isset($errors)){?>
+							<div class="itemWarning">
+								<ul>
+<?php								foreach ($errors as $key => $value){
+										echo '<li>' . $value . '</li>'; }?>
+								</ul>
+							</div>
+						<?php } ?>
 						<div class="unitForm">
 							<label>_i18n{Type}:</label>
 							<span class="itemData">
@@ -60,7 +69,7 @@
 							</span>
 						</div>
 						<div class="itemBtn">
-							<button type="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 							<a class="linkBtn" href="/"><span><strong>_i18n{Cancel}</strong></span></a>
 						</div>
 					</form>

@@ -128,7 +128,7 @@
 	
 	<action name="/my-profile.html" id="myprofile">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
-		<template name="index.html" path="templates/layout-one-column.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>	
 	
 	<!-- start user log in -->
@@ -201,10 +201,31 @@
 		<template name="index.html" path="templates/crash.html" />
 	</action>
 	<!-- end changing password -->
-
+	
+	<!-- tradesman part -->
 	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-	
+	<action name="/company-profile.html" id="companyprofile">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	<action name="/my-mail.html" id="mymail">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	<action name="/my-order.html" id="myorder">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	<action name="/my-bargains.html" id="mybargains">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	<action name="/my-job.html" id="myjob">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	<!-- tradesman part -->
 </actions>

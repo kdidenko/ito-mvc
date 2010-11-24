@@ -1,4 +1,3 @@
-<? echo XML_CONTENT_DEFINITION ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,6 +9,7 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link href="styles/style.css" rel="stylesheet" type="text/css" media="screen" />
 	<script type="text/javascript" src="js/jq.base.js"></script>
+	<script type="text/javascript" src="js/jq.modal.js"></script>
 	<script type="text/javascript" src="js/jq.function.js"></script>
 </head>
 
@@ -34,7 +34,8 @@
 		<!-- title and extra link off -->
 		<!-- content on -->
 		<div class="stationContent">
-			<!-- main content on --><?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			<!-- main content on -->
+				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
 			<!-- main content off -->
 			<!-- right sidebar on -->
 				<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>

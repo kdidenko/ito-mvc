@@ -1,0 +1,143 @@
+<? echo XML_CONTENT_DEFINITION ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>eBids4U</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link href="styles/style.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="js/jq.base.js"></script>
+	<script type="text/javascript" src="js/jq.function.js"></script>
+</head>
+
+<body>
+<div class="feedbackLink">
+	<a href="#" title="Feedback">Feedback</a>
+</div>
+<div class="wrapHeader">
+	<div class="wrapInner">
+		<?php TemplateEngine::inclusion('header.html', $mvc) ?>
+	</div>
+</div>
+<div class="wrapNav">
+	<div class="wrapInner">
+		<?php TemplateEngine::execute('/navigation-' . $mvc->getView() . '.html', $mvc)?>
+	</div>
+</div>
+<div class="wrapContent">
+	<div class="wrapInner">
+		<!-- title and extra link on -->
+			<?php TemplateEngine::execute('/sub-header-' . $mvc->getView() . '.html', $mvc); ?>
+		<!-- title and extra link off -->
+		<!-- content on -->
+		<div class="stationContent">
+			<!-- right sidebar on -->
+				<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>
+			<!-- right sidebar off -->
+			<!-- main content on -->
+				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			<!-- main content off -->
+		</div>
+		<!-- content off -->
+		<div class="stationCarousel">
+			<div class="viewCarousel">
+				<div class="angleT"></div>
+				<div class="bodyBox">
+					<div class="itemClip">
+						<ul>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg10.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg11.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg16.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg17.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="35% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg12.gif" alt="35% Rabatt" /></span>
+									<span>35% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg13.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="15% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg14.gif" alt="15% Rabatt" /></span>
+									<span>15% Rabatt</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="25% Rabatt">
+									<span class="itemImg"><img src="images/cnt/contentImg15.gif" alt="25% Rabatt" /></span>
+									<span>25% Rabatt</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="angleB"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="wrapFooter">
+	<div class="wrapInner">
+		<?php TemplateEngine::execute('/footer-' . $mvc->getView() . '.html', $mvc);?>
+	</div>
+</div>
+<div class="wrapBtmLine"><div class="wrapInner"></div></div>
+<div class="wrapBanner">
+	<div class="wrapInner">
+		<a href="#" title="Banner"><img src="images/cnt/contentBanner01.gif" width="172" height="665" alt="Banner" /></a>
+	</div>
+</div>
+</body>
+</html>

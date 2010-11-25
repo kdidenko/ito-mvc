@@ -6,6 +6,10 @@
 	<li <?php if($crnt == 'navigation-sale-opportunities') echo 'class="itemActive"';?>><a href="/" title="_i18n{Home}">Schnäppchen</a></li>
 </ul>
 <ul class="userNav">
-	<li><a href="login.html" title="_i18n{Login}">_i18n{Login}</a></li>
-	<li><a href="forgot-password.html" title="_i18n{Forgot password?}">_i18n{Forgot password?}</a></li>
+	<li>
+		_i18n{Welcome Guest!} _i18n{Please} 
+		<a href="/login.html" title="_i18n{Login}">_i18n{Login}</a>
+		_i18n{or}
+		<a href="/registration.html" title="_i18n{Register}">_i18n{Register}</a>
+	</li>
 </ul>

@@ -35,11 +35,11 @@ class AuthenticationController extends BaseActionControllerImpl {
 					SessionService::setAttribute ( SessionService::LASTNAME, $result [0] [SessionService::LASTNAME] );
 					SessionService::setAttribute ( SessionService::EMAIL, $result [0] [SessionService::EMAIL] );
 					SessionService::setRole ( $result [0] [UsersService::ROLE] );
+					SessionService::setAttribute ( SessionService::USERNAME, $result [0] [SessionService::USERNAME] );
 					#if you select checkbox "Remember me"
 					if (isset ( $requestParams ['persistent'] )) {
 						$expire = time () + 60 * 60 * 24 * 7;
 						setcookie ( "PHPSESSID", $session, $expire );
-						SessionService::setAttribute ( SessionService::USERNAME, $result [0] [SessionService::USERNAME] );
 					}
 					#forward to index page
 					$location = $this->onSuccess ( $actionParams );

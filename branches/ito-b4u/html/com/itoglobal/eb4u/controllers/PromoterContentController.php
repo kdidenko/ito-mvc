@@ -1,8 +1,8 @@
 <?php
 
-require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
+require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 
-class PromoterContentController extends SecureActionControllerImpl {
+class PromoterContentController extends ContentController {
 	
 	const RESULT = 'result';
 	/**

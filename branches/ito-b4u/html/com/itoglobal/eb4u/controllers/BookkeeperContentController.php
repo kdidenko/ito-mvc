@@ -1,8 +1,8 @@
 <?php
 
-require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
+require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 
-class BookkeeperContentController extends SecureActionControllerImpl {
+class BookkeeperContentController extends ContentController {
 	
 	const RESULT = 'result';
 	/**

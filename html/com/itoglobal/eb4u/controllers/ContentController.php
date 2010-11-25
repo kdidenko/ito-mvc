@@ -222,6 +222,7 @@ class ContentController extends SecureActionControllerImpl {
 		$where = UsersService::ID . " = '" . $id . "'";
 		$result = UsersService::getUsersList ( $where );
 		if(isset ( $result [0] )){
+			$mvc->addObject ( self::RESULT, $result [0] );
 			$mvc->addObject ( UsersService::ID, $result [0] [UsersService::ID] );
 			$mvc->addObject ( UsersService::AVATAR, $result [0] [UsersService::AVATAR] );
 			$mvc->addObject ( UsersService::LASTNAME, $result [0] [UsersService::LASTNAME] );

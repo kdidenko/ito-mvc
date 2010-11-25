@@ -1,29 +1,157 @@
 <script language="JavaScript" src="js/calendar_us.js"></script>
 <link rel="stylesheet" href="styles/calendar.css">
-<div class="myProfile">
-	<div class="myProfileimg">
-		<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo $message;?>">
-	</div>
-	<ul class="menu">
-		<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='current'" : NULL;?>>
-			<a href="/my-profile.html">
-				<img src="images/info_base.png" alt="_i18n{Personal Data}" title="_i18n{Personal Data}">_i18n{Personal Data}</img>
-			</a>
-		</li>
-		<li <?php echo isset($_GET['picture']) ? "class='current'" : NULL;?>>
-			<a href="?picture">
-				<img src="images/info_pict.png" alt="_i18n{Profile Picture}" title="_i18n{Profile Picture}">_i18n{Profile Picture}</img>
-			</a>
-		</li>
-		<li <?php echo isset($_GET['password']) ? "class='current'" : NULL;?>>
-			<a href="?password">
-				<img src="images/info_psw.png" alt="_i18n{Change Password}" title="_i18n{Change Password}">_i18n{Change Password}</img>
-			</a>
-		</li>
-	</ul>
-</div>
+<div class="wrapRAdmin">
+	<div class="greyBox">
+		<div class="viewWBox">
+			<div class="angleT"></div>
+			<div class="bodyBox">
+				<h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
+				<div class="unitWBlock">
+					<div class="unitEqColumn">
+	
+						<div class="itemForm">
+							<label>Firmename:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Ust-ID:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Grundungsjahr:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Anrede:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Vorname:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Nachname:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Strasse:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>PLZ:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Ort:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Bundesland:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Land:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="unitEqColumn">
+						<div class="itemForm">
+							<label>Handynummer:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>E-Mail:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Homepage:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<h2>Passwort andern</h2>
+				<div class="unitWBlock">
+					<div class="unitEqColumn">
+						<div class="itemForm">
+							<label>Passwort alt:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Passwort neu:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+						<div class="itemForm">
+							<label>Passwort neu wiederholen:</label>
+							<div class="itemData">
+								<input class="inpTxt" type="text" />
+							</div>
+						</div>
+					</div>
+					<div class="unitBtn">
+						<button type="submit"><span><strong>Abbrechen</strong></span></button>
+						<button><span><strong>Speichern</strong></span></button>
+					</div>
+				</div>
 
-<div class="myProfileInf">
+			</div>
+			<div class="angleB"></div>
+		</div>
+		<div class="myProfile" style="display:none">
+			<div class="myProfileimg">
+				<img alt="none avatar" src="<?php $message = $mvc->getObject(UsersService::AVATAR);echo $message;?>">
+			</div>
+			<ul class="viewTabs">
+				<li <?php echo !isset($_GET['picture']) && !isset($_GET['password']) ? "class='itemActive'" : NULL;?>>
+					<a href="/my-profile.html">
+						<img src="images/info_base.png" alt="_i18n{Personal Data}" title="_i18n{Personal Data}">_i18n{Personal Data}</img>
+					</a>
+				</li>
+				<li <?php echo isset($_GET['picture']) ? "class='itemActive'" : NULL;?>>
+					<a href="?picture">
+						<img src="images/info_pict.png" alt="_i18n{Profile Picture}" title="_i18n{Profile Picture}">_i18n{Profile Picture}</img>
+					</a>
+				</li>
+				<li <?php echo isset($_GET['password']) ? "class='itemActive'" : NULL;?>>
+					<a href="?password">
+						<img src="images/info_psw.png" alt="_i18n{Change Password}" title="_i18n{Change Password}">_i18n{Change Password}</img>
+					</a>
+				</li>
+			</ul>
+			<div class="myProfileInf">
 	<?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -42,38 +170,60 @@ if (isset($forward)){
 		<?php if (!isset($_GET['picture']) && !isset($_GET['password'])){?>
 				<span class="message warning">_i18n{Basic information is open to everyone. Please, entered real data.}</span>
 			<form enctype="multipart/form-data" action="my-profile.html" method="post" name="myprofile">
-				<dl>
-					<dt>_i18n{First Name}:</dt>
-			 			<dd><input class="profile" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : NULL;?>" /></dd>
-			 		<dt>_i18n{Last Name}:</dt>
-			 			<dd><input class="profile" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : NULL;?>"/></dd>
-					<dt>_i18n{Email}:</dt>
-			 			<dd><input class="profile" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : NULL;?>"/></dd>
-					<!-- <dt>_i18n{Birthday}:</dt> -->
-						<dd><input class="profile" type="hidden" name="birthday" id="birthday"  value="<?php $message = $mvc->getObject(UsersService::BIRTHDAY);echo isset($message) ? $message : '0000-00-00';?>""/>
-					<!-- <script language="JavaScript">
+				<div class="itemForm">
+					<label>_i18n{First Name}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="firstname" value="<?php  $message = $mvc->getObject(UsersService::FIRSTNAME);echo isset($message) ? $message : NULL;?>" />
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Last Name}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="lastname" value="<?php $message = $mvc->getObject(UsersService::LASTNAME);echo isset($message) ? $message : NULL;?>"/>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Email}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="email" value="<?php $message = $mvc->getObject(UsersService::EMAIL);echo isset($message) ? $message : NULL;?>"/>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Birthday}:</label>
+					<div class="itemData">
+						<input type="hidden" name="birthday" id="birthday"  value="<?php $message = $mvc->getObject(UsersService::BIRTHDAY);echo isset($message) ? $message : '0000-00-00';?>" />
+					</div>
+					<!--
+						<script type="text/javascript">
 							new tcal ({/* form name */'formname': 'myprofile',	/* input name*/	'controlname': 'birthday'});
 						</script>
-						</dd>
 					-->
-					<dt>_i18n{Gender}:</dt>
-			 			<dd>
-			 				<?php $message = $mvc->getObject(UsersService::GENDER);?>
-				 			<select class="profile" name="gender" >
-				 				<option value="<?php echo $message==NULL ? NULL : $message;?>"><?php echo $message==NULL ? '_i18n{Please select gender}' : $message;?></option>
-				 				<?php if($message!=Male){?>
-				 				<option value="Male">_i18n{Male}</option>
-				 				<?php }?>
-				 				<?php if($message!=Female){?>
-				 				<option value="Female">_i18n{Female}</option>
-				 				<?php } ?>
-				 			</select>
-			 			</dd>
-					<dt>_i18n{Skype}:</dt>
-			 			<dd><input class="profile" type="text" name="skype" value="<?php $message = $mvc->getObject(UsersService::SKYPE);echo isset($message) ? $message : NULL;?>"/></dd>
-				</dl>
-			<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
-			<p class="btns"><input type="submit" name="personalSbm" value="_i18n{Submit Changes}" class="defBtn" /></p>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Gender}:</label>
+					<div class="itemData">
+						<?php $message = $mvc->getObject(UsersService::GENDER);?>
+						<select class="profile" name="gender" >
+							<option value="<?php echo $message==NULL ? NULL : $message;?>"><?php echo $message==NULL ? '_i18n{Please select gender}' : $message;?></option>
+							<?php if($message!=Male){?>
+							<option value="Male">_i18n{Male}</option>
+							<?php }?>
+							<?php if($message!=Female){?>
+							<option value="Female">_i18n{Female}</option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Skype}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="skype" value="<?php $message = $mvc->getObject(UsersService::SKYPE);echo isset($message) ? $message : NULL;?>"/>
+					</div>
+				</div>
+				<div class="itemBtn">
+					<input type="hidden" name="id" value="<?php $message = $mvc->getObject(UsersService::ID);echo isset($message) ? $message : 'id';?>"/>
+					<button type="submit" name="personalSbm"><span><strong>_i18n{Submit Changes}</strong></span></button>
+				</div>
 			</form>
 		<?php } ?>
 		
@@ -111,3 +261,13 @@ if (isset($forward)){
 			</form>
 		<?php } ?>
 </div>
+		</div>
+	
+	
+		<!-- fix gradient on -->
+		<div class="lineHide"></div>
+		<!-- fix gradient off -->
+	</div>
+</div>
+
+

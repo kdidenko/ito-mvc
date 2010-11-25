@@ -136,7 +136,7 @@
 		<role type="VR">
 			<controller class="com.itoglobal.users.AuthenticationController" 
 				method="login" />
-			<template name="login.html" path="templates/layout-two-columns.html"/>	
+			<template name="login.html" path="templates/layout-one-column.html"/>	
 			<forwards>
 				<target location="/index.html" name="home" condition="onsuccess"/>
 			</forwards>

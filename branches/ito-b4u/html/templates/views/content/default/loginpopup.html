@@ -10,7 +10,7 @@
 			<h2>_i18n{Welcome, Guest!}</h2>
 		<?php }	?>
 		<div class="stationForm">
-			<form action="login.html" method="post">
+			<form action="login-popup.html" method="post">
 				<h3>_i18n{Please, sign in}:</h3>
 				<?php $errors = $mvc->getObject(UsersService::ERROR);
 						if (isset($errors)){?>
@@ -47,6 +47,3 @@
 	</div>
 	<div class="angleB"></div>
 </div>
-<!-- fix gradient on -->
-<div class="lineHide"></div>
-<!-- fix gradient off -->

@@ -1,6 +1,6 @@
-<div class="wrapFormLeft">
+<div class="wrapLogin">
 	<div class="greyBox">
-		<div class="viewHomeBox">
+		<div class="viewRBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
 				<?php	
@@ -11,7 +11,7 @@
 			?>
 					<h2>_i18n{Welcome, Guest!}</h2>
 				<?php }	?>
-				<div class="stationForm">
+				<div class="unitForm">
 					<form action="login.html" method="post">
 						<h3>_i18n{Please, sign in}:</h3>
 						<?php $errors = $mvc->getObject(UsersService::ERROR);
@@ -20,15 +20,15 @@
 								<?php echo $errors; ?>
 							</div>
 						<?php } ?>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label for="frmUser">_i18n{Username}:</label>
 							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label for="frmPass">_i18n{Password}:</label>
 							<span class="itemData"><input type="password" id="frmPass" class="inpTxt" name="password"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<span class="itemData">
 								<input type="checkbox" class="inpChk" id="frmRemember" name="persistent"/>
 								<label for="frmRemember">_i18n{Remember me}</label>
@@ -40,7 +40,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="stationForm">
+				<div class="unitForm">
 					<h3>_i18n{If you have not free accaunt yet}:</h3>
 					<div class="itemBtn">
 						<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Register}</strong></span></a>

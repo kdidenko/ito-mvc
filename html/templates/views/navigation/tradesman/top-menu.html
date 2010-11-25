@@ -3,10 +3,10 @@
 	$usr = SessionService::getAttribute(SessionService::USERNAME);
 ?>
 <ul class="mainNav">
-	<li <?php if($crnt == 'navigation-home') echo 'class="current"';?>><a href="/" title="_i18n{Home}">_i18n{Home}</a></li>
-	<li <?php if($crnt == 'navigation-schools') echo 'class="current"';?>><a href="#" title="_i18n{Schools}">_i18n{Find Job}</a></li>
-	<li <?php if($crnt == 'navigation-community') echo 'class="current"';?>><a href="#" title="_i18n{Post Job}">_i18n{Post Job}</a></li>
-	<li <?php if($crnt == 'navigation-discussions') echo 'class="current"';?>><a href="#" title="_i18n{Find Executor}">_i18n{Find Executor}</a></li>
+	<li <?php if($crnt == 'navigation-home') echo 'class="itemActive"';?>><a href="/" title="_i18n{Home}">_i18n{Home}</a></li>
+	<li <?php if($crnt == 'navigation-forentrepreneurs') echo 'class="itemActive"';?>><a href="/for-entrepreneurs.html" title="_i18n{For Entrepreneurs}">Für Unternehmer</a></li>
+	<li <?php if($crnt == 'navigation-industries') echo 'class="itemActive"';?>><a href="/" title="_i18n{Home}">Branchenverzeichnis</a></li>
+	<li <?php if($crnt == 'navigation-sale-opportunities') echo 'class="itemActive"';?>><a href="/" title="_i18n{Home}">Schnäppchen</a></li>
 </ul>
 <ul class="userNav">
 	<li>_i18n{You are logged in as} <b><?php echo $usr;?></b>.</li>

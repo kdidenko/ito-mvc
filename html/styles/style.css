@@ -1,4 +1,4 @@
-body {margin:0; padding:0; text-align:center; font-family:"Lucida Sans", "Lucida Grande", sans-serif; font-size:12px; line-height:140%; background:#fff; color:#393939; position:relative}
+body {margin:0; padding:0; text-align:center; font-family:"Lucida Sans", "Lucida Grande", sans-serif; font-size:12px; line-height:143%; background:#fff; color:#393939; position:relative}
 
 h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style:none}
 img {border:none}
@@ -21,17 +21,17 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 
 .wrapInner {width:970px; margin:0 auto; text-align:left; overflow:hidden}
 /* banner style */
-.wrapBanner {position:absolute; right:0; top:306px; width:100%; height:665px; visibility:hidden; overflow:hidden}
-	.wrapBanner .wrapInner {position:absolute; left:50%; visibility:visible; width:auto; margin:0 0 0 548px}
+.wrapBanner {position:absolute; right:0; top:303px; width:100%; height:665px; visibility:hidden; overflow:hidden}
+	.wrapBanner .wrapInner {position:absolute; left:50%; visibility:visible; width:auto; margin:0 0 0 538px}
 /* header style */
-.wrapHeader {}
+.wrapHeader {height:175px}
 	.wrapHeader .unitLogo {float:left; padding:25px 0 25px 10px}
 	.wrapHeader .unitSlogan {float:right; width:680px; height:175px; background:url(../images/headerSloganBg.gif) no-repeat 0 20px}
 	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
 /* navigation style */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
 	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
-.mainNav {float:left; overflow:hidden}
+.mainNav {float:left; overflow:hidden; height:37px}
 	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
 	.mainNav li a:hover {background:#850208; text-decoration:none}
@@ -49,11 +49,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapFooter dd {}
 .wrapBtmLine {border-top:7px solid #850208; height:20px}
 
-.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:20px; width:652px}
-	.greyBox .peopleFace {width:312px; height:98px; position:absolute; z-index:1; top:-98px; right:0; background:url(../images/contentImg07.jpg) no-repeat 0 0}
-	.greyBox .peopleHand {width:23px; height:28px; position:absolute; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
-	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
-
+/* corner style */
 .angleB {background-image:url(../images/shadowBBg.png); background-repeat:no-repeat; height:12px; font-size:1px; line-height:1px; overflow:hidden}
 	* html .angleB {background-image:url(../images/shadowBBg.gif)}
 .angleT {background-image:url(../images/shadowTBg.png); background-repeat:no-repeat; height:9px; font-size:1px; line-height:1px; overflow:hidden}
@@ -61,6 +57,28 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .bodyBox {background-image:url(../images/shadowBg.png); background-repeat:repeat-y; overflow:hidden; width:100%}
 	* html .bodyBox {background-image:url(../images/shadowBg.gif)}
 
+.stationContent {float:left; width:970px}
+	.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:20px}
+	.greyBox .itemFace {position:absolute; z-index:1; top:-98px; right:0}
+	.greyBox .itemHand {position:absolute; z-index:1}
+	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
+/* title style */
+.wrapTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
+	.viewTHead {float:left; width:730px; padding:30px 0 5px 20px; line-height:normal}
+	.viewTHead h1 {font-size:22px}
+	.viewTHead p {font-size:14px; padding:5px 0 0 0; font-weight:bold}
+	
+	.viewEHead {float:right; width:212px; padding:10px 0 0 0; text-align:right}
+	.viewEHead p {font-size:14px; color:#9F0307; line-height:18px}
+	.viewEHead p a {color:#9F0307; text-decoration:underline}
+	.viewEHead ul {float:right; padding:15px 0 0 0}
+	.viewEHead li {float:left; padding:0 0 0 2px}
+	.viewEHead li a {display:block; float:left; text-indent:99px; overflow:hidden; width:22px; height:22px}
+	.viewEHead li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
+	.viewEHead li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
+	.viewEHead li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
+
+	
 .stationTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
 	.stationTitle h1 {float:left; width:380px; padding:30px 0 5px 20px; line-height:normal; font-size:22px}
 	.stationTitle h1 span {font-size:14px; display:block; padding:5px 0 0 0}
@@ -74,94 +92,126 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewExtra li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
 	.viewExtra li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
 
-.stationContent {float:left; width:970px}
-.wrapMain {float:left; width:692px}
-.wrapSide {float:right; width:213px}
-	.wrapEnterpriseRight .stationTitle {width:270px; margin:-95px 0 0 0}
-	.wrapEnterpriseRight .stationTitle h1 {width:auto}
-/* catalog style */
-.viewCatalog {float:left; width:213px; margin:10px 0}
-	.viewCatalog .angleT, .viewCatalog .angleB, .viewCatalog .bodyBox {background-position:0 0}
-	.viewCatalog h2 {font-size:18px; line-height:normal; padding:5px 18px}
-	.viewCatalog ul {padding:5px 18px}
-	.viewCatalog li {border-top:1px solid #EDECEC; padding:7px 0}
-	.viewCatalog li.itemFirst {border-top:none}
-	.viewCatalog li a {text-decoration:none; display:block; height:1%}
-	.viewCatalog li img {vertical-align:text-bottom; padding:0 3px 0 0}
+	.wrapEqColumns .stationTitle {width:270px; margin:-95px 0 0 0}
+	.wrapEqColumns .stationTitle h1 {width:auto}
+/* side catalog style */
+.viewSList {float:left; width:213px; margin:10px 0}
+	.viewSList .angleT, .viewSList .angleB, .viewSList .bodyBox {background-position:0 0}
+	.viewSList h2 {font-size:18px; line-height:normal; padding:5px 18px}
+	.viewSList ul {padding:5px 18px}
+	.viewSList li {border-top:1px solid #EDECEC; padding:7px 0}
+	.viewSList li.itemFirst {border-top:none}
+	.viewSList li a {text-decoration:none; display:block; height:1%}
+	.viewSList li img {vertical-align:text-bottom; padding:0 3px 0 0}
 /* box red border style */
-.viewHomeBox {float:left; width:442px; margin:10px 0 0 0}
-	.viewHomeBox .angleT, .viewHomeBox .angleB, .viewHomeBox .bodyBox {background-position:-213px 0}
-	.viewHomeBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 18px}
-	.viewHomeBox form {padding:5px 5px 5px 18px; overflow:hidden; width:419px}
-	.viewHomeBox form p {float:left; width:205px; padding:0 0 5px 0}
-	.viewHomeBox form p.itemBtn {width:400px}
-	.viewHomeBox form p.itemBtn button {float:right}
-	.viewHomeBox form label {display:block; padding:5px 0 0 0}
-	.viewHomeBox form select {width:195px}
-	.viewHomeBox ol {overflow:hidden; width:442px; padding:5px 0}
-	.viewHomeBox li {float:left; width:129px; padding:0 0 5px 18px}
-	.viewHomeBox li span {display:block; color:#616161}
+.viewRBox {float:left; width:442px; margin:10px 0 0 0}
+	.viewRBox .angleT, .viewRBox .angleB, .viewRBox .bodyBox {background-position:-213px 0}
+	.viewRBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 18px 5px 18px}
+	.viewRBox .unitSearch {padding:5px 1px 0 14px; margin:0 4px; overflow:hidden; width:419px}
+	.viewRBox .unitSearch p {float:left; width:205px; padding:0 0 5px 0}
+	.viewRBox .unitSearch p.itemBtn {width:400px}
+	.viewRBox .unitSearch p.itemBtn button {float:right}
+	.viewRBox .unitSearch label {display:block; padding:5px 0 0 0}
+	.viewRBox .unitSearch select {width:195px}
+	
+	.viewRBox .unitStep {margin:0 4px; padding:0 1px 0 14px}
+	.viewRBox .unitStep ol {overflow:hidden; width:420px; padding:5px 0 0 0}
+	.viewRBox .unitStep li {float:left; width:122px; padding:0 10px 5px 8px}
+	.viewRBox .unitStep li span {display:block; color:#616161}
 /* list style */
-.viewHomeList {float:left; width:422px}
-	.viewHomeList ul {float:left; width:193px; padding:10px 0 0 18px}
-.viewEnterpriseList {float:right; width:182px; padding:14px 0 0 0}
-	.viewEnterpriseList h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
-	.viewEnterpriseList ul a {text-decoration:underline}
-
-.viewAdvantages {float:right; width:185px}
-	.viewAdvantages h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
-	.viewAdvantages ul {padding:0 5px 0 12px}
-	.viewAdvantages li {background:url(../images/listBullet.gif) no-repeat 0 5px; padding:0 0 0 10px}
+.viewTList {float:left; width:422px}
+	.viewTList ul {float:left; width:193px; padding:10px 0 0 18px}
+.viewEList {float:right; width:182px; padding:14px 0 0 0}
+	.viewEList h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
+	.viewEList ul a {text-decoration:underline}
+.viewDlist {float:right; width:185px}
+	.viewDlist h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
+	.viewDlist ul {padding:0 5px 0 12px}
+	.viewDlist li {background:url(../images/listBullet.gif) no-repeat 0 5px; padding:0 0 0 10px}
 
 .viewPlatform {float:left; width:442px; position:relative; padding:15px 0 0 0}
 	.viewPlatform p {font-size:17px; font-weight:bold; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
 	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
 	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
+/* box */
+.viewGBox {float:right; width:185px; margin:10px 0 0 0}
+	.viewGBox .angleT, .viewGBox .angleB, .viewGBox .bodyBox {background-position:-654px 0}
+	.viewGBox h3 {font-size:14px; padding:0 12px 5px 12px}
+	.viewGBox .unitVideo {padding:0 12px 5px 12px}
+	.viewGBox .itemVideo {border:2px solid #D1CFCF; background:#fff}
 
-.viewVideoBox {float:right; width:185px; margin:10px 0 0 0}
-	.viewVideoBox .angleT, .viewVideoBox .angleB, .viewVideoBox .bodyBox {background-position:-655px 0}
-	.viewVideoBox h3 {font-size:14px; padding:0 12px 5px 12px}
-	.viewVideoBox .itemVideo {border:2px solid #D1CFCF; background:#fff; margin:0 12px 5px 12px}
-.viewPageBox {float:right; width:185px; margin:10px 0 0 0}
-	.viewPageBox .angleT, .viewPageBox .angleB, .viewPageBox .bodyBox {background-position:-655px 0}
-	.viewPageBox h3 {font-size:14px; padding:0 12px 5px 12px}
-	.viewPageBox p {padding:0 0 5px 0}
-	.viewPageBox form {padding:0 12px}
-	.viewPageBox form label {display:block}
-	.viewPageBox form select {width:160px}
-	.viewPageBox button span {background-position:right -78px}
-	.viewPageBox button span strong {background-position:left -52px; color:#292929}
+	.viewGBox .unitYellow {padding:0 12px}
+	.viewGBox .unitYellow p {padding:2px 0 5px 0; overflow:hidden; width:161px}
+	.viewGBox .unitYellow label {display:block}
+	.viewGBox .unitYellow select {width:160px}
+	.viewGBox .unitYellow button span {background-position:right -78px}
+	.viewGBox .unitYellow button span strong {background-position:left -52px; color:#292929}
+/* box */
+.viewBBox {float:left; width:185px; margin:10px 0 0 0}
+	.viewBBox .angleT, .viewBBox .angleB, .viewBBox .bodyBox {background-position:-1815px 0}
+	.viewBBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 12px 5px 12px}
+
+.viewWBox {float:left; width:699px; margin:10px 0 0 0}
+	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}
+	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
+	
+	.unitWBlock {width:691px; margin:0 4px; padding:5px 0; border-top:1px dotted #393939; overflow:hidden}
+		.unitWBlock .unitBtn {width:670px; overflow:hidden; padding:4px 0}
+		.unitWBlock .unitBtn button {float:right}
+	.unitEqColumn {float:left; width:325px; padding:0 1px 0 14px}
+		.unitEqColumn .itemForm {overflow:hidden; width:325px; padding:4px 0}
+		.unitEqColumn .itemForm label {float:left; width:115px; text-align:right; padding:4px 0 0 0}
+			.unitEqColumn .itemData {float:right; width:200px}
+			.unitEqColumn .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
-	.stationCarousel .viewCarousel {}
-	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-840px 0}
+	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
 	.stationCarousel .itemClip {margin:5px 17px; height:95px; width:936px; overflow:hidden; position:relative}
 	.stationCarousel ul {width:1000em; position:absolute; left:0}
 	.stationCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
 	.stationCarousel li span, .stationCarousel li a {display:block}
 	.stationCarousel li span.itemImg {width:117px; height:75px}
 
-.stationForm {border-top:1px dotted #393939; margin:0 4px; padding:5px 1px 5px 14px}
-	.stationForm .unitForm {overflow:hidden; width:419px; padding:3px 0}
-	.stationForm h3 {font-size:13px}
-	.stationForm form {padding:0}
-	.stationForm form label {float:left; width:150px; text-align:right; padding:4px 0 0 0}
-	.stationForm .itemData {float:right; width:265px}
-		.stationForm .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
-		
-.itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 13px 5px 0; padding:7px 10px 4px 24px}
-	.stationForm .itemBtn {width:344px; overflow:hidden; padding:3px 0}
-	.stationForm .itemBtn a {float:right; margin:5px 15px 0 0}
-	.stationForm .itemBtn button, .stationForm .itemBtn a.linkBtn {float:right; margin:0 0 0 5px}
-/* home page style */
-.wrapHome {float:left; width:692px}
-.wrapEnterpriseLeft, .wrapFormLeft {float:left; width:482px}
-.wrapEnterpriseRight, .wrapFormRight {float:right; width:482px}
-	.wrapEnterpriseLeft .greyBox, .wrapEnterpriseRight .greyBox, .wrapFormLeft .greyBox, .wrapFormRight .greyBox {width:442px; padding:20px 20px 100px 20px}
-		.wrapEnterpriseRight .greyBox {padding:20px}
-	.wrapEnterpriseLeft .greyBox .peopleFace {background-image:url(../images/headImg03.jpg); height:125px; width:251px}
-	.wrapEnterpriseLeft .viewAdvantages, .wrapEnterpriseRight .viewAdvantages {float:left; padding:14px 0 0 6px; width:230px}
 
+.wrapMain {float:left; width:692px}
+	.wrapMain .greyBox {width:652px}
+	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
+	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
+.wrapSide {float:right; width:213px}
+/* login style */
+.wrapLogin {float:left; width:970px}
+	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:930px}
+	.wrapLogin .unitForm {border-top:1px dotted #393939; margin:0 4px; padding:5px 1px 5px 14px}
+	.wrapLogin .itemForm {overflow:hidden; width:419px; padding:4px 0}
+	.wrapLogin h3 {font-size:13px}
+	.wrapLogin .itemForm form {padding:0}
+	.wrapLogin .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0}
+		.wrapLogin .itemData {float:right; width:265px}
+		.wrapLogin .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
+		.wrapLogin a {text-decoration:underline}
+	.wrapLogin .itemBtn {width:344px; overflow:hidden; padding:3px 0}
+	.wrapLogin .itemBtn a {float:right; margin:4px 15px 0 0}
+	.wrapLogin .itemBtn button, .wrapLogin .itemBtn a.linkBtn {float:right; margin:0 0 0 5px; text-decoration:none}
 	
+	.wrapLogin .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 13px 5px 0; padding:7px 10px 4px 24px}
+/* enterprice style */
+.wrapEqColumns {float:left; width:482px}
+	.wrapRight {float:right}
+	.wrapEqColumns .greyBox {width:442px; padding:20px 20px 100px 20px}
+	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
+	.wrapEqColumns .viewDlist {float:left; padding:14px 0 0 6px; width:230px}
+
+.wrapLAdmin {float:left; width:225px}
+	.wrapLAdmin .greyBox {width:185px}
+.wrapRAdmin {float:right; width:739px}
+	.wrapRAdmin .greyBox {width:699px}
+
+
+
+
+.overlayPopup {background-color:#000}
+.viewPopup {text-align:left;}
+.viewPopup .viewHomeBox {margin:0}
+.viewPopup a.itemClose {position:absolute; text-decoration:none; right:8px; top:6px; background:url(../images/closeIcon.gif) no-repeat 0 0; overflow:hidden; text-indent:99px; width:13px; height:13px}
 
 

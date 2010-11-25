@@ -98,8 +98,12 @@
 	<!-- Footer views mapping end -->
 	
 	<action name="/index.html" id="home">
+		<role type="VR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/layout-two-columns.html" />
+		</role>
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
 	
 	<action name="/manage-users.html" id="manageusers">

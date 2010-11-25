@@ -41,7 +41,7 @@
 	<!-- Sub header views mapping end -->	
 	
 	<!-- Sidebar views mapping begin -->
-	<action name="/sidebar-*.html" id="sidebar">
+	<action name="/sidebar-*.html" id="sidebar-$1">
 		<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
 				method="handle$1" />
 		<template name="$1.html">

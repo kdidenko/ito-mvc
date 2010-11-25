@@ -1,7 +1,4 @@
-<div class="wrapHome">
-<p>_i18n{It's your typical registration - it's free and fairly simple to complete.}</p>
-<p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p>
-
+<!--p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p-->
 <?php	/* $errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
 			<div class="error">
@@ -11,13 +8,13 @@
 				</ul>
 			</div>
 <?php 	} */ ?>
-<div class="wrapFormLeft">
+<div class="wrapLogin">
 	<div class="greyBox">
-		<div class="viewHomeBox">
+		<div class="viewRBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
 				<h2>_i18n{Tell us about yourself}</h2>
-				<div class="stationForm">
+				<div class="unitForm">
 					<form action="registration.html" method="post" name="registration">
 					<h3></h3>
 						<?php $errors = $mvc->getObject(UsersService::ERROR);
@@ -29,7 +26,7 @@
 								</ul>
 							</div>
 						<?php } ?>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{Type}:</label>
 							<span class="itemData">
 								<input type="radio" class="inpChk" name="role" value="1" <? if(!isset($_POST['role']) || $_POST['role']==1) echo 'checked'; ?>/><label>_i18n{For private person (post a job)}</label>
@@ -38,31 +35,31 @@
 								<input type="radio" class="inpChk" name="role" value="2" <? if(isset($_POST['role'])&& $_POST['role']==2) echo 'checked'; ?>/><label>_i18n{For entrepreneur (find a job)}</label>
 							</span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label for="frmUser">_i18n{Username}:</label>
 							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{First Name}:</label>
 							<span class="itemData"><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{Last Name}:</label>
 							<span class="itemData"><input type="text" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{Your Email}:</label>
 							<span class="itemData"><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{Password}:</label>
 							<span class="itemData"><input type="password" class="inpTxt" name="password"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<label>_i18n{Repeat Password}:</label>
 							<span class="itemData"><input type="password" class="inpTxt" name="confirm_password"/></span>
 						</div>
-						<div class="unitForm">
+						<div class="itemForm">
 							<span class="itemData">
 								<input type="checkbox" class="inpChk" name="agreement"/>
 								<label>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
@@ -81,6 +78,4 @@
 		<div class="lineHide"></div>
 		<!-- fix gradient off -->
 	</div>
-</div>
-
 </div>

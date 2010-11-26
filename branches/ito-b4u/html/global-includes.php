@@ -18,7 +18,8 @@
 	require_once 'com/itoglobal/mail/MailerService.php';
 	require_once 'com/itoglobal/validation/ValidationService.php';
 	
-    require_once 'com/itoglobal/eb4u/UsersService.php';
+    require_once 'com/itoglobal/eb4u/services/UsersService.php';
+    require_once 'com/itoglobal/eb4u/services/MailService.php';
     
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';

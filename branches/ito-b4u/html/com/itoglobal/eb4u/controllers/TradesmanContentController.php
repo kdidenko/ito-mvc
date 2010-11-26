@@ -12,7 +12,6 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		$error = array ();
 		
 		if (isset ( $requestParams ['pswSbm'] )) {
@@ -82,6 +81,52 @@ class TradesmanContentController extends ContentController {
 		#get user info
 		$result = UsersService::getUser ( $id );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		return $mvc;
+	}
+	
+	public function handleMyMail($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		isset ( $requestParams [MailService::DRAFTS] ) ? MailService::goDrafts ($requestParams [MailService::DRAFTS]) : null;
+		isset ( $requestParams [MailService::TRASH] ) ? MailService::goTrash ($requestParams [MailService::TRASH]) : null;
+		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
+		
+		isset ($requestParams [MailService::SEND]) ?
+			MailService::sendMail($requestParams [MailService::SUBJECT], $requestParams [MailService::TEXT], $requestParams [MailService::SENDER], $requestParams [MailService::GETTER]) :
+				null;
+		
+		//echo "<h1>NEW: ";
+		$new_mails = MailService::countNew($id);
+		isset ( $new_mails ) ? $mvc->addObject ( MailService::NEW_MAILS, $new_mails ) : null;
+		//echo $new_mails[MailService::NEW_MAILS];		
+		//echo "</h1></br>";
+				
+		#get inbox
+		$inbox = MailService::getInbox( $id );
+		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
+		//echo "<h1>inbox</h1></br>";
+		//print_r($inbox);
+		
+		#get outbox
+		$outbox = MailService::getOutbox( $id );
+		isset ( $outbox ) ? $mvc->addObject ( MailService::OUTBOX, $outbox ) : null;
+		//echo "<h1>outbox</h1></br>";
+		//print_r($outbox);
+		
+		#get drafts
+		$drafts = MailService::getDrafts( $id );
+		isset ( $drafts ) ? $mvc->addObject ( MailService::DRAFTS, $drafts ) : null;
+		//echo "<h1>drafts</h1></br>";
+		//print_r($drafts);
+		
+		#get trash
+		$trash = MailService::getTrash( $id );
+		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
+		//echo "<h1>trash</h1></br>";
+		//print_r($trash);
+		
+		
 		return $mvc;
 	}
 }

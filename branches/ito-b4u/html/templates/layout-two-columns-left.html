@@ -48,7 +48,20 @@
 			</div>
 			<!-- left sidebar off -->
 			<!-- main content on -->
-				<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+			<div class="wrapRAdmin">
+				<div class="greyBox">
+					<div class="viewWBox">
+						<div class="angleT"></div>
+						<div class="bodyBox">
+							<?php TemplateEngine::execute('/content-' . $mvc->getView() . '.html', $mvc); ?>
+						</div>
+						<div class="angleB"></div>
+					</div>
+					<!-- fix gradient on -->
+					<div class="lineHide"></div>
+					<!-- fix gradient off -->
+				</div>
+			</div>
 			<!-- main content off -->
 		</div>
 		<!-- content off -->

@@ -13,6 +13,12 @@ if (isset($status)){?>
 				<h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
 				<div class="unitWBlock">
 					<form action="/my-profile.html" method="post">
+						<div class="itemWarning">
+							Error
+						</div>
+						<div class="itemOk">
+							Ok
+						</div>
 						<div class="unitEqColumn">
 							<div class="itemForm">
 								<label>_i18n{Company Name}:</label>
@@ -108,7 +114,7 @@ if (isset($status)){?>
 						</div>
 					</form>
 				</div>
-					
+				
 				<h2>_i18n{Password others}</h2>
 				<div class="unitWBlock">
 <?php if (isset($psw_errors )){?>

@@ -156,8 +156,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
 	
 	.unitWBlock {width:691px; margin:0 4px; padding:5px 0; border-top:1px dotted #393939; overflow:hidden}
-		.unitWBlock .unitBtn {width:670px; overflow:hidden; padding:4px 0}
-		.unitWBlock .unitBtn button {float:right}
+		.unitWBlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
+		.unitWBlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
+		.unitWBlock .unitBtn {width:670px; float:left; padding:4px 0}
+		.unitWBlock .unitBtn button {float:right; margin:0 0 0 5px}
 	.unitEqColumn {float:left; width:325px; padding:0 1px 0 14px}
 		.unitEqColumn .itemForm {overflow:hidden; width:325px; padding:4px 0}
 		.unitEqColumn .itemForm label {float:left; width:115px; text-align:right; padding:4px 0 0 0}
@@ -199,7 +201,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapLogin .itemBtn a {float:right; margin:4px 15px 0 0}
 	.wrapLogin .itemBtn button, .wrapLogin .itemBtn a.linkBtn {float:right; margin:0 0 0 5px; text-decoration:none}
 	
-	.wrapLogin .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 13px 5px 0; padding:7px 10px 4px 24px}
+	.wrapLogin .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
+	.wrapLogin .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 6px 8px; color:#00A25B; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
 /* enterprice style */
 .wrapEqColumns {float:left; width:482px}
 	.wrapRight {float:right}

@@ -1,24 +1,21 @@
-<div class="wrapRAdmin">
-	<div class="greyBox">
-		<div class="viewWBox">
 <?php 
 $data = $mvc->getObject(TradesmanContentController::RESULT);
 $psw_errors = $mvc->getObject(TradesmanContentController::PSW_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
-if (isset($status)){?>
-			<span class="message warning">_i18n{Successfully Saved.}</span>
-<?php } ?>
+?>
+<div class="wrapRAdmin">
+	<div class="greyBox">
+		<div class="viewWBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
 				<h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
 				<div class="unitWBlock">
 					<form action="/my-profile.html" method="post">
-						<div class="itemWarning">
-							Error
-						</div>
+<?php if (isset($status)){?>
 						<div class="itemOk">
-							Ok
+							<span class="message warning">_i18n{Successfully Saved.}</span>
 						</div>
+<?php } ?>
 						<div class="unitEqColumn">
 							<div class="itemForm">
 								<label>_i18n{Company Name}:</label>
@@ -109,7 +106,6 @@ if (isset($status)){?>
 							</div>
 						</div>
 						<div class="unitBtn">
-							<button type="submit"><span><strong>_i18n{Cancel}</strong></span></button>
 							<button name="personalSbm"><span><strong>_i18n{Save}</strong></span></button>
 						</div>
 					</form>
@@ -148,7 +144,6 @@ if (isset($status)){?>
 							</div>
 						</div>
 						<div class="unitBtn">
-							<button type="submit"><span><strong>_i18n{Cancel}</strong></span></button>
 							<button name="pswSbm"><span><strong>_i18n{Save}</strong></span></button>
 						</div>
 					</form>

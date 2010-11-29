@@ -1,103 +1,118 @@
-<h2>Tradesman company profile page content</h2>
+<?php 
+$data = $mvc->getObject(TradesmanContentController::RESULT);
+$psw_errors = $mvc->getObject(TradesmanContentController::PSW_ERROR);
+$status = $mvc->getObject(TradesmanContentController::STATUS);
+?>
 <div class="unitWBlock">
 	<div class="unitEqColumn">
 		<dl class="itemForm">
-			<dt>Fiemenname:</dt>
-			<dd class="itemData">Klempnerman GmbH</dd>
+			<dt>_i18n{Company Name}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::COMPANY]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Ust-ID:</dt>
-			<dd class="itemData">DE1225555</dd>
+			<dt>_i18n{Ust-ID}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::VAT]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Grundungsjahr:</dt>
-			<dd class="itemData">1997</dd>
+			<dt>_i18n{Year}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::COMPANY_YEAR]?></dd>
 		</dl>
-		<h3>Ansprechpartner</h3>
+		<h3>_i18n{Contact}</h3>
 		<div class="itemForm">
-			<label>Anrede:</label>
+			<label>_i18n{Salutation}:</label>
 			<div class="itemData">
-				<select>
-					<option>Herr</option>
+				<select name="salutation">
+					<?php if ($data[UsersService::SALUTATION]==NULL || $data[UsersService::SALUTATION]==0){?>
+						<option value="0">_i18n{Please choose}</option>
+						<option value="1">_i18n{Mr.}</option>
+						<option value="2">_i18n{Ms.}</option>
+						<?php } else { 
+								if($data[UsersService::SALUTATION]==1) {?>
+								<option value="1">_i18n{Mr.}</option>
+								<option value="2">_i18n{Ms.}</option>
+							<?php } else { ?>
+								<option value="2">_i18n{Ms.}</option>
+								<option value="1">_i18n{Mr.}</option>
+					<?php } } ?>
 				</select>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Varname:</label>
+			<label>_i18n{First Name}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" value="<?php echo $data[UsersService::FIRSTNAME]?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Nachname:</label>
+			<label>_i18n{Last Name}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" value="<?php echo $data[UsersService::LASTNAME]?>"/>
 			</div>
 		</div>
 	</div>
 	
 	<div class="unitEqColumn">
 		<dl class="itemForm">
-			<dt>Strasse:</dt>
-			<dd class="itemData">Handwerkerstrasse 25</dd>
+			<dt>_i18n{Street}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::ADDRESS]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>PLZ:</dt>
-			<dd class="itemData">56789</dd>
+			<dt>_i18n{ZIP}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::ZIP]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Ort:</dt>
-			<dd class="itemData">Hammerhausen</dd>
+			<dt>_i18n{Location}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::LOCATION]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Bundesland:</dt>
-			<dd class="itemData">Bundesland</dd>
+			<dt>_i18n{State}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::REGION]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Land:</dt>
-			<dd class="itemData">Land</dd>
+			<dt>_i18n{Country}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::COUNTRY]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Handynummer:</dt>
-			<dd class="itemData">0712/4574156</dd>
+			<dt>_i18n{Mobile Phone}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::PHONE]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>E-Mail:</dt>
-			<dd class="itemData">P.Mauer@klempnerman.de</dd>
+			<dt>_i18n{E-Mail}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::EMAIL]?></dd>
 		</dl>
 		<dl class="itemForm">
-			<dt>Homepage:</dt>
-			<dd class="itemData">www.Klempnerman.de</dd>
+			<dt>_i18n{Homepage}:</dt>
+			<dd class="itemData"><?php echo $data[UsersService::HOMEPAGE]?></dd>
 		</dl>
 		
 	</div>
 </div>
-<h2>Profilfoto</h2>
+<h2>_i18n{Profile photo}</h2>
 <div class="unitWBlock">
 	<div class="unitEqColumn">
 		<div class="itemFoto"></div>
-		<p class="linkFoto"><a href="#" title="Bild hochladen">Bild hochladen</a></p>
+		<p class="linkFoto"><a href="#" title="Bild hochladen">_i18n{Upload image}</a></p>
 	</div>
 	<div class="unitEqColumn">
 		<div class="itemForm">
-			<label>Kategorie:</label>
+			<label>_i18n{Category}:</label>
 			<div class="itemData">
 				<input class="inpTxt" type="text" />
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Unterkategorie:</label>
+			<label>_i18n{Sub-Category}:</label>
 			<div class="itemData">
 				<input class="inpTxt" type="text" />
 			</div>
 		</div>
 	</div>
 </div>
-<h2>Info company</h2>
+<h2>_i18n{Company Info}</h2>
 <div class="unitWBlock">
 	<div class="unitInfo">
-		<h3>Unternehmensbeschreibung</h3>
-		<p>Wir sind eine tolles Unternehmen</p>
+		<h3>_i18n{Company Description}</h3>
+		<p>We are a fantastic company</p>
 	</div>
 </div>
 <h2 style="display:none">Project</h2>

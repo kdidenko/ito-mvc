@@ -10,6 +10,10 @@ class UsersService {
 	 */
 	const USERNAME = 'username';
 	/**
+	 * @var string defining the salutation field name
+	 */
+	const SALUTATION = 'salutation';
+	/**
 	 * @var string defining the firstname field name
 	 */
 	const FIRSTNAME = 'firstname';
@@ -61,19 +65,15 @@ class UsersService {
 	 * @var string defining the birthday field name
 	 */
 	const BIRTHDAY = 'birthday';
-	/**
-	 * @var string defining the gender field name
-	 */
-	const GENDER = 'gender';
-	/**
-	 * @var string defining the skype field name
-	 */
-	const SKYPE = 'skype';
 	
 	/**
 	 * @var string defining the company field name
 	 */
 	const COMPANY = 'company';
+	/**
+	 * @var string defining the company_year field name
+	 */
+	const COMPANY_YEAR = 'company_year';
 	/**
 	 * @var string defining the vat field name
 	 */

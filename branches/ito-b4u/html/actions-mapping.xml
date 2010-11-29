@@ -116,10 +116,15 @@
 	
 	<action name="/new-*.html" id="new$1">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 		</forwards>
+	</action>
+	
+	<action name="/view-*.html" id="view$1">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
 	
 	<action name="/edit-*.html" id="edit$1">
@@ -224,6 +229,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
+	<!-- 
+	<action name="/*-mail.html" id="$1mail">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+	</action>
+	 -->
 	<action name="/my-order.html" id="myorder">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

@@ -1,7 +1,6 @@
 <?php 
 $inbox = $mvc->getObject(MailService::INBOX);
 $outbox = $mvc->getObject(MailService::OUTBOX);
-$drafts = $mvc->getObject(MailService::DRAFTS);
 $trash = $mvc->getObject(MailService::TRASH);
 ?>
 
@@ -18,7 +17,8 @@ $trash = $mvc->getObject(MailService::TRASH);
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ( $inbox as $key=>$mail) { ?>
+<?php 	if (count($inbox)>0 && $inbox!=NULL){
+			foreach ( $inbox as $key=>$mail) { ?>
 			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
@@ -29,11 +29,16 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="#" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>
-			<?php } ?>
+<?php 		}
+		}else {?>
+			<tr>
+				<td colspan="5" class="itemLast">No mail</td>
+			</tr>
+<?php	} ?>
 		</tbody>
 	</table>
 	<div class="unitBtn">
@@ -53,7 +58,8 @@ $trash = $mvc->getObject(MailService::TRASH);
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ( $outbox as $key=>$mail) { ?>
+<?php 	if (count($outbox)>0 && $outbox!=NULL){
+			foreach ( $outbox as $key=>$mail) { ?>
 			<tr>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
 				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
@@ -64,11 +70,16 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="#" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>
-			<?php } ?>
+<?php 		}
+		}else {?>
+			<tr>
+				<td colspan="5" class="itemLast">No mail</td>
+			</tr>
+<?php	} ?>
 		</tbody>
 	</table>
 	<div class="unitBtn"></div>
@@ -87,9 +98,9 @@ $trash = $mvc->getObject(MailService::TRASH);
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
-			if (count($trash)>0 && $trash!=NULL){
-				foreach ( $trash as $key=>$mail) { ?>
+		<?php 
+		if (count($trash)>0 && $trash!=NULL){
+			foreach ( $trash as $key=>$mail) { ?>
 			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
@@ -101,15 +112,16 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="#" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?del=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>
-			<?php }
-			}?>
+<?php 		}
+		}else {?>
 			<tr>
 				<td colspan="6" class="itemLast">No mail</td>
 			</tr>
+<?php	} ?>
 		</tbody>
 	</table>
 </div>

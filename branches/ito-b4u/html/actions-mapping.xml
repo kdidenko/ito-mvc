@@ -106,113 +106,118 @@
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
 	
-	<action name="/manage-users.html" id="manageusers">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/manage-users.html" id="manageusers" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 		<forwards>
 			<target location="/index.html" name="home" condition="onfailure"/>
+			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
 	
-	<action name="/new-*.html" id="new$1">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/new-*.html" id="new$1" roles="UR,TR,BR,PR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
 	
-	<action name="/view-*.html" id="view$1">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/view-*.html" id="view$1" roles="UR,TR,BR,PR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
 	
-	<action name="/edit-*.html" id="edit$1">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/edit-*.html" id="edit$1" roles="UR,TR,BR,PR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
 	
-	<action name="/my-profile.html" id="myprofile">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"	/>
+	<action name="/my-profile.html" id="myprofile" roles="UR,TR,BR,PR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl"	/>
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>	
 	
 	<!-- start user log in -->
-	<action name="/login.html" id="login">
-		<role type="VR">
-			<controller class="com.itoglobal.users.AuthenticationController" 
-				method="login" />
-			<template name="login.html" path="templates/layout-one-column.html"/>	
-			<forwards>
-				<target location="/index.html" name="home" condition="onsuccess"/>
-			</forwards>
-		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/crash.html" />
+	<action name="/login.html" id="login" roles="VR">
+		<controller class="com.itoglobal.users.AuthenticationController" 
+			method="login" />
+		<template name="login.html" path="templates/layout-one-column.html"/>	
+		<forwards>
+			<target location="/index.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/index.html"/>
+		</forwards>
 	</action>
-	<action name="/login-popup.html" id="loginpopup">
+	
+	<action name="/login-popup.html" id="loginpopup" roles="VR">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="login" />
 		<template name="login.html" path="templates/views/content/default/loginpopup.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
 	<!-- end user log in -->
 	
 	<!-- start user log out -->
-	<action name="/logout.html" id="logout">
+	<action name="/logout.html" id="logout" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="logout" />
 		<forwards>
 			<target location="/index.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
 	<!-- end user log out -->
 	
 	<!-- start confirm registration -->
-	<action name="/registration.html" id="registration">
-		<role type="VR">
-			<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
-			<template name="index.html" path="templates/layout-one-column.html" />	
-			<property name="template" value="templates/plain/email-confirmation.txt"/>
-		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/crash.html" />
+	<action name="/registration.html" id="registration" roles="VR">
+		<controller class="com.itoglobal.users.RegistrationController" method="registration"/>
+		<template name="index.html" path="templates/layout-one-column.html" />	
+		<property name="template" value="templates/plain/email-confirmation.txt"/>
+		<forwards>
+			<target condition="onsignedoff" location="/index.html"/>
+		</forwards>
 	</action>
 	
-	<action name="/confirm-registration.html" id="confirmregistration">
-		<role type="VR">
-			<controller class="com.itoglobal.users.RegistrationController" method="confirmRegistration"/>
-			<template name="index.html" path="templates/layout-one-column.html" />	
-			<property name="template" value="templates/plain/email-confirmation.txt"/>
-			<forwards>
-				<target location="/registration.html" name="registration" condition="onfailure"/>
-			</forwards>
-		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/crash.html" />
+	<action name="/confirm-registration.html" id="confirmregistration" roles="VR">
+		<controller class="com.itoglobal.users.RegistrationController" method="confirmRegistration"/>
+		<template name="index.html" path="templates/layout-one-column.html" />	
+		<property name="template" value="templates/plain/email-confirmation.txt"/>
+		<forwards>
+			<target location="/registration.html" name="registration" condition="onfailure"/>
+			<target condition="onsignedoff" location="/index.html"/>
+		</forwards>
 	</action>
 	<!-- end confirm registration -->
 	
 	<!-- start changing password -->
-	<action name="/forgot-password.html" id="resetpassword">
-		<role type="VR">
-			<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
-			<template name="index.html" path="templates/layout-one-column.html"/>
-			<property name="template" value="templates/plain/reset-password.txt"/>
-		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/crash.html" />
+	<action name="/forgot-password.html" id="resetpassword" roles="VR">
+		<controller class="com.itoglobal.users.RegistrationController" method="resetPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<property name="template" value="templates/plain/reset-password.txt"/>
+		<forwards>
+			<target condition="onsignedoff" location="/index.html"/>
+		</forwards>
 	</action>
 	
-	<action name="/new-password.html" id="newpassword">
-		<role type="VR">
-			<controller class="com.itoglobal.users.RegistrationController" method="newPassword"/>
-			<template name="index.html" path="templates/layout-one-column.html"/>
-		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/crash.html" />
+	<action name="/new-password.html" id="newpassword" roles="VR">
+		<controller class="com.itoglobal.users.RegistrationController" method="newPassword"/>
+		<template name="index.html" path="templates/layout-one-column.html"/>
+		<forwards>
+			<target condition="onsignedoff" location="/index.html"/>
+		</forwards>
 	</action>
 	<!-- end changing password -->
 	
@@ -221,9 +226,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-	<action name="/company-profile.html" id="companyprofile">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/company-profile.html" id="companyprofile" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
 	<action name="/my-mail.html" id="mymail" roles="UR,TR,BR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
@@ -232,23 +240,27 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>		
 	</action>
-	<!-- 
-	<action name="/*-mail.html" id="$1mail">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+
+	<action name="/my-order.html" id="myorder" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
-	 -->
-	<action name="/my-order.html" id="myorder">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/my-bargains.html" id="mybargains" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
-	<action name="/my-bargains.html" id="mybargains">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/my-job.html" id="myjob" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
-	</action>
-	<action name="/my-job.html" id="myjob">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
 	<!-- tradesman part -->
 </actions>

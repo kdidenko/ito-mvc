@@ -197,10 +197,12 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitSnColumn textarea.areaTxt {width:531px; height:160px}
 		.unitSnColumn .itemData {width:546px}
 		.unitSnColumn dd.itemData {width:546px; color:#000}
+		.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
+			.unitSnColumn .itemEq dd.itemData {width:200px}
 		
 	
 	
-	
+	/* icon mail */
 	.viewIList {float:right; white-space:nowrap}
 		.viewIList li {float:left; padding:0 0 1px 4px}
 		.viewIList li a {float:left; width:16px; height:16px; overflow:hidden; text-indent:-200px; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat}
@@ -208,6 +210,9 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.viewIList li.itemPrint a {background-position:0 -46px}
 		.viewIList li.itemForward a {background-position:0 -91px}
 		.viewIList li.itemDelete a {background-position:0 -136px}
+	.viewITList {padding:0 15px 0 0}
+		.viewITList li {padding:0 0 1px 10px}
+		.viewITList li a {text-indent:0; width:auto; padding:0 5px 0 20px}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
 	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
@@ -231,7 +236,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewMenu li a:hover, .viewMenu li.itemActive a {background:url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
 /* login style */
 .wrapLogin {float:left; width:970px}
-	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:930px}
+	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:442px}
 	.wrapLogin .unitForm {border-bottom:1px dotted #393939; margin:0 4px 5px 4px; padding:5px 1px 5px 14px}
 		.wrapLogin .unitLast {border:none; margin:0 4px}
 	.wrapLogin .itemForm {overflow:hidden; width:419px; padding:4px 0}

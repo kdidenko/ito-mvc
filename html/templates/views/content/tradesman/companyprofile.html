@@ -1,9 +1,23 @@
 <?php 
 $data = $mvc->getObject(TradesmanContentController::RESULT);
-$psw_errors = $mvc->getObject(TradesmanContentController::PSW_ERROR);
+$image_errors = $mvc->getObject(TradesmanContentController::IMAGE_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
 ?>
 <div class="unitWBlock">
+<?php if (isset($status)){?>
+	<div class="itemOk">
+		<p>_i18n{Successfully Saved.}</p>
+	</div>
+<?php } ?>
+<?php if (isset($image_errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<?php foreach ($image_errors as $key => $value){?>
+				<li><?php echo $value ?></li>
+			<?php } ?>					
+		</ul>
+	</div>
+<?php } ?>
 	<div class="unitEqColumn">
 		<dl class="itemForm">
 			<dt>_i18n{Company Name}:</dt>
@@ -90,8 +104,20 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 <h2>_i18n{Profile photo}</h2>
 <div class="unitWBlock">
 	<div class="unitEqColumn">
+		<div class="itemFoto">
+			<img alt="" src="/<?php echo $data[UsersService::AVATAR] ?>">
+		</div>
+			<form enctype="multipart/form-data" action="/company-profile.html" method="post" >
+				<input type="file" name="file" size="30" />
+				<input type="hidden" name="id" value="<?php echo $data[UsersService::ID]?>"/>
+				<div class="unitBtn">
+					<button name="pctSbm"><span><strong>_i18n{Upload image}</strong></span></button>
+				</div>
+			</form>
+		<!-- 
 		<div class="itemFoto"></div>
 		<p class="linkFoto"><a href="#" title="Bild hochladen">_i18n{Upload image}</a></p>
+		 -->
 	</div>
 	<div class="unitEqColumn">
 		<div class="itemForm">

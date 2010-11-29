@@ -12,6 +12,33 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		if (isset ( $requestParams ['personalSbm'] )) {		
+			$fields = array (
+							'0'=>UsersService::FIRSTNAME,
+							'1'=>UsersService::LASTNAME,
+							'2'=>UsersService::COMPANY_YEAR
+							);
+			$vals = array (
+							'0'=>$requestParams [UsersService::FIRSTNAME], 
+							'1'=>$requestParams [UsersService::LASTNAME],
+							'2'=>$requestParams [UsersService::COMPANY_YEAR]
+							);
+			
+			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( self::STATUS, 'successful' );
+		}
+		
+		#get user info
+		$result = UsersService::getUser ( $id );
+		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		return $mvc;
+	}
+	
+	public function handleCompanyProfile($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$error = array ();
 		
 		if (isset ( $requestParams ['pswSbm'] )) {
@@ -57,7 +84,9 @@ class TradesmanContentController extends ContentController {
 							'8'=>UsersService::REGION,
 							'9'=>UsersService::COUNTRY,
 							'10'=>UsersService::PHONE,
-							'11'=>UsersService::HOMEPAGE
+							'11'=>UsersService::HOMEPAGE,
+							'12'=>UsersService::SALUTATION,
+							'13'=>UsersService::COMPANY_YEAR
 							);
 			$vals = array (
 							'0'=>$requestParams [UsersService::FIRSTNAME], 
@@ -71,7 +100,9 @@ class TradesmanContentController extends ContentController {
 							'8'=>$requestParams [UsersService::REGION],
 							'9'=>$requestParams [UsersService::COUNTRY],
 							'10'=>$requestParams [UsersService::PHONE],
-							'11'=>$requestParams [UsersService::HOMEPAGE]
+							'11'=>$requestParams [UsersService::HOMEPAGE],
+							'12'=>$requestParams [UsersService::SALUTATION],
+							'13'=>$requestParams [UsersService::COMPANY_YEAR]
 							);
 			
 			UsersService::updateFields ( $id, $fields, $vals );
@@ -112,6 +143,16 @@ class TradesmanContentController extends ContentController {
 		#get trash
 		$trash = MailService::getTrash( $id );
 		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleNewMail($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		
+		MailService::readMail($requestParams[MailService::ID]);
+		
 		
 		return $mvc;
 	}

@@ -1,9 +1,16 @@
+<script> 
+$("#navMenu").load("/sidebar-mymail.html", function(response, status, xhr) {
+	  if (status == "error") {
+	    var msg = "Sorry but there was an error: ";
+		alert (msg + xhr.status + " " + xhr.statusText);
+	  }
+	});
+</script>
 <?php 
 $inbox = $mvc->getObject(MailService::INBOX);
 $outbox = $mvc->getObject(MailService::OUTBOX);
 $trash = $mvc->getObject(MailService::TRASH);
 ?>
-
 <h2>_i18n{Inbox}</h2>
 <div class="unitWBlock">
 	<table cellpadding="0" cellspacing="0">
@@ -29,7 +36,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>
@@ -70,7 +77,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>
@@ -112,7 +119,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 						<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 						<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 						<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-						<li class="itemDelete"><a href="?del=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('You sure you want to delete?');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+						<li class="itemDelete"><a href="?del=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 					</ul>
 				</td>	
 			</tr>

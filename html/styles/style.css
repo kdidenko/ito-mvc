@@ -184,8 +184,13 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:url(../images/navBg.png) repeat-x 0 0; color:#fff}
 	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
 	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
+	.viewWBox .unitOdd td {background:#EFEFEF}
+	.viewWBox .unitNoRead {font-weight:bold}
+	/* link */
+	.viewWBox td a {text-decoration:underline}
+		.viewWBox td a:hover {text-decoration:none}
 	
-	.viewWBox .unitOdd {background:#EFEFEF}
+	
 	
 	.viewIList {float:right; white-space:nowrap}
 		.viewIList li {float:left; padding:0 0 1px 4px}

@@ -103,7 +103,5 @@ if(jQuery) (function($){
 		//$('.userNav a').popupAn();
 		$('.stationCarousel').carouselAn();
 		$('.unitWBlock table tbody').each(function(){$(this).find('tr:odd').addClass('unitOdd')})
-		//$('.unitWBlock table tbody tr:odd').addClass('unitOdd');
-		//alert($('table tbody tr').size())
 	})
 })(jQuery);

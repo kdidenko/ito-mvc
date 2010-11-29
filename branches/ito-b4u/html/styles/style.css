@@ -154,17 +154,46 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .viewWBox {float:left; width:699px; margin:10px 0 0 0}
 	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}
 	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
+	.viewWBox h3 {font-size:14px; font-weight:bold; padding:5px 0}
 	
-	.unitWBlock {width:691px; margin:0 4px; padding:5px 0; border-top:1px dotted #393939; overflow:hidden}
-		.unitWBlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
-		.unitWBlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
-		.unitWBlock .unitBtn {width:670px; float:left; padding:4px 0}
-		.unitWBlock .unitBtn button {float:right; margin:0 0 0 5px}
-	.unitEqColumn {float:left; width:325px; padding:0 1px 0 14px}
-		.unitEqColumn .itemForm {overflow:hidden; width:325px; padding:4px 0}
-		.unitEqColumn .itemForm label {float:left; width:115px; text-align:right; padding:4px 0 0 0}
-			.unitEqColumn .itemData {float:right; width:200px}
-			.unitEqColumn .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
+	/* two column */
+	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
+	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
+	.viewWBox .unitLast {border:none; margin:0 4px}
+	/* info */
+	.viewWBox .unitInfo {padding:0 11px 5px 11px}
+		.viewWBox .unitInfo h3, .viewWBox .unitInfo p {padding:0 0 5px 0}
+	/* warning */
+	.viewWBox .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
+	.viewWBox .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
+	.viewWBox .unitBtn {width:670px; float:left; padding:4px 0}
+		.viewWBox .unitBtn button {float:right; margin:0 0 0 5px}
+	/* foto */
+	.viewWBox .itemFoto {width:170px; height:120px; background:url(../images/fotoBg.png) no-repeat 0 0; float:left; margin:0 0 10px 0}
+	.viewWBox .linkFoto {float:left; padding:50px 0 0 20px}
+		.viewWBox .linkFoto a {color:#9F0307; text-decoration:underline}
+	/* form */
+	.viewWBox .itemForm {overflow:hidden; width:325px; padding:4px 0}
+	.viewWBox label {float:left; width:115px; text-align:right; padding:4px 0 0 0}
+	.viewWBox .itemData {float:right; width:200px}
+	/* virtual form */
+	.viewWBox dt {float:left; width:115px; text-align:right; padding:4px 0 0 0}
+	.viewWBox dd.itemData {float:right; width:192px; padding:4px 4px 1px 4px; color:#999}
+	/* table */
+	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
+	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:url(../images/navBg.png) repeat-x 0 0; color:#fff}
+	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
+	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
+	
+	.viewWBox .unitOdd {background:#EFEFEF}
+	
+	.viewIList {float:right; white-space:nowrap}
+		.viewIList li {float:left; padding:0 0 1px 4px}
+		.viewIList li a {float:left; width:16px; height:16px; overflow:hidden; text-indent:-200px; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat}
+		.viewIList li.itemReply a {background-position:0 0}
+		.viewIList li.itemPrint a {background-position:0 -46px}
+		.viewIList li.itemForward a {background-position:0 -91px}
+		.viewIList li.itemDelete a {background-position:0 -136px}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
 	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
@@ -189,7 +218,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 /* login style */
 .wrapLogin {float:left; width:970px}
 	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:930px}
-	.wrapLogin .unitForm {border-top:1px dotted #393939; margin:0 4px; padding:5px 1px 5px 14px}
+	.wrapLogin .unitForm {border-bottom:1px dotted #393939; margin:0 4px 5px 4px; padding:5px 1px 5px 14px}
+		.wrapLogin .unitLast {border:none; margin:0 4px}
 	.wrapLogin .itemForm {overflow:hidden; width:419px; padding:4px 0}
 	.wrapLogin h3 {font-size:13px}
 	.wrapLogin .itemForm form {padding:0}

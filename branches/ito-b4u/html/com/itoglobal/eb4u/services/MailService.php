@@ -83,21 +83,21 @@ class MailService {
 		$where .= ' AND ' . self::OPENED . '=0';
 		$where .= ' AND ' . self::STATUS . '=0';
 		$from = self::MAILS;
-		$group = self::ID;
+		$group = self::STATUS;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $group , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
 		return $result;
 	}
 	
 	public static function getInbox($user) {
-		$where = self::SENDER_ID . '=' . $user;
+		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=0';
 		$result = self::getMails($where);
 		return $result;
 	}
 	
 	public static function getOutbox($user) {
-		$where = self::GETTER_ID . '=' . $user;
+		$where = self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=0';
 		$result = self::getMails($where);
 		return $result;

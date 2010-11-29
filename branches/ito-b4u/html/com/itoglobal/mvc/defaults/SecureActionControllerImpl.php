@@ -77,7 +77,7 @@ class SecureActionControllerImpl extends BaseActionControllerImpl implements Sec
 			if (in_array ( $role, $permitted )) {
 				$result->setTemplate ( $template );
 			} else {
-				//TODO: forward doesn't contain ModelAndView Object for now.
+				//TODO: forward do not contains ModelAndView Object for now.
 				$result->addObject ( UsersService::ERROR, self::SIGNED_OFF_MESSAGE );
 				$location = self::onSignedOff ( $actionParams );
 				self::forwardActionRequest ($location);

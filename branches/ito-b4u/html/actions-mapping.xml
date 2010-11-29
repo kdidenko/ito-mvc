@@ -2,8 +2,7 @@
 <actions xmlns="http://www.ito-global.com/schema/mvc" 
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.2.xsd  
-		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd" >
-
+		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd ">
 	
 	<action name="/switchLanguage.html" id="switchLanguage">
 		<controller class="com.itoglobal.i18n.LocalizationController"	

@@ -1,10 +1,21 @@
+<ul class="viewIList viewITList">
+				<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
+				<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
+				<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
+				<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+			</ul>
 <h2>Read Mail</h2>
 <div class="unitWBlock unitLast">
 	<form>
 		<div class="unitSnColumn">
-			<dl class="itemForm">
+			
+			<dl class="itemForm itemEq">
 				<dt>To:</dt>
 				<dd class="itemData">astabryn</dd>
+			</dl>
+			<dl class="itemForm itemEq">
+				<dt>Date:</dt>
+				<dd class="itemData">20/10/11</dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>Subject:</dt>

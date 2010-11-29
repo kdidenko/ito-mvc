@@ -1,13 +1,13 @@
 <?php
 
-require_once 'com/itoglobal/mvc/defaults/BaseActionControllerImpl.php';
+require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 
 /**
  * Authentication Controller
  * 	- implement user login/logout functionality
  * @author ITO-Global
  */
-class AuthenticationController extends BaseActionControllerImpl {
+class AuthenticationController extends SecureActionControllerImpl {
 	
 	/** User login handling controller method
 	 * @param the $actionParams

@@ -225,9 +225,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
-	<action name="/my-mail.html" id="mymail">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+	<action name="/my-mail.html" id="mymail" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>		
 	</action>
 	<!-- 
 	<action name="/*-mail.html" id="$1mail">

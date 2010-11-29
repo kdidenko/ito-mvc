@@ -169,7 +169,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox .unitBtn {width:670px; float:left; padding:4px 0}
 		.viewWBox .unitBtn button {float:right; margin:0 0 0 5px}
 	/* foto */
-	.viewWBox .itemFoto {width:170px; height:120px; background:url(../images/fotoBg.png) no-repeat 0 0; float:left; margin:0 0 10px 0}
+	.viewWBox .itemFoto {width:170px; height:120px; /*background:url(../images/fotoBg.png) no-repeat 0 0; */float:left; margin:0 0 10px 0}
 	.viewWBox .linkFoto {float:left; padding:50px 0 0 20px}
 		.viewWBox .linkFoto a {color:#9F0307; text-decoration:underline}
 	/* form */

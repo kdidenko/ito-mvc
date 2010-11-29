@@ -6,41 +6,14 @@ class TradesmanContentController extends ContentController {
 	
 	const ERROR = 'error';
 	const PSW_ERROR = 'psw_error';
+	const IMAGE_ERROR = 'image_errors';
 	const STATUS = 'status';
 	
 	public function handleMyProfile($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		
-		if (isset ( $requestParams ['personalSbm'] )) {		
-			$fields = array (
-							'0'=>UsersService::FIRSTNAME,
-							'1'=>UsersService::LASTNAME,
-							'2'=>UsersService::COMPANY_YEAR
-							);
-			$vals = array (
-							'0'=>$requestParams [UsersService::FIRSTNAME], 
-							'1'=>$requestParams [UsersService::LASTNAME],
-							'2'=>$requestParams [UsersService::COMPANY_YEAR]
-							);
-			
-			UsersService::updateFields ( $id, $fields, $vals );
-			$mvc->addObject ( self::STATUS, 'successful' );
-		}
-		
-		#get user info
-		$result = UsersService::getUser ( $id );
-		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
-		return $mvc;
-	}
-	
-	public function handleCompanyProfile($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-
-		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$error = array ();
-		
 		if (isset ( $requestParams ['pswSbm'] )) {
 			$error [] .= isset($requestParams [UsersService::OLDPASSWORD]) ? UsersService::checkOldPassword ( $requestParams [UsersService::OLDPASSWORD] ) : false;
 			$error [] .= isset($requestParams [UsersService::PASSWORD]) ? UsersService::checkPassword ( $requestParams [UsersService::PASSWORD] ) : false;
@@ -103,6 +76,54 @@ class TradesmanContentController extends ContentController {
 							'11'=>$requestParams [UsersService::HOMEPAGE],
 							'12'=>$requestParams [UsersService::SALUTATION],
 							'13'=>$requestParams [UsersService::COMPANY_YEAR]
+							);
+			
+			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( self::STATUS, 'successful' );
+		}
+		
+		#get user info
+		$result = UsersService::getUser ( $id );
+		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		return $mvc;
+	}
+	
+	public function handleCompanyProfile($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$username = SessionService::getAttribute ( UsersService::USERNAME );
+		$error = array ();
+		
+	
+		if (isset ( $requestParams ['pctSbm'] )) {
+			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+				$file = $_FILES ['file'];
+				$path = 'storage/uploads/users/' . $username . "/profile/avatar.jpg";
+				$error[] .= ValidationService::checkAvatar ( $file );
+				$error = array_filter ( $error );
+			}
+			if (count ( $error ) == 0) {
+				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+					StorageService::uploadFile ( $path, $file );
+					$mvc->addObject ( self::STATUS, 'successful' );
+					self::setNoCashe();
+				}
+			} else {
+				$mvc->addObject ( self::IMAGE_ERROR, $error );
+			}
+		}
+		
+		if (isset ( $requestParams ['personalSbm'] )) {		
+			$fields = array (
+							'0'=>UsersService::FIRSTNAME,
+							'1'=>UsersService::LASTNAME,
+							'2'=>UsersService::COMPANY_YEAR
+							);
+			$vals = array (
+							'0'=>$requestParams [UsersService::FIRSTNAME], 
+							'1'=>$requestParams [UsersService::LASTNAME],
+							'2'=>$requestParams [UsersService::COMPANY_YEAR]
 							);
 			
 			UsersService::updateFields ( $id, $fields, $vals );

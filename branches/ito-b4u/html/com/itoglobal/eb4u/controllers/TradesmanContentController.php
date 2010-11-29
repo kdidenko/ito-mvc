@@ -95,36 +95,23 @@ class TradesmanContentController extends ContentController {
 			MailService::sendMail($requestParams [MailService::SUBJECT], $requestParams [MailService::TEXT], $requestParams [MailService::SENDER], $requestParams [MailService::GETTER]) :
 				null;
 		
-		//echo "<h1>NEW: ";
+		#get count of new mail
+		/*
 		$new_mails = MailService::countNew($id);
 		isset ( $new_mails ) ? $mvc->addObject ( MailService::NEW_MAILS, $new_mails ) : null;
-		//echo $new_mails[MailService::NEW_MAILS];		
-		//echo "</h1></br>";
+		*/
 				
 		#get inbox
 		$inbox = MailService::getInbox( $id );
 		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
-		//echo "<h1>inbox</h1></br>";
-		//print_r($inbox);
 		
 		#get outbox
 		$outbox = MailService::getOutbox( $id );
 		isset ( $outbox ) ? $mvc->addObject ( MailService::OUTBOX, $outbox ) : null;
-		//echo "<h1>outbox</h1></br>";
-		//print_r($outbox);
-		
-		#get drafts
-		$drafts = MailService::getDrafts( $id );
-		isset ( $drafts ) ? $mvc->addObject ( MailService::DRAFTS, $drafts ) : null;
-		//echo "<h1>drafts</h1></br>";
-		//print_r($drafts);
 		
 		#get trash
 		$trash = MailService::getTrash( $id );
 		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
-		//echo "<h1>trash</h1></br>";
-		//print_r($trash);
-		
 		
 		return $mvc;
 	}

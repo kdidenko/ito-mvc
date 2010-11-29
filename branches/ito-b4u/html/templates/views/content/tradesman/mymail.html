@@ -19,7 +19,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 		</thead>
 		<tbody>
 			<?php foreach ( $inbox as $key=>$mail) { ?>
-			<tr <?php echo $mail['opened']==0 ? 'class="newMail"' : null; ?>>
+			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
@@ -90,7 +90,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 			<?php 
 			if (count($trash)>0 && $trash!=NULL){
 				foreach ( $trash as $key=>$mail) { ?>
-			<tr <?php echo $mail['opened']==0 ? 'class="newMail"' : null; ?>>
+			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
 				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
@@ -107,6 +107,9 @@ $trash = $mvc->getObject(MailService::TRASH);
 			</tr>
 			<?php }
 			}?>
+			<tr>
+				<td colspan="6" class="itemLast">No mail</td>
+			</tr>
 		</tbody>
 	</table>
 </div>

@@ -9,11 +9,10 @@
 				echo '<p>' . $message . '</p>';
 			} else {
 			?>
-					<h2>_i18n{Welcome, Guest!}</h2>
+					<h2>_i18n{Please, sign in}:</h2>
 				<?php }	?>
 				<div class="unitForm">
 					<form action="login.html" method="post">
-						<h3>_i18n{Please, sign in}:</h3>
 						<?php $errors = $mvc->getObject(UsersService::ERROR);
 						if (isset($errors)){?>
 							<div class="itemWarning">
@@ -40,8 +39,8 @@
 						</div>
 					</form>
 				</div>
-				<div class="unitForm">
-					<h3>_i18n{If you have not free accaunt yet}:</h3>
+				<h2>_i18n{If you have not free accaunt yet}:</h2>
+				<div class="unitForm unitLast">
 					<div class="itemBtn">
 						<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Register}</strong></span></a>
 					</div>

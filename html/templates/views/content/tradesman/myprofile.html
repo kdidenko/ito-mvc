@@ -3,15 +3,14 @@ $data = $mvc->getObject(TradesmanContentController::RESULT);
 $psw_errors = $mvc->getObject(TradesmanContentController::PSW_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
 ?>
-
 <h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
 <div class="unitWBlock">
 	<form action="/my-profile.html" method="post">
-<?php if (isset($status)){?>
-		<div class="itemOk">
-			<span class="message warning">_i18n{Successfully Saved.}</span>
-		</div>
-<?php } ?>
+		<?php if (isset($status)){?>
+			<div class="itemOk">
+				<p>_i18n{Successfully Saved.}</p>
+			</div>
+		<?php } ?>
 		<div class="unitEqColumn">
 			<div class="itemForm">
 				<label>_i18n{Company Name}:</label>
@@ -108,13 +107,13 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 </div>
 
 <h2>_i18n{Change Password}</h2>
-<div class="unitWBlock">
+<div class="unitWBlock unitLast">
 <?php if (isset($psw_errors )){?>
 	<div class="itemWarning">
 		<ul>
-<?php foreach ($psw_errors as $key => $value){?>
-			<li><?php echo $value ?></li>
-<?php } ?>					
+			<?php foreach ($psw_errors as $key => $value){?>
+				<li><?php echo $value ?></li>
+			<?php } ?>					
 		</ul>
 	</div>
 <?php } ?>

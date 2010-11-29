@@ -5,8 +5,11 @@ require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 class TradesmanContentController extends ContentController {
 	
 	const ERROR = 'error';
+	
 	const PSW_ERROR = 'psw_error';
+	
 	const IMAGE_ERROR = 'image_errors';
+	
 	const STATUS = 'status';
 	
 	public function handleMyProfile($actionParams, $requestParams) {
@@ -147,12 +150,6 @@ class TradesmanContentController extends ContentController {
 			MailService::sendMail($requestParams [MailService::SUBJECT], $requestParams [MailService::TEXT], $requestParams [MailService::SENDER], $requestParams [MailService::GETTER]) :
 				null;
 		
-		#get count of new mail
-		/*
-		$new_mails = MailService::countNew($id);
-		isset ( $new_mails ) ? $mvc->addObject ( MailService::NEW_MAILS, $new_mails ) : null;
-		*/
-				
 		#get inbox
 		$inbox = MailService::getInbox( $id );
 		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
@@ -170,11 +167,7 @@ class TradesmanContentController extends ContentController {
 	
 	public function handleNewMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		
-		MailService::readMail($requestParams[MailService::ID]);
-		
-		
+		//MailService::readMail($requestParams[MailService::ID]);
 		return $mvc;
 	}
 }

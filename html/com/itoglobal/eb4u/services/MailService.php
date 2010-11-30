@@ -39,6 +39,10 @@ class MailService {
 	 * @param 0 - new ; 1 - read
 	 */
 	const OPENED = 'opened';
+	/**
+	 * @var string defining the hash field name
+	 */
+	const HASH = 'hash';
 	
 	const NEW_MAILS = 'new_mails';
 	const SENDER = 'sender';
@@ -121,16 +125,16 @@ class MailService {
 		return $result;
 	}
 	
-	public static function readMail($id) {
+	public static function readMail($hash) {
 		$fields = array('0' => self::OPENED);
 		$vals = array('0' => '1');
-		self::updateMail($id, $fields, $vals);
+		self::updateMail($hash, $fields, $vals);
 	}
 	
-	public static function goTrash($id) {
+	public static function goTrash($hash) {
 		$fields = array('0' => self::STATUS);
 		$vals = array('0' => '1');
-		self::updateMail($id, $fields, $vals);
+		self::updateMail($hash, $fields, $vals);
 	}
 	
 	public static function goDrafts($id) {
@@ -139,29 +143,29 @@ class MailService {
 		self::updateMail($id, $fields, $vals);
 	}
 	
-	private static function updateMail ($id, $fields, $vals){
+	private static function updateMail ($hash, $fields, $vals){
 		$from = self::MAILS;
-		$where = self::ID . " = '" . $id . "'";
+		$where = self::HASH . " = '" . $hash . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
 	/**
 	 * Retrieves mail by specified mail id.
-	 * @param integer $id the mail id
+	 * @param integer $hash the mail id
 	 * @return mail data
 	 */
-	public static function getMail($id) {
+	public static function getMail($hash) {
 		$fields = 't1.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::GETTER . SQLClient::FROM . '(' . 
 					SQLClient::SELECT . self::MAILS . '.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::SENDER;
 		$from = self::MAILS . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . self::MAILS . '.' . 
 				self::SENDER_ID . '=' . UsersService::USERS . '.' . UsersService::ID . ')' . SQLClient::SQL_AS . 't1' . 
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 't1.' . 
 				self::GETTER_ID . '=' . UsersService::USERS . '.' . UsersService::ID;
-		$where = self::ID . '=' . $id;
+		$where = self::HASH . '=' . $hash;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
 		return $result;
 	}
 	
@@ -174,9 +178,11 @@ class MailService {
 	 * @return mail id
 	 */
 	public static function sendMail($subject, $text, $from, $to){
+		$date = gmdate ( "Y-m-d H:i:s" );
+		$hash = md5($date . $from);
 		#Insert new users to DB
-		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . self::CRDATE;
-		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . gmdate ( "Y-m-d H:i:s" ) . "'";
+		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . self::CRDATE . ', ' . self::HASH;
+		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . $hash . "'";
 		$into = self::MAILS;
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		#get user id 
@@ -188,10 +194,10 @@ class MailService {
 	 * delete mail from DB
 	 * @param integer $id the mail id
 	 */
-	public static function deleteMail($id) {
+	public static function deleteMail($hash) {
 		# setting the query variables
 		$from = self::MAILS;
-		$where = self::ID . " = '" . $id . "'";
+		$where = self::HASH . " = '" . $hash . "'";
 		$orderBy = null;
 		$limit = null;
 		# executing the query

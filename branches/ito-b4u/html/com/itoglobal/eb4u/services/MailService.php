@@ -85,7 +85,7 @@ class MailService {
 		$fields = SQLClient::COUNT . '(' . self::ID . ')' . SQLClient::SQL_AS . self::NEW_MAILS;
 		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::OPENED . '=0';
-		$where .= ' AND ' . self::STATUS . '=0';
+		$where .= ' AND ' . self::STATUS . '=3';
 		$from = self::MAILS;
 		$group = self::STATUS;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $group , '', '' );
@@ -95,14 +95,14 @@ class MailService {
 	
 	public static function getInbox($user) {
 		$where = self::GETTER_ID . '=' . $user;
-		$where .= ' AND ' . self::STATUS . '=0';
+		$where .= ' AND ' . self::STATUS . '=3';
 		$result = self::getMails($where);
 		return $result;
 	}
 	
 	public static function getOutbox($user) {
 		$where = self::SENDER_ID . '=' . $user;
-		$where .= ' AND ' . self::STATUS . '=0';
+		$where .= ' AND ' . self::STATUS . '=4';
 		$result = self::getMails($where);
 		return $result;
 	}
@@ -162,7 +162,7 @@ class MailService {
 				self::SENDER_ID . '=' . UsersService::USERS . '.' . UsersService::ID . ')' . SQLClient::SQL_AS . 't1' . 
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 't1.' . 
 				self::GETTER_ID . '=' . UsersService::USERS . '.' . UsersService::ID;
-		$where = self::HASH . '=' . $hash;
+		$where = self::HASH . "='" . $hash . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
@@ -180,10 +180,19 @@ class MailService {
 	public static function sendMail($subject, $text, $from, $to){
 		$date = gmdate ( "Y-m-d H:i:s" );
 		$hash = md5($date . $from);
+		$inbox = '3';
+		$outbox = '4';
 		#Insert new users to DB
-		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . self::CRDATE . ', ' . self::HASH;
-		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . $hash . "'";
 		$into = self::MAILS;
+		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
+					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
+		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
+					$hash ."','" . $outbox . "'";
+		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
+					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
+		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
+					$hash ."','" . $inbox . "'";
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		#get user id 
 		$id = $result;

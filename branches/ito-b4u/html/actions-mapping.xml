@@ -77,10 +77,6 @@
 		<role type="UR">
 			<controller class="com.itoglobal.eb4u.controllers.UserContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
-			<forwards>
-				<target location="/index.html" name="home" condition="onfailure"/>
-				<target location="/my-trainings.html" name="mytrainings" condition="onsuccess"/>
-			</forwards>
 		</role>
 		<role type="VR">
 			<controller class="com.itoglobal.eb4u.controllers.ContentController" method="handle$1" />
@@ -239,7 +235,13 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>		
 	</action>
-
+	<action name="/new-mail.html" id="newmail" roles="UR,TR,BR,PR,AR">
+		<controller class="com.itoglobal.eb4u.controllers.ContentController"	/>
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsuccess" location="/my-mail.html"/>
+		</forwards>
+	</action>	
 	<action name="/my-order.html" id="myorder" roles="UR,TR,BR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

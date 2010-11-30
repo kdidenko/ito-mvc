@@ -66,7 +66,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 			<tr>
 				<td><input type="checkbox" class="inpChk" /></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
-				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
+				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>
@@ -101,7 +101,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 				<td><input type="checkbox" class="inpChk" /></td>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
-				<td><?php echo $mail[MailService::SUBJECT]; ?></td>
+				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>

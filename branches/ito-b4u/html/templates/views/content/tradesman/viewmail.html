@@ -1,8 +1,11 @@
+<?php 
+$data = $mvc->getObject(TradesmanContentController::RESULT);
+?>
 <ul class="viewIList viewITList">
 				<li class="itemReply"><a href="#" title="_i18n{Reply}">_i18n{Reply}</a></li>
 				<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 				<li class="itemForward"><a href="#" title="_i18n{Forward}">_i18n{Forward}</a></li>
-				<li class="itemDelete"><a href="?trash=<?php echo $mail[MailService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+				<li class="itemDelete"><a href="/my-mail.html?trash=<?php echo $data[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 			</ul>
 <h2>Read Mail</h2>
 <div class="unitWBlock unitLast">
@@ -10,22 +13,21 @@
 		<div class="unitSnColumn">
 			
 			<dl class="itemForm itemEq">
-				<dt>To:</dt>
-				<dd class="itemData">astabryn</dd>
+				<dt>From:</dt>
+				<dd class="itemData"><?php echo $data[MailService::SENDER]; ?></dd>
 			</dl>
 			<dl class="itemForm itemEq">
 				<dt>Date:</dt>
-				<dd class="itemData">20/10/11</dd>
+				<dd class="itemData"><?php echo $data[MailService::CRDATE]; ?></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>Subject:</dt>
-				<dd class="itemData"><strong>first letter</strong></dd>
+				<dd class="itemData"><strong><?php echo $data[MailService::SUBJECT]; ?></strong></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>Body:</dt>
 				<dd class="itemData">
-					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-					<p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+					<?php echo $data[MailService::TEXT]; ?>
 				</dd>
 			</dl>
 		</div>

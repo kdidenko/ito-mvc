@@ -170,5 +170,14 @@ class TradesmanContentController extends ContentController {
 		//MailService::readMail($requestParams[MailService::ID]);
 		return $mvc;
 	}
+	
+	public function handleViewMail($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$mail = MailService::getMail( $requestParams[MailService::ID] );
+		isset ( $mail ) ? $mvc->addObject (self::RESULT, $mail ) : null;
+		
+		return $mvc;
+	}
 }
 ?>

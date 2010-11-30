@@ -8,6 +8,7 @@ input, select, button, textarea {font-family:"Lucida Sans", "Lucida Grande"; fon
 input.inpTxt, select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
 textarea.areaTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}
 input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
+	* html input.inpChk {margin:1px 0 0 0}
 button::-moz-focus-inner {border:0; padding:0}
 button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
 	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
@@ -31,7 +32,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
 /* navigation style */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
-	.wrapNav .wrapInner {padding:0 5px 0 50px; width:915px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
+	.wrapNav .wrapInner {padding:0 5px 0 40px; width:925px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
 .mainNav {float:left; overflow:hidden; height:37px}
 	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
 	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
@@ -39,7 +40,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.mainNav li.itemActive {padding:0; z-index:102}
 	.mainNav li.itemActive a, .mainNav li.itemActive a:hover {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
 .userNav {float:right; color:#fff}
-	.userNav li {float:left; padding:9px 0 0 20px}
+	.userNav li {float:left; padding:9px 0 0 15px}
 	.userNav li a {color:#fff; text-decoration:underline}
 	.userNav li a:hover {text-decoration:none}
 /* footer style */
@@ -183,10 +184,13 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* table */
 	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
 	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:url(../images/navBg.png) repeat-x 0 0; color:#fff}
-	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
-	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
+	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; cursor:pointer}
+	.viewWBox td.itemLast, .viewWBox th.itemLast, .viewWBox tr.itemNoMail td {border-right-width:0}
 	.viewWBox .unitOdd td {background:#EFEFEF}
-	.viewWBox .unitNoRead {font-weight:bold}
+	.viewWBox .unitNoRead {font-weight:bold; cursor:auto}
+	.viewWBox tr.unitHover td {background:#E2E2E2}
+	.viewWBox th.itemChk {width:14px}
+		.viewWBox td input.inpChk {margin:1px 0 0 0}
 	/* link */
 	.viewWBox td a {text-decoration:underline}
 		.viewWBox td a:hover {text-decoration:none}
@@ -199,20 +203,18 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitSnColumn dd.itemData {width:546px; color:#000}
 		.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
 			.unitSnColumn .itemEq dd.itemData {width:200px}
+			
 		
 	
 	
 	/* icon mail */
-	.viewIList {float:right; white-space:nowrap}
-		.viewIList li {float:left; padding:0 0 1px 4px}
-		.viewIList li a {float:left; width:16px; height:16px; overflow:hidden; text-indent:-200px; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat}
+	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
+		.viewIList li {float:left; padding:0 0 1px 10px}
+		.viewIList li a {float:left; height:16px; overflow:hidden; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat; padding:0 5px 0 20px; font-weight:normal}
 		.viewIList li.itemReply a {background-position:0 0}
 		.viewIList li.itemPrint a {background-position:0 -46px}
 		.viewIList li.itemForward a {background-position:0 -91px}
 		.viewIList li.itemDelete a {background-position:0 -136px}
-	.viewITList {padding:0 15px 0 0}
-		.viewITList li {padding:0 0 1px 10px}
-		.viewITList li a {text-indent:0; width:auto; padding:0 5px 0 20px}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
 	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}

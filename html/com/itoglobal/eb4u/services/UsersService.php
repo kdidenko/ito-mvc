@@ -215,6 +215,20 @@ class UsersService {
 		return $result;
 	}
 	
+	public function getUserIdByName ($username){
+		$result = null;		
+		if(isset($username) && $username != ''){
+			# preparing query
+			$fields = self::USERS . '.' . self::ID;
+			$from = self::USERS;
+			$where = self::USERNAME . "='" . $username . "'";
+			# executing query
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = $result != null && isset($result) && count($result) > 0 ? $result[0][UsersService::ID] : null;
+		} 
+		return $result;
+	}
+	
 	/**
 	 * Retreives the user data by specified database field.
 	 * @param text $field the field which creating character scroller.

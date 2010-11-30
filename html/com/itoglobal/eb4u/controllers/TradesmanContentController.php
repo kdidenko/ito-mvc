@@ -4,14 +4,6 @@ require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 
 class TradesmanContentController extends ContentController {
 	
-	const ERROR = 'error';
-	
-	const PSW_ERROR = 'psw_error';
-	
-	const IMAGE_ERROR = 'image_errors';
-	
-	const STATUS = 'status';
-	
 	public function handleMyProfile($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 
@@ -146,10 +138,6 @@ class TradesmanContentController extends ContentController {
 		isset ( $requestParams [MailService::TRASH] ) ? MailService::goTrash ($requestParams [MailService::TRASH]) : null;
 		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
 		
-		isset ($requestParams [MailService::SEND]) ?
-			MailService::sendMail($requestParams [MailService::SUBJECT], $requestParams [MailService::TEXT], $requestParams [MailService::SENDER], $requestParams [MailService::GETTER]) :
-				null;
-		
 		#get inbox
 		$inbox = MailService::getInbox( $id );
 		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
@@ -165,15 +153,11 @@ class TradesmanContentController extends ContentController {
 		return $mvc;
 	}
 	
-	public function handleNewMail($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		//MailService::readMail($requestParams[MailService::ID]);
-		return $mvc;
-	}
+	
 	
 	public function handleViewMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		MailService::readMail ( $requestParams[MailService::ID] );
 		$mail = MailService::getMail( $requestParams[MailService::ID] );
 		isset ( $mail ) ? $mvc->addObject (self::RESULT, $mail ) : null;
 		

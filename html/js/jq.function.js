@@ -39,6 +39,59 @@ if(jQuery) (function($){
 			f.autoRestart();
 		})
 	};
+	$.fn.mailAn = function(params){
+		var conf = $.extend({
+			tableBlock:'.unitMail',
+			hoverClass:'unitHover',
+			noMailClass:'unitNoMail'
+		}, params);
+		return this.each(function(){
+			var c=conf, o=$(this), f=this;
+			$.extend(f,{
+				getBlock:function(){return o.find(c.tableBlock)},
+				getRow:function(){return f.getBlock().find('tbody tr')},
+				
+				getAllItem:function(){return f.getMoveBlock().children(c.itemBlock)},
+				getWidth:function(){return f.getAllItem().size()*f.getMoveBlock().find(c.itemBlock).outerWidth(true)},
+				itemTransparent:function(){
+					f.getAllItem().each(function(){
+						$(this).hover(
+							function(){$(this).animate({opacity:1}, 200)},
+							function(){$(this).animate({opacity:0.5}, 100)}
+						).css({opacity:0.5})
+					})
+				},
+				moveItem:function(){
+					if(currentPosition<=-(f.getWidth()/2)){currentPosition=0}
+					f.getMoveBlock().css({left:currentPosition-=c.sizeScroll});
+				},
+				autoRestart:function(){clearTimeout(tO);
+					tO=setTimeout(function(){f.moveItem(); f.autoRestart()}, c.playDuration);
+				},
+				autoPause:function(){clearInterval(tO)}
+			});
+			if(f.getBlock().length){
+				$('tbody tr:odd', f.getBlock()).addClass('unitOdd');
+				f.getRow().each(function(i){
+					var it=$(this);
+					if(!it.hasClass(c.noMailClass)){
+						it.hover(function(){it.addClass(c.hoverClass)}, function(){it.removeClass(c.hoverClass)}
+						).bind('click', function(){
+							var l=it.find('a').attr('href');
+							if(l!=undefined){
+								document.location=it.find('a').attr('href');
+							}else{
+								alert('link not found');
+							}
+						});
+						it.find('input[type="checkbox"]').bind('click', function(e){
+							e.stopImmediatePropagation();
+						});
+					}
+				})
+			}
+		})
+	};
 	$.fn.popupAn = function(params){
 		var conf = $.extend({}, params);
 		return this.each(function(){
@@ -101,7 +154,7 @@ if(jQuery) (function($){
 	};
 	$(document).ready(function(){
 		//$('.userNav a').popupAn();
+		$('.unitWBlock').mailAn();
 		$('.stationCarousel').carouselAn();
-		$('.unitWBlock table tbody').each(function(){$(this).find('tr:odd').addClass('unitOdd')})
 	})
 })(jQuery);

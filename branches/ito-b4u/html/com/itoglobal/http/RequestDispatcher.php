@@ -13,7 +13,7 @@ class RequestDispatcher {
 		return $this->dispatchActionRequest ( $action );
 	}
 	
-	public function dispatchActionRequest($action) {
+	public function dispatchActionRequest($action, $mvc = null) {
 		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
@@ -22,7 +22,7 @@ class RequestDispatcher {
 			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $action . ' Not found on server' );
 		}
-		return $this->dispatch ($mappingObj);
+		return $this->dispatch ($mappingObj, $mvc);
 	}
 	
 	public function dispatchViewRequest($view) {
@@ -37,11 +37,12 @@ class RequestDispatcher {
 		return $this->dispatch ( $mappingObj );
 	}
 	
-	private function dispatch($mappingObj) {
+	private function dispatch($mappingObj, $mvc = null) {
 		$result = null;
-		# get the conntroller object instance
+		# get the conntroller object instances
 		$mappingObj = MVCService::optimizeMapping($mappingObj);
-		$controller = MVCService::getController ($mappingObj);
+		$mappingObj = MVCService::getForwards($mappingObj, $mvc);
+		$controller = MVCService::getController ($mappingObj);		
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
 		$methodName = method_exists($controller, $methodName) ? $methodName : BaseActionController::MVC_DEFAULT_METHOD;

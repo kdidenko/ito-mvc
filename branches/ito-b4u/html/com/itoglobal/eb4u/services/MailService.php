@@ -210,9 +210,9 @@ class MailService {
 		$mail[self::STATUS] == 1 ? self::deleteFromTrash($hash) : self::goTrash($hash); 
 	}
 	
-	public static function deleteMails($array){
-		if (isset($array) && count($array)>0){
-			$array = json_decode($array, true);
+	public static function deleteMails($string){
+		if (isset($string) && count($string)>0){
+			$array = explode(',', $string);
 			foreach ($array as $mail){
 				self::deleteMail($mail);
 			}

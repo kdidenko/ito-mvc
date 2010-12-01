@@ -55,6 +55,7 @@ class MailService {
 	const TRASH = 'trash';
 	const DRAFTS = 'drafts';
 	const DEL = 'del';
+	const DEL_ALL = 'delAll';
 	
 	/**
 	 * Retrieves the users mails by specified user id.
@@ -207,6 +208,15 @@ class MailService {
 	public static function deleteMail($hash){
 		$mail = self::getMail($hash);
 		$mail[self::STATUS] == 1 ? self::deleteFromTrash($hash) : self::goTrash($hash); 
+	}
+	
+	public static function deleteMails($array){
+		if (isset($array) && count($array)>0){
+			$array = json_decode($array, true);
+			foreach ($array as $mail){
+				self::deleteMail($mail);
+			}
+		}
 	}
 	
 	/**

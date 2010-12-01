@@ -239,10 +239,11 @@
 		</forwards>		
 	</action>
 	<action name="/new-mail.html" id="newmail" roles="UR,TR,BR,PR,AR">
-		<controller class="com.itoglobal.eb4u.controllers.ContentController"	/>
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target condition="onsuccess" location="/my-mail.html"/>
+			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>	
 	<action name="/my-order.html" id="myorder" roles="UR,TR,BR,AR">

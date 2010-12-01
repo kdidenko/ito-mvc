@@ -77,8 +77,9 @@ class MailService {
 				self::SENDER_ID . '=' . UsersService::USERS . '.' . UsersService::ID . ')' . SQLClient::SQL_AS . 't1' . 
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 't1.' . 
 				self::GETTER_ID . '=' . UsersService::USERS . '.' . UsersService::ID;
+		$orderby = self::CRDATE . ' ' . SQLClient::DESC;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
@@ -191,6 +192,8 @@ class MailService {
 		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
 					$hash ."','" . $outbox . "'";
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		$date = gmdate ( "Y-m-d H:i:s" );
+		$hash = md5($date . $from . $to);
 		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
 					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
 		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
@@ -201,11 +204,16 @@ class MailService {
 		return $result;
 	}
 	
+	public static function deleteMail($hash){
+		$mail = self::getMail($hash);
+		$mail[self::STATUS] == 1 ? self::deleteFromTrash($hash) : self::goTrash($hash); 
+	}
+	
 	/**
-	 * delete mail from DB
+	 * delete mail from trash
 	 * @param integer $id the mail id
 	 */
-	public static function deleteMail($hash) {
+	public static function deleteFromTrash($hash) {
 		# setting the query variables
 		$from = self::MAILS;
 		$where = self::HASH . " = '" . $hash . "'";

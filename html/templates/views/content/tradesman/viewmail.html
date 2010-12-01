@@ -24,7 +24,7 @@ $mail = $mvc->getObject(TradesmanContentController::RESULT);
 				<li class="itemReply"><a href="/new-mail.html" title="_i18n{Reply}">_i18n{Reply}</a></li>
 				<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
 				<li class="itemForward"><a href="/new-mail.html" title="_i18n{Forward}">_i18n{Forward}</a></li>
-				<li class="itemDelete"><a href="/my-mail.html?trash=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+				<li class="itemDelete"><a href="/my-mail.html?del=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 			</ul>
 <h2>_i18n{Read Mail}</h2>
 <div class="unitWBlock unitLast">

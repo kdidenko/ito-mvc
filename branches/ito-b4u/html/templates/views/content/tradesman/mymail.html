@@ -13,7 +13,7 @@ $outbox = $mvc->getObject(MailService::OUTBOX);
 $trash = $mvc->getObject(MailService::TRASH);
 ?>
 <form method="post" action="my-mail.html">
-<input type="hidden" name="itemSelect" value="test" />
+<input type="hidden" name="itemSelect" value="zzz" />
 <ul class="viewIList">
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
@@ -33,7 +33,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 <?php 	if (count($inbox)>0 && $inbox!=NULL){
 			foreach ( $inbox as $key=>$mail) { ?>
 			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
-				<td><input type="checkbox" class="inpChk" /></td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
@@ -67,7 +67,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 <?php 	if (count($outbox)>0 && $outbox!=NULL){
 			foreach ( $outbox as $key=>$mail) { ?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" /></td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
 				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
@@ -101,7 +101,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 		if (count($trash)>0 && $trash!=NULL){
 			foreach ( $trash as $key=>$mail) { ?>
 			<tr <?php echo $mail['opened']==0 ? 'class="unitNoRead"' : null; ?>>
-				<td><input type="checkbox" class="inpChk" /></td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
 				<td><?php echo $mail[MailService::SENDER]; ?></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
 				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>

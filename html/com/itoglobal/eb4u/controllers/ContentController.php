@@ -40,13 +40,29 @@ class ContentController extends SecureActionControllerImpl {
 	
 	public function handleNewMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		$location = $this->onSuccess( $actionParams );			
+		$location = $this->onSuccess( $actionParams );
 		isset($requestParams['back']) ? $this->forwardActionRequest ( $location ) : NULL;
-		if (isset($requestParams [MailService::SEND])){
-			$subject = $requestParams [MailService::SUBJECT];
-			$text = $requestParams [MailService::TEXT];
-			$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
+		if (isset($requestParams [MailService::RE]) || isset($requestParams [MailService::FWD])){
+			$replay = isset($requestParams [MailService::RE]) ? 1 : 0;
+			$subject = $replay ? '_i18n{Re}: ' : '_i18n{Fwd}: ' ; 
+			$subject .= $requestParams [MailService::SUBJECT];
+			$date = $requestParams [MailService::CRDATE];
+			$sender = $requestParams [MailService::SENDER];
 			$getter = $requestParams [MailService::GETTER];
+			$getter_id = UsersService::getUserIdByName($getter);
+			$text = "<div><br/><br/><br/></div><div><font class='Apple-style-span'; color='#999999'>";
+			$text .= '_i18n{On} ' . $date . ', ' . $sender . ' _i18n{wrote}:';
+			$text .= "<div><br/></div>";
+			$text .= $requestParams [MailService::TEXT];
+			$text .= "</font></div>";
+			$result = array(MailService::SUBJECT=>$subject,MailService::GETTER=>$sender,MailService::TEXT=>$text,MailService::RE=>$replay);
+			$mvc->addObject ( self::RESULT, $result );
+		}
+		if (isset($requestParams [MailService::SEND])){
+			$subject = htmlspecialchars($requestParams [MailService::SUBJECT], ENT_QUOTES);
+			$text = htmlspecialchars($requestParams [MailService::TEXT], ENT_QUOTES);
+			$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
+			$getter = htmlspecialchars($requestParams [MailService::GETTER], ENT_QUOTES);
 			$getter_id = UsersService::getUserIdByName($getter);
 			if (isset($getter_id) && $getter_id!=NULL){
 				MailService::sendMail($subject, $text, $sender_id, $getter_id);

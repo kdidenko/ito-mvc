@@ -98,9 +98,12 @@
 			<template name="index.html" path="templates/layout-two-columns.html" />
 		</role>
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns.html" />
+	</action>
+	<action name="/my-account.html" id="myaccount">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
-	
 	<action name="/manage-users.html" id="manageusers" roles="AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />

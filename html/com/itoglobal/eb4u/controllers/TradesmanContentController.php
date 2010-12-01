@@ -44,8 +44,8 @@ class TradesmanContentController extends ContentController {
 							'0'=>UsersService::FIRSTNAME, 
 							'1'=>UsersService::LASTNAME,
 							'2'=>UsersService::EMAIL,
-							'3'=>UsersService::COMPANY,
-							'4'=>UsersService::VAT,
+							//'3'=>UsersService::COMPANY,
+							//'4'=>UsersService::VAT,
 							'5'=>UsersService::ADDRESS,
 							'6'=>UsersService::ZIP,
 							'7'=>UsersService::LOCATION,
@@ -53,15 +53,15 @@ class TradesmanContentController extends ContentController {
 							'9'=>UsersService::COUNTRY,
 							'10'=>UsersService::PHONE,
 							'11'=>UsersService::HOMEPAGE,
-							'12'=>UsersService::SALUTATION,
-							'13'=>UsersService::COMPANY_YEAR
+							'12'=>UsersService::SALUTATION//,
+							//'13'=>UsersService::COMPANY_YEAR
 							);
 			$vals = array (
 							'0'=>$requestParams [UsersService::FIRSTNAME], 
 							'1'=>$requestParams [UsersService::LASTNAME],
 							'2'=>$requestParams [UsersService::EMAIL],
-							'3'=>$requestParams [UsersService::COMPANY],
-							'4'=>$requestParams [UsersService::VAT],
+							//'3'=>$requestParams [UsersService::COMPANY],
+							//'4'=>$requestParams [UsersService::VAT],
 							'5'=>$requestParams [UsersService::ADDRESS],
 							'6'=>$requestParams [UsersService::ZIP],
 							'7'=>$requestParams [UsersService::LOCATION],
@@ -69,8 +69,8 @@ class TradesmanContentController extends ContentController {
 							'9'=>$requestParams [UsersService::COUNTRY],
 							'10'=>$requestParams [UsersService::PHONE],
 							'11'=>$requestParams [UsersService::HOMEPAGE],
-							'12'=>$requestParams [UsersService::SALUTATION],
-							'13'=>$requestParams [UsersService::COMPANY_YEAR]
+							'12'=>$requestParams [UsersService::SALUTATION]//,
+							//'13'=>$requestParams [UsersService::COMPANY_YEAR]
 							);
 			
 			UsersService::updateFields ( $id, $fields, $vals );
@@ -134,7 +134,6 @@ class TradesmanContentController extends ContentController {
 	public function handleMyMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		
 		isset ( $requestParams [MailService::TRASH] ) ? MailService::goTrash ($requestParams [MailService::TRASH]) : null;
 		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
 		
@@ -158,6 +157,7 @@ class TradesmanContentController extends ContentController {
 	public function handleViewMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		MailService::readMail ( $requestParams[MailService::ID] );
+		
 		$mail = MailService::getMail( $requestParams[MailService::ID] );
 		isset ( $mail ) ? $mvc->addObject (self::RESULT, $mail ) : null;
 		

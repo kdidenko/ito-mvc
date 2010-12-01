@@ -23,23 +23,23 @@ $mail = $mvc->getObject(TradesmanContentController::RESULT);
 		<div class="unitSnColumn">
 			<dl class="itemForm itemEq">
 				<dt>From:</dt>
-				<dd class="itemmail"><?php echo $mail[MailService::SENDER];?></dd>
+				<dd class="itemData"><?php echo $mail[MailService::SENDER];?></dd>
 			</dl>
 			<dl class="itemForm itemEq">
 				<dt>Date:</dt>
-				<dd class="itemmail"><?php echo $mail[MailService::CRDATE];?></dd>
+				<dd class="itemData"><?php echo $mail[MailService::CRDATE];?></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>To:</dt>
-				<dd class="itemmail"><?php echo $mail[MailService::GETTER];?></dd>
+				<dd class="itemData"><?php echo $mail[MailService::GETTER];?></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>Subject:</dt>
-				<dd class="itemmail"><strong><?php echo $mail[MailService::SUBJECT]; ?></strong></dd>
+				<dd class="itemData"><strong><?php echo $mail[MailService::SUBJECT]; ?></strong></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>Body:</dt>
-				<dd class="itemmail">
+				<dd class="itemData">
 					<?php echo $mail[MailService::TEXT]; ?>
 				</dd>
 			</dl>

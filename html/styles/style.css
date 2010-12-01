@@ -183,7 +183,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
 	/* table */
 	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
-	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:url(../images/navBg.png) repeat-x 0 0; color:#fff}
+	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
 	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; cursor:pointer}
 	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
 	.viewWBox .unitOdd td {background:#EFEFEF}
@@ -210,7 +210,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	
 	/* icon mail */
 	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
-		.viewIList li {float:left; padding:0 0 1px 10px}
+		.viewIList li {float:left; padding:1px 0 0 10px}
 		.viewIList li a, .viewIList li button {float:left; line-height:normal; overflow:hidden; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
 		.viewIList li a:hover {text-decoration:none}
 		.viewIList li.itemReply a, .viewIList li.itemReply button {background-position:3px 0}
@@ -237,7 +237,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewMenu ul {border-top:1px dotted #ccc; padding:0 0 10px 0}
 	.viewMenu li {border-bottom:1px dotted #ccc}
 	.viewMenu li a {display:block; overflow:hidden; width:163px; padding:5px 7px 4px 7px; font-size:13px; font-weight:bold}
-	.viewMenu li a:hover, .viewMenu li.itemActive a {background:url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
+	.viewMenu li a:hover, .viewMenu li.itemActive a {background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
 /* login style */
 .wrapLogin {float:left; width:970px}
 	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:442px}

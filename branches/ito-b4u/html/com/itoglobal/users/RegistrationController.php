@@ -109,10 +109,10 @@ class RegistrationController extends SecureActionControllerImpl {
 		$fields[] .= $requestParams[UsersService::HOMEPAGE] ? 'homepage' : false;
 		$fields[] .= $requestParams[UsersService::NEWSLETTER] ? 'newsletter' : false;
 		$fields[] .= $requestParams[UsersService::BANK] ? 'bank' : false;
-		$fields[] .= $requestParams[UsersService::BANK_CODE] ? 'bank_code' : false;
+		//$fields[] .= $requestParams[UsersService::BANK_CODE] ? 'bank_code' : false;
 		$fields[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? 'account_number' : false;
 		$fields[] .= isset($requestParams[UsersService::COMPANY]) && $requestParams[UsersService::COMPANY] !=NULL ? 'company' : false;
-		$fields[] .= isset($requestParams[UsersService::SEND_JOB]) && $requestParams[UsersService::SEND_JOB]!=NULL ? 'send_job payment' : false;
+		$fields[] .= isset($requestParams[UsersService::SEND_JOB]) && $requestParams[UsersService::SEND_JOB]!=NULL ? 'send_job' : false;
 		$vals = array ('0' => '1', '1' => $path);
 		$vals[] .= $requestParams[UsersService::ADDRESS] ? $requestParams[UsersService::ADDRESS] : false;
 		$vals[] .= $requestParams[UsersService::ZIP] ? $requestParams[UsersService::ZIP] : false;
@@ -123,7 +123,7 @@ class RegistrationController extends SecureActionControllerImpl {
 		$vals[] .= $requestParams[UsersService::HOMEPAGE] ? $requestParams[UsersService::HOMEPAGE] : false;
 		$vals[] .= $requestParams[UsersService::NEWSLETTER] ? $requestParams[UsersService::NEWSLETTER] : false;
 		$vals[] .= $requestParams[UsersService::BANK] ? $requestParams[UsersService::BANK] : false;
-		$vals[] .= $requestParams[UsersService::BANK_CODE] ? $requestParams[UsersService::BANK_CODE] : false;
+		//$vals[] .= $requestParams[UsersService::BANK_CODE] ? $requestParams[UsersService::BANK_CODE] : false;
 		$vals[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? $requestParams[UsersService::ACCOUNT_NUMBER] : false;
 		$vals[] .= isset($requestParams[UsersService::COMPANY])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::COMPANY] : false;
 		$vals[] .= isset($requestParams[UsersService::SEND_JOB])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::SEND_JOB] : false;

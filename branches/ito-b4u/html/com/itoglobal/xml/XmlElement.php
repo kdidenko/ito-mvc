@@ -17,11 +17,13 @@ class XmlElement extends SimpleXMLElement {
 		}
 	}
 	
-	public function copyChildren($srcNode){
-		foreach ($srcNode->children() as $child){
-			$next = $this->addChild($child->getName(), (string) $child);
-			$next->copyAttributes($child);
-			$next->copyChildren($child);
+	public function copyChildren($srcNode) {
+		if ($srcNode) {
+			foreach ( $srcNode->children () as $child ) {
+				$next = $this->addChild($child->getName(), (string) $child);
+				$next->copyAttributes($child);
+				$next->copyChildren($child);
+			}
 		}
 	}
 

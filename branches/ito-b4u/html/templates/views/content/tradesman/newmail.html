@@ -21,7 +21,10 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 			</div>
 			<div class="itemForm">
 				<label>_i18n{Subject}:</label>
-				<div class="itemData"><input class="inpTxt" type="text" name="<?php echo MailService::SUBJECT ?>" value="<?php echo isset($mail[MailService::SUBJECT]) ? $mail[MailService::SUBJECT] : NULL; ?>"/></div>
+				<div class="itemData">
+					<input class="inpTxt" type="<?php echo isset($mail[MailService::RE]) && $mail[MailService::RE]==1  ? 'hidden' : 'text'; ?>" name="<?php echo MailService::SUBJECT ?>" value="<?php echo isset($mail[MailService::SUBJECT]) ? $mail[MailService::SUBJECT] : NULL; ?>"/>
+					<?php echo isset($mail[MailService::RE]) && $mail[MailService::RE]==1  ? $mail[MailService::SUBJECT] : NULL; ?>
+				</div>
 			</div>
 			<div class="itemForm">
 				<label>_i18n{Body}:</label>

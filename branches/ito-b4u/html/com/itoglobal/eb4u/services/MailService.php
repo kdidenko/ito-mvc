@@ -48,6 +48,8 @@ class MailService {
 	const SENDER = 'sender';
 	const GETTER = 'getter';
 	const SEND = 'send';
+	const RE = 're';
+	const FWD = 'fwd';
 	const INBOX = 'inbox';
 	const OUTBOX = 'outbox';
 	const TRASH = 'trash';

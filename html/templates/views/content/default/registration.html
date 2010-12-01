@@ -1,13 +1,6 @@
 <!--p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p-->
-<?php	/* $errors = $mvc->getObject(UsersService::ERROR);
-		if (isset($errors)){?>
-			<div class="error">
-				<ul>
-<?php			foreach ($errors as $key => $value){
-					echo '<li>' . $value . '</li>'; }?>
-				</ul>
-			</div>
-<?php 	} */ ?>
+
+
 <div class="wrapLogin">
 	<div class="greyBox">
 		<div class="viewRBox">
@@ -17,6 +10,11 @@
 				<div class="unitForm unitLast">
 					<form action="registration.html" method="post" name="registration">
 					<h3></h3>
+					<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+if (isset($message) && $message!=NULL){?>
+						<div class="itemOk"><?php echo $message; ?></div>
+<?php	} else { ?>
+					
 						<?php $errors = $mvc->getObject(UsersService::ERROR);
 						if (isset($errors)){?>
 							<div class="itemWarning">
@@ -69,6 +67,7 @@
 							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 							<a class="linkBtn" href="/"><span><strong>_i18n{Cancel}</strong></span></a>
 						</div>
+						<?php } ?>
 					</form>
 				</div>
 			</div>

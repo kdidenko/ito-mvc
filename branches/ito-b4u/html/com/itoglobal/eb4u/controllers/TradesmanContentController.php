@@ -134,7 +134,7 @@ class TradesmanContentController extends ContentController {
 	public function handleMyMail($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		isset ( $requestParams [MailService::TRASH] ) ? MailService::goTrash ($requestParams [MailService::TRASH]) : null;
+		
 		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
 		
 		#get inbox

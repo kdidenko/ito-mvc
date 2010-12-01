@@ -54,7 +54,7 @@ class TemplateEngine {
 	
 	public static function execute($action, $mvc = null) {
 		$rd = RequestDispatcher::getInstance ();
-		$result = $rd->dispatchActionRequest($action);
+		$result = $rd->dispatchActionRequest($action, $mvc);
 		if($mvc != null){
 			# append the old values to the new model
 			$result = MVCService::margeModels($result, $mvc);	

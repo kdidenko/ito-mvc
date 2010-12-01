@@ -211,11 +211,12 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* icon mail */
 	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
 		.viewIList li {float:left; padding:0 0 1px 10px}
-		.viewIList li a {float:left; height:16px; overflow:hidden; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat; padding:0 5px 0 20px; font-weight:normal}
-		.viewIList li.itemReply a {background-position:0 0}
-		.viewIList li.itemPrint a {background-position:0 -46px}
-		.viewIList li.itemForward a {background-position:0 -91px}
-		.viewIList li.itemDelete a {background-position:0 -136px}
+		.viewIList li a, .viewIList li button {float:left; line-height:normal; overflow:hidden; background-image:url(../images/mailIcon.gif); background-repeat:no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
+		.viewIList li a:hover {text-decoration:none}
+		.viewIList li.itemReply a, .viewIList li.itemReply button {background-position:3px 0}
+		.viewIList li.itemPrint a {background-position:3px -46px}
+		.viewIList li.itemForward a, .viewIList li.itemForward button {background-position:3px -91px}
+		.viewIList li.itemDelete a, .viewIList li.itemDelete button {background-position:3px -136px}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
 	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}

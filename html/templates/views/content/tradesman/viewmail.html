@@ -10,20 +10,21 @@ $("#navMenu").load("/sidebar-mymail.html", function(response, status, xhr) {
 <?php 
 $mail = $mvc->getObject(TradesmanContentController::RESULT);
 ?>
+
 <form action="/new-mail.html" method="post">
 	<input type="hidden" name="sender" value="<?php echo $mail[MailService::SENDER]; ?>"/>
 	<input type="hidden" name="getter" value="<?php echo $mail[MailService::GETTER]; ?>"/>
 	<input type="hidden" name="subject" value="<?php echo $mail[MailService::SUBJECT]; ?>"/>
 	<input type="hidden" name="text" value="<?php echo $mail[MailService::TEXT]; ?>"/>
 	<input type="hidden" name="crdate" value="<?php echo $mail[MailService::CRDATE]; ?>"/>
-	
-	
-	<ul class="viewIList viewITList">
-		<li class="itemReply"><button name="re">_i18n{Reply}</button></li>
-		<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
-		<li class="itemForward"><button name="fwd">_i18n{Forward}</button></li>
-		<li class="itemDelete"><a href="/my-mail.html?del=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
-	</ul>
+
+
+<ul class="viewIList viewITList">
+				<li class="itemReply"><button name="re">_i18n{Reply}</button><a href="/new-mail.html?re=" title="_i18n{Reply}">_i18n{Reply}</a></li>
+				<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
+				<li class="itemForward"><button name="fwd">_i18n{Forward}</button><a href="/new-mail.html" title="_i18n{Forward}">_i18n{Forward}</a></li>
+				<li class="itemDelete"><a href="/my-mail.html?del=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+			</ul>
 </form>
 <h2>_i18n{Read Mail}</h2>
 <div class="unitWBlock unitLast">

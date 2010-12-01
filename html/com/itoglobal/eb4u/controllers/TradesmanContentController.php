@@ -136,8 +136,7 @@ class TradesmanContentController extends ContentController {
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
 		isset ( $requestParams [MailService::DEL_ALL] ) ? 
-			//MailService::deleteMails ($requestParams [MailService::DEL_ALL]) :
-			print_r($requestParams ['itemSelect']) : 
+			MailService::deleteMails ($requestParams ['itemSelect']) :
 				null;
 		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
 		

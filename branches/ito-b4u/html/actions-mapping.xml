@@ -97,6 +97,10 @@
 			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 			<template name="index.html" path="templates/layout-two-columns.html" />
 		</role>
+		<role type="AR">
+			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<template name="index.html" path="templates/layout-two-columns-left.html" />
+		</role>
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
@@ -104,9 +108,9 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 	</action>
-	<action name="/manage-users.html" id="manageusers" roles="AR">
+	<action name="/manage-*.html" id="manage$1" roles="AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/index.html" name="home" condition="onfailure"/>
 			<target condition="onsignedoff" location="/login.html"/>
@@ -132,7 +136,7 @@
 	
 	<action name="/edit-*.html" id="edit$1" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="index.html" path="templates/layout-one-column.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>

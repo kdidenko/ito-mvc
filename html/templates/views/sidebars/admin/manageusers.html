@@ -1,6 +1,13 @@
-<div class="sidePgItem">
-	<h2>Navigation</h2>
-	<ul>
-		<li>&raquo;&nbsp;<a href="/new-user.html" title="Create New User">New User</a></li>
-	</ul>
+<?php 
+	$crnt = $mvc->getView();
+?>
+<div class="bodyBox" id="navMenu">
+	<h2>_i18n{Navigation}</h2>
+	<div class="viewMenu">
+		<ul>
+			<li <?php if($crnt == 'sidebar-manageusers') echo 'class="itemActive"';?>><a href="/manage-users.html" title="_i18n{Manage Users}">_i18n{Manage Users}</a></li>
+			<li <?php if($crnt == 'sidebar-newuser') echo 'class="itemActive"';?>><a href="/new-user.html" title="_i18n{Create New User}">-&nbsp;_i18n{Create New User}</a></li>
+			<li <?php if($crnt == 'sidebar-managecategory') echo 'class="itemActive"';?>><a href="/manage-category.html" title="_i18n{Manage Category}">_i18n{Manage Category}</a></li>
+		</ul>
+	</div>
 </div>

@@ -1,0 +1,63 @@
+<script type="text/javascript"> 
+$("#navMenu").load("/sidebar-mymail.html", function(response, status, xhr) {
+	/*  
+	if (status == "error") {
+	    var msg = "Sorry but there was an error: ";
+		alert (msg + xhr.status + " " + xhr.statusText);
+	  }*/
+	});
+</script>
+<?php 
+$mail = $mvc->getObject(ContentController::RESULT);
+?>
+
+<form action="/new-mail.html" method="post">
+	<input type="hidden" name="sender" value="<?php echo $mail[MailService::SENDER]; ?>"/>
+	<input type="hidden" name="getter" value="<?php echo $mail[MailService::GETTER]; ?>"/>
+	<input type="hidden" name="subject" value="<?php echo $mail[MailService::SUBJECT]; ?>"/>
+	<input type="hidden" name="text" value="<?php echo $mail[MailService::TEXT]; ?>"/>
+	<input type="hidden" name="crdate" value="<?php echo $mail[MailService::CRDATE]; ?>"/>
+
+
+<ul class="viewIList viewITList">
+				<li class="itemReply">
+				<!-- <button name="re">_i18n{Reply}</button> -->
+				<a href="/new-mail.html?re=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{Reply}">_i18n{Reply}</a>
+				</li>
+				<!-- <li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li> -->
+				<li class="itemForward">
+				<!-- <button name="fwd">_i18n{Forward}</button> -->
+				<a href="/new-mail.html?fwd=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{Forward}">_i18n{Forward}</a>
+				</li>
+				<li class="itemDelete"><a href="/my-mail.html?del=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+			</ul>
+</form>
+<h2>_i18n{Read Mail}</h2>
+<div class="unitWBlock unitLast">
+	<form>
+		<div class="unitSnColumn">
+			<dl class="itemForm itemEq">
+				<dt>_i18n{From}:</dt>
+				<dd class="itemData"><?php echo $mail[MailService::SENDER];?></dd>
+			</dl>
+			<dl class="itemForm itemEq">
+				<dt>_i18n{Date}:</dt>
+				<dd class="itemData"><?php echo $mail[MailService::CRDATE];?></dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{To}:</dt>
+				<dd class="itemData"><?php echo $mail[MailService::GETTER];?></dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{Subject}:</dt>
+				<dd class="itemData"><strong><?php echo $mail[MailService::SUBJECT]; ?></strong></dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{Body}:</dt>
+				<dd class="itemData">
+					<?php echo htmlspecialchars_decode($mail[MailService::TEXT]); ?>
+				</dd>
+			</dl>
+		</div>
+	</form>
+</div>

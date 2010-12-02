@@ -20,12 +20,14 @@ $mail = $mvc->getObject(TradesmanContentController::RESULT);
 
 
 <ul class="viewIList viewITList">
-				<li class="itemReply"><button name="re">_i18n{Reply}</button>
-				<!-- <a href="/new-mail.html?re=" title="_i18n{Reply}">_i18n{Reply}</a> -->
+				<li class="itemReply">
+				<!-- <button name="re">_i18n{Reply}</button> -->
+				<a href="/new-mail.html?re=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{Reply}">_i18n{Reply}</a>
 				</li>
-				<li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li>
-				<li class="itemForward"><button name="fwd">_i18n{Forward}</button>
-				<!-- <a href="/new-mail.html" title="_i18n{Forward}">_i18n{Forward}</a> -->
+				<!-- <li class="itemPrint"><a href="#" title="_i18n{Print}">_i18n{Print}</a></li> -->
+				<li class="itemForward">
+				<!-- <button name="fwd">_i18n{Forward}</button> -->
+				<a href="/new-mail.html?fwd=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{Forward}">_i18n{Forward}</a>
 				</li>
 				<li class="itemDelete"><a href="/my-mail.html?del=<?php echo $mail[MailService::HASH]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
 			</ul>

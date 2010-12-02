@@ -79,5 +79,40 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleViewMail($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		MailService::readMail ( $requestParams[MailService::ID] );
+		
+		$mail = MailService::getMail( $requestParams[MailService::ID] );
+		isset ( $mail ) ? $mvc->addObject (self::RESULT, $mail ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleMyMail($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+			MailService::deleteMails ($requestParams ['itemSelect']) :
+				null;
+		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
+		
+		#get inbox
+		$inbox = MailService::getInbox( $id );
+		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
+		
+		#get outbox
+		$outbox = MailService::getOutbox( $id );
+		isset ( $outbox ) ? $mvc->addObject ( MailService::OUTBOX, $outbox ) : null;
+		
+		#get trash
+		$trash = MailService::getTrash( $id );
+		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
+		
+		return $mvc;
+	}
+	
+	
 }
 ?>

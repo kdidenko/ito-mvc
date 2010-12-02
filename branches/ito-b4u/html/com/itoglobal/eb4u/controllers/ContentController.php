@@ -43,17 +43,19 @@ class ContentController extends SecureActionControllerImpl {
 		$location = $this->onSuccess( $actionParams );
 		isset($requestParams['back']) ? $this->forwardActionRequest ( $location ) : NULL;
 		if (isset($requestParams [MailService::RE]) || isset($requestParams [MailService::FWD])){
+			$id = isset($requestParams [MailService::RE]) ? $requestParams [MailService::RE] : $requestParams [MailService::FWD];
+			$mail = MailService::getMail($id);
 			$replay = isset($requestParams [MailService::RE]) ? 1 : 0;
 			$subject = $replay ? '_i18n{Re}: ' : '_i18n{Fwd}: ' ; 
-			$subject .= $requestParams [MailService::SUBJECT];
-			$date = $requestParams [MailService::CRDATE];
-			$sender = $requestParams [MailService::SENDER];
-			$getter = $requestParams [MailService::GETTER];
-			$getter_id = UsersService::getUserIdByName($getter);
+			$subject .= $mail[MailService::SUBJECT];
+			$date = $mail [MailService::CRDATE];
+			$sender = $mail [MailService::SENDER];
+			$getter = $mail [MailService::GETTER];
+			$getter_id = $mail[MailService::GETTER_ID];
 			$text = "<div><br/><br/><br/></div><div><font class='Apple-style-span'; color='#999999'>";
 			$text .= '_i18n{On} ' . $date . ', ' . $sender . ' _i18n{wrote}:';
 			$text .= "<div><br/></div>";
-			$text .= $requestParams [MailService::TEXT];
+			$text .= $mail [MailService::TEXT];
 			$text .= "</font></div>";
 			$result = array(MailService::SUBJECT=>$subject,MailService::GETTER=>$sender,MailService::TEXT=>$text,MailService::RE=>$replay);
 			$mvc->addObject ( self::RESULT, $result );

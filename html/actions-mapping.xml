@@ -286,7 +286,7 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
-	<action name="/my-job.html" id="myjob" roles="UR,TR,BR,AR">
+	<action name="/communication.html" id="communication" roles="UR,TR,BR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>

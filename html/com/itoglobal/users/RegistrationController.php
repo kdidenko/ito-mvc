@@ -238,7 +238,7 @@ class RegistrationController extends SecureActionControllerImpl {
 					$mvc->addObject ( UsersService::ERROR, $error );
 				}
 			} else {
-				$mvc->addObject ( UsersService::ON_SUCCESS, '_i18n{Url is incorrect. Please, try again to} <a href="/forgot-password.html">_i18n{change password.}</a>' );
+				$mvc->addObject ( UsersService::ERROR, '_i18n{Url is incorrect. Please, try again to} <a href="/forgot-password.html">_i18n{change password.}</a>' );
 			}
 		}
 		return $mvc;

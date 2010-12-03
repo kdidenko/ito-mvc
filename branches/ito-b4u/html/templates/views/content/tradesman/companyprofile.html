@@ -112,23 +112,16 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 <h2>_i18n{Profile photo}</h2>
 <div class="unitWBlock">
 	<div class="unitEqColumn">
-		<div class="itemFoto">
-			<img alt="" src="/<?php echo $data[UsersService::AVATAR] ?>">
-		</div>
-			<form enctype="multipart/form-data" action="/company-profile.html" method="post" >
-				<input type="file" name="file" size="30" />
+		<form enctype="multipart/form-data" action="/company-profile.html" method="post" >
+			<div class="itemForm">
+				<img alt="" src="/<?php echo $data[UsersService::AVATAR] ?>">
+			</div>
+			<div class="itemForm">
+				<input type="file" name="file" />
 				<input type="hidden" name="id" value="<?php echo $data[UsersService::ID]?>"/>
-				<div class="unitBtn">
-					<button name="pctSbm"><span><strong>_i18n{Upload image}</strong></span></button>
-				</div>
-			</form>
-		<!-- 
-		<div class="itemFoto"></div>
-		<p class="linkFoto"><a href="#" title="Bild hochladen">_i18n{Upload image}</a></p>
-		 -->
-	</div>
-	<div class="unitEqColumn">
-		empty
+				<button name="pctSbm"><span><strong>_i18n{Upload image}</strong></span></button>
+			</div>
+		</form>
 	</div>
 </div>
 <h2>_i18n{Company Info}</h2>

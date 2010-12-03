@@ -5,7 +5,8 @@ img {border:none}
 a {color:#393939; text-decoration:none}
 a:hover {text-decoration:underline}
 input, select, button, textarea {font-family:"Lucida Sans", "Lucida Grande"; font-size:12px; padding:0; margin:0; vertical-align:middle}
-input.inpTxt, select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
+input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
+select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:200px}
 textarea.areaTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}
 input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
 	* html input.inpChk {margin:1px 0 0 0}
@@ -148,15 +149,28 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewGBox .unitYellow select {width:160px}
 	.viewGBox .unitYellow button span {background-position:right -78px}
 	.viewGBox .unitYellow button span strong {background-position:left -52px; color:#292929}
-/* box */
+/* --------- menu admin --------- */
 .viewBBox {float:left; width:185px; margin:10px 0 0 0}
 	.viewBBox .angleT, .viewBBox .angleB, .viewBBox .bodyBox {background-position:-1815px 0}
 	.viewBBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 12px 5px 12px}
-
+	/* list */
+	.viewMenu {margin:0 4px}
+	.viewMenu ul {border-top:1px dotted #ccc; padding:0 0 10px 0}
+	.viewMenu li {border-bottom:1px dotted #ccc}
+	.viewMenu li a {display:block; overflow:hidden; width:163px; padding:5px 7px 4px 7px; font-size:13px; font-weight:bold}
+	.viewMenu li a:hover, .viewMenu li.itemActive a {background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
+	/* sub list */
+	.viewMenu li ul {padding:0; border:none}
+	.viewMenu li ul li {border-top:1px dotted #ccc; border-bottom:none}
+	.viewMenu li ul li a, .viewMenu li.itemActive ul li a {font-size:12px; background:#fff; width:150px; padding:3px 7px 1px 20px; color:#393939; font-weight:normal}
+	.viewMenu li ul li a:hover, .viewMenu li ul li.itemActive a {background:#E2E2E2; color:#393939}
+/* --------- admin page --------- */
 .viewWBox {float:left; width:699px; margin:10px 0 0 0}
 	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}
 	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
-	.viewWBox h3 {font-size:14px; font-weight:bold; padding:5px 0}
+	.viewWBox h3 {font-size:14px; font-weight:bold; padding:8px 0 5px 0}
+	/* single column */
+	.unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
 	/* two column */
 	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
 	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
@@ -175,12 +189,20 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.viewWBox .linkFoto a {color:#9F0307; text-decoration:underline}
 	/* form */
 	.viewWBox .itemForm {overflow:hidden; width:325px; padding:4px 0}
+		.unitSnColumn .itemForm {width:671px}
 	.viewWBox label {float:left; width:115px; text-align:right; padding:3px 0 0 0}
 	.viewWBox .itemData {float:right; width:200px}
+		.unitSnColumn .itemData {width:546px}
 	.viewWBox input.inpTxt {width:192px}
+		.unitSnColumn input.inpTxt {width:531px}
+	.viewWBox textarea.areaTxt {width:192px; height:160px}
+		.unitSnColumn textarea.areaTxt {width:531px; height:160px}
 	/* virtual form */
 	.viewWBox dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
 	.viewWBox dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
+		.unitSnColumn dd.itemData {width:546px; color:#000}
+	.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
+			.unitSnColumn .itemEq dd.itemData {width:200px}
 	/* table */
 	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
 	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
@@ -192,21 +214,6 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox tr.unitHover td {background:#E2E2E2}
 	.viewWBox th.itemChk {width:14px}
 		.viewWBox td input.inpChk {margin:1px 0 0 0}
-	/* link */
-	/*.viewWBox td a {text-decoration:underline}
-		.viewWBox td a:hover {text-decoration:none}*/
-	/* new mail */
-	.unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
-		.unitSnColumn .itemForm {width:671px}
-		.unitSnColumn input.inpTxt {width:531px}
-		.unitSnColumn textarea.areaTxt {width:531px; height:160px}
-		.unitSnColumn .itemData {width:546px}
-		.unitSnColumn dd.itemData {width:546px; color:#000}
-		.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
-			.unitSnColumn .itemEq dd.itemData {width:200px}
-			
-		
-	
 	
 	/* icon mail */
 	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
@@ -233,11 +240,6 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
 .wrapSide {float:right; width:213px}
 
-.viewMenu {margin:0 4px}
-	.viewMenu ul {border-top:1px dotted #ccc; padding:0 0 10px 0}
-	.viewMenu li {border-bottom:1px dotted #ccc}
-	.viewMenu li a {display:block; overflow:hidden; width:163px; padding:5px 7px 4px 7px; font-size:13px; font-weight:bold}
-	.viewMenu li a:hover, .viewMenu li.itemActive a {background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
 /* login style */
 .wrapLogin {float:left; width:970px}
 	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:442px}
@@ -246,9 +248,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapLogin .itemForm {overflow:hidden; width:419px; padding:4px 0}
 	.wrapLogin h3 {font-size:13px}
 	.wrapLogin .itemForm form {padding:0}
-	.wrapLogin .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0}
+	.wrapLogin .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0; position:relative}
+	.wrapLogin .itemForm .itemReq {position:absolute; right:-8px; font-size:16px}
 		.wrapLogin .itemData {float:right; width:265px}
-		.wrapLogin .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 3px; width:auto; float:none}
+		.wrapLogin .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
 		.wrapLogin a {text-decoration:underline}
 	.wrapLogin .itemBtn {width:344px; overflow:hidden; padding:3px 0}
 	.wrapLogin .itemBtn a {float:right; margin:4px 15px 0 0}

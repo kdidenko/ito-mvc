@@ -14,7 +14,7 @@ class CategoryService {
 	 */
 	const CAT_NAME = 'category_name';
 
-	private static function getCategories ($where = NULL){
+	public static function getCategories ($where = NULL){
 		$fields = '*';
 		$from = self::CATEGORY;
 		# executing the query
@@ -24,7 +24,7 @@ class CategoryService {
 	}
 	
 
-	private static function updateCategory ($id, $fields, $vals){
+	public static function updateCategory ($id, $fields, $vals){
 		$from = self::CATEGORY;
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query

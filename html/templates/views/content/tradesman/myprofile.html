@@ -112,6 +112,34 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 					<input class="inpTxt" type="text" name="homepage" value="<?php echo $data[UsersService::HOMEPAGE]?>"/>
 				</div>
 			</div>
+			<h3>You Category</h3>
+			<div class="itemForm">
+				<label>_i18n{Category}:</label>
+				<div class="itemData">
+					<select>
+						<option>test</option>
+					</select>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Sub-Category}:</label>
+				<div class="itemData">
+					<select>
+						<option>sub test</option>
+					</select>
+				</div>
+			</div>
+			<h3>User Help</h3>
+			<div class="itemForm">
+				<label>Visibly:</label>
+				<div class="itemData">
+					<select>
+						<option>L1 - hide help, show "?" only</option>
+						<option>L2 - show medium help</option>
+						<option>L3 - show help always</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		<div class="unitBtn">
 			<button name="personalSbm"><span><strong>_i18n{Save}</strong></span></button>

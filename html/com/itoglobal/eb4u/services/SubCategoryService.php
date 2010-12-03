@@ -12,11 +12,11 @@ class SubCategoryService {
 	/**
 	 * @var  string defining the subject field name
 	 */
-	const CAT_NAME = 'subcategory_name';
+	const SUBCAT_NAME = 'subcategory_name';
 	/**
 	 * @var  string defining the subject field name
 	 */
-	const SUBCAT_ID = 'category_id';
+	const CAT_ID = 'category_id';
 	
 	public static function getSubCategories ($where = NULL){
 		$fields = '*';
@@ -31,7 +31,7 @@ class SubCategoryService {
 		$fields = '*';
 		$from = self::SUBCATEGORY;
 		# executing the query
-		$where = self::SUBCAT_ID . '=' . $cat_id;
+		$where = self::CAT_ID . '=' . $cat_id;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;

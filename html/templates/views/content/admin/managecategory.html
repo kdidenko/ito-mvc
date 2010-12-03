@@ -1,14 +1,20 @@
+<?php 
+$categories = $mvc->getObject('category');
+$subcategories = $mvc->getObject('subcategory');
+?>
 <table class="list">
 <tr>
 	<th>_i18n{ID}:</th>
 	<th>_i18n{Category}:</th>
 	<th>_i18n{Action}:</th>
 </tr>
+<?php foreach($categories as $ket => $category){ ?>
 	<tr>
-		<td>1</td>
-		<td>IT</td>
+		<td><?php echo $category[CategoryService::ID] ?></td>
+		<td><?php echo $category[CategoryService::CAT_NAME] ?></td>
 		<td>edit | del</td>
 	</tr>
+<?php } ?>
 </table>
 <table class="list">
 <tr>
@@ -17,23 +23,13 @@
 	<th>_i18n{Category}:</th>
 	<th>_i18n{Action}:</th>
 </tr>
+<?php foreach($subcategories as $ket => $subcategory){ ?>
 	<tr>
-		<td>1</td>
-		<td>SEO</td>
-		<td>IT</td>
+		<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
+		<td><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></td>
+		<td><?php echo $subcategory[SubCategoryService::CAT_ID] ?></td>
 		<td>edit | del</td>
 	</tr>
-	<tr>
-		<td>2</td>
-		<td>development</td>
-		<td>IT</td>
-		<td>edit | del</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>Design</td>
-		<td>IT</td>
-		<td>edit | del</td>
-	</tr>
+<?php } ?>
 </table>
 

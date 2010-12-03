@@ -139,6 +139,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 /* box */
 .viewGBox {float:right; width:185px; margin:10px 0 0 0}
 	.viewGBox .angleT, .viewGBox .angleB, .viewGBox .bodyBox {background-position:-654px 0}
+	.viewGBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 12px 5px 12px}
 	.viewGBox h3 {font-size:14px; padding:0 12px 5px 12px}
 	.viewGBox .unitVideo {padding:0 12px 5px 12px}
 	.viewGBox .itemVideo {border:2px solid #D1CFCF; background:#fff}
@@ -164,6 +165,12 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewMenu li ul li {border-top:1px dotted #ccc; border-bottom:none}
 	.viewMenu li ul li a, .viewMenu li.itemActive ul li a {font-size:12px; background:#fff; width:150px; padding:3px 7px 1px 20px; color:#393939; font-weight:normal}
 	.viewMenu li ul li a:hover, .viewMenu li ul li.itemActive a {background:#E2E2E2; color:#393939}
+	
+	.viewPackage {margin:0 4px}
+	.viewPackage p {padding:0 8px 5px 8px}
+	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
+	.viewPackage select {width:50px; vertical-align:middle}
+	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
 /* --------- admin page --------- */
 .viewWBox {float:left; width:699px; margin:10px 0 0 0}
 	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}

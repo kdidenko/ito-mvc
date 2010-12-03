@@ -6,7 +6,7 @@ class TradesmanContentController extends ContentController {
 	
 	public function handleMyProfile($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-
+		$location = $this->onSuccess( $actionParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		$error = array ();
 		if (isset ( $requestParams ['pswSbm'] )) {
@@ -75,6 +75,7 @@ class TradesmanContentController extends ContentController {
 			
 			UsersService::updateFields ( $id, $fields, $vals );
 			$mvc->addObject ( self::STATUS, 'successful' );
+			$this->forwardActionRequest ( $location );
 		}
 		
 		#get user info

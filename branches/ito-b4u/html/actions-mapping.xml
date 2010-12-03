@@ -148,6 +148,7 @@
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target condition="onsignedoff" location="/login.html"/>
+			<target condition="onsuccess" location="/company-profile.html"/>
 		</forwards>
 	</action>	
 	

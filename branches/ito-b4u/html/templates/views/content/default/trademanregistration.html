@@ -1,38 +1,133 @@
-<div class="signinForm">
-	<form action="confirm-registration.html" method="post" name="registration">
-		<fieldset id="personal_data">
-			<label for="personal_data">_i18n{Personal Data}</label>
-			<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
-			<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
-			<p><label>_i18n{Company Name}: *</label><br /><input type="text" class="wide inpTxt" name="company" value="<? if(isset($_POST['company'])) echo $_POST['company']; ?>"/></p>
-			<p><label>_i18n{VAT-ID}:</label><br /><input type="text" class="wide wide inpTxt" name="vat" value="<? if(isset($_POST['vat'])) echo $_POST['vat']; ?>"/></p>
-			<p><label>_i18n{Address}: *</label><br /><input type="text" class="wide inpTxt" name="address" value="<? if(isset($_POST['address'])) echo $_POST['address']; ?>"/></p>
-			<p><label>_i18n{Zip code}: *</label><br /><input type="text" class="wide inpTxt" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/></p>
-			<p><label>_i18n{Location}: *</label><br /><input type="text" class="wide inpTxt" name="location" value="<? if(isset($_POST['location'])) echo $_POST['location']; ?>"/></p>
-			<p><label>_i18n{Region}: *</label><br /><input type="text" class="wide inpTxt" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/></p>
-			<p><label>_i18n{Country}: *</label><br /><input type="text" class="wide inpTxt" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/></p>
-			<p><label>_i18n{Mobile phone}: *</label><br /><input type="text" class="wide inpTxt" name="phone" value="<? if(isset($_POST['phone'])) echo $_POST['phone']; ?>"/></p>
-			<p><label>_i18n{Homepage}:</label><br /><input type="text" class="wide inpTxt" name="homepage" value="<? if(isset($_POST['homepage'])) echo $_POST['homepage']; ?>"/></p>
-			<p><input type="checkbox" class="wide inpTxt" name="send_job" value="1" checked="checked"/>_i18n{Send me job opportunities, information on breaks.}</p>
-			<p><input type="checkbox" class="wide inpTxt" name="newsletter" value="1" checked="checked"/>_i18n{Send me newsletter.}</p>
-		</fieldset>
-		<fieldset id="bank_info">
-			<label for="bank_info">_i18n{Bank Info}</label>
-			<p><label>_i18n{Bank}:</label><br /><input type="text" class="wide inpTxt" name="bank" value="<? if(isset($_POST['bank'])) echo $_POST['bank']; ?>"/></p>
-			<!-- <p><label>_i18n{Bank code}:</label><br /><input type="text" class="wide inpTxt" name="bank_code" value="<? if(isset($_POST['bank_code'])) echo $_POST['bank_code']; ?>"/></p> -->
-			<p><label>_i18n{Account number}:</label><br /><input type="text" class="wide inpTxt" name="account_number" value="<? if(isset($_POST['acoount_number'])) echo $_POST['acoount_number']; ?>"/></p>
-			<p>
-				<label>_i18n{Payment arrangements}: *</label><br />
-				<select class="wide inpTxt" name="payment">
-					<option value="3" <?php if(isset($_POST['payment']) && $_POST['payment']==3) echo 'selected'?>>1/4 - annually</option>
-					<option value="2" <?php if(isset($_POST['payment']) && $_POST['payment']==2) echo 'selected'?>>1/2 - annually</option>
-					<option value="1" <?php if(isset($_POST['payment']) && $_POST['payment']==1) echo 'selected'?>>annually</option>
-				</select>
-			</p>
-		</fieldset>
-		<p class="btns">
-			<input class="defBtn" type="button" name="Cancel" value="_i18n{Cancel}" onclick="window.location = '/' " />
-			<input class="defBtn" type="submit" value="_i18n{Sign Up}"  value="Sign up" id="submit" name="submit"/>
-		</p>
-	</form>
+<div class="wrapLogin">
+	<div class="greyBox">
+		<div class="viewRBox">
+			<div class="angleT"></div>
+			<div class="bodyBox">
+				<h2>_i18n{Personal Data}</h2>
+<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+		if (isset($message) && $message!=NULL){?>
+					<div class="itemOk"><?php echo $message; ?></div>
+<?php	} else { ?>
+				<form action="confirm-registration.html" method="post" name="registration">
+					<div class="unitForm">
+
+<?php	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors) && $errors == true){?>
+						<div class="itemWarning">
+							<ul>
+								<li>_i18n{Please, fill in all required fields (*).}</li>
+							</ul>
+						</div>
+<?php 	} ?>
+						<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
+						<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
+						<div class="itemForm">
+							<label>_i18n{Company Name}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="company" value="<? if(isset($_POST['company'])) echo $_POST['company']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{VAT-ID}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="vat" value="<? if(isset($_POST['vat'])) echo $_POST['vat']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Address}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="address" value="<? if(isset($_POST['address'])) echo $_POST['address']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Zip code}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Location}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="location" value="<? if(isset($_POST['location'])) echo $_POST['location']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Region}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Country}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Mobile phone}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="phone" value="<? if(isset($_POST['phone'])) echo $_POST['phone']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Homepage}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="homepage" value="<? if(isset($_POST['homepage'])) echo $_POST['homepage']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<span class="itemData">
+								<input type="checkbox" class="inpChk" name="send_job" value="1" checked="checked"/>
+								<label>_i18n{Send me job opportunities, information on breaks.}</label>
+								<input type="checkbox" class="inpChk" name="newsletter" value="1" checked="checked"/>
+								<label>_i18n{Send me newsletter.}</label>
+							</span>
+						</div>
+					</div>
+					<h2>_i18n{Bank Info}</h2>
+					<div class="unitForm unitLast">
+						<div class="itemForm">
+							<label>_i18n{Bank}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="bank" value="<? if(isset($_POST['bank'])) echo $_POST['bank']; ?>"/>
+							</span>
+						</div>
+						<!-- 
+						<div class="itemForm">
+							<label>_i18n{Bank code}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="inpTxt" name="bank_code" value="<? if(isset($_POST['bank_code'])) echo $_POST['bank_code']; ?>"/>
+							</span>
+						</div>
+						 -->
+						<div class="itemForm">
+							<label>_i18n{Account number}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<input type="text" class="wide inpTxt" name="account_number" value="<? if(isset($_POST['account_number'])) echo $_POST['account_number']; ?>"/>
+							</span>
+						</div>
+						<div class="itemForm">
+							<label>_i18n{Payment arrangements}:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<select class="wide inpTxt" name="payment">
+									<option value="3" <?php if(isset($_POST['payment']) && $_POST['payment']==3) echo 'selected'?>>1/4 - annually</option>
+									<option value="2" <?php if(isset($_POST['payment']) && $_POST['payment']==2) echo 'selected'?>>1/2 - annually</option>
+									<option value="1" <?php if(isset($_POST['payment']) && $_POST['payment']==1) echo 'selected'?>>annually</option>
+								</select>
+							</span>
+						</div>
+						<div class="itemBtn">
+							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+							<a class="linkBtn" href="/"><span><strong>_i18n{Cancel}</strong></span></a>
+						</div>
+					</div>
+				</form>
+<?php } ?>
+			</div>
+			<div class="angleB"></div>
+		</div>
+		<!-- fix gradient on -->
+		<div class="lineHide"></div>
+		<!-- fix gradient off -->
+	</div>
 </div>

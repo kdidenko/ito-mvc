@@ -63,6 +63,14 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<input class="inpTxt" type="text" value="<?php echo $data[UsersService::LASTNAME]?>"/>
 			</div>
 		</div>
+		<div class="itemForm">
+			<label>_i18n{Mobile Phone}:</label>
+			<div class="itemData"><input class="inpTxt" type="text" value="<?php echo $data[UsersService::PHONE]?>" /></div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{E-Mail}:</label>
+			<div class="itemData"><input class="inpTxt" type="text" value="<?php echo $data[UsersService::EMAIL]?>" /></div>
+		</div>
 	</div>
 	
 	<div class="unitEqColumn">
@@ -85,14 +93,6 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 		<dl class="itemForm">
 			<dt>_i18n{Country}:</dt>
 			<dd class="itemData"><?php echo $data[UsersService::COUNTRY]?></dd>
-		</dl>
-		<dl class="itemForm">
-			<dt>_i18n{Mobile Phone}:</dt>
-			<dd class="itemData"><?php echo $data[UsersService::PHONE]?></dd>
-		</dl>
-		<dl class="itemForm">
-			<dt>_i18n{E-Mail}:</dt>
-			<dd class="itemData"><?php echo $data[UsersService::EMAIL]?></dd>
 		</dl>
 		<dl class="itemForm">
 			<dt>_i18n{Homepage}:</dt>
@@ -120,18 +120,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 		 -->
 	</div>
 	<div class="unitEqColumn">
-		<div class="itemForm">
-			<label>_i18n{Category}:</label>
-			<div class="itemData">
-				<input class="inpTxt" type="text" />
-			</div>
-		</div>
-		<div class="itemForm">
-			<label>_i18n{Sub-Category}:</label>
-			<div class="itemData">
-				<input class="inpTxt" type="text" />
-			</div>
-		</div>
+		empty
 	</div>
 </div>
 <h2>_i18n{Company Info}</h2>

@@ -6,7 +6,7 @@
 				<h2>_i18n{Personal Data}</h2>
 <?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
 		if (isset($message) && $message!=NULL){?>
-					<span class="itemOk"><?php echo $message; ?></span>
+					<div class="unitForm unitLast"><div class="itemOk"><?php echo $message; ?></div></div>
 <?php	} else { ?>
 				<form action="confirm-registration.html" method="post" name="registration">
 					<div class="unitForm">

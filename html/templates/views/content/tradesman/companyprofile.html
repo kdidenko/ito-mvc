@@ -55,22 +55,26 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 		<div class="itemForm">
 			<label>_i18n{First Name}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" value="<?php echo $data[UsersService::FIRSTNAME]?>"/>
+				<input class="inpTxt" type="text" name="firstname" value="<?php echo $data[UsersService::FIRSTNAME]?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
 			<label>_i18n{Last Name}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" value="<?php echo $data[UsersService::LASTNAME]?>"/>
+				<input class="inpTxt" type="text" name="lastname" value="<?php echo $data[UsersService::LASTNAME]?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
 			<label>_i18n{Mobile Phone}:</label>
-			<div class="itemData"><input class="inpTxt" type="text" value="<?php echo $data[UsersService::PHONE]?>" /></div>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="phone" value="<?php echo $data[UsersService::PHONE]?>" />
+			</div>
 		</div>
 		<div class="itemForm">
 			<label>_i18n{E-Mail}:</label>
-			<div class="itemData"><input class="inpTxt" type="text" value="<?php echo $data[UsersService::EMAIL]?>" /></div>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="email" value="<?php echo $data[UsersService::EMAIL]?>" />
+			</div>
 		</div>
 	</div>
 	

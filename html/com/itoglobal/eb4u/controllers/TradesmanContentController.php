@@ -114,12 +114,16 @@ class TradesmanContentController extends ContentController {
 			$fields = array (
 							'0'=>UsersService::FIRSTNAME,
 							'1'=>UsersService::LASTNAME,
-							'2'=>UsersService::COMPANY_YEAR
+							'2'=>UsersService::SALUTATION,
+							'3'=>UsersService::PHONE,
+							'4'=>UsersService::EMAIL
 							);
 			$vals = array (
 							'0'=>$requestParams [UsersService::FIRSTNAME], 
 							'1'=>$requestParams [UsersService::LASTNAME],
-							'2'=>$requestParams [UsersService::COMPANY_YEAR]
+							'2'=>$requestParams [UsersService::SALUTATION],
+							'3'=>$requestParams [UsersService::PHONE],
+							'4'=>$requestParams [UsersService::EMAIL]
 							);
 			
 			UsersService::updateFields ( $id, $fields, $vals );

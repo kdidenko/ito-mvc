@@ -8,12 +8,15 @@
 		<ul>
 			<li <?php if($crnt == 'sidebar-myprofile') echo 'class="itemActive"';?>><a href="/my-profile.html" title="_i18n{My Profile}">_i18n{My Profile}</a></li>
 			<li <?php if($crnt == 'sidebar-companyprofile') echo 'class="itemActive"';?>><a href="/company-profile.html" title="_i18n{My Company Profile}">_i18n{My Company Profile}</a></li>
-			<li <?php if($crnt == 'sidebar-mymail') echo 'class="itemActive"';?>><a href="/my-mail.html" title="_i18n{My Messages}">_i18n{My Messages} <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a>
+			<li <?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-newmail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') echo 'class="itemActive"';?>><a href="/my-mail.html" title="_i18n{My Messages}">_i18n{My Messages} <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a>
+<?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-newmail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') { ?>
 				<ul>
-					<li><a href="#" title="Inbox">Inbox</a></li>
-					<li class="itemActive"><a href="#" title="Outbox">Outbox</a></li>
-					<li><a href="#" title="Trash">Trash</a></li>
+					<li <?php if($crnt == 'sidebar-newmail') echo 'class="itemActive"';?>><a title="_i18n{New Mail}" href="new-mail.html">_i18n{New Mail}</a></li>
+					<li <?php if($crnt == 'sidebar-inbox') echo 'class="itemActive"';?>><a href="/inbox.html" title="_i18n{Inbox}">_i18n{Inbox}  <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a></li>
+					<li <?php if($crnt == 'sidebar-outbox') echo 'class="itemActive"';?>><a href="/outbox.html" title="_i18n{Outbox}">_i18n{Outbox}</a></li>
+					<li <?php if($crnt == 'sidebar-trash') echo 'class="itemActive"';?>><a href="/trash.html" title="_i18n{Trash}">_i18n{Trash}</a></li>
 				</ul>
+<?php } ?>
 			</li>
 			<li <?php if($crnt == 'sidebar-myorder') echo 'class="itemActive"';?>><a href="/my-order.html" title="_i18n{My Order}">_i18n{My Order}</a></li>
 			<li <?php if($crnt == 'sidebar-mybargains') echo 'class="itemActive"';?>><a href="/my-bargains.html" title="_i18n{My Bargains}">_i18n{My Bargains}</a></li>

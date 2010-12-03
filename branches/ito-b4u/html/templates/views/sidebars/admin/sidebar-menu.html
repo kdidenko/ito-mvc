@@ -6,8 +6,21 @@
 	<h2>_i18n{Navigation}</h2>
 	<div class="viewMenu">
 		<ul>
-			<li <?php if($crnt == 'sidebar-myprofile') echo 'class="itemActive"';?>><a href="/my-profile.html" title="_i18n{My Profile}">_i18n{My Profile}</a></li>
-			<li <?php if($crnt == 'sidebar-companyprofile') echo 'class="itemActive"';?>><a href="/company-profile.html" title="_i18n{My Company Profile}">_i18n{My Company Profile}</a></li>
+			<li <?php if($crnt == 'sidebar-manageusers') echo 'class="itemActive"';?>><a href="/manage-users.html" title="_i18n{Manage Users}">_i18n{Manage Users}</a>
+<?php if($crnt == 'sidebar-manageusers' || $crnt == 'sidebar-newuser') { ?>
+				<ul>
+					<li <?php if($crnt == 'sidebar-newuser') echo 'class="itemActive"';?>><a href="/new-user.html" title="_i18n{Create New User}">_i18n{Create New User}</a></li>
+				</ul>
+<?php } ?>
+			</li>
+			<li <?php if($crnt == 'sidebar-managecategory') echo 'class="itemActive"';?>><a href="/manage-category.html" title="_i18n{Manage Category}">_i18n{Manage Category}</a>
+<?php if($crnt == 'sidebar-managecategory' || $crnt == 'sidebar-newcategory' || $crnt == 'sidebar-newsubcategory') { ?>
+				<ul>
+					<li <?php if($crnt == 'sidebar-newcategory') echo 'class="itemActive"';?>><a href="#/new-category.html" title="_i18n{Create New Category}">_i18n{New Category}</a></li>
+					<li <?php if($crnt == 'sidebar-newsubcategory') echo 'class="itemActive"';?>><a href="#/new-subcategory.html" title="_i18n{Create New SubCategory}">_i18n{New SubCategory}</a></li>
+				</ul>
+<?php } ?>
+			</li>
 			<li <?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-newmail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') echo 'class="itemActive"';?>><a href="/my-mail.html" title="_i18n{My Messages}">_i18n{My Messages} <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a>
 <?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') { ?>
 				<ul>
@@ -17,9 +30,7 @@
 				</ul>
 <?php } ?>
 			</li>
-			<li <?php if($crnt == 'sidebar-myorder') echo 'class="itemActive"';?>><a href="/my-order.html" title="_i18n{My Order}">_i18n{My Order}</a></li>
-			<li <?php if($crnt == 'sidebar-mybargains') echo 'class="itemActive"';?>><a href="/my-bargains.html" title="_i18n{My Bargains}">_i18n{My Bargains}</a></li>
-			<li <?php if($crnt == 'sidebar-myjob') echo 'class="itemActive"';?>><a href="/my-job.html" title="_i18n{My Job}">_i18n{My Job}</a></li>
+			
 		</ul>
 	</div>
 </div>

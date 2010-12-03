@@ -1,0 +1,42 @@
+<?php 
+$outbox = $mvc->getObject(MailService::OUTBOX);
+?>
+<form method="post" action="outbox.html">
+<input type="hidden" name="itemSelect" />
+<ul class="viewIList">
+	<li class="itemNew"><a href="new-mail.html" title="_i18n{New Mail}">_i18n{New Mail}</a></li>
+	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
+</ul>
+<h2>_i18n{Outbox}</h2>
+<div class="unitWBlock">
+	<table cellpadding="0" cellspacing="0" class="unitMail">
+		<thead>
+			<tr>
+				<th class="itemChk"></th>
+				<th>_i18n{To}</th>
+				<th>_i18n{Subject}</th>
+				<th>_i18n{Date}</th>
+				<th class="itemLast">_i18n{Order no.}</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php 	if (count($outbox)>0 && $outbox!=NULL){
+			foreach ( $outbox as $key=>$mail) { ?>
+			<tr>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
+				<td><?php echo $mail[MailService::GETTER]; ?></td>
+				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
+				<td><?php echo $mail[MailService::CRDATE]; ?></td>
+				<td class="itemLast">A55</td>
+			</tr>
+<?php 		}
+		}else {?>
+			<tr class="unitNoMail">
+				<td colspan="5">_i18n{No mail}</td>
+			</tr>
+<?php	} ?>
+		</tbody>
+	</table>
+	<div class="unitBtn"></div>
+</div>
+</form>

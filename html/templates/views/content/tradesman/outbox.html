@@ -4,6 +4,7 @@ $outbox = $mvc->getObject(MailService::OUTBOX);
 <form method="post" action="outbox.html">
 <input type="hidden" name="itemSelect" />
 <ul class="viewIList">
+	<li class="itemNew"><a href="new-mail.html" title="_i18n{New Mail}">_i18n{New Mail}</a></li>
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Outbox}</h2>

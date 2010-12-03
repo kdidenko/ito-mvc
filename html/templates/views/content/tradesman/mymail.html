@@ -15,6 +15,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 <form method="post" action="my-mail.html">
 <input type="hidden" name="itemSelect" />
 <ul class="viewIList">
+	<li class="itemNew"><a href="new-mail.html" title="_i18n{New Mail}">_i18n{New Mail}</a></li>
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Inbox}</h2>
@@ -47,9 +48,7 @@ $trash = $mvc->getObject(MailService::TRASH);
 <?php	} ?>
 		</tbody>
 	</table>
-	<div class="unitBtn">
-		<a class="linkBtn" title="_i18n{New Mail}" href="new-mail.html"><span><strong>_i18n{New Mail}</strong></span></a>
-	</div>
+	<div class="unitBtn"></div>
 </div>
 <h2>_i18n{Outbox}</h2>
 <div class="unitWBlock">

@@ -4,6 +4,7 @@ $image_errors = $mvc->getObject(TradesmanContentController::IMAGE_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
 ?>
 <div class="unitWBlock">
+<form action="/company-profile.html" method="post">
 <?php if (isset($status)){?>
 	<div class="itemOk">
 		<p>_i18n{Successfully Saved.}</p>
@@ -98,8 +99,11 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 			<dt>_i18n{Homepage}:</dt>
 			<dd class="itemData"><?php echo $data[UsersService::HOMEPAGE]?></dd>
 		</dl>
-		
 	</div>
+	<div class="unitBtn">
+		<button name="personalSbm"><span><strong>_i18n{Save}</strong></span></button>
+	</div>
+</form>
 </div>
 <h2>_i18n{Profile photo}</h2>
 <div class="unitWBlock">

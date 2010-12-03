@@ -1,12 +1,1 @@
-<?php 
-	$crnt = $mvc->getView();
-	$new_mails = $mvc->getObject(MailService::NEW_MAILS);
-?>
-<div class="bodyBox" id="navMenu">
-	<h2>_i18n{Navigation}</h2>
-	<div class="viewMenu">
-		<ul>
-			<li <?php if($crnt == 'sidebar-mymail') echo 'class="itemActive"';?>><a href="/my-mail.html" title="_i18n{My Messages}">_i18n{My Messages} <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a></li>
-		</ul>
-	</div>
-</div>
+<?php TemplateEngine::inclusion('/sidebar-menu.html', $mvc) ?>

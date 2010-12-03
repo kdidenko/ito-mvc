@@ -294,4 +294,15 @@
 		</forwards>
 	</action>
 	<!-- tradesman part -->
+	
+	
+	
+	<!-- ajax part -->
+	
+	<action name="/get-subcategory.html" id="getsubcategory">
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
+		<template name="index.html" path="templates/ajax-layout.html" />
+	</action>
+	
+	<!-- ajax part -->
 </actions>

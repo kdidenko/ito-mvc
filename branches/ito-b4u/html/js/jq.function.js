@@ -39,6 +39,22 @@ if(jQuery) (function($){
 			f.autoRestart();
 		})
 	};
+	$.fn.inputFile = function(params){
+		var conf = $.extend({
+			parentClass:'inpFile'
+		}, params);
+		return this.each(function(){
+			var c=conf,o=$(this),p,v=$('<span class="txtBg">Select image...</span>');
+			o.css({position:'absolute', opacity:0, width:'auto',zIndex:100});
+			p=o.wrap('<span class="'+c.parentClass+'" />').parent();
+			p.append(v);
+			p.bind('mousemove', function(e){
+				o.css({left:e.pageX-p.offset().left-(o.width()-20)});
+				o.css({top:e.pageY-p.offset().top-(o.height()/2)});
+			});
+			o.bind('change', function(){v.html(o.attr('value'))})
+		})
+	};
 	$.fn.mailAn = function(params){
 		var conf = $.extend({
 			tableBlock:'.unitMail',
@@ -147,5 +163,6 @@ if(jQuery) (function($){
 		//$('.userNav a').popupAn();
 		$('.viewWBox').mailAn();
 		$('.stationCarousel').carouselAn();
+		$('input:file').inputFile();
 	})
 })(jQuery);

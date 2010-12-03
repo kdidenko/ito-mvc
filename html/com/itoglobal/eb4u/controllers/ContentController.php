@@ -113,6 +113,51 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleInbox($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+			MailService::deleteMails ($requestParams ['itemSelect']) :
+				null;
+		
+		#get inbox
+		$inbox = MailService::getInbox( $id );
+		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleOutbox($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+			MailService::deleteMails ($requestParams ['itemSelect']) :
+				null;
+		
+		#get outbox
+		$outbox = MailService::getOutbox( $id );
+		isset ( $outbox ) ? $mvc->addObject ( MailService::OUTBOX, $outbox ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleTrash($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		
+		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+			MailService::deleteMails ($requestParams ['itemSelect']) :
+				null;
+		
+		#get trash
+		$trash = MailService::getTrash( $id );
+		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
+		
+		return $mvc;
+	}
+	
 	
 }
 ?>

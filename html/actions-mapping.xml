@@ -242,6 +242,27 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>		
 	</action>
+	<action name="/inbox.html" id="inbox" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>		
+	</action>
+	<action name="/outbox.html" id="outbox" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>		
+	</action>
+	<action name="/trash.html" id="trash" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>		
+	</action>
 	<action name="/new-mail.html" id="newmail" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

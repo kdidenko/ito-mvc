@@ -13,14 +13,7 @@
 				</ul>
 <?php } ?>
 			</li>
-			<li <?php if($crnt == 'sidebar-managecategory') echo 'class="itemActive"';?>><a href="/manage-category.html" title="_i18n{Manage Category}">_i18n{Manage Category}</a>
-<?php if($crnt == 'sidebar-managecategory' || $crnt == 'sidebar-newcategory' || $crnt == 'sidebar-newsubcategory') { ?>
-				<ul>
-					<li <?php if($crnt == 'sidebar-newcategory') echo 'class="itemActive"';?>><a href="/new-category.html" title="_i18n{Create New Category}">_i18n{New Category}</a></li>
-					<li <?php if($crnt == 'sidebar-newsubcategory') echo 'class="itemActive"';?>><a href="/new-subcategory.html" title="_i18n{Create New SubCategory}">_i18n{New SubCategory}</a></li>
-				</ul>
-<?php } ?>
-			</li>
+			<li <?php if($crnt == 'sidebar-managecategory') echo 'class="itemActive"';?>><a href="/manage-category.html" title="_i18n{Manage Category}">_i18n{Manage Category}</a></li>
 			<li <?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-newmail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') echo 'class="itemActive"';?>><a href="/my-mail.html" title="_i18n{My Messages}">_i18n{My Messages} <?php echo $new_mails!=0 ? '('.$new_mails.')':null;?></a>
 <?php if($crnt == 'sidebar-mymail' || $crnt == 'sidebar-viewmail' || $crnt == 'sidebar-inbox' || $crnt == 'sidebar-outbox' || $crnt == 'sidebar-trash') { ?>
 				<ul>

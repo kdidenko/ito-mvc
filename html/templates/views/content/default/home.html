@@ -1,3 +1,7 @@
+<?php 
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+?>
 <div class="wrapMain">
 	<div class="greyBox">
 		<div class="itemFace"></div>
@@ -10,14 +14,26 @@
 				<div class="unitSearch">
 					<form action="">
 						<p>
-							<select>
-								<option>&nbsp;</option>
+							<select name="category">
+<?php					if (isset($categories) && $categories!=NULL){ 
+							foreach($categories as $key=>$category){ 
+								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
+									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
 							</select>
 							<label>Hauptkategorie?</label>
 						</p>
 						<p>
-							<select>
-								<option>&nbsp;</option>
+							<select name="subcategory">
+<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+							foreach($subcategories as $key=>$subcategory){ 
+								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
+								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
 							</select>
 							<label>Unterkategorie?</label>
 						</p>

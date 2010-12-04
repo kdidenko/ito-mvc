@@ -40,6 +40,7 @@ class TradesmanContentController extends ContentController {
 		}
 		
 		if (isset ( $requestParams ['personalSbm'] )) {		
+			//print_r($requestParams);exit;
 			$fields = array (
 							'0'=>UsersService::FIRSTNAME, 
 							'1'=>UsersService::LASTNAME,
@@ -53,7 +54,9 @@ class TradesmanContentController extends ContentController {
 							'9'=>UsersService::COUNTRY,
 							'10'=>UsersService::PHONE,
 							'11'=>UsersService::HOMEPAGE,
-							'12'=>UsersService::SALUTATION//,
+							'12'=>UsersService::CAT_ID,
+							'13'=>UsersService::SUBCAT_ID,
+							'14'=>UsersService::SALUTATION//,
 							//'13'=>UsersService::COMPANY_YEAR
 							);
 			$vals = array (
@@ -69,7 +72,9 @@ class TradesmanContentController extends ContentController {
 							'9'=>$requestParams [UsersService::COUNTRY],
 							'10'=>$requestParams [UsersService::PHONE],
 							'11'=>$requestParams [UsersService::HOMEPAGE],
-							'12'=>$requestParams [UsersService::SALUTATION]//,
+							'12'=>$requestParams [CategoryService::CATEGORY],
+							'13'=>$requestParams [SubCategoryService::SUBCATEGORY],
+							'14'=>$requestParams [UsersService::SALUTATION]//,
 							//'13'=>$requestParams [UsersService::COMPANY_YEAR]
 							);
 			
@@ -81,6 +86,12 @@ class TradesmanContentController extends ContentController {
 		#get user info
 		$result = UsersService::getUser ( $id );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+		
+		$subcategory = SubCategoryService::getSubcatByCat ($result[UsersService::CAT_ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		return $mvc;
 	}
 	

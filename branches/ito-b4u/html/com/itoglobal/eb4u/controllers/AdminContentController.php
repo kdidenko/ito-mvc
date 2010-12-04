@@ -5,15 +5,24 @@ require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 class AdminContentController extends ContentController {
 	
 	
+	
 	public function handleManageCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$categories = CategoryService::getCategories();
 		isset($categories) ? $mvc->addObject ( CategoryService::CATEGORY, $categories) : NULL;
 		
+		isset($requestParams[CategoryService::NEW_CAT]) ?  
+			CategoryService::createNewCat() :
+				NULL;
+		
+		isset($requestParams[SubCategoryService::NEW_SUBCAT]) ?  
+			SubCategoryService::createNewSubCat() :
+				NULL;
+		
 		$subcategories = SubCategoryService::getSubCategories();
 		isset($subcategories) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategories) : NULL;
-		
+		//print_r($subcategories);
 		return $mvc;
 	}
 	

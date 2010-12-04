@@ -180,12 +180,22 @@ class UsersService {
 	 */
 	const SCROLLER = 'scroller';
 	
+	const CAT_ID = 'cat_id';
+	const SUBCAT_ID = 'subcat_id';
+	
 	public static function getUsersList($where = NULL, $from = NULL) {
-		$fields = self::USERS . '.*';//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
+		$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
+					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
 				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
 				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
 				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
-		$from = isset ( $from ) ? $from : self::USERS;
+		$from = isset ( $from ) ? $from : self::USERS . SQLClient::LEFT . SQLClient::JOIN . 
+				CategoryService::CATEGORY .	SQLClient::ON . CategoryService::CATEGORY . '.' . 
+				CategoryService::ID . '=' . self::USERS . '.' . self::CAT_ID . 
+				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY .	
+				SQLClient::ON . SubCategoryService::SUBCATEGORY . '.' . 
+				SubCategoryService::ID . '=' . self::USERS . '.' . self::SUBCAT_ID;
 		$groupBy = self::USERS . '.' . self::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
@@ -201,13 +211,19 @@ class UsersService {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
-			$fields = self::USERS . '.*';
-						//self::ID . ', ' . self::USERNAME . ', ' . SessionService::FIRSTNAME . ', ' . 
-						//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . 
-						//self::ENABLED . ', ' . self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . 
-						//self::BIRTHDAY . ', ' . self::SKYPE . ', ' . self::GENDER;
-			$from = self::USERS;
-			$where = self::ID . '=' . $id;
+			$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
+					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
+				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
+				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
+				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
+			$from = self::USERS . SQLClient::LEFT . SQLClient::JOIN . 
+				CategoryService::CATEGORY .	SQLClient::ON . CategoryService::CATEGORY . '.' . 
+				CategoryService::ID . '=' . self::USERS . '.' . self::CAT_ID . 
+				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY .	
+				SQLClient::ON . SubCategoryService::SUBCATEGORY . '.' . 
+				SubCategoryService::ID . '=' . self::USERS . '.' . self::SUBCAT_ID;
+			$where = self::USERS . '.' . self::ID . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;

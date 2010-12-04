@@ -79,7 +79,7 @@
 			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
 		</role>
 		<role type="VR">
-			<controller class="com.itoglobal.eb4u.controllers.ContentController" method="handle$1" />
+			<controller class="com.itoglobal.eb4u.controllers.DefaultContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/default/$1.html" />
 		</role>
 	</action>

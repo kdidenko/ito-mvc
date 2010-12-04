@@ -44,15 +44,35 @@ if(jQuery) (function($){
 			parentClass:'inpFile'
 		}, params);
 		return this.each(function(){
-			var c=conf,o=$(this),p,v=$('<span class="txtBg">Select image...</span>');
+			var c=conf,o=$(this),p,v=$('<span class="txtBg" />'),b=$('<button><span><strong>Browse...</strong></span></button>');
 			o.css({position:'absolute', opacity:0, width:'auto',zIndex:100});
-			p=o.wrap('<span class="'+c.parentClass+'" />').parent();
-			p.append(v);
+			p=o.wrap('<div class="'+c.parentClass+'" />').parent();
+			p.append(v).append(b);
 			p.bind('mousemove', function(e){
 				o.css({left:e.pageX-p.offset().left-(o.width()-20)});
 				o.css({top:e.pageY-p.offset().top-(o.height()/2)});
 			});
 			o.bind('change', function(){v.html(o.attr('value'))})
+		})
+	};
+	$.fn.changeCategory = function(params){
+		var conf = $.extend({
+			categorySelect:'select[name="category"]',
+			categorySubSelect:'select[name="subcategory"]',
+			categorySubLink:'get-subcategory.html'
+		}, params);
+		return this.each(function(){
+			var c=conf,o=$(this),f=o.find(c.categorySelect),s=o.find(c.categorySubSelect);
+			f.bind('change', function(){
+				$.ajax({
+					type:'get',
+					dataType:'html',
+					url:c.categorySubLink+'?id='+$(this).attr('value'),
+					beforeSend:function(){s.html('<option>Loading...</option>')},
+					success:function(data){s.html(data)},
+					error:function(){s.html('data not load')}
+				})
+			})
 		})
 	};
 	$.fn.mailAn = function(params){
@@ -164,5 +184,6 @@ if(jQuery) (function($){
 		$('.viewWBox').mailAn();
 		$('.stationCarousel').carouselAn();
 		$('input:file').inputFile();
+		$('body').changeCategory();
 	})
 })(jQuery);

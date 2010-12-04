@@ -2,34 +2,91 @@
 $categories = $mvc->getObject('category');
 $subcategories = $mvc->getObject('subcategory');
 ?>
-<table class="list">
-<tr>
-	<th>_i18n{ID}:</th>
-	<th>_i18n{Category}:</th>
-	<th>_i18n{Action}:</th>
-</tr>
-<?php foreach($categories as $ket => $category){ ?>
-	<tr>
-		<td><?php echo $category[CategoryService::ID] ?></td>
-		<td><?php echo $category[CategoryService::CAT_NAME] ?></td>
-		<td>edit | del</td>
-	</tr>
+<form method="post" action="manage-category.html">
+<input type="hidden" name="itemSelect" />
+<ul class="viewIList">
+	<li class="itemNew"><a href="new-category.html" title="_i18n{New Category}">_i18n{New Category}</a></li>
+	<li class="itemNew"><a href="new-subcategory.html" title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
+	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
+</ul>
+<h2>_i18n{Category}</h2>
+<div class="unitWBlock">
+	<table cellpadding="0" cellspacing="0" class="unitMail">
+		<thead>
+			<tr>
+				<th class="itemChk"></th>
+				<th>_i18n{ID}:</th>
+				<th>_i18n{Category}:</th>
+				<th class="itemLast">_i18n{Action}:</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php 	if (count($categories)>0 && $categories!=NULL){
+			 foreach($categories as $key => $category){ ?>
+				<tr>
+					<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
+					<td><?php echo $category[CategoryService::ID] ?></td>
+					<td><?php echo $category[CategoryService::CAT_NAME] ?></td>
+					<td class="itemLast">edit | del</td>
+				</tr>
 <?php } ?>
-</table>
-<table class="list">
-<tr>
-	<th>_i18n{ID}:</th>
-	<th>_i18n{SubCategory}:</th>
-	<th>_i18n{Category}:</th>
-	<th>_i18n{Action}:</th>
-</tr>
-<?php foreach($subcategories as $ket => $subcategory){ ?>
-	<tr>
-		<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
-		<td><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></td>
-		<td><?php echo $subcategory[SubCategoryService::CAT_ID] ?></td>
-		<td>edit | del</td>
-	</tr>
+				<tr>
+					<td></td>
+					<td><?php echo $category[CategoryService::ID]+1; ?></td>
+					<td><input type="text"/></td>
+					<td class="itemLast"><button>Submit</button></td>
+				</tr>
+<?php		}else {?>
+			<tr class="unitNoMail">
+				<td colspan="5">_i18n{No Category}</td>
+			</tr>
+<?php	} ?>
+		</tbody>
+	</table>
+	<div class="unitBtn"></div>
+</div>
+<h2>_i18n{Sub Category}</h2>
+<div class="unitWBlock">
+	<table cellpadding="0" cellspacing="0" class="unitMail">
+		<thead>
+			<tr>
+				<th class="itemChk"></th>
+				<th>_i18n{ID}:</th>
+				<th>_i18n{SubCategory}:</th>
+				<th>_i18n{Category}:</th>
+				<th class="itemLast">_i18n{Action}:</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php 	if (count($subcategories)>0 && $subcategories!=NULL){
+			foreach($subcategories as $key => $subcategory){ ?>
+				<tr>
+					<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
+					<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
+					<td><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></td>
+					<td><?php echo $subcategory[SubCategoryService::CAT_ID] ?></td>
+					<td class="itemLast">edit | del</td>
+				</tr>
 <?php } ?>
-</table>
-
+				<tr>
+					<td></td>
+					<td><?php echo $subcategory[SubCategoryService::ID]+1; ?></td>
+					<td><input type="text"/></td>
+					<td>
+						<select>
+							<option>IT</option>
+							<option>finance</option>
+						</select>
+					</td>
+					<td class="itemLast"><button>Submit</button></td>
+				</tr>
+<?php	}else {?>
+			<tr class="unitNoMail">
+				<td colspan="5">_i18n{No sub category}</td>
+			</tr>
+<?php	} ?>
+		</tbody>
+	</table>
+	<div class="unitBtn"></div>
+</div>
+</form>

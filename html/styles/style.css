@@ -202,8 +202,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitSnColumn input.inpTxt {width:531px}
 	.viewWBox textarea.areaTxt {width:192px; height:160px}
 		.unitSnColumn textarea.areaTxt {width:531px; height:160px}
-	.viewWBox .inpFile {position:relative; overflow:hidden; float:left}
-		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; }
+	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
+		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
+		.viewWBox .inpFile button span {background-position:right -78px}
+		.viewWBox .inpFile button span strong {background-position:left -52px; color:#292929}
 	/* virtual form */
 	.viewWBox dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
 	.viewWBox dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}

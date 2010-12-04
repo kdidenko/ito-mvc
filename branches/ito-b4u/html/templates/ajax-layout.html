@@ -1,4 +1,4 @@
 <?php $categories = $mvc->getObject('result'); ?>
 <?php foreach($categories as $ket => $category){ ?>
-	<option value="<?php echo $category[SubCategoryService::ID]; ?>"><?php echo $category[SubCategoryService::CAT_NAME]; ?></option>
+	<option value="<?php echo $category[SubCategoryService::ID]; ?>"><?php echo $category[SubCategoryService::SUBCAT_NAME]; ?></option>
 <?php } ?>

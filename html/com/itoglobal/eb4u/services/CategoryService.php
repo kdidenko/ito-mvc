@@ -13,7 +13,9 @@ class CategoryService {
 	 * @var  string defining the subject field name
 	 */
 	const CAT_NAME = 'category_name';
-
+	
+	const NEW_CAT = 'newCategory';
+	
 	public static function getCategories ($where = NULL){
 		$fields = '*';
 		$from = self::CATEGORY;

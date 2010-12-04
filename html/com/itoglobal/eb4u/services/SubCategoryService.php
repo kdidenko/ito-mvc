@@ -18,9 +18,14 @@ class SubCategoryService {
 	 */
 	const CAT_ID = 'category_id';
 	
+	const NEW_SUBCAT = 'newSubCategory';
+	
 	public static function getSubCategories ($where = NULL){
-		$fields = '*';
-		$from = self::SUBCATEGORY;
+		$fields = self::SUBCATEGORY . '.*, ' . CategoryService::CATEGORY . '.' . 
+				CategoryService::CAT_NAME;
+		$from = self::SUBCATEGORY . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . self::SUBCATEGORY . '.' . self::CAT_ID . '=' .
+				CategoryService::CATEGORY . '.' . CategoryService::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;

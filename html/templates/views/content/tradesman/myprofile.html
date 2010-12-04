@@ -1,5 +1,7 @@
 <?php 
 $data = $mvc->getObject(TradesmanContentController::RESULT);
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 $psw_errors = $mvc->getObject(TradesmanContentController::PSW_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
 ?>
@@ -117,8 +119,14 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<label>_i18n{Category}:</label>
 				<div class="itemData">
 					<select name="category">
-						<option value="1">IT</option>
-						<option value="2">finance</option>
+						<option selected="selected" value="<?php echo $data[UsersService::CAT_ID]?>"><?php echo $data[CategoryService::CAT_NAME];?></option>
+<?php					if (isset($categories) && $categories!=NULL){ 
+							foreach($categories as $key=>$category){ 
+								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
+								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
 					</select>
 				</div>
 			</div>
@@ -126,7 +134,14 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<label>_i18n{Sub-Category}:</label>
 				<div class="itemData">
 					<select name="subcategory">
-						<option>sub test</option>
+						<option selected="selected" value="<?php echo $data[UsersService::SUBCAT_ID]?>"><?php echo $data[SubCategoryService::SUBCAT_NAME];?></option>
+<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+							foreach($subcategories as $key=>$subcategory){ 
+								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
+								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
 					</select>
 				</div>
 			</div>

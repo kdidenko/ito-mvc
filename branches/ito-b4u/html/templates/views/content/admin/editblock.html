@@ -1,0 +1,47 @@
+<?php 
+$block = $mvc->getObject(StaticBlockService::STATIC_BLOCK);
+$status = $mvc->getObject(AdminContentController::STATUS);
+?>
+<ul class="viewIList viewITList">
+				<li class="itemDelete"><a href="/manage-static-block.html?del=<?php echo $block[StaticBlockService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+			</ul>
+</form>
+<h2>_i18n{Edit Block}</h2>
+<div class="unitWBlock unitLast">
+<?php if (isset($status )){?>
+	<div class="itemOk">
+		<ul>
+			<li>_i18n{Successfully Saved}</li>
+		</ul>
+	</div>
+<?php } ?>
+	<form action="/edit-block.html" method="POST">
+		<input type="hidden" name="<?php echo StaticBlockService::ID ?>" value="<?php echo isset($block[StaticBlockService::ID]) ? $block[StaticBlockService::ID] : NULL; ?>"/>
+		<div class="unitSnColumn">
+			<div class="itemForm">
+				<label>_i18n{Titile}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="<?php echo StaticBlockService::BLOCK_TITLE ?>" value="<?php echo isset($block[StaticBlockService::BLOCK_TITLE]) ? $block[StaticBlockService::BLOCK_TITLE] : NULL; ?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Body}:</label>
+				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="<?php echo StaticBlockService::BLOCK_DESC ?>"><?php echo isset($block[StaticBlockService::BLOCK_DESC]) ? $block[StaticBlockService::BLOCK_DESC] : NULL; ?></textarea></div>
+			</div>
+		</div>
+		<div class="unitBtn">
+			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
+			<button name="save_continue"><span><strong>_i18n{Save and Continue}</strong></span></button>
+			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//$('.userNav a').popupAn();
+		$('.areaTxt').cleditor({
+			width:535, height:160,
+			controls:'bold italic underline | color highlight removeformat | bullets numbering | alignleft center alignright justify | undo redo | link unlink' //+ '| cut copy paste pastetext'
+		});
+	})
+</script>

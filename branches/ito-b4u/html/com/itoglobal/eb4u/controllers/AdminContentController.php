@@ -4,7 +4,60 @@ require_once 'com/itoglobal/eb4u/controllers/ContentController.php';
 
 class AdminContentController extends ContentController {
 	
+	public function handleManageStaticBlock($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		isset ( $requestParams [self::DEL_ALL] ) ? 
+			StaticBlockService::deleteBlocks ($requestParams ['itemSelect']) :
+				null;
+		isset ( $requestParams [self::DEL] ) ? StaticBlockService::deleteBlock ($requestParams [self::DEL]) : null;
+		
+		$blocks = StaticBlockService::getBlocks();
+		isset($blocks) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $blocks) : NULL;
+		
+		return $mvc;
+	}
 	
+	public function handleNewBlock($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$location = $this->onSuccess( $actionParams );
+		
+		isset($requestParams['back']) ? $this->forwardActionRequest ( $location ) : NULL;
+		
+		if(isset($requestParams[StaticBlockService::SAVE])){
+			StaticBlockService::createBlock($requestParams[StaticBlockService::BLOCK_TITLE],$requestParams[StaticBlockService::BLOCK_DESC]);
+			$this->forwardActionRequest ( $location );
+		}
+		return $mvc;
+	}
+	
+	public function handleEditBlock($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$location = $this->onSuccess( $actionParams );
+		
+		isset($requestParams['back']) ? $this->forwardActionRequest ( $location ) : NULL;
+		if(isset($requestParams[StaticBlockService::ID])){
+			$id = $requestParams[StaticBlockService::ID];
+			if(isset($requestParams[StaticBlockService::SAVE_CONTINUE]) || isset($requestParams[StaticBlockService::SAVE])){
+				$fields = array();
+				$vals = array();
+				$fields[] .= StaticBlockService::BLOCK_TITLE;
+				$fields[] .= StaticBlockService::BLOCK_DESC;
+				$vals[] .= $requestParams[StaticBlockService::BLOCK_TITLE];
+				$vals[] .= $requestParams[StaticBlockService::BLOCK_DESC];
+				StaticBlockService::updateBlock($id, $fields, $vals);
+				isset($requestParams[StaticBlockService::SAVE]) ? $this->forwardActionRequest ( $location ) : NULL;
+			}
+			
+			$block = StaticBlockService::getBlock($id);
+			
+			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
+			$mvc->addObject ( self::STATUS, 'successful' );
+		}
+				
+		
+		return $mvc;
+	}
 	
 	public function handleManageCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );

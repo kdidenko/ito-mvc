@@ -305,4 +305,33 @@
 	</action>
 	
 	<!-- ajax part -->
+	
+	<!-- admin part -->
+	<action name="/manage-static-block.html" id="managestaticblock" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target location="/index.html" name="home" condition="onfailure"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
+	<action name="/new-block.html" id="newblock" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target location="/manage-static-block.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
+	<action name="/edit-block.html" id="editblock" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target location="/manage-static-block.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	<!-- end of admin part -->
 </actions>

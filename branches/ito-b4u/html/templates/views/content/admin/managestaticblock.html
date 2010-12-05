@@ -1,0 +1,38 @@
+<?php 
+$blocks = $mvc->getObject('static_block');
+?>
+<form method="post" action="/manage-static-block.html">
+<input type="hidden" name="itemSelect" />
+<ul class="viewIList">
+	<li class="itemNew"><a href="new-block.html" title="_i18n{New Category}">_i18n{New Block}</a></li>
+	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
+</ul>
+<h2>_i18n{Static Block}</h2>
+<div class="unitWBlock">
+	<table cellpadding="0" cellspacing="0" class="unitMail">
+		<thead>
+			<tr>
+				<th class="itemChk"></th>
+				<th>_i18n{ID}:</th>
+				<th>_i18n{Title}:</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php 	if (count($blocks)>0 && $blocks!=NULL){
+			 foreach($blocks as $key => $block){ ?>
+				<tr onclick="location.href='edit-block.html?id=<?php echo $block[StaticBlockService::ID]; ?>';">
+					<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $block[StaticBlockService::ID]; ?>" /></td>
+					<td><?php echo $block[StaticBlockService::ID] ?></td>
+					<td><?php echo $block[StaticBlockService::BLOCK_TITLE] ?></td>
+				</tr>
+<?php } ?>
+<?php		}else {?>
+			<tr class="unitNoMail">
+				<td colspan="5">_i18n{No Block}</td>
+			</tr>
+<?php	} ?>
+		</tbody>
+	</table>
+	<div class="unitBtn"></div>
+</div>
+</form>

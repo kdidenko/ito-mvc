@@ -65,7 +65,7 @@ class AdminContentController extends ContentController {
 		
 		$where .= UsersService::DELETED . " = 0";// AND " . UsersService::ROLE . "!='" . UsersService::ROLE_UR . "'";
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		$where .= " and " . UsersService::ID . "!=" . $id;
+		$where .= " and " . UsersService::USERS . '.' .UsersService::ID . "!=" . $id;
 		$result = UsersService::getUsersList ( $where );
 		$mvc->addObject ( self::RESULT, $result);
 		$role = isset($requestParams [UsersService::ROLE]) ? $requestParams [UsersService::ROLE] : NULL;
@@ -78,7 +78,7 @@ class AdminContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[UsersService::ID])){
 			#for admin and moderator
-			$where = UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
+			$where = UsersService::USERS . '.' . UsersService::ID . " = '" . $requestParams [UsersService::ID] . "'";
 			$result = UsersService::getUsersList ( $where );
 			$result = isset($result [0]) ? $result[0] : null;
 			$mvc->addObject ( self::RESULT, $result );

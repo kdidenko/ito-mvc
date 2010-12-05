@@ -4,6 +4,10 @@ require_once 'com/itoglobal/mvc/defaults/SecureActionControllerImpl.php';
 
 class ContentController extends SecureActionControllerImpl {
 	
+	const DEL = 'del';
+	
+	const DEL_ALL = 'delAll';
+	
 	const ERROR = 'error';
 	
 	const PSW_ERROR = 'psw_error';
@@ -93,10 +97,10 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
-		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+		isset ( $requestParams [self::DEL_ALL] ) ? 
 			MailService::deleteMails ($requestParams ['itemSelect']) :
 				null;
-		isset ( $requestParams [MailService::DEL] ) ? MailService::deleteMail ($requestParams [MailService::DEL]) : null;
+		isset ( $requestParams [self::DEL] ) ? MailService::deleteMail ($requestParams [self::DEL]) : null;
 		
 		#get inbox
 		$inbox = MailService::getInbox( $id );
@@ -117,7 +121,7 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
-		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+		isset ( $requestParams [self::DEL_ALL] ) ? 
 			MailService::deleteMails ($requestParams ['itemSelect']) :
 				null;
 		
@@ -132,7 +136,7 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
-		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+		isset ( $requestParams [self::DEL_ALL] ) ? 
 			MailService::deleteMails ($requestParams ['itemSelect']) :
 				null;
 		
@@ -147,7 +151,7 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
 		
-		isset ( $requestParams [MailService::DEL_ALL] ) ? 
+		isset ( $requestParams [self::DEL_ALL] ) ? 
 			MailService::deleteMails ($requestParams ['itemSelect']) :
 				null;
 		

@@ -22,6 +22,7 @@
     require_once 'com/itoglobal/eb4u/services/MailService.php';
     require_once 'com/itoglobal/eb4u/services/CategoryService.php';
     require_once 'com/itoglobal/eb4u/services/SubCategoryService.php';
+    require_once 'com/itoglobal/eb4u/services/StaticBlockService.php';
     
 	require_once 'com/itoglobal/mvc/models/ModelAndView.php';
 	require_once 'com/itoglobal/mvc/core/ActionsMappingResolver.php';

@@ -54,8 +54,7 @@ class MailService {
 	const OUTBOX = 'outbox';
 	const TRASH = 'trash';
 	const DRAFTS = 'drafts';
-	const DEL = 'del';
-	const DEL_ALL = 'delAll';
+	
 	
 	/**
 	 * Retrieves the users mails by specified user id.

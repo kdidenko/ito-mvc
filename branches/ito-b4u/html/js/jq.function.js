@@ -104,6 +104,13 @@ if(jQuery) (function($){
 			}
 		})
 	};
+	$.fn.rtfAn = function(params){
+		var conf = $.extend({controlIcon:'bold italic underline | color highlight removeformat | bullets numbering | alignleft center alignright justify | undo redo | link unlink'}, params);
+		return this.each(function(){
+			var c=conf,o=$(this);
+			o.cleditor({width:o.innerWidth()-2, height:o.innerHeight()-2, controls:c.controlIcon});
+		})
+	};
 	$.fn.popupAn = function(params){
 		var conf = $.extend({}, params);
 		return this.each(function(){
@@ -169,5 +176,6 @@ if(jQuery) (function($){
 		$('.stationCarousel').carouselAn();
 		$('input:file').fileAn();
 		$('.viewRBox .unitSearch, .unitWBlock').categoryAn();
+		$('.areaTxt').rtfAn();
 	})
 })(jQuery);

@@ -8,8 +8,8 @@ $blocks = $mvc->getObject('static_block');
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Static Block}</h2>
-<div class="unitWBlock">
-	<table cellpadding="0" cellspacing="0" class="unitMail">
+<div class="unitWBlock unitLast">
+	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>
@@ -20,19 +20,18 @@ $blocks = $mvc->getObject('static_block');
 		<tbody>
 <?php 	if (count($blocks)>0 && $blocks!=NULL){
 			 foreach($blocks as $key => $block){ ?>
-				<tr onclick="location.href='edit-block.html?id=<?php echo $block[StaticBlockService::ID]; ?>';">
+				<tr>
 					<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $block[StaticBlockService::ID]; ?>" /></td>
 					<td><?php echo $block[StaticBlockService::ID] ?></td>
-					<td><?php echo $block[StaticBlockService::BLOCK_TITLE] ?></td>
+					<td><a class="linkTr" href="edit-block.html?id=<?php echo $block[StaticBlockService::ID]; ?>"><?php echo $block[StaticBlockService::BLOCK_TITLE] ?></a></td>
 				</tr>
 <?php } ?>
 <?php		}else {?>
-			<tr class="unitNoMail">
+			<tr class="unitNoData">
 				<td colspan="5">_i18n{No Static Blocks}</td>
 			</tr>
 <?php	} ?>
 		</tbody>
 	</table>
-	<div class="unitBtn"></div>
 </div>
 </form>

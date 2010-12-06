@@ -114,6 +114,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
+	
+	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	
 	<action name="/my-account.html" id="myaccount" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
@@ -121,6 +127,7 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
+	
 	<action name="/manage-*.html" id="manage$1" roles="AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
@@ -238,10 +245,6 @@
 	<!-- end changing password -->
 	
 	<!-- tradesman part -->
-	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns.html" />
-	</action>
 	<action name="/company-profile.html" id="companyprofile" roles="UR,TR,BR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

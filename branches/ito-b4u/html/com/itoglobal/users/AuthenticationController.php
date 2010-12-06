@@ -35,6 +35,9 @@ class AuthenticationController extends SecureActionControllerImpl {
 					SessionService::setAttribute ( SessionService::LASTNAME, $result [0] [SessionService::LASTNAME] );
 					SessionService::setAttribute ( SessionService::EMAIL, $result [0] [SessionService::EMAIL] );
 					SessionService::setRole ( $result [0] [UsersService::ROLE] );
+					if ($result [0] [UsersService::ROLE] = TR) {
+						SessionService::setAttribute ( SessionService::PLAN_ID, $result [0] [SessionService::PLAN_ID] );
+					}
 					SessionService::setAttribute ( SessionService::USERNAME, $result [0] [SessionService::USERNAME] );
 					#if you select checkbox "Remember me"
 					if (isset ( $requestParams ['persistent'] )) {

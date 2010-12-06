@@ -164,6 +164,10 @@ class UsersService {
 	 */
 	const AVATAR = 'avatar';
 	/**
+	 * @var string defining the plan_id field name
+	 */
+	const PLAN_ID = 'plan_id';
+	/**
 	 * @var string defining the name of object
 	 */
 	const ERROR = 'error';

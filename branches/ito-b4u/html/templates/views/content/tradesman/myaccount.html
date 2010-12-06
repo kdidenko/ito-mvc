@@ -1,1 +1,9 @@
-<h2>_i18n{tradesman my account page content}</h2>
+<?php 
+$user = SessionService::getAttribute(SessionService::FIRSTNAME);
+$user .= ' ' . SessionService::getAttribute(SessionService::LASTNAME);
+?>
+<h2>_i18n{My private accounts}</h2>
+<div class="unitWBlock unitLast">
+	Hello <?php echo $user; ?>
+	<?php echo StaticBlockService::getBlock(20); ?>
+</div>

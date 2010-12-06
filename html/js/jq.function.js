@@ -42,9 +42,9 @@ if(jQuery) (function($){
 	$.fn.fileAn = function(params){
 		var conf = $.extend({parentClass:'inpFile'}, params);
 		return this.each(function(){
-			var c=conf,o=$(this),p,v=$('<span class="txtBg" />'),b=$('<button><span><strong>Browse...</strong></span></button>');
-			o.css({position:'absolute', opacity:0, width:'auto',zIndex:100});
-			p=o.wrap('<div class="'+c.parentClass+'" />').parent(); p.append(v).append(b);
+			var c=conf,o=$(this),p=$('<div />').addClass(c.parentClass),v=$('<span />').addClass('txtBg'),b=$('<button><span><strong>Browse...</strong></span></button>');
+			o.before(p).css({position:'absolute', opacity:0, width:'auto', zIndex:100});
+			p.append(o).append(v).append(b);
 			p.bind('mousemove', function(e){
 				o.css({left:e.pageX-p.offset().left-(o.width()-20)});
 				o.css({top:e.pageY-p.offset().top-(o.height()/2)});
@@ -174,8 +174,8 @@ if(jQuery) (function($){
 	$(document).ready(function(){
 		$('.viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
-		$('input:file').fileAn();
 		$('.viewRBox .unitSearch, .unitWBlock').categoryAn();
 		$('.areaTxt').rtfAn();
-	})
+	});
+	$(window).load(function(){$('input.ttt').fileAn();})
 })(jQuery);

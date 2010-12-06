@@ -43,26 +43,7 @@
 							<?php TemplateEngine::execute('/sidebar-' . $mvc->getView() . '.html', $mvc); ?>
 						<div class="angleB"></div>
 					</div>
-					<div class="viewGBox">
-						<div class="angleT"></div>
-							<div class="bodyBox">
-								<h2>Package</h2>
-								<div class="viewPackage">
-									<p>Current package: <span class="itemCurrent">P1</span></p>
-									<p>Upgrade package to: </p>
-									<p>
-										<select>
-											<option>P2</option>
-											<option>P3</option>
-											<option>P4</option>
-											<option>P5</option>
-										</select>
-										<button type="submit"><span><strong>Change</strong></span></button>
-									</p>
-								</div>
-							</div>
-						<div class="angleB"></div>
-					</div>
+					<?php TemplateEngine::execute('/sidebar-block.html', $mvc); ?>
 					<!-- fix gradient on -->
 					<div class="lineHide"></div>
 					<!-- fix gradient off -->

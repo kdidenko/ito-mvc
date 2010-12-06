@@ -38,7 +38,7 @@
 		</template>
 	</action>
 	<!-- Sub header views mapping end -->	
-	
+
 	<!-- Sidebar views mapping begin -->
 	<action name="/sidebar-*.html" id="sidebar-$1">
 		<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
@@ -51,6 +51,16 @@
 			<role type="PR" path="templates/views/sidebars/promoter/$1.html"/>		
 			<role type="BR" path="templates/views/sidebars/bookkeeper/$1.html"/>	
 		</template>	
+	</action>
+	
+	<action name="/sidebar-block.html" id="sidebarblock">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="$1.html" path="templates/views/sidebars/common/sidebarblock.html" />
+		<role type="TR">
+			<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
+					method="handle$1" />
+			<template name="$1.html" path="templates/views/sidebars/tradesman/sidebarblock.html" />
+		</role>
 	</action>
 	<!-- Sidebar views mapping end -->
 	

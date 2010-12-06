@@ -50,7 +50,7 @@ class AdminContentController extends ContentController {
 				$mvc->addObject ( self::STATUS, 'successful' );
 			}
 			
-			$block = StaticBlockService::getBlock($id);
+			$block = StaticBlockService::getBlockInfo($id);
 			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
 		}
 				

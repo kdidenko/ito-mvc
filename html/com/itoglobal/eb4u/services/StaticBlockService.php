@@ -37,13 +37,23 @@ class StaticBlockService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function getBlock($id) {
+	public static function getBlockInfo($id) {
 		$fields = '*';
 		$from = self::STATIC_BLOCK;
 		$where = self::ID . "='" . $id . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
+		return $result;
+	}
+	
+	public static function getBlock($id) {
+		$fields = '*';
+		$from = self::STATIC_BLOCK;
+		$where = self::ID . "='" . $id . "'";
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0][self::BLOCK_DESC] : false;
 		return $result;
 	}
 	

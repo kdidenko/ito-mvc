@@ -177,5 +177,5 @@ if(jQuery) (function($){
 		$('.viewRBox .unitSearch, .unitWBlock').categoryAn();
 		$('.areaTxt').rtfAn();
 	});
-	$(window).load(function(){$('input.ttt').fileAn();})
+	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

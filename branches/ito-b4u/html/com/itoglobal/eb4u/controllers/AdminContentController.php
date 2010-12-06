@@ -47,12 +47,11 @@ class AdminContentController extends ContentController {
 				$vals[] .= $requestParams[StaticBlockService::BLOCK_DESC];
 				StaticBlockService::updateBlock($id, $fields, $vals);
 				isset($requestParams[StaticBlockService::SAVE]) ? $this->forwardActionRequest ( $location ) : NULL;
+				$mvc->addObject ( self::STATUS, 'successful' );
 			}
 			
 			$block = StaticBlockService::getBlock($id);
-			
 			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
-			$mvc->addObject ( self::STATUS, 'successful' );
 		}
 				
 		

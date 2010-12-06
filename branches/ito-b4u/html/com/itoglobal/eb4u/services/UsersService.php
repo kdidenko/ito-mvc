@@ -71,6 +71,10 @@ class UsersService {
 	 */
 	const COMPANY = 'company';
 	/**
+	 * @var string defining the company_desc field name
+	 */
+	const COMPANY_DESC = 'company_desc';
+	/**
 	 * @var string defining the company_year field name
 	 */
 	const COMPANY_YEAR = 'company_year';

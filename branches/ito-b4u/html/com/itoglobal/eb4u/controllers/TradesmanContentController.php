@@ -101,7 +101,13 @@ class TradesmanContentController extends ContentController {
 		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		$error = array ();
 		
-	
+		
+		if (isset ( $requestParams ['companyInfoSbm'] )) {
+			$fields = array ('0'=>UsersService::COMPANY_DESC);
+			$vals = array ('0'=>$requestParams [UsersService::COMPANY_DESC]);
+			UsersService::updateFields ( $id, $fields, $vals );
+			$mvc->addObject ( self::STATUS, 'successful' );
+		}
 		if (isset ( $requestParams ['pctSbm'] )) {
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 				$file = $_FILES ['file'];

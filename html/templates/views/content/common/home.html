@@ -16,11 +16,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="category">
 <?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ 
-								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
-									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 							}
-							} 
+							foreach($categories as $key=>$category){ ?>
+								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 						} 
 						} ?>
 							</select>
 							<label>Hauptkategorie?</label>
@@ -28,11 +26,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="subcategory">
 <?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ 
-								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
+							foreach($subcategories as $key=>$subcategory){ ?>
 								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 							}
-							} 
+<?php 						}
 						} ?>
 							</select>
 							<label>Unterkategorie?</label>
@@ -97,6 +93,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		</div>
 		<!-- small box off -->
 		<!-- two lists on -->
+		<!-- 
 		<div class="viewTList">
 			<ul>
 				<li><a href="#" title="Dachdecker (67)">Dachdecker (67)</a></li>
@@ -119,6 +116,20 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 				<li><a href="#" title="VTelefonspezialist (19)">VTelefonspezialist (19)</a></li>
 				<li><a href="#" title="IT Service (15)">IT Service (15)</a></li>
 			</ul>
+		</div>
+		 -->
+		<div class="viewTList">
+<?php	if (isset($categories) && $categories!=NULL){ 
+			$count = count($categories);
+			$middle = $count/2;
+?> 
+			<ul>
+<?php		foreach($categories as $key=>$category){
+				if ($middle==$key) { ?></ul><ul><?php } ?>
+				<li><a href="#<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
+<?php		} ?> 
+			</ul>
+<?php	} ?>
 		</div>
 		<!-- two lists off -->
 		<!-- small box on -->

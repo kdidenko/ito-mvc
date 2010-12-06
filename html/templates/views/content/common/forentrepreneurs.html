@@ -15,11 +15,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="category">
 <?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ 
-								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
-									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 							}
-							} 
+							foreach($categories as $key=>$category){ ?>
+								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 						} 
 						} ?>
 							</select>
 							<label>Hauptkategorie?</label>
@@ -27,11 +25,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="subcategory">
 <?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ 
-								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
+							foreach($subcategories as $key=>$subcategory){ ?>
 								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 							}
-							} 
+<?php 						}
 						} ?>
 							</select>
 							<label>Unterkategorie?</label>
@@ -112,11 +108,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="category">
 <?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ 
-								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
-									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 							}
-							} 
+							foreach($categories as $key=>$category){ ?>
+								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 						} 
 						} ?>
 							</select>
 							<label>Hauptkategorie?</label>
@@ -124,11 +118,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 						<p>
 							<select name="subcategory">
 <?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ 
-								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
+							foreach($subcategories as $key=>$subcategory){ ?>
 								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 							}
-							} 
+<?php 						}
 						} ?>
 							</select>
 							<label>Unterkategorie?</label>

@@ -8,7 +8,7 @@ $("#navMenu").load("/sidebar-mymail.html", function(response, status, xhr) {
 	});
 </script>
 <?php 
-$mail = $mvc->getObject(TradesmanContentController::RESULT);
+$mail = $mvc->getObject(ContentController::RESULT);
 ?>
 
 <form action="/new-mail.html" method="post">

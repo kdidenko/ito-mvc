@@ -8,8 +8,8 @@ $outbox = $mvc->getObject(MailService::OUTBOX);
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Outbox}</h2>
-<div class="unitWBlock">
-	<table cellpadding="0" cellspacing="0" class="unitMail">
+<div class="unitWBlock unitLast">
+	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>
@@ -25,18 +25,17 @@ $outbox = $mvc->getObject(MailService::OUTBOX);
 			<tr>
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $mail[MailService::HASH]; ?>" /></td>
 				<td><?php echo $mail[MailService::GETTER]; ?></td>
-				<td><a href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
+				<td><a class="linkTr" href="/view-mail.html?id=<?php echo $mail[MailService::HASH]; ?>" title="_i18n{View mail}"><?php echo $mail[MailService::SUBJECT]; ?></a></td>
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>
 <?php 		}
 		}else {?>
-			<tr class="unitNoMail">
+			<tr class="unitNoData">
 				<td colspan="5">_i18n{No mail}</td>
 			</tr>
 <?php	} ?>
 		</tbody>
 	</table>
-	<div class="unitBtn"></div>
 </div>
 </form>

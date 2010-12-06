@@ -16,6 +16,8 @@ class SessionService {
 	
 	const ROLE = 'role';
 	
+	const PLAN_ID = 'plan_id';
+	
 	const ROLE_VR = 'VR';
 	
 	const ROLE_UR = 'UR';

@@ -58,7 +58,7 @@
 		<template name="$1.html" path="templates/views/sidebars/common/sidebarblock.html" />
 		<role type="TR">
 			<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
-					method="handle$1" />
+					method="handleSidebarBlock" />
 			<template name="$1.html" path="templates/views/sidebars/tradesman/sidebarblock.html" />
 		</role>
 	</action>

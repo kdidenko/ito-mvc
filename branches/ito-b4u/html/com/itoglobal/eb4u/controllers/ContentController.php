@@ -22,6 +22,33 @@ class ContentController extends SecureActionControllerImpl {
 	 */
 	const USER_DETAILS = 'USER';
 	
+	/*
+	 * HOME PAGE
+	 */
+	public function handleHome($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+
+		return $mvc;
+	}
+	
+	public function handleForEntrepreneurs($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+
+		return $mvc;
+	}
+	
 /*	public static function createTeaser ($list){
 		if (count($list)>0){
 			foreach($list as $key => $value){

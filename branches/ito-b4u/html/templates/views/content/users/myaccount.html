@@ -1,0 +1,10 @@
+<?php 
+$user = SessionService::getAttribute(SessionService::FIRSTNAME);
+$user .= ' ' . SessionService::getAttribute(SessionService::LASTNAME);
+?>
+<h2>Hello <?php echo $user; ?></h2>
+<div class="unitWBlock unitLast">
+	<div class="unitInfo unitRtf">
+		<?php echo StaticBlockService::getBlock(20); ?>
+	</div>
+</div>

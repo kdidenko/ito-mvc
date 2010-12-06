@@ -245,7 +245,7 @@
 	<!-- end changing password -->
 	
 	<!-- tradesman part -->
-	<action name="/company-profile.html" id="companyprofile" roles="UR,TR,BR,AR">
+	<action name="/company-profile.html" id="companyprofile" roles="TR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
@@ -350,4 +350,15 @@
 		</forwards>
 	</action>
 	<!-- end of admin part -->
+	
+	<!-- user part -->
+	
+	<action name="/my-recommendations.html" id="myrecommendations" roles="UR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	<!-- end of iser part -->
 </actions>

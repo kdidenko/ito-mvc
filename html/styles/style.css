@@ -215,11 +215,12 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* table */
 	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
 	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
-	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; cursor:pointer}
+	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
 	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
+	.viewWBox .unitData {cursor:pointer}
 	.viewWBox .unitOdd td {background:#EFEFEF}
 	.viewWBox .unitNoRead {font-weight:bold}
-	.viewWBox tr.unitNoMail td {border-right-width:0; cursor:auto}
+	.viewWBox tr.unitNoData td {border-right-width:0}
 	.viewWBox tr.unitHover td {background:#E2E2E2}
 	.viewWBox th.itemChk {width:14px}
 		.viewWBox td input.inpChk {margin:1px 0 0 0}

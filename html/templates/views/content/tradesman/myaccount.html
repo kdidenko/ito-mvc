@@ -2,8 +2,9 @@
 $user = SessionService::getAttribute(SessionService::FIRSTNAME);
 $user .= ' ' . SessionService::getAttribute(SessionService::LASTNAME);
 ?>
-<h2>_i18n{My private accounts}</h2>
+<h2>Hello <?php echo $user; ?></h2>
 <div class="unitWBlock unitLast">
-	Hello <?php echo $user; ?>
-	<?php echo StaticBlockService::getBlock(20); ?>
+	<div class="unitInfo unitRtf">
+		<?php echo StaticBlockService::getBlock(20); ?>
+	</div>
 </div>

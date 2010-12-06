@@ -114,9 +114,12 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
-	<action name="/my-account.html" id="myaccount">
+	<action name="/my-account.html" id="myaccount" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
 	</action>
 	<action name="/manage-*.html" id="manage$1" roles="AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />

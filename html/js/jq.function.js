@@ -39,15 +39,12 @@ if(jQuery) (function($){
 			f.autoRestart();
 		})
 	};
-	$.fn.inputFile = function(params){
-		var conf = $.extend({
-			parentClass:'inpFile'
-		}, params);
+	$.fn.fileAn = function(params){
+		var conf = $.extend({parentClass:'inpFile'}, params);
 		return this.each(function(){
 			var c=conf,o=$(this),p,v=$('<span class="txtBg" />'),b=$('<button><span><strong>Browse...</strong></span></button>');
 			o.css({position:'absolute', opacity:0, width:'auto',zIndex:100});
-			p=o.wrap('<div class="'+c.parentClass+'" />').parent();
-			p.append(v).append(b);
+			p=o.wrap('<div class="'+c.parentClass+'" />').parent(); p.append(v).append(b);
 			p.bind('mousemove', function(e){
 				o.css({left:e.pageX-p.offset().left-(o.width()-20)});
 				o.css({top:e.pageY-p.offset().top-(o.height()/2)});
@@ -55,67 +52,55 @@ if(jQuery) (function($){
 			o.bind('change', function(){v.html(o.attr('value'))})
 		})
 	};
-	$.fn.changeCategory = function(params){
-		var conf = $.extend({
-			categorySelect:'select[name="category"]',
-			categorySubSelect:'select[name="subcategory"]',
-			categorySubLink:'get-subcategory.html'
-		}, params);
+	$.fn.categoryAn = function(params){
+		var conf = $.extend({categorySelect:'select[name="category"]', categorySubSelect:'select[name="subcategory"]', categorySubLink:'get-subcategory.html'}, params);
 		return this.each(function(){
-			var c=conf,o=$(this),f=o.find(c.categorySelect),s=o.find(c.categorySubSelect);
-			f.bind('change', function(){
-				$.ajax({
-					type:'get',
-					dataType:'html',
-					url:c.categorySubLink+'?id='+$(this).attr('value'),
-					beforeSend:function(){s.html('<option>Loading...</option>')},
-					success:function(data){s.html(data)},
-					error:function(){s.html('data not load')}
-				})
-			})
+			var c=conf,o=$(this),f=this,k=o.find(c.categorySelect),s=o.find(c.categorySubSelect);
+			$.extend(f,{
+				loadBlock:function(i){
+					$.ajax({
+						type:'get', dataType:'html', url:c.categorySubLink+'?id='+i.attr('value'),
+						beforeSend:function(){s.html('<option>Loading...</option>')},
+						success:function(data){s.html(data)}, error:function(){s.html('data not load')}
+					})
+				}
+			});
+			k.bind('change', function(){f.loadBlock(k)})
 		})
 	};
-	$.fn.mailAn = function(params){
+	$.fn.dataAn = function(params){
 		var conf = $.extend({
-			tableBlock:'.unitMail',
+			tableBlock:'table',
 			hoverClass:'unitHover',
-			noMailClass:'unitNoMail'
+			noDataRow:'.unitNoData',
+			dataClass:'unitData',
+			linkWide:'.linkTr'
 		}, params);
 		return this.each(function(){
-			var c=conf,o=$(this),f=this;
+			var c=conf,o=$(this),f=this,v=[];
 			$.extend(f,{
 				getBlock:function(){return o.find(c.tableBlock)},
-				getRow:function(){return f.getBlock().find('tbody tr')},
-				getDelete:function(){return o.find(c.deleteLink)},
-				elSelect:function(){
-					var a=[];
-					f.getRow().each(function(){
-						var i=$(this).find('input[type="checkbox"]');
-						if(i.attr('checked')){a.push(i.attr('value'))}
-					})
-					o.find('input[name="itemSelect"]').attr('value', a.toString());
-				}
+				getRow:function(){return $('tbody tr:not('+c.noDataRow+')', f.getBlock())},
+				getHidden:function(){return $('input[name="itemSelect"]', o)}
 			});
 			if(f.getBlock().length){
 				$('tbody tr:odd', f.getBlock()).addClass('unitOdd');
-				$('form').submit(function(){f.elSelect()})
-				f.getRow().each(function(){
-					var it=$(this);
-					if(!it.hasClass(c.noMailClass)){
-						it.hover(function(){it.addClass(c.hoverClass)}, function(){it.removeClass(c.hoverClass)}
-						).bind('click', function(){
-							var l=it.find('a').attr('href');
-							if(l!=undefined){
-								document.location=it.find('a').attr('href');
-							}else{
-								alert('link not found');
-							}
-						});
-						it.find('input[type="checkbox"]').bind('click', function(e){
-							e.stopImmediatePropagation();
+				f.getRow().each(function(){var i=$(this);
+					i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
+					if($(c.linkWide, i).length){
+						i.addClass(c.dataClass);
+						var l=$(c.linkWide, i).attr('href');
+						$(c.linkWide, i).replaceWith($(c.linkWide, i).html());
+						i.bind('click', function(){document.location=l})
+						$('input[type="checkbox"]', i).bind('click', function(e){var h=$(this);
+							if(h.attr('checked')){v.push(h.attr('value'))}else{v.splice($.inArray(h.attr('value'), v), 1)}
+							f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
 						});
 					}
 				})
+				
+				
+				
 			}
 		})
 	};
@@ -180,10 +165,9 @@ if(jQuery) (function($){
 		});
 	};
 	$(document).ready(function(){
-		//$('.userNav a').popupAn();
-		$('.viewWBox').mailAn();
+		$('.viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
-		$('input:file').inputFile();
-		$('body').changeCategory();
+		$('input:file').fileAn();
+		$('.viewRBox .unitSearch, .unitWBlock').categoryAn();
 	})
 })(jQuery);

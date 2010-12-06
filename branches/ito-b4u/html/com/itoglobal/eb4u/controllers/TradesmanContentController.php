@@ -40,7 +40,6 @@ class TradesmanContentController extends ContentController {
 		}
 		
 		if (isset ( $requestParams ['personalSbm'] )) {		
-			//print_r($requestParams);exit;
 			$fields = array (
 							'0'=>UsersService::FIRSTNAME, 
 							'1'=>UsersService::LASTNAME,

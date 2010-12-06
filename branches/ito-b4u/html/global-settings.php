@@ -19,4 +19,12 @@
 	$db_user = 'root';		
 	$db_pass = '';
 	$charset = 'UTF8';
+	
+	# company logo size
+	$height = 130;
+	$width = 240;
+	
+	
+	define('COMPANY_LOGO_HEIGHT', $height);
+	define('COMPANY_LOGO_WIDTH', $width);
 ?>

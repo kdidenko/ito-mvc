@@ -30,10 +30,12 @@ class ValidationService {
 	public static function checkAvatar($file) {
 		$result = false;
 		if (isset($file['tmp_name'])){
+			$height = COMPANY_LOGO_HEIGHT;
+			$width = COMPANY_LOGO_WIDTH;
 			$size = getimagesize ( $file ['tmp_name'] );
-			$result = $size [0] <= 80 && $size [1] <= 80 ?
+			$result = $size [0] <= $width && $size [1] <= $height ?
 						false :
-							'_i18n{Allowed image size 80x80.}';
+							"_i18n{Allowed image size} $width x $height.";
 		}
 		return $result;
 	}

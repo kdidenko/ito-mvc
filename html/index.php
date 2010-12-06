@@ -7,9 +7,9 @@
 	ini_set('log_errors', TRUE);
     ini_set('html_errors', TRUE);
 	ini_set('display_errors', TRUE);
-
     # include all required code
 	include_once 'global-includes.php';
+
 
 	# session may be started now
 	SessionService::startSession();

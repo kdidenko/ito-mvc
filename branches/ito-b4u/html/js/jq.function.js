@@ -53,7 +53,7 @@ if(jQuery) (function($){
 		})
 	};
 	$.fn.categoryAn = function(params){
-		var conf = $.extend({categorySelect:'select[name="category"]', categorySubSelect:'select[name="subcategory"]', categorySubLink:'get-subcategory.html'}, params);
+		var conf = $.extend({categorySelect:'select.gCategory', categorySubSelect:'select.gSubCategory', categorySubLink:'get-subcategory.html'}, params);
 		return this.each(function(){
 			var c=conf,o=$(this),f=this,k=o.find(c.categorySelect),s=o.find(c.categorySubSelect);
 			$.extend(f,{
@@ -174,7 +174,7 @@ if(jQuery) (function($){
 	$(document).ready(function(){
 		$('.viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
-		$('.viewRBox .unitSearch, .unitWBlock').categoryAn();
+		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitTrioColumn').categoryAn();
 		$('.areaTxt').rtfAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})

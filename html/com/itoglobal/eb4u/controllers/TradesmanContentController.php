@@ -152,6 +152,37 @@ class TradesmanContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleCommunication($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		if(isset($requestParams['save'])){
+			//print_r($requestParams);
+			//print_r(REGIONS);
+			//$arra = explode(',',REGIONS);
+			//print_r($arra);
+			$categories = $requestParams['category']; 
+			$subcategories = $requestParams['subcategory']; 
+			$plan = '1'; 
+			//print_r($categories);
+			//print_r($subcategories);
+			foreach($categories as $key=>$category){
+				$subcategory = $subcategories[$key];
+				//print_r($category);
+				//print_r($subcategory);
+				RemindService::setRemind($id, $category, $subcategory, $plan, '1');
+			}
+			
+			$mvc->addObject ( self::STATUS, 'successful' );
+		}	
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		return $mvc;
+	}
 	
 }
 ?>

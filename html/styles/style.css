@@ -181,6 +181,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* two column */
 	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
 	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
+	.viewWBox .unitTrioColumn {width:676px; padding:0 4px 0 11px; overflow:hidden}
 	.viewWBox .unitLast {border:none; margin:0 4px}
 	/* info */
 	.viewWBox .unitInfo {padding:0 11px 5px 11px}
@@ -201,13 +202,19 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* form */
 	.viewWBox .itemForm {overflow:hidden; width:325px; padding:4px 0}
 		.unitSnColumn .itemForm {width:671px}
+		.unitTrioColumn .itemForm {width:236px; float:left}
+		.unitTrioColumn .itemFirst {width:191px}
 	.viewWBox label {float:left; width:115px; text-align:right; padding:3px 0 0 0}
+		.unitTrioColumn label {width:105px}
+		.unitTrioColumn .itemFirst label {width:60px}
 	.viewWBox .itemData {float:right; width:200px}
 		.unitSnColumn .itemData {width:546px}
+		.unitTrioColumn .itemData {width:126px}
 	.viewWBox input.inpTxt {width:192px}
 		.unitSnColumn input.inpTxt {width:531px}
 	.viewWBox textarea.areaTxt {width:192px; height:300px}
 		.unitSnColumn textarea.areaTxt {width:531px}
+		.unitTrioColumn select {width:126px}
 	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
 		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
 		.viewWBox .inpFile button span {background-position:right -78px}
@@ -248,6 +255,11 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.viewUList dt {float:left; width:auto; padding:0 0 0 10px; font-weight:bold; background:#fff; position:relative; z-index:5}
 		.viewUList dd {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative; z-index:4}
 		.viewUList dd a.itemActive {font-weight:bold}
+	.viewRList {width:676px; padding:5px 4px 0 11px; overflow:hidden}
+		.viewRList dt {float:left; width:100px; padding:5px 0 0 0}
+		.viewRList dd {float:right; width:566px}
+		.viewRList li {float:left; width:141px; padding:2px 0}
+		.viewRList li label {text-align:left; padding:4px 10px 0 4px; width:auto}
 
 .stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
 	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}

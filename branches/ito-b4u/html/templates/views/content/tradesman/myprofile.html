@@ -118,7 +118,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 			<div class="itemForm">
 				<label>_i18n{Category}:</label>
 				<div class="itemData">
-					<select name="category">
+					<select name="category" class="gCategory">
 						<option selected="selected" value="<?php echo $data[UsersService::CAT_ID]?>"><?php echo $data[CategoryService::CAT_NAME];?></option>
 <?php					if (isset($categories) && $categories!=NULL){ 
 							foreach($categories as $key=>$category){ 
@@ -133,7 +133,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 			<div class="itemForm">
 				<label>_i18n{Sub-Category}:</label>
 				<div class="itemData">
-					<select name="subcategory">
+					<select name="subcategory" class="gSubCategory">
 						<option selected="selected" value="<?php echo $data[UsersService::SUBCAT_ID]?>"><?php echo $data[SubCategoryService::SUBCAT_NAME];?></option>
 <?php					if (isset($subcategories) && $subcategories!=NULL){ 
 							foreach($subcategories as $key=>$subcategory){ 

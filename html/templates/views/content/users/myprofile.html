@@ -1,7 +1,5 @@
 <?php 
 $data = $mvc->getObject(ContentController::RESULT);
-$categories = $mvc->getObject(CategoryService::CATEGORY);
-$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 $psw_errors = $mvc->getObject(ContentController::PSW_ERROR);
 $status = $mvc->getObject(ContentController::STATUS);
 ?>
@@ -14,24 +12,6 @@ $status = $mvc->getObject(ContentController::STATUS);
 			</div>
 		<?php } ?>
 		<div class="unitEqColumn">
-			<div class="itemForm">
-				<label>_i18n{Company Name}:</label>
-				<div class="itemData">
-					<input class="inpTxt" disabled="disabled" type="text" name="company" value="<?php echo $data[UsersService::COMPANY]?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Ust-ID}:</label>
-				<div class="itemData">
-					<input class="inpTxt" disabled="disabled" type="text" name="vat" value="<?php echo $data[UsersService::VAT]?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Year}:</label>
-				<div class="itemData">
-					<input class="inpTxt" disabled="disabled" type="text" name="company_year" value="<?php echo $data[UsersService::COMPANY_YEAR]?>"/>
-				</div>
-			</div>
 			<div class="itemForm">
 				<label>_i18n{Salutation}:</label>
 				<div class="itemData">
@@ -82,7 +62,7 @@ $status = $mvc->getObject(ContentController::STATUS);
 				</div>
 			</div>
 			<div class="itemForm">
-				<label>_i18n{State}:</label>
+				<label>_i18n{Region}:</label>
 				<div class="itemData">
 					<input class="inpTxt" type="text" name="region" value="<?php echo $data[UsersService::REGION]?>"/>
 				</div>
@@ -106,43 +86,6 @@ $status = $mvc->getObject(ContentController::STATUS);
 				<label>_i18n{E-Mail}:</label>
 				<div class="itemData">
 					<input class="inpTxt" type="text" name="email" value="<?php echo $data[UsersService::EMAIL]?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Homepage}:</label>
-				<div class="itemData">
-					<input class="inpTxt" type="text" name="homepage" value="<?php echo $data[UsersService::HOMEPAGE]?>"/>
-				</div>
-			</div>
-			<h3>You Category</h3>
-			<div class="itemForm">
-				<label>_i18n{Category}:</label>
-				<div class="itemData">
-					<select name="category" class="gCategory">
-						<option selected="selected" value="<?php echo $data[UsersService::CAT_ID]?>"><?php echo $data[CategoryService::CAT_NAME];?></option>
-<?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ 
-								if ($category[CategoryService::ID]!=$data[UsersService::CAT_ID]){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 							}
-							} 
-						} ?>
-					</select>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Sub-Category}:</label>
-				<div class="itemData">
-					<select name="subcategory" class="gSubCategory">
-						<option selected="selected" value="<?php echo $data[UsersService::SUBCAT_ID]?>"><?php echo $data[SubCategoryService::SUBCAT_NAME];?></option>
-<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ 
-								if ($subcategory[SubCategoryService::ID]!=$data[UsersService::SUBCAT_ID]){ ?>
-								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 							}
-							} 
-						} ?>
-					</select>
 				</div>
 			</div>
 			<h3>User Help</h3>

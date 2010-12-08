@@ -15,6 +15,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
 	button span strong, a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
 	a.linkBtn:hover {color:#fff; text-decoration:none}
+.hideElement {display:none}
 
 .feedbackLink {position:fixed; left:0; top:50%; z-index:500}
 	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
@@ -181,7 +182,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* two column */
 	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
 	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
-	.viewWBox .unitTrioColumn {width:676px; padding:0 4px 0 11px; overflow:hidden}
+	.viewWBox .unitNotif {width:676px; padding:0 4px 5px 11px; overflow:hidden}
 	.viewWBox .unitLast {border:none; margin:0 4px}
 	/* info */
 	.viewWBox .unitInfo {padding:0 11px 5px 11px}
@@ -202,19 +203,19 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	/* form */
 	.viewWBox .itemForm {overflow:hidden; width:325px; padding:4px 0}
 		.unitSnColumn .itemForm {width:671px}
-		.unitTrioColumn .itemForm {width:236px; float:left}
-		.unitTrioColumn .itemFirst {width:191px}
+		.unitNotif .itemForm {width:236px; float:left}
+		.unitNotif .itemFirst {width:191px}
 	.viewWBox label {float:left; width:115px; text-align:right; padding:3px 0 0 0}
-		.unitTrioColumn label {width:105px}
-		.unitTrioColumn .itemFirst label {width:60px}
+		.unitNotif label {width:105px}
+		.unitNotif .itemFirst label {width:60px}
 	.viewWBox .itemData {float:right; width:200px}
 		.unitSnColumn .itemData {width:546px}
-		.unitTrioColumn .itemData {width:126px}
+		.unitNotif .itemData {width:126px}
 	.viewWBox input.inpTxt {width:192px}
 		.unitSnColumn input.inpTxt {width:531px}
 	.viewWBox textarea.areaTxt {width:192px; height:300px}
 		.unitSnColumn textarea.areaTxt {width:531px}
-		.unitTrioColumn select {width:126px}
+		.unitNotif select {width:126px}
 	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
 		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
 		.viewWBox .inpFile button span {background-position:right -78px}
@@ -225,6 +226,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitSnColumn dd.itemData {width:546px; color:#000}
 	.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
 			.unitSnColumn .itemEq dd.itemData {width:200px}
+	.unitNotif .unitP {width:671px; background:#EFEFEF; overflow:hidden; padding:3px 0}
+	.unitNotif .linkDelete {float:right; background:#EFEFEF; margin:0 5px 0 0; padding:2px 5px 4px 5px}
+	.unitNotif .linkDelete a {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
+	.unitNotifEmpty {padding:0 4px 5px 11px}
 	/* table */
 	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
 	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}

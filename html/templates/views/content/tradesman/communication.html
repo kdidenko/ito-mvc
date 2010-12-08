@@ -15,6 +15,13 @@ $data = $mvc->getObject(ContentController::RESULT);
 	<li class="itemNew"><a href="#" title="New notification">New notification</a></li>
 </ul>
 <h2>Notification</h2>
+<?php if (isset($status )){?>
+	<div class="itemOk">
+		<ul>
+			<li>_i18n{Successfully Saved}</li>
+		</ul>
+	</div>
+<?php } ?>
 <div class="unitWBlock unitLast">
 	<div id="unitNotif" class="hideElement">
 		<!-- sample on -->
@@ -62,13 +69,6 @@ $data = $mvc->getObject(ContentController::RESULT);
 		<!-- sample off -->
 	</div>
 	<form action="/communication.html" method="post">
-	<?php if (isset($status )){?>
-		<div class="itemOk">
-			<ul>
-				<li>_i18n{Successfully Saved}</li>
-			</ul>
-		</div>
-	<?php } ?>
 		<div class="unitNotifEmpty hideElement">Empty notification</div>
 <?php 
 	if(isset($data) && $data!=NULL && count($data)>0) {

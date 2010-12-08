@@ -71,7 +71,7 @@ $data = $mvc->getObject(ContentController::RESULT);
 	<?php } ?>
 		<div class="unitNotifEmpty hideElement">Empty notification</div>
 <?php 
-	if(isset($data) && count($data)>0) {
+	if(isset($data) && $data!=NULL && count($data)>0) {
 		foreach($data as $data_key=>$remind){
 ?>
 		<div class="unitNotif">

@@ -156,32 +156,56 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		if(isset($requestParams['save'])){
-			//echo "<br/><br/><br/><br/>";print_r($requestParams);
-			
-			$categories = $requestParams[CategoryService::CATEGORY];
-			$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
-			/*print_r($categories);
-			print_r($subcategories);
-			exit;
-			RemindService::deleteByUser($id);
-			
-			foreach($categories as $key=>$category){
-				$subcategory = $subcategories[$key];
-				
-				RemindService::setRemind($id, $category, $subcategory, $plan, '1');
-			}*/
-			$mvc->addObject ( self::STATUS, 'successful' );
+			if (isset($requestParams['region'])){
+				if (isset($requestParams[CategoryService::CATEGORY]) && count($requestParams[CategoryService::CATEGORY])>0){
+					$value = array();
+					$categories = $requestParams[CategoryService::CATEGORY];
+					$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
+					$plan = $requestParams[PlanService::PLAN];
+					$region = $requestParams['region'];
+					
+					RemindService::deleteByUser($id);
+					
+					foreach ($region as $region_key=>$region_item){
+						foreach($categories as $key=>$category){
+							$subcategory = $subcategories[$key];
+							$price = 1;
+							$region = $region_item;
+							$values[] .= $id . ', ' . $category . ', ' . $subcategory . ', ' . 
+										$price . ', ' . $region;
+						}
+					}
+					
+					RemindService::setRemind($id, $values);
+					
+					$mvc->addObject ( self::STATUS, 'successful' );
+				} else {
+					$mvc->addObject ( self::ERROR, '<br/>ERROR no notification' );
+				}
+			} else {
+				if (!isset($requestParams[CategoryService::CATEGORY])) {
+					RemindService::deleteByUser($id);
+				} else {
+					$mvc->addObject ( self::ERROR, '<br/>ERROR no region' );
+				}
+			}
 		}	
 		
 		$category = CategoryService::getCategories ();
 		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
 
-		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		//$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		$subcategory = SubCategoryService::getSubCategories ();
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		
 		$data = RemindService::getRemindsByUser ($id);
 		isset ( $data ) ? $mvc->addObject ( self::RESULT, $data ) : null;
 		
+		$regions = RegionService::getRegions ($id);
+		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
+		
+		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
+		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
 		
 		return $mvc;
 	}

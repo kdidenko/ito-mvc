@@ -1,11 +1,13 @@
 <?php 
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$remind_regions = $mvc->getObject(RemindService::REGION_ID);
 $status = $mvc->getObject(ContentController::STATUS);
 $data = $mvc->getObject(ContentController::RESULT);
-//echo "<br/><br/><br/><br/>";print_r($data);
+$errors = $mvc->getObject(ContentController::ERROR);
 ?>
-<h2>_i18n{tradesman my job page content}</h2>
+<h2>_i18n{My Notification}</h2>
 <div class="unitWBlock">
 	<div class="unitInfo unitRtf">
 		<?php echo StaticBlockService::getBlock(21); ?>
@@ -19,6 +21,13 @@ $data = $mvc->getObject(ContentController::RESULT);
 	<div class="itemOk">
 		<ul>
 			<li>_i18n{Successfully Saved}</li>
+		</ul>
+	</div>
+<?php } ?>
+<?php if (isset($errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<li><?php echo $errors?></li>
 		</ul>
 	</div>
 <?php } ?>
@@ -44,9 +53,11 @@ $data = $mvc->getObject(ContentController::RESULT);
 					<div class="itemData">
 						<select id="frmCs" name="subcategory" class="gSubCategory">
 		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-									foreach($subcategories as $key=>$subcategory){ ?>
-										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-		<?php 						}
+									foreach($subcategories as $key=>$subcategory){ 
+										if ($subcategory[SubCategoryService::CAT_ID] == $categories[0][CategoryService::ID]){?>
+											<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+		<?php 							}
+									}
 								} ?>
 						</select>
 					</div>
@@ -95,10 +106,10 @@ $data = $mvc->getObject(ContentController::RESULT);
 					<label for="frmCs<?php echo $data_key; ?>">_i18n{Sub-Category}:</label>
 					<div class="itemData">
 						<select id="frmCs<?php echo $data_key; ?>" name="subcategory[<?php echo $data_key; ?>]" class="gSubCategory">
-							<option selected="selected" value="<?php echo $remind[RemindService::CATEGORY_ID]?>"><?php echo $remind[SubCategoryService::SUBCAT_NAME];?></option>
+							<option selected="selected" value="<?php echo $remind[RemindService::SUBCATEGORY_ID]?>"><?php echo $remind[SubCategoryService::SUBCAT_NAME];?></option>
 <?php			if (isset($subcategories) && $subcategories!=NULL){ 
 					foreach($subcategories as $key=>$subcategory){ 
-						if ($subcategory[SubCategoryService::ID]!=$remind[RemindService::SUBCATEGORY_ID]){ ?>
+						if ($subcategory[SubCategoryService::ID]!=$remind[RemindService::SUBCATEGORY_ID] && $subcategory[SubCategoryService::CAT_ID]==$remind[RemindService::CATEGORY_ID]){ ?>
 							<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
 <?php 					}
 					} 
@@ -126,46 +137,19 @@ $data = $mvc->getObject(ContentController::RESULT);
 			<dt>Region:</dt>
 			<dd>
 				<ul>
+<?php foreach($regions as $key=>$region){ ?> 
 					<li>
-						<input id="frmR1" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
-						<label for="frmR1">Wien</label>
+						<input 
+						
+						<?php if (isset($remind_regions)&&$remind_regions!=NULL ){ foreach($remind_regions as $key=>$remind_regions_item){ ?> 
+						<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked'  : NULL; }}?>
+						
+						id="frmR<?php echo $region[RegionService::ID]; ?>" type="checkbox" class="inpChk" name="region[<?php echo $region[RegionService::ID]; ?>]" value="<?php echo $region[RegionService::ID]; ?>"/>
+						<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label> 
+						
+						
 					</li>
-					<li>
-						<input id="frmR2" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
-						<label for="frmR2">Oberosterreich</label>
-					</li>
-					<li>
-						<input id="frmR3" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
-						<label for="frmR3">Karnten</label>
-					</li>
-					<li>
-						<input id="frmR4" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
-						<label for="frmR4">Osttirol</label>
-					</li>
-					<li>
-						<input id="frmR5" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
-						<label for="frmR5">Niederosterreich</label>
-					</li>
-					<li>
-						<input id="frmR6" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
-						<label for="frmR6">Steiermark</label>
-					</li>
-					<li>
-						<input id="frmR7" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
-						<label for="frmR7">Tirol</label>
-					</li>
-					<li>
-						<input id="frmR8" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
-						<label for="frmR8">Burgenland</label>
-					</li>
-					<li>
-						<input id="frmR9" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
-						<label for="frmR9">Salzburg</label>
-					</li>
-					<li>
-						<input id="frmR10" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
-						<label for="frmR10">Vorarlberg</label>
-					</li>
+<?php } ?>
 				</ul>
 			</dd>
 		</dl>

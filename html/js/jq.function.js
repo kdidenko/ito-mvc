@@ -191,7 +191,7 @@ if(jQuery) (function($){
 						})
 						return false
 						
-						
+						 
 						
 						
 					})
@@ -222,7 +222,7 @@ if(jQuery) (function($){
 	$(document).ready(function(){
 		$('.viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
-		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitTrioColumn').categoryAn();
+		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitNotif').categoryAn();
 		$('.areaTxt').rtfAn();
 		$('.bodyBox').notificationAn();
 	});

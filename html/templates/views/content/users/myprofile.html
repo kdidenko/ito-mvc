@@ -99,6 +99,23 @@ $status = $mvc->getObject(ContentController::STATUS);
 					</select>
 				</div>
 			</div>
+			<h3>Progress</h3>
+			<dl class="itemForm">
+				<dt>_i18n{You registered}:</dt>
+				<dd class="itemData"><?php echo $data[UsersService::CRDATE];?></dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{How many tenders you made?}</dt>
+				<dd class="itemData">0</dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{How many orders you made?}</dt>
+				<dd class="itemData">0</dd>
+			</dl>
+			<dl class="itemForm">
+				<dt>_i18n{How many recomendations you made?}</dt>
+				<dd class="itemData">0</dd>
+			</dl>
 		</div>
 		<div class="unitBtn">
 			<button name="personalSbm"><span><strong>_i18n{Save}</strong></span></button>

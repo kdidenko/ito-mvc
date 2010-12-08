@@ -30,16 +30,19 @@ class RemindService {
 	 */
 	const REGION_ID = 'region_id';
 	
-	private static function getReminds (){
-		$fields = 't1.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::GETTER . SQLClient::FROM . '(' . 
-					SQLClient::SELECT . self::MAILS . '.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::SENDER;
-		$from = self::MAILS . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . self::MAILS . '.' . 
-				self::SENDER_ID . '=' . UsersService::USERS . '.' . UsersService::ID . ')' . SQLClient::SQL_AS . 't1' . 
-				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 't1.' . 
-				self::GETTER_ID . '=' . UsersService::USERS . '.' . UsersService::ID;
-		$orderby = self::CRDATE . ' ' . SQLClient::DESC;
+	public static function getRemindsByUser ($user){
+		$fields = self::REMINDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
+				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+		$from = self::REMINDERS . 
+				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::REMINDERS . '.' . self::CATEGORY_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
+				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
+				self::REMINDERS . '.' . self::SUBCATEGORY_ID;
+		$where = self::USER_ID . '=' . $user;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '' , $orderby, '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
@@ -56,21 +59,19 @@ class RemindService {
 		return $result;
 	}
 	
-	private static function updateRemind ($id, $fields, $vals){
+	public static function updateRemind ($id, $fields, $vals){
 		$from = self::REMINDERS;
 		$where = self::ID . " = '" . $id . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 	
-	public static function deleteFromTrash($hash) {
+	public static function deleteByUser($user) {
 		# setting the query variables
-		$from = self::MAILS;
-		$where = self::HASH . " = '" . $hash . "'";
-		$orderBy = null;
-		$limit = null;
+		$from = self::REMINDERS;
+		$where = self::USER_ID . " = '" . $user . "'";
 		# executing the query
-		DBClientHandler::getInstance ()->execDelete($from, $where, $orderBy, $limit);
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
 	}	
 
 }

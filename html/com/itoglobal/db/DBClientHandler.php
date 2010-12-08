@@ -64,6 +64,12 @@ class DBClientHandler {
 	public function execInsert($fields, $values, $into) {
 		return $this->client->execInsert ( $fields, $values, $into, $this->connection );
 	}
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execMultipleInsert($fields, $values, $into)
+	 */
+	public function execMultipleInsert($fields, $values, $into) {
+		return $this->client->execMultipleInsert ( $fields, $values, $into, $this->connection );
+	}
 	
 	/* (non-PHPdoc)
 	 * @see com/itoglobal/db/sql/SQLClientInterface#execSelect($fields, $from, $where, $groupBy, $orderBy, $limit)

@@ -111,6 +111,15 @@ interface SQLClientInterface {
      */
     public static function execInsert ($fields, $values, $into, $lnk);
     /**
+     * Executes SQL INSERT statement.
+     * @param $fields string - comma separated fields list of inserted values.
+     * @param $values array - comma separated values list to be inserted.
+     * @param $into string - tebale name to insert values.
+     * @param $into mixed - db link to use for execution
+     * @return integer - zero if execution was successful. Non-zero if an error occurred.
+     */
+    public static function execMultipleInsert ($fields, $values, $into, $lnk);
+    /**
      * Prepares and executes SQL SELECT statement.
      * @param $fields string - comma separated list of fields to select.
      * @param $from string - comma separated list of table names to use for select query.

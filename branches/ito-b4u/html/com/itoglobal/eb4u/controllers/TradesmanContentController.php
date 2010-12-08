@@ -156,22 +156,20 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		if(isset($requestParams['save'])){
-			//print_r($requestParams);
-			//print_r(REGIONS);
-			//$arra = explode(',',REGIONS);
-			//print_r($arra);
-			$categories = $requestParams['category']; 
-			$subcategories = $requestParams['subcategory']; 
-			$plan = '1'; 
-			//print_r($categories);
-			//print_r($subcategories);
+			//echo "<br/><br/><br/><br/>";print_r($requestParams);
+			
+			$categories = $requestParams[CategoryService::CATEGORY];
+			$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
+			/*print_r($categories);
+			print_r($subcategories);
+			exit;
+			RemindService::deleteByUser($id);
+			
 			foreach($categories as $key=>$category){
 				$subcategory = $subcategories[$key];
-				//print_r($category);
-				//print_r($subcategory);
+				
 				RemindService::setRemind($id, $category, $subcategory, $plan, '1');
-			}
-			
+			}*/
 			$mvc->addObject ( self::STATUS, 'successful' );
 		}	
 		
@@ -180,6 +178,10 @@ class TradesmanContentController extends ContentController {
 
 		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$data = RemindService::getRemindsByUser ($id);
+		isset ( $data ) ? $mvc->addObject ( self::RESULT, $data ) : null;
+		
 		
 		return $mvc;
 	}

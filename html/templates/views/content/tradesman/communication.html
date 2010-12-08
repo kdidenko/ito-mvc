@@ -9,185 +9,156 @@ $status = $mvc->getObject(ContentController::STATUS);
 		<?php echo StaticBlockService::getBlock(21); ?>
 	</div>
 </div>
-<form action="/communication.html" method="post">
+<ul class="viewIList">
+	<li class="itemNew"><a href="#" title="New notification">New notification</a></li>
+</ul>
+<h2>Notification</h2>
 <div class="unitWBlock unitLast">
-<?php if (isset($status )){?>
-	<div class="itemOk">
-		<ul>
-			<li>_i18n{Successfully Saved}</li>
-		</ul>
+	<div id="unitNotif" class="hideElement">
+		<!-- sample on -->
+		<div class="unitNotif">
+			<div class="unitP">
+				<div class="itemForm itemFirst">
+					<label for="frmCc">_i18n{Category}:</label>
+					<div class="itemData">
+						<select id="frmCc" name="category" class="gCategory">
+		<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+		<?php 						} 
+								} ?>
+						</select>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label for="frmCs">_i18n{Sub-Category}:</label>
+					<div class="itemData">
+						<select id="frmCs" name="subcategory" class="gSubCategory">
+		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+									foreach($subcategories as $key=>$subcategory){ ?>
+										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+		<?php 						}
+								} ?>
+						</select>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label for="frmCp">Auftragsvolumen:</label>
+					<div class="itemData">
+						<select id="frmCp" name="plan">
+							<option>0-1.000 Euro</option>
+							<option>1.000-5.000 Euro</option>
+							<option>5.000-unbegrenzt</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="linkDelete">
+				<a href="#" title="Remove notification">Remove notification</a>
+			</div>
+		</div>
+		<!-- sample off -->
 	</div>
-<?php } ?>
-	<div class="unitTrioColumn">
-		<div class="itemForm itemFirst">
-			<label for="frmC4">_i18n{Category}:</label>
-			<div class="itemData">
-				<select id="frmC4" name="category[1]" class="gCategory">
-<?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 						} 
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC5">_i18n{Sub-Category}:</label>
-			<div class="itemData">
-				<select id="frmC5" name="subcategory[1]" class="gSubCategory">
-<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ ?>
-								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 						}
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC6">Auftragsvolumen:</label>
-			<div class="itemData">
-				<select id="frmC6" name="plan[1]">
-					<option>0-1.000 Euro</option>
-					<option>1.000-5.000 Euro</option>
-					<option>5.000-unbegrenzt</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class="unitTrioColumn">
-		<div class="itemForm itemFirst">
-			<label for="frmC7">_i18n{Category}:</label>
-			<div class="itemData">
-				<select id="frmC7" name="category[2]" class="gCategory">
-<?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 						} 
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC8">_i18n{Sub-Category}:</label>
-			<div class="itemData">
-				<select id="frmC8" name="subcategory[2]" class="gSubCategory">
-<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ ?>
-								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 						}
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC9">Auftragsvolumen:</label>
-			<div class="itemData">
-				<select id="frmC9" name="plan[2]">
-					<option>0-1.000 Euro</option>
-					<option>1.000-5.000 Euro</option>
-					<option>5.000-unbegrenzt</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class="unitTrioColumn">
-		<div class="itemForm itemFirst">
-			<label for="frmC1">_i18n{Category}:</label>
-			<div class="itemData">
-				<!-- 
-				<select id="frmC1" name="category" class="gCategory">
-					<option value="1" selected="selected">IT</option>
-					<option value="2">finance</option>
-				</select>
-				 -->
-				<select id="frmC1" name="category[3]" class="gCategory">
-<?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 						} 
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC2">_i18n{Sub-Category}:</label>
-			<div class="itemData">
-				<!-- 
-				<select id="frmC2" name="subcategory" class="gSubCategory">
-					<option value="2" selected="selected">web-design</option>
-					<option value="1">SEO</option>
-					<option value="3">development</option>
-				</select>
-				 -->
-				<select id="frmC2" name="subcategory[3]" class="gSubCategory">
-<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ ?>
-								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 						}
-						} ?>
-				</select>
-			</div>
-		</div>
-		<div class="itemForm">
-			<label for="frmC3">Auftragsvolumen:</label>
-			<div class="itemData">
-				<select id="frmC3" name="plan[3]">
-					<option>0-1.000 Euro</option>
-					<option>1.000-5.000 Euro</option>
-					<option>5.000-unbegrenzt</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<dl class="viewRList">
-		<dt>Region:</dt>
-		<dd>
+	<form action="/communication.html" method="post">
+	<?php if (isset($status )){?>
+		<div class="itemOk">
 			<ul>
-				<li>
-					<input id="frmR1" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
-					<label for="frmR1">Wien</label>
-				</li>
-				<li>
-					<input id="frmR2" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
-					<label for="frmR2">Oberosterreich</label>
-				</li>
-				<li>
-					<input id="frmR3" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
-					<label for="frmR3">Karnten</label>
-				</li>
-				<li>
-					<input id="frmR4" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
-					<label for="frmR4">Osttirol</label>
-				</li>
-				<li>
-					<input id="frmR5" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
-					<label for="frmR5">Niederosterreich</label>
-				</li>
-				<li>
-					<input id="frmR6" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
-					<label for="frmR6">Steiermark</label>
-				</li>
-				<li>
-					<input id="frmR7" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
-					<label for="frmR7">Tirol</label>
-				</li>
-				<li>
-					<input id="frmR8" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
-					<label for="frmR8">Burgenland</label>
-				</li>
-				<li>
-					<input id="frmR9" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
-					<label for="frmR9">Salzburg</label>
-				</li>
-				<li>
-					<input id="frmR10" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
-					<label for="frmR10">Vorarlberg</label>
-				</li>
+				<li>_i18n{Successfully Saved}</li>
 			</ul>
-		</dd>
-	</dl>
-	<div class="unitBtn">
-		<button name="save"><span><strong>_i18n{Save}</strong></span></button>
-	</div>
+		</div>
+	<?php } ?>
+		<div class="unitNotifEmpty hideElement">Empty notification</div>
+		<div class="unitNotif">
+			<div class="unitP">
+				<div class="itemForm itemFirst">
+					<label for="frmC4">_i18n{Category}:</label>
+					<div class="itemData">
+						<select id="frmC4" name="category[1]" class="gCategory">
+		<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+		<?php 						} 
+								} ?>
+						</select>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label for="frmC5">_i18n{Sub-Category}:</label>
+					<div class="itemData">
+						<select id="frmC5" name="subcategory[1]" class="gSubCategory">
+		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+									foreach($subcategories as $key=>$subcategory){ ?>
+										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+		<?php 						}
+								} ?>
+						</select>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label for="frmC6">Auftragsvolumen:</label>
+					<div class="itemData">
+						<select id="frmC6" name="plan[1]">
+							<option>0-1.000 Euro</option>
+							<option>1.000-5.000 Euro</option>
+							<option>5.000-unbegrenzt</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="linkDelete">
+				<a href="#" title="Remove notification">Remove notification</a>
+			</div>
+		</div>
+		<dl class="viewRList">
+			<dt>Region:</dt>
+			<dd>
+				<ul>
+					<li>
+						<input id="frmR1" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
+						<label for="frmR1">Wien</label>
+					</li>
+					<li>
+						<input id="frmR2" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
+						<label for="frmR2">Oberosterreich</label>
+					</li>
+					<li>
+						<input id="frmR3" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
+						<label for="frmR3">Karnten</label>
+					</li>
+					<li>
+						<input id="frmR4" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
+						<label for="frmR4">Osttirol</label>
+					</li>
+					<li>
+						<input id="frmR5" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
+						<label for="frmR5">Niederosterreich</label>
+					</li>
+					<li>
+						<input id="frmR6" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
+						<label for="frmR6">Steiermark</label>
+					</li>
+					<li>
+						<input id="frmR7" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
+						<label for="frmR7">Tirol</label>
+					</li>
+					<li>
+						<input id="frmR8" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
+						<label for="frmR8">Burgenland</label>
+					</li>
+					<li>
+						<input id="frmR9" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
+						<label for="frmR9">Salzburg</label>
+					</li>
+					<li>
+						<input id="frmR10" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
+						<label for="frmR10">Vorarlberg</label>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+		<div class="unitBtn">
+			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
+		</div>
+	</form>
 </div>
-</form>
+

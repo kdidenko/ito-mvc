@@ -68,6 +68,54 @@ if(jQuery) (function($){
 			k.bind('change', function(){f.loadBlock(k)})
 		})
 	};
+	$.fn.notificationAn = function(params){
+		var conf = $.extend({
+			sBlock:'#unitNotif',
+			linkNew:'.viewIList .itemNew',
+			linkDelete:'.linkDelete a',
+			maxItems:5,
+			cBlock:'.unitNotif',
+			nBlock:'.unitNotifEmpty'
+		}, params);
+		return this.each(function(){
+			var c=conf,o=$(this),f=this,s=null,m=0,v=0;
+			$.extend(f,{
+				getAdd:function(){return $(c.linkNew, o)},
+				getEmpty:function(){
+					if(m>0){$(c.nBlock, o).addClass('hideElement')}else{$(c.nBlock, o).removeClass('hideElement')}
+				},
+				getBlock:function(){s=$(c.sBlock, o).remove().children()},
+				getDelete:function(i){$(c.linkDelete, i).bind('click', function(){i.remove(); m--; f.getEmpty(); return false})},
+				getPhpBlock:function(){
+					m=$(c.cBlock, o).size(); v=$(c.cBlock, o).size();
+					$(c.cBlock, o).each(function(){
+						f.getDelete($(this));
+					})
+				},
+				newBlock:function(i){
+					var b=s.clone();
+					$('input, select', b).each(function(){
+						$(this).attr('name', $(this).attr('name')+'['+i+']');
+						$(this).attr('id', $(this).attr('id')+i);
+					});
+					$('label', b).each(function(){
+						$(this).attr('for', $(this).attr('for')+i);
+					});
+					f.getDelete(b);
+					b.categoryAn(); return b;
+				}
+			});
+			f.getBlock();
+			if(s.length){
+				f.getPhpBlock();
+				f.getEmpty();
+				f.getAdd().bind('click', function(){
+					if(m<c.maxItems){m++; v++; $(c.nBlock, o).after(f.newBlock(v)); f.getEmpty()}
+					return false;
+				})
+			}
+		})
+	};
 	$.fn.dataAn = function(params){
 		var conf = $.extend({
 			tableBlock:'table',
@@ -176,6 +224,7 @@ if(jQuery) (function($){
 		$('.stationCarousel').carouselAn();
 		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitTrioColumn').categoryAn();
 		$('.areaTxt').rtfAn();
+		$('.bodyBox').notificationAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

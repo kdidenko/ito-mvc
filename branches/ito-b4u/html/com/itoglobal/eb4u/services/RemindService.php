@@ -30,6 +30,16 @@ class RemindService {
 	 */
 	const REGION_ID = 'region_id';
 	
+	
+	/*
+	 SELECT reminders. * , category.category_name, subcategory.subcategory_name
+	FROM reminders
+	LEFT JOIN category ON category.id = reminders.category_id
+	LEFT JOIN subcategory ON subcategory.id = reminders.subcategory_id
+	WHERE user_id =42
+	GROUP BY  `category_id` ,  `subcategory_id` ,  `plan_id` 
+	 */
+	
 	public static function getRemindsByUser ($user){
 		$fields = self::REMINDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
@@ -41,20 +51,31 @@ class RemindService {
 				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
 				self::REMINDERS . '.' . self::SUBCATEGORY_ID;
 		$where = self::USER_ID . '=' . $user;
+		$groupBy = self::CATEGORY_ID . ',' . self::SUBCATEGORY_ID . ', ' . self::PLAN_ID;
+		$orderBy = self::ID;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , $orderBy, '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
 	
-	public static function setRemind($user, $category, $subcategory, $plan, $region) {
+	public static function getRemindsRegionsByUser ($user){
+		$fields = self::REGION_ID;
+		$from = self::REMINDERS; 
+		$where = self::USER_ID . '=' . $user;
+		$groupBy = self::REGION_ID;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function setRemind($user, $values) {
 		#Insert new users to DB
 		$into = self::REMINDERS;
 		$fields = self::USER_ID . ', ' . self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . 
 				self::PLAN_ID . ', ' .	self::REGION_ID;
-		$values = "'" . $user . "','" . $category . "','" . $subcategory . "','" . 
-				$plan . "','" . $region . "'";
-		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		$result = DBClientHandler::getInstance ()->execMultipleInsert ( $fields, $values, $into );
 		#get user id 
 		return $result;
 	}

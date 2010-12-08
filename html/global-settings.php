@@ -24,20 +24,7 @@
 	$height = 130;
 	$width = 240;
 	
-	# region predefined
-	$regions = "Wien,
-			Oberosterreich,
-			Karnten,
-			Osttirol,
-			Niederosterreich,
-			Steiermark,
-			Tirol,
-			Burgenland,
-			Salzburg,
-			Vorarlberg";
 	
-	
-	define('REGIONS', $regions);
 	define('COMPANY_LOGO_HEIGHT', $height);
 	define('COMPANY_LOGO_WIDTH', $width);
 ?>

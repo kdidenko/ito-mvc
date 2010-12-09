@@ -70,7 +70,7 @@ class MailService {
 	 * @param integer $user the user id.
 	 * @return mixed mails data or null if user with such id does not exists. 
 	 */
-	private static function getMails ($where){
+	public static function getMails ($where){
 		$fields = 't1.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::GETTER . SQLClient::FROM . '(' . 
 					SQLClient::SELECT . self::MAILS . '.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::SENDER;
 		$from = self::MAILS . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . self::MAILS . '.' . 
@@ -90,7 +90,7 @@ class MailService {
 	 * @param bool $gettime get time for all
 	 * @return unknown_type
 	 */
-	private function createDate($array, $status = false, $gettime=false){
+	public function createDate($array, $status = false, $gettime=false){
 		foreach($array as $key => $value){
 			$data = $value[MailService::CRDATE];
 			$data = explode(' ', $data);

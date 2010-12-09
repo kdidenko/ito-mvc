@@ -21,6 +21,10 @@ class StorageService {
 	 */
 	const USERS_FOLDER = 'storage/uploads/users/';
 	/**
+	 * @var string - bargains directory name 
+	 */
+	const BARGAINS_FOLDER = 'storage/uploads/bargains/';
+	/**
 	 * @var string - user avatar directory name 
 	 */
 	const USER_AVATAR = 'avatar.jpg';

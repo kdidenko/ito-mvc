@@ -210,5 +210,14 @@ class TradesmanContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleMyBargains($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$bargains = BargainsService::getBargains($id);
+		isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
+		
+		return $mvc;
+	}
+	
 }
 ?>

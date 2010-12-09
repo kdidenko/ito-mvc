@@ -1,3 +1,6 @@
+<?php 
+$bargains = $mvc->getObject(BargainsService::BARGAINS);
+?>
 <ul class="viewIList">
 	<li class="itemNewB"><a href="#" title="New">New</a></li>
 	<li class="itemArhiv"><button onclick="return confirm('_i18n{You sure you want to delete?}');" >Archivieren</button></li>
@@ -18,26 +21,20 @@
 			</tr>
 		</thead>
 		<tbody>
+<?php if (isset($bargains) && $bargains!=NULL) { ?>
+<?php 	foreach ($bargains as $key=>$value){ ?>
 			<tr>
 				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a href="#" class="linkTr">S124</a></td>
-				<td>Kategorie1</td>
-				<td>text</td>
-				<td>05/08/2010</td>
-				<td>50.00 &euro;</td>
-				<td>3</td>
+				<td><a href="#" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
+				<td><?php echo $value[CategoryService::CAT_NAME]?></td>
+				<td><?php echo $value[BargainsService::BARGAIN_NAME]?></td>
+				<td><?php echo $value[BargainsService::UNTIL_DATE]?></td>
+				<td><?php echo $value[BargainsService::BARGAIN_PRICE]?> &euro;</td>
+				<td><?php echo $value[BargainsService::NUMBER]?></td>
 				<td class="itemLast"><a href="#" title="Deactivate">Deactivate</a></td>
 			</tr>
-			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a href="#" class="linkTr">S111</a></td>
-				<td>Kategorie1</td>
-				<td>text</td>
-				<td>07/08/2010</td>
-				<td>10.00 &euro;</td>
-				<td>1</td>
-				<td class="itemLast"><a href="#" title="Deactivate">Activate</a></td>
-			</tr>
+<?php 	} ?>
+<?php } ?>
 		</tbody>
 	</table>
 	<div class="unitBtn"></div>

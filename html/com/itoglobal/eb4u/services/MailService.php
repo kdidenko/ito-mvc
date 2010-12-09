@@ -84,6 +84,27 @@ class MailService {
 		return $result;
 	}
 	
+	/**
+	 * @param array $array data
+	 * @param bool $status get time only for opened
+	 * @param bool $gettime get time for all
+	 * @return unknown_type
+	 */
+	private function createDate($array, $status = false, $gettime=false){
+		foreach($array as $key => $value){
+			$data = $value[MailService::CRDATE];
+			$data = explode(' ', $data);
+			$time = substr($data[1], 0, -3);
+			$data = explode('-',$data[0]);
+			$data = $data[2] . '/' . $data[1] . '/' . $data[0];
+			if ($status==true){
+				$data .= $value[MailService::OPENED]==0 || $gettime==true? ' ' . $time : NULL;
+			}
+			$array[$key][MailService::CRDATE] = $data;
+		}
+		return $array;
+	}
+	
 	public static function countNew($user) {
 		$fields = SQLClient::COUNT . '(' . self::ID . ')' . SQLClient::SQL_AS . self::NEW_MAILS;
 		$where = self::GETTER_ID . '=' . $user;
@@ -100,6 +121,7 @@ class MailService {
 		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=3';
 		$result = self::getMails($where);
+		$result = $result != false ? self::createDate($result, true) : false;
 		return $result;
 	}
 	
@@ -107,6 +129,7 @@ class MailService {
 		$where = self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=4';
 		$result = self::getMails($where);
+		$result = $result != false ? self::createDate($result) : false;
 		return $result;
 	}
 	
@@ -125,6 +148,7 @@ class MailService {
 		$where .= ' OR ' . self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=1';
 		$result = self::getMails($where);
+		$result = $result != false ? self::createDate($result, true) : false;
 		return $result;
 	}
 	
@@ -168,8 +192,10 @@ class MailService {
 		$where = self::HASH . "='" . $hash . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
-		return $result;
+		$result = $result != null && isset($result) && count($result) > 0 ? 
+					self::createDate($result, true, true) : 
+						false;
+		return $result[0];
 	}
 	
 	/**

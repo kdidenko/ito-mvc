@@ -130,7 +130,9 @@ class ContentController extends SecureActionControllerImpl {
 		isset ( $requestParams [self::DEL] ) ? MailService::deleteMail ($requestParams [self::DEL]) : null;
 		
 		#get inbox
+		//$inbox = self::createDate(MailService::getInbox( $id ));
 		$inbox = MailService::getInbox( $id );
+		//$inbox = self::createDate($inbox);
 		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
 		
 		#get outbox
@@ -188,7 +190,6 @@ class ContentController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
-	
 	
 }
 ?>

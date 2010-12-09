@@ -141,7 +141,7 @@ if(jQuery) (function($){
 						$(c.linkWide, i).replaceWith($(c.linkWide, i).html());
 						i.bind('click', function(){document.location=l})
 						$('input[type="checkbox"]', i).bind('click', function(e){var h=$(this);
-							if(h.attr('checked')){v.push(h.attr('value'))}else{v.splice($.inArray(h.attr('value'), v), 1)}
+							if(h.attr('checked')){v.push(h.attr('value')); i.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); i.removeClass('unitChecked')}
 							f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
 						});
 					}

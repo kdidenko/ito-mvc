@@ -309,6 +309,13 @@
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
+	<action name="/my-plan.html" id="myplan" roles="UR,TR,BR,AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<forwards>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
 	<!-- tradesman part -->
 	
 	

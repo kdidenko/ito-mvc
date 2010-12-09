@@ -239,6 +239,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox .unitOdd td {background:#EFEFEF}
 	.viewWBox .unitNoRead {font-weight:bold}
 	.viewWBox tr.unitNoData td {border-right-width:0}
+	.viewWBox tr.unitChecked td {background:#FFFFCC}
 	.viewWBox tr.unitHover td {background:#E2E2E2}
 	.viewWBox th.itemChk {width:14px}
 		.viewWBox td input.inpChk {margin:1px 0 0 0}
@@ -256,6 +257,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.viewIList li.itemNewC a {background-position:3px -226px}
 		.viewIList li.itemNewSC a {background-position:3px -271px}
 		.viewIList li.itemNewB a {background-position:3px -317px}
+		.viewIList li.itemArhiv a, .viewIList li.itemArhiv button {background-position:3px -363px}
 	.viewUList {overflow:hidden; width:671px; line-height:12px; padding:0 0 10px 0}
 		.viewUList dt {float:left; width:auto; padding:0 0 0 10px; font-weight:bold; background:#fff; position:relative; z-index:5}
 		.viewUList dd {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative; z-index:4}

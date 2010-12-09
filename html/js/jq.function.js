@@ -71,7 +71,7 @@ if(jQuery) (function($){
 	$.fn.notificationAn = function(params){
 		var conf = $.extend({
 			sBlock:'#unitNotif',
-			linkNew:'.viewIList .itemNew',
+			linkNew:'.viewIList .itemNewB',
 			linkDelete:'.linkDelete a',
 			maxItems:5,
 			cBlock:'.unitNotif',

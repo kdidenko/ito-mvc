@@ -1,11 +1,32 @@
 <!--p>_i18n{Already registered or want to make changes to your account?} <a href="login.html" title="_i18n{Sign in to eBids4U account}">_i18n{Sign in}</a></p-->
+<?php $role = $mvc->getObject('role'); ?>
+
+
 <div class="wrapLogin">
 	<div class="greyBox">
 		<div class="viewRBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
-				<h2>_i18n{Tell us about yourself}</h2>
 				<div class="unitForm unitLast">
+				
+				
+		
+				
+				
+<? if(!isset($role) || $role==NULL ){ ?>
+					<div class="itemForm">
+						<span class="itemData">
+							<a href="/registration.html?role=1" title="USER" >USER</a>
+						</span>
+						<span class="itemData">
+							<a href="/registration.html?role=2" title="TRADESMAN" >TRADESMAN</a>
+						</span>
+					</div>
+
+<?php } else { ?>
+				
+				
+					<h2>_i18n{Tell us about yourself}</h2>
 					<form action="registration.html" method="post" name="registration">
 					<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
 if (isset($message) && $message!=NULL){?>
@@ -21,15 +42,6 @@ if (isset($message) && $message!=NULL){?>
 								</ul>
 							</div>
 						<?php } ?>
-						<div class="itemForm">
-							<label>_i18n{Type}:</label>
-							<span class="itemData">
-								<input type="radio" class="inpChk" name="role" value="1" <? if(!isset($_POST['role']) || $_POST['role']==1) echo 'checked'; ?>/><label>_i18n{For private person (post a job)}</label>
-							</span>
-							<span class="itemData">
-								<input type="radio" class="inpChk" name="role" value="2" <? if(isset($_POST['role'])&& $_POST['role']==2) echo 'checked'; ?>/><label>_i18n{For entrepreneur (find a job)}</label>
-							</span>
-						</div>
 						<div class="itemForm">
 							<label for="frmUser">_i18n{Username}:</label>
 							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
@@ -61,11 +73,13 @@ if (isset($message) && $message!=NULL){?>
 							</span>
 						</div>
 						<div class="itemBtn">
+						<input type="hidden" name="role" value="<?php echo $role ?>"/>
 							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
-							<a class="linkBtn" href="/"><span><strong>_i18n{Cancel}</strong></span></a>
+							<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
 						</div>
 						<?php } ?>
 					</form>
+<?php } ?>
 				</div>
 			</div>
 			<div class="angleB"></div>

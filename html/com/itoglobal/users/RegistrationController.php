@@ -18,7 +18,7 @@ class RegistrationController extends SecureActionControllerImpl {
 	public function registration($actionParams, $requestParams) {
 		# calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
+		isset($requestParams[UsersService::ROLE]) ? $mvc->addObject ( UsersService::ROLE, $requestParams[UsersService::ROLE] ) : NULL;
 		if (isset ( $requestParams ['submit'] )) {
 			#server-side validation
 			$error = UsersService::validation ( $requestParams );

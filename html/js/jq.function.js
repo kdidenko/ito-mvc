@@ -78,7 +78,7 @@ if(jQuery) (function($){
 					$('tr td:nth-child('+(v+1)+')', o).addClass('itemChecked').find('input[type="radio"]').attr('checked', true);
 					i=v;
 				}
-			}).eq(0).click();
+			}).find('input[type="radio"]:checked').click();
 		})
 	};
 	$.fn.notificationAn = function(params){

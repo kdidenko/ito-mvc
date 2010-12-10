@@ -19,15 +19,84 @@ class RegistrationController extends SecureActionControllerImpl {
 		# calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		isset($requestParams[UsersService::ROLE]) ? $mvc->addObject ( UsersService::ROLE, $requestParams[UsersService::ROLE] ) : NULL;
-		if (isset ( $requestParams ['submit'] )) {
+		
+		if (isset ( $requestParams ['submit'] ) && $requestParams[UsersService::ROLE]==1) {
 			#server-side validation
 			$error = UsersService::validation ( $requestParams );
 			if (count ( $error ) == 0) {
 				#Insert new users to DB
-				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ROLE;
+				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . 
+							UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . 
+							UsersService::VALIDATION . ', ' . UsersService::ROLE;
 				$hash = md5 ( rand ( 1, 9999 ) );
 				$role = $requestParams[UsersService::ROLE]==2 ? 'TR' : 'UR';
-				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . $requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . md5 ( $requestParams [UsersService::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . $hash . "','" . $role . "'";
+				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . 
+							$requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . 
+							md5 ( $requestParams [UsersService::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . 
+							$hash . "','" . $role . "'";
+				$into = UsersService::USERS;
+				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+				#get user id 
+				$id = $result;
+				#prepare text for email 
+				$plain = $mvc->getProperty ( 'template' );
+				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $id . '&validation_id=' . $hash;
+				#call method for sending mail
+				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
+				$mvc->addObject ( UsersService::ON_SUCCESS, '_i18n{Your registration successful. Please check your email to confirm your account.}' );
+			} else {
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}
+		}
+		
+		if (isset ( $requestParams ['submit'] ) && $requestParams[UsersService::ROLE]==2) {
+			#server-side validation
+			$error = UsersService::validation ( $requestParams );
+			if (count ( $error ) == 0) {
+
+				/*
+				UsersService::COMPANY;
+				UsersService::VAT;
+				UsersService::COMPANY_YEAR;
+				
+				UsersService::ADDRESS;
+				UsersService::ZIP;
+				UsersService::LOCATION;
+				UsersService::REGION;
+				UsersService::COUNTRY;
+				
+				UsersService::SALUTATION;
+				UsersService::FIRSTNAME;
+				UsersService::LASTNAME;
+				UsersService::USERNAME;
+				
+				UsersService::EMAIL;
+				UsersService::PHONE;
+				UsersService::HOMEPAGE;
+				UsersService::PASSWORD;
+				UsersService::CONFIRM;
+				
+				UsersService::PLAN_ID;
+				*/
+				
+				#Insert new users to DB
+				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . 
+							UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . 
+							UsersService::VALIDATION . ', ' . UsersService::ROLE . ', ' .
+							UsersService::COMPANY . ', ' . UsersService::VAT . ', ' . UsersService::COMPANY_YEAR . ', ' . 
+							UsersService::ADDRESS . ', ' . UsersService::ZIP . ', ' . UsersService::LOCATION . ', ' . 
+							UsersService::REGION . ', ' . UsersService::COUNTRY . ', ' . UsersService::SALUTATION . ', ' . 
+							UsersService::PHONE . ', ' . UsersService::HOMEPAGE . ', ' . UsersService::PLAN_ID;							         ;
+				$hash = md5 ( rand ( 1, 9999 ) );
+				$role = UsersService::ROLE_TR;
+				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . 
+							$requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . 
+							md5 ( $requestParams [UsersService::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . 
+							$hash . "','" . $role . "','" .
+							$requestParams [UsersService::COMPANY] . "','" .$requestParams [UsersService::VAT] . "','" .$requestParams [UsersService::COMPANY_YEAR] . "','" .
+							$requestParams [UsersService::ADDRESS] . "','" .$requestParams [UsersService::ZIP] . "','" .$requestParams [UsersService::LOCATION] . "','" .
+							$requestParams [UsersService::REGION] . "','" .$requestParams [UsersService::COUNTRY] . "','" .$requestParams [UsersService::SALUTATION] . "','" . 
+							$requestParams [UsersService::PHONE] . "','" .$requestParams [UsersService::HOMEPAGE] . "','" .$requestParams [UsersService::PLAN_ID] . "'";
 				$into = UsersService::USERS;
 				$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 				#get user id 

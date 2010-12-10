@@ -1,5 +1,6 @@
 <?php 
 	$plans = $mvc->getObject(PlanService::PLAN); 
+	$role = $mvc->getObject('role');
 ?>
 <div class="wrapLogin">
 	<div class="greyBox">
@@ -86,12 +87,12 @@
 								<label for="frmR9">_i18n{Salutation}:</label>
 								<span class="itemData" id="frmR9" >
 									<select name="salutation">
-										<?php if ($data[UsersService::SALUTATION]==NULL || $data[UsersService::SALUTATION]==0){?>
+										<?php if ($_POST[UsersService::SALUTATION]==NULL || $_POST[UsersService::SALUTATION]==0){?>
 										<option value="0">_i18n{Please choose}</option>
 										<option value="1">_i18n{Mr.}</option>
 										<option value="2">_i18n{Ms.}</option>
 										<?php } else { 
-								if($data[UsersService::SALUTATION]==1) {?>
+											if($_POST[UsersService::SALUTATION]==1) {?>
 													<option value="1">_i18n{Mr.}</option>
 													<option value="2">_i18n{Ms.}</option>
 												<?php } else { ?>
@@ -155,7 +156,7 @@
 										<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
 										<p>_i18n{excluding VAT}</p>
 										<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
-										<input type="radio" checked="checked" name="plan" value="1" />
+										<input type="radio" checked="checked" name="plan_id" value="1" />
 									</div>
 								</td>
 								<td class="itemStar">
@@ -164,7 +165,7 @@
 										<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
 										<p>_i18n{excluding VAT}</p>
 										<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan" value="2" />
+										<input type="radio" name="plan_id" value="2" />
 									</div>
 								</td>
 								<td class="itemStar">
@@ -173,7 +174,7 @@
 										<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
 										<p>_i18n{excluding VAT}</p>
 										<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan" value="3" />
+										<input type="radio" name="plan_id" value="3" />
 									</div>
 								</td>
 								<td class="itemStar">
@@ -182,7 +183,7 @@
 										<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
 										<p>_i18n{excluding VAT}</p>
 										<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan" value="4" />
+										<input type="radio" name="plan_id" value="4" />
 									</div>
 								</td>
 								<td class="itemStar">
@@ -191,7 +192,7 @@
 										<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
 										<p>_i18n{excluding VAT}</p>
 										<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan" value="5" />
+										<input type="radio" name="plan_id" value="5" />
 									</div>
 								</td>
 							</tr>

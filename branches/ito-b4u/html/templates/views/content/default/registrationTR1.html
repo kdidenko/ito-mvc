@@ -28,19 +28,19 @@
 						<div class="unitEqColumn">
 							<h3>_i18n{Company Data}</h3>
 							<div class="itemForm">
-								<label for="frmR1">_i18n{Company Name}:</label>
+								<label for="frmR1">_i18n{Company Name}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" id="frmR1" type="text" name="company" value="<? if(isset($_POST['company'])) echo $_POST['company']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR2">_i18n{Ust-ID}:</label>
+								<label for="frmR2">_i18n{Ust-ID}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" id="frmR2" type="text" name="vat" value="<? if(isset($_POST['vat'])) echo $_POST['vat']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR3">_i18n{Year}:</label>
+								<label for="frmR3">_i18n{Year}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" id="frmR3" type="text" name="company_year" value="<? if(isset($_POST['company_year'])) echo $_POST['company_year']; ?>"/>
 								</span>
@@ -49,31 +49,31 @@
 						<div class="unitEqColumn">
 							<h3>_i18n{Adsress Data}</h3>
 							<div class="itemForm">
-								<label for="frmR5">_i18n{Street}:</label>
+								<label for="frmR5">_i18n{Street}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" type="text" id="frmR5" name="address" value="<? if(isset($_POST['address'])) echo $_POST['address']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR6">_i18n{ZIP}:</label>
+								<label for="frmR6">_i18n{ZIP}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" type="text" id="frmR6" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR7">_i18n{Location}:</label>
+								<label for="frmR7">_i18n{Location}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" type="text" id="frmR7" name="location" value="<? if(isset($_POST['location'])) echo $_POST['location']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR8">_i18n{State}:</label>
+								<label for="frmR8">_i18n{State}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" type="text" id="frmR8" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR9">_i18n{Country}:</label>
+								<label for="frmR9">_i18n{Country}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input class="inpTxt" type="text" id="frmR9" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
 								</span>
@@ -84,7 +84,7 @@
 						<div class="unitEqColumn">
 							<h3>_i18n{Personal Data}</h3>
 							<div class="itemForm">
-								<label for="frmR9">_i18n{Salutation}:</label>
+								<label for="frmR9">_i18n{Salutation}:<span class="itemReq">*</span></label>
 								<span class="itemData" id="frmR9" >
 									<select name="salutation">
 										<?php if ($_POST[UsersService::SALUTATION]==NULL || $_POST[UsersService::SALUTATION]==0){?>
@@ -103,22 +103,22 @@
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR10">_i18n{First Name}:</label>
+								<label for="frmR10">_i18n{First Name}:<span class="itemReq">*</span></label>
 								<span class="itemData"><input type="text" id="frmR10" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR11">_i18n{Last Name}:</label>
+								<label for="frmR11">_i18n{Last Name}:<span class="itemReq">*</span></label>
 								<span class="itemData"><input type="text" id="frmR11" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR15">_i18n{Username}:</label>
+								<label for="frmR15">_i18n{Username}:<span class="itemReq">*</span></label>
 								<span class="itemData"><input type="text" id="frmR15" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
 							</div>
 						</div>
 						<div class="unitEqColumn">
 							<h3>_i18n{Contact Data}</h3>
 							<div class="itemForm">
-								<label for="frmR12">_i18n{Your Email}:</label>
+								<label for="frmR12">_i18n{Your Email}:<span class="itemReq">*</span></label>
 								<span class="itemData">
 									<input type="text" id="frmR12" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/>
 								</span>
@@ -136,11 +136,11 @@
 								</span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR16">_i18n{Password}:</label>
+								<label for="frmR16">_i18n{Password}:<span class="itemReq">*</span></label>
 								<span class="itemData"><input type="password" id="frmR16" class="inpTxt" name="password"/></span>
 							</div>
 							<div class="itemForm">
-								<label for="frmR17">_i18n{Repeat Password}:</label>
+								<label for="frmR17">_i18n{Repeat Password}:<span class="itemReq">*</span></label>
 								<span class="itemData"><input type="password" id="frmR17" class="inpTxt" name="confirm_password"/></span>
 							</div>
 						</div>

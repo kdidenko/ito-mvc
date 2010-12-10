@@ -129,7 +129,7 @@ class RegistrationController extends SecureActionControllerImpl {
 		#cheking hash
 		if (isset ( $result [UsersService::VALIDATION] ) && $result [UsersService::VALIDATION] == $hash) {
 			$mvc->addObject ( UsersService::ROLE, $result[UsersService::ROLE] );
-			if (isset ( $requestParams ['submit'] )) {
+			if (isset ( $requestParams ['submit'] ) && $requestParams [UsersService::ROLE]=='UR') {
 				$error = array();
 				/*
 				 * user fields
@@ -157,6 +157,51 @@ class RegistrationController extends SecureActionControllerImpl {
 					$mvc->addObject ( UsersService::ERROR, $error );
 				}
 			}
+			if (isset ( $requestParams ['submit'] ) && $requestParams [UsersService::ROLE]=='TR') {
+				$error = array();
+				/*
+				 * user fields
+				 * address	zip	location region	country	phone homepage newsletter bank bank_code acoount_number
+				*/
+				$error [] .= $requestParams [UsersService::BANK] ? false : "_i18n{Please, enter bank info.}";
+				$error [] .= $requestParams [UsersService::ACCOUNT_NUMBER] ? false : "_i18n{Please, enter account number.}";
+				$error [] .= $requestParams [UsersService::PAYMENT] ? false : "_i18n{Please, choose payment method.}";
+				$error  = array_filter ( $error );
+				if (count ( $error ) == 0) {
+					//$this->createNewUser($requestParams, $result);
+					
+					#creating directories for user
+					StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] );
+					StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE );
+					$path = StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE . StorageService::USER_AVATAR;
+					copy ( StorageService::DEF_USER_AVATAR, $path );
+					
+					# setting the query variables
+					$fields = array ( '0' => UsersService::ENABLED, '1' => UsersService::AVATAR);
+					$fields[] .= $requestParams[UsersService::BANK] ? UsersService::BANK : false;
+					$fields[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? UsersService::ACCOUNT_NUMBER : false;
+					$fields[] .= $requestParams[UsersService::PAYMENT] ? UsersService::PAYMENT : false;
+					$fields[] .= isset($requestParams[UsersService::SEND_JOB]) && $requestParams[UsersService::SEND_JOB]!=NULL ? 'send_job' : false;
+					$vals = array ('0' => '1', '1' => $path);
+					$vals[] .= $requestParams[UsersService::BANK] ? $requestParams[UsersService::BANK] : false;
+					$vals[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? $requestParams[UsersService::ACCOUNT_NUMBER] : false;
+					$vals[] .= $requestParams[UsersService::PAYMENT] ? $requestParams[UsersService::PAYMENT] : false;
+					$vals[] .= isset($requestParams[UsersService::SEND_JOB])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::SEND_JOB] : false;
+					$vals  = array_filter ( $vals );
+					$fields  = array_filter ( $fields );
+						
+					#update user information
+					UsersService::updateFields($requestParams[UsersService::ID], $fields, $vals );
+					
+					
+					$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
+					//$mvc->addObject ( UsersService::ERROR, $message );
+					$mvc->addObject ( UsersService::ON_SUCCESS, $message );
+				} else {
+					$mvc->addObject ( UsersService::ERROR, $error );
+				}
+			}
+			
 		} else {
 			$location = $this->onFailure ( $actionParams );
 			$this->forwardActionRequest ( $location );

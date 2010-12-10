@@ -1,9 +1,9 @@
 <!-- start include registration form --> 
 <?php	$role = $mvc->getObject(UsersService::ROLE); 
 		if ($role == 'TR'){
-			TemplateEngine::inclusion('/trademanregistration.html', $mvc);
+			TemplateEngine::inclusion('/registrationTR2.html', $mvc);
 		} else {
-			TemplateEngine::inclusion('/userregistration.html', $mvc);
+			TemplateEngine::inclusion('/registrationUR2.html', $mvc);
 		}
 ?>
  <!-- finish include registration form -->

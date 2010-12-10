@@ -1,38 +1,61 @@
+<?php 
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$remind_regions = $mvc->getObject(RemindService::REGION_ID);
+$errors = $mvc->getObject(ContentController::ERROR);
+$message = $mvc->getObject(UsersService::ON_SUCCESS);
+$role = $mvc->getObject(UsersService::ROLE); 
+?>
+
 <div class="wrapLogin">
 	<div class="greyBox">
 		<div class="viewWBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
-				<h2>Neuregistrierung</h2>
+<?php	if (isset($message) && $message!=NULL){?>
+						<div class="itemOk"><?php echo $message; ?></div>
+<?php	} else { ?>
+					
+<?php 	$errors = $mvc->getObject(UsersService::ERROR);
+		if (isset($errors)){?>
+						<div class="itemWarning">
+							<ul>
+<?php	foreach ($errors as $key => $value){ ?>
+								<li><?php echo $value; ?></li>
+<?php	} ?>
+							</ul>
+						</div>
+<?php	} ?>
+			<form action="confirm-registration.html" method="post">
 				<div class="unitWBlock">
 					<div class="unitEqColumn">
-						<h3>Bankverbindung</h3>
+						<h3>_i18n{Bank Data}</h3>
 						<div class="itemForm">
-							<label for="frmR1">Bank:</label>
-							<span class="itemData"><input type="text" id="frmR1" class="inpTxt" /></span>
+							<label for="frmR1">Bank:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR1" name="bank" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank']; ?>/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR2">Kto-Nr:</label>
-							<span class="itemData"><input type="text" id="frmR2" class="inpTxt" /></span>
+							<label for="frmR2">Kto-Nr:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR2" name="account_number" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['account_number']; ?>/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR3">BLZ:</label>
-							<span class="itemData"><input type="text" id="frmR3" class="inpTxt" /></span>
+							<label for="frmR3">BLZ:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR3" name="bank_blz" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank_blz']; ?>/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR4">Zahlungsmodalitaten:</label>
-							<span class="itemData"><select id="frmR4"><option>1/4-jahrlich</option><option>1/2-jahrlich</option><option>jahrlich</option></select></span>
+							<label for="frmR4">Zahlungsmodalitaten:<span class="itemReq">*</span></label>
+							<span class="itemData">
+								<select id="frmR4" name="payment">
+									<option>1/4-jahrlich</option>
+									<option>1/2-jahrlich</option>
+									<option>jahrlich</option>
+								</select>
+							</span>
 						</div>
 					</div>
 					<div class="unitEqColumn">
-						<h3>Text</h3>
-						<div class="itemForm">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at justo purus, eget egestas dolor. Pellentesque sagittis convallis turpis sit amet aliquet. Pellentesque tincidunt elit purus, eu rutrum nisi.</p>
-						</div>
-						<div class="itemForm">
-							<p>Integer a dui sit amet turpis luctus ornare in ac lorem.</p>
-							<p>Cras id tellus ut tortor accumsan fringilla.</p>
-						</div>
+						<?php echo StaticBlockService::getBlock(22); ?>
 					</div>
 				</div>
 				<div class="unitWBlock" style="display:none">
@@ -41,9 +64,9 @@
 					<input type="radio" class="inpChk" /><label>Paypal</label>
 				</div>
 				<ul class="viewIList">
-					<li class="itemNewB"><a href="#" title="New notification">New notification</a></li>
+					<li class="itemNewB"><a href="#" title="_i18n{New notification}">_i18n{New notification}</a></li>
 				</ul>
-				<h2>Notification</h2>
+				<h2>_i18n{Choose Notification}</h2>
 				<div class="unitWBlock">
 					<div id="unitNotif" class="hideElement">
 						<!-- sample on -->
@@ -85,76 +108,63 @@
 						</div>
 						<!-- sample off -->
 					</div>
-					<form action="/communication.html" method="post">
-						<div class="unitNotifEmpty hideElement">Empty notification</div>
-						<dl class="viewRList">
-							<dt>Region:</dt>
-							<dd>
-								<ul>
-									<li>
-										<input id="frmR10" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
-										<label for="frmR10">Wien</label>
-									</li>
-									<li>
-										<input id="frmR11" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
-										<label for="frmR11">Oberosterreich</label>
-									</li>
-									<li>
-										<input id="frmR12" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
-										<label for="frmR12">Karnten</label>
-									</li>
-									<li>
-										<input id="frmR13" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
-										<label for="frmR13">Osttirol</label>
-									</li>
-									<li>
-										<input id="frmR14" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
-										<label for="frmR14">Niederosterreich</label>
-									</li>
-									<li>
-										<input id="frmR15" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
-										<label for="frmR15">Steiermark</label>
-									</li>
-									<li>
-										<input id="frmR16" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
-										<label for="frmR16">Tirol</label>
-									</li>
-									<li>
-										<input id="frmR17" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
-										<label for="frmR17">Burgenland</label>
-									</li>
-									<li>
-										<input id="frmR18" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
-										<label for="frmR18">Salzburg</label>
-									</li>
-									<li>
-										<input id="frmR19" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
-										<label for="frmR19">Vorarlberg</label>
-									</li>
-								</ul>
-							</dd>
-						</dl>
-					</form>
+					<div class="unitNotifEmpty hideElement">Empty notification</div>
+					<dl class="viewRList">
+						<dt>Region:</dt>
+						<dd>
+							<ul>
+								<li>
+									<input id="frmR10" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
+									<label for="frmR10">Wien</label>
+								</li>
+								<li>
+									<input id="frmR11" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
+									<label for="frmR11">Oberosterreich</label>
+								</li>
+								<li>
+									<input id="frmR12" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
+									<label for="frmR12">Karnten</label>
+								</li>
+								<li>
+									<input id="frmR13" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
+									<label for="frmR13">Osttirol</label>
+								</li>
+								<li>
+									<input id="frmR14" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
+									<label for="frmR14">Niederosterreich</label>
+								</li>
+								<li>
+									<input id="frmR15" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
+									<label for="frmR15">Steiermark</label>
+								</li>
+								<li>
+									<input id="frmR16" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
+									<label for="frmR16">Tirol</label>
+								</li>
+								<li>
+									<input id="frmR17" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
+									<label for="frmR17">Burgenland</label>
+								</li>
+								<li>
+									<input id="frmR18" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
+									<label for="frmR18">Salzburg</label>
+								</li>
+								<li>
+									<input id="frmR19" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
+									<label for="frmR19">Vorarlberg</label>
+								</li>
+							</ul>
+						</dd>
+					</dl>
 				</div>
 				<div class="unitWBlock">
 					<div class="unitInfo unitRtf">
-						Lorem ipsum <b>dolor sit amet</b>, consectetur adipiscing elit. Sed massa urna, mattis id mattis ac, fringilla commodo diam. Sed enim lorem, iaculis sed suscipit sit amet, vestibulum ut nunc. <a href="http://google.com">Vestibulum vitae leo mauris</a>, a laoreet sem. Curabitur id magna in libero fringilla scelerisque sit amet at orci. Sed sit amet massa nec nisl accumsan <i>commodo</i> non quis elit. Suspendisse pulvinar elementum mauris, sit amet eleifend tellus varius dignissim. Integer congue sem non tortor consequat aliquet. Vestibulum at sodales neque. Aliquam id quam ac nisl euismod iaculis. Nullam vulputate feugiat dictum. Sed nec lacus et ligula sollicitudin dignissim eget nec felis. Aenean nec lorem eget sem lacinia feugiat sed sed risus. Cras ultricies, ante ut varius tempus, nisl nisi porta odio, eu sodales enim nibh nec dui. <font color="#cc0000">Aenean auctor</font>, nunc quis interdum tristique, erat massa eleifend justo, at facilisis ipsum nibh vel enim. Curabitur aliquam tortor ultricies enim ultrices in posuere quam sollicitudin. Nunc dolor elit, dapibus et condimentum non, blandit quis est. Quisque posuere ornare neque, a scelerisque dui tincidunt id. <span style="background-color: rgb(204, 204, 204);">Proin in euismod purus</span>.
-						<br>
-						<br>
-						<b><font color="#ff0000"><font color="#000000"><span style="background-color: rgb(255, 204, 102);"></span></font></font></b>
-						<ul>
-							<li>Donec fermentum elit a libero euismod sit amet ullamcorper lorem sodales.</li>
-							<li>Sed suscipit laoreet turpis, non fermentum elit venenatis vitae.</li>
-							<li>Nunc posuere lacus vitae felis elementum pellentesque.</li>
-						</ul>
-						<br>
-						<ol>
-							<li>Nullam volutpat egestas eros, porttitor interdum enim sollicitudin ac.</li>
-							<li>Ut tempus viverra purus, vel posuere elit auctor ac.</li>
-						</ol>
+						<?php echo StaticBlockService::getBlock(23); ?>
 					</div>
 				</div>
+				
 				<div class="unitWBlock unitLast">
+					<!-- 
 					<div class="unitEqColumn">
 						<div class="itemForm">
 							<label for="frmR30">Mail:</label>
@@ -165,6 +175,7 @@
 							<span class="itemData"><input type="text" id="frmR31" class="inpTxt" /></span>
 						</div>
 					</div>
+					 -->
 						<div class="unitSnColumn">
 							<div class="itemForm">
 								<span class="itemData">
@@ -174,12 +185,15 @@
 							</div>
 						</div>
 					<div class="unitBtn">
+						<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
+						<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
 						<input type="hidden" name="role" value="<?php echo $role ?>"/>
 						<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 						<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
 					</div>
 				</div>
-				
+				</form>
+				<?php } ?>
 			</div>
 			<div class="angleB"></div>
 		</div>

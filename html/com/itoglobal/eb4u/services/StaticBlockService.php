@@ -53,18 +53,16 @@ class StaticBlockService {
 		$where = self::ID . "='" . $id . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result[0][self::BLOCK_DESC] : false;
+		$result = $result != null && isset($result) && count($result) > 0 ? htmlspecialchars_decode ( $result[0][self::BLOCK_DESC], ENT_QUOTES) : false;
 		return $result;
 	}
 	
 	public static function createBlock($title, $body){
 		$into = self::STATIC_BLOCK;
 		$title = htmlspecialchars($title, ENT_QUOTES);
-		$body = htmlspecialchars($body, ENT_QUOTES);
+		$body =  htmlspecialchars($body, ENT_QUOTES);
 		$fields = self::BLOCK_TITLE . ', ' . self::BLOCK_DESC; 
 		$values = "'" . $title . "', '" . $body . "'";
-		//print_r($fields);
-		//print_r($values);
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
 	} 
 	

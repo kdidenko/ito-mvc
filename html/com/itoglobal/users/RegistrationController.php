@@ -42,6 +42,10 @@ class RegistrationController extends SecureActionControllerImpl {
 				$mvc->addObject ( UsersService::ERROR, $error );
 			}
 		}
+		
+		$plans = PlanService::getPlans();
+		isset($plans) ? $mvc->addObject ( PlanService::PLAN, $plans ) : NULL;
+		
 		return $mvc;
 	}
 	

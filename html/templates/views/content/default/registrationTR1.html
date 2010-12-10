@@ -1,3 +1,6 @@
+<?php 
+	$plans = $mvc->getObject(PlanService::PLAN); 
+?>
 <div class="wrapLogin">
 	<div class="greyBox">
 		<div class="viewWBox">
@@ -149,45 +152,45 @@
 								<td class="itemStar">
 									<div class="itemInStar itemOne">
 										<h4>one star</h4>
-										<p>19.- Euro</p>
-										<p>exklusive MWSt</p>
-										<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>250 Euro</strong></p>
-										<input type="radio" name="plan" value="1" />
+										<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
+										<p>_i18n{excluding VAT}</p>
+										<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
+										<input type="radio" checked="checked" name="plan" value="1" />
 									</div>
 								</td>
 								<td class="itemStar">
 									<div class="itemInStar itemTwo">
 										<h4>two star</h4>
-										<p>69.- Euro</p>
-										<p>exklusive MWSt</p>
-										<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>1.000 Euro</strong></p>
+										<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
+										<p>_i18n{excluding VAT}</p>
+										<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
 										<input type="radio" name="plan" value="2" />
 									</div>
 								</td>
 								<td class="itemStar">
 									<div class="itemInStar itemThree">
 										<h4>three star</h4>
-										<p>69.- Euro</p>
-										<p>exklusive MWSt</p>
-										<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>5.000 Euro</strong></p>
+										<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
+										<p>_i18n{excluding VAT}</p>
+										<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
 										<input type="radio" name="plan" value="3" />
 									</div>
 								</td>
 								<td class="itemStar">
 									<div class="itemInStar itemFour">
 										<h4>four star</h4>
-										<p>69.- Euro</p>
-										<p>exklusive MWSt</p>
-										<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>10.000 Euro</strong></p>
+										<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
+										<p>_i18n{excluding VAT}</p>
+										<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
 										<input type="radio" name="plan" value="4" />
 									</div>
 								</td>
 								<td class="itemStar">
 									<div class="itemInStar itemFive">
 										<h4>five star</h4>
-										<p>69.- Euro</p>
-										<p>exklusive MWSt</p>
-										<p class="itemInfo">kann zu jedem Auftrag in unbegrenzter Hohe ein Angebot erstellen</p>
+										<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
+										<p>_i18n{excluding VAT}</p>
+										<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
 										<input type="radio" name="plan" value="5" />
 									</div>
 								</td>
@@ -201,28 +204,24 @@
 								<td></td>
 							</tr>
 							<tr>
-								<th>Angebotsabgabe bis</th>
-								<td>250.-</td>
-								<td>1.000.-</td>
-								<td>5.000.-</td>
-								<td>10.000.-</td>
-								<td>uber 10.000.-</td>
+								<th>_i18n{Tender to}</th>
+								<?php foreach($plans as $key=>$plan) {?>
+								<td><?php echo $plan[PlanService::TENDER_TO]!=0 ? $plan[PlanService::TENDER_TO] : '_i18n{more than} ' . $plans[$key-1][PlanService::TENDER_TO]; ?></td>
+								<?php } ?>
 							</tr>
 							<tr>
-								<th>Schnappchen</th>
-								<td>nein</td>
-								<td>nein</td>
-								<td>ein Schnappchen inkludiert</td>
-								<td>ein Schnappchen inkludiert</td>
-								<td>ein Schnappchen inkludiert</td>
+								<th>_i18n{Bargains}</th>
+								<?php foreach($plans as $key=>$plan) { ?>
+								<td><?php echo $plan[PlanService::BARGAINS]==0 ? "_i18n{no}" : "_i18n{included}" ?></td>
+								<?php } ?>
 							</tr>
 							<tr>
-								<th>Standart Branchenbuch</th>
-								<td>ja</td>
-								<td>ja</td>
-								<td>ja</td>
-								<td>ja</td>
-								<td>inkl.</td>
+								<th>_i18n{Standard Business Directory}</th>
+								<td>_i18n{included}</td>
+								<td>_i18n{included}</td>
+								<td>_i18n{included}</td>
+								<td>_i18n{included}</td>
+								<td>_i18n{included}</td>
 							</tr>
 						</table>
 						<div class="unitSnColumn">

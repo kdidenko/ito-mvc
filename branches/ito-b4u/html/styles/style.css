@@ -137,6 +137,20 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewPlatform p {font-size:17px; font-weight:bold; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
 	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
 	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
+
+.viewPackage {margin:0 4px}
+	.viewPackage p {padding:0 8px 5px 8px}
+	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
+	.viewPackage select {width:50px; vertical-align:middle}
+	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
+
+.stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
+	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
+	.stationCarousel .itemClip {margin:5px 17px; height:95px; width:936px; overflow:hidden; position:relative}
+	.stationCarousel ul {width:1000em; position:absolute; left:0}
+	.stationCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
+	.stationCarousel li span, .stationCarousel li a {display:block}
+	.stationCarousel li span.itemImg {width:117px; height:75px}
 /* box */
 .viewGBox {float:right; width:185px; margin:10px 0 0 0}
 	.viewGBox .angleT, .viewGBox .angleB, .viewGBox .bodyBox {background-position:-654px 0}
@@ -166,28 +180,24 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewMenu li ul li {border-top:1px dotted #ccc; border-bottom:none}
 	.viewMenu li ul li a, .viewMenu li.itemActive ul li a {font-size:12px; background:#fff; width:150px; padding:3px 7px 1px 20px; color:#393939; font-weight:normal}
 	.viewMenu li ul li a:hover, .viewMenu li ul li.itemActive a {background:#E2E2E2; color:#393939}
-	
-	.viewPackage {margin:0 4px}
-	.viewPackage p {padding:0 8px 5px 8px}
-	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
-	.viewPackage select {width:50px; vertical-align:middle}
-	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
-/* --------- admin page --------- */
+/* --------- admin --------- */
 .viewWBox {float:left; width:699px; margin:10px 0 0 0}
 	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}
 	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
 	.viewWBox h3 {font-size:14px; font-weight:bold; padding:8px 0 5px 0}
+	
 	/* single column */
 	.unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
 	/* two column */
 	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
 	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
-	.viewWBox .unitNotif {width:676px; padding:0 4px 5px 11px; overflow:hidden}
 	.viewWBox .unitLast {border:none; margin:0 4px}
+	/* notification */
+	.viewWBox .unitNotif {width:676px; padding:0 4px 5px 11px; overflow:hidden}
 	/* info */
 	.viewWBox .unitInfo {padding:0 11px 5px 11px}
 		.viewWBox .unitInfo textarea.areaTxt {width:656px}
-		
+	/* rtf out */
 	.viewWBox .unitRtf {}
 		.viewWBox .unitRtf ol {padding:0 0 0 20px}
 		.viewWBox .unitRtf ol li {list-style:decimal}
@@ -208,12 +218,13 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox label {float:left; width:115px; text-align:right; padding:3px 0 0 0}
 		.unitNotif label {width:105px}
 		.unitNotif .itemFirst label {width:60px}
+	.viewWBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
 	.viewWBox .itemData {float:right; width:200px}
 		.unitSnColumn .itemData {width:546px}
 		.unitNotif .itemData {width:126px}
 	.viewWBox input.inpTxt {width:192px}
 		.unitSnColumn input.inpTxt {width:531px}
-	.viewWBox textarea.areaTxt {width:192px; height:300px}
+	.viewWBox textarea {width:192px; height:300px}
 		.unitSnColumn textarea.areaTxt {width:531px}
 		.unitNotif select {width:126px}
 	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
@@ -243,7 +254,23 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox tr.unitHover td {background:#E2E2E2}
 	.viewWBox th.itemChk {width:14px}
 		.viewWBox td input.inpChk {margin:1px 0 0 0}
+
+	.viewWBox table.viewPlan th {background:none; font-size:11px; color:#393939; font-weight:normal; border:1px dotted #999}
+	.viewWBox table.viewPlan td {border:1px dotted #999; text-align:center; cursor:pointer}
+	.viewWBox table.viewPlan td.itemStar {width:100px; vertical-align:top}
+	.viewWBox table.viewPlan td.itemChecked {background-color:#FFFFCC}
+	.viewWBox table.viewPlan h4 {font-weight:bold; font-size:12px; text-transform:uppercase}
+	.viewWBox table.viewPlan p {padding:0 0 5px 0}
+	.viewWBox table.viewPlan .itemInfo {font-size:11px}
+	.viewWBox table.viewPlan .itemInfo strong {display:block; font-size:12px; font-weight:normal}
+	.viewWBox table.viewPlan .itemInStar {padding:65px 0 0 0; background-image:url(../images/planIcon.gif); background-repeat:no-repeat; overflow:hidden; position:relative}
+	.viewWBox table.viewPlan .itemOne {background-position:-5px 7px}
+	.viewWBox table.viewPlan .itemTwo {background-position:-116px 7px}
+	.viewWBox table.viewPlan .itemThree {background-position:-227px 7px}
+	.viewWBox table.viewPlan .itemFour {background-position:-338px 7px}
+	.viewWBox table.viewPlan .itemFive {background-position:-449px 7px}
 	
+	.viewWBox table.viewPlan input {position:absolute; bottom:-40px}
 	/* icon mail */
 	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
 		.viewIList li {float:left; padding:1px 0 0 10px}
@@ -268,54 +295,47 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.viewRList li {float:left; width:141px; padding:2px 0}
 		.viewRList li label {text-align:left; padding:4px 10px 0 4px; width:auto}
 
-.stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
-	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
-	.stationCarousel .itemClip {margin:5px 17px; height:95px; width:936px; overflow:hidden; position:relative}
-	.stationCarousel ul {width:1000em; position:absolute; left:0}
-	.stationCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
-	.stationCarousel li span, .stationCarousel li a {display:block}
-	.stationCarousel li span.itemImg {width:117px; height:75px}
+	.viewRBox .unitForm {border-bottom:1px dotted #393939; margin:0 4px 5px 4px; padding:5px 1px 5px 14px}
+		.viewRBox .unitLast {border:none; margin:0 4px}
+	.viewRBox .itemForm {overflow:hidden; width:419px; padding:4px 0}
+	.viewRBox .itemForm form {padding:0}
+	.viewRBox .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0; position:relative}
+	.viewRBox .itemForm .itemReq {position:absolute; right:-8px; font-size:16px}
+		.viewRBox .itemData {float:right; width:265px}
+		.viewRBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
+		.viewRBox a {text-decoration:underline}
+	.viewRBox .itemBtn {width:344px; overflow:hidden; padding:3px 0}
+	.viewRBox .itemBtn a {float:right; margin:4px 15px 0 0}
+	.viewRBox .itemBtn button, .viewRBox .itemBtn a.linkBtn {float:right; margin:0 0 0 5px; text-decoration:none}
+	
+	.viewRBox .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
+	.viewRBox .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 6px 8px; color:#00A25B; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
 
-
+/* main page */
 .wrapMain {float:left; width:692px}
 	.wrapMain .greyBox {width:652px}
 	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
 	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
 .wrapSide {float:right; width:213px}
-
-/* login style */
-.wrapLogin {float:left; width:970px}
-	.wrapLogin .greyBox {padding:20px 264px 100px 264px; width:442px}
-	.wrapLogin .unitForm {border-bottom:1px dotted #393939; margin:0 4px 5px 4px; padding:5px 1px 5px 14px}
-		.wrapLogin .unitLast {border:none; margin:0 4px}
-	.wrapLogin .itemForm {overflow:hidden; width:419px; padding:4px 0}
-	.wrapLogin h3 {font-size:13px}
-	.wrapLogin .itemForm form {padding:0}
-	.wrapLogin .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0; position:relative}
-	.wrapLogin .itemForm .itemReq {position:absolute; right:-8px; font-size:16px}
-		.wrapLogin .itemData {float:right; width:265px}
-		.wrapLogin .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
-		.wrapLogin a {text-decoration:underline}
-	.wrapLogin .itemBtn {width:344px; overflow:hidden; padding:3px 0}
-	.wrapLogin .itemBtn a {float:right; margin:4px 15px 0 0}
-	.wrapLogin .itemBtn button, .wrapLogin .itemBtn a.linkBtn {float:right; margin:0 0 0 5px; text-decoration:none}
-	
-	.wrapLogin .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
-	.wrapLogin .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 6px 8px; color:#00A25B; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
-/* enterprice style */
+/* enterprice page */
 .wrapEqColumns {float:left; width:482px}
 	.wrapRight {float:right}
 	.wrapEqColumns .greyBox {width:442px; padding:20px 20px 100px 20px}
 	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
 	.wrapEqColumns .viewDlist {float:left; padding:14px 0 0 6px; width:230px}
-
+/* admin page */
 .wrapLAdmin {float:left; width:225px}
 	.wrapLAdmin .greyBox {width:185px}
 .wrapRAdmin {float:right; width:739px}
 	.wrapRAdmin .greyBox {width:699px}
-
-
-
+/* login and registration page */
+.wrapLogin {float:left; width:970px}
+	.wrapLogin .greyBox {padding:20px 0 100px 0; width:970px}
+	.wrapLogin .viewRBox {padding:0 264px}
+	.wrapLogin .viewWBox {padding:0 136px 0 135px}
+	.wrapLogin h3 {padding:0 0 5px 0}
+	/*.wrapLogin .viewWBox .unitWBlock {background:url(../images/lineBg.gif) repeat-y center}*/
+	
 
 .overlayPopup {background-color:#000}
 .viewPopup {text-align:left;}

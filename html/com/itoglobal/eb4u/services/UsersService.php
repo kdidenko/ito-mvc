@@ -326,8 +326,18 @@ class UsersService {
 		if(isset($_FILES)) {
 			$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
 		}
-		//$error .= self::GenerateBirthday($birth_day, $birth_month, $birth_year); 
-		//TODO: create birthday field!
+		if ($requestParams[self::ROLE]==2){
+			$error [] .= $requestParams [self::COMPANY] ? false : '_i18n{Please, enter name of company.}';
+			$error [] .= $requestParams [self::VAT] ? false : '_i18n{Please, enter vat of company.}';
+			$error [] .= $requestParams [self::COMPANY_YEAR] ? false : '_i18n{Please, enter year of foundation your company.}';
+			$error [] .= $requestParams [self::ADDRESS] ? false : '_i18n{Please, enter your address.}';
+			$error [] .= $requestParams [self::ZIP] ? false : '_i18n{Please, enter your zip code.}';
+			$error [] .= $requestParams [self::LOCATION] ? false : '_i18n{Please, enter your location.}';
+			$error [] .= $requestParams [self::REGION] ? false : '_i18n{Please, enter your region.}';
+			$error [] .= $requestParams [self::COUNTRY] ? false : '_i18n{Please, enter your country.}';
+			$error [] .= $requestParams [self::SALUTATION] && $requestParams [self::SALUTATION]!=0 ? false : '_i18n{Please, choose your salutation.}';
+			$error [] .= $requestParams [self::PLAN_ID] ? false : '_i18n{Please, choose your plan.}';
+		}
 		return array_filter ( $error );
 	}
 	

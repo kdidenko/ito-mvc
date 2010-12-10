@@ -1,10 +1,10 @@
-body {margin:0; padding:0; text-align:center; font-family:"Lucida Sans", "Lucida Grande", Arial, sans-serif; font-size:12px; line-height:143%; background:#fff; color:#393939; position:relative}
+body {margin:0; padding:0; text-align:center; font-family:Lucida Sans, Lucida Grande, Arial, sans-serif; font-size:12px; line-height:143%; background:#fff; color:#393939; position:relative}
 
 h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style:none}
 img {border:none}
 a {color:#393939; text-decoration:none}
 a:hover {text-decoration:underline}
-input, select, button, textarea {font-family:"Lucida Sans", "Lucida Grande", Arial, sans-serif; font-size:12px; padding:0; margin:0; vertical-align:middle}
+input, select, button, textarea {font-family:Lucida Sans, Lucida Grande, Arial, sans-serif; font-size:12px; padding:0; margin:0; vertical-align:middle}
 input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
 select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:200px}
 textarea.areaTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}

@@ -225,6 +225,7 @@ class TradesmanContentController extends ContentController {
 		isset($plans) ? $mvc->addObject ( PlanService::PLAN, $plans ) : NULL;
 		
 		$plan = SessionService::getAttribute(SessionService::PLAN_ID);
+		$plan = isset($requestParams[PlanService::PLAN])? $requestParams[PlanService::PLAN] :$plan; 
 		$mvc->addObject ( PlanService::CRNT_PLAN, $plan);
 		
 		

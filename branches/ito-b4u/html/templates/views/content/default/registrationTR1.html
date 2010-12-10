@@ -1,5 +1,6 @@
 <div class="wrapLogin">
 	<div class="greyBox">
+		<!-- 
 		<div class="viewRBox">
 			<div class="angleT"></div>
 			<div class="bodyBox">
@@ -20,10 +21,7 @@
 								</ul>
 							</div>
 						<?php } ?>
-						<div class="itemForm">
-							<label for="frmUser">_i18n{Username}:</label>
-							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
-						</div>
+						
 						<div class="itemForm">
 							<label>_i18n{First Name}:</label>
 							<span class="itemData"><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
@@ -36,27 +34,201 @@
 							<label>_i18n{Your Email}:</label>
 							<span class="itemData"><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></span>
 						</div>
+						
+						
+						
+						<?php } ?>
+					</form>
+				</div>
+			</div>
+			<div class="angleB"></div>
+		</div>
+		 -->
+		<div class="viewWBox">
+			<div class="angleT"></div>
+			<div class="bodyBox">
+				<h2>Neuregistrierung</h2>
+				<div class="unitWBlock">
+					<div class="unitEqColumn">
+						<h3>Unternehmensdaten</h3>
 						<div class="itemForm">
-							<label>_i18n{Password}:</label>
-							<span class="itemData"><input type="password" class="inpTxt" name="password"/></span>
+							<label for="frmR1">_i18n{Company Name}:</label>
+							<span class="itemData"><input type="text" id="frmR1" class="inpTxt" /></span>
 						</div>
 						<div class="itemForm">
-							<label>_i18n{Repeat Password}:</label>
-							<span class="itemData"><input type="password" class="inpTxt" name="confirm_password"/></span>
+							<label for="frmR2">_i18n{Ust-ID}:</label>
+							<span class="itemData"><input type="text" id="frmR2" class="inpTxt" /></span>
 						</div>
+						<div class="itemForm">
+							<label for="frmR3">text:</label>
+							<span class="itemData"><input type="text" id="frmR3" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR4">text:</label>
+							<span class="itemData"><input type="text" id="frmR4" class="inpTxt" /></span>
+						</div>
+					</div>
+					<div class="unitEqColumn">
+						<h3>Neuregistrierung</h3>
+						<div class="itemForm">
+							<label for="frmR5">_i18n{Street}:</label>
+							<span class="itemData"><input type="text" id="frmR5" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR6">text:</label>
+							<span class="itemData"><input type="text" id="frmR6" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR7">text:</label>
+							<span class="itemData"><input type="text" id="frmR7" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR8">text:</label>
+							<span class="itemData"><input type="text" id="frmR8" class="inpTxt" /></span>
+						</div>
+					</div>
+				</div>
+				<div class="unitWBlock">
+					<div class="unitEqColumn">
+						<h3>Personliche Daten</h3>
+						<div class="itemForm">
+							<label for="frmR9">text:</label>
+							<span class="itemData"><input type="text" id="frmR9" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR10">text:</label>
+							<span class="itemData"><input type="text" id="frmR10" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR11">text:</label>
+							<span class="itemData"><input type="text" id="frmR11" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR12">text:</label>
+							<span class="itemData"><input type="text" id="frmR12" class="inpTxt" /></span>
+						</div>
+					</div>
+					<div class="unitEqColumn">
+						<h3>Kontaktdaten</h3>
+						<div class="itemForm">
+							<label for="frmR13">text:</label>
+							<span class="itemData"><input type="text" id="frmR13" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR14">text:</label>
+							<span class="itemData"><input type="text" id="frmR14" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR15">_i18n{Username}:</label>
+							<span class="itemData"><input type="text" id="frmR15" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR16">_i18n{Password}:</label>
+							<span class="itemData"><input type="password" id="frmR16" class="inpTxt" name="password"/></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR17">_i18n{Repeat Password}:</label>
+							<span class="itemData"><input type="password" id="frmR17" class="inpTxt" name="confirm_password"/></span>
+						</div>
+					</div>
+				</div>
+				<h2>Select plan</h2>
+				<div class="unitWBlock unitLast">
+					<table cellpadding="0" cellspacing="0" class="viewPlan">
+						<tr>
+							<th></th>
+							<td class="itemStar">
+								<div class="itemInStar itemOne">
+									<h4>one star</h4>
+									<p>19.- Euro</p>
+									<p>exklusive MWSt</p>
+									<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>250 Euro</strong></p>
+									<input type="radio" name="plan" value="1" />
+								</div>
+							</td>
+							<td class="itemStar">
+								<div class="itemInStar itemTwo">
+									<h4>two star</h4>
+									<p>69.- Euro</p>
+									<p>exklusive MWSt</p>
+									<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>1.000 Euro</strong></p>
+									<input type="radio" name="plan" value="2" />
+								</div>
+							</td>
+							<td class="itemStar">
+								<div class="itemInStar itemThree">
+									<h4>three star</h4>
+									<p>69.- Euro</p>
+									<p>exklusive MWSt</p>
+									<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>5.000 Euro</strong></p>
+									<input type="radio" name="plan" value="3" />
+								</div>
+							</td>
+							<td class="itemStar">
+								<div class="itemInStar itemFour">
+									<h4>four star</h4>
+									<p>69.- Euro</p>
+									<p>exklusive MWSt</p>
+									<p class="itemInfo">Angebot stellen bis zu einem Auftragsvolumen von <strong>10.000 Euro</strong></p>
+									<input type="radio" name="plan" value="4" />
+								</div>
+							</td>
+							<td class="itemStar">
+								<div class="itemInStar itemFive">
+									<h4>five star</h4>
+									<p>69.- Euro</p>
+									<p>exklusive MWSt</p>
+									<p class="itemInfo">kann zu jedem Auftrag in unbegrenzter Hohe ein Angebot erstellen</p>
+									<input type="radio" name="plan" value="5" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>Features</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Angebotsabgabe bis</th>
+							<td>250.-</td>
+							<td>1.000.-</td>
+							<td>5.000.-</td>
+							<td>10.000.-</td>
+							<td>uber 10.000.-</td>
+						</tr>
+						<tr>
+							<th>Schnappchen</th>
+							<td>nein</td>
+							<td>nein</td>
+							<td>ein Schnappchen inkludiert</td>
+							<td>ein Schnappchen inkludiert</td>
+							<td>ein Schnappchen inkludiert</td>
+						</tr>
+						<tr>
+							<th>Standart Branchenbuch</th>
+							<td>ja</td>
+							<td>ja</td>
+							<td>ja</td>
+							<td>ja</td>
+							<td>inkl.</td>
+						</tr>
+					</table>
+					<div class="unitSnColumn">
 						<div class="itemForm">
 							<span class="itemData">
-								<input type="checkbox" class="inpChk" name="agreement"/>
-								<label>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+								<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
+								<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
 							</span>
 						</div>
-						<div class="itemBtn">
-						<input type="hidden" name="role" value="<?php echo $role ?>"/>
+					</div>
+					<div class="unitBtn">
+							<input type="hidden" name="role" value="<?php echo $role ?>"/>
 							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 							<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
 						</div>
-						<?php } ?>
-					</form>
 				</div>
 			</div>
 			<div class="angleB"></div>

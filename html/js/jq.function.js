@@ -68,6 +68,19 @@ if(jQuery) (function($){
 			k.bind('change', function(){f.loadBlock(k)})
 		})
 	};
+	$.fn.planAn = function(){
+		return this.each(function(){
+			var o=$(this),i=0;
+			$('td', o).bind('click', function(){
+				var k=$(this); v=k.index();
+				if(i!=v){
+					$('tr td:nth-child('+(i+1)+')', o).removeClass('itemChecked');
+					$('tr td:nth-child('+(v+1)+')', o).addClass('itemChecked').find('input[type="radio"]').attr('checked', true);
+					i=v;
+				}
+			}).eq(0).click();
+		})
+	};
 	$.fn.notificationAn = function(params){
 		var conf = $.extend({
 			sBlock:'#unitNotif',
@@ -220,11 +233,12 @@ if(jQuery) (function($){
 		});
 	};
 	$(document).ready(function(){
-		$('.viewWBox').dataAn();
+		$('.wrapRAdmin .viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
 		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitNotif').categoryAn();
 		$('.areaTxt').rtfAn();
 		$('.bodyBox').notificationAn();
+		$('.viewPlan').planAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

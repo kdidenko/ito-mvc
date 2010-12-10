@@ -131,7 +131,7 @@ if(jQuery) (function($){
 	};
 	$.fn.dataAn = function(params){
 		var conf = $.extend({
-			tableBlock:'table',
+			tableBlock:'table:not(.viewPlan)',
 			hoverClass:'unitHover',
 			noDataRow:'.unitNoData',
 			dataClass:'unitData',

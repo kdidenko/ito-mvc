@@ -1,0 +1,168 @@
+<div class="wrapLogin">
+	<div class="greyBox">
+		<div class="viewWBox">
+			<div class="angleT"></div>
+			<div class="bodyBox">
+				<h2>Neuregistrierung</h2>
+				<div class="unitWBlock">
+					<div class="unitEqColumn">
+						<h3>Bankverbindung</h3>
+						<div class="itemForm">
+							<label for="frmR1">Bank:</label>
+							<span class="itemData"><input type="text" id="frmR1" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR2">Kto-Nr:</label>
+							<span class="itemData"><input type="text" id="frmR2" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR3">BLZ:</label>
+							<span class="itemData"><input type="text" id="frmR3" class="inpTxt" /></span>
+						</div>
+						<div class="itemForm">
+							<label for="frmR4">Zahlungsmodalitaten:</label>
+							<span class="itemData"><select id="frmR4"><option>1/4-jahrlich</option><option>1/2-jahrlich</option><option>jahrlich</option></select></span>
+						</div>
+					</div>
+					<div class="unitEqColumn">
+						<h3>Text</h3>
+						<div class="itemForm">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at justo purus, eget egestas dolor. Pellentesque sagittis convallis turpis sit amet aliquet. Pellentesque tincidunt elit purus, eu rutrum nisi.</p>
+						</div>
+						<div class="itemForm">
+							<p>Integer a dui sit amet turpis luctus ornare in ac lorem.</p>
+							<p>Cras id tellus ut tortor accumsan fringilla.</p>
+						</div>
+					</div>
+				</div>
+				<div class="unitWBlock">
+					Radio buttons
+				</div>
+				<ul class="viewIList">
+					<li class="itemNewB"><a href="#" title="New notification">New notification</a></li>
+				</ul>
+				<h2>Notification</h2>
+				<div class="unitWBlock">
+					<div id="unitNotif" class="hideElement">
+						<!-- sample on -->
+						<div class="unitNotif">
+							<div class="unitP">
+								<div class="itemForm itemFirst">
+									<label for="frmR5">_i18n{Category}:</label>
+									<div class="itemData">
+										<select class="gCategory" name="category" id="frmR5">
+											<option value="1" selected="selected">IT</option>
+											<option value="2">finance</option>
+										</select>
+									</div>
+								</div>
+								<div class="itemForm">
+									<label for="frmR6">_i18n{Sub-Category}:</label>
+									<div class="itemData">
+										<select class="gSubCategory" name="subcategory" id="frmR6">
+											<option value="1" selected="selected">SEO</option>
+											<option value="2">web-design</option>
+											<option value="3">development</option>
+										</select>
+									</div>
+								</div>
+								<div class="itemForm">
+									<label for="frmR7">Auftragsvolumen:</label>
+									<div class="itemData">
+										<select id="frmR7" name="plan">
+											<option>0-1.000 Euro</option>
+											<option>1.000-5.000 Euro</option>
+											<option>5.000-unbegrenzt</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="linkDelete">
+								<a href="#" title="Remove notification">Remove notification</a>
+							</div>
+						</div>
+						<!-- sample off -->
+					</div>
+					<form action="/communication.html" method="post">
+						<div class="unitNotifEmpty hideElement">Empty notification</div>
+						<dl class="viewRList">
+							<dt>Region:</dt>
+							<dd>
+								<ul>
+									<li>
+										<input id="frmR1" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
+										<label for="frmR1">Wien</label>
+									</li>
+									<li>
+										<input id="frmR2" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
+										<label for="frmR2">Oberosterreich</label>
+									</li>
+									<li>
+										<input id="frmR3" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
+										<label for="frmR3">Karnten</label>
+									</li>
+									<li>
+										<input id="frmR4" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
+										<label for="frmR4">Osttirol</label>
+									</li>
+									<li>
+										<input id="frmR5" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
+										<label for="frmR5">Niederosterreich</label>
+									</li>
+									<li>
+										<input id="frmR6" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
+										<label for="frmR6">Steiermark</label>
+									</li>
+									<li>
+										<input id="frmR7" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
+										<label for="frmR7">Tirol</label>
+									</li>
+									<li>
+										<input id="frmR8" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
+										<label for="frmR8">Burgenland</label>
+									</li>
+									<li>
+										<input id="frmR9" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
+										<label for="frmR9">Salzburg</label>
+									</li>
+									<li>
+										<input id="frmR10" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
+										<label for="frmR10">Vorarlberg</label>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+					</form>
+				</div>
+				<div class="unitWBlock unitLast">
+					<div class="unitInfo unitRtf">
+						Lorem ipsum <b>dolor sit amet</b>, consectetur adipiscing elit. Sed massa urna, mattis id mattis ac, fringilla commodo diam. Sed enim lorem, iaculis sed suscipit sit amet, vestibulum ut nunc. <a href="http://google.com">Vestibulum vitae leo mauris</a>, a laoreet sem. Curabitur id magna in libero fringilla scelerisque sit amet at orci. Sed sit amet massa nec nisl accumsan <i>commodo</i> non quis elit. Suspendisse pulvinar elementum mauris, sit amet eleifend tellus varius dignissim. Integer congue sem non tortor consequat aliquet. Vestibulum at sodales neque. Aliquam id quam ac nisl euismod iaculis. Nullam vulputate feugiat dictum. Sed nec lacus et ligula sollicitudin dignissim eget nec felis. Aenean nec lorem eget sem lacinia feugiat sed sed risus. Cras ultricies, ante ut varius tempus, nisl nisi porta odio, eu sodales enim nibh nec dui. <font color="#cc0000">Aenean auctor</font>, nunc quis interdum tristique, erat massa eleifend justo, at facilisis ipsum nibh vel enim. Curabitur aliquam tortor ultricies enim ultrices in posuere quam sollicitudin. Nunc dolor elit, dapibus et condimentum non, blandit quis est. Quisque posuere ornare neque, a scelerisque dui tincidunt id. <span style="background-color: rgb(204, 204, 204);">Proin in euismod purus</span>.
+						<br>
+						<br>
+						<b><font color="#ff0000"><font color="#000000"><span style="background-color: rgb(255, 204, 102);"></span></font></font></b>
+						<ul>
+							<li>Donec fermentum elit a libero euismod sit amet ullamcorper lorem sodales.</li>
+							<li>Sed suscipit laoreet turpis, non fermentum elit venenatis vitae.</li>
+							<li>Nunc posuere lacus vitae felis elementum pellentesque.</li>
+						</ul>
+						<br>
+						<ol>
+							<li>Nullam volutpat egestas eros, porttitor interdum enim sollicitudin ac.</li>
+							<li>Ut tempus viverra purus, vel posuere elit auctor ac.</li>
+						</ol>
+					</div>
+					<div class="unitBtn">
+						<input type="hidden" name="role" value="<?php echo $role ?>"/>
+						<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+						<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
+					</div>
+				</div>
+				
+			</div>
+			<div class="angleB"></div>
+		</div>
+		<!-- fix gradient on -->
+		<div class="lineHide"></div>
+		<!-- fix gradient off -->
+	</div>
+</div>

@@ -1,1 +1,94 @@
-<h2>_i18n{here you can update your plan}</h2>
+<?php 
+	$plans = $mvc->getObject(PlanService::PLAN);
+	$crnt_plans = $mvc->getObject(PlanService::CRNT_PLAN);
+?>
+<h2>Select plan</h2>
+<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+		if (isset($message) && $message!=NULL){?>
+						<div class="itemOk"><?php echo $message; ?></div>
+<?php	}?>
+<form action="my-plan.html" method="post" name="registration">					
+	<div class="unitWBlock unitLast">
+		<table cellpadding="0" cellspacing="0" class="viewPlan">
+			<tr>
+				<th></th>
+				<td class="itemStar">
+					<div class="itemInStar itemOne">
+						<h4>one star</h4>
+						<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
+						<p>_i18n{excluding VAT}</p>
+						<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
+						<input type="radio" <?php echo $plans[0][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[0][PlanService::ID]?>" />
+					</div>
+				</td>
+				<td class="itemStar">
+					<div class="itemInStar itemTwo">
+						<h4>two star</h4>
+						<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
+						<p>_i18n{excluding VAT}</p>
+						<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
+						<input type="radio" <?php echo $plans[1][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[1][PlanService::ID]?>" />
+					</div>
+				</td>
+				<td class="itemStar">
+					<div class="itemInStar itemThree">
+						<h4>three star</h4>
+						<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
+						<p>_i18n{excluding VAT}</p>
+						<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
+						<input type="radio" <?php echo $plans[2][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[2][PlanService::ID]?>" />
+					</div>
+				</td>
+				<td class="itemStar">
+					<div class="itemInStar itemFour">
+						<h4>four star</h4>
+						<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
+						<p>_i18n{excluding VAT}</p>
+						<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
+						<input type="radio" <?php echo $plans[3][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[3][PlanService::ID]?>" />
+					</div>
+				</td>
+				<td class="itemStar">
+					<div class="itemInStar itemFive">
+						<h4>five star</h4>
+						<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
+						<p>_i18n{excluding VAT}</p>
+						<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
+						<input type="radio" <?php echo $plans[4][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[4][PlanService::ID]?>" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>Features</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>_i18n{Tender to}</th>
+				<?php foreach($plans as $key=>$plan) {?>
+				<td><?php echo $plan[PlanService::TENDER_TO]!=0 ? $plan[PlanService::TENDER_TO] : '_i18n{more than} ' . $plans[$key-1][PlanService::TENDER_TO]; ?></td>
+				<?php } ?>
+			</tr>
+			<tr>
+				<th>_i18n{Bargains}</th>
+				<?php foreach($plans as $key=>$plan) { ?>
+				<td><?php echo $plan[PlanService::BARGAINS]==0 ? "_i18n{no}" : "_i18n{included}" ?></td>
+				<?php } ?>
+			</tr>
+			<tr>
+				<th>_i18n{Standard Business Directory}</th>
+				<td>_i18n{included}</td>
+				<td>_i18n{included}</td>
+				<td>_i18n{included}</td>
+				<td>_i18n{included}</td>
+				<td>_i18n{included}</td>
+			</tr>
+		</table>
+		<div class="unitBtn">
+			<button type="submit" name="submit"><span><strong>_i18n{Save}</strong></span></button>
+		</div>
+	</div>
+</form>

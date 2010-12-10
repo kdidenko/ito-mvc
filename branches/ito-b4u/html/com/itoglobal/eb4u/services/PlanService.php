@@ -2,7 +2,7 @@
 
 class PlanService {
 	/**
-	 * @var string defining the mails table name
+	 * @var string defining the plan table name
 	 */
 	const PLAN = 'plan';
 	/**
@@ -17,11 +17,27 @@ class PlanService {
 	 * @var  string defining the plan_price field name
 	 */
 	const PLAN_PRICE = 'plan_price';
-	
 	/**
-	 * Retrieves mail by specified mail id.
-	 * @param integer $hash the mail id
-	 * @return mail data
+	 * @var  string defining the tender_to field name
+	 */
+	const TENDER_TO = 'tender_to';
+	/**
+	 * @var  string defining the bargains field name
+	 */
+	const BARGAINS = 'bargains';
+	/**
+	 * @var  string defining the plan_desc field name
+	 */
+	const PLAN_DESC = 'plan_desc';
+	
+	
+	const CRNT_PLAN = 'crnt_plan';
+	
+	const OTHER_PLAN = 'other_plan';
+	/**
+	 * Retrieves plan by specified plan id.
+	 * @param integer $hash the plan id
+	 * @return plan data
 	 */
 	public static function getPlan($id) {
 		$fields = '*';
@@ -30,6 +46,15 @@ class PlanService {
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
+		return $result;
+	}
+	
+	public static function getPlans() {
+		$fields = '*';
+		$from = self::PLAN;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '' , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
 	

@@ -181,18 +181,41 @@ class RegistrationController extends SecureActionControllerImpl {
 					$fields[] .= $requestParams[UsersService::BANK] ? UsersService::BANK : false;
 					$fields[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? UsersService::ACCOUNT_NUMBER : false;
 					$fields[] .= $requestParams[UsersService::PAYMENT] ? UsersService::PAYMENT : false;
-					$fields[] .= isset($requestParams[UsersService::SEND_JOB]) && $requestParams[UsersService::SEND_JOB]!=NULL ? 'send_job' : false;
+					$fields[] .= isset($requestParams[UsersService::NEWSLETTER]) && $requestParams[UsersService::NEWSLETTER]!=NULL ? 'newsletter' : false;
 					$vals = array ('0' => '1', '1' => $path);
 					$vals[] .= $requestParams[UsersService::BANK] ? $requestParams[UsersService::BANK] : false;
 					$vals[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? $requestParams[UsersService::ACCOUNT_NUMBER] : false;
 					$vals[] .= $requestParams[UsersService::PAYMENT] ? $requestParams[UsersService::PAYMENT] : false;
-					$vals[] .= isset($requestParams[UsersService::SEND_JOB])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::SEND_JOB] : false;
+					$vals[] .= isset($requestParams[UsersService::NEWSLETTER])&&$requestParams[UsersService::NEWSLETTER]!=NULL ? $requestParams[UsersService::NEWSLETTER] : false;
 					$vals  = array_filter ( $vals );
 					$fields  = array_filter ( $fields );
 						
 					#update user information
 					UsersService::updateFields($requestParams[UsersService::ID], $fields, $vals );
 					
+					if (isset($requestParams['region'])){
+						if (isset($requestParams[CategoryService::CATEGORY]) && count($requestParams[CategoryService::CATEGORY])>0){
+							$value = array();
+							$categories = $requestParams[CategoryService::CATEGORY];
+							$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
+							$plan = $requestParams[PlanService::PLAN];
+							$region = $requestParams['region'];
+							
+							RemindService::deleteByUser($id);
+							
+							foreach ($region as $region_key=>$region_item){
+								foreach($categories as $key=>$category){
+									$subcategory = $subcategories[$key];
+									$price = 1;
+									$region = $region_item;
+									$values[] .= $id . ', ' . $category . ', ' . $subcategory . ', ' . 
+												$price . ', ' . $region;
+								}
+							}
+							
+							RemindService::setRemind($id, $values);
+						} 
+					}
 					
 					$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
 					//$mvc->addObject ( UsersService::ERROR, $message );
@@ -206,6 +229,18 @@ class RegistrationController extends SecureActionControllerImpl {
 			$location = $this->onFailure ( $actionParams );
 			$this->forwardActionRequest ( $location );
 		}
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubCategories ();
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$regions = RegionService::getRegions ($id);
+		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
+		
+		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
+		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
+		
 		return $mvc;
 	}
 	

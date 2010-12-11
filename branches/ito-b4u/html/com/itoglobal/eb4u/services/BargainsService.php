@@ -77,7 +77,10 @@ class BargainsService {
 	 * @var string defining the number field name
 	 */
 	const NUMBER = 'number';
-	
+	/**
+	 * @var string defining the status field name
+	 */
+	const STATUS = 'status';
 	
 	/**
 	 * Retrieves the users bargains by specified user id.

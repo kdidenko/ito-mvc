@@ -1,0 +1,1 @@
+ALTER TABLE  `bargains` ADD  `status` TINYINT NOT NULL ;

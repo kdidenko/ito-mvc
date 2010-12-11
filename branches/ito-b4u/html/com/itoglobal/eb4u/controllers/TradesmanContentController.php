@@ -213,6 +213,13 @@ class TradesmanContentController extends ContentController {
 	public function handleMyBargains($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		
+		isset ( $requestParams [self::DEL_ALL] ) ? 
+			//MailService::deleteMails ($requestParams ['itemSelect'])
+			print_r($requestParams [self::DEL_ALL]) :
+				null;
+		
 		$bargains = BargainsService::getBargains($id);
 		isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
 		

@@ -221,12 +221,21 @@ class TradesmanContentController extends ContentController {
 	
 	public function handleMyPlan($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams['submit'])){
+			$id = SessionService::getAttribute(SessionService::USERS_ID);
+			$fields = UsersService::PLAN_ID;
+			$value = $requestParams[UsersService::PLAN_ID];
+			UsersService::updateFields($id, $fields, $value);
+			SessionService::setAttribute(SessionService::PLAN_ID, $requestParams[UsersService::PLAN_ID]);
+		}
 		$plans = PlanService::getPlans();
 		isset($plans) ? $mvc->addObject ( PlanService::PLAN, $plans ) : NULL;
 		
 		$plan = SessionService::getAttribute(SessionService::PLAN_ID);
 		$plan = isset($requestParams[PlanService::PLAN])? $requestParams[PlanService::PLAN] :$plan; 
 		$mvc->addObject ( PlanService::CRNT_PLAN, $plan);
+		
+		
 		
 		
 	return $mvc;

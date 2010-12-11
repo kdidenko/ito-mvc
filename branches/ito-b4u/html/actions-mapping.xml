@@ -53,13 +53,13 @@
 		</template>	
 	</action>
 	
-	<action name="/sidebar-block.html" id="sidebarblock">
+	<action name="/plan-block.html" id="planblock">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="$1.html" path="templates/views/sidebars/common/sidebarblock.html" />
+		<template name="$1.html" path="templates/views/sidebars/common/planblock.html" />
 		<role type="TR">
 			<controller class="com.itoglobal.eb4u.controllers.SidebarController" 
-					method="handleSidebarBlock" />
-			<template name="$1.html" path="templates/views/sidebars/tradesman/sidebarblock.html" />
+					method="handlePlanBlock" />
+			<template name="$1.html" path="templates/views/sidebars/tradesman/planblock.html" />
 		</role>
 	</action>
 	<!-- Sidebar views mapping end -->

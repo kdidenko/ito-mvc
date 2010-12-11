@@ -1,3 +1,12 @@
+<script> 
+$("#planBlock").load("/plan-block.html", function(response, status, xhr) {
+	/*  
+	if (status == "error") {
+	    var msg = "Sorry but there was an error: ";
+		alert (msg + xhr.status + " " + xhr.statusText);
+	  }*/
+	});
+</script>
 <?php 
 	$plans = $mvc->getObject(PlanService::PLAN);
 	$crnt_plans = $mvc->getObject(PlanService::CRNT_PLAN);
@@ -7,7 +16,7 @@
 		if (isset($message) && $message!=NULL){?>
 						<div class="itemOk"><?php echo $message; ?></div>
 <?php	}?>
-<form action="my-plan.html" method="post" name="registration">					
+<form action="my-plan.html" method="post">					
 	<div class="unitWBlock unitLast">
 		<table cellpadding="0" cellspacing="0" class="viewPlan">
 			<tr>
@@ -18,7 +27,7 @@
 						<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
 						<p>_i18n{excluding VAT}</p>
 						<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
-						<input type="radio" <?php echo $plans[0][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[0][PlanService::ID]?>" />
+						<input type="radio" <?php echo $plans[0][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan_id" value="<?php echo $plans[0][PlanService::ID]?>" />
 					</div>
 				</td>
 				<td class="itemStar">
@@ -27,7 +36,7 @@
 						<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
 						<p>_i18n{excluding VAT}</p>
 						<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
-						<input type="radio" <?php echo $plans[1][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[1][PlanService::ID]?>" />
+						<input type="radio" <?php echo $plans[1][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan_id" value="<?php echo $plans[1][PlanService::ID]?>" />
 					</div>
 				</td>
 				<td class="itemStar">
@@ -36,7 +45,7 @@
 						<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
 						<p>_i18n{excluding VAT}</p>
 						<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
-						<input type="radio" <?php echo $plans[2][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[2][PlanService::ID]?>" />
+						<input type="radio" <?php echo $plans[2][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan_id" value="<?php echo $plans[2][PlanService::ID]?>" />
 					</div>
 				</td>
 				<td class="itemStar">
@@ -45,7 +54,7 @@
 						<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
 						<p>_i18n{excluding VAT}</p>
 						<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
-						<input type="radio" <?php echo $plans[3][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[3][PlanService::ID]?>" />
+						<input type="radio" <?php echo $plans[3][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan_id" value="<?php echo $plans[3][PlanService::ID]?>" />
 					</div>
 				</td>
 				<td class="itemStar">
@@ -54,7 +63,7 @@
 						<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
 						<p>_i18n{excluding VAT}</p>
 						<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
-						<input type="radio" <?php echo $plans[4][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan" value="<?php echo $plans[4][PlanService::ID]?>" />
+						<input type="radio" <?php echo $plans[4][PlanService::ID]==$crnt_plans ? 'checked="checked"' : NULL; ?> name="plan_id" value="<?php echo $plans[4][PlanService::ID]?>" />
 					</div>
 				</td>
 			</tr>

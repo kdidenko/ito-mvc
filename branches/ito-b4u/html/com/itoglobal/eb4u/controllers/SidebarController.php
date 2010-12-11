@@ -24,7 +24,7 @@ class SidebarController extends SecureActionControllerImpl {
 		return $mvc;		
 	}
 	
-	public function handleSidebarBlock($actionParams, $requestParams) {
+	public function handlePlanBlock($actionParams, $requestParams) {
 		$mvc = parent::handleActionRequest($actionParams, $requestParams);
 		
 		$plan = SessionService::getAttribute(SessionService::PLAN_ID);

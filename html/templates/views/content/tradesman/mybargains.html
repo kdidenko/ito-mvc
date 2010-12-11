@@ -1,9 +1,10 @@
 <?php 
 $bargains = $mvc->getObject(BargainsService::BARGAINS);
 ?>
+<form action="my-bargains.html" method="post">
 <ul class="viewIList">
 	<li class="itemNewB"><a href="/new-bargain.html" title="New">New</a></li>
-	<li class="itemArhiv"><button onclick="return confirm('_i18n{You sure you want to delete?}');" >Archivieren</button></li>
+	<li class="itemArhiv"><button name="archiveAll" onclick="return confirm('_i18n{You sure you want to archive?}');" >_i18n{Archive}</button></li>
 </ul>
 <h2>_i18n{My current Bargains}</h2>
 <div class="unitWBlock">
@@ -23,8 +24,9 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 		<tbody>
 <?php if (isset($bargains) && $bargains!=NULL) { ?>
 <?php 	foreach ($bargains as $key=>$value){ ?>
+<?php		if ($value[BargainsService::STATUS]!=3){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $value[BargainsService::ID]?>" /></td>
 				<td><a href="#" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
 				<td><?php echo $value[CategoryService::CAT_NAME]?></td>
 				<td><?php echo $value[BargainsService::BARGAIN_NAME]?></td>
@@ -33,14 +35,16 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 				<td><?php echo $value[BargainsService::NUMBER]?></td>
 				<td class="itemLast"><a href="#" title="Deactivate">Deactivate</a></td>
 			</tr>
+<?php 		} ?>
 <?php 	} ?>
 <?php } ?>
 		</tbody>
 	</table>
 	<div class="unitBtn"></div>
 </div>
+
 <ul class="viewIList">
-	<li class="itemDelete"><button onclick="return confirm('_i18n{You sure you want to delete?}');" >Delete</button></li>
+	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Bargains Archive}</h2>
 <div class="unitWBlock unitLast">
@@ -57,15 +61,22 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 			</tr>
 		</thead>
 		<tbody>
+<?php if (isset($bargains) && $bargains!=NULL) { ?>
+<?php 	foreach ($bargains as $key=>$value){ ?>
+<?php		if ($value[BargainsService::STATUS]==3){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td>S70</td>
-				<td>Kategorie2</td>
-				<td>text</td>
-				<td>01/01/2010</td>
-				<td>130.00 &euro;</td>
-				<td class="itemLast">User12</td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $value[BargainsService::ID]?>" /></td>
+				<td><a href="#" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
+				<td><?php echo $value[CategoryService::CAT_NAME]?></td>
+				<td><?php echo $value[BargainsService::BARGAIN_NAME]?></td>
+				<td><?php echo $value[BargainsService::UNTIL_DATE]?></td>
+				<td><?php echo $value[BargainsService::BARGAIN_PRICE]?> &euro;</td>
+				<td class="itemLast"><a href="#" title="Deactivate">user</a></td>
 			</tr>
+<?php 		} ?>
+<?php 	} ?>
+<?php } ?>
 		</tbody>
 	</table>
 </div>
+</form>

@@ -32,24 +32,24 @@ $role = $mvc->getObject(UsersService::ROLE);
 					<div class="unitEqColumn">
 						<h3>_i18n{Bank Data}</h3>
 						<div class="itemForm">
-							<label for="frmR1">Bank:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR1" name="bank" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank']; ?>/></span>
+							<label for="frmR1">_i18n{Bank}:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR1" name="bank" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank']; ?>"/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR2">Kto-Nr:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR2" name="account_number" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['account_number']; ?>/></span>
+							<label for="frmR2">_i18n{Account No}:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR2" name="account_number" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['account_number']; ?>"/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR3">BLZ:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR3" name="bank_blz" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank_blz']; ?>/></span>
+							<label for="frmR3">_i18n{BLZ}:<span class="itemReq">*</span></label>
+							<span class="itemData"><input type="text" id="frmR3" name="bank_blz" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank_blz']; ?>"/></span>
 						</div>
 						<div class="itemForm">
-							<label for="frmR4">Zahlungsmodalitaten:<span class="itemReq">*</span></label>
+							<label for="frmR4">_i18n{Payment}:<span class="itemReq">*</span></label>
 							<span class="itemData">
 								<select id="frmR4" name="payment">
-									<option>1/4-jahrlich</option>
-									<option>1/2-jahrlich</option>
-									<option>jahrlich</option>
+									<option value="1">1/4-_i18n{annually}</option>
+									<option value="2">1/2-_i18n{annually}</option>
+									<option value="3">_i18n{annually}</option>
 								</select>
 							</span>
 						</div>
@@ -75,26 +75,33 @@ $role = $mvc->getObject(UsersService::ROLE);
 								<div class="itemForm itemFirst">
 									<label for="frmR5">_i18n{Category}:</label>
 									<div class="itemData">
-										<select class="gCategory" name="category" id="frmR5">
-											<option value="1" selected="selected">IT</option>
-											<option value="2">finance</option>
+										<select id="frmCc" name="category" class="gCategory">
+<?php								if (isset($categories) && $categories!=NULL){ 
+										foreach($categories as $key=>$category){ ?>
+											<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 									} 
+									} ?>
 										</select>
 									</div>
 								</div>
 								<div class="itemForm">
 									<label for="frmR6">_i18n{Sub-Category}:</label>
 									<div class="itemData">
-										<select class="gSubCategory" name="subcategory" id="frmR6">
-											<option value="1" selected="selected">SEO</option>
-											<option value="2">web-design</option>
-											<option value="3">development</option>
+										<select id="frmCs" name="subcategory" class="gSubCategory">
+<?php								if (isset($subcategories) && $subcategories!=NULL){ 
+										foreach($subcategories as $key=>$subcategory){ 
+											if ($subcategory[SubCategoryService::CAT_ID] == $categories[0][CategoryService::ID]){?>
+												<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php			 							}
+										}
+									} ?>
 										</select>
 									</div>
 								</div>
 								<div class="itemForm">
 									<label for="frmR7">Auftragsvolumen:</label>
 									<div class="itemData">
-										<select id="frmR7" name="plan">
+										<select id="frmCp" name="plan">
 											<option>0-1.000 Euro</option>
 											<option>1.000-5.000 Euro</option>
 											<option>5.000-unbegrenzt</option>
@@ -103,56 +110,27 @@ $role = $mvc->getObject(UsersService::ROLE);
 								</div>
 							</div>
 							<div class="linkDelete">
-								<a href="#" title="Remove notification">Remove notification</a>
+								<a href="#" title="_i18n{Remove notification}">_i18n{Remove notification}</a>
 							</div>
 						</div>
 						<!-- sample off -->
 					</div>
-					<div class="unitNotifEmpty hideElement">Empty notification</div>
+					<div class="unitNotifEmpty hideElement">_i18n{Empty notification}</div>
 					<dl class="viewRList">
 						<dt>Region:</dt>
 						<dd>
 							<ul>
+<?php foreach($regions as $key=>$region){ ?> 
 								<li>
-									<input id="frmR10" type="checkbox" class="inpChk" name="region[1]" value="Wien"/>
-									<label for="frmR10">Wien</label>
+									<input 
+									
+									<?php if (isset($remind_regions)&&$remind_regions!=NULL ){ foreach($remind_regions as $key=>$remind_regions_item){ ?> 
+									<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked'  : NULL; }}?>
+									
+									id="frmR<?php echo $region[RegionService::ID]; ?>" type="checkbox" class="inpChk" name="region[<?php echo $region[RegionService::ID]; ?>]" value="<?php echo $region[RegionService::ID]; ?>"/>
+									<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label> 
 								</li>
-								<li>
-									<input id="frmR11" type="checkbox" class="inpChk" name="region[2]" value="Oberosterreich"/>
-									<label for="frmR11">Oberosterreich</label>
-								</li>
-								<li>
-									<input id="frmR12" type="checkbox" class="inpChk" name="region[3]" value="Karnten"/>
-									<label for="frmR12">Karnten</label>
-								</li>
-								<li>
-									<input id="frmR13" type="checkbox" class="inpChk" name="region[4]" value="Osttirol"/>
-									<label for="frmR13">Osttirol</label>
-								</li>
-								<li>
-									<input id="frmR14" type="checkbox" class="inpChk" name="region[5]" value="Niederosterreich"/>
-									<label for="frmR14">Niederosterreich</label>
-								</li>
-								<li>
-									<input id="frmR15" type="checkbox" class="inpChk" name="region[6]" value="Steiermark"/>
-									<label for="frmR15">Steiermark</label>
-								</li>
-								<li>
-									<input id="frmR16" type="checkbox" class="inpChk" name="region[7]" value="Tirol"/>
-									<label for="frmR16">Tirol</label>
-								</li>
-								<li>
-									<input id="frmR17" type="checkbox" class="inpChk" name="region[8]" value="Burgenland"/>
-									<label for="frmR17">Burgenland</label>
-								</li>
-								<li>
-									<input id="frmR18" type="checkbox" class="inpChk" name="region[9]" value="Salzburg"/>
-									<label for="frmR18">Salzburg</label>
-								</li>
-								<li>
-									<input id="frmR19" type="checkbox" class="inpChk" name="region[10]" value="Vorarlberg"/>
-									<label for="frmR19">Vorarlberg</label>
-								</li>
+<?php } ?>
 							</ul>
 						</dd>
 					</dl>
@@ -179,8 +157,8 @@ $role = $mvc->getObject(UsersService::ROLE);
 						<div class="unitSnColumn">
 							<div class="itemForm">
 								<span class="itemData">
-									<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
-									<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+									<input type="checkbox" id="frmR19" class="inpChk" name="newsletter" value="1" checked="checked"/>
+									<label for="frmR19">_i18n{Send me newsletter}</label>
 								</span>
 							</div>
 						</div>

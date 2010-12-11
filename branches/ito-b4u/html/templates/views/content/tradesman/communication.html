@@ -74,13 +74,13 @@ $errors = $mvc->getObject(ContentController::ERROR);
 				</div>
 			</div>
 			<div class="linkDelete">
-				<a href="#" title="Remove notification">Remove notification</a>
+				<a href="#" title="_i18n{Remove notification}">_i18n{Remove notification}</a>
 			</div>
 		</div>
 		<!-- sample off -->
 	</div>
 	<form action="/communication.html" method="post">
-		<div class="unitNotifEmpty hideElement">Empty notification</div>
+		<div class="unitNotifEmpty hideElement">_i18n{Empty notification}</div>
 <?php 
 	if(isset($data) && $data!=NULL && count($data)>0) {
 		foreach($data as $data_key=>$remind){

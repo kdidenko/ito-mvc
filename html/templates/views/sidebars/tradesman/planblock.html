@@ -9,7 +9,7 @@ $other_plan = $mvc->getObject(PlanService::OTHER_PLAN);
 			<div class="viewPackage">
 			<form action="my-plan.html" method="post">
 				<p>_i18n{Current plan}: <span class="itemCurrent"><?php echo $plan ?></span></p>
-				<?php if(isset($other_plan) && count($other_plan)>0){?>
+				<?php if(isset($other_plan) && count($other_plan)>0 && $other_plan!=NULL){?>
 				<p>_i18n{Upgrade plan to}: </p>
 				<p>
 					<select name="plan">

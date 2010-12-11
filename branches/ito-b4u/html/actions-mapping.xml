@@ -102,26 +102,33 @@
 	</action>
 	<!-- Footer views mapping end -->
 	
+	<!-- Footer views mapping begin -->
+	<action name="/user-agreement.html" id="useragreement">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl"/>
+		<template name="user-agreement.html" path="templates/layout-static-page.html" />
+	</action>
+	<!-- Footer views mapping end -->
+	
 	<action name="/index.html" id="home">
 		<role type="VR">
-			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 			<template name="index.html" path="templates/layout-two-columns.html" />
 		</role>
 		<role type="AR">
-			<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+			<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 			<template name="index.html" path="templates/layout-two-columns-left.html" />
 		</role>
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	
 	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	
 	<action name="/my-account.html" id="myaccount" roles="UR,TR,BR,PR,AR">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target condition="onsignedoff" location="/login.html"/>

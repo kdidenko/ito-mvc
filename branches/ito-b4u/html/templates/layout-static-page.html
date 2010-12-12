@@ -13,6 +13,10 @@
 	<script type="text/javascript" src="js/jq.function.js"></script>
 </head>
 <body>
+<?php 
+$title = $mvc->getObject(StaticPageController::TITLE);
+$body = $mvc->getObject(StaticPageController::BODY);
+?>
 <div class="feedbackLink">
 	<a href="#" title="Feedback">Feedback</a>
 </div>
@@ -30,7 +34,7 @@
 	<div class="wrapInner">
 		<div class="wrapTitle">
 			<div class="viewTHead">
-				<h1>User Agreement</h1>
+				<h1><?php echo $title; ?></h1>
 			</div>
 			<!-- extra links on -->
 			<div class="viewEHead">
@@ -51,19 +55,14 @@
 					<div class="viewWBox">
 						<div class="angleT"></div>
 						<div class="bodyBox">
-							<h2>Title</h2>
+							<h2><?php echo $title; ?></h2>
 							<div class="unitWBlock unitLast">
 								<div class="unitInfo unitRtf">
-									Lorem ipsum <b>dolor sit amet</b>, consectetur adipiscing elit. Sed massa urna, mattis id mattis ac, fringilla commodo diam. Sed enim lorem, iaculis sed suscipit sit amet, vestibulum ut nunc. <a href="http://google.com">Vestibulum vitae leo mauris</a>, a laoreet sem. Curabitur id magna in libero fringilla scelerisque sit amet at orci. Sed sit amet massa nec nisl accumsan <i>commodo</i> non quis elit. Suspendisse pulvinar elementum mauris, sit amet eleifend tellus varius dignissim. Integer congue sem non tortor consequat aliquet.
-									<br />
-									<br />
-									Vestibulum at sodales neque. Aliquam id quam ac nisl euismod iaculis. Nullam vulputate feugiat dictum. Sed nec lacus et ligula sollicitudin dignissim eget nec felis. Aenean nec lorem eget sem lacinia feugiat sed sed risus. Cras ultricies, ante ut varius tempus, nisl nisi porta odio, eu sodales enim nibh nec dui. Aenean auctor, nunc quis interdum tristique, erat massa eleifend justo, at facilisis ipsum nibh vel enim. Curabitur aliquam tortor ultricies enim ultrices in posuere quam sollicitudin.
-									<br />
-									<br />
-									Nunc dolor elit, dapibus et condimentum non, blandit quis est. Quisque posuere ornare neque, a scelerisque dui tincidunt id.
-									<br>
-									<br>
+									<?php echo $body; ?>
 								</div>
+							</div>
+							<div class="unitBtn">
+								<button><span><strong>_i18n{Close}</strong></span></button>
 							</div>
 						</div>
 						<div class="angleB"></div>

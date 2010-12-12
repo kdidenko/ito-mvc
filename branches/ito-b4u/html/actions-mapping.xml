@@ -102,12 +102,11 @@
 	</action>
 	<!-- Footer views mapping end -->
 	
-	<!-- Footer views mapping begin -->
 	<action name="/user-agreement.html" id="useragreement">
-		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl"/>
+		<controller class="com.itoglobal.eb4u.controllers.StaticPageController"
+			method="handleActionRequest"/>
 		<template name="user-agreement.html" path="templates/layout-static-page.html" />
 	</action>
-	<!-- Footer views mapping end -->
 	
 	<action name="/index.html" id="home">
 		<role type="VR">

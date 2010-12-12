@@ -1,54 +1,69 @@
-<h2>_i18n{tradesman new bargain page content}</h2>
+<?php
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+?>
+<h2>_i18n{New Bargain}</h2>
+<form action="new-bargain.html" method="post">
 <div class="unitWBlock">
 	<div class="unitSnColumn">
 		<div class="itemForm">
-			<label>Schnappchentitel:</label>
+			<label>_i18n{Title}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="bargain_name" value="<? if(isset($_POST['bargain_name'])) echo $_POST['bargain_name']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Schnappchenbeschreibung:</label>
+			<label>_i18n{Description}:</label>
 			<div class="itemData">
-				<textarea class="areaTxt"></textarea>
+				<textarea class="areaTxt" name="bargain_desc"><? if(isset($_POST['bargain_desc'])) echo $_POST['bargain_desc']; ?></textarea>
 			</div>
 		</div>
 		<div class="itemForm itemEq">
-			<label>Kategorie:</label>
+			<label>_i18n{Category}:</label>
 			<div class="itemData">
-				<select>
-					<option>Kategorie</option>
+				<select name="category" class="gCategory">
+<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+						<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 				} 
+				} ?>
 				</select>
 			</div>
 		</div>
 		<div class="itemForm itemEq">
-			<label>Unterkategorie:</label>
+			<label>_i18n{SubCategory}:</label>
 			<div class="itemData">
-				<select>
-					<option>Unterkategorie</option>
+				<select name="subcategory" class="gSubCategory">
+<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+					foreach($subcategories as $key=>$subcategory){ ?>						
+						<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 				} 
+				} ?>
 				</select>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Normalpreis:</label>
+			<label>_i18n{Usual Price}:</label>
 			<div class="itemData">
 				<input class="inpTxt" type="text" />
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Schnappchenpreis:</label>
+			<label>_i18n{Bargain Price}:</label>
 			<div class="itemData">
 				<input class="inpTxt" type="text" />
 			</div>
 		</div>
+		<!-- 
 		<div class="itemForm">
 			<label>Ersparnis:</label>
 			<div class="itemData">
 				<input class="inpTxt" type="text" />
 			</div>
 		</div>
+		-->
 		<div class="itemForm">
-			<label>Upload Bilder:</label>
+			<label>_i18n{Upload Pictures}:</label>
 			<div class="itemData">
 				<input type="file" />
 			</div>
@@ -58,61 +73,68 @@
 <div class="unitWBlock unitLast">
 	<div class="unitEqColumn">
 		<div class="itemForm">
-			<label>Strasse:</label>
+			<label>_i18n{Street}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="street" value="<? if(isset($_POST['street'])) echo $_POST['street']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>PLZ:</label>
+			<label>_i18n{ZIP}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Ort:</label>
+			<label>_i18n{City}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="city" value="<? if(isset($_POST['city'])) echo $_POST['city']; ?>"/>
 			</div>
 		</div>
 	</div>
 	<div class="unitEqColumn">
 		<div class="itemForm">
-			<label>Bundesland:</label>
+			<label>_i18n{State}:</label>
 			<div class="itemData">
+				<input class="inpTxt" type="text" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
+				<!-- 
 				<select>
 					<option>Bundesland</option>
 				</select>
+				 -->
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Land:</label>
+			<label>_i18n{Country}:</label>
 			<div class="itemData">
+				<input class="inpTxt" type="text" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
+				<!-- 
 				<select>
 					<option>Land</option>
 				</select>
+				 -->
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>Webseite:</label>
+			<label>_i18n{Website}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="website" value="<? if(isset($_POST['website'])) echo $_POST['website']; ?>"/>
 			</div>
 		</div>
 	</div>
 	<div class="unitSnColumn">
 		<div class="itemForm">
-			<label>Gultig von bis:</label>
+			<label>_i18n{Valid}</label>
 			<div class="itemData">
-				<label class="labelDate">vos</label>
-				<input class="inpDate" type="text" />
-				<label class="labelDate">bis</label>
-				<input class="inpDate" type="text" />
+				<label class="labelDate">_i18n{from}:</label>
+				<input class="inpDate" type="text" name="from_date" value="<? if(isset($_POST['from_date'])) echo $_POST['from_date']; ?>"/>
+				<label class="labelDate">_i18n{until}:</label>
+				<input class="inpDate" type="text" name="until_date" value="<? if(isset($_POST['until_date'])) echo $_POST['until_date']; ?>"/>
 			</div>
 		</div>
 	</div>
 	<div class="unitBtn">
-			<button><span><strong>Save</strong></span></button>
-			<button><span><strong>Discard</strong></span></button>
+			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
+			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
 		</div>
 </div>
+</form>

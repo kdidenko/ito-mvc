@@ -21,7 +21,7 @@
 						<?php } ?>
 						<div class="itemForm">
 							<label for="frmUser">_i18n{Username}:</label>
-							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username"/></span>
+							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"/></span>
 						</div>
 						<div class="itemForm">
 							<label for="frmPass">_i18n{Password}:</label>

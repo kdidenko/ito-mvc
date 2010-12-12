@@ -88,8 +88,9 @@ class TradesmanContentController extends ContentController {
 
 		$category = CategoryService::getCategories ();
 		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
-		
-		$subcategory = SubCategoryService::getSubcatByCat ($result[UsersService::CAT_ID]);
+		$catId = isset($result[UsersService::CAT_ID])&&$result[UsersService::CAT_ID]!=NULL ?
+					$result[UsersService::CAT_ID] : 1;
+		$subcategory = SubCategoryService::getSubcatByCat ($catId);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		return $mvc;
 	}
@@ -223,6 +224,25 @@ class TradesmanContentController extends ContentController {
 		$bargains = BargainsService::getBargains($id);
 		isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
 		
+		return $mvc;
+	}
+	
+	
+	public function handleNewBargain($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		
+		if(isset($requestParams['save'])){
+			print_r($requestParams);
+		}
+		
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+				
 		return $mvc;
 	}
 	

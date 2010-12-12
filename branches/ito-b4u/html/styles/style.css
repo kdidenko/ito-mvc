@@ -7,7 +7,7 @@ a:hover {text-decoration:underline}
 input, select, button, textarea {font-family:"Lucida Sans", "Lucida Grande", Arial, sans-serif; font-size:12px; padding:0; margin:0; vertical-align:middle}
 input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
 select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:200px}
-textarea.areaTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}
+textarea {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}
 input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
 	* html input.inpChk {margin:1px 0 0 0}
 button::-moz-focus-inner {border:0; padding:0}
@@ -222,11 +222,13 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
 	.viewWBox .itemData {float:right; width:200px}
 		.unitSnColumn .itemData {width:546px}
+		.unitSnColumn .itemEq {width:338px; overflow:hidden; float:left}
+			.unitSnColumn .itemEq .itemData {width:213px}
 		.unitNotif .itemData {width:126px}
 	.viewWBox input.inpTxt {width:192px}
 		.unitSnColumn input.inpTxt {width:531px}
-	.viewWBox textarea {width:192px; height:300px}
-		.unitSnColumn textarea.areaTxt {width:531px}
+	.viewWBox textarea {width:192px; height:120px}
+		.unitSnColumn textarea.areaTxt {width:531px; height:300px}
 		.unitNotif select {width:126px}
 	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
 		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
@@ -236,8 +238,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
 	.viewWBox dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
 		.unitSnColumn dd.itemData {width:546px; color:#000}
-	.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}
-			.unitSnColumn .itemEq dd.itemData {width:200px}
+	/*.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}*/
+			.unitSnColumn .itemEq dd.itemData {width:213px}
 	.unitNotif .unitP {width:671px; background:#EFEFEF; overflow:hidden; padding:3px 0}
 	.unitNotif .linkDelete {float:right; background:#EFEFEF; margin:0 5px 0 0; padding:2px 5px 4px 5px}
 	.unitNotif .linkDelete a {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
@@ -331,11 +333,14 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapRAdmin .greyBox {width:699px}
 /* login and registration page */
 .wrapLogin {float:left; width:970px}
-	.wrapLogin .greyBox {padding:20px 0 100px 0; width:970px}
+	.wrapLogin .greyBox {padding:20px 0; width:970px}
 	.wrapLogin .viewRBox {padding:0 264px}
 	.wrapLogin .viewWBox {padding:0 136px 0 135px}
 	.wrapLogin h3 {padding:0 0 5px 0}
 	/*.wrapLogin .viewWBox .unitWBlock {background:url(../images/lineBg.gif) repeat-y center}*/
+.wrapRtf {float:left; width:970px}
+	.wrapRtf .greyBox {padding:20px 0; width:970px}
+	.wrapRtf .viewWBox {padding:0 136px 0 135px}
 	
 
 .overlayPopup {background-color:#000}
@@ -344,3 +349,134 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .viewPopup a.itemClose {position:absolute; text-decoration:none; right:8px; top:6px; background:url(../images/closeIcon.gif) no-repeat 0 0; overflow:hidden; text-indent:99px; width:13px; height:13px}
 
 
+/* calendar */
+input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:3px; margin:0 5px 0 0; width:120px; float:left}
+.viewWBox .itemData label.labelDate {float:left; padding:3px 5px 0 0}
+a.chooseDate { background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:3px 20px 0 0}
+table.jCalendar {
+	border: 1px solid #000;
+	background: #aaa;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+table.jCalendar th {
+	background: #333;
+	color: #fff;
+	font-weight: bold;
+	padding: 3px 5px;
+}
+
+table.jCalendar td {
+	background: #ccc;
+	color: #000;
+	padding: 3px 5px;
+	text-align: center;
+}
+table.jCalendar td.other-month {
+	background: #ddd;
+	color: #aaa;
+}
+table.jCalendar td.today {
+	background: #666;
+	color: #fff;
+}
+table.jCalendar td.selected {
+	background: #f66;
+	color: #fff;
+}
+table.jCalendar td.selected.dp-hover {
+	background: #f33;
+	color: #fff;
+}
+table.jCalendar td.dp-hover,
+table.jCalendar tr.activeWeekHover td {
+	background: #fff;
+	color: #000;
+}
+table.jCalendar tr.selectedWeek td {
+	background: #f66;
+	color: #fff;
+}
+table.jCalendar td.disabled, table.jCalendar td.disabled.dp-hover {
+	background: #bbb;
+	color: #888;
+}
+table.jCalendar td.unselectable,
+table.jCalendar td.unselectable:hover,
+table.jCalendar td.unselectable.dp-hover {
+	background: #bbb;
+	color: #888;
+}
+
+/* For the popup */
+
+/* NOTE - you will probably want to style a.dp-choose-date - see how I did it in demo.css */
+
+div.dp-popup {
+	position: relative;
+	background: #ccc;
+	font-size: 10px;
+	font-family: arial, sans-serif;
+	padding: 2px;
+	width: 171px;
+	line-height: 1.2em;
+}
+div#dp-popup {
+	position: absolute;
+	z-index: 199;
+}
+div.dp-popup h2 {
+	font-size: 12px;
+	text-align: center;
+	margin: 2px 0;
+	padding: 0;
+}
+a#dp-close {
+	font-size: 11px;
+	padding: 4px 0;
+	text-align: center;
+	display: block;
+}
+a#dp-close:hover {
+	text-decoration: underline;
+}
+div.dp-popup a {
+	color: #000;
+	text-decoration: none;
+	padding: 3px 2px 0;
+}
+div.dp-popup div.dp-nav-prev {
+	position: absolute;
+	top: 2px;
+	left: 4px;
+	width: 100px;
+}
+div.dp-popup div.dp-nav-prev a {
+	float: left;
+}
+/* Opera needs the rules to be this specific otherwise it doesn't change the cursor back to pointer after you have disabled and re-enabled a link */
+div.dp-popup div.dp-nav-prev a, div.dp-popup div.dp-nav-next a {
+	cursor: pointer;
+}
+div.dp-popup div.dp-nav-prev a.disabled, div.dp-popup div.dp-nav-next a.disabled {
+	cursor: default;
+}
+div.dp-popup div.dp-nav-next {
+	position: absolute;
+	top: 2px;
+	right: 4px;
+	width: 100px;
+}
+div.dp-popup div.dp-nav-next a {
+	float: right;
+}
+div.dp-popup a.disabled {
+	cursor: default;
+	color: #aaa;
+}
+div.dp-popup td {
+	cursor: pointer;
+}
+div.dp-popup td.disabled {
+	cursor: default;
+}

@@ -185,7 +185,7 @@ class StorageService {
 	
 	public static function uploadFile($path, $file) {
 		if (is_uploaded_file ( $file ['tmp_name'] )) {
-			if ($file ['size'] != 0 and $file ['size'] <= 512000) {
+			if ($file ['size'] != 0) { // and $file ['size'] <= 512000
 				move_uploaded_file ( $file ['tmp_name'], $path ) ? 
 					null :
 						error_log ( 'Invalid mooving file to' . $path );

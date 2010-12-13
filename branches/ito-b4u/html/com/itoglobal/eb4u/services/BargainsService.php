@@ -77,18 +77,25 @@ class BargainsService {
 	 * @var string defining the status field name
 	 */
 	const STATUS = 'status';
+	/**
+	 * @var string defining the status field name
+	 */
+	const HASH = 'hash';
+	
 	const BARGAIN_RELATIONS = 'bargain_relations';
  	const BARGAIN_ID = 'bargain_id';
  	const UPLOAD_ID = 'upload_id';
 	
 	public static function setBargain($id, $data, $path){
 		$into = self::BARGAINS;
+		$date = gmdate ( "Y-m-d H:i:s" );
+		$hash = md5($date . $id);
 		$fields = self::USER_ID . ', ' . self::BARGAIN_NAME . ', ' . self::BARGAIN_DESC . ', ' . 
 					self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . self::USUAL_PRICE . ', ' . 
 					self::BARGAIN_PRICE . ', ' . self::STREET . ', ' . 
 					self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::WEBSITE . ', ' . self::FROM_DATE . ', ' . 
-					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS;
+					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS . ', ' . self::STATUS;
 		$values = "'" . $id . "','" . $data[self::BARGAIN_NAME] . "','" . 
 					$data[self::BARGAIN_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
 					$data[self::SUBCATEGORY_ID] . "','" . $data[self::USUAL_PRICE] ."','" .
@@ -97,7 +104,7 @@ class BargainsService {
 					$data[self::CITY] . "','" . $data[self::REGION] . "','" . 
 					$data[self::COUNTRY] . "','" . $data[self::WEBSITE] ."','" .
 					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" . 
-					$data[self::NUMBER] . "','" . '1' . "'";
+					$data[self::NUMBER] . "','" . '1' . "','" . $hash . "'";
 					
 		$bargain_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		$upload_id = UploadsService::setUploadsPath($path);
@@ -132,14 +139,13 @@ class BargainsService {
 	}
 	
 	
-	/*
-	public static function updateMail ($hash, $fields, $vals){
-		$from = self::MAILS;
+	public static function updateFields ($hash, $fields, $vals){
+		$from = self::BARGAINS;
 		$where = self::HASH . " = '" . $hash . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
-	*/
+
 	/**
 	 * Retrieves mail by specified mail id.
 	 * @param integer $hash the mail id

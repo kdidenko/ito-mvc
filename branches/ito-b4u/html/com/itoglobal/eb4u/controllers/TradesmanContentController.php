@@ -215,9 +215,11 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		
+		isset ( $requestParams [UsersService::ENABLED] ) ? BargainsService::updateFields ( $requestParams [UsersService::ENABLED], BargainsService::STATUS, '1' ) : NULL;
+		isset ( $requestParams [UsersService::DISABLE] ) ? BargainsService::updateFields ( $requestParams [UsersService::DISABLE], BargainsService::STATUS, '0' ) : NULL;
 		
 		isset ( $requestParams [self::DEL_ALL] ) ? 
-			//MailService::deleteMails ($requestParams ['itemSelect'])
+			//MailService::deleteMails ($requestParams ['itemSelect']) :
 			print_r($requestParams [self::DEL_ALL]) :
 				null;
 		

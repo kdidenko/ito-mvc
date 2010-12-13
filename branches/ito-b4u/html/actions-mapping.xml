@@ -334,7 +334,7 @@
 	</action>
 	
 	<action name="/localisation-js.html" id="localisationjs">
-		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/ajax/localisation-js.html" />
 	</action>
 	

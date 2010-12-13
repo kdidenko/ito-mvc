@@ -330,7 +330,12 @@
 	
 	<action name="/get-subcategory.html" id="getsubcategory">
 		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
-		<template name="index.html" path="templates/ajax-layout.html" />
+		<template name="index.html" path="templates/ajax/ajax-layout.html" />
+	</action>
+	
+	<action name="/localisation-js.html" id="localisationjs">
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
+		<template name="index.html" path="templates/ajax/localisation-js.html" />
 	</action>
 	
 	<!-- ajax part -->

@@ -191,7 +191,7 @@ Date.fullYearStart = '20';
 											'cellspacing':2
 										}
 									)
-									.addClass('jCalendar')
+									.addClass('tCalendar')
 									.append(
 										(s.showHeader != $.dpConst.SHOW_HEADER_NONE ? 
 											$(dc('thead'))
@@ -224,7 +224,7 @@ Date.fullYearStart = '20';
 						var $this = $(this);
 						if (!s.selectWeek) {
 							$this.addClass(s.hoverClass);
-						} else if (firstDayInBounds && !$this.is('.disabled')) {
+						} else if (firstDayInBounds && !$this.is('.disabledDay')) {
 							$this.parent().addClass('activeWeekHover');
 						}
 					}
@@ -247,9 +247,9 @@ Date.fullYearStart = '20';
 					var thisMonth = currentDate.getMonth() == month;
 					var d = $(dc('td'))
 								.text(currentDate.getDate() + '')
-								.addClass((thisMonth ? 'current-month ' : 'other-month ') +
+								.addClass((thisMonth ? 'current-month ' : 'otherMonth ') +
 													(currentDate.isWeekend() ? 'weekend ' : 'weekday ') +
-													(thisMonth && currentDate.getTime() == today.getTime() ? 'today ' : '')
+													(thisMonth && currentDate.getTime() == today.getTime() ? 'currentDay ' : '')
 								)
 								.data('datePickerDate', currentDate.asString())
 								.hover(doHover(firstDayInBounds), unHover)
@@ -685,7 +685,7 @@ Date.fullYearStart = '20';
 		this.renderCallback		=	[];
 		this.selectedDates		=	{};
 		this.inline				=	null;
-		this.context			=	'#dp-popup';
+		this.context			=	'#dPopup';
 		this.settings			=	{};
 	};
 	$.extend(
@@ -751,14 +751,14 @@ Date.fullYearStart = '20';
 			setDisabled : function(s)
 			{
 				$e = $(this.ele);
-				$e[s ? 'addClass' : 'removeClass']('dp-disabled');
+				$e[s ? 'addClass' : 'removeClass']('dDisabled');
 				if (this.button) {
 					$but = $(this.button);
-					$but[s ? 'addClass' : 'removeClass']('dp-disabled');
+					$but[s ? 'addClass' : 'removeClass']('dDisabled');
 					$but.attr('title', s ? '' : $.dpText.TEXT_CHOOSE_DATE);
 				}
 				if ($e.is(':text')) {
-					$e.attr('disabled', s ? 'disabled' : '');
+					$e.attr('disabledDay', s ? 'disabledDay' : '');
 				}
 			},
 			setDisplayedMonth : function(m, y, rerender)
@@ -833,7 +833,7 @@ Date.fullYearStart = '20';
 				}
 				this.selectedDates[d.asString()] = v;
 				this.numSelected += v ? 1 : -1;
-				var selectorString = 'td.' + (d.getMonth() == this.displayedMonth ? 'current-month' : 'other-month');
+				var selectorString = 'td.' + (d.getMonth() == this.displayedMonth ? 'current-month' : 'otherMonth');
 				var $td;
 				$(selectorString, this.context).each(
 					function()
@@ -844,11 +844,11 @@ Date.fullYearStart = '20';
 							{
 								$td.parent()[v ? 'addClass' : 'removeClass']('selectedWeek');
 							}
-							$td[v ? 'addClass' : 'removeClass']('selected'); 
+							$td[v ? 'addClass' : 'removeClass']('selectedDay'); 
 						}
 					}
 				);
-				$('td', this.context).not('.selected')[this.selectMultiple &&  this.numSelected == this.numSelectable ? 'addClass' : 'removeClass']('unselectable');
+				$('td', this.context).not('.selectedDay')[this.selectMultiple &&  this.numSelected == this.numSelectable ? 'addClass' : 'removeClass']('unselectable');
 				
 				if (dispatchEvents)
 				{
@@ -877,11 +877,11 @@ Date.fullYearStart = '20';
 			{
 				this.selectedDates = {};
 				this.numSelected = 0;
-				$('td.selected', this.context).removeClass('selected').parent().removeClass('selectedWeek');
+				$('td.selectedDay', this.context).removeClass('selectedDay').parent().removeClass('selectedWeek');
 			},
 			display : function(eleAlignTo)
 			{
-				if ($(this.ele).is('.dp-disabled')) return;
+				if ($(this.ele).is('.dDisabled')) return;
 				
 				eleAlignTo = eleAlignTo || this.ele;
 				var c = this;
@@ -897,17 +897,17 @@ Date.fullYearStart = '20';
 					$createIn = $(this.ele);
 					attrs = {
 						'id'		:	'calendar-' + this.ele._dpId,
-						'class'	:	'dp-popup dp-popup-inline'
+						'class'	:	'dPopup dp-popup-inline'
 					};
 
-					$('.dp-popup', $createIn).remove();
+					$('.dPopup', $createIn).remove();
 					cssRules = {
 					};
 				} else {
 					$createIn = $('body');
 					attrs = {
-						'id'		:	'dp-popup',
-						'class'	:	'dp-popup'
+						'id'		:	'dPopup',
+						'class'	:	'dPopup'
 					};
 					cssRules = {
 						'top'	:	eleOffset.top + c.verticalOffset,
@@ -917,7 +917,7 @@ Date.fullYearStart = '20';
 					var _checkMouse = function(e)
 					{
 						var el = e.target;
-						var cal = $('#dp-popup')[0];
+						var cal = $('#dPopup')[0];
 						
 						while (true){
 							if (el == cal) {
@@ -955,13 +955,12 @@ Date.fullYearStart = '20';
 				
 				$createIn
 					.append(
-						$('<div></div>')
+						$('<div />')
 							.attr(attrs)
 							.css(cssRules)
 							.append(
-//								$('<a href="#" class="selecteee">aaa</a>'),
-								$('<h2></h2>'),
-								$('<div class="dp-nav-prev"></div>')
+								$('<h4 />'),
+								$('<div class="dp-nav-prev" />')
 									.append(
 										$('<a class="dp-nav-prev-year" href="#" title="' + $.dpText.TEXT_PREV_YEAR + '">&lt;&lt;</a>')
 											.bind(
@@ -980,7 +979,7 @@ Date.fullYearStart = '20';
 												}
 											)
 									),
-								$('<div class="dp-nav-next"></div>')
+								$('<div class="dp-nav-next" />')
 									.append(
 										$('<a class="dp-nav-next-year" href="#" title="' + $.dpText.TEXT_NEXT_YEAR + '">&gt;&gt;</a>')
 											.bind(
@@ -999,12 +998,12 @@ Date.fullYearStart = '20';
 												}
 											)
 									),
-								$('<div class="dp-calendar"></div>')
+								$('<div class="dCalendar" />')
 							)
 							.bgIframe()
 						);
 					
-				var $pop = this.inline ? $('.dp-popup', this.context) : $('#dp-popup');
+				var $pop = this.inline ? $('.dPopup', this.context) : $('#dPopup');
 				
 				if (this.showYearNavigation == false) {
 					$('.dp-nav-prev-year, .dp-nav-next-year', c.context).css('display', 'none');
@@ -1057,8 +1056,8 @@ Date.fullYearStart = '20';
 					function()
 					{
 						var $this = $(this);
-						if (!$this.is('.disabled')) {
-							c.setSelected(d, !$this.is('.selected') || !c.selectMultiple, false, true);
+						if (!$this.is('.disabledDay')) {
+							c.setSelected(d, !$this.is('.selectedDay') || !c.selectMultiple, false, true);
 							if (c.closeOnSelect) {
 								// Focus the next input in the form???
 								if (c.settings.autoFocusNextInput) {
@@ -1085,7 +1084,7 @@ Date.fullYearStart = '20';
 					}
 				);
 				if (c.isSelected(d)) {
-					$td.addClass('selected');
+					$td.addClass('selectedDay');
 					if (c.settings.selectWeek)
 					{
 						$td.parent().addClass('selectedWeek');
@@ -1113,7 +1112,7 @@ Date.fullYearStart = '20';
 			// m and y are -1, 0 or 1 depending which direction we want to go in...
 			_displayNewMonth : function(ele, m, y) 
 			{
-				if (!$(ele).is('.disabled')) {
+				if (!$(ele).is('.disabledDay')) {
 					this.setDisplayedMonth(this.displayedMonth + m, this.displayedYear + y, true);
 				}
 				ele.blur();
@@ -1127,10 +1126,10 @@ Date.fullYearStart = '20';
 			_renderCalendar : function()
 			{
 				// set the title...
-				$('h2', this.context).html((new Date(this.displayedYear, this.displayedMonth, 1)).asString($.dpText.HEADER_FORMAT));
+				$('h4', this.context).html((new Date(this.displayedYear, this.displayedMonth, 1)).asString($.dpText.HEADER_FORMAT));
 				
 				// render the calendar...
-				$('.dp-calendar', this.context).renderCalendar(
+				$('.dCalendar', this.context).renderCalendar(
 					$.extend(
 						{},
 						this.settings, 
@@ -1146,30 +1145,30 @@ Date.fullYearStart = '20';
 				// update the status of the control buttons and disable dates before startDate or after endDate...
 				// TODO: When should the year buttons be disabled? When you can't go forward a whole year from where you are or is that annoying?
 				if (this.displayedYear == this.startDate.getFullYear() && this.displayedMonth == this.startDate.getMonth()) {
-					$('.dp-nav-prev-year', this.context).addClass('disabled');
-					$('.dp-nav-prev-month', this.context).addClass('disabled');
-					$('.dp-calendar td.other-month', this.context).each(
+					$('.dp-nav-prev-year', this.context).addClass('disabledDay');
+					$('.dp-nav-prev-month', this.context).addClass('disabledDay');
+					$('.dCalendar td.otherMonth', this.context).each(
 						function()
 						{
 							var $this = $(this);
 							if (Number($this.text()) > 20) {
-								$this.addClass('disabled');
+								$this.addClass('disabledDay');
 							}
 						}
 					);
 					var d = this.startDate.getDate();
-					$('.dp-calendar td.current-month', this.context).each(
+					$('.dCalendar td.current-month', this.context).each(
 						function()
 						{
 							var $this = $(this);
 							if (Number($this.text()) < d) {
-								$this.addClass('disabled');
+								$this.addClass('disabledDay');
 							}
 						}
 					);
 				} else {
-					$('.dp-nav-prev-year', this.context).removeClass('disabled');
-					$('.dp-nav-prev-month', this.context).removeClass('disabled');
+					$('.dp-nav-prev-year', this.context).removeClass('disabledDay');
+					$('.dp-nav-prev-month', this.context).removeClass('disabledDay');
 					var d = this.startDate.getDate();
 					if (d > 20) {
 						// check if the startDate is last month as we might need to add some disabled classes...
@@ -1177,12 +1176,12 @@ Date.fullYearStart = '20';
 						var sd = new Date(st);
 						sd.addMonths(1);
 						if (this.displayedYear == sd.getFullYear() && this.displayedMonth == sd.getMonth()) {
-							$('.dp-calendar td.other-month', this.context).each(
+							$('.dCalendar td.otherMonth', this.context).each(
 								function()
 								{
 									var $this = $(this);
 									if (Date.fromString($this.data('datePickerDate')).getTime() < st) {
-										$this.addClass('disabled');
+										$this.addClass('disabledDay');
 									}
 								}
 							);
@@ -1190,43 +1189,43 @@ Date.fullYearStart = '20';
 					}
 				}
 				if (this.displayedYear == this.endDate.getFullYear() && this.displayedMonth == this.endDate.getMonth()) {
-					$('.dp-nav-next-year', this.context).addClass('disabled');
-					$('.dp-nav-next-month', this.context).addClass('disabled');
-					$('.dp-calendar td.other-month', this.context).each(
+					$('.dp-nav-next-year', this.context).addClass('disabledDay');
+					$('.dp-nav-next-month', this.context).addClass('disabledDay');
+					$('.dCalendar td.otherMonth', this.context).each(
 						function()
 						{
 							var $this = $(this);
 							if (Number($this.text()) < 14) {
-								$this.addClass('disabled');
+								$this.addClass('disabledDay');
 							}
 						}
 					);
 					var d = this.endDate.getDate();
-					$('.dp-calendar td.current-month', this.context).each(
+					$('.dCalendar td.current-month', this.context).each(
 						function()
 						{
 							var $this = $(this);
 							if (Number($this.text()) > d) {
-								$this.addClass('disabled');
+								$this.addClass('disabledDay');
 							}
 						}
 					);
 				} else {
-					$('.dp-nav-next-year', this.context).removeClass('disabled');
-					$('.dp-nav-next-month', this.context).removeClass('disabled');
+					$('.dp-nav-next-year', this.context).removeClass('disabledDay');
+					$('.dp-nav-next-month', this.context).removeClass('disabledDay');
 					var d = this.endDate.getDate();
 					if (d < 13) {
 						// check if the endDate is next month as we might need to add some disabled classes...
 						var ed = new Date(this.endDate.getTime());
 						ed.addMonths(-1);
 						if (this.displayedYear == ed.getFullYear() && this.displayedMonth == ed.getMonth()) {
-							$('.dp-calendar td.other-month', this.context).each(
+							$('.dCalendar td.otherMonth', this.context).each(
 								function()
 								{
 									var $this = $(this);
 									var cellDay = Number($this.text());
 									if (cellDay < 13 && cellDay > d) {
-										$this.addClass('disabled');
+										$this.addClass('disabledDay');
 									}
 								}
 							);
@@ -1242,8 +1241,8 @@ Date.fullYearStart = '20';
 					$(document).unbind('mousedown.datepicker');
 					$(document).unbind('keydown.datepicker');
 					this._clearCalendar();
-					$('#dp-popup a').unbind();
-					$('#dp-popup').empty().remove();
+					$('#dPopup a').unbind();
+					$('#dPopup').empty().remove();
 					if (!programatic) {
 						$(this.ele).trigger('dpClosed', [this.getSelected()]);
 					}
@@ -1254,8 +1253,8 @@ Date.fullYearStart = '20';
 			_clearCalendar : function()
 			{
 				// TODO.
-				$('.dp-calendar td', this.context).unbind();
-				$('.dp-calendar', this.context).empty();
+				$('.dCalendar td', this.context).unbind();
+				$('.dCalendar', this.context).empty();
 			}
 		}
 	);
@@ -1305,7 +1304,7 @@ Date.fullYearStart = '20';
 		horizontalPosition	: $.dpConst.POS_LEFT,
 		verticalOffset		: 0,
 		horizontalOffset	: 0,
-		hoverClass			: 'dp-hover',
+		hoverClass			: 'dHover',
 		autoFocusNextInput  : false
 	};
 
@@ -1407,7 +1406,7 @@ if(jQuery) (function($){
 					})
 				}
 			});
-			k.bind('change', function(){f.loadBlock(k)})
+			if(k.length && s.length){k.bind('change', function(){f.loadBlock(k)})}
 		})
 	};
 	$.fn.planAn = function(){
@@ -1517,6 +1516,27 @@ if(jQuery) (function($){
 	$.fn.popupAn = function(params){
 		var conf = $.extend({}, params);
 		return this.each(function(){
+			var c=conf, o=$(this), f=this, urlPopup=o.attr('href');
+			$.extend(f,{
+				loadPopup:function(){
+					o.bind('click', function(e){
+						$.ajax({url:urlPopup, type:'get',
+							success:function(data){
+								$('.viewWBox', data).modal({
+									closeHTML:"<a href='#' title='Close' class='itemClose'>Close</a>"
+								})
+							},
+							error:function(data){alert(data)}
+						});
+						return false;
+					})
+				}
+			});
+			f.loadPopup();
+		});
+		/*$.fn.popupAn = function(params){
+		var conf = $.extend({}, params);
+		return this.each(function(){
 			var c=conf, o=$(this), f=this, urlPopup=o.attr('href').replace(/([^.]*)\.(.*)/, "$1-popup.$2");
 			$.extend(f,{
 				showPopup:function(d){
@@ -1572,16 +1592,17 @@ if(jQuery) (function($){
 				}
 			});
 			f.loadPopup();
-		});
+		});*/
 	};
 	$(document).ready(function(){
 		$('.wrapRAdmin .viewWBox').dataAn();
 		$('.stationCarousel').carouselAn();
-		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitNotif').categoryAn();
+		$('.viewRBox .unitSearch, .unitWBlock .unitEqColumn, .unitWBlock .unitNotif, .unitWBlock .unitSnColumn').categoryAn();
 		$('.areaTxt').rtfAn();
 		$('.bodyBox').notificationAn();
 		$('.viewPlan').planAn();
 		$('.inpDate').datePicker();
+		$('.itemPopup').popupAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

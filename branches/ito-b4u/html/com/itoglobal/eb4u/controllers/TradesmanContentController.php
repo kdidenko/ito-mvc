@@ -112,7 +112,7 @@ class TradesmanContentController extends ContentController {
 		if (isset ( $requestParams ['pctSbm'] )) {
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 				$file = $_FILES ['file'];
-				$path = 'storage/uploads/users/' . $username . "/profile/avatar.jpg";
+				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_PROFILE . "avatar.jpg";
 				$error[] .= ValidationService::checkAvatar ( $file );
 				$error = array_filter ( $error );
 			}
@@ -231,9 +231,39 @@ class TradesmanContentController extends ContentController {
 	public function handleNewBargain($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		
 		if(isset($requestParams['save'])){
-			print_r($requestParams);
+			$error = array();
+			foreach ($requestParams as $key => $value){
+				$error[] .= $value==NULL ? true : false;
+			}
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				
+				$file = $_FILES ['bargain_image'];
+				$date = mktime();
+				$height = 100;
+				$width = 100;
+				$path = StorageService::BARGAINS_FOLDER . "bargain-$date.jpg";
+				$path2 = StorageService::BARGAINS_FOLDER . "bargain-$date-" . ImageService::SMALL . ".jpg";
+				if (isset ( $file ['name'] ) ) {
+					StorageService::uploadFile ( $path, $file );
+					self::setNoCashe();
+					$image = new ImageService();
+					$image->load($path);
+					$image->resize($width,$height);
+					$image->save($path2);
+				}
+				
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$from_date = explode('/', $requestParams[BargainsService::FROM_DATE]);
+				$until_date = explode('/', $requestParams[BargainsService::UNTIL_DATE]);
+				$requestParams[BargainsService::FROM_DATE] = $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
+				$requestParams[BargainsService::UNTIL_DATE] = $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
+				$requestParams[BargainsService::BARGAIN_DESC] = htmlspecialchars($requestParams[BargainsService::BARGAIN_DESC], ENT_QUOTES);
+				BargainsService::setBargain($id, $requestParams, $path);
+			} else {
+				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
+			}
 		}
 		
 		

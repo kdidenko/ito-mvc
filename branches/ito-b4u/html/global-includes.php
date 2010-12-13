@@ -15,10 +15,12 @@
 	require_once 'com/itoglobal/http/RequestDispatcher.php';	
     require_once 'com/itoglobal/session/SessionService.php';
     require_once 'com/itoglobal/storage/StorageService.php';
+    require_once 'com/itoglobal/storage/ImageService.php';
 	require_once 'com/itoglobal/mail/MailerService.php';
 	require_once 'com/itoglobal/validation/ValidationService.php';
 	
-    require_once 'com/itoglobal/eb4u/services/UsersService.php';
+	require_once 'com/itoglobal/eb4u/services/UploadsService.php';
+	require_once 'com/itoglobal/eb4u/services/UsersService.php';
     require_once 'com/itoglobal/eb4u/services/MailService.php';
     require_once 'com/itoglobal/eb4u/services/CategoryService.php';
     require_once 'com/itoglobal/eb4u/services/SubCategoryService.php';

@@ -38,10 +38,6 @@ class BargainsService {
 	 */
 	const BARGAIN_PRICE = 'bargain_price';
 	/**
-	 * @var string defining the bargain_image field name
-	 */
-	const BARGAIN_IMAGE = 'bargain_image';
-	/**
 	 * @var string defining the street field name
 	 */
 	const STREET= 'street';
@@ -81,6 +77,36 @@ class BargainsService {
 	 * @var string defining the status field name
 	 */
 	const STATUS = 'status';
+	const BARGAIN_RELATIONS = 'bargain_relations';
+ 	const BARGAIN_ID = 'bargain_id';
+ 	const UPLOAD_ID = 'upload_id';
+	
+	public static function setBargain($id, $data, $path){
+		$into = self::BARGAINS;
+		$fields = self::USER_ID . ', ' . self::BARGAIN_NAME . ', ' . self::BARGAIN_DESC . ', ' . 
+					self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . self::USUAL_PRICE . ', ' . 
+					self::BARGAIN_PRICE . ', ' . self::STREET . ', ' . 
+					self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
+					self::COUNTRY . ', ' . self::WEBSITE . ', ' . self::FROM_DATE . ', ' . 
+					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS;
+		$values = "'" . $id . "','" . $data[self::BARGAIN_NAME] . "','" . 
+					$data[self::BARGAIN_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
+					$data[self::SUBCATEGORY_ID] . "','" . $data[self::USUAL_PRICE] ."','" .
+					$data[self::BARGAIN_PRICE] . "','" .
+					$data[self::STREET] . "','" . $data[self::ZIP] ."','" .
+					$data[self::CITY] . "','" . $data[self::REGION] . "','" . 
+					$data[self::COUNTRY] . "','" . $data[self::WEBSITE] ."','" .
+					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" . 
+					$data[self::NUMBER] . "','" . '1' . "'";
+					
+		$bargain_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		$upload_id = UploadsService::setUploadsPath($path);
+		$into = self::BARGAIN_RELATIONS;
+		$fields = self::BARGAIN_ID . ',' . self::UPLOAD_ID;
+		$values = "'" . $bargain_id . "', '" . $upload_id . "'";
+		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
 	
 	/**
 	 * Retrieves the users bargains by specified user id.
@@ -136,39 +162,7 @@ class BargainsService {
 		return $result[0];
 	}
 	*/
-	/**
-	 * function for sending mail
-	 * @param string $subject subject of letter
-	 * @param string $text text of letter
-	 * @param integer $from sender
-	 * @param integer $to getter
-	 * @return mail id
-	 */
-	/*
-	public static function sendMail($subject, $text, $from, $to){
-		$date = gmdate ( "Y-m-d H:i:s" );
-		$hash = md5($date . $from);
-		$inbox = '3';
-		$outbox = '4';
-		#Insert new users to DB
-		$into = self::MAILS;
-		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
-					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
-		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
-					$hash ."','" . $outbox . "'";
-		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-		$date = gmdate ( "Y-m-d H:i:s" );
-		$hash = md5($date . $from . $to);
-		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
-					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
-		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
-					$hash ."','" . $inbox . "'";
-		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-		#get user id 
-		$id = $result;
-		return $result;
-	}
-	*/	
+
 	/**
 	 * delete mail from trash
 	 * @param integer $id the mail id

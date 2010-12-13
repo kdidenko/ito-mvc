@@ -1,10 +1,18 @@
 <?php
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$errors = $mvc->getObject(TradesmanContentController::ERROR);
 ?>
 <h2>_i18n{New Bargain}</h2>
-<form action="new-bargain.html" method="post">
+<form action="new-bargain.html" method="post" enctype="multipart/form-data">
 <div class="unitWBlock">
+<?php if (isset($errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<li><?php echo $errors ?></li>
+		</ul>
+	</div>
+<?php } ?>
 	<div class="unitSnColumn">
 		<div class="itemForm">
 			<label>_i18n{Title}:</label>
@@ -21,7 +29,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="itemForm itemEq">
 			<label>_i18n{Category}:</label>
 			<div class="itemData">
-				<select name="category" class="gCategory">
+				<select name="category_id" class="gCategory">
 <?php			if (isset($categories) && $categories!=NULL){ 
 					foreach($categories as $key=>$category){ ?>
 						<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
@@ -33,7 +41,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="itemForm itemEq">
 			<label>_i18n{SubCategory}:</label>
 			<div class="itemData">
-				<select name="subcategory" class="gSubCategory">
+				<select name="subcategory_id" class="gSubCategory">
 <?php			if (isset($subcategories) && $subcategories!=NULL){ 
 					foreach($subcategories as $key=>$subcategory){ ?>						
 						<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
@@ -45,27 +53,25 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="itemForm">
 			<label>_i18n{Usual Price}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="usual_price" value="<? if(isset($_POST['usual_price'])) echo $_POST['usual_price']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
 			<label>_i18n{Bargain Price}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text" name="bargain_price" value="<? if(isset($_POST['bargain_price'])) echo $_POST['bargain_price']; ?>"/>
 			</div>
 		</div>
-		<!-- 
 		<div class="itemForm">
-			<label>Ersparnis:</label>
+			<label>Number:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" />
+				<input class="inpTxt" type="text"  name="number" value="<? if(isset($_POST['number'])) echo $_POST['number']; ?>"/>
 			</div>
 		</div>
-		-->
-		<div class="itemForm">
+		<div class="itemForm"> 
 			<label>_i18n{Upload Pictures}:</label>
 			<div class="itemData">
-				<input type="file" />
+				<input type="file" name="bargain_image" value="<? if(isset($_POST['bargain_image'])) echo $_POST['bargain_image']; ?>"/>
 			</div>
 		</div>
 	</div>
@@ -133,7 +139,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		</div>
 	</div>
 	<div class="unitBtn">
-			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
+			<button name="save" value="1"><span><strong>_i18n{Save}</strong></span></button>
 			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
 		</div>
 </div>

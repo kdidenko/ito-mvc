@@ -348,7 +348,7 @@ class UsersService {
 		} else {
 			$result = ValidationService::alphaNumeric($username)?
 				false :
-					'_i18n{Wrong username. Please, enter a correct email.}';
+					'_i18n{Wrong username. Please, enter a correct username.}';
 		}
 		if (!$result) {
 			$where = self::USERNAME . " = '" . $username . "'";

@@ -328,14 +328,15 @@
 	
 	<!-- ajax part -->
 	
+	<!-- alias name="/js/i18n/jq.localisation.js" target="js/jq.localisation.js" / -->
 	<action name="/get-subcategory.html" id="getsubcategory">
 		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
 		<template name="index.html" path="templates/ajax/ajax-layout.html" />
 	</action>
 	
-	<action name="/localisation-js.html" id="localisationjs">
-		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="index.html" path="templates/ajax/localisation-js.html" />
+	<action name="/js/i18n/jq.localisation.js" id="localisationjs">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="js/jq.localisation.js" />
 	</action>
 	
 	<!-- ajax part -->

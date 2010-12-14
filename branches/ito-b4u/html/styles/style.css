@@ -220,11 +220,14 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitNotif .itemFirst label {width:60px}
 		.viewWBox .itemReq {position:absolute; right:-8px; font-size:16px; color:#f00}
 	.viewWBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
+	.viewWBox .itemData label.labelDate {float:left; padding:3px 5px 0 0}
 	.viewWBox .itemData {float:right; width:200px}
 		.unitSnColumn .itemData {width:546px}
 		.unitSnColumn .itemEq {width:338px; overflow:hidden; float:left}
 			.unitSnColumn .itemEq .itemData {width:213px}
 		.unitNotif .itemData {width:126px}
+	.viewWBox input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:3px; margin:0 5px 0 0; width:120px; float:left}
+	.viewWBox .chooseDate {background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:3px 20px 0 0}
 	.viewWBox input.inpTxt {width:192px}
 		.unitSnColumn input.inpTxt {width:531px}
 	.viewWBox textarea {width:192px; height:120px}
@@ -274,7 +277,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox table.viewPlan .itemFive {background-position:-449px 7px}
 	
 	.viewWBox table.viewPlan input {position:absolute; bottom:-40px}
-	/* icon mail */
+	/* icon tools */
 	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
 		.viewIList li {float:left; padding:1px 0 0 10px}
 		.viewIList li a, .viewIList li button {float:left; line-height:normal; overflow:hidden; background-image:url(../images/actionIcon.gif); background-repeat:no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
@@ -350,64 +353,23 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 
 
 /* calendar */
-input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:3px; margin:0 5px 0 0; width:120px; float:left}
-.viewWBox .itemData label.labelDate {float:left; padding:3px 5px 0 0}
-a.chooseDate { background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:3px 20px 0 0}
-
-
-
 #dPopup {position:absolute; z-index:199}
 .dPopup {position:relative; background:#ccc; padding:2px; width:171px}
+	.dPopup a {color:#000; text-decoration:none; padding:3px 2px 0}
 	.dPopup h4 {font-size:12px; text-align:center; margin:0; padding:2px 0}
 	.dPopup table {background:#EFEFEF; border-collapse:collapse}
 	.dPopup th {border:1px dotted #999;	background:#333; color:#fff; font-weight:bold; padding:2px 0 1px 0; width:25px}
-	.dPopup td {border:1px dotted #999; background:#fff; color:#393939; padding:2px 0 1px 0; width:25px; text-align:center}
+	.dPopup td {border:1px dotted #999; background:#fff; color:#393939; padding:2px 0 1px 0; width:25px; text-align:center; cursor:pointer}
 	.dPopup td.otherMonth {background:#ddd; color:#aaa}
 	.dPopup td.currentDay {background:#f66; color:#fff}
 	.dPopup td.selectedDay {background:#850208; color:#fff}
 	.dPopup td.dHover, .dPopup tr.activeWeekHover td {background:#ccc; color:#000}
-	.dPopup td.disabledDay, dPopup td.disabledDay.dHover {background:#F0F0F0; color:#888}
+	.dPopup td.disabledDay, dPopup td.disabledDay.dHover {background:#F0F0F0; color:#888; cursor:default}
 	.dPopup td.unselectable, .dPopup td.unselectable:hover, .dPopup td.unselectable.dHover {background:#F0F0F0; color:#888}
-
-a#dp-close {
-	font-size: 11px;
-	padding: 4px 0;
-	text-align: center;
-	display: block;
-}
-a#dp-close:hover {
-	text-decoration: underline;
-}
-.dPopup a {color:#000; text-decoration:none; padding:3px 2px 0}
-div.dPopup div.dp-nav-prev {
-	position: absolute;
-	top: 2px;
-	left: 4px;
-	width: 100px;
-}
-div.dPopup div.dp-nav-prev a {
-	float: left;
-}
-/* Opera needs the rules to be this specific otherwise it doesn't change the cursor back to pointer after you have disabled and re-enabled a link */
-div.dPopup div.dp-nav-prev a, div.dPopup div.dp-nav-next a {
-	cursor: pointer;
-}
-.dPopup div.dp-nav-prev a.disabledDay, div.dPopup .dp-nav-next a.disabledDay {
-	cursor: default;
-}
-div.dPopup div.dp-nav-next {
-	position: absolute;
-	top: 2px;
-	right: 4px;
-	width: 100px;
-}
-div.dPopup div.dp-nav-next a {
-	float: right;
-}
-.dPopup a.disabledD {cursor:default; color:#aaa}
-div.dPopup td {
-	cursor: pointer;
-}
-div.dPopup td.disabled {
-	cursor: default;
-}
+	.dPopup .dNavPrev {position:absolute; top:2px; left:7px; width:100px; font-size:15px}
+	.dPopup .dNavPrev a {float:left; padding:0; margin:0 5px 0 0}
+	.dPopup .dNavNext {position:absolute; top:2px; right:7px; width:100px; font-size:15px}
+	.dPopup .dNavNext a {float:right; padding:0; margin:0 0 0 5px}
+	.dPopup a.disabledDay {cursor:default; color:#aaa}
+	.dPopup .dNavPrev a, .dPopup div.dNavNext a {cursor:pointer}
+		.dPopup .dNavPrev a.disabledDay, .dPopup .dNavNext a.disabledDay {cursor:default}

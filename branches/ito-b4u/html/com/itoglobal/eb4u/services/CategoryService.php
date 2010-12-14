@@ -25,7 +25,14 @@ class CategoryService {
 		return $result;
 	}
 	
-
+	public static function createNewCat ($field){
+		$into = self::CATEGORY;
+		$fields = self::CAT_NAME;
+		$values = "'" . $field . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
 	public static function updateCategory ($id, $fields, $vals){
 		$from = self::CATEGORY;
 		$where = self::ID . " = '" . $id . "'";

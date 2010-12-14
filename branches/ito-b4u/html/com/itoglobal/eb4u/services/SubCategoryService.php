@@ -32,6 +32,14 @@ class SubCategoryService {
 		return $result;
 	}
 	
+	public static function createNewSubCat ($subcategory, $category){
+		$into = self::SUBCATEGORY;
+		$fields = self::SUBCAT_NAME . "," . self::CAT_ID;
+		$values = "'" . $subcategory . "','" . $category . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
 	public static function getSubcatByCat ($cat_id){
 		$fields = '*';
 		$from = self::SUBCATEGORY;
@@ -68,14 +76,12 @@ class SubCategoryService {
 	 * delete mail from trash
 	 * @param integer $id the mail id
 	 */
-	public static function deleteCategory($id) {
+	public static function deleteSubCategory($id) {
 		# setting the query variables
-		$from = self::CATEGORY;
+		$from = self::SUBCATEGORY;
 		$where = self::ID . " = '" . $id . "'";
-		$orderBy = null;
-		$limit = null;
 		# executing the query
-		DBClientHandler::getInstance ()->execDelete($from, $where, $orderBy, $limit);
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
 	}	
 
 }

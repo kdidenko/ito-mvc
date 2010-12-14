@@ -61,20 +61,31 @@ class AdminContentController extends ContentController {
 	public function handleManageCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
+		isset($requestParams[CategoryService::NEW_CAT]) ?  
+			CategoryService::createNewCat($requestParams[CategoryService::CATEGORY]) :
+				NULL;
+		isset($requestParams['delCategory']) ?  
+			CategoryService::deleteCategory($requestParams['delCategory']) :
+				NULL;
+				
+		isset($requestParams['editCategory']) ?  
+			CategoryService::deleteCategory($requestParams['editCategory']) :
+				NULL;
+				
+		isset($requestParams[SubCategoryService::NEW_SUBCAT]) ? 
+			SubCategoryService::createNewSubCat($requestParams[SubCategoryService::SUBCATEGORY], $requestParams[SubCategoryService::CAT_ID]) :
+				NULL;
+		isset($requestParams['delSubCategory']) ?  
+			SubCategoryService::deleteSubCategory($requestParams['delSubCategory']) :
+				NULL;
+				
+				
 		$categories = CategoryService::getCategories();
 		isset($categories) ? $mvc->addObject ( CategoryService::CATEGORY, $categories) : NULL;
 		
-		isset($requestParams[CategoryService::NEW_CAT]) ?  
-			CategoryService::createNewCat() :
-				NULL;
-		
-		isset($requestParams[SubCategoryService::NEW_SUBCAT]) ?  
-			SubCategoryService::createNewSubCat() :
-				NULL;
-		
 		$subcategories = SubCategoryService::getSubCategories();
 		isset($subcategories) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategories) : NULL;
-		//print_r($subcategories);
+
 		return $mvc;
 	}
 	

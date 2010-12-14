@@ -5,8 +5,9 @@ RewriteEngine On
 	RewriteCond %{REQUEST_URI} ^.*(-mapping)\.xml$	[NC]
 	RewriteRule . -									[NS,F,L]
 
-# Do not apply rewriting rules for some common file types.
-RewriteCond %{REQUEST_URI} ^/.*\.(xml|xsd|xsl|dtd|css|js|jpg|gif|txt|png|swf|ico|tiff|bmp|pdf)$ [NC]
+# Do not apply rewriting rules for some common file types except files required to be in i18n.
+	RewriteRule ^.*/i18n/(.*)$  index.php			[L]				
+	RewriteCond %{REQUEST_URI} ^/.*\.(xml|xsd|xsl|dtd|css|js|jpg|gif|txt|png|swf|ico|tiff|bmp|pdf)$	
 	RewriteRule . -									[L]
 
 # Process any internal redirects at the very beginning!

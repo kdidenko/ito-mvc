@@ -4,7 +4,7 @@ $subcategories = $mvc->getObject('subcategory');
 ?>
 <form action="/manage-category.html" method="post">
 	<ul class="viewIList">
-		<li class="itemNewC"><a title="_i18n{New Category}">_i18n{New Category}</a></li>
+		<li class="itemNewC"><a href="#" title="_i18n{New Category}">_i18n{New Category}</a></li>
 		<li class="itemNewSC"><a title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
 	</ul>
 	<h2>_i18n{Category}</h2>
@@ -12,36 +12,64 @@ $subcategories = $mvc->getObject('subcategory');
 		<table cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
-					<th>_i18n{ID}</th>
-					<th>_i18n{Category}</th>
-					<th class="itemLast">_i18n{Action}</th>
+					<th class="itemChk"></th>
+					<th>_i18n{ID}</th>					
+					<th class="itemLast">_i18n{Category}</th>
 				</tr>
 			</thead>
 			<tbody>
-<?php 	if (count($categories)>0 && $categories!=NULL){
+			<?php if (count($categories)>0 && $categories!=NULL){
 			foreach($categories as $key => $category){ ?>
 				<tr>
+					<td><input type="checkbox" class="inpChk" /></td>
 					<td><?php echo $category[CategoryService::ID] ?></td>
-					<td><?php echo $category[CategoryService::CAT_NAME] ?></td>
-					<td class="itemLast">
-						<!-- 
+					<td class="itemLast"><span class="linkTr" title="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></span></td>
+					<!-- <td>
+						
 						<button name="editCategory">Edit</button>
 						<button name="saveCategory" value="<?php echo $category[CategoryService::ID] ?>">Submit</button>
-						 -->
-						<button name="delCategory" value="<?php echo $category[CategoryService::ID] ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button>
+						
+						<button name="delCategory" value="<?php echo $category[CategoryService::ID] ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button> -->
 					</td>
 				</tr>
-<?php 		} ?>
-						<tr>
-							<td><?php echo $category[CategoryService::ID]+1; ?></td>
-							<td><input type="text" name="category"></td>
-							<td class="itemLast"><button name="newCategory">Submit</button></td>
-						</tr>
-	<?php		}else {?>
+				<?php } ?>
+				<tr class="unitCategoryEdit unitCategory">
+					<td colspan="3">
+						<div class="unitP">
+							<div class="itemForm">
+								<label>Edit category:</label>
+								<div class="itemData">
+									<input type="text" name="itemCategory" class="inpTxt" />
+									<input type="hidden" name="idCategory" />
+								</div>
+							</div>
+						</div>
+						<div class="linkSave">
+							<button>Save category</button>
+						</div>
+					</td>
+				</tr>
+				<tr class="unitCategoryNew unitCategory">
+					<td colspan="3">
+						<div class="unitP">
+							<div class="itemForm">
+								<label>New category:</label>
+								<div class="itemData">
+									<input type="text" name="you_need" class="inpTxt" />
+									<input type="hidden" name="<?php echo $category[CategoryService::ID]+1; ?>" />
+								</div>
+							</div>
+						</div>
+						<div class="linkSave">
+							<button>Save category</button>
+						</div>
+					</td>
+				</tr>
+				<?php }else{ ?>
 				<tr class="unitNoMail">
 					<td colspan="5">_i18n{No Category}</td>
 				</tr>
-	<?php	} ?>
+				<?php } ?>
 			</tbody>
 		</table>
 		<div class="unitBtn"></div>

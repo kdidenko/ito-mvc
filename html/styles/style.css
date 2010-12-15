@@ -194,6 +194,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox .unitLast {border:none; margin:0 4px}
 	/* notification */
 	.viewWBox .unitNotif {width:676px; padding:0 4px 5px 11px; overflow:hidden}
+	.viewWBox .unitNotifHide {display:none}
 	/* info */
 	.viewWBox .unitInfo {padding:0 11px 5px 11px}
 		.viewWBox .unitInfo textarea.areaTxt {width:656px}
@@ -260,6 +261,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewWBox tr.unitHover td {background:#E2E2E2}
 	.viewWBox th.itemChk {width:14px}
 		.viewWBox td input.inpChk {margin:1px 0 0 0}
+	.viewWBox tr.unitCategory td {border-right-width:0; padding:5px 0}
+	.viewWBox tr.unitCategory .unitP {background:#EFEFEF; overflow:hidden; padding:3px 0; width:671px}
+	.viewWBox tr.unitCategory .linkSave {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
+	.viewWBox tr.unitCategory .linkSave button {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -451px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
 
 	.viewWBox table.viewPlan th {background:none; font-size:11px; color:#393939; font-weight:normal; border:1px dotted #999}
 	.viewWBox table.viewPlan td {border:1px dotted #999; text-align:center; cursor:pointer}

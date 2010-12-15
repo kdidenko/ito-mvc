@@ -293,11 +293,18 @@ class TradesmanContentController extends ContentController {
 		$plan = SessionService::getAttribute(SessionService::PLAN_ID);
 		$plan = isset($requestParams[PlanService::PLAN])? $requestParams[PlanService::PLAN] :$plan; 
 		$mvc->addObject ( PlanService::CRNT_PLAN, $plan);
-		
-		
-		
-		
-	return $mvc;
+		return $mvc;
 	}
+	
+	public function handleMyOrder($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		$orders = OrdersService::getOrders($id);
+		isset($orders) ? $mvc->addObject ( OrdersService::ORDERS, $orders) : NULL;
+		
+		return $mvc;
+	}
+	
 }
 ?>

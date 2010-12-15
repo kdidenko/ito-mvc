@@ -95,7 +95,7 @@ class BargainsService {
 					self::BARGAIN_PRICE . ', ' . self::STREET . ', ' . 
 					self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::WEBSITE . ', ' . self::FROM_DATE . ', ' . 
-					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS . ', ' . self::STATUS;
+					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS . ', ' . self::HASH;
 		$values = "'" . $id . "','" . $data[self::BARGAIN_NAME] . "','" . 
 					$data[self::BARGAIN_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
 					$data[self::SUBCATEGORY_ID] . "','" . $data[self::USUAL_PRICE] ."','" .

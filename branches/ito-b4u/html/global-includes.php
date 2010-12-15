@@ -30,6 +30,8 @@
     require_once 'com/itoglobal/eb4u/services/RegionService.php';
     require_once 'com/itoglobal/eb4u/services/CountryService.php';
     require_once 'com/itoglobal/eb4u/services/BargainsService.php';
+    require_once 'com/itoglobal/eb4u/services/OrdersService';
+    
     
     
     

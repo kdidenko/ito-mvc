@@ -1,3 +1,4 @@
+<?php $role = $mvc->getObject('role'); ?>
 <div class="wrapLogin">
 	<div class="greyBox">
 		<div class="viewRBox">
@@ -51,7 +52,7 @@
 							</span>
 						</div>
 						<div class="itemBtn">
-						<input type="hidden" name="role" value="<?php echo $role ?>"/>
+							<input type="hidden" name="role" value="<?php echo $role ?>"/>
 							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 							<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
 						</div>

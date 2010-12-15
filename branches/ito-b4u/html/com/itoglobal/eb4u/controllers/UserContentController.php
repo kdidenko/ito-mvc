@@ -76,6 +76,15 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleNewOrder($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if(isset($requestParams['save'])){
+			OrdersService::setOrders($requestParams);
+		}
+		
+		return $mvc;
+	}
 	
 	/*
 	private static function getUserRole(){

@@ -83,7 +83,7 @@ if(jQuery)(function($){
 	};
 	$.fn.notificationAn = function(params){
 		var conf = $.extend({
-			sBlock:'#unitNotif',
+			sBlock:'.unitNotifHide',
 			linkNew:'.viewIList .itemNewB',
 			linkDelete:'.linkDelete a',
 			maxItems:5,
@@ -97,7 +97,7 @@ if(jQuery)(function($){
 				getEmpty:function(){
 					if(m>0){$(c.nBlock, o).addClass('hideElement')}else{$(c.nBlock, o).removeClass('hideElement')}
 				},
-				getBlock:function(){s=$(c.sBlock, o).remove().children()},
+				getHBlock:function(){s=$(c.sBlock, o).remove().children()},
 				getDelete:function(i){$(c.linkDelete, i).bind('click', function(){i.remove(); m--; f.getEmpty(); return false})},
 				getPhpBlock:function(){
 					m=$(c.cBlock, o).size(); v=$(c.cBlock, o).size();
@@ -118,7 +118,7 @@ if(jQuery)(function($){
 					b.categoryAn(); return b;
 				}
 			});
-			f.getBlock();
+			f.getHBlock();
 			if(s.length){
 				f.getPhpBlock();
 				f.getEmpty();
@@ -131,42 +131,58 @@ if(jQuery)(function($){
 	};
 	$.fn.dataAn = function(params){
 		var conf = $.extend({
+			eBlock:'.unitCategoryEdit',
+			nBlock:'.unitCategoryNew',
 			tableBlock:'table:not(.viewPlan)',
 			hoverClass:'unitHover',
+			addCategory:'.itemNewC a',
 			noDataRow:'.unitNoData',
 			dataClass:'unitData',
 			linkWide:'.linkTr'
 		}, params);
 		return this.each(function(){
-			var c=conf,o=$(this),f=this,v=[];
+			var c=conf,o=$(this),f=this,v=[],e=null,n=null,t=null;
 			$.extend(f,{
 				getBlock:function(){return o.find(c.tableBlock)},
 				getRow:function(){return $('tbody tr:not('+c.noDataRow+')', f.getBlock())},
-				getHidden:function(){return $('input[name="itemSelect"]', o)}
+				getHidden:function(){return $('input[name="itemSelect"]', o)},
+				getHBlock:function(){e=$(c.eBlock, o).remove()},
+				getNBlock:function(){n=$(c.nBlock, o).remove()},
+				bindCategory:function(k, h, r){if(t!=null){t.removeClass('hideElement')}; t=r.before(h); k.remove()}
 			});
 			if(f.getBlock().length){
+				f.getHBlock(); f.getNBlock();
+				$(c.addCategory, o).bind('click', function(){
+					f.bindCategory(e, n, f.getRow().eq(0)); return false
+				})
 				$('tbody tr:odd', f.getBlock()).addClass('unitOdd');
 				f.getRow().each(function(){var i=$(this);
 					i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
 					if($(c.linkWide, i).length){
 						i.addClass(c.dataClass);
-						var l=$(c.linkWide, i).attr('href');
-						$(c.linkWide, i).replaceWith($(c.linkWide, i).html());
-						i.bind('click', function(){document.location=l})
+						if($('a'+c.linkWide, i).length){
+							var l=$(c.linkWide, i); l.replaceWith(l.text());
+							i.bind('click', function(){document.location=l.attr('href')});
+						}
+						if($('span'+c.linkWide, i).length){
+							var l=$(c.linkWide, i); l.replaceWith(l.text());
+							i.bind('click', function(){
+								f.bindCategory(n, e, i.addClass('hideElement'));
+								$('input[name="itemCategory"]', e).attr('value', l.text());
+								$('input[name="idCategory"]', e).attr('value', l.attr('title'));
+							});
+						};
 						$('input[type="checkbox"]', i).bind('click', function(e){var h=$(this);
 							if(h.attr('checked')){v.push(h.attr('value')); i.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); i.removeClass('unitChecked')}
 							f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
 						});
 					}
 				})
-				
-				
-				
 			}
 		})
 	};
 	$.fn.rtfAn = function(params){
-		var conf = $.extend({controlIcon:'bold italic underline | color highlight removeformat | bullets numbering | alignleft center alignright justify | undo redo | link unlink'}, params);
+		var conf = $.extend({controlIcon:'bold italic underline | color highlight removeformat | bullets numbering | alignleft center alignright justify | undo redo | link unlink | source'}, params);
 		return this.each(function(){
 			var c=conf,o=$(this);
 			o.cleditor({width:o.innerWidth()-2, height:o.innerHeight()-2, controls:c.controlIcon});

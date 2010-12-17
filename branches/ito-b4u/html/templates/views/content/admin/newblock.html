@@ -6,7 +6,7 @@ $block = $mvc->getObject(StaticBlockService::STATIC_BLOCK);
 	<form action="/new-block.html" method="POST">
 		<div class="unitSnColumn">
 			<div class="itemForm">
-				<label>_i18n{Titile}:</label>
+				<label>_i18n{Title}:</label>
 				<div class="itemData">
 					<input class="inpTxt" type="text" name="<?php echo StaticBlockService::BLOCK_TITLE ?>" value="<?php echo isset($block[StaticBlockService::BLOCK_TITLE]) ? $block[StaticBlockService::BLOCK_TITLE] : NULL; ?>"/>
 				</div>

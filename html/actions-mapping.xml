@@ -143,6 +143,24 @@
 		</forwards>
 	</action>
 	
+	<action name="/new-category.html" id="newcategory" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/admin/newcategory.html" />
+		<forwards>
+			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
+	<action name="/edit-category.html" id="editcategory" roles="AR">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/views/content/admin/editcategory.html" />
+		<forwards>
+			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
 	<action name="/new-*.html" id="new$1" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

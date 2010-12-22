@@ -61,8 +61,34 @@ class OrdersService {
 	 * @var string defining the status field name
 	 */
 	const HASH = 'hash';
+	/**
+	 * @var string defining the order_price field name
+	 */
+	const PRICE = 'order_price';
+	const FROM_PRICE = "price_from";
+	const UNTIL_PRICE = "price_until";
+	
+	/**
+	 * @var string defining the order_relations table name
+	 */
+	const ORDER_RELATIONS = 'order_relations';
+	/**
+	 * @var string defining the order_id field name
+	 */
+	const ORDER_ID = 'order_id';
+	/**
+	 * @var string defining the upload_id field name
+	 */
+	const UPLOAD_ID = 'upload_id';
 	
 	/*
+	
+	CREATE TABLE  `order_relations` (
+	 `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+	 `order_id` INT( 11 ) NOT NULL ,
+	 `upload_id` INT( 11 ) NOT NULL ,
+	PRIMARY KEY (  `id` )
+	) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin AUTO_INCREMENT =3;
 	
 	CREATE TABLE  `orders` (
 	 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -86,39 +112,43 @@ class OrdersService {
 	 * get Countries
 	 * @return array
 	 */
-	public static function getOrders (){
-		$fields = self::COUNTRY . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
+	public static function getOrders ($where = NULL){
+		$fields = self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
-				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
-		$from = self::COUNTRY . 
+				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME . 
+				', ' . UsersService::USERS . '.' . UsersService::USERNAME;
+		$from = self::ORDERS . 
 				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
-				self::COUNTRY . '.' . self::CATEGORY_ID . 
+				self::ORDERS . '.' . self::CATEGORY_ID . 
 				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
 				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
-				self::COUNTRY . '.' . self::SUBCATEGORY_ID .
+				self::ORDERS . '.' . self::SUBCATEGORY_ID .
 				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
 				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
-				self::COUNTRY . '.' . self::REGION . 
+				self::ORDERS . '.' . self::REGION . 
 				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
 				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
-				self::COUNTRY . '.' . self::COUNTRY; 
+				self::ORDERS . '.' . self::COUNTRY .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::ORDERS . '.' . self::OWNER;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '', '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
 	
-	public static function setOrders ($id, $data, $path){
-		$into = self::COUNTRY;
+	public static function setOrders ($id, $data, $paths){
+		$into = self::ORDERS;
 		$date = gmdate ( "Y-m-d H:i:s" );
 		$hash = md5($date . $id);
 		$fields = self::OWNER . ', ' . self::ORDER_NAME . ', ' . self::ORDER_DESC . ', ' . 
 					self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . 
 					self::STREET . ', ' . self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::FROM_DATE . ', ' .	self::UNTIL_DATE . ', ' . 
-					self::HASH;
+					self::HASH . ', ' . self::PRICE;
 		$values = "'" . $id . "','" . $data[self::ORDER_NAME] . "','" . 
 					$data[self::ORDER_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
 					$data[self::SUBCATEGORY_ID] . "','" . 
@@ -126,14 +156,16 @@ class OrdersService {
 					$data[self::CITY] . "','" . $data[self::REGION] . "','" . 
 					$data[self::COUNTRY] . "','" . 
 					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" . 
-					$hash . "'";
+					$hash ."','" . $data[self::PRICE] . "'";
 					
 		$order_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
-		//$upload_id = UploadsService::setUploadsPath($path);
-		//$into = self::BARGAIN_RELATIONS;
-		//$fields = self::BARGAIN_ID . ',' . self::UPLOAD_ID;
-		//$values = "'" . $order_id . "', '" . $upload_id . "'";
-		//DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		foreach($paths as $key => $path){
+			$upload_id = UploadsService::setUploadsPath($path);
+			$into = self::ORDER_RELATIONS;
+			$fields = self::ORDER_ID . ',' . self::UPLOAD_ID;
+			$values = "'" . $order_id . "', '" . $upload_id . "'";
+			DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		}
 	}
 }
 

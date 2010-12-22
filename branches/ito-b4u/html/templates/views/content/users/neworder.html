@@ -1,1 +1,79 @@
+<?php 
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
+$errors = $mvc->getObject(ContentController::ERROR);
+?>
 <h2>New Order</h2>
+<?php if (isset($errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<li><?php echo $errors ?></li>
+		</ul>
+	</div>
+<?php } ?>
+<form action="new-order.html" method="post"  enctype="multipart/form-data">
+order_name<input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/>
+order_desc<textarea name="order_desc"/><? if(isset($_POST['order_desc'])) echo $_POST['order_desc']; ?></textarea><br/>
+street<input name="street" type="text" value="<? if(isset($_POST['street'])) echo $_POST['street']; ?>"/><br/>
+zip<input name="zip" type="text" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/><br/>
+city<input name="city" type="text" value="<? if(isset($_POST['city'])) echo $_POST['city']; ?>"/><br/><br/>
+
+
+region
+				<select name="region" class="gCategory">
+<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+						<option value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>
+country
+				<select name="country" class="gSubCategory">
+<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+						<option value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>
+category_id
+				<select name="category_id" class="gCategory">
+<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+						<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>
+subcategory_id
+				<select name="subcategory_id" class="gSubCategory">
+<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+					foreach($subcategories as $key=>$subcategory){ ?>						
+						<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>		
+price<input name="order_price" type="text" value="<? if(isset($_POST['order_price'])) echo $_POST['order_price']; ?>"/><br/>
+from_date<input name="from_date" type="text" value="2010-12-21"/><br/>
+until_date<input name="until_date" type="text" value="2010-12-21"/><br/>
+<br/><br/><br/>
+file1<input type="file" name="file[1]" /><br/><br/>
+file2<input type="file" name="file[2]" /><br/><br/>
+file3<input type="file" name="file[3]" /><br/><br/>
+file4<input type="file" name="file[4]" /><br/><br/>
+<!-- 
+<input name="" type="text"/><br/>
+<input name="" type="text"/><br/>
+<input name="" type="text"/><br/>
+<input name="" type="text"/><br/>
+ -->
+<br/><br/><br/>
+<input name="save" type="submit" value="Submit"/><br/>
+
+
+
+</form>

@@ -76,13 +76,90 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleMyOrder($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$orders = OrdersService::getOrders ();
+		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
+		
+		return $mvc;
+	}
+	
 	public function handleNewOrder($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if(isset($requestParams['save'])){
-			OrdersService::setOrders($requestParams);
+			$error = array();
+			$files = $_FILES ['file'];
+			foreach ($requestParams as $key => $value){
+				$error[] .= $value==NULL ? true : false;
+			}
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				print_r($requestParams);
+
+				/*
+				echo "<br/>";
+				echo "<br/>";
+				print_r($files);
+				echo "<br/>";
+				*/
+				$img = array();
+				$paths = array();
+				foreach ($files['error'] as $key=>$error){
+					//echo "<br/>";print_r($error);echo " - ";print_r($key);echo "<br/>";
+					if($error==0){
+						$img['name'] = $files['name'][$key];
+						$img['type'] = $files['type'][$key];
+						$img['tmp_name'] = $files['tmp_name'][$key];
+						$img['error'] = $files['error'][$key];
+						$img['size'] = $files['size'][$key];
+						
+						//print_r($img);echo "<br/>";
+
+						$date = mktime();
+						$height = 100;
+						$width = 100;
+						$path = StorageService::ORDERS_FOLDER . "order-$date.jpg";
+						$paths [].= $path;
+						$path2 = StorageService::ORDERS_FOLDER . "order-$date-" . ImageService::SMALL . ".jpg";
+						if (isset ( $img ['name'] ) ) {
+							StorageService::uploadFile ( $path, $img );
+							self::setNoCashe();
+							$image = new ImageService();
+							$image->load($path);
+							$image->resize($width,$height);
+							$image->save($path2);
+						}
+					}
+				}
+								
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$from_date = explode('/', $requestParams[OrdersService::FROM_DATE]);
+				$until_date = explode('/', $requestParams[OrdersService::UNTIL_DATE]);
+				//$requestParams[OrdersService::FROM_DATE] = $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
+				//$requestParams[OrdersService::UNTIL_DATE] = $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
+				$requestParams[OrdersService::ORDER_DESC] = htmlspecialchars($requestParams[OrdersService::ORDER_DESC], ENT_QUOTES);
+				OrdersService::setOrders($id, $requestParams, $paths);
+				
+			} else {
+				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
+			}
 		}
 		
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+				
 		return $mvc;
 	}
 	

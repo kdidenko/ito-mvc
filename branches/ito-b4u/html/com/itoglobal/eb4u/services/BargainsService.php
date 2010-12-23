@@ -122,14 +122,26 @@ class BargainsService {
 	 */
 	public static function getBargains ($user){
 		$fields = self::BARGAINS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
-				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
+				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
+				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME . 
+				', ' . UsersService::USERS . '.' . UsersService::USERNAME; 
 		$from = self::BARGAINS . 
 				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
 				self::BARGAINS . '.' . self::CATEGORY_ID . 
 				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
 				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
-				self::BARGAINS . '.' . self::SUBCATEGORY_ID;
+				self::BARGAINS . '.' . self::SUBCATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
+				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
+				self::BARGAINS . '.' . self::REGION . 
+				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
+				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
+				self::BARGAINS . '.' . self::COUNTRY .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::BARGAINS . '.' . self::USER_ID;
 		$where = self::USER_ID . '=' . $user;
 		$orderby = self::ID;
 		# executing the query

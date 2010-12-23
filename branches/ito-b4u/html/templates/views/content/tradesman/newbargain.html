@@ -1,6 +1,8 @@
 <?php
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
 $errors = $mvc->getObject(TradesmanContentController::ERROR);
 ?>
 <h2>_i18n{New Bargain}</h2>
@@ -79,17 +81,29 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 <div class="unitWBlock unitLast">
 	<div class="unitEqColumn">
 		<div class="itemForm">
-			<label>_i18n{Street}:</label>
+			<label>_i18n{Country}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" name="street" value="<? if(isset($_POST['street'])) echo $_POST['street']; ?>"/>
+				<select name="country" >
+<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+						<option value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
 			</div>
-		</div>
+		</div>		
 		<div class="itemForm">
-			<label>_i18n{ZIP}:</label>
+			<label>_i18n{State}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
+				<select name="region" >
+<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+						<option value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
 			</div>
-		</div>
+		</div>		
 		<div class="itemForm">
 			<label>_i18n{City}:</label>
 			<div class="itemData">
@@ -98,26 +112,17 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 		</div>
 	</div>
 	<div class="unitEqColumn">
+
 		<div class="itemForm">
-			<label>_i18n{State}:</label>
+			<label>_i18n{ZIP}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
-				<!-- 
-				<select>
-					<option>Bundesland</option>
-				</select>
-				 -->
+				<input class="inpTxt" type="text" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">
-			<label>_i18n{Country}:</label>
+			<label>_i18n{Street}:</label>
 			<div class="itemData">
-				<input class="inpTxt" type="text" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
-				<!-- 
-				<select>
-					<option>Land</option>
-				</select>
-				 -->
+				<input class="inpTxt" type="text" name="street" value="<? if(isset($_POST['street'])) echo $_POST['street']; ?>"/>
 			</div>
 		</div>
 		<div class="itemForm">

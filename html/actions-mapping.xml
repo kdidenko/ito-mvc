@@ -187,12 +187,9 @@
 		</forwards>
 	</action>
 	
-	<action name="/view-orders.html" id="vieworders" roles="UR,TR,BR,PR,AR">
+	<action name="/view-orders.html" id="vieworders">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
-		<forwards>
-			<target condition="onsignedoff" location="/login.html"/>
-		</forwards>
 	</action>
 	
 	<action name="/edit-*.html" id="edit$1" roles="UR,TR,BR,PR,AR">

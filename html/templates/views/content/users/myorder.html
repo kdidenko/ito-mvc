@@ -1,3 +1,8 @@
 <h2>_i18n{user my order page content}</h2>
 <br/>
 <strong><a href="/new-order.html">New Order</a></strong>
+<br/>
+<?php 
+$orders = $mvc->getObject(OrdersService::ORDERS);
+print_r($orders);
+?>

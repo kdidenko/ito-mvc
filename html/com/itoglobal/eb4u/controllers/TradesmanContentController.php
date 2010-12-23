@@ -242,27 +242,28 @@ class TradesmanContentController extends ContentController {
 			if (count ( $error ) == 0) {
 				
 				$file = $_FILES ['bargain_image'];
-				$date = mktime();
-				$height = 100;
-				$width = 100;
-				$path = StorageService::BARGAINS_FOLDER . "bargain-$date.jpg";
-				$path2 = StorageService::BARGAINS_FOLDER . "bargain-$date-" . ImageService::SMALL . ".jpg";
-				if (isset ( $file ['name'] ) ) {
-					StorageService::uploadFile ( $path, $file );
-					self::setNoCashe();
-					$image = new ImageService();
-					$image->load($path);
-					$image->resize($width,$height);
-					$image->save($path2);
+				if ($file['error']==0){
+					$date = mktime();
+					$height = 100;
+					$width = 100;
+					$path = StorageService::BARGAINS_FOLDER . "bargain-$date.jpg";
+					$path2 = StorageService::BARGAINS_FOLDER . "bargain-$date-" . ImageService::SMALL . ".jpg";
+					if (isset ( $file ['name'] ) ) {
+						StorageService::uploadFile ( $path, $file );
+						self::setNoCashe();
+						$image = new ImageService();
+						$image->load($path);
+						$image->resize($width,$height);
+						$image->save($path2);
+					}
+					$id = SessionService::getAttribute(SessionService::USERS_ID);
+					$from_date = explode('/', $requestParams[BargainsService::FROM_DATE]);
+					$until_date = explode('/', $requestParams[BargainsService::UNTIL_DATE]);
+					$requestParams[BargainsService::FROM_DATE] = $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
+					$requestParams[BargainsService::UNTIL_DATE] = $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
+					$requestParams[BargainsService::BARGAIN_DESC] = htmlspecialchars($requestParams[BargainsService::BARGAIN_DESC], ENT_QUOTES);
+					BargainsService::setBargain($id, $requestParams, $path);
 				}
-				
-				$id = SessionService::getAttribute(SessionService::USERS_ID);
-				$from_date = explode('/', $requestParams[BargainsService::FROM_DATE]);
-				$until_date = explode('/', $requestParams[BargainsService::UNTIL_DATE]);
-				$requestParams[BargainsService::FROM_DATE] = $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
-				$requestParams[BargainsService::UNTIL_DATE] = $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
-				$requestParams[BargainsService::BARGAIN_DESC] = htmlspecialchars($requestParams[BargainsService::BARGAIN_DESC], ENT_QUOTES);
-				BargainsService::setBargain($id, $requestParams, $path);
 			} else {
 				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
 			}
@@ -274,7 +275,13 @@ class TradesmanContentController extends ContentController {
 
 		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
-				
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
 		return $mvc;
 	}
 	

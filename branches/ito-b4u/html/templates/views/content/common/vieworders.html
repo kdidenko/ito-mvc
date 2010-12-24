@@ -6,7 +6,7 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 $countries = $mvc->getObject(CountryService::COUNTRY);
 ?>
 <form action="view-orders.html" method="post">
-name <input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/><br/>
+phrase <input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/><br/>
 
 country
 				<select name="country" class="gSubCategory">
@@ -47,7 +47,7 @@ subcategory_id
 				</select>
 <br/><br/>		
 price from<input name="price_from" type="text" value="<? if(isset($_POST['price_from'])) echo $_POST['price_from']; ?>"/>
-until <input name="price_until" type="text" value="<? if(isset($_POST['price_until'])) echo $_POST['price_until']; ?>"/><br/>
+to <input name="price_until" type="text" value="<? if(isset($_POST['price_until'])) echo $_POST['price_until']; ?>"/><br/>
 <br/>
 <input name="search" type="submit" value="Submit"/><br/>
 <hr></hr>

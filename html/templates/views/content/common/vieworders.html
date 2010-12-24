@@ -1,1 +1,67 @@
-<h1>view/search orders</h1>
+<?php 
+$orders = $mvc->getObject(OrdersService::ORDERS);
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
+?>
+<form action="view-orders.html" method="post">
+name <input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/><br/>
+
+country
+				<select name="country" class="gSubCategory">
+					<option value="all">all</option>
+<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+						<option <?php echo isset($_POST['country'])&&$country[CountryService::ID]==$_POST['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+region
+				<select name="region" class="gCategory">
+					<option value="all">all</option>
+<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+						<option <?php echo isset($_POST['region'])&&$region[RegionService::ID]==$_POST['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>
+category_id
+				<select name="category_id" class="gCategory">
+					<option value="all">all</option>
+<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+						<option <?php echo isset($_POST['category_id'])&&$category[CategoryService::ID]==$_POST['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+subcategory_id
+				<select name="subcategory_id" class="gSubCategory">
+					<option value="all">all</option>
+<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+					foreach($subcategories as $key=>$subcategory){ ?>						
+						<option <?php echo isset($_POST['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_POST['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+				</select>
+<br/><br/>		
+price from<input name="price_from" type="text" value="<? if(isset($_POST['price_from'])) echo $_POST['price_from']; ?>"/>
+until <input name="price_until" type="text" value="<? if(isset($_POST['price_until'])) echo $_POST['price_until']; ?>"/><br/>
+<br/>
+<input name="search" type="submit" value="Submit"/><br/>
+<hr></hr>
+<?php 
+if(isset($orders)&&count($orders)>0&&$orders!=NULL){
+foreach($orders as $key => $order){
+	echo "<br/>";
+	echo "<a href='/view-order.html?id=".$order['hash']."'>";
+	print_r($order);
+	echo "</a>";	
+	echo "<br/>";
+}
+} else { ?>
+NO ORDER LIKE YOU WHANT
+<?php } ?>
+
+</form>

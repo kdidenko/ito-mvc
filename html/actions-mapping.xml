@@ -191,6 +191,10 @@
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
+	<action name="/view-order.html" id="vieworder">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
 	
 	<action name="/edit-*.html" id="edit$1" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />

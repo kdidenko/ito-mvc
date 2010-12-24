@@ -49,6 +49,76 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+
+	public function handleViewOrders($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$where = NULL;
+		if (isset ( $requestParams [OrdersService::ORDER_NAME] )&& $requestParams [OrdersService::ORDER_NAME] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . " LIKE '%" . $requestParams [OrdersService::ORDER_NAME] . "%'";
+		}
+		if (isset ( $requestParams [OrdersService::FROM_PRICE] )&& $requestParams [OrdersService::FROM_PRICE] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::PRICE . ' >= ' . $requestParams [OrdersService::FROM_PRICE];
+		}
+		if (isset ( $requestParams [OrdersService::UNTIL_PRICE] )&& $requestParams [OrdersService::UNTIL_PRICE] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::PRICE . ' <= ' . $requestParams [OrdersService::UNTIL_PRICE];
+		}
+		if (isset ( $requestParams [OrdersService::COUNTRY] ) && $requestParams [OrdersService::COUNTRY]!='all' ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::COUNTRY . '=' . $requestParams [OrdersService::COUNTRY];
+		}
+		if (isset ( $requestParams [OrdersService::REGION] ) && $requestParams [OrdersService::REGION]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::REGION . '=' . $requestParams [OrdersService::REGION];
+		}
+		if (isset ( $requestParams [OrdersService::CATEGORY_ID] ) && $requestParams [OrdersService::CATEGORY_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::CATEGORY_ID . '=' . $requestParams [OrdersService::CATEGORY_ID];
+		}
+		if (isset ( $requestParams [OrdersService::SUBCATEGORY_ID] ) && $requestParams [OrdersService::SUBCATEGORY_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= OrdersService::ORDERS . '.' . OrdersService::SUBCATEGORY_ID . '=' . $requestParams [OrdersService::SUBCATEGORY_ID];
+		}
+		
+		$orders = OrdersService::getOrders ($where);
+		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		if (isset ($requestParams[OrdersService::CATEGORY_ID])){
+			$crntCategory = $requestParams[OrdersService::CATEGORY_ID]!='all' ? 
+								$requestParams[OrdersService::CATEGORY_ID] : 
+									$category[0][CategoryService::ID];  
+			$subcategory = SubCategoryService::getSubcatByCat ($crntCategory);
+			isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		}
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleViewOrder($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
+		$order = OrdersService::getOrders ($where);
+		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
+		$images = OrdersService::getOrderImgs ($where);
+		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
+		
+		return $mvc;
+	}
+	
+	
 /*	public static function createTeaser ($list){
 		if (count($list)>0){
 			foreach($list as $key => $value){

@@ -14,9 +14,10 @@ class UploadsService {
 	 */
 	const PATH = 'path';
 	
-	public static function getUploadsPath() {
+	public static function getUploadsPath($where = NULL) {
 		$fields = '*';
 		$from = self::UPLOADS;
+		$where = self::ID . '=' . $where;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '' , '', '' );
 		$result = $result != null && isset($result) ? $result : false;

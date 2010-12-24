@@ -1,0 +1,19 @@
+<?php 
+$data = $mvc->getObject(OrdersService::ORDERS);
+$images = $mvc->getObject(UploadsService::PATH);
+?>
+
+<?php if(isset($data)&&count($data)>0&&$data!=NULL){
+foreach($data as $key => $value){
+	echo "<br/>";
+	print_r($value);
+	echo "<br/>";
+}
+foreach($images as $key => $image){
+	echo "<br/>";
+	echo "<img src='" . $image['path'] . "'>";
+	echo "<br/>";
+}
+} else { ?>
+NO ORDER LIKE YOU WHANT
+<?php } ?>

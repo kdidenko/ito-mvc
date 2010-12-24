@@ -140,6 +140,22 @@ class OrdersService {
 		return $result;
 	}
 	
+	public static function getOrderImgs ($hash){
+		$where = OrdersService::HASH . "='" . $hash . "'";
+		$orders = self::getOrders();
+		$id = $orders[0][self::ID];
+		$fields = self::ORDER_RELATIONS . '.*, ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
+		$from = self::ORDER_RELATIONS . 
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . 
+				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				self::ORDER_RELATIONS . '.' . self::UPLOAD_ID;
+		$where = self::ORDER_ID . "='" . $id . "'"; 
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
 	public static function setOrders ($id, $data, $paths){
 		$into = self::ORDERS;
 		$date = gmdate ( "Y-m-d H:i:s" );

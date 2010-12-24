@@ -98,16 +98,9 @@ class UserContentController extends ContentController {
 			if (count ( $error ) == 0) {
 				print_r($requestParams);
 
-				/*
-				echo "<br/>";
-				echo "<br/>";
-				print_r($files);
-				echo "<br/>";
-				*/
 				$img = array();
 				$paths = array();
 				foreach ($files['error'] as $key=>$error){
-					//echo "<br/>";print_r($error);echo " - ";print_r($key);echo "<br/>";
 					if($error==0){
 						$img['name'] = $files['name'][$key];
 						$img['type'] = $files['type'][$key];
@@ -115,14 +108,12 @@ class UserContentController extends ContentController {
 						$img['error'] = $files['error'][$key];
 						$img['size'] = $files['size'][$key];
 						
-						//print_r($img);echo "<br/>";
-
 						$date = mktime();
 						$height = 100;
 						$width = 100;
-						$path = StorageService::ORDERS_FOLDER . "order-$date.jpg";
+						$path = StorageService::ORDERS_FOLDER . "order-$date-$key.jpg";
 						$paths [].= $path;
-						$path2 = StorageService::ORDERS_FOLDER . "order-$date-" . ImageService::SMALL . ".jpg";
+						$path2 = StorageService::ORDERS_FOLDER . "order-$date-$key" . ImageService::SMALL . ".jpg";
 						if (isset ( $img ['name'] ) ) {
 							StorageService::uploadFile ( $path, $img );
 							self::setNoCashe();

@@ -4,7 +4,7 @@ $psw_errors = $mvc->getObject(ContentController::PSW_ERROR);
 $status = $mvc->getObject(ContentController::STATUS);
 ?>
 <h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
-<div class="unitWBlock">
+<div class="unitABlock">
 	<form action="/my-profile.html" method="post">
 		<?php if (isset($status)){?>
 			<div class="itemOk">
@@ -124,7 +124,7 @@ $status = $mvc->getObject(ContentController::STATUS);
 </div>
 
 <h2>_i18n{Change Password}</h2>
-<div class="unitWBlock unitLast">
+<div class="unitABlock unitABlockLast">
 <?php if (isset($psw_errors )){?>
 	<div class="itemWarning">
 		<ul>

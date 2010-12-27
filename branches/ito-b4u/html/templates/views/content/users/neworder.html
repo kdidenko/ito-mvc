@@ -6,15 +6,26 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 $errors = $mvc->getObject(ContentController::ERROR);
 ?>
 <h2>New Order</h2>
-<?php if (isset($errors )){?>
-	<div class="itemWarning">
-		<ul>
-			<li><?php echo $errors ?></li>
-		</ul>
+<div class="unitWBlock unitLast">
+	<?php if (isset($errors )){?>
+		<div class="itemWarning">
+			<ul>
+				<li><?php echo $errors ?></li>
+			</ul>
+		</div>
+	<?php } ?>
+	<form action="new-order.html" method="post"  enctype="multipart/form-data">
+	<div class="unitSnColumn">
+		<div class="itemForm">
+			<label>order_name</label>
+			<div class="itemData">
+				<input name="order_name" class="inpTxt" type="text" value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>" />
+			</div>
+		</div>
 	</div>
-<?php } ?>
-<form action="new-order.html" method="post"  enctype="multipart/form-data">
-order_name<input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/>
+</div>
+
+<br/>
 order_desc<textarea name="order_desc"/><? if(isset($_POST['order_desc'])) echo $_POST['order_desc']; ?></textarea><br/>
 street<input name="street" type="text" value="<? if(isset($_POST['street'])) echo $_POST['street']; ?>"/><br/>
 zip<input name="zip" type="text" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/><br/>

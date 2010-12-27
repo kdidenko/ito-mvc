@@ -1,66 +1,72 @@
 <?php $role = $mvc->getObject('role'); ?>
 <div class="wrapLogin">
 	<div class="greyBox">
-		<div class="viewRBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h2>_i18n{Tell us about yourself}</h2>
-				<div class="unitForm unitLast">
-					<form action="registration.html" method="post" name="registration">
-<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+		<div class="viewBox viewBoxL">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2>_i18n{Tell us about yourself}</h2>
+						<div class="unitABlock unitABlockLast">
+							<form action="registration.html" method="post" name="registration">
+		<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
 		if (isset($message) && $message!=NULL){?>
-						<div class="itemOk"><?php echo $message; ?></div>
-<?php	} else { ?>
-					
-<?php 	$errors = $mvc->getObject(UsersService::ERROR);
+								<div class="itemOk"><?php echo $message; ?></div>
+		<?php	} else { ?>
+							
+		<?php 	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
-							<div class="itemWarning">
-								<ul>
-<?php								foreach ($errors as $key => $value){
+								<div class="itemWarning">
+									<ul>
+		<?php						foreach ($errors as $key => $value){
 										echo '<li>' . $value . '</li>'; }?>
-								</ul>
-							</div>
-						<?php } ?>
-						<div class="itemForm">
-							<label for="frmUser">_i18n{Username}:</label>
-							<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
+									</ul>
+								</div>
+							<?php } ?>
+								<div class="unitEqColumn">
+									<div class="itemForm">
+										<label for="frmUser">_i18n{Username}:</label>
+										<span class="itemData"><input type="text" id="frmUser" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
+									</div>
+									<div class="itemForm">
+										<label>_i18n{First Name}:</label>
+										<span class="itemData"><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label>_i18n{Last Name}:</label>
+										<span class="itemData"><input type="text" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label>_i18n{Your Email}:</label>
+										<span class="itemData"><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label>_i18n{Password}:</label>
+										<span class="itemData"><input type="password" class="inpTxt" name="password"/></span>
+									</div>
+									<div class="itemForm">
+										<label>_i18n{Repeat Password}:</label>
+										<span class="itemData"><input type="password" class="inpTxt" name="confirm_password"/></span>
+									</div>
+									<div class="itemForm">
+										<span class="itemData">
+											<input type="checkbox" class="inpChk" name="agreement"/>
+											<label>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+										</span>
+									</div>
+									<div class="unitBtn">
+										<input type="hidden" name="role" value="<?php echo $role ?>"/>
+										<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+										<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
+									</div>
+									<?php } ?>
+								</div>
+							</form>
 						</div>
-						<div class="itemForm">
-							<label>_i18n{First Name}:</label>
-							<span class="itemData"><input type="text" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label>_i18n{Last Name}:</label>
-							<span class="itemData"><input type="text" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label>_i18n{Your Email}:</label>
-							<span class="itemData"><input type="text" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label>_i18n{Password}:</label>
-							<span class="itemData"><input type="password" class="inpTxt" name="password"/></span>
-						</div>
-						<div class="itemForm">
-							<label>_i18n{Repeat Password}:</label>
-							<span class="itemData"><input type="password" class="inpTxt" name="confirm_password"/></span>
-						</div>
-						<div class="itemForm">
-							<span class="itemData">
-								<input type="checkbox" class="inpChk" name="agreement"/>
-								<label>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
-							</span>
-						</div>
-						<div class="itemBtn">
-							<input type="hidden" name="role" value="<?php echo $role ?>"/>
-							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
-							<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
-						</div>
-						<?php } ?>
-					</form>
+					</div>
 				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- fix gradient on -->
 		<div class="lineHide"></div>

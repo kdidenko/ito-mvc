@@ -10,9 +10,11 @@ $role = $mvc->getObject(UsersService::ROLE);
 
 <div class="wrapLogin">
 	<div class="greyBox">
-		<div class="viewWBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
+		<div class="viewBox viewBoxR">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
 <?php	if (isset($message) && $message!=NULL){?>
 						<div class="itemOk"><?php echo $message; ?></div>
 <?php	} else { ?>
@@ -27,153 +29,155 @@ $role = $mvc->getObject(UsersService::ROLE);
 							</ul>
 						</div>
 <?php	} ?>
-			<form action="confirm-registration.html" method="post">
-				<div class="unitWBlock">
-					<div class="unitEqColumn">
-						<h3>_i18n{Bank Data}</h3>
-						<div class="itemForm">
-							<label for="frmR1">_i18n{Bank}:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR1" name="bank" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label for="frmR2">_i18n{Account No}:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR2" name="account_number" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['account_number']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label for="frmR3">_i18n{BLZ}:<span class="itemReq">*</span></label>
-							<span class="itemData"><input type="text" id="frmR3" name="bank_blz" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank_blz']; ?>"/></span>
-						</div>
-						<div class="itemForm">
-							<label for="frmR4">_i18n{Payment}:<span class="itemReq">*</span></label>
-							<span class="itemData">
-								<select id="frmR4" name="payment">
-									<option value="1">1/4-_i18n{annually}</option>
-									<option value="2">1/2-_i18n{annually}</option>
-									<option value="3">_i18n{annually}</option>
-								</select>
-							</span>
-						</div>
-					</div>
-					<div class="unitEqColumn">
-						<?php echo StaticBlockService::getBlock(22); ?>
-					</div>
-				</div>
-				<div class="unitWBlock" style="display:none">
-					<input type="radio" class="inpChk" /><label>Zahlung per Kreditkarte</label>
-					<input type="radio" class="inpChk" /><label>Lastschrift</label>
-					<input type="radio" class="inpChk" /><label>Paypal</label>
-				</div>
-				<ul class="viewIList">
-					<li class="itemNewB"><a href="#" title="_i18n{New notification}">_i18n{New notification}</a></li>
-				</ul>
-				<h2>_i18n{Choose Notification}</h2>
-				<div class="unitWBlock">
-					<div id="unitNotif" class="hideElement">
-						<!-- sample on -->
-						<div class="unitNotif">
-							<div class="unitP">
-								<div class="itemForm itemFirst">
-									<label for="frmR5">_i18n{Category}:</label>
-									<div class="itemData">
-										<select id="frmCc" name="category" class="gCategory">
-<?php								if (isset($categories) && $categories!=NULL){ 
-										foreach($categories as $key=>$category){ ?>
-											<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 									} 
-									} ?>
-										</select>
+						<form action="confirm-registration.html" method="post">
+							<div class="unitABlock">
+								<div class="unitEqColumn">
+									<h3>_i18n{Bank Data}</h3>
+									<div class="itemForm">
+										<label for="frmR1">_i18n{Bank}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR1" name="bank" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR2">_i18n{Account No}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR2" name="account_number" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['account_number']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR3">_i18n{BLZ}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR3" name="bank_blz" class="inpTxt" value="<? if(isset($_POST['company'])) echo $_POST['bank_blz']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR4">_i18n{Payment}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<select id="frmR4" name="payment">
+												<option value="1">1/4-_i18n{annually}</option>
+												<option value="2">1/2-_i18n{annually}</option>
+												<option value="3">_i18n{annually}</option>
+											</select>
+										</span>
 									</div>
 								</div>
-								<div class="itemForm">
-									<label for="frmR6">_i18n{Sub-Category}:</label>
-									<div class="itemData">
-										<select id="frmCs" name="subcategory" class="gSubCategory">
-<?php								if (isset($subcategories) && $subcategories!=NULL){ 
+								<div class="unitEqColumn">
+									<?php echo StaticBlockService::getBlock(22); ?>
+								</div>
+							</div>
+							<div class="unitABlock" style="display:none">
+								<input type="radio" class="inpChk" /><label>Zahlung per Kreditkarte</label>
+								<input type="radio" class="inpChk" /><label>Lastschrift</label>
+								<input type="radio" class="inpChk" /><label>Paypal</label>
+							</div>
+							<ul class="viewIList">
+								<li class="itemNewB"><a href="#" title="_i18n{New notification}">_i18n{New notification}</a></li>
+							</ul>
+							<h2>_i18n{Choose Notification}</h2>
+							<div class="unitABlock">
+								<div id="unitNt" class="hideElement">
+									<!-- sample on -->
+									<div class="unitNt">
+										<div class="innerP">
+											<div class="itemForm itemFirst">
+												<label for="frmR5">_i18n{Category}:</label>
+												<div class="itemData">
+													<select id="frmCc" name="category" class="gCategory">
+			<?php								if (isset($categories) && $categories!=NULL){ 
+										foreach($categories as $key=>$category){ ?>
+														<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+			<?php 									} 
+									} ?>
+													</select>
+												</div>
+											</div>
+											<div class="itemForm">
+												<label for="frmR6">_i18n{Sub-Category}:</label>
+												<div class="itemData">
+													<select id="frmCs" name="subcategory" class="gSubCategory">
+			<?php								if (isset($subcategories) && $subcategories!=NULL){ 
 										foreach($subcategories as $key=>$subcategory){ 
 											if ($subcategory[SubCategoryService::CAT_ID] == $categories[0][CategoryService::ID]){?>
-												<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php			 							}
+															<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+			<?php			 							}
 										}
 									} ?>
-										</select>
+													</select>
+												</div>
+											</div>
+											<div class="itemForm">
+												<label for="frmR7">Auftragsvolumen:</label>
+												<div class="itemData">
+													<select id="frmCp" name="plan">
+														<option>0-1.000 Euro</option>
+														<option>1.000-5.000 Euro</option>
+														<option>5.000-unbegrenzt</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="linkDelete">
+											<a href="#" title="_i18n{Remove notification}">_i18n{Remove notification}</a>
+										</div>
+									</div>
+									<!-- sample off -->
+								</div>
+								<div class="unitNtEmpty hideElement">_i18n{Empty notification}</div>
+								<dl class="viewNtList">
+									<dt>Region:</dt>
+									<dd>
+										<ul>
+			<?php foreach($regions as $key=>$region){ ?> 
+											<li>
+												<input 
+												
+												<?php if (isset($remind_regions)&&$remind_regions!=NULL ){ foreach($remind_regions as $key=>$remind_regions_item){ ?> 
+												<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked'  : NULL; }}?>
+												
+												id="frmR<?php echo $region[RegionService::ID]; ?>" type="checkbox" class="inpChk" name="region[<?php echo $region[RegionService::ID]; ?>]" value="<?php echo $region[RegionService::ID]; ?>"/>
+												<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label> 
+											</li>
+			<?php } ?>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="unitABlock">
+								<div class="unitInfo unitRtf">
+									<?php echo StaticBlockService::getBlock(23); ?>
+								</div>
+							</div>
+							
+							<div class="unitABlock unitABlockLast">
+								<!-- 
+								<div class="unitEqColumn">
+									<div class="itemForm">
+										<label for="frmR30">Mail:</label>
+										<span class="itemData"><input type="text" id="frmR30" class="inpTxt" /></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR31">Mail bestatigen:</label>
+										<span class="itemData"><input type="text" id="frmR31" class="inpTxt" /></span>
 									</div>
 								</div>
-								<div class="itemForm">
-									<label for="frmR7">Auftragsvolumen:</label>
-									<div class="itemData">
-										<select id="frmCp" name="plan">
-											<option>0-1.000 Euro</option>
-											<option>1.000-5.000 Euro</option>
-											<option>5.000-unbegrenzt</option>
-										</select>
+								 -->
+								<div class="unitSnColumn">
+									<div class="itemForm">
+										<span class="itemData">
+											<input type="checkbox" id="frmR19" class="inpChk" name="newsletter" value="1" checked="checked"/>
+											<label for="frmR19">_i18n{Send me newsletter}</label>
+										</span>
 									</div>
 								</div>
+								<div class="unitBtn">
+									<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
+									<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
+									<input type="hidden" name="role" value="<?php echo $role ?>"/>
+									<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+									<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
+								</div>
 							</div>
-							<div class="linkDelete">
-								<a href="#" title="_i18n{Remove notification}">_i18n{Remove notification}</a>
-							</div>
-						</div>
-						<!-- sample off -->
-					</div>
-					<div class="unitNotifEmpty hideElement">_i18n{Empty notification}</div>
-					<dl class="viewRList">
-						<dt>Region:</dt>
-						<dd>
-							<ul>
-<?php foreach($regions as $key=>$region){ ?> 
-								<li>
-									<input 
-									
-									<?php if (isset($remind_regions)&&$remind_regions!=NULL ){ foreach($remind_regions as $key=>$remind_regions_item){ ?> 
-									<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked'  : NULL; }}?>
-									
-									id="frmR<?php echo $region[RegionService::ID]; ?>" type="checkbox" class="inpChk" name="region[<?php echo $region[RegionService::ID]; ?>]" value="<?php echo $region[RegionService::ID]; ?>"/>
-									<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label> 
-								</li>
-<?php } ?>
-							</ul>
-						</dd>
-					</dl>
-				</div>
-				<div class="unitWBlock">
-					<div class="unitInfo unitRtf">
-						<?php echo StaticBlockService::getBlock(23); ?>
+							</form>
+							<?php } ?>
 					</div>
 				</div>
-				
-				<div class="unitWBlock unitLast">
-					<!-- 
-					<div class="unitEqColumn">
-						<div class="itemForm">
-							<label for="frmR30">Mail:</label>
-							<span class="itemData"><input type="text" id="frmR30" class="inpTxt" /></span>
-						</div>
-						<div class="itemForm">
-							<label for="frmR31">Mail bestatigen:</label>
-							<span class="itemData"><input type="text" id="frmR31" class="inpTxt" /></span>
-						</div>
-					</div>
-					 -->
-						<div class="unitSnColumn">
-							<div class="itemForm">
-								<span class="itemData">
-									<input type="checkbox" id="frmR19" class="inpChk" name="newsletter" value="1" checked="checked"/>
-									<label for="frmR19">_i18n{Send me newsletter}</label>
-								</span>
-							</div>
-						</div>
-					<div class="unitBtn">
-						<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
-						<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
-						<input type="hidden" name="role" value="<?php echo $role ?>"/>
-						<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
-						<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
-					</div>
-				</div>
-				</form>
-				<?php } ?>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- fix gradient on -->
 		<div class="lineHide"></div>

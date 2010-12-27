@@ -4,10 +4,13 @@
 ?>
 <div class="wrapLogin">
 	<div class="greyBox">
-		<div class="viewWBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h2>_i18n{Tell us about yourself}</h2>
+		<div class="greyBox">
+		<div class="viewBox viewBoxR">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2>_i18n{Tell us about yourself}</h2>
 <?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
 		if (isset($message) && $message!=NULL){?>
 						<div class="itemOk"><?php echo $message; ?></div>
@@ -23,226 +26,229 @@
 							</ul>
 						</div>
 <?php	} ?>
-				<form action="registration.html" method="post" name="registration">
-					<div class="unitWBlock">
-						<div class="unitEqColumn">
-							<h3>_i18n{Company Data}</h3>
-							<div class="itemForm">
-								<label for="frmR1">_i18n{Company Name}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" id="frmR1" type="text" name="company" value="<? if(isset($_POST['company'])) echo $_POST['company']; ?>"/>
-								</span>
+						<form action="registration.html" method="post" name="registration">
+							<div class="unitABlock">
+								<div class="unitEqColumn">
+									<h3>_i18n{Company Data}</h3>
+									<div class="itemForm">
+										<label for="frmR1">_i18n{Company Name}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" id="frmR1" type="text" name="company" value="<? if(isset($_POST['company'])) echo $_POST['company']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR2">_i18n{Ust-ID}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" id="frmR2" type="text" name="vat" value="<? if(isset($_POST['vat'])) echo $_POST['vat']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR3">_i18n{Year}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" id="frmR3" type="text" name="company_year" value="<? if(isset($_POST['company_year'])) echo $_POST['company_year']; ?>"/>
+										</span>
+									</div>
+								</div>
+								<div class="unitEqColumn">
+									<h3>_i18n{Adsress Data}</h3>
+									<div class="itemForm">
+										<label for="frmR5">_i18n{Street}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" type="text" id="frmR5" name="address" value="<? if(isset($_POST['address'])) echo $_POST['address']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR6">_i18n{ZIP}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" type="text" id="frmR6" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR7">_i18n{Location}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" type="text" id="frmR7" name="location" value="<? if(isset($_POST['location'])) echo $_POST['location']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR8">_i18n{State}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" type="text" id="frmR8" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR9">_i18n{Country}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input class="inpTxt" type="text" id="frmR9" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
+										</span>
+									</div>
+								</div>
 							</div>
-							<div class="itemForm">
-								<label for="frmR2">_i18n{Ust-ID}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" id="frmR2" type="text" name="vat" value="<? if(isset($_POST['vat'])) echo $_POST['vat']; ?>"/>
-								</span>
+							<div class="unitABlock">
+								<div class="unitEqColumn">
+									<h3>_i18n{Personal Data}</h3>
+									<div class="itemForm">
+										<label for="frmR9">_i18n{Salutation}:<span class="itemReq">*</span></label>
+										<span class="itemData" id="frmR9" >
+											<select name="salutation">
+												<?php if ($_POST[UsersService::SALUTATION]==NULL || $_POST[UsersService::SALUTATION]==0){?>
+												<option value="0">_i18n{Please choose}</option>
+												<option value="1">_i18n{Mr.}</option>
+												<option value="2">_i18n{Ms.}</option>
+												<?php } else { 
+													if($_POST[UsersService::SALUTATION]==1) {?>
+															<option value="1">_i18n{Mr.}</option>
+															<option value="2">_i18n{Ms.}</option>
+														<?php } else { ?>
+															<option value="2">_i18n{Ms.}</option>
+															<option value="1">_i18n{Mr.}</option>
+												<?php } }  ?>
+											</select>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR10">_i18n{First Name}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR10" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR11">_i18n{Last Name}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR11" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR15">_i18n{Username}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="text" id="frmR15" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
+									</div>
+								</div>
+								<div class="unitEqColumn">
+									<h3>_i18n{Contact Data}</h3>
+									<div class="itemForm">
+										<label for="frmR12">_i18n{Your Email}:<span class="itemReq">*</span></label>
+										<span class="itemData">
+											<input type="text" id="frmR12" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR14">_i18n{Mobile phone}:</label>
+										<span class="itemData">
+											<input class="inpTxt" id="frmR14" type="text" name="phone" value="<? if(isset($_POST['phone'])) echo $_POST['phone']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR13">_i18n{Homepage}:</label>
+										<span class="itemData">
+											<input class="inpTxt" type="text"  id="frmR13" name="homepage" value="<? if(isset($_POST['homepage'])) echo $_POST['homepage']; ?>"/>
+										</span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR16">_i18n{Password}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="password" id="frmR16" class="inpTxt" name="password"/></span>
+									</div>
+									<div class="itemForm">
+										<label for="frmR17">_i18n{Repeat Password}:<span class="itemReq">*</span></label>
+										<span class="itemData"><input type="password" id="frmR17" class="inpTxt" name="confirm_password"/></span>
+									</div>
+								</div>
 							</div>
-							<div class="itemForm">
-								<label for="frmR3">_i18n{Year}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" id="frmR3" type="text" name="company_year" value="<? if(isset($_POST['company_year'])) echo $_POST['company_year']; ?>"/>
-								</span>
+							<h2>Select plan</h2>
+							<div class="unitABlock unitABlockLast">
+								<table cellpadding="0" cellspacing="0" class="viewPlan">
+									<tr>
+										<th></th>
+										<td class="itemStar">
+											<div class="itemInStar itemOne">
+												<h4>one star</h4>
+												<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
+												<p>_i18n{excluding VAT}</p>
+												<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
+												<input type="radio" checked="checked" name="plan_id" value="1" />
+											</div>
+										</td>
+										<td class="itemStar">
+											<div class="itemInStar itemTwo">
+												<h4>two star</h4>
+												<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
+												<p>_i18n{excluding VAT}</p>
+												<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
+												<input type="radio" name="plan_id" value="2" />
+											</div>
+										</td>
+										<td class="itemStar">
+											<div class="itemInStar itemThree">
+												<h4>three star</h4>
+												<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
+												<p>_i18n{excluding VAT}</p>
+												<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
+												<input type="radio" name="plan_id" value="3" />
+											</div>
+										</td>
+										<td class="itemStar">
+											<div class="itemInStar itemFour">
+												<h4>four star</h4>
+												<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
+												<p>_i18n{excluding VAT}</p>
+												<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
+												<input type="radio" name="plan_id" value="4" />
+											</div>
+										</td>
+										<td class="itemStar">
+											<div class="itemInStar itemFive">
+												<h4>five star</h4>
+												<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
+												<p>_i18n{excluding VAT}</p>
+												<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
+												<input type="radio" name="plan_id" value="5" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>Features</th>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<th>_i18n{Tender to}</th>
+										<?php foreach($plans as $key=>$plan) {?>
+										<td><?php echo $plan[PlanService::TENDER_TO]!=0 ? $plan[PlanService::TENDER_TO] : '_i18n{more than} ' . $plans[$key-1][PlanService::TENDER_TO]; ?></td>
+										<?php } ?>
+									</tr>
+									<tr>
+										<th>_i18n{Bargains}</th>
+										<?php foreach($plans as $key=>$plan) { ?>
+										<td><?php echo $plan[PlanService::BARGAINS]==0 ? "_i18n{no}" : "_i18n{included}" ?></td>
+										<?php } ?>
+									</tr>
+									<tr>
+										<th>_i18n{Standard Business Directory}</th>
+										<td>_i18n{included}</td>
+										<td>_i18n{included}</td>
+										<td>_i18n{included}</td>
+										<td>_i18n{included}</td>
+										<td>_i18n{included}</td>
+									</tr>
+								</table>
+								<div class="unitSnColumn">
+									<div class="itemForm">
+										<span class="itemData">
+											<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
+											<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="/user-agreement.html" class="nnn" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+										</span>
+									</div>
+								</div>
+								<div class="popup" style="background: red; display: none;">test</div>
+								<div class="unitBtn">
+									<input type="hidden" name="role" value="<?php echo $role ?>"/>
+									<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+									<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
+								</div>
 							</div>
-						</div>
-						<div class="unitEqColumn">
-							<h3>_i18n{Adsress Data}</h3>
-							<div class="itemForm">
-								<label for="frmR5">_i18n{Street}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" type="text" id="frmR5" name="address" value="<? if(isset($_POST['address'])) echo $_POST['address']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR6">_i18n{ZIP}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" type="text" id="frmR6" name="zip" value="<? if(isset($_POST['zip'])) echo $_POST['zip']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR7">_i18n{Location}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" type="text" id="frmR7" name="location" value="<? if(isset($_POST['location'])) echo $_POST['location']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR8">_i18n{State}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" type="text" id="frmR8" name="region" value="<? if(isset($_POST['region'])) echo $_POST['region']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR9">_i18n{Country}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input class="inpTxt" type="text" id="frmR9" name="country" value="<? if(isset($_POST['country'])) echo $_POST['country']; ?>"/>
-								</span>
-							</div>
-						</div>
+						</form>
+						<?php } ?>
 					</div>
-					<div class="unitWBlock">
-						<div class="unitEqColumn">
-							<h3>_i18n{Personal Data}</h3>
-							<div class="itemForm">
-								<label for="frmR9">_i18n{Salutation}:<span class="itemReq">*</span></label>
-								<span class="itemData" id="frmR9" >
-									<select name="salutation">
-										<?php if ($_POST[UsersService::SALUTATION]==NULL || $_POST[UsersService::SALUTATION]==0){?>
-										<option value="0">_i18n{Please choose}</option>
-										<option value="1">_i18n{Mr.}</option>
-										<option value="2">_i18n{Ms.}</option>
-										<?php } else { 
-											if($_POST[UsersService::SALUTATION]==1) {?>
-													<option value="1">_i18n{Mr.}</option>
-													<option value="2">_i18n{Ms.}</option>
-												<?php } else { ?>
-													<option value="2">_i18n{Ms.}</option>
-													<option value="1">_i18n{Mr.}</option>
-										<?php } }  ?>
-									</select>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR10">_i18n{First Name}:<span class="itemReq">*</span></label>
-								<span class="itemData"><input type="text" id="frmR10" class="inpTxt" name="firstname" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"/></span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR11">_i18n{Last Name}:<span class="itemReq">*</span></label>
-								<span class="itemData"><input type="text" id="frmR11" class="inpTxt" name="lastname" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"/></span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR15">_i18n{Username}:<span class="itemReq">*</span></label>
-								<span class="itemData"><input type="text" id="frmR15" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
-							</div>
-						</div>
-						<div class="unitEqColumn">
-							<h3>_i18n{Contact Data}</h3>
-							<div class="itemForm">
-								<label for="frmR12">_i18n{Your Email}:<span class="itemReq">*</span></label>
-								<span class="itemData">
-									<input type="text" id="frmR12" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR14">_i18n{Mobile phone}:</label>
-								<span class="itemData">
-									<input class="inpTxt" id="frmR14" type="text" name="phone" value="<? if(isset($_POST['phone'])) echo $_POST['phone']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR13">_i18n{Homepage}:</label>
-								<span class="itemData">
-									<input class="inpTxt" type="text"  id="frmR13" name="homepage" value="<? if(isset($_POST['homepage'])) echo $_POST['homepage']; ?>"/>
-								</span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR16">_i18n{Password}:<span class="itemReq">*</span></label>
-								<span class="itemData"><input type="password" id="frmR16" class="inpTxt" name="password"/></span>
-							</div>
-							<div class="itemForm">
-								<label for="frmR17">_i18n{Repeat Password}:<span class="itemReq">*</span></label>
-								<span class="itemData"><input type="password" id="frmR17" class="inpTxt" name="confirm_password"/></span>
-							</div>
-						</div>
-					</div>
-					<h2>Select plan</h2>
-					<div class="unitWBlock unitLast">
-						<table cellpadding="0" cellspacing="0" class="viewPlan">
-							<tr>
-								<th></th>
-								<td class="itemStar">
-									<div class="itemInStar itemOne">
-										<h4>one star</h4>
-										<p><?php echo $plans[0][PlanService::PLAN_PRICE]?>.- Euro</p>
-										<p>_i18n{excluding VAT}</p>
-										<p class="itemInfo"><?php echo $plans[0][PlanService::PLAN_DESC]?></p>
-										<input type="radio" checked="checked" name="plan_id" value="1" />
-									</div>
-								</td>
-								<td class="itemStar">
-									<div class="itemInStar itemTwo">
-										<h4>two star</h4>
-										<p><?php echo $plans[1][PlanService::PLAN_PRICE]?>.- Euro</p>
-										<p>_i18n{excluding VAT}</p>
-										<p class="itemInfo"><?php echo $plans[1][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan_id" value="2" />
-									</div>
-								</td>
-								<td class="itemStar">
-									<div class="itemInStar itemThree">
-										<h4>three star</h4>
-										<p><?php echo $plans[2][PlanService::PLAN_PRICE]?>.- Euro</p>
-										<p>_i18n{excluding VAT}</p>
-										<p class="itemInfo"><?php echo $plans[2][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan_id" value="3" />
-									</div>
-								</td>
-								<td class="itemStar">
-									<div class="itemInStar itemFour">
-										<h4>four star</h4>
-										<p><?php echo $plans[3][PlanService::PLAN_PRICE]?>.- Euro</p>
-										<p>_i18n{excluding VAT}</p>
-										<p class="itemInfo"><?php echo $plans[3][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan_id" value="4" />
-									</div>
-								</td>
-								<td class="itemStar">
-									<div class="itemInStar itemFive">
-										<h4>five star</h4>
-										<p><?php echo $plans[4][PlanService::PLAN_PRICE]?>.- Euro</p>
-										<p>_i18n{excluding VAT}</p>
-										<p class="itemInfo"><?php echo $plans[4][PlanService::PLAN_DESC]?></p>
-										<input type="radio" name="plan_id" value="5" />
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>Features</th>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<th>_i18n{Tender to}</th>
-								<?php foreach($plans as $key=>$plan) {?>
-								<td><?php echo $plan[PlanService::TENDER_TO]!=0 ? $plan[PlanService::TENDER_TO] : '_i18n{more than} ' . $plans[$key-1][PlanService::TENDER_TO]; ?></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<th>_i18n{Bargains}</th>
-								<?php foreach($plans as $key=>$plan) { ?>
-								<td><?php echo $plan[PlanService::BARGAINS]==0 ? "_i18n{no}" : "_i18n{included}" ?></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<th>_i18n{Standard Business Directory}</th>
-								<td>_i18n{included}</td>
-								<td>_i18n{included}</td>
-								<td>_i18n{included}</td>
-								<td>_i18n{included}</td>
-								<td>_i18n{included}</td>
-							</tr>
-						</table>
-						<div class="unitSnColumn">
-							<div class="itemForm">
-								<span class="itemData">
-									<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
-									<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="/user-agreement.html" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
-								</span>
-							</div>
-						</div>
-						<div class="unitBtn">
-							<input type="hidden" name="role" value="<?php echo $role ?>"/>
-							<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
-							<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
-						</div>
-					</div>
-				</form>
-				<?php } ?>
+				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- fix gradient on -->
 		<div class="lineHide"></div>

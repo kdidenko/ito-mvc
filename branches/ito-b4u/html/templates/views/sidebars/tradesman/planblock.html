@@ -2,26 +2,30 @@
 $plan = $mvc->getObject(PlanService::CRNT_PLAN);
 $other_plan = $mvc->getObject(PlanService::OTHER_PLAN);
 ?>
-<div class="viewGBox">
-	<div class="angleT"></div>
-		<div class="bodyBox">
-			<h2>_i18n{Plan}</h2>
-			<div class="viewPackage">
-			<form action="my-plan.html" method="post">
-				<p>_i18n{Current plan}: <span class="itemCurrent"><?php echo $plan ?></span></p>
-				<?php if(isset($other_plan) && count($other_plan)>0 && $other_plan!=NULL){?>
-				<p>_i18n{Upgrade plan to}: </p>
-				<p>
-					<select name="plan">
-<?php 				foreach ($other_plan as $key=>$value) { ?>
-						<option value="<?php echo $value[PlanService::ID]; ?>"><?php echo $value[PlanService::PLAN_NAME]; ?></option>
-<?php 				} ?>
-					</select>
-					<button type="submit" name="change_plan"><span><strong>_i18n{Change}</strong></span></button>
-				</p>
-				<?php } ?>
-			</form>
+<div class="viewBox viewBoxC">
+	<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+	<div class="cL">
+		<div class="cR">
+			<div class="bodyBox">
+				<h2>_i18n{Plan}</h2>
+				<div class="viewPackage">
+					<form action="my-plan.html" method="post">
+						<p>_i18n{Current plan}: <span class="itemCurrent"><?php echo $plan ?></span></p>
+						<?php if(isset($other_plan) && count($other_plan)>0 && $other_plan!=NULL){?>
+						<p>_i18n{Upgrade plan to}: </p>
+						<p>
+							<select name="plan">
+		<?php 				foreach ($other_plan as $key=>$value) { ?>
+								<option value="<?php echo $value[PlanService::ID]; ?>"><?php echo $value[PlanService::PLAN_NAME]; ?></option>
+		<?php 				} ?>
+							</select>
+							<button type="submit" name="change_plan"><span><strong>_i18n{Change}</strong></span></button>
+						</p>
+						<?php } ?>
+					</form>
+				</div>
 			</div>
 		</div>
-	<div class="angleB"></div>
+	</div>
+	<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 </div>

@@ -4,11 +4,11 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 <form action="my-bargains.html" method="post">
 <ul class="viewIList">
 	<li class="itemNewB"><a href="/new-bargain.html" title="New">New</a></li>
-	<li class="itemArhiv"><button name="archiveAll" onclick="return confirm('_i18n{You sure you want to archive?}');" >_i18n{Archive}</button></li>
+	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{My current Bargains}</h2>
-<div class="unitWBlock">
-	<table cellpadding="0" cellspacing="0">
+<div class="unitABlock">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>
@@ -49,13 +49,9 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 	</table>
 	<div class="unitBtn"></div>
 </div>
-
-<ul class="viewIList">
-	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
-</ul>
 <h2>_i18n{Bargains Archive}</h2>
-<div class="unitWBlock unitLast">
-	<table cellpadding="0" cellspacing="0">
+<div class="unitABlock unitABlockLast">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>

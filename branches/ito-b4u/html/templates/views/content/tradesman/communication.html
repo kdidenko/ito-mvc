@@ -8,7 +8,7 @@ $data = $mvc->getObject(ContentController::RESULT);
 $errors = $mvc->getObject(ContentController::ERROR);
 ?>
 <h2>_i18n{My Notification}</h2>
-<div class="unitWBlock">
+<div class="unitABlock">
 	<div class="unitInfo unitRtf">
 		<?php echo StaticBlockService::getBlock(21); ?>
 	</div>
@@ -17,25 +17,23 @@ $errors = $mvc->getObject(ContentController::ERROR);
 	<li class="itemNewB"><a href="#" title="_i18n{New notification}">_i18n{New notification}</a></li>
 </ul>
 <h2>Notification</h2>
-<?php if (isset($status )){?>
-	<div class="itemOk">
-		<ul>
-			<li>_i18n{Successfully Saved}</li>
-		</ul>
-	</div>
-<?php } ?>
-<?php if (isset($errors )){?>
-	<div class="itemWarning">
-		<ul>
-			<li><?php echo $errors?></li>
-		</ul>
-	</div>
-<?php } ?>
-<div class="unitWBlock unitLast">
-	<div class="unitNotifHide">
+<div class="unitABlock unitABlockLast">
+	<?php if (isset($status )){?>
+		<div class="itemOk">
+			<p>_i18n{Successfully Saved}</p>
+		</div>
+	<?php } ?>
+	<?php if (isset($errors )){?>
+		<div class="itemWarning">
+			<ul>
+				<li><?php echo $errors?></li>
+			</ul>
+		</div>
+	<?php } ?>
+	<div class="unitNtHide">
 		<!-- sample on -->
-		<div class="unitNotif">
-			<div class="unitP">
+		<div class="unitNt">
+			<div class="innerP">
 				<div class="itemForm itemFirst">
 					<label for="frmCc">_i18n{Category}:</label>
 					<div class="itemData">
@@ -80,13 +78,15 @@ $errors = $mvc->getObject(ContentController::ERROR);
 		<!-- sample off -->
 	</div>
 	<form action="/communication.html" method="post">
-		<div class="unitNotifEmpty hideElement">_i18n{Empty notification}</div>
+		<div class="unitNtEmpty hideElement">
+			<p>_i18n{Empty notification}</p>
+		</div>
 <?php 
 	if(isset($data) && $data!=NULL && count($data)>0) {
 		foreach($data as $data_key=>$remind){
 ?>
-		<div class="unitNotif">
-			<div class="unitP">
+		<div class="unitNt">
+			<div class="innerP">
 				<div class="itemForm itemFirst">
 					<label for="frmCc<?php echo $data_key; ?>">_i18n{Category}:</label>
 					<div class="itemData">
@@ -133,21 +133,18 @@ $errors = $mvc->getObject(ContentController::ERROR);
 			</div>
 		</div>
 <?php } } ?>
-		<dl class="viewRList">
+		<dl class="viewNtList">
 			<dt>Region:</dt>
 			<dd>
 				<ul>
 <?php foreach($regions as $key=>$region){ ?> 
 					<li>
 						<input 
-						
 						<?php if (isset($remind_regions)&&$remind_regions!=NULL ){ foreach($remind_regions as $key=>$remind_regions_item){ ?> 
-						<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked'  : NULL; }}?>
+						<?php echo $remind_regions_item[RemindService::REGION_ID]==$region[RegionService::ID] ? 'checked' : NULL; }}?>
 						
 						id="frmR<?php echo $region[RegionService::ID]; ?>" type="checkbox" class="inpChk" name="region[<?php echo $region[RegionService::ID]; ?>]" value="<?php echo $region[RegionService::ID]; ?>"/>
-						<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label> 
-						
-						
+						<label for="frmR<?php echo $region[RegionService::ID]; ?>"><?php echo $region[RegionService::REGION_NAME]; ?></label>
 					</li>
 <?php } ?>
 				</ul>

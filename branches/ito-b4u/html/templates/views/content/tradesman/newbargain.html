@@ -7,7 +7,7 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 ?>
 <h2>_i18n{New Bargain}</h2>
 <form action="new-bargain.html" method="post" enctype="multipart/form-data">
-<div class="unitWBlock">
+<div class="unitABlock">
 <?php if (isset($errors )){?>
 	<div class="itemWarning">
 		<ul>
@@ -28,7 +28,9 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 				<textarea class="areaTxt" name="bargain_desc"><? if(isset($_POST['bargain_desc'])) echo $_POST['bargain_desc']; ?></textarea>
 			</div>
 		</div>
-		<div class="itemForm itemEq">
+	</div>
+	<div class="unitEqColumn">
+		<div class="itemForm">
 			<label>_i18n{Category}:</label>
 			<div class="itemData">
 				<select name="category_id" class="gCategory">
@@ -52,6 +54,8 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 				</select>
 			</div>
 		</div>
+	</div>
+	<div class="unitEqColumn">
 		<div class="itemForm">
 			<label>_i18n{Usual Price}:</label>
 			<div class="itemData">
@@ -64,6 +68,8 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 				<input class="inpTxt" type="text" name="bargain_price" value="<? if(isset($_POST['bargain_price'])) echo $_POST['bargain_price']; ?>"/>
 			</div>
 		</div>
+	</div>
+	<div class="unitSnColumn">
 		<div class="itemForm">
 			<label>Number:</label>
 			<div class="itemData">
@@ -78,7 +84,7 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 		</div>
 	</div>
 </div>
-<div class="unitWBlock unitLast">
+<div class="unitABlock unitABlockLast">
 	<div class="unitEqColumn">
 		<div class="itemForm">
 			<label>_i18n{Country}:</label>
@@ -112,7 +118,6 @@ $errors = $mvc->getObject(TradesmanContentController::ERROR);
 		</div>
 	</div>
 	<div class="unitEqColumn">
-
 		<div class="itemForm">
 			<label>_i18n{ZIP}:</label>
 			<div class="itemData">

@@ -7,39 +7,43 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="itemFace"></div>
 		<div class="itemHand"></div>
 		<!-- box on -->
-		<div class="viewRBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h2>Jetzt Angebote einholen</h2>
-				<div class="unitSearch">
-					<form action="">
-						<p>
-							<select name="category" class="gCategory">
-<?php					if (isset($categories) && $categories!=NULL){ 
-							foreach($categories as $key=>$category){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 						} 
-						} ?>
-							</select>
-							<label>Hauptkategorie?</label>
-						</p>
-						<p>
-							<select name="subcategory" class="gSubCategory">
-<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-							foreach($subcategories as $key=>$subcategory){ ?>
-								<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 						}
-						} ?>
-							</select>
-							<label>Unterkategorie?</label>
-						</p>
-						<p class="itemBtn">
-							<button type="submit"><span><strong>Angebot kostenlos holen!</strong></span></button>
-						</p>
-					</form>
+		<div class="viewBox viewBoxB">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2>Jetzt Angebote einholen</h2>
+						<div class="unitSearch">
+							<form action="">
+								<p>
+									<select name="category" class="gCategory">
+		<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+		<?php 						} 
+								} ?>
+									</select>
+									<label>Hauptkategorie?</label>
+								</p>
+								<p>
+									<select name="subcategory" class="gSubCategory">
+		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+									foreach($subcategories as $key=>$subcategory){ ?>
+										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+		<?php 						}
+								} ?>
+									</select>
+									<label>Unterkategorie?</label>
+								</p>
+								<p class="itemBtn">
+									<button type="submit"><span><strong>Angebot kostenlos holen!</strong></span></button>
+								</p>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- box off -->
 		<!-- list on -->
@@ -56,108 +60,95 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		</div>
 		<!-- list off -->
 		<!-- box on -->
-		<div class="viewRBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h2>So finden Sie das beste Angebot!</h2>
-				<div class="unitStep">
-					<ol>
-						<li>
-							<span><img src="images/nbrFind01.gif" alt="Ihren Auftrag kostenlos eintragen" /></span>
-							<span>Ihren Auftrag kostenlos eintragen</span>
-						</li>
-						<li>
-							<span><img src="images/nbrFind02.gif" alt="Angebote vergleichen" /></span>
-							<span>Angebote vergleichen</span>
-						</li>
-						<li>
-							<span><img src="images/nbrFind03.gif" alt="Auftrag vergeben" /></span>
-							<span>Auftrag vergeben</span>
-						</li>
-					</ol>
+		<div class="viewBox viewBoxB">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2>So finden Sie das beste Angebot!</h2>
+						<div class="unitStep">
+							<ol>
+								<li>
+									<span><img src="images/nbrFind01.gif" alt="Ihren Auftrag kostenlos eintragen" /></span>
+									<span>Ihren Auftrag kostenlos eintragen</span>
+								</li>
+								<li>
+									<span><img src="images/nbrFind02.gif" alt="Angebote vergleichen" /></span>
+									<span>Angebote vergleichen</span>
+								</li>
+								<li>
+									<span><img src="images/nbrFind03.gif" alt="Auftrag vergeben" /></span>
+									<span>Auftrag vergeben</span>
+								</li>
+							</ol>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- box off -->
 		<!-- small box on -->
-		<div class="viewGBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h3>So geht's Video</h3>
-				<div class="unitVideo">
-					<div class="itemVideo"><img src="images/cnt/contentImg09.gif" alt="Video" /></div>
+		<div class="viewBox viewBoxC">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h3>So geht's Video</h3>
+						<div class="unitVideo">
+							<div class="itemVideo"><img src="images/cnt/contentImg09.gif" alt="Video" /></div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- small box off -->
 		<!-- two lists on -->
-		<!-- 
 		<div class="viewTList">
+			<?php	if (isset($categories) && $categories!=NULL){ 
+				$count = count($categories);
+				$middle = $count/2;
+			?>
 			<ul>
-				<li><a href="#" title="Dachdecker (67)">Dachdecker (67)</a></li>
-				<li><a href="#" title="Grafiker (54)">Grafiker (54)</a></li>
-				<li><a href="#" title="Heizungsfirmen (53)">Heizungsfirmen (53)</a></li>
-				<li><a href="#" title="Putzinstitute (53)">Putzinstitute (53)</a></li>
-				<li><a href="#" title="Umzugsunternehmen (49)">Umzugsunternehmen (49)</a></li>
-				<li><a href="#" title="Küchenbauer (48)">Küchenbauer (48)</a></li>
-				<li><a href="#" title="Treuhandbüro (45)">Treuhandbüro (45)</a></li>
-				<li><a href="#" title="Versicherungen (40)">Versicherungen (40)</a></li>
-			</ul>
-			<ul>
-				<li><a href="#" title="Musikunterricht (39)">Musikunterricht (39)</a></li>
-				<li><a href="#" title="Steuerberatung (38)">Steuerberatung (38)</a></li>
-				<li><a href="#" title="Partyservice (25)">Partyservice (25)</a></li>
-				<li><a href="#" title="Maler (24)">Maler (24)</a></li>
-				<li><a href="#" title="Maurer (23)">Maurer (23)</a></li>
-				<li><a href="#" title="Bodenleger (22)">Bodenleger (22)</a></li>
-				<li><a href="#" title="Elektriker (20)">Elektriker (20)</a></li>
-				<li><a href="#" title="VTelefonspezialist (19)">VTelefonspezialist (19)</a></li>
-				<li><a href="#" title="IT Service (15)">IT Service (15)</a></li>
-			</ul>
-		</div>
-		 -->
-		<div class="viewTList">
-<?php	if (isset($categories) && $categories!=NULL){ 
-			$count = count($categories);
-			$middle = $count/2;
-?> 
-			<ul>
-<?php		foreach($categories as $key=>$category){
+			<?php foreach($categories as $key=>$category){
 				if ($middle==$key) { ?></ul><ul><?php } ?>
 				<li><a href="#<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
-<?php		} ?> 
+				<?php } ?> 
 			</ul>
-<?php	} ?>
+			<?php	} ?>
 		</div>
 		<!-- two lists off -->
 		<!-- small box on -->
-		<div class="viewGBox">
-			<div class="angleT"></div>
-			<div class="bodyBox">
-				<h3>Branchenverzeichnis</h3>
-				<div class="unitYellow">
-					<form action="">
-						<p>
-							<label>Branche?</label>
-							<select>
-								<option>&nbsp;</option>
-							</select>
-						</p>
-						<p>
-							<label>Region?</label>
-							<select>
-								<option>&nbsp;</option>
-							</select>
-						</p>
-						<p class="itemBtn">
-							<button type="submit"><span><strong>Suchen</strong></span></button>
-						</p>
-					</form>
+		<div class="viewBox viewBoxC">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h3>Branchenverzeichnis</h3>
+						<div class="unitYellow">
+							<form action="">
+								<p>
+									<label>Branche?</label>
+									<select>
+										<option>&nbsp;</option>
+									</select>
+								</p>
+								<p>
+									<label>Region?</label>
+									<select>
+										<option>&nbsp;</option>
+									</select>
+								</p>
+								<p class="itemBtn">
+									<button type="submit"><span><strong>Suchen</strong></span></button>
+								</p>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="angleB"></div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 		<!-- small box off -->
 		<!-- fix gradient on -->

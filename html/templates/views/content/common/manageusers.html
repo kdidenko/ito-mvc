@@ -1,38 +1,39 @@
 <h2>Users</h2>
-<div class="unitWBlock unitLast">
-	<dl class="viewUList">
-		<dt>Users List</dt>
-		<dd><a <?php echo !isset($_REQUEST[UsersService::ROLE]) ? "class='itemActive'" : NULL;?> href="/manage-users.html">_i18n{All}</a></dd>
-		<dd><a <?php if(isset($_REQUEST[UsersService::ROLE]))
-			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_AR ? "class='itemActive'" : NULL;?> href="?role=AR">_i18n{Administrators}</a></dd>
-		<dd><a <?php if(isset($_REQUEST[UsersService::ROLE]))
-			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_BR ? "class='itemActive'" : NULL;?>  href="?role=BR">_i18n{Bookkeeper}</a></dd>
-		<dd><a <?php if(isset($_REQUEST[UsersService::ROLE]))
-			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_PR ? "class='itemActive'" : NULL;?>  href="?role=PR">_i18n{Promoter}</a></dd>
-		<dd><a <?php if(isset($_REQUEST[UsersService::ROLE]))
-			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_TR ? "class='itemActive'" : NULL;?>  href="?role=TR">_i18n{Tradesman}</a></dd>
-		<dd><a <?php if(isset($_REQUEST[UsersService::ROLE]))
-			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_UR ? "class='itemActive'" : NULL;?>  href="?role=UR">_i18n{Users}</a></dd>
-		<dd></dd>
-	</dl>
+<div class="unitABlock unitABlockLast">
+	<ul class="viewUList">
+		<!--li>Users List</li-->
+		<li><a <?php echo !isset($_REQUEST[UsersService::ROLE]) ? "class='itemActive'" : NULL;?> href="/manage-users.html">_i18n{All}</a></li>
+		<li><a <?php if(isset($_REQUEST[UsersService::ROLE]))
+			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_AR ? "class='itemActive'" : NULL;?> href="?role=AR">_i18n{Administrators}</a></li>
+		<li><a <?php if(isset($_REQUEST[UsersService::ROLE]))
+			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_BR ? "class='itemActive'" : NULL;?>  href="?role=BR">_i18n{Bookkeeper}</a></li>
+		<li><a <?php if(isset($_REQUEST[UsersService::ROLE]))
+			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_PR ? "class='itemActive'" : NULL;?>  href="?role=PR">_i18n{Promoter}</a></li>
+		<li><a <?php if(isset($_REQUEST[UsersService::ROLE]))
+			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_TR ? "class='itemActive'" : NULL;?>  href="?role=TR">_i18n{Tradesman}</a></li>
+		<li><a <?php if(isset($_REQUEST[UsersService::ROLE]))
+			echo $_REQUEST[UsersService::ROLE]==UsersService::ROLE_UR ? "class='itemActive'" : NULL;?>  href="?role=UR">_i18n{Users}</a></li>
+	</ul>
 	<?php
 		$scroller = $mvc->getObject ( UsersService::SCROLLER );		
 		$message = $mvc->getObject ( ContentController::RESULT );
 		if (isset ( $message ) and count($message) != 0) { 
 	?>
-	<dl class="viewUList">
+	<ul class="viewUList">
 		<?php foreach($scroller as $key => $value){ ?>
-			<dd><a href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
-				echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a></dd>
+			<li><a href="?<?php echo isset($_GET[UsersService::ROLE]) ? "role=".$_GET[UsersService::ROLE]."&" : NULL; 
+				echo "scroller=".$value[UsersService::SCROLLER];?>"><?php echo $value[UsersService::SCROLLER];?></a></li>
 			<?php } ?>
-	</dl>
+	</ul>
 	<?php
 	$forward = $mvc->getObject('forward');
 	if (isset($forward)){
 	?>
-	<span class="message warning">_i18n{Successfully Saved.}</span>
+	<div class="itemOk">
+		<p>_i18n{Successfully Saved.}</p>
+	</div>
 	<?php } ?>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th>_i18n{User Name}:</th>

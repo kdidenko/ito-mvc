@@ -2,7 +2,7 @@
 $block = $mvc->getObject(StaticBlockService::STATIC_BLOCK);
 ?>
 <h2>_i18n{New Block}</h2>
-<div class="unitWBlock unitLast">
+<div class="unitABlock unitABlockLast">
 	<form action="/new-block.html" method="POST">
 		<div class="unitSnColumn">
 			<div class="itemForm">
@@ -22,12 +22,3 @@ $block = $mvc->getObject(StaticBlockService::STATIC_BLOCK);
 		</div>
 	</form>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		//$('.userNav a').popupAn();
-		$('.areaTxt').cleditor({
-			width:535, height:160,
-			controls:'bold italic underline | color highlight removeformat | bullets numbering | alignleft center alignright justify | undo redo | link unlink' //+ '| cut copy paste pastetext'
-		});
-	})
-</script>

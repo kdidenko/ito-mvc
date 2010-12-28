@@ -1,12 +1,16 @@
+<h2>New user</h2>
+<div class="unitABlock unitABlockLast">
 <?php
 $forward = $mvc->getObject('forward');
 if (isset($forward)){
 ?>
-	<span class="message warning">_i18n{User should get email with registration confirmation.}</span>
+	<div class="itemOk">
+		<p>_i18n{User should get email with registration confirmation.}</p>
+	</div>
 <?php } else { ?>
 <?php	$errors = $mvc->getObject(UsersService::ERROR);
 		if (isset($errors)){?>
-			<div class="error">
+			<div class="itemWarning">
 				<ul>
 <?php			foreach ($errors as $key => $value){
 					echo '<li>' . $value . '</li>'; }?>
@@ -14,20 +18,49 @@ if (isset($forward)){
 			</div>
 <?php 	} ?>
 	<form class="edit" action="new-user.html" method="post">
-		<span>_i18n{User Name}:</span>
-			<input type="text" name="username" id="username" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>"></input>
+		<div class="unitEqColumn">
+			<div class="itemForm">
+				<label>_i18n{User Name}:</label>
+				<div class="itemData">
+					<input type="text" name="username" class="inpTxt" size="35" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" />
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{First Name}:</label>
+				<div class="itemData">
+					<input type="text" name="firstname" class="inpTxt" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>" />
+				</div>
+			</div>
+			
+			<div class="itemForm">
+				<label>_i18n{Last Name}:</label>
+				<div class="itemData">
+					<input type="text" name="lastname" class="inpTxt" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>" />
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Email}:</label>
+				<div class="itemData">
+					<input type="text" name="email" class="inpTxt" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>" />
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Role}:</label>
+				<div class="itemData">
+					<input type="text" name="firstname" class="inpTxt" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>" />
+				</div>
+			</div>
+		</div>
+
+</div>
+		<span></span>
+			</input>
 			<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{First Name}:</span>
-			<input type="text" name="firstname" id="firstname" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>"></input>
+		<span></span>
+			</input>
 			<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{Last Name}:</span>
-			<input type="text" name="lastname" id="lastname" size="35" value="<? if(isset($_POST['lastname'])) echo $_POST['lastname']; ?>"></input>
-			<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{Email}:</span>
-			<input type="text" name="email" id="email" size="35" value="<? if(isset($_POST['reg_email'])) echo $_POST['reg_email']; ?>"></input>
-			<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{Role}:</span>
-			<select name="role" >
+		<span></span>
+			<select name="role">
 				<option value="<?php echo UsersService::ROLE_PR ?>">_i18n{Promoter}</option>
 				<option value="<?php echo UsersService::ROLE_BR ?>">_i18n{Bookkeeper}</option>
 			</select>

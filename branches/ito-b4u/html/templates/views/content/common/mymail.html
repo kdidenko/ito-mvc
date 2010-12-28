@@ -19,8 +19,8 @@ $trash = $mvc->getObject(MailService::TRASH);
 	<li class="itemDelete"><button name="delAll" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button></li>
 </ul>
 <h2>_i18n{Inbox}</h2>
-<div class="unitWBlock">
-	<table cellpadding="0" cellspacing="0">
+<div class="unitABlock">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>
@@ -51,8 +51,8 @@ $trash = $mvc->getObject(MailService::TRASH);
 	<div class="unitBtn"></div>
 </div>
 <h2>_i18n{Outbox}</h2>
-<div class="unitWBlock">
-	<table cellpadding="0" cellspacing="0">
+<div class="unitABlock">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>
@@ -83,8 +83,8 @@ $trash = $mvc->getObject(MailService::TRASH);
 	<div class="unitBtn"></div>
 </div>
 <h2>_i18n{Trash}</h2>
-<div class="unitWBlock unitLast">
-	<table cellpadding="0" cellspacing="0">
+<div class="unitWBlock unitABlockLast">
+	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
 				<th class="itemChk"></th>

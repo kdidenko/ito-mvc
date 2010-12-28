@@ -1,22 +1,23 @@
-body {margin:0; padding:0; text-align:center; font-family:"Lucida Sans", "Lucida Grande", Arial, sans-serif; font-size:12px; line-height:143%; background:#fff; color:#393939; position:relative}
-
+body {margin:0; padding:0; text-align:center; font-family:"Trebuchet MS", Arial, sans-serif; font-size:13px; line-height:143%; background:#fff; color:#393939; position:relative; min-width:970px}
 h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style:none}
 img {border:none}
 a {color:#393939; text-decoration:none}
 a:hover {text-decoration:underline}
-input, select, button, textarea {font-family:"Lucida Sans", "Lucida Grande", Arial, sans-serif; font-size:12px; padding:0; margin:0; vertical-align:middle}
-input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px; width:182px}
-select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:200px}
-textarea {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:3px}
+
+input, select, button, textarea {font-family:"Trebuchet MS", Arial, sans-serif; font-size:13px; padding:0; margin:0; vertical-align:middle}
+input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:182px}
+select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:1px 3px; width:200px}
+textarea {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px}
 input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
 	* html input.inpChk {margin:1px 0 0 0}
 button::-moz-focus-inner {border:0; padding:0}
 button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
 	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
-	button span strong, a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:23px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:1em}
+	button span strong, a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:21px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:13px}
 	a.linkBtn:hover {color:#fff; text-decoration:none}
 .hideElement {display:none}
 
+/* ------------------ feedback style ------------------ */
 .feedbackLink {position:fixed; left:0; top:50%; z-index:500}
 	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
 /* fix for IE6 */
@@ -24,53 +25,71 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	* html .feedbackLink a {background-image:url(../images/feedbackBg.gif)}
 
 .wrapInner {width:970px; margin:0 auto; text-align:left; overflow:hidden}
-/* banner style */
+/* ------------------ banner style ------------------ */
 .wrapBanner {position:absolute; right:0; top:303px; width:100%; height:665px; visibility:hidden; overflow:hidden}
 	.wrapBanner .wrapInner {position:absolute; left:50%; visibility:visible; width:auto; margin:0 0 0 538px}
-/* header style */
+/* ------------------ header style ------------------ */
 .wrapHeader {height:175px}
 	.wrapHeader .unitLogo {float:left; padding:25px 0 25px 10px}
 	.wrapHeader .unitSlogan {float:right; width:680px; height:175px; background:url(../images/headerSloganBg.gif) no-repeat 0 20px}
 	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
-/* navigation style */
+/* ------------------ top navigation style ------------------ */
 .wrapNav {background:url(../images/navBg.png) repeat-x 0 1px; position:relative; z-index:100}
 	.wrapNav .wrapInner {padding:0 5px 0 40px; width:925px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
 .mainNav {float:left; overflow:hidden; height:37px}
-	.mainNav li {float:left; font-size:14px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
-	.mainNav li a {float:left; padding:7px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
+	.mainNav li {float:left; font-size:15px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101}
+	.mainNav li a {float:left; padding:6px 13px; background:url(../images/navItemBg.png) no-repeat 0 center; color:#fff; text-decoration:none}
 	.mainNav li a:hover {background:#850208; text-decoration:none}
 	.mainNav li.itemActive {padding:0; z-index:102}
 	.mainNav li.itemActive a, .mainNav li.itemActive a:hover {padding:8px 13px 12px 13px; background:url(../images/navItemActiveBg.png) repeat-x 0 0; color:#c60404}
 .userNav {float:right; color:#fff}
-	.userNav li {float:left; padding:9px 0 0 15px}
+	.userNav li {float:left; padding:8px 0 0 15px}
 	.userNav li a {color:#fff; text-decoration:underline}
 	.userNav li a:hover {text-decoration:none}
-/* footer style */
+/* ------------------ footer & line style ------------------ */
 .wrapFooter {}
 	.wrapFooter .wrapInner {border-top:1px solid #EDEDED}
 	.wrapFooter dl {float:left; padding:10px 0 10px 25px}
-	.wrapFooter dt {font-size:14px; font-weight:bold; color:#9f0307; padding:0 0 8px 0}
+	.wrapFooter dt {font-size:15px; font-weight:bold; color:#9f0307; padding:0 0 8px 0}
 	.wrapFooter dd {}
 .wrapBtmLine {border-top:7px solid #850208; height:20px}
-
-/* corner style */
-.angleB {background-image:url(../images/shadowBBg.png); background-repeat:no-repeat; height:12px; font-size:1px; line-height:1px; overflow:hidden}
-	* html .angleB {background-image:url(../images/shadowBBg.gif)}
-.angleT {background-image:url(../images/shadowTBg.png); background-repeat:no-repeat; height:9px; font-size:1px; line-height:1px; overflow:hidden}
-	* html .angleT {background-image:url(../images/shadowTBg.gif)}
-.bodyBox {background-image:url(../images/shadowBg.png); background-repeat:repeat-y; overflow:hidden; width:100%}
-	* html .bodyBox {background-image:url(../images/shadowBg.gif)}
-
+/* ------------------ content wrap style ------------------ */
 .stationContent {float:left; width:970px}
-	.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:20px}
+	.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:15px}
 	.greyBox .itemFace {position:absolute; z-index:1; top:-98px; right:0}
 	.greyBox .itemHand {position:absolute; z-index:1}
 	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
-/* title style */
+
+/* home wrap style */
+.wrapMain {float:left; width:692px}
+	.wrapMain .greyBox {width:652px}
+	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
+	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
+.wrapSide {float:right; width:252px} /* width:213px */
+	.wrapMain .viewBoxB {width:442px; float:left}
+	.wrapMain .viewBoxC {width:195px; float:right}
+/* enterprice wrap style */
+.wrapEqColumns {float:left; width:472px}
+	.wrapRight {float:right}
+	.wrapEqColumns .greyBox {width:442px; padding:15px 15px 80px 15px}
+	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
+	.wrapEqColumns .viewDlist {float:left; padding:14px 0 0 6px; width:230px}
+	.wrapEqColumns .viewBoxC {width:195px; float:right}
+/* login & registration wrap style */
+.wrapLogin {float:left; width:970px}
+	.wrapLogin .greyBox {padding:15px; width:940px; text-align:center}
+	.wrapLogin .viewBox {margin:10px auto 0 auto}
+/* admin wrap style */
+.wrapLAdmin {float:left; width:215px}
+	.wrapLAdmin .greyBox {width:185px}
+.wrapRAdmin {float:right; width:729px}
+	.wrapRAdmin .greyBox {width:699px}
+
+/* ------------------ title wrap style ------------------ */
 .wrapTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
-	.viewTHead {float:left; width:730px; padding:30px 0 5px 20px; line-height:normal}
-	.viewTHead h1 {font-size:22px}
-	.viewTHead p {font-size:14px; padding:5px 0 0 0; font-weight:bold}
+	.viewTHead {float:left; width:730px; padding:20px 0 5px 15px; line-height:normal}
+	.viewTHead h1 {font-size:24px}
+	.viewTHead p {font-size:15px; padding:5px 0 0 0; font-weight:bold}
 	
 	.viewEHead {float:right; width:212px; padding:10px 0 0 0; text-align:right}
 	.viewEHead p {font-size:14px; color:#9F0307; line-height:18px}
@@ -81,285 +100,214 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewEHead li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
 	.viewEHead li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
 	.viewEHead li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
-
 	
-.stationTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
-	.stationTitle h1 {float:left; width:380px; padding:30px 0 5px 20px; line-height:normal; font-size:22px}
-	.stationTitle h1 span {font-size:14px; display:block; padding:5px 0 0 0}
-.viewExtra {float:right; width:212px; padding:10px 0 0 0; text-align:right}
-	.viewExtra p {font-size:14px; color:#9F0307; line-height:18px}
-	.viewExtra p a {color:#9F0307; text-decoration:underline}
-	.viewExtra ul {float:right; padding:15px 0 0 0}
-	.viewExtra li {float:left; padding:0 0 0 2px}
-	.viewExtra li a {display:block; float:left; text-indent:99px; overflow:hidden; width:22px; height:22px}
-	.viewExtra li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
-	.viewExtra li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
-	.viewExtra li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
+	.viewTHeadEq {width:350px}
+	.wrapEqColumns .wrapTitle {width:350px; margin:-95px 0 0 0}
 
-	.wrapEqColumns .stationTitle {width:270px; margin:-95px 0 0 0}
-	.wrapEqColumns .stationTitle h1 {width:auto}
+/* ------------------ box style ------------------ */
+.viewBox {position:relative; margin:10px 0 0 0}
+	.viewBox .bodyBox {background:#fff}
+.cL {padding:0 0 0 4px; background:url(../images/boxE01.png) repeat-y left 0}
+.cR {padding:0 4px 0 0; background:url(../images/boxE01.png) repeat-y right 0}
+.cT, .cT .cL, .cT .cR, .cB, .cB .cL, .cB .cR {position:relative; font-size:1px; line-height:1px; background:url(../images/boxE01.png); background-repeat:no-repeat; padding:0}
+	.cT, .cB {margin:0 12px 0 12px; background-image:url(../images/boxE01v.png); background-repeat:repeat-x}
+	.cT .cL, .cB .cL {float:left; margin:0 0 0 -12px; width:12px}
+	.cT .cR, .cB .cR {float:right; margin:0 -12px 0 0; width:12px}
+	.cT, .cT .cL, .cT .cR {height:9px}
+	.cB, .cB .cL, .cB .cR {height:12px}
+.cT {background-position:0 0}
+	.cT .cL {background-position:-5px 0}
+	.cT .cR {background-position:-17px 0}
+.cB {background-position:0 -9px}
+	.cB .cL {background-position:-5px -9px}
+	.cB .cR {background-position:-17px -9px}
+	
+	.viewBox h2 {font-size:15px; color:#9F0307; padding:0 14px 5px 14px}
+	.viewBox h3 {font-size:15px; padding:0 14px 5px 14px}
+
+.viewBoxA .cL, .viewBoxA .cR {background-image:url(../images/boxE02.png)}
+.viewBoxA .cT, .viewBoxA .cB {background-image:url(../images/boxE02v.png)}
+
+.viewBoxB .cL, .viewBoxB .cR {background-image:url(../images/boxE03.png)}
+.viewBoxB .cT, .viewBoxB .cB {background-image:url(../images/boxE03v.png)}
+
+.viewBoxC .cL, .viewBoxC .cR {background-image:url(../images/boxE04.png)}
+.viewBoxC .cT, .viewBoxC .cB {background-image:url(../images/boxE04v.png)}
+.viewBoxC .bodyBox {background:#F5F5F3}
+
+.wrapCarousel {float:left; width:970px; padding:0 0 10px 0; border-top:1px solid #850208}
+	.wrapCarousel .itemClip {margin:0 17px; padding:5px 0; height:95px; width:936px; overflow:hidden; position:relative}
+	.wrapCarousel ul {width:1000em; position:absolute; left:0}
+	.wrapCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
+	.wrapCarousel li span, .wrapCarousel li a {display:block}
+	.wrapCarousel li span.itemImg {width:117px; height:75px}
+
 /* side catalog style */
-.viewSList {float:left; width:213px; margin:10px 0}
-	.viewSList .angleT, .viewSList .angleB, .viewSList .bodyBox {background-position:0 0}
-	.viewSList h2 {font-size:18px; line-height:normal; padding:5px 18px}
-	.viewSList ul {padding:5px 18px}
+.viewSList {}
+	.viewSList h2 {font-size:18px; line-height:normal; padding:5px 14px}
+	.viewSList ul {padding:5px 14px}
 	.viewSList li {border-top:1px solid #EDECEC; padding:7px 0}
 	.viewSList li.itemFirst {border-top:none}
 	.viewSList li a {text-decoration:none; display:block; height:1%}
 	.viewSList li img {vertical-align:text-bottom; padding:0 3px 0 0}
-/* box red border style */
-.viewRBox {float:left; width:442px; margin:10px 0 0 0}
-	.viewRBox .angleT, .viewRBox .angleB, .viewRBox .bodyBox {background-position:-213px 0}
-	.viewRBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 18px 5px 18px}
-	.viewRBox .unitSearch {padding:5px 1px 0 14px; margin:0 4px; overflow:hidden; width:419px}
-	.viewRBox .unitSearch p {float:left; width:205px; padding:0 0 5px 0}
-	.viewRBox .unitSearch p.itemBtn {width:400px}
-	.viewRBox .unitSearch p.itemBtn button {float:right}
-	.viewRBox .unitSearch label {display:block; padding:5px 0 0 0}
-	.viewRBox .unitSearch select {width:195px}
-	
-	.viewRBox .unitStep {margin:0 4px; padding:0 1px 0 14px}
-	.viewRBox .unitStep ol {overflow:hidden; width:420px; padding:5px 0 0 0}
-	.viewRBox .unitStep li {float:left; width:122px; padding:0 10px 5px 8px}
-	.viewRBox .unitStep li span {display:block; color:#616161}
+/* search block style */
+.unitSearch {overflow:hidden; width:420px; padding:5px 0 0 14px}
+	.unitSearch p {float:left; width:205px; padding:0 0 5px 0}
+	.unitSearch p.itemBtn {width:400px}
+	.unitSearch p.itemBtn button {float:right}
+	.unitSearch label {display:block; padding:5px 0 0 0}
+	.unitSearch select {width:195px}
+/* step block style */
+.unitStep {margin:0 4px; padding:0 1px 0 14px}
+	.unitStep ol {overflow:hidden; width:420px; padding:5px 0 0 0}
+	.unitStep li {float:left; width:122px; padding:0 10px 5px 8px}
+	.unitStep li span {display:block; color:#616161}
+/* small video */
+.unitVideo {padding:0 14px 5px 14px}
+	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
+/* small form */
+.unitYellow {padding:0 12px}
+	.unitYellow p {padding:2px 0 5px 0; overflow:hidden; width:161px}
+	.unitYellow label {display:block}
+	.unitYellow select {width:160px}
+	.unitYellow button span {background-position:right -78px}
+	.unitYellow button span strong {background-position:left -52px; color:#292929}
+.viewPlatform {float:left; width:442px; position:relative; padding:15px 0 0 0}
+	.viewPlatform p {font-size:17px; font-weight:normal; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
+	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
+	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
 /* list style */
+.viewDlist {float:right; width:195px}
+	.viewDlist h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
+	.viewDlist ul {padding:0 5px 0 12px}
+	.viewDlist li {background:url(../images/listBullet.gif) no-repeat 0 7px; padding:0 0 0 10px}
 .viewTList {float:left; width:422px}
 	.viewTList ul {float:left; width:193px; padding:10px 0 0 18px}
 .viewEList {float:right; width:182px; padding:14px 0 0 0}
-	.viewEList h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
+	.viewEList h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
 	.viewEList ul a {text-decoration:underline}
-.viewDlist {float:right; width:185px}
-	.viewDlist h3 {font-size:14px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
-	.viewDlist ul {padding:0 5px 0 12px}
-	.viewDlist li {background:url(../images/listBullet.gif) no-repeat 0 5px; padding:0 0 0 10px}
 
-.viewPlatform {float:left; width:442px; position:relative; padding:15px 0 0 0}
-	.viewPlatform p {font-size:17px; font-weight:bold; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
-	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
-	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
 
-.viewPackage {margin:0 4px}
-	.viewPackage p {padding:0 8px 5px 8px}
-	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
-	.viewPackage select {width:50px; vertical-align:middle}
-	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
 
-.stationCarousel {float:left; width:970px; padding:10px 0; border-top:1px solid #850208}
-	.stationCarousel .angleT, .stationCarousel .angleB, .stationCarousel .bodyBox {background-position:-842px 0}
-	.stationCarousel .itemClip {margin:5px 17px; height:95px; width:936px; overflow:hidden; position:relative}
-	.stationCarousel ul {width:1000em; position:absolute; left:0}
-	.stationCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
-	.stationCarousel li span, .stationCarousel li a {display:block}
-	.stationCarousel li span.itemImg {width:117px; height:75px}
-/* box */
-.viewGBox {float:right; width:185px; margin:10px 0 0 0}
-	.viewGBox .angleT, .viewGBox .angleB, .viewGBox .bodyBox {background-position:-654px 0}
-	.viewGBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 12px 5px 12px}
-	.viewGBox h3 {font-size:14px; padding:0 12px 5px 12px}
-	.viewGBox .unitVideo {padding:0 12px 5px 12px}
-	.viewGBox .itemVideo {border:2px solid #D1CFCF; background:#fff}
-
-	.viewGBox .unitYellow {padding:0 12px}
-	.viewGBox .unitYellow p {padding:2px 0 5px 0; overflow:hidden; width:161px}
-	.viewGBox .unitYellow label {display:block}
-	.viewGBox .unitYellow select {width:160px}
-	.viewGBox .unitYellow button span {background-position:right -78px}
-	.viewGBox .unitYellow button span strong {background-position:left -52px; color:#292929}
-/* --------- menu admin --------- */
-.viewBBox {float:left; width:185px; margin:10px 0 0 0}
-	.viewBBox .angleT, .viewBBox .angleB, .viewBBox .bodyBox {background-position:-1815px 0}
-	.viewBBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 12px 5px 12px}
-	/* list */
-	.viewMenu {margin:0 4px}
+/* ------------------ admin left style ------------------ */
+.viewMenu {}
 	.viewMenu ul {border-top:1px dotted #ccc; padding:0 0 10px 0}
 	.viewMenu li {border-bottom:1px dotted #ccc}
-	.viewMenu li a {display:block; overflow:hidden; width:163px; padding:5px 7px 4px 7px; font-size:13px; font-weight:bold}
+	.viewMenu li a {display:block; overflow:hidden; width:153px; padding:5px 10px 4px 14px; font-size:13px; font-weight:bold}
 	.viewMenu li a:hover, .viewMenu li.itemActive a {background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
 	/* sub list */
 	.viewMenu li ul {padding:0; border:none}
 	.viewMenu li ul li {border-top:1px dotted #ccc; border-bottom:none}
 	.viewMenu li ul li a, .viewMenu li.itemActive ul li a {font-size:12px; background:#fff; width:150px; padding:3px 7px 1px 20px; color:#393939; font-weight:normal}
 	.viewMenu li ul li a:hover, .viewMenu li ul li.itemActive a {background:#E2E2E2; color:#393939}
-/* --------- admin --------- */
-.viewWBox {float:left; width:699px; margin:10px 0 0 0}
-	.viewWBox .angleT, .viewWBox .angleB, .viewWBox .bodyBox {background-position:-2000px 0}
-	.viewWBox h2 {font-size:14px; font-weight:bold; color:#9F0307; padding:0 15px 5px 15px}
-	.viewWBox h3 {font-size:14px; font-weight:bold; padding:8px 0 5px 0}
+.viewPackage {}
+	.viewPackage p {padding:0 11px 5px 11px}
+	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
+	.viewPackage select {width:50px; vertical-align:middle}
+	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
+/* ------------------ admin content style ------------------ */
+.unitABlock {width:691px; margin:0 0 5px 0; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
+	.unitABlockLast {margin:0; border:none}
+	.unitABlock .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
+	.unitABlock .unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
+	.unitABlock h3 {font-size:14px; padding:5px 0 8px}
 	
-	/* single column */
-	.unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
-	/* two column */
-	.viewWBox .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
-	.viewWBox .unitWBlock {width:691px; margin:0 4px 5px 4px; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
-	.viewWBox .unitLast {border:none; margin:0 4px}
-	/* notification */
-	.viewWBox .unitNotif {width:676px; padding:0 4px 5px 11px; overflow:hidden}
-	.viewWBox .unitNotifHide {display:none}
-	/* info */
-	.viewWBox .unitInfo {padding:0 11px 5px 11px}
-		.viewWBox .unitInfo textarea.areaTxt {width:656px}
-	/* rtf out */
-	.viewWBox .unitRtf {}
-		.viewWBox .unitRtf ol {padding:0 0 0 20px}
-		.viewWBox .unitRtf ol li {list-style:decimal}
-		.viewWBox .unitRtf ul li {background:url(../images/listBullet.gif) no-repeat 2px 6px; padding:0 0 0 20px}
-		.viewWBox .unitRtf a {text-decoration:underline}
-	/* warning */
-	.viewWBox .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
-	.viewWBox .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
-	.viewWBox .unitBtn {width:676px; float:left; padding:4px 0}
-		.viewWBox .unitBtn button, .viewWBox .unitBtn a.linkBtn {float:right; margin:0 0 0 5px}
-	/* foto */
-	.viewWBox .itemFoto {padding:0 0 5px 0}
-	/* form */
-	.viewWBox .itemForm {overflow:hidden; width:325px; padding:4px 0}
-		.unitSnColumn .itemForm {width:671px}
-		.unitNotif .itemForm {width:236px; float:left}
-		.unitNotif .itemFirst {width:191px}
-	.viewWBox label {float:left; width:115px; text-align:right; padding:3px 0 0 0; position:relative}
-		.unitNotif label {width:105px}
-		.unitNotif .itemFirst label {width:60px}
-		.viewWBox .itemReq {position:absolute; right:-8px; font-size:16px; color:#f00}
-	.viewWBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
-	.viewWBox .itemData label.labelDate {float:left; padding:3px 5px 0 0}
-	.viewWBox .itemData {float:right; width:200px}
-		.unitSnColumn .itemData {width:546px}
-		.unitSnColumn .itemEq {width:338px; overflow:hidden; float:left}
-			.unitSnColumn .itemEq .itemData {width:213px}
-		.unitNotif .itemData {width:126px}
-	.viewWBox input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:3px; margin:0 5px 0 0; width:120px; float:left}
-	.viewWBox .chooseDate {background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:3px 20px 0 0}
-	.viewWBox input.inpTxt {width:192px}
-		.unitSnColumn input.inpTxt {width:531px}
-	.viewWBox textarea {width:192px; height:120px}
-		.unitSnColumn textarea.areaTxt {width:531px; height:300px}
-		.unitNotif select {width:126px}
-	.viewWBox .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
-		.viewWBox .inpFile .txtBg {width:150px; overflow:hidden; height:16px; padding:3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
-		.viewWBox .inpFile button span {background-position:right -78px}
-		.viewWBox .inpFile button span strong {background-position:left -52px; color:#292929}
-	/* virtual form */
-	.viewWBox dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
-	.viewWBox dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
-		.unitSnColumn dd.itemData {width:546px; color:#000}
-	/*.unitSnColumn .itemEq {width:325px; overflow:hidden; float:left}*/
-			.unitSnColumn .itemEq dd.itemData {width:213px}
-	.unitNotif .unitP {width:671px; background:#EFEFEF; overflow:hidden; padding:3px 0}
-	.unitNotif .linkDelete {float:right; background:#EFEFEF; margin:0 5px 0 0; padding:2px 5px 4px 5px}
-	.unitNotif .linkDelete a {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
-	.unitNotifEmpty {padding:0 4px 5px 11px}
-	/* table */
-	.viewWBox table {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
-	.viewWBox th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
-	.viewWBox td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
-	.viewWBox td.itemLast, .viewWBox th.itemLast {border-right-width:0}
-	.viewWBox .unitData {cursor:pointer}
-	.viewWBox .unitOdd td {background:#EFEFEF}
-	.viewWBox .unitNoRead {font-weight:bold}
-	.viewWBox tr.unitNoData td {border-right-width:0}
-	.viewWBox tr.unitChecked td {background:#FFFFCC}
-	.viewWBox tr.unitHover td {background:#E2E2E2}
-	.viewWBox th.itemChk {width:14px}
-		.viewWBox td input.inpChk {margin:1px 0 0 0}
-	.viewWBox tr.unitCategory td {border-right-width:0; padding:5px 0}
+	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
+	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
+	/* button style */
+	.unitABlock .unitBtn {width:676px; float:left; padding:4px 0}
+		.unitABlock .unitBtn button, .unitABlock .unitBtn a.linkBtn {float:right; margin:0 0 0 5px}
+	/* form element two column */
+	.unitABlock .itemForm {overflow:hidden; width:325px; padding:4px 0}
+	.unitABlock label {float:left; width:115px; text-align:right; padding:3px 0 0 0; position:relative}
+	.unitABlock .itemData {float:right; width:200px}
+	.unitABlock .itemData label {text-align:left; display:table; height:1%; padding:2px 10px 0 4px; width:auto; float:none}
+	.unitABlock input.inpTxt {width:192px}
+	.unitABlock .itemReq {position:absolute; right:-8px; font-size:16px; color:#f00}
+	
+	.unitABlock dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
+	.unitABlock dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
+	
+	.unitABlock .unitInfo {padding:0 11px 5px 11px}
+	.unitABlock .unitInfo textarea.areaTxt {width:656px}
+	
+	.unitABlock label.labelDate {float:left; padding:3px 5px 0 0; width:auto}
+	.unitABlock input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:2px 3px; margin:0 5px 0 0; width:120px; float:left}
+	.unitABlock .chooseDate {background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:5px 20px 0 0}
+	
+	.unitABlock .unitSnColumn .itemForm {width:671px}
+	.unitABlock .unitSnColumn .itemData {width:546px}
+	.unitABlock .unitSnColumn input.inpTxt {width:531px}
+	.unitABlock .unitSnColumn textarea.areaTxt {width:531px; height:300px}
+	.unitABlock .unitSnColumn dd.itemData {width:538px}
+/* list user */
+.viewUList {overflow:hidden; width:671px; line-height:14px; padding:0 0 10px 0}
+	.viewUList li {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative}
+	.viewUList li a.itemActive {font-weight:bold}
+/* rtf out */
+.unitABlock .unitRtf {}
+	.unitABlock .unitRtf ol {padding:0 0 0 20px}
+	.unitABlock .unitRtf ol li {list-style:decimal}
+	.unitABlock .unitRtf ul li {background:url(../images/listBullet.gif) no-repeat 2px 6px; padding:0 0 0 20px}
+	.unitABlock .unitRtf a {text-decoration:underline}
+/* table list style */
+.viewList {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
+	.viewList th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
+	.viewList td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
+	.viewList td.itemLast, .viewList th.itemLast {border-right-width:0}
+	.viewList .unitData {cursor:pointer}
+	.viewList .unitOdd td {background:#EFEFEF}
+	.viewList .unitNoRead {font-weight:bold}
+	.viewList tr.unitNoData td {border-right-width:0}
+	.viewList tr.unitChecked td {background:#FFFFCC}
+	.viewList tr.unitHover td {background:#E2E2E2}
+	.viewList th.itemChk {width:14px}
+		.viewList td input.inpChk {margin:1px 0 0 0}
+	/*.viewWBox tr.unitCategory td {border-right-width:0; padding:5px 0}
 	.viewWBox tr.unitCategory .unitP {background:#EFEFEF; overflow:hidden; padding:3px 0; width:671px}
 	.viewWBox tr.unitCategory .linkSave {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
-	.viewWBox tr.unitCategory .linkSave button {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -451px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
-
-	.viewWBox table.viewPlan th {background:none; font-size:11px; color:#393939; font-weight:normal; border:1px dotted #999}
-	.viewWBox table.viewPlan td {border:1px dotted #999; text-align:center; cursor:pointer}
-	.viewWBox table.viewPlan td.itemStar {width:100px; vertical-align:top}
-	.viewWBox table.viewPlan td.itemChecked {background-color:#FFFFCC}
-	.viewWBox table.viewPlan h4 {font-weight:bold; font-size:12px; text-transform:uppercase}
-	.viewWBox table.viewPlan p {padding:0 0 5px 0}
-	.viewWBox table.viewPlan .itemInfo {font-size:11px}
-	.viewWBox table.viewPlan .itemInfo strong {display:block; font-size:12px; font-weight:normal}
-	.viewWBox table.viewPlan .itemInStar {padding:65px 0 0 0; background-image:url(../images/planIcon.gif); background-repeat:no-repeat; overflow:hidden; position:relative}
-	.viewWBox table.viewPlan .itemOne {background-position:-5px 7px}
-	.viewWBox table.viewPlan .itemTwo {background-position:-116px 7px}
-	.viewWBox table.viewPlan .itemThree {background-position:-227px 7px}
-	.viewWBox table.viewPlan .itemFour {background-position:-338px 7px}
-	.viewWBox table.viewPlan .itemFive {background-position:-449px 7px}
+	.viewWBox tr.unitCategory .linkSave button {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -451px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}*/
+/* table plan style */
+.viewPlan {width:671px; border-collapse:collapse; margin:0 10px 5px 10px}
+	.viewPlan th {font-size:11px; color:#393939; font-weight:normal; border:1px dotted #999; padding:3px 5px}
+	.viewPlan td {border:1px dotted #999; text-align:center; cursor:pointer; padding:3px 5px}
+	.viewPlan td.itemStar {width:100px; vertical-align:top}
+	.viewPlan td.itemChecked {background-color:#FFFFCC}
+	.viewPlan h4 {font-weight:bold; font-size:12px; text-transform:uppercase}
+	.viewPlan p {padding:0 0 5px 0}
+	.viewPlan .itemInfo {font-size:11px}
+	.viewPlan .itemInfo strong {display:block; font-size:12px; font-weight:normal}
+	.viewPlan .itemInStar {padding:65px 0 0 0; background-image:url(../images/planIcon.gif); background-repeat:no-repeat; overflow:hidden; position:relative}
+	.viewPlan .itemOne {background-position:-5px 7px}
+	.viewPlan .itemTwo {background-position:-116px 7px}
+	.viewPlan .itemThree {background-position:-227px 7px}
+	.viewPlan .itemFour {background-position:-338px 7px}
+	.viewPlan .itemFive {background-position:-449px 7px}
 	
-	.viewWBox table.viewPlan input {position:absolute; bottom:-40px}
-	/* icon tools */
-	.viewIList {float:right; white-space:nowrap; padding:0 15px 0 0}
-		.viewIList li {float:left; padding:1px 0 0 10px}
-		.viewIList li a, .viewIList li button {float:left; line-height:normal; overflow:hidden; background-image:url(../images/actionIcon.gif); background-repeat:no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
-		.viewIList li a:hover {text-decoration:none}
-		.viewIList li.itemReply a, .viewIList li.itemReply button {background-position:3px 0}
-		.viewIList li.itemPrint a {background-position:3px -46px}
-		.viewIList li.itemForward a, .viewIList li.itemForward button {background-position:3px -91px}
-		.viewIList li.itemDelete a, .viewIList li.itemDelete button {background-position:3px -136px}
-		.viewIList li.itemNew a {background-position:3px -182px}
-		.viewIList li.itemNewC a {background-position:3px -226px}
-		.viewIList li.itemNewSC a {background-position:3px -271px}
-		.viewIList li.itemNewB a {background-position:3px -317px}
-		.viewIList li.itemArhiv a, .viewIList li.itemArhiv button {background-position:3px -363px}
-	.viewUList {overflow:hidden; width:671px; line-height:12px; padding:0 0 10px 0}
-		.viewUList dt {float:left; width:auto; padding:0 0 0 10px; font-weight:bold; background:#fff; position:relative; z-index:5}
-		.viewUList dd {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative; z-index:4}
-		.viewUList dd a.itemActive {font-weight:bold}
-	.viewRList {width:676px; padding:5px 4px 0 11px; overflow:hidden}
-		.viewRList dt {float:left; width:100px; padding:5px 0 0 0}
-		.viewRList dd {float:right; width:566px}
-		.viewRList li {float:left; width:141px; padding:2px 0}
-		.viewRList li label {text-align:left; padding:4px 10px 0 4px; width:auto}
+	.viewPlan input {position:absolute; bottom:-40px}
+/* notification */
+.unitNt {width:671px; padding:0 9px 5px 11px; overflow:hidden}
+	.unitNt .innerP {width:671px; background:#EFEFEF; overflow:hidden; padding:3px 0}
+	.unitNt .itemForm {width:236px; float:left}
+	.unitNt .itemFirst {width:191px}
+	.unitNt label {width:105px}
+	.unitNt .itemFirst label {width:60px}
+	.unitNt .itemData {width:126px}
+	.unitNt select {width:126px}
+	.unitNt .linkDelete {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
+	.unitNt .linkDelete a {float:left; line-height:14px; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
 
-	.viewRBox .unitForm {border-bottom:1px dotted #393939; margin:0 4px 5px 4px; padding:5px 1px 5px 14px}
-		.viewRBox .unitLast {border:none; margin:0 4px}
-	.viewRBox .itemForm {overflow:hidden; width:419px; padding:4px 0}
-	.viewRBox .itemForm form {padding:0}
-	.viewRBox .itemForm label {float:left; width:144px; text-align:right; padding:4px 0 0 0; position:relative}
-	.viewRBox .itemForm .itemReq {position:absolute; right:-8px; font-size:16px; color:#f00}
-		.viewRBox .itemData {float:right; width:265px}
-		.viewRBox .itemData label {text-align:left; display:table; height:1%; padding:4px 10px 0 4px; width:auto; float:none}
-		.viewRBox a {text-decoration:underline}
-	.viewRBox .itemBtn {width:344px; overflow:hidden; padding:3px 0}
-	.viewRBox .itemBtn a {float:right; margin:4px 15px 0 0}
-	.viewRBox .itemBtn button, .viewRBox .itemBtn a.linkBtn {float:right; margin:0 0 0 5px; text-decoration:none}
-	
-	.viewRBox .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
-	.viewRBox .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 6px 8px; color:#00A25B; margin:5px 14px 5px 0; padding:6px 10px 4px 24px}
+	.unitNtHide {display:none}
+	.unitNtEmpty {padding:0 9px 5px 11px}
+	.unitNtEmpty p {padding:5px; background:#EFEFEF}
 
-/* main page */
-.wrapMain {float:left; width:692px}
-	.wrapMain .greyBox {width:652px}
-	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
-	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
-.wrapSide {float:right; width:213px}
-/* enterprice page */
-.wrapEqColumns {float:left; width:482px}
-	.wrapRight {float:right}
-	.wrapEqColumns .greyBox {width:442px; padding:20px 20px 100px 20px}
-	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
-	.wrapEqColumns .viewDlist {float:left; padding:14px 0 0 6px; width:230px}
-/* admin page */
-.wrapLAdmin {float:left; width:225px}
-	.wrapLAdmin .greyBox {width:185px}
-.wrapRAdmin {float:right; width:739px}
-	.wrapRAdmin .greyBox {width:699px}
-/* login and registration page */
-.wrapLogin {float:left; width:970px}
-	.wrapLogin .greyBox {padding:20px 0; width:970px}
-	.wrapLogin .viewRBox {padding:0 264px}
-	.wrapLogin .viewWBox {padding:0 136px 0 135px}
-	.wrapLogin h3 {padding:0 0 5px 0}
-	/*.wrapLogin .viewWBox .unitWBlock {background:url(../images/lineBg.gif) repeat-y center}*/
-.wrapRtf {float:left; width:970px}
-	.wrapRtf .greyBox {padding:20px 0; width:970px}
-	.wrapRtf .viewWBox {padding:0 136px 0 135px}
-	
-
-.overlayPopup {background-color:#000}
-.viewPopup {text-align:left;}
-.viewPopup .viewHomeBox {margin:0}
-.viewPopup a.itemClose {position:absolute; text-decoration:none; right:8px; top:6px; background:url(../images/closeIcon.gif) no-repeat 0 0; overflow:hidden; text-indent:99px; width:13px; height:13px}
-
-
-/* calendar */
-#dPopup {position:absolute; z-index:199}
-.dPopup {position:relative; background:#ccc; padding:2px; width:171px}
+.viewNtList {width:676px; padding:5px 4px 0 11px; overflow:hidden}
+	.viewNtList dt {float:left; width:100px; padding:5px 0 0 0; text-align:left}
+	.viewNtList dd {float:right; width:566px}
+	.viewNtList li {float:left; width:141px; padding:2px 0}
+	.viewNtList li label {text-align:left; padding:3px 10px 0 4px; width:auto}
+/* date popup */
+.dPopup {position:absolute; z-index:199; background:#ccc; padding:2px; width:171px}
 	.dPopup a {color:#000; text-decoration:none; padding:3px 2px 0}
 	.dPopup h4 {font-size:12px; text-align:center; margin:0; padding:2px 0}
 	.dPopup table {background:#EFEFEF; border-collapse:collapse}
@@ -378,3 +326,27 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.dPopup a.disabledDay {cursor:default; color:#aaa}
 	.dPopup .dNavPrev a, .dPopup div.dNavNext a {cursor:pointer}
 		.dPopup .dNavPrev a.disabledDay, .dPopup .dNavNext a.disabledDay {cursor:default}
+/* icon action */
+.viewIList {float:right; white-space:nowrap; padding:1px 15px 0 0}
+	.viewIList li {float:left; padding:1px 0 0 10px; background-image:url(../images/actionIcon.gif); background-repeat:no-repeat}
+	.viewIList li a, .viewIList li button {float:left; line-height:14px; padding:1px 5px 1px 25px; font-weight:normal}
+	.viewIList li a:hover {text-decoration:none}
+	.viewIList li.itemReply {background-position:13px 1px}
+	.viewIList li.itemPrint a {background-position:3px -45px}
+	.viewIList li.itemForward {background-position:13px -90px}
+	.viewIList li.itemDelete {background-position:13px -135px}
+	.viewIList li.itemNew {background-position:13px -181px}
+	.viewIList li.itemNewC {background-position:13px -225px}
+	.viewIList li.itemNewSC {background-position:13px -270px}
+	.viewIList li.itemNewB {background-position:13px -316px}
+/*	.viewIList li.itemArhiv a, .viewIList li.itemArhiv button {background-position:3px -363px}*/
+
+/* ------------------ login style ------------------ */
+.viewBoxL {width:400px; text-align:left}
+	.viewBoxL .unitABlock {width:392px}
+	.viewBoxL .unitABlock .unitBtn {width:335px}
+	.viewBoxL .unitBtn a {float:right; margin:3px 15px 0 0; text-decoration:underline}
+.viewBoxR {width:699px; text-align:left}
+
+
+

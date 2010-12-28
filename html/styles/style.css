@@ -240,6 +240,11 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitABlock .unitSnColumn input.inpTxt {width:531px}
 	.unitABlock .unitSnColumn textarea.areaTxt {width:531px; height:300px}
 	.unitABlock .unitSnColumn dd.itemData {width:538px}
+	
+	.unitABlock .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
+	.unitABlock .inpFile .txtBg {width:150px; overflow:hidden; height:18px; padding:2px 3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
+	.unitABlock .inpFile button span {background-position:right -78px}
+	.unitABlock .inpFile button span strong {background-position:left -52px; color:#292929}
 /* list user */
 .viewUList {overflow:hidden; width:671px; line-height:14px; padding:0 0 10px 0}
 	.viewUList li {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative}

@@ -96,7 +96,6 @@ class UserContentController extends ContentController {
 			}
 			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
-				print_r($requestParams);
 
 				$img = array();
 				$paths = array();
@@ -126,13 +125,14 @@ class UserContentController extends ContentController {
 				}
 								
 				$id = SessionService::getAttribute(SessionService::USERS_ID);
-				$from_date = explode('/', $requestParams[OrdersService::FROM_DATE]);
-				$until_date = explode('/', $requestParams[OrdersService::UNTIL_DATE]);
-				//$requestParams[OrdersService::FROM_DATE] = $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
-				//$requestParams[OrdersService::UNTIL_DATE] = $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
+				$requestParams[OrdersService::IMP_FROM_DATE] = self::createDate($requestParams[OrdersService::IMP_FROM_DATE]);
+				$requestParams[OrdersService::IMP_UNTIL_DATE] = self::createDate($requestParams[OrdersService::IMP_UNTIL_DATE]);
+				$requestParams[OrdersService::FROM_DATE] = self::createDate($requestParams[OrdersService::FROM_DATE]);
+				$requestParams[OrdersService::UNTIL_DATE] = self::createDate($requestParams[OrdersService::UNTIL_DATE]);
 				$requestParams[OrdersService::ORDER_DESC] = htmlspecialchars($requestParams[OrdersService::ORDER_DESC], ENT_QUOTES);
 				OrdersService::setOrders($id, $requestParams, $paths);
-				
+				$location = $this->onSuccess( $actionParams );
+				$this->forwardActionRequest ( $location );
 			} else {
 				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
 			}

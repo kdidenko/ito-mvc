@@ -261,5 +261,11 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function createDate($date){
+		$date = explode('/', $date);
+		$result = $date[2] . '-' . $date[1] . '-' . $date[0];
+		return $result;
+	}
+	
 }
 ?>

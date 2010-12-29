@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Хост: localhost
--- Время создания: Дек 13 2010 г., 14:10
+-- Время создания: Дек 29 2010 г., 10:23
 -- Версия сервера: 5.0.27
 -- Версия PHP: 5.2.6
 
@@ -40,7 +40,7 @@ CREATE TABLE `bargains` (
   `status` tinyint(4) NOT NULL,
   `hash` varchar(32) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 -- 
 -- Дамп данных таблицы `bargains`
@@ -61,7 +61,7 @@ CREATE TABLE `bargain_relations` (
   `bargain_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
 
 -- 
 -- Дамп данных таблицы `bargain_relations`
@@ -69,7 +69,12 @@ CREATE TABLE `bargain_relations` (
 
 INSERT INTO `bargain_relations` (`id`, `bargain_id`, `upload_id`) VALUES 
 (1, 1, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 3, 6),
+(4, 4, 7),
+(5, 5, 8),
+(6, 6, 9),
+(7, 7, 10);
 
 -- --------------------------------------------------------
 
@@ -81,7 +86,7 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL auto_increment,
   `category_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 -- 
 -- Дамп данных таблицы `category`
@@ -90,6 +95,25 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `category_name`) VALUES 
 (1, 0x4954),
 (2, 0x66696e616e6365);
+
+-- --------------------------------------------------------
+
+-- 
+-- Структура таблицы `country`
+-- 
+
+CREATE TABLE `country` (
+  `id` int(11) NOT NULL auto_increment,
+  `country_name` varchar(255) collate utf8_bin NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+
+-- 
+-- Дамп данных таблицы `country`
+-- 
+
+INSERT INTO `country` (`id`, `country_name`) VALUES 
+(1, 0xc396737465727265696368);
 
 -- --------------------------------------------------------
 
@@ -108,7 +132,7 @@ CREATE TABLE `mails` (
   `status` tinyint(1) NOT NULL default '0' COMMENT '1 - trash; 2 - drafts; 3 - inbox; 4 - outbox',
   `hash` varchar(32) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=31 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=31 ;
 
 -- 
 -- Дамп данных таблицы `mails`
@@ -128,6 +152,64 @@ INSERT INTO `mails` (`id`, `subject`, `text`, `crdate`, `sender_id`, `getter_id`
 -- --------------------------------------------------------
 
 -- 
+-- Структура таблицы `orders`
+-- 
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL auto_increment,
+  `owner` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `subcategory_id` int(11) NOT NULL,
+  `order_name` varchar(255) collate utf8_bin NOT NULL,
+  `order_desc` text collate utf8_bin NOT NULL,
+  `street` varchar(255) collate utf8_bin NOT NULL,
+  `zip` varchar(255) collate utf8_bin NOT NULL,
+  `city` varchar(255) collate utf8_bin NOT NULL,
+  `region` int(11) NOT NULL,
+  `country` int(11) NOT NULL,
+  `from_date` date NOT NULL,
+  `until_date` date NOT NULL,
+  `hash` varchar(32) collate utf8_bin NOT NULL,
+  `order_price` float NOT NULL,
+  `imp_from_date` date NOT NULL,
+  `imp_until_date` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+
+-- 
+-- Дамп данных таблицы `orders`
+-- 
+
+INSERT INTO `orders` (`id`, `owner`, `category_id`, `subcategory_id`, `order_name`, `order_desc`, `street`, `zip`, `city`, `region`, `country`, `from_date`, `until_date`, `hash`, `order_price`, `imp_from_date`, `imp_until_date`) VALUES 
+(1, 40, 1, 1, 0x74657374, 0x6669727374206f7264657220, 0x736f6d65207374726565742068657265, 0x7a697020636f6465, 0x6369747920, 1, 1, '2010-12-21', '2010-12-21', 0x3337303165306234363662373232653565623936643866366130343233333863, 3589.5, '0000-00-00', '0000-00-00'),
+(2, 40, 1, 3, 0x7765622d73697465, 0x49206e65656420746f20637265617465206f6e6c696e652077656273686f70, 0x737472656574, 0x3738373636, 0x4e657720596f726b, 5, 1, '2010-12-21', '2010-12-21', 0x3630386631663433333061623063613034623663303665306138623439653064, 1000, '0000-00-00', '0000-00-00'),
+(3, 40, 1, 1, 0x486f6d6520706167652064657369676e20666f7220656269647334752073697465, 0x7765206e6565642064657369676e20666f72206f757220686f6d652070616765, 0x737472656574, 0x33373238, 0x4c6f6e646f6e, 1, 1, '2010-12-31', '2010-12-31', 0x6536316438643264643162663262336662623634346263323136613639393931, 800, '2010-12-30', '2010-12-30');
+
+-- --------------------------------------------------------
+
+-- 
+-- Структура таблицы `order_relations`
+-- 
+
+CREATE TABLE `order_relations` (
+  `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL,
+  `upload_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+
+-- 
+-- Дамп данных таблицы `order_relations`
+-- 
+
+INSERT INTO `order_relations` (`id`, `order_id`, `upload_id`) VALUES 
+(3, 1, 3),
+(4, 1, 4),
+(5, 2, 5);
+
+-- --------------------------------------------------------
+
+-- 
 -- Структура таблицы `plan`
 -- 
 
@@ -139,7 +221,7 @@ CREATE TABLE `plan` (
   `tender_to` float NOT NULL,
   `bargains` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- 
 -- Дамп данных таблицы `plan`
@@ -162,7 +244,7 @@ CREATE TABLE `regions` (
   `id` int(11) NOT NULL auto_increment,
   `region_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
 -- 
 -- Дамп данных таблицы `regions`
@@ -194,7 +276,7 @@ CREATE TABLE `reminders` (
   `plan_id` int(11) NOT NULL,
   `region_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- 
 -- Дамп данных таблицы `reminders`
@@ -212,7 +294,7 @@ CREATE TABLE `static_block` (
   `block_title` varchar(255) collate utf8_bin NOT NULL,
   `block_desc` text collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=25 ;
 
 -- 
 -- Дамп данных таблицы `static_block`
@@ -236,7 +318,7 @@ CREATE TABLE `subcategory` (
   `subcategory_name` varchar(255) collate utf8_bin NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- 
 -- Дамп данных таблицы `subcategory`
@@ -259,7 +341,7 @@ CREATE TABLE `uploads` (
   `id` int(11) NOT NULL auto_increment,
   `path` varchar(1000) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
 -- 
 -- Дамп данных таблицы `uploads`
@@ -267,7 +349,15 @@ CREATE TABLE `uploads` (
 
 INSERT INTO `uploads` (`id`, `path`) VALUES 
 (1, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239323235363130312e6a7067),
-(2, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239323235363532302e6a7067);
+(2, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239323235363532302e6a7067),
+(3, 0x73746f726167652f75706c6f6164732f6f72646572732f6f726465722d313239323833333936372e6a7067),
+(4, 0x73746f726167652f75706c6f6164732f6f72646572732f6f726465722d313239323833333936372e6a7067),
+(5, 0x73746f726167652f75706c6f6164732f6f72646572732f6f726465722d313239333034313239352e6a7067),
+(6, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239333130383530372e6a7067),
+(7, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239333130383632322e6a7067),
+(8, ''),
+(9, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239333130383731302e6a7067),
+(10, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239333130383736392e6a7067);
 
 -- --------------------------------------------------------
 
@@ -322,7 +412,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `username`, `passwo
 (4, 'Administrator', 'YouCademy', 'admin@youcademy.com', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-04-26 13:29:14', '2010-05-07 19:04:29', 1, 0, NULL, '840c3eda3ea42ecd90aeb3434f3510b7', 'AR', 'storage/uploads/users/admin/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),
 (37, 'bookkeeper', 'bookkeeper', 'bookkeeper@gmail.com', 'bookkeeper', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-16 09:38:00', '2010-11-10 16:22:45', 1, 0, NULL, 'f69e505b08403ad2298b9f262659929a', 'BR', 'storage/uploads/users/bookkeeper/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),
 (41, 'John', 'Volt', 'john@gmail.com', 'promoter', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:21:50', '2010-11-10 16:40:27', 1, 0, NULL, '4c8c76b39d294759a9000cbda3a6571a', 'PR', 'storage/uploads/users/user2/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),
-(40, 'Bill', 'Gates', 'bill@gmail.com', 'tradesman2', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:21:13', '2010-12-13 13:14:03', 1, 0, NULL, 'e0c7ccc47b2613c82d1073a4214deecc', 'UR', 'storage/uploads/users/tradesman2/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 3),
+(40, 'Bill', 'Gates', 'bill@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:21:13', '2010-12-20 00:11:59', 1, 0, NULL, 'e0c7ccc47b2613c82d1073a4214deecc', 'UR', 'storage/uploads/users/tradesman2/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 3),
 (42, 'Andrew', 'Stabryn', 'astabryn@ito-global.com', 'tradesman', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:23:01', '2010-12-13 13:14:07', 1, 0, NULL, '309928d4b100a5d75adff48a9bfc1ddb', 'TR', 'storage/uploads/users/tradesman/profile/avatar.jpg', 'ITO-Global', 'we are good company', 'DH827265', 'Shyroka', '45465', 'lviv', 'lviv state', 'Ukraine', '+384564645', 'www.ito-global.com', NULL, NULL, NULL, NULL, NULL, 1, 1994, 1, 2, 2),
 (43, 'Andrew', 'Stabryn', 'astabryn@gmail.com', 'astabryn', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-10-07 13:42:52', '2010-12-04 22:47:50', 0, 0, '2000-09-07', '9a1de01f893e0d2551ecbb7ce4dc963e', 'UR', 'storage/uploads/users/user4/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0),
 (46, 'test', 'test', 'test@test.test', 'test', 'e10adc3949ba59abbe56e057f20f883e', '2010-12-03 21:21:47', '2010-12-04 00:14:08', 1, 0, NULL, 'd8330f857a17c53d217014ee776bfd50', 'TR', 'storage/uploads/users/test/profile/avatar.jpg', 'dsadas', '', NULL, 'dsad', 'fsd', 'das', 'das', 'das', 'das', 'das', 1, '1', 'das', 'da', NULL, NULL, NULL, 0, 0, 0);

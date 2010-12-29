@@ -4,16 +4,52 @@ $images = $mvc->getObject(UploadsService::PATH);
 ?>
 
 <?php if(isset($data)&&count($data)>0&&$data!=NULL){
-foreach($data as $key => $value){
-	echo "<br/>";
-	print_r($value);
-	echo "<br/>";
-}
-foreach($images as $key => $image){
-	echo "<br/>";
-	echo "<img src='" . $image['path'] . "'>";
-	echo "<br/>";
-}
-} else { ?>
+if (isset($images)&&$images!=NULL){
+	foreach($images as $key => $image){?>
+	
+		<img src='<?php echo $image['path']?>' >
+		
+<?php	}	} ?>
+<hr/>
+
+	<br/>
+	title: <?php echo $data[OrdersService::ORDER_NAME]; ?>
+	<br/>
+	desc: <?php echo $data[OrdersService::ORDER_DESC]; ?>
+	<br/>
+	category: <?php echo $data[CategoryService::CAT_NAME]; ?>
+	<br/>
+	subcategory: <?php echo $data[SubCategoryService::SUBCAT_NAME]; ?>
+	<br/>
+	Time left: <?php echo $data[OrdersService::UNTIL_DATE]; ?>
+	<br/>
+	Implementation date: from <?php echo $data[OrdersService::IMP_FROM_DATE]; ?> until <?php echo $data[OrdersService::IMP_UNTIL_DATE]; ?>
+	<br/>
+	city: <?php echo $data[OrdersService::CITY]; ?>
+	<br/>
+	street: <?php echo $data[OrdersService::STREET]; ?>
+	<br/>
+	country: <?php echo $data[CountryService::COUNTRY_NAME]; ?>
+	<br/>
+	region: <?php echo $data[RegionService::REGION_NAME]; ?>
+	<br/>
+	def price: <?php echo $data[OrdersService::PRICE]; ?>
+	<br/>
+	
+<hr/>
+<form>
+Current bid: 1000$
+<br/>
+<input type="text"/>
+<br/>
+<br/>
+<div class="unitBtn">
+	<button name="bid" value="1"><span><strong>Make a bid</strong></span></button>
+</div>
+<br/>
+<br/>
+</form>
+<hr/>
+<?php } else { ?>
 NO ORDER LIKE YOU WHANT
 <?php } ?>

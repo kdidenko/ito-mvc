@@ -112,7 +112,12 @@ class ContentController extends SecureActionControllerImpl {
 		$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
 		$order = OrdersService::getOrders ($where);
 		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
-		$images = OrdersService::getOrderImgs ($where);
+		
+		$images = OrdersService::getOrderImgs ($order[0][OrdersService::ID]);
+		foreach($images as $key => $value){
+			$part = explode('.',$value[UploadsService::PATH]);
+			$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+		}
 		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
 		
 		return $mvc;

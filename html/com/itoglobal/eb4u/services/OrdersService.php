@@ -58,6 +58,14 @@ class OrdersService {
 	 */
 	const UNTIL_DATE = 'until_date';
 	/**
+	 * @var string defining the imp_from_date field name
+	 */
+	const IMP_FROM_DATE = 'imp_from_date';
+	/**
+	 * @var string defining the imp_until_date field name
+	 */
+	const IMP_UNTIL_DATE = 'imp_until_date';
+	/**
 	 * @var string defining the status field name
 	 */
 	const HASH = 'hash';
@@ -164,6 +172,7 @@ class OrdersService {
 					self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . 
 					self::STREET . ', ' . self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::FROM_DATE . ', ' .	self::UNTIL_DATE . ', ' . 
+					self::IMP_FROM_DATE . ', ' . self::IMP_UNTIL_DATE . ', ' . 
 					self::HASH . ', ' . self::PRICE;
 		$values = "'" . $id . "','" . $data[self::ORDER_NAME] . "','" . 
 					$data[self::ORDER_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
@@ -171,7 +180,8 @@ class OrdersService {
 					$data[self::STREET] . "','" . $data[self::ZIP] ."','" .
 					$data[self::CITY] . "','" . $data[self::REGION] . "','" . 
 					$data[self::COUNTRY] . "','" . 
-					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" . 
+					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" .
+					$data[self::IMP_FROM_DATE] . "','" . $data[self::IMP_UNTIL_DATE] ."','" . 
 					$hash ."','" . $data[self::PRICE] . "'";
 					
 		$order_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );

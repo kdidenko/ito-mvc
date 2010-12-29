@@ -88,8 +88,30 @@ class OrdersService {
 	 * @var string defining the upload_id field name
 	 */
 	const UPLOAD_ID = 'upload_id';
+	/**
+	 * @var string defining the bids table name
+	 */
+	const BIDS = 'bids';
+	/**
+	 * @var string defining the user_id field name
+	 */
+	const USER_ID = 'user_id';
+	/**
+	 * @var string defining the bid field name
+	 */
+	const BID = 'bid';
+	/**
+	 * @var string defining the date field name
+	 */
+	const DATE = 'date';
 	
 	/*
+	CREATE TABLE  `bids` (
+	 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	 `bid` FLOAT NOT NULL ,
+	 `user_id` INT NOT NULL ,
+	 `order_id` INT NOT NULL
+	) ENGINE = INNODB;
 	
 	CREATE TABLE  `order_relations` (
 	 `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
@@ -148,17 +170,41 @@ class OrdersService {
 		return $result;
 	}
 	
-	public static function getOrderImgs ($hash){
-		$orders = self::getOrders();
-		$id = $orders[0][self::ID];
+	public static function getOrderImgs ($order_id){
 		$fields = self::ORDER_RELATIONS . '.*, ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
 		$from = self::ORDER_RELATIONS . 
 				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . 
 				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
 				self::ORDER_RELATIONS . '.' . self::UPLOAD_ID;
-		$where = self::ORDER_ID . "='" . $hash . "'"; 
+		$where = self::ORDER_ID . "='" . $order_id . "'"; 
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function makeBid ($hash, $bid){
+		$where = self::HASH . "='" . $hash . "'";  
+		$orders = self::getOrders($where);
+		$order_id = $orders[0][self::ID];
+		$date = gmdate ( "Y-m-d H:i:s" );
+		$id = SessionService::getAttribute ( SessionService::USERS_ID );
+		$into = self::BIDS;
+		$fields = self::BID . ', ' . self::USER_ID . ', ' . self::ORDER_ID . ', ' . 
+					self::DATE;
+		$values = 	"'" . $bid . "','" . $id . "','" . 
+					$order_id . "','" .	$date . "'";
+		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
+	public static function getBids($order_id, $where = null){
+		$fields = '*';
+		$from = self::BIDS;
+		$where = isset($where)&& $where!=NULL ? $where . ' AND ' : NULL; 
+		$where .= self::ORDER_ID . "='" . $order_id . "'"; 
+		$order_by = self::BID;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $order_by, '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}

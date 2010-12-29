@@ -1,6 +1,7 @@
 <?php 
 $data = $mvc->getObject(OrdersService::ORDERS);
 $images = $mvc->getObject(UploadsService::PATH);
+$bids = $mvc->getObject(OrdersService::BIDS);
 ?>
 
 <?php if(isset($data)&&count($data)>0&&$data!=NULL){
@@ -37,14 +38,27 @@ if (isset($images)&&$images!=NULL){
 	<br/>
 	
 <hr/>
-<form>
-Current bid: 1000$
+<form method="post" action="view-order.html">
+<?php if ($bids!=NULL){ ?>
+Current bid: <?php echo $bids[0][OrdersService::BID]; } ?> 
 <br/>
-<input type="text"/>
+<?php foreach($bids as $key => $bid){ ?>
+	<?php echo $bid[OrdersService::USER_ID]; ?> 
+	-
+	<?php echo $bid[OrdersService::BID];?>
+	-
+	<?php echo $bid[OrdersService::DATE];?>
+	<br/>
+<?php 
+}
+?>
+<br/>
+<input type="text" name="bid"/>
+<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id"/>
 <br/>
 <br/>
 <div class="unitBtn">
-	<button name="bid" value="1"><span><strong>Make a bid</strong></span></button>
+	<button name="makeBid" value="1"><span><strong>Make a bid</strong></span></button>
 </div>
 <br/>
 <br/>

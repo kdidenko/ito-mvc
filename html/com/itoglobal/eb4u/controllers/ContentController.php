@@ -113,6 +113,16 @@ class ContentController extends SecureActionControllerImpl {
 		$order = OrdersService::getOrders ($where);
 		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
 		
+		if (isset($requestParams['makeBid']) && $requestParams[OrdersService::BID]!=NULL){
+			$role = SessionService::getAttribute ( SessionService::ROLE );
+			$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 
+			$smoller = OrdersService::getBids($order[0][OrdersService::ID], $where);
+			if ($role!=NULL && $role==UsersService::ROLE_TR && $smoller==NULL && count($smoller)>=1){
+				OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
+			}
+		}
+		
+		
 		$images = OrdersService::getOrderImgs ($order[0][OrdersService::ID]);
 		foreach($images as $key => $value){
 			$part = explode('.',$value[UploadsService::PATH]);
@@ -120,6 +130,9 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
 		
+		$bids = OrdersService::getBids($order[0][OrdersService::ID]);
+		isset ( $bids ) ? $mvc->addObject ( OrdersService::BIDS, $bids ) : null;
+
 		return $mvc;
 	}
 	

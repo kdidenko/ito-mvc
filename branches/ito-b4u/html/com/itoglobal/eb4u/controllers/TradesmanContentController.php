@@ -310,6 +310,9 @@ class TradesmanContentController extends ContentController {
 		$orders = OrdersService::getOrders($id);
 		isset($orders) ? $mvc->addObject ( OrdersService::ORDERS, $orders) : NULL;
 		
+		$bookmarks = OrdersService::getOrderBookmarks($id);
+		isset($bookmarks) ? $mvc->addObject ( OrdersService::ORDER_BOOKMARKS, $bookmarks) : NULL;
+		
 		return $mvc;
 	}
 	

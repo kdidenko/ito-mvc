@@ -3,7 +3,14 @@ $data = $mvc->getObject(OrdersService::ORDERS);
 $images = $mvc->getObject(UploadsService::PATH);
 $bids = $mvc->getObject(OrdersService::BIDS);
 ?>
-
+<hr/>
+<br/>
+<ul class="viewIList">
+	<li class="itemNew"><a href="view-order.html?id=<?php echo $data[OrdersService::HASH]?>&bookmark">Make a bookmark</a></li>
+</ul>
+<br/>
+<br/>
+<hr/>
 <?php if(isset($data)&&count($data)>0&&$data!=NULL){
 if (isset($images)&&$images!=NULL){
 	foreach($images as $key => $image){?>

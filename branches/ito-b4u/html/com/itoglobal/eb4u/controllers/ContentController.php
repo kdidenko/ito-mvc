@@ -108,11 +108,16 @@ class ContentController extends SecureActionControllerImpl {
 	
 	public function handleViewOrder($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		
 		$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
 		$order = OrdersService::getOrders ($where);
 		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
 		
+		if (isset ($requestParams['bookmark'])){
+			OrdersService::createBookmark($order[0][OrdersService::ID], $id);
+			echo "bookmark";
+		}
 		if (isset($requestParams['makeBid']) && $requestParams[OrdersService::BID]!=NULL){
 			$role = SessionService::getAttribute ( SessionService::ROLE );
 			$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 

@@ -40,7 +40,7 @@ if (isset($images)&&$images!=NULL){
 <hr/>
 <form method="post" action="view-order.html">
 <?php if ($bids!=NULL){ ?>
-Current bid: <?php echo $bids[0][OrdersService::BID]; } ?> 
+Current bid: <?php echo $bids[0][OrdersService::BID];  ?> 
 <br/>
 <?php foreach($bids as $key => $bid){ ?>
 	<?php echo $bid[OrdersService::USER_ID]; ?> 
@@ -50,7 +50,7 @@ Current bid: <?php echo $bids[0][OrdersService::BID]; } ?>
 	<?php echo $bid[OrdersService::DATE];?>
 	<br/>
 <?php 
-}
+} }
 ?>
 <br/>
 <input type="text" name="bid"/>

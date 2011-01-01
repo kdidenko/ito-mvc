@@ -62,6 +62,13 @@
 			<template name="$1.html" path="templates/views/sidebars/tradesman/planblock.html" />
 		</role>
 	</action>
+	
+	<action name="/carousel.html" id="carousel">
+		<controller class="com.itoglobal.eb4u.controllers.FooterController" 
+			method="handleCarousel" />
+		<template name="carousel.html" path="templates/views/navigation/common/carousel.html" />
+	</action>
+	
 	<!-- Sidebar views mapping end -->
 	
 	<!-- Content views mapping begin -->

@@ -1,6 +1,18 @@
+<!-- 
+SELECT id, min(`bid`) FROM `bids` 
+WHERE `order_id`=2 AND `user_id`=42
+
+
+SELECT * 
+FROM  `orders` 
+LEFT JOIN bids ON bids.order_id = orders.id
+WHERE bids.user_id =42
+
+-->
 <?php 
 $orders = $mvc->getObject(OrdersService::ORDERS);
-//print_r($orders);
+$bookmarks = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
+print_r($bookmarks);
 ?>
 <ul class="viewIList">
 	<li class="itemNew"><a href="/new-order.html">New Order</a></li>

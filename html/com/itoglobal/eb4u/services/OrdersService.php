@@ -77,6 +77,10 @@ class OrdersService {
 	const UNTIL_PRICE = "price_until";
 	
 	/**
+	 * @var string defining the order_bookmarks table name
+	 */
+	const ORDER_BOOKMARKS = 'order_bookmarks';
+	/**
 	 * @var string defining the order_relations table name
 	 */
 	const ORDER_RELATIONS = 'order_relations';
@@ -112,6 +116,13 @@ class OrdersService {
 	 `user_id` INT NOT NULL ,
 	 `order_id` INT NOT NULL
 	) ENGINE = INNODB;
+	
+	CREATE TABLE  `order_bookmarks` (
+	 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	 `order_id` INT NOT NULL ,
+	 `user_id` INT NOT NULL
+	) ENGINE = INNODB;
+		
 	
 	CREATE TABLE  `order_relations` (
 	 `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
@@ -177,6 +188,26 @@ class OrdersService {
 				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
 				self::ORDER_RELATIONS . '.' . self::UPLOAD_ID;
 		$where = self::ORDER_ID . "='" . $order_id . "'"; 
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function createBookmark ($order_id, $user){
+		$into = self::ORDER_BOOKMARKS;
+		$fields = self::ORDER_ID . ', ' . self::USER_ID;
+		$values = "'" . $order_id . "','" . $user . "'";
+		$bookmark_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
+	public static function getOrderBookmarks ($user_id){
+		$fields = self::ORDERS . '.*';
+		$from = self::ORDER_BOOKMARKS . 
+				SQLClient::LEFT . SQLClient::JOIN . self::ORDERS . 
+				SQLClient::ON . self::ORDERS . '.' . self::ID . '=' . 
+				self::ORDER_BOOKMARKS . '.' . self::ORDER_ID;
+		$where = self::USER_ID . "='" . $user_id . "'"; 
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;

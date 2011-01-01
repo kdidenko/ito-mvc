@@ -34,6 +34,14 @@ class SidebarController extends SecureActionControllerImpl {
 		$mvc->addObject ( PlanService::CRNT_PLAN, $plan[PlanService::PLAN_NAME]);
 		return $mvc;
 	}
+	
+	public function handleHome($actionParams, $requestParams) {
+		$mvc = parent::handleActionRequest($actionParams, $requestParams);
+		$result = BargainsService::getBargainCatalog();
+		$mvc->addObject ( BargainsService::BARGAINS, $result );
+		
+		return $mvc;
+	}
 }
 
 ?>

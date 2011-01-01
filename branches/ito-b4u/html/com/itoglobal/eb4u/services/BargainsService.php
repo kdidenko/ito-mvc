@@ -81,6 +81,10 @@ class BargainsService {
 	 * @var string defining the status field name
 	 */
 	const HASH = 'hash';
+	/**
+	 * @var string defining the discount field name
+	 */
+	const DISCOUNT = 'discount';
 	
 	const BARGAIN_RELATIONS = 'bargain_relations';
  	const BARGAIN_ID = 'bargain_id';
@@ -90,16 +94,18 @@ class BargainsService {
 		$into = self::BARGAINS;
 		$date = gmdate ( "Y-m-d H:i:s" );
 		$hash = md5($date . $id);
+		$discount = $data[self::USUAL_PRICE] - $data[self::BARGAIN_PRICE];
+		$discount = round($discount / ($data[self::USUAL_PRICE]/100));
 		$fields = self::USER_ID . ', ' . self::BARGAIN_NAME . ', ' . self::BARGAIN_DESC . ', ' . 
 					self::CATEGORY_ID . ', ' . self::SUBCATEGORY_ID . ', ' . self::USUAL_PRICE . ', ' . 
-					self::BARGAIN_PRICE . ', ' . self::STREET . ', ' . 
+					self::BARGAIN_PRICE . ', ' . self::DISCOUNT . ', ' . self::STREET . ', ' . 
 					self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::WEBSITE . ', ' . self::FROM_DATE . ', ' . 
 					self::UNTIL_DATE . ', ' . self::NUMBER . ', ' . self::STATUS . ', ' . self::HASH;
 		$values = "'" . $id . "','" . $data[self::BARGAIN_NAME] . "','" . 
 					$data[self::BARGAIN_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
 					$data[self::SUBCATEGORY_ID] . "','" . $data[self::USUAL_PRICE] ."','" .
-					$data[self::BARGAIN_PRICE] . "','" .
+					$data[self::BARGAIN_PRICE] . "','" . $discount . "','" . 
 					$data[self::STREET] . "','" . $data[self::ZIP] ."','" .
 					$data[self::CITY] . "','" . $data[self::REGION] . "','" . 
 					$data[self::COUNTRY] . "','" . $data[self::WEBSITE] ."','" .
@@ -158,6 +164,35 @@ class BargainsService {
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
 
+	public static function getBargainCatalog ($footer=false) {
+		$fields = self::BARGAINS . '.' . self::ID . ',' .
+					self::BARGAINS . '.' . self::BARGAIN_NAME . ',' . 
+					self::BARGAINS . '.' . self::DISCOUNT . ',' .
+					UploadsService::UPLOADS . '.' . UploadsService::PATH; 
+		$from = self::BARGAINS . 
+				SQLClient::LEFT . SQLClient::JOIN . self::BARGAIN_RELATIONS . 
+				SQLClient::ON . self::BARGAIN_RELATIONS . '.' . self::BARGAIN_ID . '=' . 
+				self::BARGAINS . '.' . self::ID .
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . 
+				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' .
+				self::BARGAIN_RELATIONS . '.' . self::UPLOAD_ID;
+		$date = date('Y-m-d');
+		$where = self::UNTIL_DATE . '>=' . $date;
+		$orderby = $footer==true ? "RAND()" : self::DISCOUNT . ' ' . SQLClient::DESC;
+		$limit = $footer==true ? '0,10' : '0,5';
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, $limit );
+		if($result != null && isset($result) && count($result) > 0 ){ 
+			foreach($result as $key => $value){
+				$part = explode('.',$value[UploadsService::PATH]);
+				$result[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+			}
+		} else {
+			$result = false;
+		}
+		return $result;
+	}
+	
 	/**
 	 * Retrieves mail by specified mail id.
 	 * @param integer $hash the mail id

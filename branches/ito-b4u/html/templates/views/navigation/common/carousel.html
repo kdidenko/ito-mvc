@@ -1,24 +1,25 @@
 <?php
 $bargains = $mvc->getObject(BargainsService::BARGAINS);
 ?>
-<div class="wrapSide">
-	<div class="viewBox">
+<div class="wrapCarousel">
+	<div class="viewBox viewBoxC">
 		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
 		<div class="cL">
 			<div class="cR">
-				<div class="bodyBox viewSList">
-					<h2>_i18n{Bargains Catalog}</h2>
-					<ul>
+				<div class="bodyBox">
+					<div class="itemClip">
+						<ul>
 <?php 				if (isset($bargains)&&$bargains!=NULL){
 						foreach ($bargains as $key => $bargain){?>						
-						<li <?php if($key==0) echo 'class="itemFirst"';?>>
+						<li>
 							<a href="#" title="<?php echo $bargain[BargainsService::BARGAIN_NAME];?>">
-								<img width="52" height="52" src="<?php echo $bargain[UploadsService::PATH];?>" alt="<?php echo $bargain[BargainsService::BARGAIN_NAME];?>" />
-								<span><?php echo $bargain[BargainsService::BARGAIN_NAME];?></span>
+								<span class="itemImg"><img height="72" src="<?php echo $bargain[UploadsService::PATH];?>" alt="<?php echo $bargain[BargainsService::DISCOUNT];?>% _i18n{Discount}" /></span>
+								<span><?php echo $bargain[BargainsService::DISCOUNT];?>% _i18n{Discount}</span>
 							</a>
 						</li>
 <?php }} ?>
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

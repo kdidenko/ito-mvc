@@ -6,62 +6,160 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 $countries = $mvc->getObject(CountryService::COUNTRY);
 ?>
 <form action="view-orders.html" method="post">
-phrase <input name="order_name" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/><br/><br/>
-
-country
-				<select name="country" class="gSubCategory">
-					<option value="all">all</option>
-<?php			if (isset($countries) && $countries!=NULL){ 
-					foreach($countries as $key=>$country){ ?>						
-						<option <?php echo isset($_POST['country'])&&$country[CountryService::ID]==$_POST['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
-<?php 				} 
-				} ?>
-				</select>
-region
-				<select name="region" class="gCategory">
-					<option value="all">all</option>
-<?php			if (isset($regions) && $regions!=NULL){ 
-					foreach($regions as $key=>$region){ ?>
-						<option <?php echo isset($_POST['region'])&&$region[RegionService::ID]==$_POST['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
-<?php 				} 
-				} ?>
-				</select>
-<br/><br/>
-category_id
-				<select name="category_id" class="gCategory">
-					<option value="all">all</option>
-<?php			if (isset($categories) && $categories!=NULL){ 
+	<div class="wrapLSearch">
+		<div class="greyBox">
+			<div class="viewBox viewBoxC">
+				<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+				<div class="cL">
+					<div class="cR">
+						<div class="bodyBox">
+							<h2>Filter</h2>
+							<div class="viewFilter">
+								<dl>
+									<dt>Category</dt>
+									<dd>
+										<select name="category_id" class="gCategory">
+											<option value="all">all</option>
+						<?php			if (isset($categories) && $categories!=NULL){ 
 					foreach($categories as $key=>$category){ ?>
-						<option <?php echo isset($_POST['category_id'])&&$category[CategoryService::ID]==$_POST['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 				} 
+												<option <?php echo isset($_POST['category_id'])&&$category[CategoryService::ID]==$_POST['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+						<?php 				} 
 				} ?>
-				</select>
-subcategory_id
-				<select name="subcategory_id" class="gSubCategory">
-					<option value="all">all</option>
-<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+										</select>
+										<label>category_id</label>
+									</dd>
+									<dd>
+										<select name="subcategory_id" class="gSubCategory">
+											<option value="all">all</option>
+						<?php			if (isset($subcategories) && $subcategories!=NULL){ 
 					foreach($subcategories as $key=>$subcategory){ ?>						
-						<option <?php echo isset($_POST['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_POST['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-<?php 				} 
+												<option <?php echo isset($_POST['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_POST['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+						<?php 				} 
 				} ?>
-				</select>
-<br/><br/>		
-price from<input name="price_from" type="text" value="<? if(isset($_POST['price_from'])) echo $_POST['price_from']; ?>"/>
-to <input name="price_until" type="text" value="<? if(isset($_POST['price_until'])) echo $_POST['price_until']; ?>"/><br/>
-<br/>
-<input name="search" type="submit" value="Submit"/><br/>
-<hr></hr>
-<?php 
-if(isset($orders)&&count($orders)>0&&$orders!=NULL){
-foreach($orders as $key => $order){
+										</select>
+										<label>subcategory_id</label>
+									</dd>
+								</dl>
+								<dl>
+									<dt>Place</dt>
+									<dd>
+										<select name="country">
+											<option value="all">all</option>
+						<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+												<option <?php echo isset($_POST['country'])&&$country[CountryService::ID]==$_POST['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+						<?php 				} 
+				} ?>
+										</select>
+										<label>country</label>
+									</dd>
+									<dd>
+										<select name="region">
+											<option value="all">all</option>
+						<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+												<option <?php echo isset($_POST['region'])&&$region[RegionService::ID]==$_POST['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+						<?php 				} 
+				} ?>
+										</select>
+										<label>region</label>
+									</dd>
+								</dl>
+								<dl class="unitPrice">
+									<dt>Price</dt>
+									<dd>
+										<label> from</label>
+										<input class="inpTxt" name="price_from" type="text" value="<? if(isset($_POST['price_from'])) echo $_POST['price_from']; ?>"/>
+									</dd>
+									<dd>
+										<label>to</label>
+										<input class="inpTxt" name="price_until" type="text" value="<? if(isset($_POST['price_until'])) echo $_POST['price_until']; ?>"/>
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+			</div>
+		</div>
+	</div>
+	<div class="wrapRSearch">
+		<div class="greyBox">
+			<div class="viewBox viewBoxA">
+				<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+				<div class="cL">
+					<div class="cR">
+						<div class="bodyBox">
+							<h2>Find jobs</h2>
+							<div class="unitBSearch">
+								<p>
+									<input name="order_name" class="inpTxt" type="text"  value="<? if(isset($_POST['order_name'])) echo $_POST['order_name']; ?>"/>
+									<button name="search" type="submit"><span><strong>Search</strong></span></button>
+								</p>
+							</div>
+
+							<div class="unitESearch">
+								<div class="unitTPagination">
+									<p><span>3</span> results found for <span>empty</span></p>
+									<ul>
+										<li><span>1</span></li>
+										<li><a href="#" title="2">2</a></li>
+										<li><a href="#" title="3">3</a></li>
+									</ul>
+								</div>
+								<div class="viewLSearch">
+									<?php
+									if(isset($orders)&&count($orders)>0&&$orders!=NULL){
+									foreach($orders as $key => $order){?>
+									<div class="unitLSearch">
+										<div class="itemImg">
+											<img src="storage/uploads/orders/order-1292833967-thumbnail.jpg" alt="" />
+										</div>
+										<div class="itemText">
+											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[OrdersService::ORDER_NAME]; ?>"><?php echo $order[OrdersService::ORDER_NAME]; ?></a></h3>
+											<p><?php echo $order[OrdersService::ORDER_DESC]; ?></p>
+											<ul>
+												<li>category: <strong><?php echo $order[CategoryService::CAT_NAME]; ?></strong></li>
+												<li>country: <strong><?php echo $order[CountryService::COUNTRY_NAME]; ?></strong></li>
+												<li>subcategory: <strong><?php echo $order[SubCategoryService::SUBCAT_NAME]; ?></strong></li>
+												<li>city: <strong><?php echo $order[OrdersService::CITY]; ?></strong></li>
+											</ul>
+										</div>
+										<div class="itemPrice">
+											<?php echo $order[OrdersService::PRICE]; ?> &euro;
+										</div>
+									</div>
+									<?php }
+									} else { ?>
+									NO ORDER LIKE YOU WHANT
+									<?php } ?>
+								</div>
+								<div class="unitBPagination">
+									<ul>
+										<li><span>1</span></li>
+										<li><a href="#" title="2">2</a></li>
+										<li><a href="#" title="3">3</a></li>
+									</ul>
+								</div>
+								 
+
+<!-- 
+	
 	echo "<br/>";
 	echo "<a href='/view-order.html?id=".$order['hash']."'>";
-	print_r($order);
+	//print_r($order);
 	echo "</a>";	
 	echo "<br/>";
-}
-} else { ?>
-NO ORDER LIKE YOU WHANT
-<?php } ?>
-
+	echo "<h3>".$order['order_name']."</h3>";
+	echo "<p>".$order['order_desc']."</p>";
+ -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+			</div>
+		</div>
+	</div>
 </form>

@@ -454,7 +454,7 @@ if(jQuery)(function($){
 	$(document).ready(function(){
 		$('.wrapRAdmin .viewBoxA').dataAn();
 		$('.wrapCarousel').carouselAn();
-		$('.viewBoxB .unitSearch, .viewBoxA .unitEqColumn, .viewBoxA .unitNt').categoryAn();
+		$('.viewBoxB .unitSearch, .viewBoxA .unitEqColumn, .viewBoxA .unitNt, .wrapLSearch').categoryAn();
 		$('.areaTxt').rtfAn();
 		$('.bodyBox').notificationAn();
 		$('.viewPlan').planAn();

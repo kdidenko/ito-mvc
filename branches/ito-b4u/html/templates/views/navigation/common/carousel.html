@@ -12,7 +12,7 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 <?php 				if (isset($bargains)&&$bargains!=NULL){
 						foreach ($bargains as $key => $bargain){?>						
 						<li>
-							<a href="#" title="<?php echo $bargain[BargainsService::BARGAIN_NAME];?>">
+							<a href="view-bargain.html?id=<?php echo $bargain[BargainsService::HASH]; ?>" title="<?php echo $bargain[BargainsService::BARGAIN_NAME];?>">
 								<span class="itemImg"><img height="72" src="<?php echo $bargain[UploadsService::PATH];?>" alt="<?php echo $bargain[BargainsService::DISCOUNT];?>% _i18n{Discount}" /></span>
 								<span><?php echo $bargain[BargainsService::DISCOUNT];?>% _i18n{Discount}</span>
 							</a>

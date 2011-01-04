@@ -1,7 +1,0 @@
-CREATE TABLE  `bids` (
- `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
- `bid` FLOAT NOT NULL ,
- `user_id` INT NOT NULL ,
- `order_id` INT NOT NULL
-) ENGINE = INNODB;
-ALTER TABLE  `bids` ADD  `date` DATETIME NOT NULL ;

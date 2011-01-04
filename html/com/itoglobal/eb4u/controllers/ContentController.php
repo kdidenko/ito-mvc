@@ -141,6 +141,40 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleViewBargain($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
+		$bargain = BargainsService::getBargains($where);
+		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
+		
+		if (isset ($requestParams['bookmark'])){
+			BargainsService::createBookmark($bargain[0][BargainsService::ID], $id);
+			echo "bookmark";
+		}
+		if (isset($requestParams['makeBid']) && $requestParams[BargainsService::BID]!=NULL){
+			$role = SessionService::getAttribute ( SessionService::ROLE );
+			$where = BargainsService::BID . '<=' . $requestParams[BargainsService::BID]; 
+			$smoller = BargainsService::getBids($bargain[0][BargainsService::ID], $where);
+			if ($role!=NULL && $role==UsersService::ROLE_TR && $smoller==NULL && count($smoller)>=1){
+				BargainsService::makeBid($requestParams[BargainsService::ID], $requestParams[BargainsService::BID]);
+			}
+		}
+		
+		
+		$images = BargainsService::getOrderImgs ($bargain[0][BargainsService::ID]);
+		foreach($images as $key => $value){
+			$part = explode('.',$value[UploadsService::PATH]);
+			$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+		}
+		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
+		
+		//$bids = BargainsService::getBids($bargain[0][BargainsService::ID]);
+		//isset ( $bids ) ? $mvc->addObject ( BargainsService::BIDS, $bids ) : null;
+
+		return $mvc;
+	}
 	
 /*	public static function createTeaser ($list){
 		if (count($list)>0){

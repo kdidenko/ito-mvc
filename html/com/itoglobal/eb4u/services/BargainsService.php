@@ -120,13 +120,25 @@ class BargainsService {
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 	}
 	
+	public static function getOrderImgs ($order_id){
+		$fields = self::BARGAIN_RELATIONS . '.*, ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
+		$from = self::BARGAIN_RELATIONS . 
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . 
+				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				self::BARGAIN_RELATIONS . '.' . self::UPLOAD_ID;
+		$where = self::BARGAIN_ID . "='" . $order_id . "'"; 
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
 	
 	/**
 	 * Retrieves the users bargains by specified user id.
 	 * @param integer $user the user id.
 	 * @return mixed bargains data or null if user with such id does not exists. 
 	 */
-	public static function getBargains ($user){
+	public static function getBargains ($where = NULL){
 		$fields = self::BARGAINS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
@@ -148,7 +160,6 @@ class BargainsService {
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::BARGAINS . '.' . self::USER_ID;
-		$where = self::USER_ID . '=' . $user;
 		$orderby = self::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );
@@ -168,6 +179,7 @@ class BargainsService {
 		$fields = self::BARGAINS . '.' . self::ID . ',' .
 					self::BARGAINS . '.' . self::BARGAIN_NAME . ',' . 
 					self::BARGAINS . '.' . self::DISCOUNT . ',' .
+					self::BARGAINS . '.' . self::HASH . ',' .
 					UploadsService::UPLOADS . '.' . UploadsService::PATH; 
 		$from = self::BARGAINS . 
 				SQLClient::LEFT . SQLClient::JOIN . self::BARGAIN_RELATIONS . 

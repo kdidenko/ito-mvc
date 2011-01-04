@@ -1,0 +1,80 @@
+<?php 
+$data = $mvc->getObject(BargainsService::BARGAINS);
+$images = $mvc->getObject(UploadsService::PATH);
+$bids = $mvc->getObject(OrdersService::BIDS);
+?>
+<hr/>
+<br/>
+<ul class="viewIList">
+	<li class="itemNew"><a href="view-order.html?id=<?php echo $data[OrdersService::HASH]?>&bookmark">Make a bookmark</a></li>
+</ul>
+<br/>
+<br/>
+<hr/>
+<?php if(isset($data)&&count($data)>0&&$data!=NULL){
+if (isset($images)&&$images!=NULL){
+	foreach($images as $key => $image){?>
+	
+		<img src='<?php echo $image['path']?>' >
+		
+<?php	}	} ?>
+<hr/>
+
+	<br/>
+	title: <?php echo $data[BargainsService::BARGAIN_NAME]; ?>
+	<br/>
+	desc: <?php echo htmlspecialchars_decode($data[BargainsService::BARGAIN_DESC]); ?>
+	<br/>
+	category: <?php echo $data[CategoryService::CAT_NAME]; ?>
+	<br/>
+	subcategory: <?php echo $data[SubCategoryService::SUBCAT_NAME]; ?>
+	<br/>
+	Time left: <?php echo $data[BargainsService::UNTIL_DATE]; ?>
+	<br/>
+	city: <?php echo $data[BargainsService::CITY]; ?>
+	<br/>
+	street: <?php echo $data[BargainsService::STREET]; ?>
+	<br/>
+	country: <?php echo $data[CountryService::COUNTRY_NAME]; ?>
+	<br/>
+	region: <?php echo $data[RegionService::REGION_NAME]; ?>
+	<br/>
+	count: <?php echo $data[BargainsService::NUMBER]; ?>
+	<br/>
+	<h2>bargain price: <?php echo $data[BargainsService::BARGAIN_PRICE]; ?></h2>
+	<br/>
+	usual price: <?php echo $data[BargainsService::USUAL_PRICE]; ?>
+	<br/>
+	<h2>discount: <?php echo $data[BargainsService::DISCOUNT]; ?>%</h2>
+	<br/>
+	
+<hr/>
+<form method="post" action="view-order.html">
+<?php if ($bids!=NULL){ ?>
+Current bid: <?php echo $bids[0][OrdersService::BID];  ?> 
+<br/>
+<?php foreach($bids as $key => $bid){ ?>
+	<?php echo $bid[BargainsService::USER_ID]; ?> 
+	-
+	<?php echo $bid[OrdersService::BID];?>
+	-
+	<?php echo $bid[BargainsService::DATE];?>
+	<br/>
+<?php 
+} }
+?>
+<br/>
+<input type="text" name="bid"/>
+<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id"/>
+<br/>
+<br/>
+<div class="unitBtn">
+	<button name="makeBid" value="1"><span><strong>Make a bid</strong></span></button>
+</div>
+<br/>
+<br/>
+</form>
+<hr/>
+<?php } else { ?>
+NO BARGAIN LIKE YOU WHANT
+<?php } ?>

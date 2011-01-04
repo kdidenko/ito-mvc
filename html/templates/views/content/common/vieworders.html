@@ -26,7 +26,17 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 						<?php 				} 
 				} ?>
 										</select>
-										<label>category_id</label>
+										<label>category</label>
+									</dd>
+									<dt>Category</dt>
+									<dd>
+									<ul>
+						<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+												<li><a><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
+						<?php 				} 
+				} ?>
+									</ul>
 									</dd>
 									<dd>
 										<select name="subcategory_id" class="gSubCategory">
@@ -37,7 +47,7 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 						<?php 				} 
 				} ?>
 										</select>
-										<label>subcategory_id</label>
+										<label>subcategory</label>
 									</dd>
 								</dl>
 								<dl>

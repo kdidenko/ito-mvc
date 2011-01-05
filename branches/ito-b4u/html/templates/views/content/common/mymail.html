@@ -40,8 +40,11 @@ $trash = $mvc->getObject(MailService::TRASH);
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>
-<?php 		}
-		}else {?>
+<?php 		} ?>
+			<tr>
+				<td colspan="5">there are only latest messages, <a href="/inbox.html">click for more...</a></td>
+			</tr>
+<?php		}else {?>
 			<tr class="unitNoData">
 				<td colspan="5">_i18n{No mail}</td>
 			</tr>
@@ -72,8 +75,11 @@ $trash = $mvc->getObject(MailService::TRASH);
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>
-<?php 		}
-		}else {?>
+<?php 		} ?>
+			<tr>
+				<td colspan="5">there are only latest messages, <a href="/outbox.html">click for more...</a></td>
+			</tr>
+<?php		}else {?>
 			<tr class="unitNoData">
 				<td colspan="5">_i18n{No mail}</td>
 			</tr>
@@ -107,8 +113,11 @@ $trash = $mvc->getObject(MailService::TRASH);
 				<td><?php echo $mail[MailService::CRDATE]; ?></td>
 				<td class="itemLast">A55</td>
 			</tr>
-<?php 		}
-		}else {?>
+<?php 		} ?>
+			<tr>
+				<td colspan="6">there are only latest messages, <a href="/trash.html">click for more...</a></td>
+			</tr>
+<?php		}else {?>
 			<tr class="unitNoData">
 				<td colspan="6">_i18n{No mail}</td>
 			</tr>

@@ -1,0 +1,12 @@
+Wellcome to YouCademy ###FIRST_NAME### ###LAST_NAME###!
+
+Your have one new message!
+
+Please go to:
+
+###CONFIRMATION_URL###
+
+to details view.
+
+Vielen Dank,
+Ihr Supportteam von www.angebotholen.at

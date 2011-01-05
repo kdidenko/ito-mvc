@@ -76,28 +76,34 @@
 		<role type="TR">
 			<controller class="com.itoglobal.eb4u.controllers.TradesmanContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/tradesman/$1.html" />
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 		<role type="PR">
 			<controller class="com.itoglobal.eb4u.controllers.PromoterContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/promoter/$1.html" />
 			<property name="template" value="templates/plain/created-account.txt"/>
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 		<role type="BR">
 			<controller class="com.itoglobal.eb4u.controllers.BookkeeperContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/bookkeeper/$1.html" />
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 		<role type="AR">
 			<controller class="com.itoglobal.eb4u.controllers.AdminContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/admin/$1.html" />
 			<property name="template" value="templates/plain/created-account.txt"/>
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 		<role type="UR">
 			<controller class="com.itoglobal.eb4u.controllers.UserContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/users/$1.html" />
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 		<role type="VR">
 			<controller class="com.itoglobal.eb4u.controllers.DefaultContentController" method="handle$1" />
 			<template name="content-$1.html" path="templates/views/content/default/$1.html" />
+			<property name="newMessage" value="templates/plain/new-message.txt"/>
 		</role>
 	</action>
 	<!-- Content views mapping end -->
@@ -335,6 +341,7 @@
 	<action name="/new-mail.html" id="newmail" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		
 		<forwards>
 			<target condition="onsuccess" location="/my-mail.html"/>
 			<target condition="onsignedoff" location="/login.html"/>

@@ -251,7 +251,9 @@ class ContentController extends SecureActionControllerImpl {
 			$getter = htmlspecialchars($requestParams [MailService::GETTER], ENT_QUOTES);
 			$getter_id = UsersService::getUserIdByName($getter);
 			if (isset($getter_id) && $getter_id!=NULL){
-				MailService::sendMail($subject, $text, $sender_id, $getter_id);
+				#prepare text for email 
+				$plain = $mvc->getProperty ( 'newMessage' );
+				MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
 				$this->forwardActionRequest ( $location );
 			} else {
 				$error [] .= '_i18n{No such user.}';

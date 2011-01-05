@@ -84,12 +84,14 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		
 		$orders = OrdersService::getOrders ($where);
-		foreach($orders as $key => $value){
-			if ($value[UploadsService::PATH]!=NULL){
-				$part = explode('.',$value[UploadsService::PATH]);
-				$orders[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
-			} else {
-				$orders[$key][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
+		if ($orders!=NULL){
+			foreach($orders as $key => $value){
+				if ($value[UploadsService::PATH]!=NULL){
+					$part = explode('.',$value[UploadsService::PATH]);
+					$orders[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+				} else {
+					$orders[$key][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
+				}
 			}
 		}
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;

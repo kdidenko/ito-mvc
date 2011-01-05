@@ -206,12 +206,12 @@ class MailService {
 	 * @param integer $to getter
 	 * @return mail id
 	 */
-	public static function sendMail($subject, $text, $from, $to){
+	public static function sendMail($subject, $text, $from, $to, $plain){
 		$date = gmdate ( "Y-m-d H:i:s" );
 		$hash = md5($date . $from);
 		$inbox = '3';
 		$outbox = '4';
-		#Insert new users to DB
+		#Insert new mail to DB
 		$into = self::MAILS;
 		$fields = self::SUBJECT . ', ' . self::TEXT . ', ' . self::SENDER_ID . ', ' . self::GETTER_ID . ', ' . 
 					self::CRDATE . ', ' . self::HASH . ', ' . self::STATUS;
@@ -225,6 +225,12 @@ class MailService {
 		$values = "'" . $subject . "','" . $text . "','" . $from . "','" . $to . "','" . $date . "','" . 
 					$hash ."','" . $inbox . "'";
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		
+		$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/view-mail.html?id=' . $hash;
+		$mail_to = UsersService::getUser($to);
+		#call method for sending mail
+		MailerService::replaceVars ( $mail_to[UsersService::EMAIL], null, $mail_to[UsersService::FIRSTNAME], $mail_to[UsersService::LASTNAME], $plain, $url );
+		
 		#get user id 
 		$id = $result;
 		return $result;

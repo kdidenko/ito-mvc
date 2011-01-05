@@ -29,7 +29,7 @@ if (isset($images)&&$images!=NULL){
 	<br/>
 	subcategory: <?php echo $data[SubCategoryService::SUBCAT_NAME]; ?>
 	<br/>
-	Time left: <?php echo $data[BargainsService::UNTIL_DATE]; ?>
+	Time left: <?php echo $data[BargainsService::TIME_LEFT]; ?>
 	<br/>
 	city: <?php echo $data[BargainsService::CITY]; ?>
 	<br/>
@@ -49,6 +49,7 @@ if (isset($images)&&$images!=NULL){
 	<br/>
 	
 <hr/>
+<!-- 
 <form method="post" action="view-order.html">
 <?php if ($bids!=NULL){ ?>
 Current bid: <?php echo $bids[0][OrdersService::BID];  ?> 
@@ -68,12 +69,15 @@ Current bid: <?php echo $bids[0][OrdersService::BID];  ?>
 <input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id"/>
 <br/>
 <br/>
+ -->
 <div class="unitBtn">
-	<button name="makeBid" value="1"><span><strong>Make a bid</strong></span></button>
+	<button name="buy" value="1"><span><strong>Buy</strong></span></button>
 </div>
 <br/>
 <br/>
+<!-- 
 </form>
+ -->
 <hr/>
 <?php } else { ?>
 NO BARGAIN LIKE YOU WHANT

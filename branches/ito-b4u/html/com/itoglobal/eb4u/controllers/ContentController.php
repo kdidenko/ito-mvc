@@ -84,6 +84,14 @@ class ContentController extends SecureActionControllerImpl {
 		}
 		
 		$orders = OrdersService::getOrders ($where);
+		foreach($orders as $key => $value){
+			if ($value[UploadsService::PATH]!=NULL){
+				$part = explode('.',$value[UploadsService::PATH]);
+				$orders[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+			} else {
+				$orders[$key][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
+			}
+		}
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
 		
 		$category = CategoryService::getCategories ();
@@ -112,6 +120,7 @@ class ContentController extends SecureActionControllerImpl {
 		
 		$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
 		$order = OrdersService::getOrders ($where);
+		$order[0]['time_left'] = self::countTimeLeft($order[0]['until_date']);
 		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
 		
 		if (isset ($requestParams['bookmark'])){
@@ -147,8 +156,11 @@ class ContentController extends SecureActionControllerImpl {
 		
 		$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
 		$bargain = BargainsService::getBargains($where);
-		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
 		
+		$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
+		
+		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
+
 		if (isset ($requestParams['bookmark'])){
 			BargainsService::createBookmark($bargain[0][BargainsService::ID], $id);
 			echo "bookmark";
@@ -176,6 +188,18 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	private function countTimeLeft($date_time_string){
+		$currenttime = time();
+	    $date_elements = explode('-',$date_time_string);
+	    $newtime= mktime(null, null,null, $date_elements[1],$date_elements[2], $date_elements[0]);
+	    
+	    $days=floor(($newtime-time())/86400);
+	    $hours=floor(($newtime-time())/3600-($days*24));
+	    $mins=floor(($newtime-time())/60-($days*1440)-($hours*60));
+	    $secs=floor(($newtime-time())-($days*86400)-($hours*3600)-($mins*60));
+		//echo "after days $days hours $hours mins $mins secs $secs";
+		return "after days $days hours $hours mins $mins secs $secs";
+	}
 /*	public static function createTeaser ($list){
 		if (count($list)>0){
 			foreach($list as $key => $value){

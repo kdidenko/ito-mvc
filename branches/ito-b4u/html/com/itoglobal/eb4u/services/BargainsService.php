@@ -70,6 +70,10 @@ class BargainsService {
 	 */
 	const UNTIL_DATE = 'until_date';
 	/**
+	 * @var string defining the time_left field name
+	 */
+	const TIME_LEFT = 'time_left';
+	/**
 	 * @var string defining the number field name
 	 */
 	const NUMBER = 'number';

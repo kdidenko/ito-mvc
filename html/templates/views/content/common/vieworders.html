@@ -111,7 +111,7 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 
 							<div class="unitESearch">
 								<div class="unitTPagination">
-									<p><span>3</span> results found for <span>empty</span></p>
+									<p><span><?php echo count($orders)?></span> results found for <span>empty</span></p>
 									<ul>
 										<li><span>1</span></li>
 										<li><a href="#" title="2">2</a></li>
@@ -124,7 +124,7 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 									foreach($orders as $key => $order){?>
 									<div class="unitLSearch">
 										<div class="itemImg">
-											<img src="storage/uploads/orders/order-1292833967-thumbnail.jpg" alt="" />
+											<img src="<?php echo $order[UploadsService::PATH]; ?>" alt="<?php echo $order[OrdersService::ORDER_NAME]; ?>" />
 										</div>
 										<div class="itemText">
 											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[OrdersService::ORDER_NAME]; ?>"><?php echo $order[OrdersService::ORDER_NAME]; ?></a></h3>

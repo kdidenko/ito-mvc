@@ -41,6 +41,10 @@ class StorageService {
 	 */
 	const DEF_USER_AVATAR = 'storage/uploads/default-avatar.jpg';
 	/**
+	 * @var string - default user avatar directory name 
+	 */
+	const DEF_ORDER_AVATAR = 'storage/uploads/default-order-avatar.jpg';
+	/**
 	 * @var string - templates directory name 
 	 */
 	const TEMPLATES = 'templates';

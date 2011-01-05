@@ -70,7 +70,7 @@ class MailService {
 	 * @param integer $user the user id.
 	 * @return mixed mails data or null if user with such id does not exists. 
 	 */
-	public static function getMails ($where){
+	public static function getMails ($where, $limit = NULL){
 		$fields = 't1.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::GETTER . SQLClient::FROM . '(' . 
 					SQLClient::SELECT . self::MAILS . '.*,' . UsersService::USERNAME . SQLClient::SQL_AS . self::SENDER;
 		$from = self::MAILS . SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . self::MAILS . '.' . 
@@ -79,7 +79,7 @@ class MailService {
 				self::GETTER_ID . '=' . UsersService::USERS . '.' . UsersService::ID;
 		$orderby = self::CRDATE . ' ' . SQLClient::DESC;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, $limit );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
@@ -117,37 +117,37 @@ class MailService {
 		return $result;
 	}
 	
-	public static function getInbox($user) {
+	public static function getInbox($user, $limit=NULL ) {
 		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=3';
-		$result = self::getMails($where);
+		$result = self::getMails($where, $limit);
 		$result = $result != false ? self::createDate($result, true) : false;
 		return $result;
 	}
 	
-	public static function getOutbox($user) {
+	public static function getOutbox($user, $limit=NULL ) {
 		$where = self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=4';
-		$result = self::getMails($where);
+		$result = self::getMails($where, $limit);
 		$result = $result != false ? self::createDate($result) : false;
 		return $result;
 	}
 	
-	public static function getDrafts($user) {
+	public static function getDrafts($user, $limit=NULL ) {
 		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=2';
 		$where .= ' OR ' . self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=2';
-		$result = self::getMails($where);
+		$result = self::getMails($where, $limit);
 		return $result;
 	}
 	
-	public static function getTrash($user) {
+	public static function getTrash($user, $limit=NULL ) {
 		$where = self::GETTER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=1';
 		$where .= ' OR ' . self::SENDER_ID . '=' . $user;
 		$where .= ' AND ' . self::STATUS . '=1';
-		$result = self::getMails($where);
+		$result = self::getMails($where, $limit);
 		$result = $result != false ? self::createDate($result, true) : false;
 		return $result;
 	}

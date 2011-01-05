@@ -282,18 +282,18 @@ class ContentController extends SecureActionControllerImpl {
 				null;
 		isset ( $requestParams [self::DEL] ) ? MailService::deleteMail ($requestParams [self::DEL]) : null;
 		
+		$limit = '0,5';
+		
 		#get inbox
-		//$inbox = self::createDate(MailService::getInbox( $id ));
-		$inbox = MailService::getInbox( $id );
-		//$inbox = self::createDate($inbox);
+		$inbox = MailService::getInbox( $id , $limit );
 		isset ( $inbox ) ? $mvc->addObject ( MailService::INBOX, $inbox ) : null;
 		
 		#get outbox
-		$outbox = MailService::getOutbox( $id );
+		$outbox = MailService::getOutbox( $id , $limit );
 		isset ( $outbox ) ? $mvc->addObject ( MailService::OUTBOX, $outbox ) : null;
 		
 		#get trash
-		$trash = MailService::getTrash( $id );
+		$trash = MailService::getTrash( $id , $limit );
 		isset ( $trash ) ? $mvc->addObject ( MailService::TRASH, $trash ) : null;
 		
 		return $mvc;

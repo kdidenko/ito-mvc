@@ -1,4 +1,4 @@
-Wellcome to YouCademy ###FIRST_NAME### ###LAST_NAME###!
+Dear ###FIRST_NAME### ###LAST_NAME###!
 
 Your have one new message!
 

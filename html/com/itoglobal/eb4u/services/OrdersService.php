@@ -58,6 +58,10 @@ class OrdersService {
 	 */
 	const UNTIL_DATE = 'until_date';
 	/**
+	 * @var string defining the time_left field name
+	 */
+	const TIME_LEFT = 'time_left';	
+	/**
 	 * @var string defining the imp_from_date field name
 	 */
 	const IMP_FROM_DATE = 'imp_from_date';
@@ -151,6 +155,17 @@ class OrdersService {
 	
 	/**
 	 * get Countries
+	 	SELECT orders. * , category.category_name, subcategory.subcategory_name, regions.region_name, country.country_name, users.username, uploads.path
+		FROM orders
+		LEFT JOIN category ON category.id = orders.category_id
+		LEFT JOIN subcategory ON subcategory.id = orders.subcategory_id
+		LEFT JOIN regions ON regions.id = orders.region
+		LEFT JOIN country ON country.id = orders.country
+		LEFT JOIN users ON users.id = orders.owner
+		LEFT JOIN order_relations ON order_relations.order_id = orders.id
+		LEFT JOIN uploads ON uploads.id = order_relations.upload_id
+		GROUP BY orders.id
+		LIMIT 0 , 30
 	 * @return array
 	 */
 	public static function getOrders ($where = NULL){
@@ -158,25 +173,33 @@ class OrdersService {
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME . 
-				', ' . UsersService::USERS . '.' . UsersService::USERNAME;
+				', ' . UsersService::USERS . '.' . UsersService::USERNAME .
+				', ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
 		$from = self::ORDERS . 
 				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
 				self::ORDERS . '.' . self::CATEGORY_ID . 
-				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
+				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY . SQLClient::ON . 
 				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
 				self::ORDERS . '.' . self::SUBCATEGORY_ID .
-				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
+				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS . SQLClient::ON . 
 				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
 				self::ORDERS . '.' . self::REGION . 
-				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
+				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY . SQLClient::ON . 
 				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
 				self::ORDERS . '.' . self::COUNTRY .
-				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
-				self::ORDERS . '.' . self::OWNER;
+				self::ORDERS . '.' . self::OWNER .
+				SQLClient::LEFT . SQLClient::JOIN . OrdersService::ORDER_RELATIONS . SQLClient::ON . 
+				OrdersService::ORDER_RELATIONS . '.' . OrdersService::ORDER_ID . '=' . 
+				self::ORDERS . '.' . self::ID .
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . SQLClient::ON . 
+				UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				OrdersService::ORDER_RELATIONS . '.' . OrdersService::UPLOAD_ID;
+		$groupBy = OrdersService::ORDERS . '.' . OrdersService::ID;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}

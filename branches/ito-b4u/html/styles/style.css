@@ -9,7 +9,7 @@ input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; pa
 select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:1px 3px; width:200px}
 textarea {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px}
 input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
-	* html input.inpChk {margin:1px 0 0 0}
+	* html input.inpChk {margin:6px 0 0 0}
 button::-moz-focus-inner {border:0; padding:0}
 button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
 	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
@@ -55,7 +55,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .wrapBtmLine {border-top:7px solid #850208; height:20px}
 /* ------------------ content wrap style ------------------ */
 .stationContent {float:left; width:970px}
-	.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:15px}
+	.greyBox {background:#EFEFEF url(../images/greyBg.png) repeat-x 0 bottom; position:relative; z-index:1; padding:25px 15px 15px 15px}
 	.greyBox .itemFace {position:absolute; z-index:1; top:-98px; right:0}
 	.greyBox .itemHand {position:absolute; z-index:1}
 	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
@@ -71,13 +71,13 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 /* enterprice wrap style */
 .wrapEqColumns {float:left; width:472px}
 	.wrapRight {float:right}
-	.wrapEqColumns .greyBox {width:442px; padding:15px 15px 80px 15px}
+	.wrapEqColumns .greyBox {width:442px; padding:25px 15px 80px 15px}
 	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
-	.wrapEqColumns .viewDlist {float:left; padding:14px 0 0 4px; width:230px}
+	.wrapEqColumns .viewDlist {float:left; padding:8px 0 0 4px; width:230px}
 	.wrapEqColumns .viewBoxC {width:195px; float:right}
 /* login & registration wrap style */
 .wrapLogin {float:left; width:970px}
-	.wrapLogin .greyBox {padding:15px; width:940px; text-align:center}
+	.wrapLogin .greyBox {width:940px; text-align:center}
 	.wrapLogin .viewBox {margin:10px auto 0 auto}
 /* admin wrap style */
 .wrapLAdmin {float:left; width:215px}
@@ -110,9 +110,9 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapEqColumns .wrapTitle {width:350px; margin:-95px 0 0 0}
 
 /* ------------------ box style ------------------ */
-.viewBox {position:relative; margin:10px 0 0 0}
+.viewBox {margin:0 0 10px 0; position:relative} /* position:relative is need??? */
 	.viewBox .bodyBox {background:#fff}
-.cL {padding:0 0 0 4px; background:url(../images/boxE01.png) repeat-y left 0}
+.cL {padding:0 0 0 4px; background:url(../images/boxE01.png) repeat-y left 0; position:relative; bo4rder:1px solid green}
 .cR {padding:0 4px 0 0; background:url(../images/boxE01.png) repeat-y right 0}
 .cT, .cT .cL, .cT .cR, .cB, .cB .cL, .cB .cR {position:relative; font-size:1px; line-height:1px; background:url(../images/boxE01.png); background-repeat:no-repeat; padding:0}
 	.cT, .cB {margin:0 12px 0 12px; background-image:url(../images/boxE01v.png); background-repeat:repeat-x}
@@ -140,8 +140,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .viewBoxC .cT, .viewBoxC .cB {background-image:url(../images/boxE04v.png)}
 .viewBoxC .bodyBox {background:#F5F5F3}
 
-.wrapCarousel {float:left; width:970px; padding:0 0 10px 0; border-top:1px solid #850208}
-	.wrapCarousel .itemClip {margin:0 17px; padding:5px 0; height:95px; width:936px; overflow:hidden; position:relative}
+.wrapCarousel {overflow:hidden; width:970px; padding:10px 0 0 0; border-top:1px solid #850208}
+	.wrapCarousel .itemClip {margin:0 13px; padding:5px 0; height:95px; width:936px; overflow:hidden; position:relative}
 	.wrapCarousel ul {width:1000em; position:absolute; left:0}
 	.wrapCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
 	.wrapCarousel li span, .wrapCarousel li a {display:block}
@@ -177,19 +177,19 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitYellow select {width:160px}
 	.unitYellow button span {background-position:right -78px}
 	.unitYellow button span strong {background-position:left -52px; color:#292929}
-.viewPlatform {float:left; width:442px; position:relative; padding:15px 0 0 0}
+.viewPlatform {float:left; width:442px; position:relative; padding:5px 0 10px 0}
 	.viewPlatform p {font-size:17px; font-weight:normal; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
 	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
-	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:0; left:0; z-index:1}
+	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:10px; left:0; z-index:1}
 /* list style */
-.viewDlist {float:right; width:195px}
-	.viewDlist h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 12px}
+.viewDlist {float:right; width:195px; padding:0 0 10px 0}
+	.viewDlist h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:0 5px 5px 12px}
 	.viewDlist ul {padding:0 5px 0 12px}
 	.viewDlist li {background:url(../images/listBullet.gif) no-repeat 0 7px; padding:0 0 0 10px}
 .viewTList {float:left; width:422px}
-	.viewTList ul {float:left; width:195px; padding:10px 0 0 16px}
-.viewEList {float:right; width:182px; padding:14px 0 0 0}
-	.viewEList h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:5px 5px 5px 0}
+	.viewTList ul {float:left; width:195px; padding:0 0 10px 16px}
+.viewEList {float:right; width:182px; padding:8px 0 0 0}
+	.viewEList h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:0 5px 5px 0}
 	.viewEList ul a {text-decoration:underline}
 
 
@@ -217,8 +217,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitABlock .unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
 	.unitABlock h3 {font-size:14px; padding:5px 0 8px}
 	
-	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:5px 14px; padding:6px 10px 4px 24px}
-	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:5px 14px; padding:6px 10px 4px 24px}
+	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:0 14px 5px 14px; padding:6px 10px 4px 24px}
+	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:0 14px 5px 14px; padding:6px 10px 4px 24px}
 	/* button style */
 	.unitABlock .unitBtn {width:678px; float:left; padding:4px 0}
 		.unitABlock .unitBtn button, .unitABlock .unitBtn a.linkBtn {float:right; margin:0 0 0 5px}
@@ -312,10 +312,16 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitNtEmpty p {padding:5px; background:#EFEFEF}
 
 .viewNtList {width:676px; padding:5px 4px 0 11px; overflow:hidden}
-	.viewNtList dt {float:left; width:100px; padding:5px 0 0 0; text-align:left}
-	.viewNtList dd {float:right; width:566px}
-	.viewNtList li {float:left; width:141px; padding:2px 0}
-	.viewNtList li label {text-align:left; padding:3px 10px 0 4px; width:auto}
+	.viewNtList dt {float:none; width:671px; overflow:hidden; padding:0; text-align:left; line-height:14px}
+	.viewNtList dd {float:none; width:671px; overflow:hidden}
+	.viewNtList dd li {float:left; width:162px; padding:2px 0 2px 5px}
+	.viewNtList dd li label {text-align:left; padding:2px 10px 0 4px; width:auto}
+	
+	.viewNtList dt span {float:left; padding:4px 0 4px 5px; font-weight:bold}
+	.viewNtList dt ul {float:right; overflow:hidden; padding:4px 0; position:relative}
+	.viewNtList dt li {float:left; padding:0 10px; position:relative; border-right:1px solid #393939; margin:0 -1px 0 0}
+	.viewNtList dt a {color:#9F0307; text-decoration:underline}
+	.viewNtList dt a:hover {text-decoration:none}
 /* date popup */
 .dPopup {position:absolute; z-index:199; background:#ccc; padding:2px; width:171px}
 	.dPopup a {color:#000; text-decoration:none; padding:3px 2px 0}

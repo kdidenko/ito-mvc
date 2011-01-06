@@ -39,6 +39,30 @@ if(jQuery)(function($){
 			f.autoRestart();
 		})
 	};
+	$.fn.checkedInputAn = function(params){
+		var conf = $.extend({
+			headerBlock:'dt',
+			textSelect:'Select all',
+			textDeSelect:'Deselect all',
+			contentBlock:'dd input[type=checkbox]'
+		}, params);
+		return this.each(function(){
+			var c=conf,o=$(this),h=$(c.headerBlock, o),
+				s=$('<li><a href="#" title="'+c.textSelect+'">'+c.textSelect+'</a></li>'),
+				d=$('<li><a href="#" title="'+c.textDeSelect+'">'+c.textDeSelect+'</a></li>');
+			if(h.html() != null){
+				h.append($('<ul />').append(s, d))
+				s.bind('click', function(){
+					$(c.contentBlock, o).attr('checked', true);
+					return false;
+				})
+				d.bind('click', function(){
+					$(c.contentBlock, o).attr('checked', false);
+					return false;
+				})
+			}
+		})
+	};
 	$.fn.fileAn = function(params){
 		var conf = $.extend({parentClass:'inpFile'}, params);
 		return this.each(function(){
@@ -459,6 +483,7 @@ if(jQuery)(function($){
 		$('.bodyBox').notificationAn();
 		$('.viewPlan').planAn();
 		$('.inpDate').datePicker();
+		$('.viewNtList').checkedInputAn();
 		//$('.itemPopup').popupAn();
 		//$('.nnn').lpAn();
 	});

@@ -168,7 +168,7 @@ class OrdersService {
 		LIMIT 0 , 30
 	 * @return array
 	 */
-	public static function getOrders ($where = NULL){
+	public static function getOrders ($where = NULL, $limit = NULL){
 		$fields = self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
@@ -199,8 +199,16 @@ class OrdersService {
 				OrdersService::ORDER_RELATIONS . '.' . OrdersService::UPLOAD_ID;
 		$groupBy = OrdersService::ORDERS . '.' . OrdersService::ID;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', $limit );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function countOrders ($where = NULL){
+		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::ORDERS;
+		$from = self::ORDERS;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
 		return $result;
 	}
 	

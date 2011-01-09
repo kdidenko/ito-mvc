@@ -54,6 +54,12 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$where = NULL;
+		$onpage = isset ( $requestParams ['onpage'] )&& $requestParams ['onpage'] !=NULL ? $requestParams ['onpage'] : 5;
+		if (isset ( $requestParams ['page'] )&& $requestParams ['page'] !=NULL ){ 
+			$limit = ($requestParams ['page']-1)*$onpage . "," . $onpage;
+		} else {
+			$limit = "0,$onpage";
+		}
 		if (isset ( $requestParams [OrdersService::ORDER_NAME] )&& $requestParams [OrdersService::ORDER_NAME] !=NULL ){ 
 			$where .= $where!=NULL ? ' AND ' : NULL;
 			$where .= OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . " LIKE '%" . $requestParams [OrdersService::ORDER_NAME] . "%'";
@@ -82,8 +88,7 @@ class ContentController extends SecureActionControllerImpl {
 			$where .= $where!=NULL ? ' AND ' : NULL;
 			$where .= OrdersService::ORDERS . '.' . OrdersService::SUBCATEGORY_ID . '=' . $requestParams [OrdersService::SUBCATEGORY_ID];
 		}
-		
-		$orders = OrdersService::getOrders ($where);
+		$orders = OrdersService::getOrders ($where, $limit);
 		if ($orders!=NULL){
 			foreach($orders as $key => $value){
 				if ($value[UploadsService::PATH]!=NULL){
@@ -95,6 +100,12 @@ class ContentController extends SecureActionControllerImpl {
 			}
 		}
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
+		
+		$all_orders = OrdersService::countOrders ($where);
+		isset ( $orders ) ? $mvc->addObject ( "count",  $all_orders[OrdersService::ORDERS] ) : null;
+		
+		$pages = $all_orders[OrdersService::ORDERS]/$onpage; 
+		isset ( $orders ) ? $mvc->addObject ( "pages",  $pages ) : null;
 		
 		$category = CategoryService::getCategories ();
 		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;

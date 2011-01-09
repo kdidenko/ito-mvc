@@ -4,8 +4,10 @@ $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 $regions = $mvc->getObject(RegionService::REGIONS);
 $countries = $mvc->getObject(CountryService::COUNTRY);
+$count = $mvc->getObject("count");
+$pages = $mvc->getObject("pages");
 ?>
-<form action="view-orders.html" method="get">
+<form action="view-orders.html" method="get" id="search">
 	<div class="wrapLSearch">
 		<div class="greyBox">
 			<div class="viewBox viewBoxC">
@@ -126,12 +128,29 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 
 							<div class="unitESearch">
 								<div class="unitTPagination">
-									<p>found <span><?php echo $orders!=NULL ? count($orders):0;?></span> results for your request</p>
+									<p>found <span><?php echo $count;?></span> results for your request</p>
 									<!-- <p>found <span><?php echo count($orders)?></span> results found for <span>empty</span></p> -->
 									<ul>
-										<li><span>1</span></li>
-										<li><a href="#" title="2">2</a></li>
-										<li><a href="#" title="3">3</a></li>
+										<?php for($i=0; $i<$pages; $i++){ ?>
+											<li>
+											<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
+												<span><?php echo $i+1; ?></span>
+											<?php }else{ ?>
+												<a href="/view-orders.html?&page=<?php echo $i+1; ?>
+													<?php echo isset($_GET['category_id']) ? '&category_id='.$_GET["category_id"] : NULL ; ?>
+													<?php echo isset($_GET['subcategory_id']) ? '&subcategory_id='.$_GET["subcategory_id"] : NULL ; ?>
+													<?php echo isset($_GET['country_id']) ? '&country_id='.$_GET["country_id"] : NULL ; ?>
+													<?php echo isset($_GET['region_id']) ? '&region_id='.$_GET["region_id"] : NULL ; ?>
+													<?php echo isset($_GET['price_from']) ? '&price_from='.$_GET["price_from"] : NULL ; ?>
+													<?php echo isset($_GET['price_until']) ? '&price_until='.$_GET["price_until"] : NULL ; ?>
+													<?php echo isset($_GET['order_name']) ? '&order_name='.$_GET["order_name"] : NULL ; ?>
+													<?php echo isset($_GET['onpage']) ? '&onpage='.$_GET["onpage"] : NULL ; ?>
+													<?php echo isset($_GET['search']) ? '&search='.$_GET["search"] : NULL ; ?>" title="1">
+												<?php echo $i+1; ?>
+												</a>
+											<?php }?>
+											</li>
+										<?php } ?>
 									</ul>
 								</div>
 								<div class="viewLSearch">
@@ -162,13 +181,37 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 									<?php } ?>
 								</div>
 								<div class="unitBPagination">
+									<select name="onpage" onchange="document.forms['search'].submit();">
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==1 ? "selected='selected'" : NULL ; ?>>1</option>
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==2 ? "selected='selected'" : NULL ; ?>>2</option>
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==3 ? "selected='selected'" : NULL ; ?>>3</option>
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==5 ? "selected='selected'" : NULL ; ?>>5</option>
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==10 ? "selected='selected'" : NULL ; ?>>10</option>
+										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==50 ? "selected='selected'" : NULL ; ?>>50</option>
+									</select>
 									<ul>
-										<li><span>1</span></li>
-										<li><a href="#" title="2">2</a></li>
-										<li><a href="#" title="3">3</a></li>
+										<?php for($i=0; $i<$pages; $i++){ ?>
+											<li>
+											<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
+												<span><?php echo $i+1; ?></span>
+											<?php }else{ ?>
+												<a href="/view-orders.html?&page=<?php echo $i+1; ?>
+													<?php echo isset($_GET['category_id']) ? '&category_id='.$_GET["category_id"] : NULL ; ?>
+													<?php echo isset($_GET['subcategory_id']) ? '&subcategory_id='.$_GET["subcategory_id"] : NULL ; ?>
+													<?php echo isset($_GET['country_id']) ? '&country_id='.$_GET["country_id"] : NULL ; ?>
+													<?php echo isset($_GET['region_id']) ? '&region_id='.$_GET["region_id"] : NULL ; ?>
+													<?php echo isset($_GET['price_from']) ? '&price_from='.$_GET["price_from"] : NULL ; ?>
+													<?php echo isset($_GET['price_until']) ? '&price_until='.$_GET["price_until"] : NULL ; ?>
+													<?php echo isset($_GET['order_name']) ? '&order_name='.$_GET["order_name"] : NULL ; ?>
+													<?php echo isset($_GET['onpage']) ? '&onpage='.$_GET["onpage"] : NULL ; ?>
+													<?php echo isset($_GET['search']) ? '&search='.$_GET["search"] : NULL ; ?>" title="1">
+												<?php echo $i+1; ?>
+												</a>
+											<?php }?>
+											</li>
+										<?php } ?>
 									</ul>
 								</div>
-								 
 
 <!-- 
 	

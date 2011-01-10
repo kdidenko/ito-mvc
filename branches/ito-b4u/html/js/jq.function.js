@@ -484,8 +484,7 @@ if(jQuery)(function($){
 		$('.viewPlan').planAn();
 		$('.inpDate').datePicker();
 		$('.viewNtList').checkedInputAn();
-		//$('.itemPopup').popupAn();
-		//$('.nnn').lpAn();
+		$('.unitBPagination select').bind('change', function(){$('form').submit()})
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

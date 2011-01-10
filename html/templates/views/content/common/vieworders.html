@@ -181,14 +181,17 @@ $pages = $mvc->getObject("pages");
 									<?php } ?>
 								</div>
 								<div class="unitBPagination">
-									<select name="onpage" onchange="document.forms['search'].submit();">
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==1 ? "selected='selected'" : NULL ; ?>>1</option>
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==2 ? "selected='selected'" : NULL ; ?>>2</option>
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==3 ? "selected='selected'" : NULL ; ?>>3</option>
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==5 ? "selected='selected'" : NULL ; ?>>5</option>
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==10 ? "selected='selected'" : NULL ; ?>>10</option>
-										<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==50 ? "selected='selected'" : NULL ; ?>>50</option>
-									</select>
+									<div class="itemPage">
+										<label>Items per page:</label>
+										<select name="onpage">
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==1 ? "selected='selected'" : NULL ; ?>>1</option>
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==2 ? "selected='selected'" : NULL ; ?>>2</option>
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==3 ? "selected='selected'" : NULL ; ?>>3</option>
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==5 ? "selected='selected'" : NULL ; ?>>5</option>
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==10 ? "selected='selected'" : NULL ; ?>>10</option>
+											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==50 ? "selected='selected'" : NULL ; ?>>50</option>
+										</select>
+									</div>
 									<ul>
 										<?php for($i=0; $i<$pages; $i++){ ?>
 											<li>

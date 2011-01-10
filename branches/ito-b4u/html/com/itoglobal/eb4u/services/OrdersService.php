@@ -233,14 +233,49 @@ class OrdersService {
 	}
 	
 	public static function getOrderBookmarks ($user_id){
-		$fields = self::ORDERS . '.*';
+		$fields =  self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
+					', ' . UsersService::USERS . '.' . UsersService::USERNAME;
 		$from = self::ORDER_BOOKMARKS . 
 				SQLClient::LEFT . SQLClient::JOIN . self::ORDERS . 
 				SQLClient::ON . self::ORDERS . '.' . self::ID . '=' . 
-				self::ORDER_BOOKMARKS . '.' . self::ORDER_ID;
+				self::ORDER_BOOKMARKS . '.' . self::ORDER_ID .
+				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::ORDERS . '.' . self::CATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::ORDERS . '.' . self::OWNER;
 		$where = self::USER_ID . "='" . $user_id . "'"; 
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function getCurrentOrders ($user_id){
+		$fields =  self::ORDERS . '.*, min(' . self::BIDS . '.' . self::BID . ') as bids, '. CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
+					', ' . UsersService::USERS . '.' . UsersService::USERNAME;
+/*
+		SELECT *, min(bids.bid)
+FROM  `orders` 
+LEFT JOIN bids ON bids.order_id = orders.id
+WHERE bids.user_id =42
+GROUP BY bids.order_id
+*/
+		$from = self::BIDS . 
+				SQLClient::LEFT . SQLClient::JOIN . self::ORDERS . 
+				SQLClient::ON . self::ORDERS . '.' . self::ID . '=' . 
+				self::BIDS . '.' . self::ORDER_ID .
+				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::ORDERS . '.' . self::CATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::ORDERS . '.' . self::OWNER;
+		$where = self::USER_ID . "='" . $user_id . "'"; 
+		$group = self::BIDS . '.' . self::ORDER_ID;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $group, '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}

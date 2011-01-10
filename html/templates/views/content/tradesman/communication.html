@@ -6,6 +6,7 @@ $remind_regions = $mvc->getObject(RemindService::REGION_ID);
 $status = $mvc->getObject(ContentController::STATUS);
 $data = $mvc->getObject(ContentController::RESULT);
 $errors = $mvc->getObject(ContentController::ERROR);
+$plans = $mvc->getObject(PlanService::PLAN);
 ?>
 <h2>_i18n{My Notification}</h2>
 <div class="unitABlock">
@@ -47,7 +48,7 @@ $errors = $mvc->getObject(ContentController::ERROR);
 					</div>
 				</div>
 				<div class="itemForm">
-					<label for="frmCs">_i18n{Sub-Category}:</label>
+					<label for="frmCs">_i18n{SubCategory}:</label>
 					<div class="itemData">
 						<select id="frmCs" name="subcategory" class="gSubCategory">
 		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
@@ -61,12 +62,20 @@ $errors = $mvc->getObject(ContentController::ERROR);
 					</div>
 				</div>
 				<div class="itemForm">
-					<label for="frmCp">Auftragsvolumen:</label>
+					<label for="frmCp">_i18n{Price} :</label>
 					<div class="itemData">
 						<select id="frmCp" name="plan">
-							<option>0-1.000 Euro</option>
-							<option>1.000-5.000 Euro</option>
-							<option>5.000-unbegrenzt</option>
+		<?php					if (isset($plans) && $plans!=NULL){ 
+									foreach($plans as $key=>$plan){ ?>
+										<option value="<?php echo $plan[PlanService::ID] ?>">
+											<?php if ($plan[PlanService::TENDER_TO]!=0) { ?>
+												_i18n{up to} <?php echo $plan[PlanService::TENDER_TO] ?> &euro;
+											<?php } else { ?>
+											 	_i18n{up to} <?php echo $plans[$key-1][PlanService::TENDER_TO] ?> &euro; _i18n{and more} 
+											 <?php } ?>
+										</option>
+		<?php 						}
+								} ?>
 						</select>
 					</div>
 				</div>
@@ -118,12 +127,29 @@ $errors = $mvc->getObject(ContentController::ERROR);
 					</div>
 				</div>
 				<div class="itemForm">
-					<label for="frmCp<?php echo $data_key; ?>">Auftragsvolumen:</label>
+					<label for="for="frmCp<?php echo $data_key; ?>">_i18n{Price} :</label>
 					<div class="itemData">
 						<select id="frmCp<?php echo $data_key; ?>" name="plan[<?php echo $data_key; ?>]">
-							<option>0-1.000 Euro</option>
-							<option>1.000-5.000 Euro</option>
-							<option>5.000-unbegrenzt</option>
+							<option selected="selected" value="<?php echo $remind[RemindService::PLAN_ID]?>">
+								<?php if ($remind[PlanService::TENDER_TO]!=0) { ?>
+									_i18n{up to} <?php echo $remind[PlanService::TENDER_TO] ?> &euro;
+								<?php } else { ?>
+								 	_i18n{all prices} 
+								 <?php } ?>
+							</option>
+		<?php					if (isset($plans) && $plans!=NULL){ 
+									foreach($plans as $key=>$plan){ 
+									if ($plan[PlanService::ID]!=$remind[RemindService::PLAN_ID]){ ?>
+										<option value="<?php echo $plan[PlanService::ID] ?>">
+											<?php if ($plan[PlanService::TENDER_TO]!=0) { ?>
+												_i18n{up to} <?php echo $plan[PlanService::TENDER_TO] ?> &euro;
+											<?php } else { ?>
+											 	_i18n{up to} <?php echo $plans[$key-1][PlanService::TENDER_TO] ?> &euro; _i18n{and more} 
+											 <?php } ?>
+										</option>
+		<?php 						}
+									}
+								} ?>
 						</select>
 					</div>
 				</div>

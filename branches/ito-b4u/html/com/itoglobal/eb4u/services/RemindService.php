@@ -42,14 +42,18 @@ class RemindService {
 	
 	public static function getRemindsByUser ($user){
 		$fields = self::REMINDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
-				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME .
+				', ' . PlanService::PLAN . '.' . PlanService::TENDER_TO;
 		$from = self::REMINDERS . 
 				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
 				self::REMINDERS . '.' . self::CATEGORY_ID . 
 				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
 				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
-				self::REMINDERS . '.' . self::SUBCATEGORY_ID;
+				self::REMINDERS . '.' . self::SUBCATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . PlanService::PLAN .	SQLClient::ON . 
+				PlanService::PLAN . '.' . PlanService::ID . '=' . 
+				self::REMINDERS . '.' . self::PLAN_ID;
 		$where = self::USER_ID . '=' . $user;
 		$groupBy = self::CATEGORY_ID . ',' . self::SUBCATEGORY_ID . ', ' . self::PLAN_ID;
 		$orderBy = self::ID;

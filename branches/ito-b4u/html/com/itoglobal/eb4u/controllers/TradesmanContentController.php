@@ -162,6 +162,7 @@ class TradesmanContentController extends ContentController {
 					$value = array();
 					$categories = $requestParams[CategoryService::CATEGORY];
 					$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
+					$prices = $requestParams[PlanService::PLAN];
 					$plan = $requestParams[PlanService::PLAN];
 					$region = $requestParams['region'];
 					
@@ -170,7 +171,7 @@ class TradesmanContentController extends ContentController {
 					foreach ($region as $region_key=>$region_item){
 						foreach($categories as $key=>$category){
 							$subcategory = $subcategories[$key];
-							$price = 1;
+							$price = $prices[$key];
 							$region = $region_item;
 							$values[] .= $id . ', ' . $category . ', ' . $subcategory . ', ' . 
 										$price . ', ' . $region;
@@ -181,13 +182,13 @@ class TradesmanContentController extends ContentController {
 					
 					$mvc->addObject ( self::STATUS, 'successful' );
 				} else {
-					$mvc->addObject ( self::ERROR, '<br/>ERROR no notification' );
+					$mvc->addObject ( self::ERROR, '_i18n{Please, create new notification}' );
 				}
 			} else {
 				if (!isset($requestParams[CategoryService::CATEGORY])) {
 					RemindService::deleteByUser($id);
 				} else {
-					$mvc->addObject ( self::ERROR, '<br/>ERROR no region' );
+					$mvc->addObject ( self::ERROR, '_i18n{Please, select one or more regions}' );
 				}
 			}
 		}	
@@ -207,6 +208,9 @@ class TradesmanContentController extends ContentController {
 		
 		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
 		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
+		
+		$plans = PlanService::getPlans();
+		isset ( $plans ) ? $mvc->addObject ( PlanService::PLAN, $plans ) : null;
 		
 		return $mvc;
 	}
@@ -309,10 +313,12 @@ class TradesmanContentController extends ContentController {
 		
 		$orders = OrdersService::getOrders($id);
 		isset($orders) ? $mvc->addObject ( OrdersService::ORDERS, $orders) : NULL;
+
+		$crnt_orders = OrdersService::getCurrentOrders($id);
+		isset($crnt_orders) ? $mvc->addObject ( OrdersService::BIDS, $crnt_orders) : NULL;
 		
 		$bookmarks = OrdersService::getOrderBookmarks($id);
 		isset($bookmarks) ? $mvc->addObject ( OrdersService::ORDER_BOOKMARKS, $bookmarks) : NULL;
-		
 		return $mvc;
 	}
 	

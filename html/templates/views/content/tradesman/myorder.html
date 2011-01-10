@@ -3,16 +3,17 @@ SELECT id, min(`bid`) FROM `bids`
 WHERE `order_id`=2 AND `user_id`=42
 
 
-SELECT * 
+SELECT *, min(bids.bid)
 FROM  `orders` 
 LEFT JOIN bids ON bids.order_id = orders.id
 WHERE bids.user_id =42
+GROUP BY bids.order_id
 
 -->
 <?php 
 $orders = $mvc->getObject(OrdersService::ORDERS);
 $bookmarks = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
-print_r($bookmarks);
+$crnt_orders = $mvc->getObject(OrdersService::BIDS);
 ?>
 
 <h2>_i18n{Orders Won}</h2>
@@ -57,15 +58,18 @@ print_r($bookmarks);
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($crnt_orders)&& $crnt_orders!=NULL){?>
+			<?php foreach($crnt_orders as $key => $crnt_order){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a class="linkTr" href="#" title="A123">A123</a></td>
-				<td>Kategorie1</td>
-				<td>Beschreib...</td>
-				<td>user17</td>
-				<td>120.00 &euro;</td>
-				<td class="itemLast">130.00 &euro;</td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $crnt_order[OrdersService::HASH];?>" /></td>
+				<td><?php echo $crnt_order[OrdersService::ID];?></td>
+				<td><?php echo $crnt_order[CategoryService::CAT_NAME];?></td>
+				<td><?php echo $crnt_order[OrdersService::ORDER_DESC];?></td>
+				<td><?php echo $crnt_order[UsersService::USERNAME];?></td>
+				<td><?php echo $crnt_order[OrdersService::PRICE];?> &euro;</td>
+				<td class="itemLast"><?php echo $crnt_order[OrdersService::BIDS];?> &euro;	</td>
 			</tr>
+		<?php } } ?>
 		</tbody>
 	</table>
 </div>
@@ -83,14 +87,17 @@ print_r($bookmarks);
 			</tr>
 		</thead>
 		<tbody>
+		<?php if (isset($bookmarks)&& $bookmarks!=NULL){?>
+		<?php foreach($bookmarks as $key => $bookmark){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a class="linkTr" href="#" title="A730">A730</a></td>
-				<td>Kategorie1</td>
-				<td>Beschreib...</td>
-				<td>550.00 &euro;</td>
-				<td class="itemLast">user25</td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $bookmark[OrdersService::HASH];?>" /></td>
+				<td><?php echo $bookmark[OrdersService::ID];?></td>
+				<td><?php echo $bookmark[CategoryService::CAT_NAME];?></td>
+				<td><?php echo $bookmark[OrdersService::ORDER_DESC];?></td>
+				<td><?php echo $bookmark[OrdersService::PRICE];?> &euro;</td>
+				<td class="itemLast"><?php echo $bookmark[UsersService::USERNAME];?></td>
 			</tr>
+		<?php } } ?>
 		</tbody>
 	</table>
 </div>

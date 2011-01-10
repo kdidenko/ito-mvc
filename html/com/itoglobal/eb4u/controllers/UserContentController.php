@@ -133,6 +133,9 @@ class UserContentController extends ContentController {
 				OrdersService::setOrders($id, $requestParams, $paths);
 				$location = $this->onSuccess( $actionParams );
 				$this->forwardActionRequest ( $location );
+				
+				//send mails
+				
 			} else {
 				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
 			}

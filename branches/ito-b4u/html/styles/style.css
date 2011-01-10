@@ -395,4 +395,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitTPagination li a, .unitBPagination li a {float:left; padding:1px 4px 2px 4px; border:1px solid #393939; background:#E1E1E1}
 	.unitTPagination li a:hover, .unitBPagination li a:hover {border:1px solid #9F0307; color:#9F0307; background:#fff; text-decoration:none}
 	.unitTPagination li span, .unitBPagination li span {float:left; padding:1px 4px 2px 4px; border:1px solid #9F0307; color:#9F0307; font-weight:bold; background:#fff}
+	.unitBPagination .itemPage {float:left; padding:0 0 0 10px; margin:-1px 0 -2px 0; position:relative}
+	.unitBPagination label {float:left; padding:1px 5px 0 0}
+	.unitBPagination select {float:left; font-size:11px; width:50px}
 

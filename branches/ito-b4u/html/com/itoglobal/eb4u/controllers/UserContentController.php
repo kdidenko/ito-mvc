@@ -76,6 +76,17 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleMyBargains($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		$where = BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;
+		$boughtBargains = BargainsService::getBoughtBargain($where);
+		isset ( $boughtBargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $boughtBargains ) : null;
+		
+		return $mvc;
+	}
+	
 	public function handleMyOrder($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		

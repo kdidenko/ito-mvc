@@ -1,1 +1,37 @@
-<h2>_i18n{user my bargains page content}</h2>
+<?php 
+$bargains = $mvc->getObject(BargainsService::BARGAINS);
+?>
+<form action="my-bargains.html" method="post">
+<ul class="viewIList">
+</ul>
+<h2>_i18n{Bought Bargains}</h2>
+<div class="unitABlock unitABlockLast">
+	<table cellpadding="0" cellspacing="0" class="viewList">
+		<thead>
+			<tr>
+				<!-- <th class="itemChk"></th> -->
+				<th>_i18n{Bargain-No}</th>
+				<th>_i18n{Category}</th>
+				<th>_i18n{Name}</th>
+				<th>_i18n{Date}</th>
+				<th class="itemLast">_i18n{Price}</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php if (isset($bargains) && $bargains!=NULL) { ?>
+<?php 	foreach ($bargains as $key=>$value){ ?>
+			<tr>
+				<!-- <td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $value[BargainsService::HASH]?>" /></td> -->
+				<td><a href="view-bargain.html?id=<?php echo $value[BargainsService::HASH];?>" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
+				<td><?php echo $value[CategoryService::CAT_NAME]?></td>
+				<td><?php echo $value[BargainsService::BARGAIN_NAME]?></td>
+				<td><?php echo $value[BargainsService::BOUGHT_DATE]?></td>
+				<td class="itemLast"><?php echo $value[BargainsService::BARGAIN_PRICE]?> &euro;</td>
+			</tr>
+<?php 	} ?>
+<?php } ?>
+		</tbody>
+	</table>
+	<div class="unitBtn"></div>
+</div>
+</form>

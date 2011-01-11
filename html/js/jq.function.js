@@ -200,6 +200,7 @@ if(jQuery)(function($){
 							if(h.attr('checked')){v.push(h.attr('value')); i.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); i.removeClass('unitChecked')}
 							f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
 						});
+						$('a', i).bind('click', function(e){e.stopImmediatePropagation()})
 					}
 				})
 			}

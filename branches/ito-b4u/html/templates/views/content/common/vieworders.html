@@ -40,33 +40,6 @@ $pages = $mvc->getObject("pages");
 				} ?>
 										</select>
 									</dd>
-									<!-- 
-									<dt>Category</dt>
-									<dd>
-									<ul>
-									<?php if(isset($_GET['category_id'])){ ?>
-									<?php echo $category[CategoryService::CAT_NAME] ?>
-									<?php 	}else{ ?>
-						<?php			if (isset($categories) && $categories!=NULL){ 
-					foreach($categories as $key=>$category){ ?>
-												<li><a href="view-orders.html?category_id=<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
-						<?php 				} }
-				} ?>
-									</ul>
-									</dd>
-									<?php if(isset($_GET['category_id'])){ ?>
-									<dt>SubCategory</dt>
-									<dd>
-										<ul>
-						<?php			if (isset($subcategories) && $subcategories!=NULL){ 
-					foreach($subcategories as $key=>$subcategory){ ?>						
-												<li><a><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></a></li>
-						<?php 				} 
-				} ?>
-										</ul>
-									</dd>
-									<?php 	} ?>
-									 -->
 								</dl>
 								<dl>
 									<dt>Country</dt>
@@ -182,11 +155,13 @@ $pages = $mvc->getObject("pages");
 								</div>
 								<div class="unitBPagination">
 									<div class="itemPage">
-										<label>Items per page:</label>
+										<label>_i18n{Items per page}:</label>
 										<select name="onpage">
+											<!-- 
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==1 ? "selected='selected'" : NULL ; ?>>1</option>
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==2 ? "selected='selected'" : NULL ; ?>>2</option>
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==3 ? "selected='selected'" : NULL ; ?>>3</option>
+											 -->
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==5 ? "selected='selected'" : NULL ; ?>>5</option>
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==10 ? "selected='selected'" : NULL ; ?>>10</option>
 											<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==50 ? "selected='selected'" : NULL ; ?>>50</option>
@@ -215,17 +190,6 @@ $pages = $mvc->getObject("pages");
 										<?php } ?>
 									</ul>
 								</div>
-
-<!-- 
-	
-	echo "<br/>";
-	echo "<a href='/view-order.html?id=".$order['hash']."'>";
-	//print_r($order);
-	echo "</a>";	
-	echo "<br/>";
-	echo "<h3>".$order['order_name']."</h3>";
-	echo "<p>".$order['order_desc']."</p>";
- -->
 							</div>
 						</div>
 					</div>

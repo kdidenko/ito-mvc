@@ -73,6 +73,10 @@ class UserContentController extends ContentController {
 		$result = UsersService::getUser ( $id );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
 
+		$where = BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;
+		$boughtBargains = BargainsService::getBoughtBargain($where);
+		isset ( $boughtBargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $boughtBargains ) : null;
+		
 		return $mvc;
 	}
 	

@@ -2,6 +2,7 @@
 $data = $mvc->getObject(ContentController::RESULT);
 $psw_errors = $mvc->getObject(ContentController::PSW_ERROR);
 $status = $mvc->getObject(ContentController::STATUS);
+$bargains = $mvc->getObject(BargainsService::BARGAINS);
 ?>
 <h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
 <div class="unitABlock">
@@ -109,8 +110,8 @@ $status = $mvc->getObject(ContentController::STATUS);
 				<dd class="itemData">0</dd>
 			</dl>
 			<dl class="itemForm">
-				<dt>_i18n{How many orders you made?}</dt>
-				<dd class="itemData">0</dd>
+				<dt>_i18n{How many bargains you bought?}</dt>
+				<dd class="itemData"><?php echo count($bargains); ?></dd>
 			</dl>
 			<dl class="itemForm">
 				<dt>_i18n{How many recomendations you made?}</dt>

@@ -74,6 +74,11 @@ class OrdersService {
 	 */
 	const HASH = 'hash';
 	/**
+	 * @var string defining the crdate field name
+	 */
+	const CRDATE = 'crdate';
+	
+	/**
 	 * @var string defining the order_price field name
 	 */
 	const PRICE = 'order_price';
@@ -315,7 +320,7 @@ GROUP BY bids.order_id
 					self::STREET . ', ' . self::ZIP . ', ' . self::CITY . ', ' . self::REGION . ', ' . 
 					self::COUNTRY . ', ' . self::FROM_DATE . ', ' .	self::UNTIL_DATE . ', ' . 
 					self::IMP_FROM_DATE . ', ' . self::IMP_UNTIL_DATE . ', ' . 
-					self::HASH . ', ' . self::PRICE;
+					self::HASH . ', ' . self::PRICE . ', ' . self::CRDATE;
 		$values = "'" . $id . "','" . $data[self::ORDER_NAME] . "','" . 
 					$data[self::ORDER_DESC] . "','" . $data[self::CATEGORY_ID] . "','" . 
 					$data[self::SUBCATEGORY_ID] . "','" . 
@@ -324,8 +329,7 @@ GROUP BY bids.order_id
 					$data[self::COUNTRY] . "','" . 
 					$data[self::FROM_DATE] . "','" . $data[self::UNTIL_DATE] ."','" .
 					$data[self::IMP_FROM_DATE] . "','" . $data[self::IMP_UNTIL_DATE] ."','" . 
-					$hash ."','" . $data[self::PRICE] . "'";
-					
+					$hash ."','" . $data[self::PRICE] ."','" . $date . "'";
 		$order_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		foreach($paths as $key => $path){
 			$upload_id = UploadsService::setUploadsPath($path);

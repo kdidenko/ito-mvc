@@ -1,30 +1,34 @@
+<?php 
+$orders = $mvc->getObject(OrdersService::ORDERS);
+?>
 <ul class="viewIList">
 	<li class="itemNew"><a href="/new-order.html">New Order</a></li>
 </ul>
 <h2>_i18n{My Orders}</h2>
-<div class="unitABlock">
+<div class="unitABlock unitABlockLast">
 	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
-				<th class="itemChk"></th>
+				<th>_i18n{No}</th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
 				<th>_i18n{Job Description}</th>
 				<th>_i18n{End price}</th>
-				<th>_i18n{User}</th>
 				<th class="itemLast">_i18n{Date}</th>
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($orders)&& $orders!=NULL){?>
+			<?php foreach($orders as $key => $order){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a class="linkTr" href="#" title="A101">A101</a></td>
-				<td>Kategorie1</td>
-				<td>Beschreib...</td>
-				<td>120.00 &euro;</td>
-				<td>user1</td>
-				<td class="itemLast">01/06/2010</td>
+				<td><?php echo $key+1;?></td>
+				<td><?php echo $order[OrdersService::ID];?></td>
+				<td><?php echo $order[CategoryService::CAT_NAME];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_DESC];?>"><?php echo $order[OrdersService::ORDER_DESC];?></a></td>
+				<td><?php echo $order[OrdersService::PRICE];?> &euro;</td>
+				<td class="itemLast"><?php echo $order[OrdersService::CRDATE];?></td>
 			</tr>
+			<?php } } ?>
 		</tbody>
 	</table>
 </div>

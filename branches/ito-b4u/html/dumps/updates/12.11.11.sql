@@ -1,0 +1,1 @@
+ALTER TABLE  `orders` ADD  `crdate` DATETIME NOT NULL ;

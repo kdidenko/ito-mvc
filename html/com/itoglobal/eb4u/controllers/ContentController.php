@@ -173,17 +173,10 @@ class ContentController extends SecureActionControllerImpl {
 		$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
 		
 		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
-
-		if (isset ($requestParams['bookmark'])){
-			BargainsService::createBookmark($bargain[0][BargainsService::ID], $id);
-			echo "bookmark";
-		}
-		if (isset($requestParams['makeBid']) && $requestParams[BargainsService::BID]!=NULL){
+		if (isset($requestParams['buy']) && $bargain[0][BargainsService::NUMBER]>0){
 			$role = SessionService::getAttribute ( SessionService::ROLE );
-			$where = BargainsService::BID . '<=' . $requestParams[BargainsService::BID]; 
-			$smoller = BargainsService::getBids($bargain[0][BargainsService::ID], $where);
-			if ($role!=NULL && $role==UsersService::ROLE_TR && $smoller==NULL && count($smoller)>=1){
-				BargainsService::makeBid($requestParams[BargainsService::ID], $requestParams[BargainsService::BID]);
+			if ($role!=NULL && $role==UsersService::ROLE_UR){
+				BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
 			}
 		}
 		
@@ -194,10 +187,11 @@ class ContentController extends SecureActionControllerImpl {
 			$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
 		}
 		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
+		$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID] . ' AND ' . 
+				BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;
+		$boughtBargains = BargainsService::getBoughtBargain($where);
+		$mvc->addObject ( BargainsService::BOUGHT_BARGAIN, $boughtBargains);
 		
-		//$bids = BargainsService::getBids($bargain[0][BargainsService::ID]);
-		//isset ( $bids ) ? $mvc->addObject ( BargainsService::BIDS, $bids ) : null;
-
 		return $mvc;
 	}
 	

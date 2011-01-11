@@ -64,7 +64,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $crnt_order[OrdersService::HASH];?>" /></td>
 				<td><?php echo $crnt_order[OrdersService::ID];?></td>
 				<td><?php echo $crnt_order[CategoryService::CAT_NAME];?></td>
-				<td><?php echo $crnt_order[OrdersService::ORDER_DESC];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $crnt_order[OrdersService::HASH];?>" title="<?php echo $crnt_order[OrdersService::ORDER_DESC];?>"><?php echo $crnt_order[OrdersService::ORDER_DESC];?></a></td>
 				<td><?php echo $crnt_order[UsersService::USERNAME];?></td>
 				<td><?php echo $crnt_order[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $crnt_order[OrdersService::BIDS];?> &euro;	</td>
@@ -93,7 +93,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $bookmark[OrdersService::HASH];?>" /></td>
 				<td><?php echo $bookmark[OrdersService::ID];?></td>
 				<td><?php echo $bookmark[CategoryService::CAT_NAME];?></td>
-				<td><?php echo $bookmark[OrdersService::ORDER_DESC];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $bookmark[OrdersService::HASH];?>" title="<?php echo $bookmark[OrdersService::ORDER_DESC];?>"><?php echo $bookmark[OrdersService::ORDER_DESC];?></a></td>
 				<td><?php echo $bookmark[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $bookmark[UsersService::USERNAME];?></td>
 			</tr>

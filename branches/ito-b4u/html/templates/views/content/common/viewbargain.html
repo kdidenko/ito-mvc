@@ -1,15 +1,8 @@
 <?php 
 $data = $mvc->getObject(BargainsService::BARGAINS);
 $images = $mvc->getObject(UploadsService::PATH);
-$bids = $mvc->getObject(OrdersService::BIDS);
+$bought = $mvc->getObject(BargainsService::BOUGHT_BARGAIN);
 ?>
-<hr/>
-<br/>
-<ul class="viewIList">
-	<li class="itemNew"><a href="view-order.html?id=<?php echo $data[OrdersService::HASH]?>&bookmark">Make a bookmark</a></li>
-</ul>
-<br/>
-<br/>
 <hr/>
 <?php if(isset($data)&&count($data)>0&&$data!=NULL){
 if (isset($images)&&$images!=NULL){
@@ -49,29 +42,15 @@ if (isset($images)&&$images!=NULL){
 	<br/>
 	
 <hr/>
-<!-- 
-<form method="post" action="view-order.html">
-<?php if ($bids!=NULL){ ?>
-Current bid: <?php echo $bids[0][OrdersService::BID];  ?> 
-<br/>
-<?php foreach($bids as $key => $bid){ ?>
-	<?php echo $bid[BargainsService::USER_ID]; ?> 
-	-
-	<?php echo $bid[OrdersService::BID];?>
-	-
-	<?php echo $bid[BargainsService::DATE];?>
-	<br/>
-<?php 
-} }
-?>
-<br/>
-<input type="text" name="bid"/>
-<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id"/>
-<br/>
-<br/>
- -->
 <div class="unitBtn">
+<?php if (isset($bought) && $bought!=NULL){?>
+		you already bought
+		<?php echo count($bought); ?>
+<?php } ?>
+	<form method="post" action="view-bargain.html">
+		<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id"/>
 	<button name="buy" value="1"><span><strong>Buy</strong></span></button>
+	</form>
 </div>
 <br/>
 <br/>

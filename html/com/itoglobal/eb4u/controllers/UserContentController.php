@@ -93,8 +93,10 @@ class UserContentController extends ContentController {
 	
 	public function handleMyOrder($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		
-		$orders = OrdersService::getOrders ();
+		$where = OrdersService::OWNER . '=' . $id;
+		$orders = OrdersService::getOrders ($where);
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
 		
 		return $mvc;

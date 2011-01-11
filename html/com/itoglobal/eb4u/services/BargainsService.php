@@ -93,8 +93,11 @@ class BargainsService {
 	const BARGAIN_RELATIONS = 'bargain_relations';
  	const BARGAIN_ID = 'bargain_id';
  	const UPLOAD_ID = 'upload_id';
+ 	
+ 	const BOUGHT_BARGAIN = 'bought_bargain';
+ 	const BOUGHT_DATE = 'bought_date';
 	
-	public static function setBargain($id, $data, $path){
+ 	public static function setBargain($id, $data, $path){
 		$into = self::BARGAINS;
 		$date = gmdate ( "Y-m-d H:i:s" );
 		$hash = md5($date . $id);
@@ -178,7 +181,55 @@ class BargainsService {
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
-
+	
+	public static function getBoughtBargain ($where){
+		$fields = self::BOUGHT_BARGAIN . '.*, ' . self::BARGAINS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . 
+				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
+				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
+				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME . 
+				', ' . UsersService::USERS . '.' . UsersService::USERNAME; 
+		$from = self::BOUGHT_BARGAIN . 
+				SQLClient::LEFT . SQLClient::JOIN . self::BARGAINS . 
+				SQLClient::ON . self::BOUGHT_BARGAIN . '.' . self::BARGAIN_ID . '=' . 
+				self::BARGAINS . '.' . self::ID . 
+				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::BARGAINS . '.' . self::CATEGORY_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . SubCategoryService::SUBCATEGORY .	SQLClient::ON . 
+				SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::ID . '=' . 
+				self::BARGAINS . '.' . self::SUBCATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
+				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
+				self::BARGAINS . '.' . self::REGION . 
+				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
+				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
+				self::BARGAINS . '.' . self::COUNTRY .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::BARGAINS . '.' . self::USER_ID;
+		$orderby = self::BOUGHT_DATE;
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+ 	public static function buyBargain($bargain_id, $user_id){
+		// update number of availeble bargains
+		$from = self::BARGAINS;
+		$fields = self::NUMBER;
+		$vals = self::NUMBER . '-1'; 
+		$where = self::ID . " = '" . $bargain_id . "'";
+		# executing the query
+		$id = DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+		// insert new row in table
+ 		$into = self::BOUGHT_BARGAIN;
+		$date = gmdate ( "Y-m-d H:i:s" );
+		$fields = self::USER_ID . ', ' . self::BOUGHT_DATE . ', ' . self::BARGAIN_ID;
+		$values = "'" . $user_id . "','" . $date . "','" . $bargain_id . "'";
+		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+	}
+	
 	public static function getBargainCatalog ($footer=false) {
 		$fields = self::BARGAINS . '.' . self::ID . ',' .
 					self::BARGAINS . '.' . self::BARGAIN_NAME . ',' . 
@@ -193,7 +244,7 @@ class BargainsService {
 				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' .
 				self::BARGAIN_RELATIONS . '.' . self::UPLOAD_ID;
 		$date = date('Y-m-d');
-		$where = self::UNTIL_DATE . '>=' . $date;
+		$where = self::UNTIL_DATE . '>=' . $date . ' AND ' . self::NUMBER . '>0';
 		$orderby = $footer==true ? "RAND()" : self::DISCOUNT . ' ' . SQLClient::DESC;
 		$limit = $footer==true ? '0,10' : '0,5';
 		# executing the query

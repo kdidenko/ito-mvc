@@ -139,6 +139,16 @@
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	
+	<action name="/companies.html" id="companies">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	
+	<action name="/company.html" id="company">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	
 	<action name="/my-account.html" id="myaccount" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />

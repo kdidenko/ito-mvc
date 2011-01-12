@@ -77,6 +77,11 @@ class OrdersService {
 	 * @var string defining the crdate field name
 	 */
 	const CRDATE = 'crdate';
+	/**
+	 * @var string defining the bought field name
+	 */
+	const BOUGHT = 'bought';
+	
 	
 	/**
 	 * @var string defining the order_price field name
@@ -118,7 +123,30 @@ class OrdersService {
 	 */
 	const DATE = 'date';
 	
+	/**
+	 * @var string defining the bought_orders table name
+	 */
+	const BOUGHT_ORDERS = 'bought_orders';
+	/**
+	 * @var string defining the bought_date field name
+	 */
+	const BOUGHT_DATE = 'bought_date';
+	/**
+	 * @var string defining the bought_price field name
+	 */
+	const BOUGHT_PRICE = 'bought_price';
+	
+	
 	/*
+	ALTER TABLE  `orders` ADD  `bought` BOOL NOT NULL ;
+	CREATE TABLE  `bought_orders` (
+	 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	 `order_id` INT NOT NULL ,
+	 `user_id` INT NOT NULL ,
+	 `bought_date` DATETIME NOT NULL ,
+	 `bought_price` FLOAT NOT NULL
+	) ENGINE = INNODB;
+
 	CREATE TABLE  `bids` (
 	 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 	 `bid` FLOAT NOT NULL ,
@@ -209,6 +237,37 @@ class OrdersService {
 		return $result;
 	}
 	
+	public static function checkOrders (){
+		$date = date("Y-m-d h:m:s");
+		$fields = self::ORDERS . '.' . self::ID;
+		$from = self::ORDERS;
+		$where = self::BOUGHT . '=0 AND ' . self::UNTIL_DATE . "<'" . $date . "'";
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function buyOrder ($order_id){
+		$from = self::ORDERS;
+		$where = self::ID . " = '" . $order_id . "'";
+		$fields = self::BOUGHT;
+		$vals = 1;
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+		$bids = self::getBids($order_id);
+		if(isset($bids)&&$bids!=NULL){
+			$date = gmdate ( "Y-m-d H:i:s" );
+			$id = SessionService::getAttribute ( SessionService::USERS_ID );
+			$into = self::BOUGHT_ORDERS;
+			$fields = self::BOUGHT_PRICE . ', ' . self::USER_ID . ', ' . self::ORDER_ID . ', ' . 
+						self::BOUGHT_DATE;
+			$values = 	"'" . $bids[0][self::BID] . "','" . $id . "','" . 
+						$order_id . "','" .	$date . "'";
+			$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
+		}
+	}
+		
 	public static function countOrders ($where = NULL){
 		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::ORDERS;
 		$from = self::ORDERS;

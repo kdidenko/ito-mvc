@@ -53,7 +53,15 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleViewOrders($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		$where = NULL;
+		//check 
+		$result = OrdersService::checkOrders();
+		if($result!=NULL){
+			foreach($result as $key => $order){
+				OrdersService::buyOrder ($order[OrdersService::ID]);
+			}
+		}
+		
+		$where = OrdersService::BOUGHT . '=0';
 		$onpage = isset ( $requestParams ['onpage'] )&& $requestParams ['onpage'] !=NULL ? $requestParams ['onpage'] : 5;
 		if (isset ( $requestParams ['page'] )&& $requestParams ['page'] !=NULL ){ 
 			$limit = ($requestParams ['page']-1)*$onpage . "," . $onpage;

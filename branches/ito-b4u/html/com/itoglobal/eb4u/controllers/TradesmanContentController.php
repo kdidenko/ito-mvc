@@ -232,7 +232,7 @@ class TradesmanContentController extends ContentController {
 			$bargains = BargainsService::getBargains($id);
 			isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
 		}else{
-			$mvc->addObject ( ContentController::ERROR, "You have no access yet. Please, upgrate your <a href='/my-plan.html' title='Change Plan'>plan</a>." );
+			$mvc->addObject ( ContentController::ERROR, "You have no access yet. Please, upgrade your <a href='/my-plan.html' title='Change Plan'>plan</a>." );
 		}
 		return $mvc;
 	}

@@ -151,10 +151,15 @@ class ContentController extends SecureActionControllerImpl {
 		
 		
 		$images = OrdersService::getOrderImgs ($order[0][OrdersService::ID]);
-		foreach($images as $key => $value){
-			$part = explode('.',$value[UploadsService::PATH]);
-			$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+		if ($images!=NULL){
+			foreach($images as $key => $value){
+				$part = explode('.',$value[UploadsService::PATH]);
+				$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+			}
+		} else {
+			$images[0][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
 		}
+		
 		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
 		
 		$bids = OrdersService::getBids($order[0][OrdersService::ID]);

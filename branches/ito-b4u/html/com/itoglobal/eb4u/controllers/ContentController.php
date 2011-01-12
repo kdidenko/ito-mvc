@@ -182,6 +182,15 @@ class ContentController extends SecureActionControllerImpl {
 			$role = SessionService::getAttribute ( SessionService::ROLE );
 			if ($role!=NULL && $role==UsersService::ROLE_UR){
 				BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
+				
+				$subject = $bargain[0][BargainsService::BARGAIN_NAME];
+				$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
+				$user = SessionService::getAttribute ( SessionService::USERNAME );
+				$text = $user . " bought one item <a href=\'/view-bargain.html?id=" . $bargain[0][BargainsService::HASH] . "\'>" . $bargain[0][BargainsService::BARGAIN_NAME] . "<\/a>";
+				$getter_id = $bargain[0][BargainsService::USER_ID];
+				#prepare text for email 
+				$plain = $mvc->getProperty ( 'newMessage' );
+				MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
 			}
 		}
 		

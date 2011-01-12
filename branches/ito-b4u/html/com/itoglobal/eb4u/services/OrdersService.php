@@ -239,7 +239,8 @@ class OrdersService {
 	
 	public static function checkOrders (){
 		$date = date("Y-m-d h:m:s");
-		$fields = self::ORDERS . '.' . self::ID;
+		$fields = self::ORDERS . '.' . self::ID . ',' .  self::ORDERS . '.' . self::OWNER . ',' .  
+				self::ORDERS . '.' . self::ORDER_NAME . ',' . self::ORDERS . '.' . self::HASH;
 		$from = self::ORDERS;
 		$where = self::BOUGHT . '=0 AND ' . self::UNTIL_DATE . "<'" . $date . "'";
 		# executing the query
@@ -266,6 +267,7 @@ class OrdersService {
 						$order_id . "','" .	$date . "'";
 			$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		}
+		return $bids;
 	}
 		
 	public static function countOrders ($where = NULL){

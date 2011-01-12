@@ -57,7 +57,18 @@ class ContentController extends SecureActionControllerImpl {
 		$result = OrdersService::checkOrders();
 		if($result!=NULL){
 			foreach($result as $key => $order){
-				OrdersService::buyOrder ($order[OrdersService::ID]);
+				$bids = OrdersService::buyOrder ($order[OrdersService::ID]);
+				
+				if(isset($bids)&&$bids!=NULL){
+					$subject = $order[OrdersService::ORDER_NAME];
+					$sender_id = 4;
+					$user = SessionService::getAttribute ( SessionService::USERNAME );
+					$text = "<b>Congratulation!</b><br\/> You have just won auction <a href=\'/view-bargain.html?id=" . $order[OrdersService::HASH] . "\'>" . $order[OrdersService::ORDER_NAME] . "<\/a>!";
+					$getter_id = $bids[0][OrdersService::USER_ID];
+					#prepare text for email 
+					$plain = $mvc->getProperty ( 'newMessage' );
+					MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
+				}
 			}
 		}
 		

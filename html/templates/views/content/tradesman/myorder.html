@@ -11,7 +11,7 @@ GROUP BY bids.order_id
 
 -->
 <?php 
-$orders = $mvc->getObject(OrdersService::ORDERS);
+$won_orders = $mvc->getObject(OrdersService::BOUGHT_ORDERS);
 $bookmarks = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
 $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 ?>
@@ -31,15 +31,18 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($won_orders)&& $won_orders!=NULL){?>
+			<?php foreach($won_orders as $key => $won_order){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a class="linkTr" href="#" title="A101">A101</a></td>
-				<td>Kategorie1</td>
-				<td>Beschreib...</td>
-				<td>120.00 &euro;</td>
-				<td>user1</td>
-				<td class="itemLast">01/06/2010</td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $won_order[OrdersService::HASH];?>" /></td>
+				<td><?php echo $won_order[OrdersService::ID];?></td>
+				<td><?php echo $won_order[CategoryService::CAT_NAME];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $won_order[OrdersService::HASH];?>" title="<?php echo $won_order[OrdersService::ORDER_DESC];?>"><?php echo $won_order[OrdersService::ORDER_DESC];?></a></td>
+				<td><?php echo $won_order[OrdersService::BOUGHT_PRICE];?> &euro;</td>
+				<td><?php echo $won_order[UsersService::USERNAME];?></td>
+				<td class="itemLast"><?php echo $won_order[OrdersService::BOUGHT_DATE];?></td>
 			</tr>
+			<?php } } ?>
 		</tbody>
 	</table>
 </div>
@@ -69,7 +72,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><?php echo $crnt_order[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $crnt_order[OrdersService::BIDS];?> &euro;	</td>
 			</tr>
-		<?php } } ?>
+			<?php } } ?>
 		</tbody>
 	</table>
 </div>

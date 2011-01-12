@@ -49,6 +49,14 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleCompanies($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$users = UsersService::getUsersList ();
+		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
+
+		return $mvc;
+	}
 
 	public function handleViewOrders($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );

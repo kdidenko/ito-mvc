@@ -316,7 +316,31 @@ class OrdersService {
 		return $result;
 	}
 	
+	public static function getBoughtOrder($user_id){
+		$fields =  self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
+					', ' . UsersService::USERS . '.' . UsersService::USERNAME . 
+					', ' . self::BOUGHT_ORDERS . '.' . self::BOUGHT_PRICE .
+					', ' . self::BOUGHT_ORDERS . '.' . self::BOUGHT_DATE;
+		$from = self::BOUGHT_ORDERS . 
+				SQLClient::LEFT . SQLClient::JOIN . self::ORDERS . 
+				SQLClient::ON . self::ORDERS . '.' . self::ID . '=' . 
+				self::BOUGHT_ORDERS  . '.' . self::ORDER_ID .
+				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::ORDERS . '.' . self::CATEGORY_ID .
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::ORDERS . '.' . self::OWNER;
+		$where = self::USER_ID . "='" . $user_id . "'"; 
+		# executing the query
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	
 	public static function getCurrentOrders ($user_id){
+		$date = date("Y-m-d h:m:s");
 		$fields =  self::ORDERS . '.*, min(' . self::BIDS . '.' . self::BID . ') as bids, '. CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
 					', ' . UsersService::USERS . '.' . UsersService::USERNAME;
 /*
@@ -336,7 +360,7 @@ GROUP BY bids.order_id
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::ORDERS . '.' . self::OWNER;
-		$where = self::USER_ID . "='" . $user_id . "'"; 
+		$where = self::USER_ID . "='" . $user_id . "' AND " . self::UNTIL_DATE . ">='" . $date . "'" ; 
 		$group = self::BIDS . '.' . self::ORDER_ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $group, '', '' );

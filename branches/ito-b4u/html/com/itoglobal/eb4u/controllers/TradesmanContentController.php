@@ -218,18 +218,22 @@ class TradesmanContentController extends ContentController {
 	public function handleMyBargains($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		
-		isset ( $requestParams [UsersService::ENABLED] ) ? BargainsService::updateFields ( $requestParams [UsersService::ENABLED], BargainsService::STATUS, '1' ) : NULL;
-		isset ( $requestParams [UsersService::DISABLE] ) ? BargainsService::updateFields ( $requestParams [UsersService::DISABLE], BargainsService::STATUS, '0' ) : NULL;
-		
-		isset ( $requestParams [self::DEL_ALL] ) ? 
-			//MailService::deleteMails ($requestParams ['itemSelect']) :
-			print_r($requestParams [self::DEL_ALL]) :
-				null;
-		
-		$bargains = BargainsService::getBargains($id);
-		isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
-		
+		$plan_id = SessionService::getAttribute(SessionService::PLAN_ID);
+		$plan_info = PlanService::getPlan($plan_id);
+		if ($plan_info[PlanService::BARGAINS]==1){
+			isset ( $requestParams [UsersService::ENABLED] ) ? BargainsService::updateFields ( $requestParams [UsersService::ENABLED], BargainsService::STATUS, '1' ) : NULL;
+			isset ( $requestParams [UsersService::DISABLE] ) ? BargainsService::updateFields ( $requestParams [UsersService::DISABLE], BargainsService::STATUS, '0' ) : NULL;
+			
+			isset ( $requestParams [self::DEL_ALL] ) ? 
+				//MailService::deleteMails ($requestParams ['itemSelect']) :
+				print_r($requestParams [self::DEL_ALL]) :
+					null;
+			
+			$bargains = BargainsService::getBargains($id);
+			isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
+		}else{
+			$mvc->addObject ( ContentController::ERROR, "You have no access yet. Please, upgrate your <a href='/my-plan.html' title='Change Plan'>plan</a>." );
+		}
 		return $mvc;
 	}
 	
@@ -311,8 +315,8 @@ class TradesmanContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		
-		$orders = OrdersService::getOrders($id);
-		isset($orders) ? $mvc->addObject ( OrdersService::ORDERS, $orders) : NULL;
+		$won_orders = OrdersService::getBoughtOrder($id);
+		isset($won_orders) ? $mvc->addObject ( OrdersService::BOUGHT_ORDERS, $won_orders) : NULL;
 
 		$crnt_orders = OrdersService::getCurrentOrders($id);
 		isset($crnt_orders) ? $mvc->addObject ( OrdersService::BIDS, $crnt_orders) : NULL;

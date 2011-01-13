@@ -158,40 +158,59 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
 		
-		$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
-		$order = OrdersService::getOrders ($where);
-		$order[0]['time_left'] = self::countTimeLeft($order[0]['until_date']);
-		isset ( $order ) ? $mvc->addObject ( OrdersService::ORDERS, $order[0] ) : null;
-		
-		if (isset ($requestParams['bookmark'])){
-			OrdersService::createBookmark($order[0][OrdersService::ID], $id);
-			echo "bookmark";
-		}
-		if (isset($requestParams['makeBid']) && $requestParams[OrdersService::BID]!=NULL){
-			$role = SessionService::getAttribute ( SessionService::ROLE );
-			$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 
-			$smoller = OrdersService::getBids($order[0][OrdersService::ID], $where);
-			if ($role!=NULL && $role==UsersService::ROLE_TR && $smoller==NULL && count($smoller)>=1){
-				OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
+		if(isset($requestParams[OrdersService::ID])){
+			$where = OrdersService::HASH . "='" . $requestParams[OrdersService::ID] . "'";
+			$order = OrdersService::getOrders ($where);
+			if(isset ( $order )&&$order!=NULL) {
+				$order[0]['time_left'] = self::countTimeLeft($order[0]['until_date']);
+				$mvc->addObject ( OrdersService::ORDERS, $order[0] );
 			}
-		}
 		
 		
-		$images = OrdersService::getOrderImgs ($order[0][OrdersService::ID]);
-		if ($images!=NULL){
-			foreach($images as $key => $value){
-				$part = explode('.',$value[UploadsService::PATH]);
-				$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
+			if (isset ($requestParams['bookmark'])){
+				OrdersService::createBookmark($order[0][OrdersService::ID], $id);
+				echo "bookmark";
 			}
-		} else {
-			$images[0][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
+			if (isset($requestParams['makeBid']) && $requestParams[OrdersService::BID]!=NULL){
+				$role = SessionService::getAttribute ( SessionService::ROLE );
+				if ($role!=NULL){
+					if ($role==UsersService::ROLE_TR){
+						if ($order[0][OrdersService::PRICE]>=$requestParams[OrdersService::BID]){
+							$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 
+							$smaller = OrdersService::getBids($order[0][OrdersService::ID], $where);
+							if ($smaller ==NULL && count($smaller)>=1){
+								OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
+								$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
+							} else {
+								$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then current bid} ".$smoller[0]['bid'] . " &euro;" );
+							}
+						} else {
+							$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then order price} ".$order[0][OrdersService::PRICE] . " &euro;" );
+						}
+					} else {
+						$mvc->addObject ( self::ERROR, "_i18n{Only tradesman can make a bid, you can} <a href='/registration.html?role=2' title='_i18n{register}'>_i18n{register}</a> like tradesman." );
+					}
+				} else {
+					$mvc->addObject ( self::ERROR, "_i18n{Please}, <a href='/login.html' title='_i18n{login}'>_i18n{login}</a> _i18n{if you alredy registred, or you can} <a href='/registration.html' title='_i18n{register}'>_i18n{register}</a>." );
+				}
+			}
+			
+			
+			$images = OrdersService::getOrderImgs ($order[0][OrdersService::ID]);
+			if ($images!=NULL){
+				foreach($images as $key => $value){
+					$part = explode('.',$value[UploadsService::PATH]);
+					$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
+				}
+			} else {
+				$images[0][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
+			}
+			
+			isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
+			
+			$bids = OrdersService::getBids($order[0][OrdersService::ID]);
+			isset ( $bids ) ? $mvc->addObject ( OrdersService::BIDS, $bids ) : null;
 		}
-		
-		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
-		
-		$bids = OrdersService::getBids($order[0][OrdersService::ID]);
-		isset ( $bids ) ? $mvc->addObject ( OrdersService::BIDS, $bids ) : null;
-
 		return $mvc;
 	}
 	

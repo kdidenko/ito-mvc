@@ -81,12 +81,11 @@ class OrdersService {
 	 * @var string defining the bought field name
 	 */
 	const BOUGHT = 'bought';
-	
-	
 	/**
 	 * @var string defining the order_price field name
 	 */
 	const PRICE = 'order_price';
+	
 	const FROM_PRICE = "price_from";
 	const UNTIL_PRICE = "price_until";
 	

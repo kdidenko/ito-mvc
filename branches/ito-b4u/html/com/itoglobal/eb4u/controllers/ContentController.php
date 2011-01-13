@@ -195,7 +195,7 @@ class ContentController extends SecureActionControllerImpl {
 								OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
 								$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
 							} else {
-								$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then current bid} ".$smoller[0]['bid'] . " &euro;" );
+								$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then current bid} ".$smaller[0]['bid'] . " &euro;" );
 							}
 						} else {
 							$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then order price} ".$order[0][OrdersService::PRICE] . " &euro;" );

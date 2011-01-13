@@ -2,62 +2,143 @@
 $data = $mvc->getObject(BargainsService::BARGAINS);
 $images = $mvc->getObject(UploadsService::PATH);
 $bought = $mvc->getObject(BargainsService::BOUGHT_BARGAIN);
+$error = $mvc->getObject(ContentController::ERROR);
+$save = $mvc->getObject(ContentController::STATUS);
 ?>
-<hr/>
-<?php if(isset($data)&&count($data)>0&&$data!=NULL){
-if (isset($images)&&$images!=NULL){
-	foreach($images as $key => $image){?>
-	
-		<img src='<?php echo $image['path']?>' >
-		
-<?php	}	} ?>
+<?php if(isset($data)&&count($data)>0&&$data!=NULL){?>
+<div class="wrapWSearch">
+	<div class="greyBox">
+		<div class="viewBox viewBoxA">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2><?php echo $data[BargainsService::BARGAIN_NAME]; ?></h2>
+						<div class="unitDBlock">
+							<div class="unitDLeft">
+								<?php if (isset($images)&&$images!=NULL){ ?>
+								<div class="unitImg">
+									<ul>
+										<?php foreach($images as $key => $image){ ?>
+										<li><a href="<?php echo $image['path']?>" title=""><img src='<?php echo $image['path2']?>' ></a></li>
+										<?php } ?>
+									</ul>
+								</div>
+								<?php } ?>
+							</div>
+							<div class="unitDRight">
+								<!-- start notification -->
+								<?php if (isset($error)){?>
+									<div class="itemWarning">
+										<p><?php echo $error?></p>
+									</div>
+								<?php } ?>
+								<?php if (isset($save)){?>
+									<div class="itemOk">
+										<p><?php echo $save?></p>
+									</div>
+								<?php } ?>
+								<!-- end notification -->
+								<dl>
+									<dt>_i18n{Description}:</dt>
+									<dd><?php echo htmlspecialchars_decode($data[BargainsService::BARGAIN_DESC]); ?></dd>
+								</dl>
+								<dl>
+									<dt>_i18n{Remnant Time}:</dt>
+									<dd><?php echo $data[BargainsService::TIME_LEFT]; ?></dd>
+								</dl>
+								<div class="unitLine"></div>
+								<div class="unitEqColumns">
+									<dl class="itemSmall">
+										<dt>_i18n{Category}:</dt>
+										<dd><?php echo $data[CategoryService::CAT_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>_i18n{SubCategory}:</dt>
+										<dd><?php echo $data[SubCategoryService::SUBCAT_NAME]; ?></dd>
+									</dl>
+								</div>
+								<div class="unitEqColumns">
+									<dl class="itemSmall">
+										<dt>_i18n{Country}:</dt>
+										<dd><?php echo $data[CountryService::COUNTRY_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>_i18n{State}:</dt>
+										<dd><?php echo $data[RegionService::REGION_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>_i18n{City}:</dt>
+										<dd><?php echo $data[BargainsService::CITY]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>_i18n{Street}:</dt>
+										<dd><?php echo $data[BargainsService::STREET]; ?></dd>
+									</dl>
+								</div>
+								<div class="unitLine"></div>
+								<div class="unitEqColumns">
+									<dl>
+										<dt>_i18n{Usual Price}:</dt>
+										<dd class="itemPrice"><?php echo $data[BargainsService::USUAL_PRICE]; ?> &euro;</dd>
+									</dl>
+									<dl>
+										<dt>_i18n{Bargain Price}:</dt>
+										<dd class="itemPrice"><?php echo $data[BargainsService::BARGAIN_PRICE]; ?> &euro;</dd>
+									</dl>
+									<dl>
+										<dt>_i18n{Discount}:</dt>
+										<dd class="itemPrice"><?php echo $data[BargainsService::DISCOUNT]; ?>%</dd>
+									</dl>
+									<dl>
+										<dt>_i18n{Number}:</dt>
+										<dd class="itemPrice"><?php echo $data[BargainsService::NUMBER]; ?></dd>
+									</dl>
+									<form method="post" action="view-bargain.html">
+									<?php if (isset($bought) && $bought!=NULL){?>
+										<dl>
+											<dt>_i18n{You already bought} :</dt>
+											<dd class="itemPrice"><?php echo count($bought); ?> _i18n{items}</dd>
+										</dl>
+									<?php } ?>
+										<p>
+											<input type="text" class="inpTxt" name="bid" />
+											<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id" />
+											<button name="buy" value="1"><span><strong>_i18n{Buy}</strong></span></button>
+										</p>
+									</form>
+								</div>
+								<div class="unitEqColumns">
+									<?php if (isset($bought)&&$bought!=NULL){ ?>
+										<table cellpadding="0" cellspacing="0">
+											<tr>
+												<th>_i18n{User}</th>
+												<th>_i18n{Date}</th>
+											</tr>
+											<?php foreach($bought as $key => $value){ ?>
+											<tr>
+												<td><?php echo $value[UsersService::USERNAME]; ?></td>
+												<td><?php echo $value[BargainsService::BOUGHT_DATE];?></td>
+											</tr>
+											<?php } ?>
+										</table>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+		</div>
+		<div class="lineHide"></div>
+	</div>
+</div>
 <hr/>
 
-	<br/>
-	title: <?php echo $data[BargainsService::BARGAIN_NAME]; ?>
-	<br/>
-	desc: <?php echo htmlspecialchars_decode($data[BargainsService::BARGAIN_DESC]); ?>
-	<br/>
-	category: <?php echo $data[CategoryService::CAT_NAME]; ?>
-	<br/>
-	subcategory: <?php echo $data[SubCategoryService::SUBCAT_NAME]; ?>
-	<br/>
-	Time left: <?php echo $data[BargainsService::TIME_LEFT]; ?>
-	<br/>
-	city: <?php echo $data[BargainsService::CITY]; ?>
-	<br/>
-	street: <?php echo $data[BargainsService::STREET]; ?>
-	<br/>
-	country: <?php echo $data[CountryService::COUNTRY_NAME]; ?>
-	<br/>
-	region: <?php echo $data[RegionService::REGION_NAME]; ?>
-	<br/>
-	count: <?php echo $data[BargainsService::NUMBER]; ?>
-	<br/>
-	<h2>bargain price: <?php echo $data[BargainsService::BARGAIN_PRICE]; ?></h2>
-	<br/>
-	usual price: <?php echo $data[BargainsService::USUAL_PRICE]; ?>
-	<br/>
-	<h2>discount: <?php echo $data[BargainsService::DISCOUNT]; ?>%</h2>
-	<br/>
-	
-<hr/>
-<div class="unitBtn">
-<?php if (isset($bought) && $bought!=NULL){?>
-		you already bought
-		<?php echo count($bought); ?>
-<?php } ?>
-	<form method="post" action="view-bargain.html">
-		<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id"/>
-	<button name="buy" value="1"><span><strong>Buy</strong></span></button>
-	</form>
-</div>
-<br/>
-<br/>
-<!-- 
-</form>
- -->
-<hr/>
+
+
+
 <?php } else { ?>
-NO BARGAIN LIKE YOU WHANT
+_i18n{NO BARGAIN LIKE YOU WHANT}
 <?php } ?>

@@ -133,7 +133,7 @@ class UserContentController extends ContentController {
 						$width = 100;
 						$path = StorageService::ORDERS_FOLDER . "order-$date-$key.jpg";
 						$paths [].= $path;
-						$path2 = StorageService::ORDERS_FOLDER . "order-$date-$key" . ImageService::SMALL . ".jpg";
+						$path2 = StorageService::ORDERS_FOLDER . "order-$date-$key-" . ImageService::SMALL . ".jpg";
 						if (isset ( $img ['name'] ) ) {
 							StorageService::uploadFile ( $path, $img );
 							self::setNoCashe();

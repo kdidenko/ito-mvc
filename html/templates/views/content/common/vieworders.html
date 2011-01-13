@@ -136,7 +136,7 @@ $pages = $mvc->getObject("pages");
 										</div>
 										<div class="itemText">
 											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[OrdersService::ORDER_NAME]; ?>"><?php echo $order[OrdersService::ORDER_NAME]; ?></a></h3>
-											<p><?php echo $order[OrdersService::ORDER_DESC]; ?></p>
+											<p><?php echo htmlspecialchars_decode($order[OrdersService::ORDER_DESC]); ?></p>
 											<ul>
 												<li>category: <strong><?php echo $order[CategoryService::CAT_NAME]; ?></strong></li>
 												<li>country: <strong><?php echo $order[CountryService::COUNTRY_NAME]; ?></strong></li>

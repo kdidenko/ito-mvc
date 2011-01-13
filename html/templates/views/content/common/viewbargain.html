@@ -2,6 +2,7 @@
 $data = $mvc->getObject(BargainsService::BARGAINS);
 $images = $mvc->getObject(UploadsService::PATH);
 $bought = $mvc->getObject(BargainsService::BOUGHT_BARGAIN);
+$boughtByUser = $mvc->getObject('count');
 $error = $mvc->getObject(ContentController::ERROR);
 $save = $mvc->getObject(ContentController::STATUS);
 ?>
@@ -95,10 +96,10 @@ $save = $mvc->getObject(ContentController::STATUS);
 										<dd class="itemPrice"><?php echo $data[BargainsService::NUMBER]; ?></dd>
 									</dl>
 									<form method="post" action="view-bargain.html">
-									<?php if (isset($bought) && $bought!=NULL){?>
+									<?php if (isset($boughtByUser) && $boughtByUser!=NULL){?>
 										<dl>
 											<dt>_i18n{You already bought} :</dt>
-											<dd class="itemPrice"><?php echo count($bought); ?> _i18n{items}</dd>
+											<dd class="itemPrice"><?php echo count($boughtByUser); ?> _i18n{items}</dd>
 										</dl>
 									<?php } ?>
 										<p>

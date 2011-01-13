@@ -52,12 +52,22 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleCompanies($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		$users = UsersService::getUsersList ();
+		$where = UsersService::ROLE . "='" . UsersService::ROLE_TR . "'";
+		$users = UsersService::getUsersList ($where);
 		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
 
 		return $mvc;
 	}
 
+	public function handleCompany($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$users = UsersService::getUser ($requestParams[UsersService::ID]);
+		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
+
+		return $mvc;
+	}
+	
 	public function handleViewOrders($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -232,41 +242,54 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleViewBargain($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		
-		$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
-		$bargain = BargainsService::getBargains($where);
-		
-		$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
-		
-		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
-		if (isset($requestParams['buy']) && $bargain[0][BargainsService::NUMBER]>0){
-			$role = SessionService::getAttribute ( SessionService::ROLE );
-			if ($role!=NULL && $role==UsersService::ROLE_UR){
-				BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
-				
-				$subject = $bargain[0][BargainsService::BARGAIN_NAME];
-				$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
-				$user = SessionService::getAttribute ( SessionService::USERNAME );
-				$text = $user . " bought one item <a href=\'/view-bargain.html?id=" . $bargain[0][BargainsService::HASH] . "\'>" . $bargain[0][BargainsService::BARGAIN_NAME] . "<\/a>";
-				$getter_id = $bargain[0][BargainsService::USER_ID];
-				#prepare text for email 
-				$plain = $mvc->getProperty ( 'newMessage' );
-				MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
+		if(isset($requestParams[OrdersService::ID])){
+			$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
+			$bargain = BargainsService::getBargains($where);
+			
+			$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
+			
+			isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
+			if (isset($requestParams['buy']) && $bargain[0][BargainsService::NUMBER]>0){
+				$role = SessionService::getAttribute ( SessionService::ROLE );
+				if ($role!=NULL){
+					if ($role==UsersService::ROLE_UR){
+						BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
+						
+						$subject = $bargain[0][BargainsService::BARGAIN_NAME];
+						$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
+						$user = SessionService::getAttribute ( SessionService::USERNAME );
+						$text = $user . " bought one item <a href=\'/view-bargain.html?id=" . $bargain[0][BargainsService::HASH] . "\'>" . $bargain[0][BargainsService::BARGAIN_NAME] . "<\/a>";
+						$getter_id = $bargain[0][BargainsService::USER_ID];
+						#prepare text for email 
+						$plain = $mvc->getProperty ( 'newMessage' );
+						MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
+						$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
+					} else {
+						$mvc->addObject ( self::ERROR, "_i18n{Only standart user can buy this item, you can} <a href='/registration.html?role=1' title='_i18n{register}'>_i18n{register}</a> like tradesman." );
+					}
+				} else {
+					$mvc->addObject ( self::ERROR, "_i18n{Please}, <a href='/login.html' title='_i18n{login}'>_i18n{login}</a> _i18n{if you alredy registred, or you can} <a href='/registration.html' title='_i18n{register}'>_i18n{register}</a>." );
+				}
 			}
-		}
-		
-		
-		$images = BargainsService::getOrderImgs ($bargain[0][BargainsService::ID]);
-		foreach($images as $key => $value){
-			$part = explode('.',$value[UploadsService::PATH]);
-			$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
-		}
-		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
-		$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID] . ' AND ' . 
-				BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;
-		$boughtBargains = BargainsService::getBoughtBargain($where);
-		$mvc->addObject ( BargainsService::BOUGHT_BARGAIN, $boughtBargains);
-		
+			
+			$images = BargainsService::getOrderImgs ($bargain[0][BargainsService::ID]);
+			foreach($images as $key => $value){
+				$part = explode('.',$value[UploadsService::PATH]);
+				$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
+			}
+			isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
+			
+			$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID];
+			$boughtBargains = BargainsService::getBoughtBargain($where);
+			$mvc->addObject ( BargainsService::BOUGHT_BARGAIN, $boughtBargains);
+			
+			if(isset($id)){
+				$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID] . ' AND ' . 
+						BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;
+				$boughtByUser = BargainsService::getBoughtBargain($where);
+				$mvc->addObject ( 'count', $boughtByUser);
+			}
+		}	
 		return $mvc;
 	}
 	

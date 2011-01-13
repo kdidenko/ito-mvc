@@ -1,5 +1,29 @@
-<h2>Yellow pages</h2>
-<br/>
-<a href="/company.html">1st company</a>
-<br/>
-<a href="/company.html">2nd company</a>
+<?php 
+$users = $mvc->getObject(UsersService::USERS);
+?>
+<?php if (isset($users)&&$users!=NULL){?>
+<hr/>
+<?php foreach($users as $key=> $user){?>
+	<img src="<?php echo $user[UsersService::AVATAR] ?>"/>
+	<br/>
+	<b><a href="/company.html?id=<?php echo $user[UsersService::ID]?>"><?php echo $user[UsersService::COMPANY] ?></a></b>
+	<br/>
+	<b>Desc:</b>
+	<br/>
+	<?php echo $user[UsersService::COMPANY_DESC] ?>
+	<br/>
+	<b>Address:</b>
+	<br/>
+	<?php echo $user[UsersService::ADDRESS] ?>,	<?php echo $user[UsersService::LOCATION] ?>
+	<br/>
+	<?php echo $user[UsersService::REGION] ?> , <?php echo $user[UsersService::COUNTRY] ?>
+	<br/>
+	<b>Category:</b>
+	<br/>
+	<?php echo $user[CategoryService::CAT_NAME] ?>
+	<br/>
+	<b>SubCategory:</b>
+	<br/>
+	<?php echo $user[SubCategoryService::SUBCAT_NAME] ?>
+	<hr/>
+<?php } } ?>

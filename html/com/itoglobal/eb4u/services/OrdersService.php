@@ -297,7 +297,15 @@ class OrdersService {
 		$bookmark_id = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 	}
 	
-	public static function getOrderBookmarks ($user_id){
+	public static function removeBookmark ($order_id, $user){
+		# setting the query variables
+		$from = self::ORDER_BOOKMARKS;
+		$where = self::ORDER_ID . " = '" . $order_id . "' AND " . self::USER_ID . " = '" . $user . "'";
+		# executing the query
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
+	}
+	
+	public static function getOrderBookmarks ($user_id, $bokmark_id=NULL){
 		$fields =  self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
 					', ' . UsersService::USERS . '.' . UsersService::USERNAME;
 		$from = self::ORDER_BOOKMARKS . 
@@ -311,6 +319,7 @@ class OrdersService {
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::ORDERS . '.' . self::OWNER;
 		$where = self::USER_ID . "='" . $user_id . "'"; 
+		$where .= $bokmark_id !=NULL ? " AND " . self::ORDER_ID . "='" . $bokmark_id . "'" : null; 
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
@@ -384,8 +393,11 @@ GROUP BY bids.order_id
 	}
 	
 	public static function getBids($order_id, $where = null){
-		$fields = '*';
-		$from = self::BIDS;
+		$fields = self::BIDS . '.*, ' . UsersService::USERS . '.' . UsersService::USERNAME;;
+		$from = self::BIDS . 
+				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
+				UsersService::USERS . '.' . UsersService::ID . '=' . 
+				self::BIDS . '.' . self::USER_ID;
 		$where = isset($where)&& $where!=NULL ? $where . ' AND ' : NULL; 
 		$where .= self::ORDER_ID . "='" . $order_id . "'"; 
 		$order_by = self::BID;

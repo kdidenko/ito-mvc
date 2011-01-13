@@ -167,10 +167,23 @@ class ContentController extends SecureActionControllerImpl {
 			}
 		
 		
-			if (isset ($requestParams['bookmark'])){
-				OrdersService::createBookmark($order[0][OrdersService::ID], $id);
-				echo "bookmark";
+			if (isset ($requestParams['addBookmark']) || isset ($requestParams['delBookmark'])){
+				$role = SessionService::getAttribute ( SessionService::ROLE );
+				if ($role!=NULL){
+					if ($role==UsersService::ROLE_TR){
+						if (isset ($requestParams['addBookmark'])){
+							OrdersService::createBookmark($order[0][OrdersService::ID], $id);
+							$mvc->addObject ( self::STATUS, "_i18n{You have successfully added a bookmark!}" );
+						} else {
+							OrdersService::removeBookmark($order[0][OrdersService::ID], $id);
+							$mvc->addObject ( self::STATUS, "_i18n{You have successfully remove a bookmark!}" );
+						}
+					}
+				} else {
+					$mvc->addObject ( self::ERROR, "_i18n{Please}, <a href='/login.html' title='_i18n{login}'>_i18n{login}</a> _i18n{if you alredy registred, or you can} <a href='/registration.html' title='_i18n{register}'>_i18n{register}</a>." );
+				}
 			}
+			
 			if (isset($requestParams['makeBid']) && $requestParams[OrdersService::BID]!=NULL){
 				$role = SessionService::getAttribute ( SessionService::ROLE );
 				if ($role!=NULL){
@@ -205,11 +218,13 @@ class ContentController extends SecureActionControllerImpl {
 			} else {
 				$images[0][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;
 			}
-			
 			isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
 			
 			$bids = OrdersService::getBids($order[0][OrdersService::ID]);
 			isset ( $bids ) ? $mvc->addObject ( OrdersService::BIDS, $bids ) : null;
+			
+			$bookmark = OrdersService::getOrderBookmarks($id, $order[0][OrdersService::ID]);
+			isset ( $bookmark ) ? $mvc->addObject ( OrdersService::ORDER_BOOKMARKS, $bookmark ) : null;
 		}
 		return $mvc;
 	}
@@ -264,8 +279,7 @@ class ContentController extends SecureActionControllerImpl {
 	    $hours=floor(($newtime-time())/3600-($days*24));
 	    $mins=floor(($newtime-time())/60-($days*1440)-($hours*60));
 	    $secs=floor(($newtime-time())-($days*86400)-($hours*3600)-($mins*60));
-		//echo "after days $days hours $hours mins $mins secs $secs";
-		return "after days $days hours $hours mins $mins secs $secs";
+		return "$days _i18n{days} $hours _i18n{hours} $mins _i18n{mins} $secs _i18n{secs}";
 	}
 /*	public static function createTeaser ($list){
 		if (count($list)>0){

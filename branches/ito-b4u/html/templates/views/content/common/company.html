@@ -1,1 +1,35 @@
-<h2>Company Details</h2>
+<?php 
+$user = $mvc->getObject(UsersService::USERS);
+?>
+<?php if (isset($user)&&$user!=NULL){?>
+<img src="<?php echo $user[UsersService::AVATAR] ?>"/>
+<br/>
+<h2><?php echo $user[UsersService::COMPANY] ?></h2>
+<br/>
+Category: <?php echo $user[CategoryService::CAT_NAME] ?>
+<br/>
+SubCategory: <?php echo $user[SubCategoryService::SUBCAT_NAME] ?>
+<br/>
+Address: <?php echo $user[UsersService::ADDRESS] ?>
+<br/>	
+City: <?php echo $user[UsersService::LOCATION] ?>
+<br/>
+Region: <?php echo $user[UsersService::REGION] ?>
+<br/> 
+Country: <?php echo $user[UsersService::COUNTRY] ?>
+<br/>
+ZIP: <?php echo $user[UsersService::ZIP] ?>
+<br/>
+Year: <?php echo $user[UsersService::COMPANY_YEAR] ?>
+<br/>
+Email: <?php echo $user[UsersService::EMAIL] ?>
+<br/>
+Phone: <?php echo $user[UsersService::PHONE] ?>
+<br/>
+Homepage: <?php echo $user[UsersService::HOMEPAGE] ?>
+<hr/>
+<b>Desc:</b>
+<br/>
+<?php echo $user[UsersService::COMPANY_DESC] ?>
+<hr/>
+<?php } ?>

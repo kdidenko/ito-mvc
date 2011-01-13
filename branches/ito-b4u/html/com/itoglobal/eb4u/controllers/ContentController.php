@@ -259,7 +259,7 @@ class ContentController extends SecureActionControllerImpl {
 		$images = BargainsService::getOrderImgs ($bargain[0][BargainsService::ID]);
 		foreach($images as $key => $value){
 			$part = explode('.',$value[UploadsService::PATH]);
-			$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+			$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
 		}
 		isset ( $images ) ? $mvc->addObject ( UploadsService::PATH, $images ) : null;
 		$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID] . ' AND ' . 

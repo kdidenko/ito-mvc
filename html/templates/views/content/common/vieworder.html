@@ -2,9 +2,10 @@
 $data = $mvc->getObject(OrdersService::ORDERS);
 $images = $mvc->getObject(UploadsService::PATH);
 $bids = $mvc->getObject(OrdersService::BIDS);
+$error = $mvc->getObject(ContentController::ERROR);
+$save = $mvc->getObject(ContentController::STATUS);
 ?>
 <?php if(isset($data)&&count($data)>0&&$data!=NULL){?>
-
 <div class="wrapWSearch">
 	<div class="greyBox">
 		<div class="viewBox viewBoxA">
@@ -29,6 +30,18 @@ $bids = $mvc->getObject(OrdersService::BIDS);
 								<?php } ?>
 							</div>
 							<div class="unitDRight">
+								<!-- start notification -->
+								<?php if (isset($error)){?>
+									<div class="itemWarning">
+										<p><?php echo $error?></p>
+									</div>
+								<?php } ?>
+								<?php if (isset($save)){?>
+									<div class="itemOk">
+										<p><?php echo $save?></p>
+									</div>
+								<?php } ?>
+								<!-- end notification -->
 								<dl>
 									<dt>desc:</dt>
 									<dd><?php echo htmlspecialchars_decode($data[OrdersService::ORDER_DESC]); ?></dd>

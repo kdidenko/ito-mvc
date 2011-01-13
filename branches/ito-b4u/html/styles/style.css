@@ -89,6 +89,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapLSearch .greyBox {width:185px}
 .wrapRSearch {float:right; width:729px}
 	.wrapRSearch .greyBox {width:699px}
+.wrapWSearch {float:left; width:970px}
+	.wrapWSearch .greyBox {width:940px}
 
 /* ------------------ title wrap style ------------------ */
 .wrapTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
@@ -374,8 +376,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewFilter input.inpTxt {width:75px}
 .unitBSearch {padding:5px 12px}
 	.unitBSearch p {overflow:hidden; width:667px; padding:0 0 10px 0}
-	.unitBSearch input.inpTxt {width:585px; float:left}
-	.unitBSearch button {float:right}
+	.unitBSearch input.inpTxt {width:585px; float:left; margin:0 5px 0 0}
 .viewLSearch {padding:0 12px; overflow:hidden}
 .unitLSearch {padding:10px 0; border-top:1px solid #ccc; overflow:hidden; width:667px; position:relative; margin:-1px 0 0 0}
 	.unitLSearch .itemImg {float:left; padding:0 10px 0 0}
@@ -399,3 +400,35 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitBPagination label {float:left; padding:1px 5px 0 0}
 	.unitBPagination select {float:left; font-size:11px; width:50px}
 
+.unitDBlock {overflow:hidden; padding:5px 0; width:932px}
+.unitDLeft {float:left; width:263px; padding:0 0 0 12px}
+	.unitDLeft .unitImg {background:#EFEFEF; padding:5px 5px 5px 10px; position:relative}
+	.unitDLeft .unitFake {background:#EFEFEF; left:10px; top:5px; width:243px; height:243px; position:absolute; z-index: 10}
+	.unitDLeft .unitSingle {height:243px; overflow:hidden}
+	.unitDLeft ul {overflow:hidden; width:248px}
+	.unitDLeft li {float:left; padding:0 5px 0 0}
+	.unitDLeft li a {float:left; overflow:hidden; position:relative} 
+	.unitDLeft li.itemActive a {border:2px solid #9F0307}
+	.unitDLeft li img {width:57px; vertical-align:top}
+	.unitDLeft li.itemActive img {margin:-2px; position:relative}
+	
+	.unitDLeft .unitSingle {padding:0 0 5px 0}
+	.unitDLeft .unitSingle img {width:243px; vertical-align:top}
+	
+.unitDRight {float:right; width:630px; padding:0 12px 0 0}
+	.unitDRight dl {width:630px; overflow:hidden; padding:4px 0}
+	.unitDRight dt {float:left; width:90px; font-weight:bold}
+	.unitDRight dd {float:right; width:525px}
+	.unitDRight dd.itemPrice {font-size:15px; font-weight:bold; color:#9F0307; margin:-1px 0 0 0}
+	.unitDRight .unitEqColumns {float:left; width:315px; padding:4px 0}
+	.unitDRight .unitEqColumns dl {width:305px}
+	.unitDRight .unitEqColumns dt {width:90px}
+	.unitDRight .unitEqColumns dd {width:200px}
+	.unitDRight .unitEqColumns dl.itemSmall {padding:1px 0; font-size:12px; line-height:normal}
+	.unitDRight .unitEqColumns p {padding:4px 0; width:305px; overflow:hidden}
+	.unitDRight .unitEqColumns p input {width:100px; float:left; margin:0 5px 0 0}
+	.unitDRight .unitLine {border-bottom:1px dotted #ccc; height:0; line-height:1px; font-size:1px; overflow:hidden; width:630px}
+
+	.unitDRight table {width:315px; border-collapse:collapse; margin:5px 0 0 0}
+	.unitDRight th {background:url(../images/navBg.png) repeat-x 0 0 #7B0108; border:1px dotted #999; color:#fff; padding:3px 5px; text-align:left}
+	.unitDRight td {border:1px dotted #999; padding:3px 5px}

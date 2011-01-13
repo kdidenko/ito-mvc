@@ -3,74 +3,127 @@ $data = $mvc->getObject(OrdersService::ORDERS);
 $images = $mvc->getObject(UploadsService::PATH);
 $bids = $mvc->getObject(OrdersService::BIDS);
 ?>
-<hr/>
-<br/>
-<ul class="viewIList">
-	<li class="itemNew"><a href="view-order.html?id=<?php echo $data[OrdersService::HASH]?>&bookmark">Make a bookmark</a></li>
-</ul>
-<br/>
-<br/>
-<hr/>
-<?php if(isset($data)&&count($data)>0&&$data!=NULL){
-if (isset($images)&&$images!=NULL){
-	foreach($images as $key => $image){?>
-	
-		<img src='<?php echo $image['path']?>' >
-		
-<?php	}	} ?>
+<?php if(isset($data)&&count($data)>0&&$data!=NULL){?>
+
+<div class="wrapWSearch">
+	<div class="greyBox">
+		<div class="viewBox viewBoxA">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<ul class="viewIList">
+							<li class="itemNew"><a href="view-order.html?id=<?php echo $data[OrdersService::HASH]?>&bookmark">Make a bookmark</a></li>
+						</ul>
+						<h2><?php echo $data[OrdersService::ORDER_NAME]; ?></h2>
+						<div class="unitDBlock">
+							<div class="unitDLeft">
+								<?php if (isset($images)&&$images!=NULL){ ?>
+								<div class="unitImg">
+									<ul>
+										<?php foreach($images as $key => $image){ ?>
+										<li><a href="storage/uploads/orders/order-1292833967-thumbnail.jpg" title=""><img src='<?php echo $image['path']?>' ></a></li>
+										<li><a href="http://engineeredweb.com/sites/engineeredweb.com/files/images/1849511160.jpeg" title=""><img src='<?php echo $image['path']?>' ></a></li>
+										<?php } ?>
+									</ul>
+								</div>
+								<?php } ?>
+							</div>
+							<div class="unitDRight">
+								<dl>
+									<dt>desc:</dt>
+									<dd><?php echo $data[OrdersService::ORDER_DESC]; ?></dd>
+								</dl>
+								<dl>
+									<dt>Time left:</dt>
+									<dd><?php echo $data[OrdersService::TIME_LEFT]; ?></dd>
+								</dl>
+								<dl>
+									<dt>Implementation date:</dt>
+									<dd>from <?php echo $data[OrdersService::IMP_FROM_DATE]; ?> until <?php echo $data[OrdersService::IMP_UNTIL_DATE]; ?></dd>
+								</dl>
+								<div class="unitLine"></div>
+								<div class="unitEqColumns">
+									<dl class="itemSmall">
+										<dt>category:</dt>
+										<dd><?php echo $data[CategoryService::CAT_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>subcategory:</dt>
+										<dd><?php echo $data[SubCategoryService::SUBCAT_NAME]; ?></dd>
+									</dl>
+								</div>
+								<div class="unitEqColumns">
+									<dl class="itemSmall">
+										<dt>country:</dt>
+										<dd><?php echo $data[CountryService::COUNTRY_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>region:</dt>
+										<dd><?php echo $data[RegionService::REGION_NAME]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>city:</dt>
+										<dd><?php echo $data[OrdersService::CITY]; ?></dd>
+									</dl>
+									<dl class="itemSmall">
+										<dt>street:</dt>
+										<dd><?php echo $data[OrdersService::STREET]; ?></dd>
+									</dl>
+								</div>
+								<div class="unitLine"></div>
+								<div class="unitEqColumns">
+									<dl>
+										<dt>def price:</dt>
+										<dd class="itemPrice"><?php echo $data[OrdersService::PRICE]; ?> &euro;</dd>
+									</dl>
+									<?php if ($bids!=NULL){ ?>
+										<dl>
+											<dt>Current bid:</dt>
+											<dd class="itemPrice"><?php echo $bids[0][OrdersService::BID]; ?> &euro;</dd>
+										</dl>
+									<?php } ?>
+									<form method="post" action="view-order.html">
+										<p>
+											<input type="text" class="inpTxt" name="bid" />
+											<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id" />
+											<button name="makeBid" value="1"><span><strong>Make a bid</strong></span></button>
+										</p>
+									</form>
+								</div>
+								<div class="unitEqColumns">
+									<?php if ($bids!=NULL){ ?>
+										<table cellpadding="0" cellspacing="0">
+											<tr>
+												<th>USER_ID</th>
+												<th>BID</th>
+												<th>DATE</th>
+											</tr>
+											<?php foreach($bids as $key => $bid){ ?>
+											<tr>
+												<td><?php echo $bid[OrdersService::USER_ID]; ?></td>
+												<td><?php echo $bid[OrdersService::BID];?></td>
+												<td><?php echo $bid[OrdersService::DATE];?></td>
+											</tr>
+											<?php } ?>
+										</table>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+		</div>
+		<div class="lineHide"></div>
+	</div>
+</div>
 <hr/>
 
-	<br/>
-	title: <?php echo $data[OrdersService::ORDER_NAME]; ?>
-	<br/>
-	desc: <?php echo $data[OrdersService::ORDER_DESC]; ?>
-	<br/>
-	category: <?php echo $data[CategoryService::CAT_NAME]; ?>
-	<br/>
-	subcategory: <?php echo $data[SubCategoryService::SUBCAT_NAME]; ?>
-	<br/>
-	Time left: <?php echo $data[OrdersService::TIME_LEFT]; ?>
-	<br/>
-	Implementation date: from <?php echo $data[OrdersService::IMP_FROM_DATE]; ?> until <?php echo $data[OrdersService::IMP_UNTIL_DATE]; ?>
-	<br/>
-	city: <?php echo $data[OrdersService::CITY]; ?>
-	<br/>
-	street: <?php echo $data[OrdersService::STREET]; ?>
-	<br/>
-	country: <?php echo $data[CountryService::COUNTRY_NAME]; ?>
-	<br/>
-	region: <?php echo $data[RegionService::REGION_NAME]; ?>
-	<br/>
-	def price: <?php echo $data[OrdersService::PRICE]; ?>
-	<br/>
-	
-<hr/>
-<form method="post" action="view-order.html">
-<?php if ($bids!=NULL){ ?>
-Current bid: <?php echo $bids[0][OrdersService::BID];  ?> 
-<br/>
-<?php foreach($bids as $key => $bid){ ?>
-	<?php echo $bid[OrdersService::USER_ID]; ?> 
-	-
-	<?php echo $bid[OrdersService::BID];?>
-	-
-	<?php echo $bid[OrdersService::DATE];?>
-	<br/>
-<?php 
-} }
-?>
-<br/>
-<input type="text" name="bid"/>
-<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id"/>
-<br/>
-<br/>
-<div class="unitBtn">
-	<button name="makeBid" value="1"><span><strong>Make a bid</strong></span></button>
-</div>
-<br/>
-<br/>
-</form>
-<hr/>
+
+
+
 <?php } else { ?>
 NO ORDER LIKE YOU WHANT
 <?php } ?>

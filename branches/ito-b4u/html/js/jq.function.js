@@ -213,6 +213,56 @@ if(jQuery)(function($){
 			o.cleditor({width:o.innerWidth()-2, height:o.innerHeight()-2, controls:c.controlIcon});
 		})
 	};
+	$.fn.fotoAn = function(params){
+		var conf = $.extend({
+			moveBlock:'ul',
+			itemBlock:'li',
+			//prevPage:'itemPrev',
+			//nextPage:'itemNext',
+			viewItem:'unitSingle',
+			timeAnimate:300
+		}, params);
+		return this.each(function(){
+			var c=conf, o=$(this),
+				f=this,
+				/*prev=$('<span />').addClass(c.prevPage),
+				next=$('<span />').addClass(c.nextPage),*/
+				view=$('<div />').addClass(c.viewItem),
+				fake=$('<div />').addClass('unitFake'),
+				innerSpan=$('<span />').css({opacity:0.7});
+			$.extend(f,{
+				getAllItem:function(){return f.getMoveBlock().children(c.itemBlock)},
+				getMoveBlock:function(){return o.find(c.moveBlock)},
+				getCurrent:function(i){return f.getAllItem().eq(i)},
+				fireCallback:function(n){if($.isFunction(n)){n.call(this)}},
+				changeItem:function(currentItem){
+					f.getAllItem().removeClass('itemActive');
+					f.getCurrent(currentItem).addClass('itemActive');
+					fake.removeClass('hideElement').animate({opacity:1}, c.timeAnimate, function(){
+						$('<img />').attr('src', f.getCurrent(currentItem).find('a').attr('href'))
+					    	.load(function(){
+					    		view.empty().append($(this));
+					    		fake.height($(this).height());
+					    		view.animate({height:$(this).height()}, c.timeAnimate);
+					    		fake.animate({opacity:0}, c.timeAnimate, function(){fake.addClass('hideElement')})
+					    });
+					})
+				}
+			});
+			o.prepend(fake).prepend(view);
+			if(f.getAllItem().length<=1){
+				f.getMoveBlock().addClass('hideElement');
+			}/*else{
+				o.prepend(prev).append(next);
+			}*/;
+			f.getAllItem().each(function(i){
+				$('a', this).bind('click', function(e){
+					f.changeItem(i);
+					e.preventDefault();
+				})
+			}).filter(':first').find('a').click();
+		})
+	};
 	$.fn.lpAn = function(params){
 		var conf = $.extend({
 			wS:100,
@@ -479,6 +529,7 @@ if(jQuery)(function($){
 	$(document).ready(function(){
 		$('.wrapRAdmin .viewBoxA').dataAn();
 		$('.wrapCarousel').carouselAn();
+		$('.unitDLeft .unitImg').fotoAn();
 		$('.viewBoxB .unitSearch, .viewBoxA .unitEqColumn, .viewBoxA .unitNt, .wrapLSearch').categoryAn();
 		$('.areaTxt').rtfAn();
 		$('.bodyBox').notificationAn();

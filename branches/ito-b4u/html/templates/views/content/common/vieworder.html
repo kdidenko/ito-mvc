@@ -31,7 +31,7 @@ $bids = $mvc->getObject(OrdersService::BIDS);
 							<div class="unitDRight">
 								<dl>
 									<dt>desc:</dt>
-									<dd><?php echo $data[OrdersService::ORDER_DESC]; ?></dd>
+									<dd><?php echo htmlspecialchars_decode($data[OrdersService::ORDER_DESC]); ?></dd>
 								</dl>
 								<dl>
 									<dt>Time left:</dt>

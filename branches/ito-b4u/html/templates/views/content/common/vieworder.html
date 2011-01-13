@@ -22,8 +22,7 @@ $bids = $mvc->getObject(OrdersService::BIDS);
 								<div class="unitImg">
 									<ul>
 										<?php foreach($images as $key => $image){ ?>
-										<li><a href="storage/uploads/orders/order-1292833967-thumbnail.jpg" title=""><img src='<?php echo $image['path']?>' ></a></li>
-										<li><a href="http://engineeredweb.com/sites/engineeredweb.com/files/images/1849511160.jpeg" title=""><img src='<?php echo $image['path']?>' ></a></li>
+										<li><a href="<?php echo $image['path']?>" title=""><img src='<?php echo $image['path2']?>' ></a></li>
 										<?php } ?>
 									</ul>
 								</div>

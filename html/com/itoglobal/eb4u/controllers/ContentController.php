@@ -181,7 +181,7 @@ class ContentController extends SecureActionControllerImpl {
 		if ($images!=NULL){
 			foreach($images as $key => $value){
 				$part = explode('.',$value[UploadsService::PATH]);
-				$images[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+				$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
 			}
 		} else {
 			$images[0][UploadsService::PATH] = StOrageService::DEF_ORDER_AVATAR;

@@ -13,6 +13,10 @@ class UploadsService {
 	 * @var  string defining the path field name
 	 */
 	const PATH = 'path';
+	/**
+	 * @var  string defining the path field name
+	 */
+	const PATH2 = 'path2';
 	
 	public static function getUploadsPath($where = NULL) {
 		$fields = '*';

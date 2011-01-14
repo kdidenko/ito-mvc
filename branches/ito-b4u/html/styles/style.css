@@ -219,8 +219,11 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitABlock .unitSnColumn {float:left; width:676px; padding:0 4px 0 11px}
 	.unitABlock h3 {font-size:14px; padding:5px 0 8px}
 	
-	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 6px 8px; color:#f00; margin:0 14px 5px 14px; padding:6px 10px 4px 24px}
-	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 4px 6px; color:#00A25B; margin:0 14px 5px 14px; padding:6px 10px 4px 24px}
+	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 8px 7px; color:#f00; margin:0 14px 5px 14px; padding:6px 10px 6px 30px}
+		.unitABlock .itemWarning a {color:#9F0307; text-decoration:underline}
+		.unitABlock .itemWarning a:hover {text-decoration:none}
+	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 8px 8px; color:#00A25B; margin:0 14px 5px 14px; padding:6px 10px 6px 30px}
+	
 	/* button style */
 	.unitABlock .unitBtn {width:678px; float:left; padding:4px 0}
 		.unitABlock .unitBtn button, .unitABlock .unitBtn a.linkBtn {float:right; margin:0 0 0 5px}
@@ -264,7 +267,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitABlock .unitRtf a {text-decoration:underline}
 /* table list style */
 .viewList {width:667px; border-collapse:collapse; margin:0 12px 5px 12px}
-	.viewList th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; font-size:13px; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
+	.viewList th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
 	.viewList td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
 	.viewList td.itemLast, .viewList th.itemLast {border-right-width:0}
 	.viewList .unitData {cursor:pointer}
@@ -405,30 +408,39 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitDLeft .unitImg {background:#EFEFEF; padding:5px 5px 5px 10px; position:relative}
 	.unitDLeft .unitFake {background:#EFEFEF; left:10px; top:5px; width:243px; height:243px; position:absolute; z-index: 10}
 	.unitDLeft .unitSingle {height:243px; overflow:hidden}
-	.unitDLeft ul {overflow:hidden; width:248px}
+	.unitDLeft ul {overflow:hidden; width:248px; padding:5px 0 0 0}
 	.unitDLeft li {float:left; padding:0 5px 0 0}
 	.unitDLeft li a {float:left; overflow:hidden; position:relative} 
 	.unitDLeft li.itemActive a {border:2px solid #9F0307}
 	.unitDLeft li img {width:57px; vertical-align:top}
 	.unitDLeft li.itemActive img {margin:-2px; position:relative}
 	
-	.unitDLeft .unitSingle {padding:0 0 5px 0}
+	.unitDLeft .unitSingle {height:243px}
 	.unitDLeft .unitSingle img {width:243px; vertical-align:top}
 	
 .unitDRight {float:right; width:630px; padding:0 12px 0 0}
 	.unitDRight dl {width:630px; overflow:hidden; padding:4px 0}
-	.unitDRight dt {float:left; width:90px; font-weight:bold}
-	.unitDRight dd {float:right; width:525px}
+	.unitDRight dt {float:left; width:90px; font-weight:bold; padding:0 0 0 10px}
+	.unitDRight dd {float:right; width:510px; padding:0 10px 0 0}
 	.unitDRight dd.itemPrice {font-size:15px; font-weight:bold; color:#9F0307; margin:-1px 0 0 0}
 	.unitDRight .unitEqColumns {float:left; width:315px; padding:4px 0}
-	.unitDRight .unitEqColumns dl {width:305px}
-	.unitDRight .unitEqColumns dt {width:90px}
-	.unitDRight .unitEqColumns dd {width:200px}
+	.unitDRight .unitEqColumns dl {width:315px}
+	.unitDRight .unitEqColumns dd {width:195px}
 	.unitDRight .unitEqColumns dl.itemSmall {padding:1px 0; font-size:12px; line-height:normal}
-	.unitDRight .unitEqColumns p {padding:4px 0; width:305px; overflow:hidden}
-	.unitDRight .unitEqColumns p input {width:100px; float:left; margin:0 5px 0 0}
+	
 	.unitDRight .unitLine {border-bottom:1px dotted #ccc; height:0; line-height:1px; font-size:1px; overflow:hidden; width:630px}
+	.unitDRight .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 8px 7px; color:#f00; margin:0 0 5px 0; padding:6px 10px 6px 30px}
+	.unitDRight .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 8px 8px; color:#00A25B; margin:0 0 5px 0; padding:6px 10px 6px 30px}
+	
+	.unitDRight .unitOrder {background:#EFEFEF; width:630px; overflow:hidden; padding:4px 0}
+	.unitDRight .unitOrder p {padding:4px 10px 4px 0; float:right; clear:both}
+	.unitDRight .unitOrder p input {width:100px; float:left; margin:0 5px 0 0}
+	.unitDRight p.itemHistory {padding:0 10px 4px 0; text-align:right}
+	.unitDRight p.itemHistory a {font-size:12px; color:#9F0307; text-decoration:underline}
+	.unitDRight p.itemHistory a:hover {text-decoration:none}
 
-	.unitDRight table {width:315px; border-collapse:collapse; margin:5px 0 0 0}
-	.unitDRight th {background:url(../images/navBg.png) repeat-x 0 0 #7B0108; border:1px dotted #999; color:#fff; padding:3px 5px; text-align:left}
-	.unitDRight td {border:1px dotted #999; padding:3px 5px}
+	.unitDRight .unitHistory {width:630px; overflow:hidden; padding:4px 0}
+	.unitDRight .unitHistory table {width:630px; border-collapse:collapse}
+	.unitDRight .unitHistory th {background:url(../images/navBg.png) repeat-x 0 0 #7B0108; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; color:#fff; padding:3px 5px; text-align:left}
+	.unitDRight .unitHistory td {border-bottom:1px dotted #999; border-right:1px dotted #999; padding:3px 5px}
+	.unitDRight .unitHistory td.itemLast, .unitDRight .unitHistory th.itemLast {border-right-width:0}

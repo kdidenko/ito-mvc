@@ -263,6 +263,29 @@ if(jQuery)(function($){
 			}).filter(':first').find('a').click();
 		})
 	};
+	$.fn.historyAn = function(params){
+		var conf = $.extend({
+			headBlock:'.unitOrder',
+			contentBlock:'.unitHistory',
+			hideClass:'hideElement',
+			linkBlock:'.itemHistory a'
+		}, params);
+		return this.each(function(){
+			var o=$(this),c=conf,h=$(c.headBlock, o),w=$(c.contentBlock, o);
+			if(w.length==1){
+				w.addClass(c.hideClass);
+				$(c.linkBlock, h).bind('click', function(e){
+					w.removeClass(c.hideClass);
+					$('html, body').scrollTop(w.offset().top);
+					e.preventDefault();
+				});
+				$(c.linkBlock, w).bind('click', function(e){
+					w.addClass(c.hideClass);
+					e.preventDefault();
+				})
+			}
+		})
+	};
 	$.fn.lpAn = function(params){
 		var conf = $.extend({
 			wS:100,
@@ -528,6 +551,7 @@ if(jQuery)(function($){
 	};*/
 	$(document).ready(function(){
 		$('.wrapRAdmin .viewBoxA').dataAn();
+		$('.unitDRight').historyAn();
 		$('.wrapCarousel').carouselAn();
 		$('.unitDLeft .unitImg').fotoAn();
 		$('.viewBoxB .unitSearch, .viewBoxA .unitEqColumn, .viewBoxA .unitNt, .wrapLSearch').categoryAn();

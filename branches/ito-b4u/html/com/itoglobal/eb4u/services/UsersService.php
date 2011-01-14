@@ -253,6 +253,14 @@ class UsersService {
 		return $result;
 	}
 	
+	public static function countUsers ($where = NULL){
+		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::USERS;
+		$from = self::USERS;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
+		return $result;
+	}
+	
 	/**
 	 * Retreives the user data by specified database field.
 	 * @param text $field the field which creating character scroller.

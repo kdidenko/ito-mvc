@@ -1,8 +1,95 @@
 <?php 
 $users = $mvc->getObject(UsersService::USERS);
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
+$count = $mvc->getObject("count");
+$pages = $mvc->getObject("pages");
 ?>
-<?php if (isset($users)&&$users!=NULL){?>
 <hr/>
+<form action="/companies.html" method="get">
+Category
+<select name="cat_id" class="gCategory">
+		<option value="all">all</option>
+<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+			<option <?php echo isset($_GET['category_id'])&&$category[CategoryService::ID]==$_GET['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+	</select>
+SubCategory
+	<select name="subcat_id" class="gSubCategory">
+		<option value="all">all</option>
+<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+					foreach($subcategories as $key=>$subcategory){ ?>						
+			<option <?php echo isset($_GET['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_GET['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 				} 
+				} ?>
+		</select>
+<br/>
+<br/>
+Country
+		<select name="country_id">
+			<option value="all">all</option>
+<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+			<option <?php echo isset($_GET['country'])&&$country[CountryService::ID]==$_GET['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php 				} 
+				} ?>
+	</select>
+Region
+	<select name="region_id">
+		<option value="all">all</option>
+<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+			<option <?php echo isset($_GET['region'])&&$region[RegionService::ID]==$_GET['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php 				} 
+				} ?>
+		</select>
+<br/>
+<br/>
+Company Name <input name="company" class="inpTxt" type="text"  value="<? if(isset($_GET['order_name'])) echo $_GET['order_name']; ?>"/>
+<br/>
+<br/>
+<button name="search" type="submit"><span><strong>Search</strong></span></button>
+<br/><br/>
+
+<hr/>
+<p>found <span><?php echo $count;?></span> results for your request</p>
+<ul>
+	<?php for($i=0; $i<$pages; $i++){ ?>
+		<li>
+		<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
+			<span><?php echo $i+1; ?></span>
+		<?php }else{ ?>
+			<a href="/view-orders.html?&page=<?php echo $i+1; ?>
+				<?php echo isset($_GET['category_id']) ? '&category_id='.$_GET["category_id"] : NULL ; ?>
+				<?php echo isset($_GET['subcategory_id']) ? '&subcategory_id='.$_GET["subcategory_id"] : NULL ; ?>
+				<?php echo isset($_GET['country_id']) ? '&country_id='.$_GET["country_id"] : NULL ; ?>
+				<?php echo isset($_GET['region_id']) ? '&region_id='.$_GET["region_id"] : NULL ; ?>
+				<?php echo isset($_GET['price_from']) ? '&price_from='.$_GET["price_from"] : NULL ; ?>
+				<?php echo isset($_GET['price_until']) ? '&price_until='.$_GET["price_until"] : NULL ; ?>
+				<?php echo isset($_GET['order_name']) ? '&order_name='.$_GET["order_name"] : NULL ; ?>
+				<?php echo isset($_GET['onpage']) ? '&onpage='.$_GET["onpage"] : NULL ; ?>
+				<?php echo isset($_GET['search']) ? '&search='.$_GET["search"] : NULL ; ?>" title="1">
+			<?php echo $i+1; ?>
+			</a>
+		<?php }?>
+		</li>
+	<?php } ?>
+</ul>
+<hr/>
+<div class="itemPage">
+	<label>_i18n{Items per page}:</label>
+	<select name="onpage">
+		<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==5 ? "selected='selected'" : NULL ; ?>>5</option>
+		<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==10 ? "selected='selected'" : NULL ; ?>>10</option>
+		<option <?php echo isset($_GET['onpage'])&&$_GET['onpage']==50 ? "selected='selected'" : NULL ; ?>>50</option>
+	</select>
+</div>
+<hr/>
+<?php if (isset($users)&&$users!=NULL){?>
 <?php foreach($users as $key=> $user){?>
 	<img src="<?php echo $user[UsersService::AVATAR] ?>"/>
 	<br/>
@@ -27,3 +114,5 @@ $users = $mvc->getObject(UsersService::USERS);
 	<?php echo $user[SubCategoryService::SUBCAT_NAME] ?>
 	<hr/>
 <?php } } ?>
+
+</form>

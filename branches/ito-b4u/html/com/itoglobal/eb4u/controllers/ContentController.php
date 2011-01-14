@@ -48,14 +48,63 @@ class ContentController extends SecureActionControllerImpl {
 
 		return $mvc;
 	}
-	
+
 	public function handleCompanies($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$where = UsersService::ROLE . "='" . UsersService::ROLE_TR . "'";
+		$onpage = isset ( $requestParams ['onpage'] )&& $requestParams ['onpage'] !=NULL ? $requestParams ['onpage'] : 5;
+		if (isset ( $requestParams ['page'] )&& $requestParams ['page'] !=NULL ){ 
+			$limit = ($requestParams ['page']-1)*$onpage . "," . $onpage;
+		} else {
+			$limit = "0,$onpage";
+		}
+		if (isset ( $requestParams [UsersService::COMPANY] )&& $requestParams [UsersService::COMPANY] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= UsersService::USERS . '.' . UsersService::COMPANY . " LIKE '%" . $requestParams [UsersService::COMPANY] . "%'";
+		}
+		if (isset ( $requestParams [UsersService::COUNTRY] ) && $requestParams [UsersService::COUNTRY]!='all' ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= UsersService::USERS . '.' . UsersService::COUNTRY . '=' . $requestParams [UsersService::COUNTRY];
+		}
+		if (isset ( $requestParams [UsersService::REGION] ) && $requestParams [UsersService::REGION]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= UsersService::USERS . '.' . UsersService::REGION . '=' . $requestParams [UsersService::REGION];
+		}
+		if (isset ( $requestParams [UsersService::CAT_ID] ) && $requestParams [UsersService::CAT_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= UsersService::USERS . '.' . UsersService::CAT_ID . '=' . $requestParams [UsersService::CAT_ID];
+		}
+		if (isset ( $requestParams [UsersService::SUBCAT_ID] ) && $requestParams [UsersService::SUBCAT_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= UsersService::USERS . '.' . UsersService::SUBCAT_ID . '=' . $requestParams [UsersService::SUBCAT_ID];
+		}
 		$users = UsersService::getUsersList ($where);
 		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
+		
+		$all_users = UsersService::countUsers ($where);
+		isset ( $users ) ? $mvc->addObject ( "count",  $all_users[UsersService::USERS] ) : null;
+		
+		$pages = $all_users[UsersService::USERS]/$onpage; 
+		isset ( $users ) ? $mvc->addObject ( "pages",  $pages ) : null;
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
 
+		if (isset ($requestParams[UsersService::SUBCAT_ID])){
+			$crntCategory = $requestParams[UsersService::SUBCAT_ID]!='all' ? 
+								$requestParams[UsersService::SUBCAT_ID] : 
+									$category[0][CategoryService::ID];  
+			$subcategory = SubCategoryService::getSubcatByCat ($crntCategory);
+			isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		}
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
 		return $mvc;
 	}
 

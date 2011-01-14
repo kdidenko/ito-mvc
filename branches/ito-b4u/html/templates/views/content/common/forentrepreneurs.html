@@ -78,9 +78,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="viewDlist">
 			<h3>Vorteile für Dienstleister</h3>
 			<ul>
-				<li><a href="#" title="Reduktion der Akquisitionskosten">Reduktion der Akquisitionskosten</a></li>
-				<li><a href="#" title="Gute Preise, da keine Abgebotsrunden">Gute Preise, da keine Abgebotsrunden</a></li>
-				<li><a href="#" title="Sie bestimmen welche Aufträge sie möchten">Sie bestimmen welche Aufträge sie möchten</a></li>
+				<li>Reduktion der Akquisitionskosten</li>
+				<li>Gute Preise, da keine Abgebotsrunden</li>
+				<li>Sie bestimmen welche Aufträge sie möchten</li>
 			</ul>
 		</div>
 		<!-- list off -->
@@ -163,30 +163,22 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<div class="viewDlist">
 			<h3>Vorteile für Händler</h3>
 			<ul>
-				<li><a href="#" title="Sie benötigen keinen eigenen Shop">Sie benötigen keinen eigenen Shop</a></li>
-				<li><a href="#" title="Sie profitieren von einer hohen Besucherzahl">Sie profitieren von einer hohen Besucherzahl</a></li>
-				<li><a href="#" title="Neue Kunden besuchen Ihr Geschäft">Neue Kunden besuchen Ihr Geschäft</a></li>
+				<li>Sie benötigen keinen eigenen Shop</li>
+				<li>Sie profitieren von einer hohen Besucherzahl</li>
+				<li>Neue Kunden besuchen Ihr Geschäft</li>
 			</ul>
 		</div>
 		<!-- list off -->
 		<!-- product list on -->
 		<div class="viewEList">
-			<h3>Produkte-Kategorien</h3>
+			<h3>_i18n{Products-Categories}</h3>
 			<ul>
-				<li><a href="#" title="Haushaltsgeräte">Haushaltsgeräte</a></li>
-				<li><a href="#" title="Heimelektronik">Heimelektronik</a></li>
-				<li><a href="#" title="Computer">Computer</a></li>
-				<li><a href="#" title="Computerzugehör">Computerzugehör</a></li>
-				<li><a href="#" title="Mobile">Mobile</a></li>
-				<li><a href="#" title="Telefonie">Telefonie</a></li>
-				<li><a href="#" title="Möbel">Möbel</a></li>
-				<li><a href="#" title="Spielsachen">Spielsachen</a></li>
-				<li><a href="#" title="Computergames">Computergames</a></li>
-				<li><a href="#" title="Gartegeräte">Gartegeräte</a></li>
-				<li><a href="#" title="Schmuck">Schmuck</a></li>
-				<li><a href="#" title="Frauenmode">Frauenmode</a></li>
-				<li><a href="#" title="Herrenmode">Herrenmode</a></li>
-				<li><a href="#" title="&raquo; weitere">&raquo; weitere</a></li>
+			<?php if (isset($categories)&&$categories!=NULL){?>
+			<?php foreach($categories as $key=>$category){ ?>
+				<li><a href="#" title="<?php echo $category[CategoryService::CAT_NAME]?>"><?php echo $category[CategoryService::CAT_NAME]?></a></li>
+			<?php }?>
+				<li><a href="#" title="&raquo; weitere">&raquo; _i18n{more}</a></li>
+			<?php }?>
 			</ul>
 		</div>
 		<!-- product list off -->

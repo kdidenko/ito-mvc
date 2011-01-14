@@ -239,10 +239,87 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleViewBargains($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		$date = date("Y-m-d h:m:s");
+		$where = BargainsService::UNTIL_DATE . ">='" . $date . "'";
+		$onpage = isset ( $requestParams ['onpage'] )&& $requestParams ['onpage'] !=NULL ? $requestParams ['onpage'] : 5;
+		if (isset ( $requestParams ['page'] )&& $requestParams ['page'] !=NULL ){ 
+			$limit = ($requestParams ['page']-1)*$onpage . "," . $onpage;
+		} else {
+			$limit = "0,$onpage";
+		}
+		if (isset ( $requestParams [BargainsService::BARGAIN_NAME] )&& $requestParams [BargainsService::BARGAIN_NAME] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::BARGAIN_NAME . " LIKE '%" . $requestParams [BargainsService::BARGAIN_NAME] . "%'";
+		}
+		if (isset ( $requestParams [BargainsService::FROM_PRICE] )&& $requestParams [BargainsService::FROM_PRICE] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::PRICE . ' >= ' . $requestParams [BargainsService::FROM_PRICE];
+		}
+		if (isset ( $requestParams [BargainsService::UNTIL_PRICE] )&& $requestParams [BargainsService::UNTIL_PRICE] !=NULL ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::PRICE . ' <= ' . $requestParams [BargainsService::UNTIL_PRICE];
+		}
+		if (isset ( $requestParams [BargainsService::COUNTRY] ) && $requestParams [BargainsService::COUNTRY]!='all' ){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::COUNTRY . '=' . $requestParams [BargainsService::COUNTRY];
+		}
+		if (isset ( $requestParams [BargainsService::REGION] ) && $requestParams [BargainsService::REGION]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::REGION . '=' . $requestParams [BargainsService::REGION];
+		}
+		if (isset ( $requestParams [BargainsService::CATEGORY_ID] ) && $requestParams [BargainsService::CATEGORY_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::CATEGORY_ID . '=' . $requestParams [BargainsService::CATEGORY_ID];
+		}
+		if (isset ( $requestParams [BargainsService::SUBCATEGORY_ID] ) && $requestParams [BargainsService::SUBCATEGORY_ID]!='all'){ 
+			$where .= $where!=NULL ? ' AND ' : NULL;
+			$where .= BargainsService::BARGAINS . '.' . BargainsService::SUBCATEGORY_ID . '=' . $requestParams [BargainsService::SUBCATEGORY_ID];
+		}
+		$bargains = BargainsService::getBargains ($where, $limit);
+		//print_r($bargains);
+		if ($bargains!=NULL){
+			foreach($bargains as $key => $value){
+				if ($value[UploadsService::PATH]!=NULL){
+					$part = explode('.',$value[UploadsService::PATH]);
+					$bargains[$key][UploadsService::PATH] = $part[0] . '-thumbnail.' . $part[1];
+				}
+			}
+		}
+		isset ( $bargains ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargains ) : null;
+		
+		$all_bargains = BargainsService::countBargains ($where);
+		isset ( $bargains ) ? $mvc->addObject ( "count",  $all_bargains[BargainsService::BARGAINS] ) : null;
+		
+		$pages = $all_bargains[BargainsService::BARGAINS]/$onpage; 
+		isset ( $orders ) ? $mvc->addObject ( "pages",  $pages ) : null;
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		if (isset ($requestParams[BargainsService::CATEGORY_ID])){
+			$crntCategory = $requestParams[BargainsService::CATEGORY_ID]!='all' ? 
+								$requestParams[BargainsService::CATEGORY_ID] : 
+									$category[0][CategoryService::ID];  
+			$subcategory = SubCategoryService::getSubcatByCat ($crntCategory);
+			isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		}
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
+		return $mvc;
+	}
+	
 	public function handleViewBargain($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
-		if(isset($requestParams[OrdersService::ID])){
+		if(isset($requestParams[BargainsService::ID])){
 			$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
 			$bargain = BargainsService::getBargains($where);
 			
@@ -277,7 +354,7 @@ class ContentController extends SecureActionControllerImpl {
 				}
 			}
 			
-			$images = BargainsService::getOrderImgs ($bargain[0][BargainsService::ID]);
+			$images = BargainsService::getBargainImgs ($bargain[0][BargainsService::ID]);
 			foreach($images as $key => $value){
 				$part = explode('.',$value[UploadsService::PATH]);
 				$images[$key][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];

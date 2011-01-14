@@ -90,6 +90,9 @@ class BargainsService {
 	 */
 	const DISCOUNT = 'discount';
 	
+	const FROM_PRICE = "price_from";
+	const UNTIL_PRICE = "price_until";
+	
 	const BARGAIN_RELATIONS = 'bargain_relations';
  	const BARGAIN_ID = 'bargain_id';
  	const UPLOAD_ID = 'upload_id';
@@ -127,7 +130,7 @@ class BargainsService {
 		DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 	}
 	
-	public static function getOrderImgs ($order_id){
+	public static function getBargainImgs ($order_id){
 		$fields = self::BARGAIN_RELATIONS . '.*, ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
 		$from = self::BARGAIN_RELATIONS . 
 				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . 
@@ -150,7 +153,8 @@ class BargainsService {
 				', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 				', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 				', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME . 
-				', ' . UsersService::USERS . '.' . UsersService::USERNAME; 
+				', ' . UsersService::USERS . '.' . UsersService::USERNAME .
+				', ' . UploadsService::UPLOADS . '.' . UploadsService::PATH;
 		$from = self::BARGAINS . 
 				SQLClient::LEFT . SQLClient::JOIN . CategoryService::CATEGORY . 
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
@@ -166,7 +170,13 @@ class BargainsService {
 				self::BARGAINS . '.' . self::COUNTRY .
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
-				self::BARGAINS . '.' . self::USER_ID;
+				self::BARGAINS . '.' . self::USER_ID .
+				SQLClient::LEFT . SQLClient::JOIN . self::BARGAIN_RELATIONS . SQLClient::ON . 
+				self::BARGAIN_RELATIONS . '.' . self::BARGAIN_ID . '=' . 
+				self::BARGAINS . '.' . self::ID .
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS . SQLClient::ON . 
+				UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				self::BARGAIN_RELATIONS . '.' . self::UPLOAD_ID;
 		$orderby = self::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );
@@ -180,6 +190,14 @@ class BargainsService {
 		$where = self::HASH . " = '" . $hash . "'";
 		# executing the query
 		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
+	}
+	
+	public static function countBargains ($where = NULL){
+		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::BARGAINS;
+		$from = self::BARGAINS;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
+		return $result;
 	}
 	
 	public static function getBoughtBargain ($where){

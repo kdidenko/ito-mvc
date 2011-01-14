@@ -30,7 +30,7 @@ SubCategory
 <br/>
 <br/>
 Country
-		<select name="country_id">
+		<select name="country">
 			<option value="all">all</option>
 <?php			if (isset($countries) && $countries!=NULL){ 
 					foreach($countries as $key=>$country){ ?>						
@@ -39,7 +39,7 @@ Country
 				} ?>
 	</select>
 Region
-	<select name="region_id">
+	<select name="region">
 		<option value="all">all</option>
 <?php			if (isset($regions) && $regions!=NULL){ 
 					foreach($regions as $key=>$region){ ?>

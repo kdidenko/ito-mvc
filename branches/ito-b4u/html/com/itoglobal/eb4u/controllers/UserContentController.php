@@ -81,6 +81,12 @@ class UserContentController extends ContentController {
 		$orders = OrdersService::getOrders ($where);
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
 		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
 		return $mvc;
 	}
 	
@@ -106,77 +112,6 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
-	public function handleNewOrder($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		if(isset($requestParams['save'])){
-			$error = array();
-			$files = $_FILES ['file'];
-			foreach ($requestParams as $key => $value){
-				$error[] .= $value==NULL ? true : false;
-			}
-			$error = array_filter ( $error );
-			if (count ( $error ) == 0) {
-
-				$img = array();
-				$paths = array();
-				foreach ($files['error'] as $key=>$error){
-					if($error==0){
-						$img['name'] = $files['name'][$key];
-						$img['type'] = $files['type'][$key];
-						$img['tmp_name'] = $files['tmp_name'][$key];
-						$img['error'] = $files['error'][$key];
-						$img['size'] = $files['size'][$key];
-						
-						$date = mktime();
-						$height = 100;
-						$width = 100;
-						$path = StorageService::ORDERS_FOLDER . "order-$date-$key.jpg";
-						$paths [].= $path;
-						$path2 = StorageService::ORDERS_FOLDER . "order-$date-$key-" . ImageService::SMALL . ".jpg";
-						if (isset ( $img ['name'] ) ) {
-							StorageService::uploadFile ( $path, $img );
-							self::setNoCashe();
-							$image = new ImageService();
-							$image->load($path);
-							$image->resize($width,$height);
-							$image->save($path2);
-						}
-					}
-				}
-								
-				$id = SessionService::getAttribute(SessionService::USERS_ID);
-				$requestParams[OrdersService::IMP_FROM_DATE] = self::createDate($requestParams[OrdersService::IMP_FROM_DATE]);
-				$requestParams[OrdersService::IMP_UNTIL_DATE] = self::createDate($requestParams[OrdersService::IMP_UNTIL_DATE]);
-				$requestParams[OrdersService::FROM_DATE] = self::createDate($requestParams[OrdersService::FROM_DATE]);
-				$requestParams[OrdersService::UNTIL_DATE] = self::createDate($requestParams[OrdersService::UNTIL_DATE]);
-				$requestParams[OrdersService::ORDER_DESC] = htmlspecialchars($requestParams[OrdersService::ORDER_DESC], ENT_QUOTES);
-				OrdersService::setOrders($id, $requestParams, $paths);
-				$location = $this->onSuccess( $actionParams );
-				$this->forwardActionRequest ( $location );
-				
-				//send mails
-				
-			} else {
-				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
-			}
-		}
-		
-		
-		$category = CategoryService::getCategories ();
-		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
-
-		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
-		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
-		
-		$countries = RegionService::getRegions ();
-		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
-		
-		$regions = CountryService::getCountries ();
-		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
-				
-		return $mvc;
-	}
 	
 	/*
 	private static function getUserRole(){

@@ -188,7 +188,7 @@
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 		<forwards>
-			<target location="/my-order.html" name="myorder" condition="onsuccess"/>
+			<target location="/view-orders.html" name="view-orders" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>
@@ -228,7 +228,7 @@
 	</action>
 	<action name="/edit-*.html" id="edit$1" roles="UR,TR,BR,PR,AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="index.html" path="templates/layout-twe-columns-left.html" />
+		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/manage-$1s.html" name="manage$1s" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>

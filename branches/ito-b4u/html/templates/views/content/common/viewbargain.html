@@ -40,6 +40,42 @@ $save = $mvc->getObject(ContentController::STATUS);
 									</div>
 								<?php } ?>
 								<!-- end notification -->
+								<div class="unitOrder">
+									<div class="unitEqColumns">
+										<dl>
+											<dt>_i18n{Usual Price}:</dt>
+											<dd class="itemPrice"><?php echo $data[BargainsService::USUAL_PRICE]; ?> &euro;</dd>
+										</dl>
+										<dl>
+											<dt>_i18n{Bargain Price}:</dt>
+											<dd class="itemPrice"><?php echo $data[BargainsService::BARGAIN_PRICE]; ?> &euro;</dd>
+										</dl>
+										<dl>
+											<dt>_i18n{Discount}:</dt>
+											<dd class="itemPrice"><?php echo $data[BargainsService::DISCOUNT]; ?>%</dd>
+										</dl>
+										<dl>
+											<dt>_i18n{Number}:</dt>
+											<dd class="itemPrice"><?php echo $data[BargainsService::NUMBER]; ?></dd>
+										</dl>
+									</div>
+									<div class="unitEqColumns">
+										<form method="post" action="view-bargain.html">
+											<p>
+												<input type="text" value="1" class="inpTxt" name="" />
+												<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id" />
+												<button name="buy" value="1"><span><strong>_i18n{Buy}</strong></span></button>
+											</p>
+											<?php if(isset($bought) && $bought!=NULL){ ?>
+												<p>_i18n{You already bought}: <strong><?php echo count($bought); ?> _i18n{items}</strong></p>
+											<?php } ?>
+											<?php if(isset($boughtByUser) && $boughtByUser!=NULL){ ?>
+												<p class="itemHistory">_i18n{You already bought}: <strong><?php echo count($boughtByUser); ?> _i18n{items}</strong></p>
+											<?php } ?>
+											<p class="itemHistory"><a href="#" title="">Link</a></p>
+										</form>
+									</div>
+								</div>
 								<dl>
 									<dt>_i18n{Description}:</dt>
 									<dd><?php echo htmlspecialchars_decode($data[BargainsService::BARGAIN_DESC]); ?></dd>
@@ -77,48 +113,17 @@ $save = $mvc->getObject(ContentController::STATUS);
 										<dd><?php echo $data[BargainsService::STREET]; ?></dd>
 									</dl>
 								</div>
-								<div class="unitLine"></div>
-								<div class="unitEqColumns">
-									<dl>
-										<dt>_i18n{Usual Price}:</dt>
-										<dd class="itemPrice"><?php echo $data[BargainsService::USUAL_PRICE]; ?> &euro;</dd>
-									</dl>
-									<dl>
-										<dt>_i18n{Bargain Price}:</dt>
-										<dd class="itemPrice"><?php echo $data[BargainsService::BARGAIN_PRICE]; ?> &euro;</dd>
-									</dl>
-									<dl>
-										<dt>_i18n{Discount}:</dt>
-										<dd class="itemPrice"><?php echo $data[BargainsService::DISCOUNT]; ?>%</dd>
-									</dl>
-									<dl>
-										<dt>_i18n{Number}:</dt>
-										<dd class="itemPrice"><?php echo $data[BargainsService::NUMBER]; ?></dd>
-									</dl>
-									<form method="post" action="view-bargain.html">
-									<?php if (isset($boughtByUser) && $boughtByUser!=NULL){?>
-										<dl>
-											<dt>_i18n{You already bought} :</dt>
-											<dd class="itemPrice"><?php echo count($boughtByUser); ?> _i18n{items}</dd>
-										</dl>
-									<?php } ?>
-										<p>
-											<input type="hidden" value="<?php echo $data[BargainsService::HASH]?>" name="id" />
-											<button name="buy" value="1"><span><strong>_i18n{Buy}</strong></span></button>
-										</p>
-									</form>
-								</div>
-								<div class="unitEqColumns">
+								<div class="unitHistory">
 									<?php if (isset($bought)&&$bought!=NULL){ ?>
 										<table cellpadding="0" cellspacing="0">
 											<tr>
 												<th>_i18n{User}</th>
-												<th>_i18n{Date}</th>
+												<th class="itemLast">_i18n{Date}</th>
 											</tr>
 											<?php foreach($bought as $key => $value){ ?>
 											<tr>
 												<td><?php echo $value[UsersService::USERNAME]; ?></td>
-												<td><?php echo $value[BargainsService::BOUGHT_DATE];?></td>
+												<td class="itemLast"><?php echo $value[BargainsService::BOUGHT_DATE];?></td>
 											</tr>
 											<?php } ?>
 										</table>

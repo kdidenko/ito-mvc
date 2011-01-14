@@ -253,17 +253,22 @@ class ContentController extends SecureActionControllerImpl {
 				$role = SessionService::getAttribute ( SessionService::ROLE );
 				if ($role!=NULL){
 					if ($role==UsersService::ROLE_UR){
-						BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
-						
-						$subject = $bargain[0][BargainsService::BARGAIN_NAME];
-						$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
-						$user = SessionService::getAttribute ( SessionService::USERNAME );
-						$text = $user . " bought one item <a href=\'/view-bargain.html?id=" . $bargain[0][BargainsService::HASH] . "\'>" . $bargain[0][BargainsService::BARGAIN_NAME] . "<\/a>";
-						$getter_id = $bargain[0][BargainsService::USER_ID];
-						#prepare text for email 
-						$plain = $mvc->getProperty ( 'newMessage' );
-						MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
-						$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
+						if ($requestParams['amount']!=0&&$requestParams['amount']<=$bargain[0][BargainsService::NUMBER]){
+							for($i=1;$i<=$requestParams['amount'];$i++){
+								BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
+							}
+							$subject = $bargain[0][BargainsService::BARGAIN_NAME];
+							$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
+							$user = SessionService::getAttribute ( SessionService::USERNAME );
+							$text = $user . " bought ".$requestParams['amount']." item <a href=\'/view-bargain.html?id=" . $bargain[0][BargainsService::HASH] . "\'>" . $bargain[0][BargainsService::BARGAIN_NAME] . "<\/a>";
+							$getter_id = $bargain[0][BargainsService::USER_ID];
+							#prepare text for email 
+							$plain = $mvc->getProperty ( 'newMessage' );
+							MailService::sendMail($subject, $text, $sender_id, $getter_id, $plain);
+							$mvc->addObject ( self::STATUS, "_i18n{You bought }".$requestParams['amount']. " _i18n{items} !" );
+						} else {
+							$mvc->addObject ( self::ERROR, "_i18n{You can't buy more then }". $bargain[0][BargainsService::NUMBER] . " _i18n{items}." );
+						}
 					} else {
 						$mvc->addObject ( self::ERROR, "_i18n{Only standart user can buy this item, you can} <a href='/registration.html?role=1' title='_i18n{register}'>_i18n{register}</a> like tradesman." );
 					}

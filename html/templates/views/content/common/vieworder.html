@@ -67,7 +67,9 @@ $bookmark = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
 												<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id" />
 												<button name="makeBid" value="1"><span><strong>_i18n{Make a bid}</strong></span></button>
 											</p>
-											<p class="itemHistory"><a href="#" title="Show history bids">Show history bids</a></p>
+											<?php if (isset($bought)&&$bought!=NULL){ ?>
+												<p class="itemHistory"><a href="#" title="Show history bids">Show history bids</a></p>
+											<?php } ?>
 										</form>
 									</div>
 								</div>

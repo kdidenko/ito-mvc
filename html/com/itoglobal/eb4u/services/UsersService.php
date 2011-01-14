@@ -193,17 +193,26 @@ class UsersService {
 	
 	public static function getUsersList($where = NULL, $from = NULL) {
 		$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
-					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
+					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
+					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
 				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
 				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
 				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
 				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
-		$from = isset ( $from ) ? $from : self::USERS . SQLClient::LEFT . SQLClient::JOIN . 
-				CategoryService::CATEGORY .	SQLClient::ON . CategoryService::CATEGORY . '.' . 
-				CategoryService::ID . '=' . self::USERS . '.' . self::CAT_ID . 
-				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY .	
-				SQLClient::ON . SubCategoryService::SUBCATEGORY . '.' . 
-				SubCategoryService::ID . '=' . self::USERS . '.' . self::SUBCAT_ID;
+		$from = isset ( $from ) ? $from : self::USERS . 
+				SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
+				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+				self::USERS . '.' . self::CAT_ID . 
+				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY . SQLClient::ON . 
+				SubCategoryService::SUBCATEGORY . '.' .	SubCategoryService::ID . '=' . 
+				self::USERS . '.' . self::SUBCAT_ID . 
+				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
+				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
+				self::USERS . '.' . self::REGION . 
+				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
+				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
+				self::USERS . '.' . self::COUNTRY;
 		$groupBy = self::USERS . '.' . self::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
@@ -220,17 +229,26 @@ class UsersService {
 		if(isset($id) && $id != ''){
 			# preparing query
 			$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
-					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME;
+					', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
+					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
+					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
 				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
 				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
 				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
 				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
-			$from = self::USERS . SQLClient::LEFT . SQLClient::JOIN . 
-				CategoryService::CATEGORY .	SQLClient::ON . CategoryService::CATEGORY . '.' . 
-				CategoryService::ID . '=' . self::USERS . '.' . self::CAT_ID . 
-				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY .	
-				SQLClient::ON . SubCategoryService::SUBCATEGORY . '.' . 
-				SubCategoryService::ID . '=' . self::USERS . '.' . self::SUBCAT_ID;
+			$from = self::USERS . 
+					SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
+					SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
+					self::USERS . '.' . self::CAT_ID . 
+					SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY . SQLClient::ON . 
+					SubCategoryService::SUBCATEGORY . '.' .	SubCategoryService::ID . '=' . 
+					self::USERS . '.' . self::SUBCAT_ID . 
+					SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
+					RegionService::REGIONS . '.' . RegionService::ID . '=' . 
+					self::USERS . '.' . self::REGION . 
+					SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
+					CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
+					self::USERS . '.' . self::COUNTRY;
 			$where = self::USERS . '.' . self::ID . '=' . $id;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );

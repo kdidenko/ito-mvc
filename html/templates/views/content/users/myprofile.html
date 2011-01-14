@@ -1,5 +1,7 @@
 <?php 
 $data = $mvc->getObject(ContentController::RESULT);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
 $psw_errors = $mvc->getObject(ContentController::PSW_ERROR);
 $status = $mvc->getObject(ContentController::STATUS);
 $bargains = $mvc->getObject(BargainsService::BARGAINS);
@@ -64,19 +66,36 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 				</div>
 			</div>
 			<div class="itemForm">
-				<label>_i18n{Region}:</label>
-				<div class="itemData">
-					<input class="inpTxt" type="text" name="region" value="<?php echo $data[UsersService::REGION]?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
 				<label>_i18n{Country}:</label>
 				<div class="itemData">
-					<input class="inpTxt" type="text" name="country" value="<?php echo $data[UsersService::COUNTRY]?>"/>
+					<select name="country" >
+						<option selected="selected" value="<?php echo $data[UsersService::COUNTRY]?>"><?php echo $data[CountryService::COUNTRY_NAME];?></option>
+<?php	if (isset($countries) && $countries!=NULL){ 
+			foreach($countries as $key=>$country){ 
+				if ($country[CategoryService::ID]!=$data[UsersService::COUNTRY]){ ?>					
+						<option value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+					</select>
+				</div>
+			</div>		
+			<div class="itemForm">
+				<label>_i18n{State}:</label>
+				<div class="itemData">
+					<select name="region" >
+						<option selected="selected" value="<?php echo $data[UsersService::REGION]?>"><?php echo $data[RegionService::REGION_NAME];?></option>
+<?php	if (isset($regions) && $regions!=NULL){ 
+			foreach($regions as $key=>$region){ 
+				if ($region[RegionService::ID]!=$data[UsersService::REGION]){ ?>
+						<option value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+					</select>
 				</div>
 			</div>
 		</div>
-		
 		<div class="unitEqColumn">
 			<div class="itemForm">
 				<label>_i18n{Mobile phone}:</label>

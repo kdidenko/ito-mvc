@@ -114,10 +114,22 @@ class RegistrationController extends SecureActionControllerImpl {
 		
 		$plans = PlanService::getPlans();
 		isset($plans) ? $mvc->addObject ( PlanService::PLAN, $plans ) : NULL;
+
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
 		
 		return $mvc;
 	}
-	
+
+	/**
+	 * Confirmation user registration
+	 * @param array $actionParams
+	 * @param array $requestParams
+	 * @return ModelAndView
+	 */
 	public function confirmRegistration($actionParams, $requestParams) {
 		# calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
@@ -140,13 +152,6 @@ class RegistrationController extends SecureActionControllerImpl {
 				$error [] .= $requestParams [UsersService::REGION] ? false : true;
 				$error [] .= $requestParams [UsersService::COUNTRY] ? false : true;
 				$error [] .= $requestParams [UsersService::PHONE] ? false : true;
-				/*
-				 * tradesman fields
-				 * company send_job payment
-				*/
-				if ($result[UsersService::ROLE]=='TR'){
-					$error [] .= $requestParams [UsersService::COMPANY] ? false : true;
-				}
 				$error  = array_filter ( $error );
 				if (count ( $error ) == 0) {
 					$this->createNewUser($requestParams, $result);
@@ -235,8 +240,11 @@ class RegistrationController extends SecureActionControllerImpl {
 		$subcategory = SubCategoryService::getSubCategories ();
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		
-		$regions = RegionService::getRegions ($id);
-		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
 		
 		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
 		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
@@ -286,44 +294,7 @@ class RegistrationController extends SecureActionControllerImpl {
 		#update user information
 		UsersService::updateFields($requestParams[UsersService::ID], $fields, $vals );
 	}
-	/**
-	 * Confirmation user registration
-	 * @param array $actionParams
-	 * @param array $requestParams
-	 * @return ModelAndView
-	 */
-	/*
-	public function confirmRegistration($actionParams, $requestParams) {
-		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-			
-		$id = $requestParams [UsersService::ID];
-		$hash = $requestParams [UsersService::VALIDATION];	
-		#get user data
-		$result = UsersService::getUser($id);
-		#cheking hash
-		if (isset ( $result [UsersService::VALIDATION] ) && $result [UsersService::VALIDATION] == $hash) {
-			#creating directories for user
-			StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] );
-			StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE );
-			$path = StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE . StorageService::USER_AVATAR;
-			copy ( StorageService::DEF_USER_AVATAR, $path );
-			
-			# setting the query variables
-			$fields = array ( '0' => UsersService::ENABLED, '1' => UsersService::AVATAR);
-			$vals = array ('0' => '1', '1' => $path);
-			#update user information
-			UsersService::updateFields($id, $fields, $vals );
-			
-			$message = '_i18n{Your registration complete. Please enter your username and password.}';
-			$mvc->addObject ( UsersService::ERROR, $message );
-		} else {
-			$location = $this->onFailure ( $actionParams );
-			$this->forwardActionRequest ( $location );
-		}
-		return $mvc;
-	}
-	*/
-	
+
 	/**
 	 * Cheking e-mail and send mail with url for reset password
 	 * @param array $actionParams

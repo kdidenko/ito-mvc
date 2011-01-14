@@ -92,6 +92,13 @@ class TradesmanContentController extends ContentController {
 					$result[UsersService::CAT_ID] : 1;
 		$subcategory = SubCategoryService::getSubcatByCat ($catId);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
 		return $mvc;
 	}
 	

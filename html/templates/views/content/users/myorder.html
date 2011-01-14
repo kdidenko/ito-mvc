@@ -12,7 +12,7 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 				<th>_i18n{No}</th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
-				<th>_i18n{Job Description}</th>
+				<th>_i18n{Name}</th>
 				<th>_i18n{End price}</th>
 				<th class="itemLast">_i18n{Date}</th>
 			</tr>
@@ -24,7 +24,7 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 				<td><?php echo $key+1;?></td>
 				<td><?php echo $order[OrdersService::ID];?></td>
 				<td><?php echo $order[CategoryService::CAT_NAME];?></td>
-				<td><a class="linkTr" href="view-order.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_DESC];?>"><?php echo $order[OrdersService::ORDER_DESC];?></a></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>"><?php echo $order[OrdersService::ORDER_NAME];?></a></td>
 				<td><?php echo $order[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $order[OrdersService::CRDATE];?></td>
 			</tr>

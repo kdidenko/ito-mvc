@@ -117,6 +117,82 @@ class ContentController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleNewOrder($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$role = SessionService::getAttribute(SessionService::ROLE);
+		if(isset($requestParams['save'])){
+			$error = array();
+			$files = $_FILES ['file'];
+			foreach ($requestParams as $key => $value){
+				$error[] .= $value==NULL ? true : false;
+			}
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				if($files['error'][1]==0 || $files['error'][2]==0 || $files['error'][3]==0 || $files['error'][4]==0){
+					if($role==SessionService::ROLE_UR){
+						$img = array();
+						$paths = array();
+						foreach ($files['error'] as $key=>$error){
+							if($error==0){
+								$img['name'] = $files['name'][$key];
+								$img['type'] = $files['type'][$key];
+								$img['tmp_name'] = $files['tmp_name'][$key];
+								$img['error'] = $files['error'][$key];
+								$img['size'] = $files['size'][$key];
+								
+								$date = mktime();
+								$height = 100;
+								$width = 100;
+								$path = StorageService::ORDERS_FOLDER . "order-$date-$key.jpg";
+								$paths [].= $path;
+								$path2 = StorageService::ORDERS_FOLDER . "order-$date-$key-" . ImageService::SMALL . ".jpg";
+								if (isset ( $img ['name'] ) ) {
+									StorageService::uploadFile ( $path, $img );
+									self::setNoCashe();
+									$image = new ImageService();
+									$image->load($path);
+									$image->resize($width,$height);
+									$image->save($path2);
+								}
+							}
+						}
+										
+						$id = SessionService::getAttribute(SessionService::USERS_ID);
+						$requestParams[OrdersService::IMP_FROM_DATE] = self::createDate($requestParams[OrdersService::IMP_FROM_DATE]);
+						$requestParams[OrdersService::IMP_UNTIL_DATE] = self::createDate($requestParams[OrdersService::IMP_UNTIL_DATE]);
+						$requestParams[OrdersService::FROM_DATE] = self::createDate($requestParams[OrdersService::FROM_DATE]);
+						$requestParams[OrdersService::UNTIL_DATE] = self::createDate($requestParams[OrdersService::UNTIL_DATE]);
+						$requestParams[OrdersService::ORDER_DESC] = htmlspecialchars($requestParams[OrdersService::ORDER_DESC], ENT_QUOTES);
+						OrdersService::setOrders($id, $requestParams, $paths);
+						$location = $this->onSuccess( $actionParams );
+						$this->forwardActionRequest ( $location );
+					} else {	
+						$mvc->addObject ( self::ERROR, "_i18n{Please}, <a href='/login.html' title='_i18n{login}' target='blank'>_i18n{login like user}</a> _i18n{if you alredy registred, or you can} <a href='/registration.html?role=1' title='_i18n{register}' target='blank'>_i18n{register like user}</a>." );
+					}
+				} else {	
+					$mvc->addObject ( self::ERROR, "_i18n{Please, upload one or more images.}" );
+				}
+			} else {
+				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
+			}
+		}
+		
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+				
+		return $mvc;
+	}
+	
 	public function handleViewOrders($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
@@ -435,7 +511,7 @@ class ContentController extends SecureActionControllerImpl {
 	    $secs=floor(($newtime-time())-($days*86400)-($hours*3600)-($mins*60));
 		return "$days _i18n{days} $hours _i18n{hours} $mins _i18n{mins} $secs _i18n{secs}";
 	}
-/*	public static function createTeaser ($list){
+	public static function createTeaser ($list){
 		if (count($list)>0){
 			foreach($list as $key => $value){
 				$chr = strpos($value[SchoolService::DESCRIPTION], '</p>');
@@ -452,7 +528,7 @@ class ContentController extends SecureActionControllerImpl {
 		$word = substr($word, 0, 255);
 		$word = strrev(strstr(strrev($word), ' '));
 		return $word;
-	}*/
+	}
 	
 	
 	public function handleNewMail($actionParams, $requestParams) {

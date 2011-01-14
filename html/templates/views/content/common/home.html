@@ -14,7 +14,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 					<div class="bodyBox">
 						<h2>Jetzt Angebote einholen</h2>
 						<div class="unitSearch">
-							<form action="">
+							<form action="/new-order.html">
 								<p>
 									<select name="category" class="gCategory">
 		<?php					if (isset($categories) && $categories!=NULL){ 
@@ -23,7 +23,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<?php 						} 
 								} ?>
 									</select>
-									<label>Hauptkategorie?</label>
+									<label>_i18n{Category}?</label>
 								</p>
 								<p>
 									<select name="subcategory" class="gSubCategory">
@@ -33,10 +33,10 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 		<?php 						}
 								} ?>
 									</select>
-									<label>Unterkategorie?</label>
+									<label>_i18n{SubCategory}?</label>
 								</p>
 								<p class="itemBtn">
-									<button type="submit"><span><strong>Angebot kostenlos holen!</strong></span></button>
+									<button type="submit"><span><strong>_i18n{Make a free offer}<!-- Angebot kostenlos holen! --></strong></span></button>
 								</p>
 							</form>
 						</div>
@@ -125,23 +125,23 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 			<div class="cL">
 				<div class="cR">
 					<div class="bodyBox">
-						<h3>Branchenverzeichnis</h3>
+						<h3>_i18n{Yellow Pages}</h3>
 						<div class="unitYellow">
 							<form action="">
 								<p>
-									<label>Branche?</label>
+									<label>_i18n{Industry}?</label>
 									<select>
 										<option>&nbsp;</option>
 									</select>
 								</p>
 								<p>
-									<label>Region?</label>
+									<label>_i18n{Region}?</label>
 									<select>
 										<option>&nbsp;</option>
 									</select>
 								</p>
 								<p class="itemBtn">
-									<button type="submit"><span><strong>Suchen</strong></span></button>
+									<button type="submit"><span><strong>_i18n{Search}</strong></span></button>
 								</p>
 							</form>
 						</div>

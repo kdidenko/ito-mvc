@@ -1,4 +1,6 @@
 ﻿# Lenguage DE
+more=weitere
+Products-Categories=Produkte-Kategorien
 My Bid=Mein Gebot
 End price=Endpreis
 Job Description=Tätigkeitsbeschreibung
@@ -165,6 +167,7 @@ You entered incorrect username or your account is disable.=Sie haben einen falsc
 Account number=Kontonummer
 Address=Adresse
 Bank=Bank
+Search=Suchen
 Bank Info=Bank Info
 Bank code=Bankleitzahl
 Company Name=Rirmenname
@@ -239,6 +242,7 @@ Salutation=Anrede
 Save=Speichern
 Send=Senden
 State=Staat
+Industry=Branche
 Street=Street
 Sub-Category=Unterkategorie
 Subject=Betreff

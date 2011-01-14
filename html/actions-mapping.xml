@@ -184,9 +184,9 @@
 		</forwards>
 	</action>
 	
-	<action name="/new-order.html" id="neworder" roles="UR">
+	<action name="/new-order.html" id="neworder">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
-		<template name="index.html" path="templates/layout-two-columns-left.html" />
+		<template name="index.html" path="templates/layout-one-column.html" />
 		<forwards>
 			<target location="/my-order.html" name="myorder" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>
@@ -215,6 +215,10 @@
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 	<action name="/view-order.html" id="vieworder">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	<action name="/view-bargains.html" id="viewbargains">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>

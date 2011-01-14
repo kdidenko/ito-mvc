@@ -24,7 +24,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<th class="itemChk"></th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
-				<th>_i18n{Job Description}</th>
+				<th>_i18n{Job Name}</th>
 				<th>_i18n{End price}</th>
 				<th>_i18n{User}</th>
 				<th class="itemLast">_i18n{Date}</th>
@@ -37,7 +37,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $won_order[OrdersService::HASH];?>" /></td>
 				<td><?php echo $won_order[OrdersService::ID];?></td>
 				<td><?php echo $won_order[CategoryService::CAT_NAME];?></td>
-				<td><a class="linkTr" href="view-order.html?id=<?php echo $won_order[OrdersService::HASH];?>" title="<?php echo $won_order[OrdersService::ORDER_DESC];?>"><?php echo $won_order[OrdersService::ORDER_DESC];?></a></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $won_order[OrdersService::HASH];?>" title="<?php echo $won_order[OrdersService::ORDER_DESC];?>"><?php echo $won_order[OrdersService::ORDER_NAME];?></a></td>
 				<td><?php echo $won_order[OrdersService::BOUGHT_PRICE];?> &euro;</td>
 				<td><?php echo $won_order[UsersService::USERNAME];?></td>
 				<td class="itemLast"><?php echo $won_order[OrdersService::BOUGHT_DATE];?></td>
@@ -54,7 +54,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<th class="itemChk"></th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
-				<th>_i18n{Job Description}</th>
+				<th>_i18n{Job Name}</th>
 				<th>_i18n{User}</th>
 				<th>_i18n{Price}</th>
 				<th class="itemLast">_i18n{My Bid}</th>
@@ -67,7 +67,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $crnt_order[OrdersService::HASH];?>" /></td>
 				<td><?php echo $crnt_order[OrdersService::ID];?></td>
 				<td><?php echo $crnt_order[CategoryService::CAT_NAME];?></td>
-				<td><a class="linkTr" href="view-order.html?id=<?php echo $crnt_order[OrdersService::HASH];?>" title="<?php echo $crnt_order[OrdersService::ORDER_DESC];?>"><?php echo $crnt_order[OrdersService::ORDER_DESC];?></a></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $crnt_order[OrdersService::HASH];?>" title="<?php echo $crnt_order[OrdersService::ORDER_NAME];?>"><?php echo $crnt_order[OrdersService::ORDER_NAME];?></a></td>
 				<td><?php echo $crnt_order[UsersService::USERNAME];?></td>
 				<td><?php echo $crnt_order[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $crnt_order[OrdersService::BIDS];?> &euro;	</td>
@@ -84,7 +84,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<th class="itemChk"></th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
-				<th>_i18n{Job Description}</th>
+				<th>_i18n{Job Name}</th>
 				<th>_i18n{Price}</th>
 				<th class="itemLast">_i18n{User}</th>
 			</tr>
@@ -96,7 +96,7 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $bookmark[OrdersService::HASH];?>" /></td>
 				<td><?php echo $bookmark[OrdersService::ID];?></td>
 				<td><?php echo $bookmark[CategoryService::CAT_NAME];?></td>
-				<td><a class="linkTr" href="view-order.html?id=<?php echo $bookmark[OrdersService::HASH];?>" title="<?php echo $bookmark[OrdersService::ORDER_DESC];?>"><?php echo $bookmark[OrdersService::ORDER_DESC];?></a></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $bookmark[OrdersService::HASH];?>" title="<?php echo $bookmark[OrdersService::ORDER_NAME];?>"><?php echo $bookmark[OrdersService::ORDER_NAME];?></a></td>
 				<td><?php echo $bookmark[OrdersService::PRICE];?> &euro;</td>
 				<td class="itemLast"><?php echo $bookmark[UsersService::USERNAME];?></td>
 			</tr>

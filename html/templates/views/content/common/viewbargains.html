@@ -1,5 +1,5 @@
 <?php 
-$orders = $mvc->getObject(OrdersService::ORDERS);
+$orders = $mvc->getObject(BargainsService::BARGAINS);
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 $regions = $mvc->getObject(RegionService::REGIONS);
@@ -135,8 +135,7 @@ $pages = $mvc->getObject("pages");
 											<img src="<?php echo $order[UploadsService::PATH]; ?>" alt="<?php echo $order[OrdersService::ORDER_NAME]; ?>" />
 										</div>
 										<div class="itemText">
-											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[OrdersService::ORDER_NAME]; ?>"><?php echo $order[OrdersService::ORDER_NAME]; ?></a></h3>
-											<p><?php echo htmlspecialchars_decode($order[OrdersService::ORDER_DESC]); ?></p>
+											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[BargainsService::BARGAIN_NAME]; ?>"><?php echo $order[BargainsService::BARGAIN_NAME]; ?></a></h3>
 											<ul>
 												<li>category: <strong><?php echo $order[CategoryService::CAT_NAME]; ?></strong></li>
 												<li>country: <strong><?php echo $order[CountryService::COUNTRY_NAME]; ?></strong></li>
@@ -145,7 +144,7 @@ $pages = $mvc->getObject("pages");
 											</ul>
 										</div>
 										<div class="itemPrice">
-											<?php echo $order[OrdersService::PRICE]; ?> &euro;
+											<?php echo $order[BargainsService::BARGAIN_PRICE]; ?> &euro;
 										</div>
 									</div>
 									<?php }

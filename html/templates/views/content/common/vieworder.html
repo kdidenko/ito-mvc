@@ -47,6 +47,30 @@ $bookmark = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
 									</div>
 								<?php } ?>
 								<!-- end notification -->
+								<div class="unitOrder">
+									<div class="unitEqColumns">
+										<dl>
+											<dt>_i18n{Order Price}:</dt>
+											<dd class="itemPrice"><?php echo $data[OrdersService::PRICE]; ?> &euro;</dd>
+										</dl>
+										<?php if ($bids!=NULL){ ?>
+											<dl>
+												<dt>_i18n{Current bid}:</dt>
+												<dd class="itemPrice"><?php echo $bids[0][OrdersService::BID]; ?> &euro;</dd>
+											</dl>
+										<?php } ?>
+									</div>
+									<div class="unitEqColumns">
+										<form method="post" action="view-order.html">
+											<p>
+												<input type="text" class="inpTxt" name="bid" />
+												<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id" />
+												<button name="makeBid" value="1"><span><strong>_i18n{Make a bid}</strong></span></button>
+											</p>
+											<p class="itemHistory"><a href="#" title="Show history bids">Show history bids</a></p>
+										</form>
+									</div>
+								</div>
 								<dl>
 									<dt>_i18n{Description}:</dt>
 									<dd><?php echo htmlspecialchars_decode($data[OrdersService::ORDER_DESC]); ?></dd>
@@ -88,39 +112,20 @@ $bookmark = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
 										<dd><?php echo $data[OrdersService::STREET]; ?></dd>
 									</dl>
 								</div>
-								<div class="unitLine"></div>
-								<div class="unitEqColumns">
-									<dl>
-										<dt>_i18n{Order Price}:</dt>
-										<dd class="itemPrice"><?php echo $data[OrdersService::PRICE]; ?> &euro;</dd>
-									</dl>
+								<div class="unitHistory">
 									<?php if ($bids!=NULL){ ?>
-										<dl>
-											<dt>_i18n{Current bid}:</dt>
-											<dd class="itemPrice"><?php echo $bids[0][OrdersService::BID]; ?> &euro;</dd>
-										</dl>
-									<?php } ?>
-									<form method="post" action="view-order.html">
-										<p>
-											<input type="text" class="inpTxt" name="bid" />
-											<input type="hidden" value="<?php echo $data[OrdersService::HASH]?>" name="id" />
-											<button name="makeBid" value="1"><span><strong>_i18n{Make a bid}</strong></span></button>
-										</p>
-									</form>
-								</div>
-								<div class="unitEqColumns">
-									<?php if ($bids!=NULL){ ?>
+										<p class="itemHistory"><a href="#" title="Hide history bids">Hide history bids</a></p>
 										<table cellpadding="0" cellspacing="0">
 											<tr>
 												<th>_i18n{User}</th>
 												<th>_i18n{Bid}</th>
-												<th>_i18n{Date}</th>
+												<th class="itemLast">_i18n{Date}</th>
 											</tr>
 											<?php foreach($bids as $key => $bid){ ?>
 											<tr>
 												<td><?php echo $bid[UsersService::USERNAME]; ?></td>
 												<td><?php echo $bid[OrdersService::BID];?></td>
-												<td><?php echo $bid[OrdersService::DATE];?></td>
+												<td class="itemLast"><?php echo $bid[OrdersService::DATE];?></td>
 											</tr>
 											<?php } ?>
 										</table>

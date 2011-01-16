@@ -13,23 +13,23 @@
 				<div class="cR">
 					<div class="bodyBox">
 						<h2>_i18n{Tell us about yourself}</h2>
-<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
-		if (isset($message) && $message!=NULL){?>
-						<div class="itemOk"><?php echo $message; ?></div>
-<?php	} else { ?>
-					
-<?php 	$errors = $mvc->getObject(UsersService::ERROR);
-		if (isset($errors)){?>
-						<div class="itemWarning">
-							<ul>
-<?php	foreach ($errors as $key => $value){ ?>
-								<li><?php echo $value; ?></li>
-<?php	} ?>
-							</ul>
-						</div>
-<?php	} ?>
+						
 						<form action="registration.html" method="post" name="registration">
 							<div class="unitABlock">
+								<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+						if (isset($message) && $message!=NULL){?>
+								<div class="itemOk"><?php echo $message; ?></div>
+							<?php	} else { ?>
+								<?php 	$errors = $mvc->getObject(UsersService::ERROR);
+							if (isset($errors)){?>
+								<div class="itemWarning">
+									<ul>
+									<?php foreach ($errors as $key => $value){ ?>
+										<li><?php echo $value; ?></li>
+									<?php	} ?>
+									</ul>
+								</div>
+						<?php	} ?>
 								<div class="unitEqColumn">
 									<h3>_i18n{Company Data}</h3>
 									<div class="itemForm">

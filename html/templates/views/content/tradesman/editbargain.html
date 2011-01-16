@@ -1,0 +1,185 @@
+<?php
+$bargain = $mvc->getObject(BargainsService::BARGAINS);
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
+$errors = $mvc->getObject(TradesmanContentController::ERROR);
+$status = $mvc->getObject(TradesmanContentController::STATUS);
+?>
+<h2>_i18n{Edit Bargain}</h2>
+<form action="edit-bargain.html" method="post" enctype="multipart/form-data">
+<div class="unitABlock">
+<?php if (isset($errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<li><?php echo $errors ?></li>
+		</ul>
+	</div>
+<?php } ?>
+<?php if (isset($status )){?>
+	<div class="itemOk">
+		<ul>
+			<li><?php echo $status ?></li>
+		</ul>
+	</div>
+<?php } ?>
+	<div class="unitSnColumn">
+		<div class="itemForm">
+			<label>_i18n{Title}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="bargain_name" value="<? echo $bargain[BargainsService::BARGAIN_NAME]; ?>"/>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Description}:</label>
+			<div class="itemData">
+				<textarea class="areaTxt" name="bargain_desc"><? echo $bargain[BargainsService::BARGAIN_DESC]; ?></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="unitEqColumn">
+		<div class="itemForm">
+			<label>_i18n{Category}:</label>
+			<div class="itemData">
+				<select name="category_id" class="gCategory">
+					<option selected="selected" value="<?php echo $bargain[BargainsService::CATEGORY_ID]?>"><?php echo $bargain[CategoryService::CAT_NAME];?></option>
+<?php					if (isset($categories) && $categories!=NULL){ 
+							foreach($categories as $key=>$category){ 
+								if ($category[CategoryService::ID]!=$bargain[BargainsService::CATEGORY_ID]){ ?>
+							<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
+				</select>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Sub-Category}:</label>
+			<div class="itemData">
+				<select name="subcategory_id" class="gSubCategory">
+					<option selected="selected" value="<?php echo $bargain[BargainsService::SUBCATEGORY_ID]?>"><?php echo $bargain[SubCategoryService::SUBCAT_NAME];?></option>
+<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+							foreach($subcategories as $key=>$subcategory){ 
+								if ($subcategory[SubCategoryService::ID]!=$bargain[BargainsService::SUBCATEGORY_ID]){ ?>
+							<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+<?php 							}
+							} 
+						} ?>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="unitEqColumn">
+		<div class="itemForm">
+			<label>_i18n{Usual Price}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="usual_price" value="<? echo $bargain[BargainsService::USUAL_PRICE]; ?>"/>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Bargain Price}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="bargain_price" value="<? echo $bargain[BargainsService::BARGAIN_PRICE]; ?>"/>
+			</div>
+		</div>
+	</div>
+	<div class="unitSnColumn">
+		<div class="itemForm">
+			<label>Number:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text"  name="number" value="<? echo $bargain[BargainsService::NUMBER]; ?>"/>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Upload Pictures}:</label>
+			<div class="itemData">
+				<div class="itemWarning">
+					If you want to change image, please select another
+				</div>
+				<img src="<? echo $bargain[UploadsService::PATH2]; ?>" title="<? echo $bargain[BargainsService::BARGAIN_NAME]; ?>"/>
+				<br/>
+				<input type="file" name="bargain_image"/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="unitABlock unitABlockLast">
+	<div class="unitEqColumn">
+		<div class="itemForm">
+			<label>_i18n{Country}:</label>
+			<div class="itemData">
+				<select name="country" >
+					<option selected="selected" value="<?php echo $bargain[BargainsService::COUNTRY]?>"><?php echo $bargain[CountryService::COUNTRY_NAME];?></option>
+<?php	if (isset($countries) && $countries!=NULL){ 
+			foreach($countries as $key=>$country){ 
+				if ($country[CategoryService::ID]!=$bargain[BargainsService::COUNTRY]){ ?>					
+					<option value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+				</select>
+			</div>
+		</div>		
+		<div class="itemForm">
+			<label>_i18n{State}:</label>
+			<div class="itemData">
+				<select name="region" >
+					<option selected="selected" value="<?php echo $bargain[BargainsService::REGION]?>"><?php echo $bargain[RegionService::REGION_NAME];?></option>
+<?php	if (isset($regions) && $regions!=NULL){ 
+			foreach($regions as $key=>$region){ 
+				if ($region[RegionService::ID]!=$bargain[BargainsService::REGION]){ ?>
+					<option value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+				</select>
+			</div>
+		</div>	
+		<div class="itemForm">
+			<label>_i18n{City}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="city" value="<? echo $bargain[BargainsService::CITY]; ?>"/>
+			</div>
+		</div>
+	</div>
+	<div class="unitEqColumn">
+		<div class="itemForm">
+			<label>_i18n{ZIP}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="zip" value="<? echo $bargain[BargainsService::ZIP]; ?>"/>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Street}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="street" value="<? echo $bargain[BargainsService::STREET]; ?>"/>
+			</div>
+		</div>
+		<div class="itemForm">
+			<label>_i18n{Website}:</label>
+			<div class="itemData">
+				<input class="inpTxt" type="text" name="website" value="<? echo $bargain[BargainsService::WEBSITE]; ?>"/>
+			</div>
+		</div>
+	</div>
+	<div class="unitSnColumn">
+		<div class="itemForm">
+			<label>_i18n{Valid}</label>
+			<div class="itemData">
+				<label class="labelDate">_i18n{from}:</label>
+				<input class="inpDate" type="text" name="from_date" value="<? echo $bargain[BargainsService::FROM_DATE]; ?>"/>
+				<label class="labelDate">_i18n{until}:</label>
+				<input class="inpDate" type="text" name="until_date" value="<? echo $bargain[BargainsService::UNTIL_DATE]; ?>"/>
+			</div>
+		</div>
+	</div>
+	<div class="unitBtn">
+		<input type="hidden" name="id" value="<? echo $bargain[BargainsService::HASH]; ?>"/>
+		<input type="hidden" name="path" value="<? echo $bargain[UploadsService::PATH]; ?>"/>
+		<input type="hidden" name="path2" value="<? echo $bargain[UploadsService::PATH2]; ?>"/>
+		<button name="save" value="1"><span><strong>_i18n{Save}</strong></span></button>
+		<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
+	</div>
+</div>
+</form>

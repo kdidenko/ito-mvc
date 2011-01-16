@@ -144,6 +144,25 @@ class BargainsService {
 	}
 	
 	/**
+	 * delete bargain from db
+	 * @param integer $id the mail id
+	 */
+	public static function deleteBargains($string){
+		if (isset($string) && count($string)>0){
+			$array = explode(',', $string);
+			foreach ($array as $bargain){
+				# setting the query variables
+				$from = self::BARGAINS;
+				$where = self::HASH . " = '" . $bargain . "'";
+				$orderBy = null;
+				$limit = null;
+				# executing the query
+				DBClientHandler::getInstance ()->execDelete($from, $where, $orderBy, $limit);
+			}
+		}
+	}
+	
+	/**
 	 * Retrieves the users bargains by specified user id.
 	 * @param integer $user the user id.
 	 * @return mixed bargains data or null if user with such id does not exists. 

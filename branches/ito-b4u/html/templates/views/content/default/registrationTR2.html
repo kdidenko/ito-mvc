@@ -15,22 +15,22 @@ $role = $mvc->getObject(UsersService::ROLE);
 			<div class="cL">
 				<div class="cR">
 					<div class="bodyBox">
-<?php	if (isset($message) && $message!=NULL){?>
-						<div class="itemOk"><?php echo $message; ?></div>
-<?php	} else { ?>
-					
-<?php 	$errors = $mvc->getObject(UsersService::ERROR);
-		if (isset($errors)){?>
-						<div class="itemWarning">
-							<ul>
-<?php	foreach ($errors as $key => $value){ ?>
-								<li><?php echo $value; ?></li>
-<?php	} ?>
-							</ul>
-						</div>
-<?php	} ?>
+
 						<form action="confirm-registration.html" method="post">
 							<div class="unitABlock">
+								<?php	if (isset($message) && $message!=NULL){?>
+									<div class="itemOk"><?php echo $message; ?></div>
+								<?php } else { ?>
+									<?php 	$errors = $mvc->getObject(UsersService::ERROR);
+										if (isset($errors)){?>
+									<div class="itemWarning">
+										<ul>
+											<?php	foreach ($errors as $key => $value){ ?>
+												<li><?php echo $value; ?></li>
+											<?php	} ?>
+										</ul>
+									</div>
+								<?php	} ?>
 								<div class="unitEqColumn">
 									<h3>_i18n{Bank Data}</h3>
 									<div class="itemForm">

@@ -61,10 +61,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.greyBox .lineHide {width:100%; overflow:hidden; height:1px}
 
 /* home wrap style */
-.wrapMain {float:left; width:692px}
-	.wrapMain .greyBox {width:652px}
+.wrapMain {float:left; width:702px}
+	.wrapMain .greyBox {width:662px}
 	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
-	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:105px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
+	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:95px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
 .wrapSide {float:right; width:252px} /* width:213px */
 	.wrapMain .viewBoxB {width:442px; float:left}
 	.wrapMain .viewBoxC {width:195px; float:right}
@@ -85,10 +85,11 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .wrapRAdmin {float:right; width:729px}
 	.wrapRAdmin .greyBox {width:699px}
 /* search wrap style */
-.wrapLSearch {float:left; width:215px}
-	.wrapLSearch .greyBox {width:185px}
-.wrapRSearch {float:right; width:729px}
-	.wrapRSearch .greyBox {width:699px}
+/*.wrapLSearch {float:right; width:235px}
+	.wrapLSearch .greyBox {width:205px}*/
+.wrapSSearch {float:right; width:252px}
+.wrapLSearch {float:left; width:702px}
+	.wrapLSearch .greyBox {width:662px}
 .wrapWSearch {float:left; width:970px}
 	.wrapWSearch .greyBox {width:940px}
 
@@ -164,21 +165,36 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitSearch p.itemBtn button {float:right}
 	.unitSearch label {display:block; padding:5px 0 0 0}
 	.unitSearch select {width:195px}
+	
+	.wrapSSearch .unitSearch {width:220px; padding:0 0 0 12px}
+	.wrapSSearch .unitSearch p {width:220px; padding:2px 0 5px 0}
+	.wrapSSearch .unitSearch select {width:218px}
+	.wrapSSearch .unitSearch p.itemBtn button strong {float:left; width:195px}
 /* step block style */
 .unitStep {padding:0 1px 0 12px}
 	.unitStep ol {overflow:hidden; width:420px; padding:5px 0 0 0}
 	.unitStep li {float:left; width:122px; padding:0 10px 5px 8px}
 	.unitStep li span {display:block; color:#616161}
+	
+	.wrapSSearch .unitStep ol {width:220px; padding:0}
+	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
+	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
 /* small video */
 .unitVideo {padding:0 12px 5px 12px}
 	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
 /* small form */
 .unitYellow {padding:0 12px}
 	.unitYellow p {padding:2px 0 5px 0; overflow:hidden; width:161px}
+	.unitYellow p.itemSmall {font-size:12px}
 	.unitYellow label {display:block}
 	.unitYellow select {width:160px}
 	.unitYellow button span {background-position:right -78px}
 	.unitYellow button span strong {background-position:left -52px; color:#292929}
+	.unitYellow .inpEmpty {color:#ccc}
+	
+	.wrapSSearch .unitYellow p {width:220px}
+	.wrapSSearch .unitYellow input {width:211px}
+		
 .viewPlatform {float:left; width:442px; position:relative; padding:5px 0 10px 0}
 	.viewPlatform p {font-size:17px; font-weight:normal; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
 	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
@@ -193,8 +209,6 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .viewEList {float:right; width:182px; padding:8px 0 0 0}
 	.viewEList h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:0 5px 5px 0}
 	.viewEList ul a {text-decoration:underline}
-
-
 
 /* ------------------ admin left style ------------------ */
 .viewMenu {}
@@ -278,10 +292,6 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewList tr.unitHover td {background:#E2E2E2}
 	.viewList th.itemChk {width:14px}
 		.viewList td input.inpChk {margin:1px 0 0 0}
-	/*.viewWBox tr.unitCategory td {border-right-width:0; padding:5px 0}
-	.viewWBox tr.unitCategory .unitP {background:#EFEFEF; overflow:hidden; padding:3px 0; width:671px}
-	.viewWBox tr.unitCategory .linkSave {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
-	.viewWBox tr.unitCategory .linkSave button {float:left; line-height:normal; overflow:hidden; background:url(../images/actionIcon.gif) 3px -451px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}*/
 /* table plan style */
 .viewPlan {width:667px; border-collapse:collapse; margin:0 12px 5px 12px}
 	.viewPlan th {font-size:11px; color:#393939; font-weight:normal; border:1px dotted #999; padding:3px 5px}
@@ -377,21 +387,35 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewFilter dd label {display:block; padding:5px 0}
 	.viewFilter .unitPrice dd label {float:left; padding:3px 5px 3px 0; width:62px}
 	.viewFilter input.inpTxt {width:75px}
-.unitBSearch {padding:5px 12px}
-	.unitBSearch p {overflow:hidden; width:667px; padding:0 0 10px 0}
-	.unitBSearch input.inpTxt {width:585px; float:left; margin:0 5px 0 0}
+.unitBSearch {padding:5px 12px 10px 12px}
+	.unitBSearch p {overflow:hidden; width:630px; padding:0 0 5px 0}
+	.unitBSearch input.inpTxt {width:548px; float:left; margin:0 5px 0 0}
+	.unitBSearch p.itemFilter {padding:0}
+	.unitBSearch p.itemFilter span {float:left; padding:4px 5px 2px}
+	.unitBSearch p.itemFilter span a {background:url(../images/actionIcon.gif) no-repeat 1px -534px; float:left; font-weight:normal; line-height:14px; overflow:hidden; padding:1px 5px 1px 20px}
+	.unitBSearch p.itemFilter span.itemFilterOpen {background:#EFEFEF}
+	.unitBSearch p.itemFilter span.itemFilterOpen a {background:url(../images/actionIcon.gif) no-repeat 1px -493px}
+	
+	.unitFilter {background:#EFEFEF; overflow:hidden; width:630px}
+	.unitFilter dl {padding:0 12px; width:606px; float:left; position:relative; margin:-1px 0 0 0}
+	.unitFilter dt {font-weight:bold; width:90px; padding:11px 0 8px 10px; float:left; border-top:1px dotted #393939}
+	.unitFilter dd {padding:8px 0 8px 0; float:right; width:506px; border-top:1px dotted #393939}
+	.unitFilter dd label {float:left; padding:3px 10px 3px 0; width:90px; text-align:right}
+	.unitFilter select {width:150px; float:left}
+	.unitFilter input.inpTxt {width:75px; margin:0 67px 0 0}
+	
 .viewLSearch {padding:0 12px; overflow:hidden}
-.unitLSearch {padding:10px 0; border-top:1px solid #ccc; overflow:hidden; width:667px; position:relative; margin:-1px 0 0 0}
-	.unitLSearch .itemImg {float:left; padding:0 10px 0 0}
-	.unitLSearch .itemText {overflow:hidden; height:1%; padding:0 50px 0 0}
+.unitLSearch {padding:10px 0; border-top:1px solid #ccc; overflow:hidden; width:630px; position:relative; margin:-1px 0 0 0}
+	.unitLSearch .itemImg {float:left; padding:0 12px 0 0}
+	.unitLSearch .itemText {float:right; width:462px; padding:0 50px 0 0}
 	.unitLSearch .itemPrice {position:absolute; right:5px; top:10px; font-size:17px; color:#9F0206}
 	.unitLSearch h3 {padding:0 0 5px 0}
 	.unitLSearch p {padding:0 0 15px 0}
 	.unitLSearch ul {font-size:12px; line-height:normal; overflow:hidden; width:90%}
 	.unitLSearch li {float:left; width:45%}
 
-.unitTPagination {background:#EFEFEF; border-top:1px dotted #393939; width:691px; overflow:hidden; padding:5px 0}
-.unitBPagination {background:#EFEFEF; border-bottom:1px dotted #393939; width:691px; overflow:hidden; padding:5px 0}
+.unitTPagination {background:#EFEFEF; border-top:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
+.unitBPagination {background:#EFEFEF; border-bottom:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
 	.unitTPagination p {float:left; padding:0 0 0 12px; font-size:14px; color:#9F0106}
 	.unitTPagination p span {font-weight:bold}
 	.unitTPagination ul, .unitBPagination ul {float:right; padding:0 12px 0 0}
@@ -430,6 +454,8 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	
 	.unitDRight .unitLine {border-bottom:1px dotted #ccc; height:0; line-height:1px; font-size:1px; overflow:hidden; width:630px}
 	.unitDRight .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 8px 7px; color:#f00; margin:0 0 5px 0; padding:6px 10px 6px 30px}
+		.unitDRight .itemWarning a {color:#9F0307; text-decoration:underline}
+		.unitDRight .itemWarning a:hover {text-decoration:none}
 	.unitDRight .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 8px 8px; color:#00A25B; margin:0 0 5px 0; padding:6px 10px 6px 30px}
 	
 	.unitDRight .unitOrder {background:#EFEFEF; width:630px; overflow:hidden; padding:4px 0}

@@ -7,96 +7,81 @@ $countries = $mvc->getObject(CountryService::COUNTRY);
 $count = $mvc->getObject("count");
 $pages = $mvc->getObject("pages");
 ?>
-<form action="view-orders.html" method="get" id="search">
-	<div class="wrapLSearch">
-		<div class="greyBox">
-			<div class="viewBox viewBoxC">
-				<div class="cT"><em class="cL"></em><em class="cR"></em></div>
-				<div class="cL">
-					<div class="cR">
-						<div class="bodyBox">
-							<h2>Filter</h2>
-							<div class="viewFilter">
-								<dl>
-									<dt>Category</dt>
-									<dd>
-										<select name="category_id" class="gCategory">
-											<option value="all">all</option>
-						<?php			if (isset($categories) && $categories!=NULL){ 
-					foreach($categories as $key=>$category){ ?>
-												<option <?php echo isset($_GET['category_id'])&&$category[CategoryService::ID]==$_GET['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-						<?php 				} 
-				} ?>
-										</select>
-									</dd>
-									<dt>SubCategory</dt>
-									<dd>
-										<select name="subcategory_id" class="gSubCategory">
-											<option value="all">all</option>
-						<?php			if (isset($subcategories) && $subcategories!=NULL){ 
-					foreach($subcategories as $key=>$subcategory){ ?>						
-												<option <?php echo isset($_GET['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_GET['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
-						<?php 				} 
-				} ?>
-										</select>
-									</dd>
-								</dl>
-								<dl>
-									<dt>Country</dt>
-									<dd>
-										<select name="country_id">
-											<option value="all">all</option>
-						<?php			if (isset($countries) && $countries!=NULL){ 
-					foreach($countries as $key=>$country){ ?>						
-												<option <?php echo isset($_GET['country'])&&$country[CountryService::ID]==$_GET['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
-						<?php 				} 
-				} ?>
-										</select>
-									</dd>
-									<dt>Region</dt>
-									<dd>
-										<select name="region_id">
-											<option value="all">all</option>
-						<?php			if (isset($regions) && $regions!=NULL){ 
-					foreach($regions as $key=>$region){ ?>
-												<option <?php echo isset($_GET['region'])&&$region[RegionService::ID]==$_GET['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
-						<?php 				} 
-				} ?>
-										</select>
-									</dd>
-								</dl>
-								<dl class="unitPrice">
-									<dt>Price</dt>
-									<dd>
-										<label> from</label>
-										<input class="inpTxt" name="price_from" type="text" value="<? if(isset($_GET['price_from'])) echo $_GET['price_from']; ?>"/>
-									</dd>
-									<dd>
-										<label>to</label>
-										<input class="inpTxt" name="price_until" type="text" value="<? if(isset($_GET['price_until'])) echo $_GET['price_until']; ?>"/>
-									</dd>
-								</dl>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="cB"><em class="cL"></em><em class="cR"></em></div>
-			</div>
-		</div>
-	</div>
-	<div class="wrapRSearch">
-		<div class="greyBox">
-			<div class="viewBox viewBoxA">
-				<div class="cT"><em class="cL"></em><em class="cR"></em></div>
-				<div class="cL">
-					<div class="cR">
-						<div class="bodyBox">
-							<h2>Find jobs</h2>
+
+<div class="wrapLSearch">
+	<div class="greyBox">
+		<div class="viewBox viewBoxA">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<h2>Find jobs</h2>
+						<form action="view-orders.html" method="get" id="search">
 							<div class="unitBSearch">
 								<p>
 									<input name="order_name" class="inpTxt" type="text"  value="<? if(isset($_GET['order_name'])) echo $_GET['order_name']; ?>"/>
 									<button name="search" type="submit"><span><strong>Search</strong></span></button>
 								</p>
+								<p class="itemFilter">
+									<span class="item1FilterOpen"><a href="#" title="Advanced search">Advanced search</a></span>
+								</p>
+								<div class="unitFilter">
+									<dl>
+										<dt></dt>
+										<dd>
+											<label>Category</label>
+											<select name="category_id" class="gCategory">
+												<option value="all">all</option>
+							<?php			if (isset($categories) && $categories!=NULL){ 
+					foreach($categories as $key=>$category){ ?>
+													<option <?php echo isset($_GET['category_id'])&&$category[CategoryService::ID]==$_GET['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+							<?php 				} 
+				} ?>
+											</select>
+											<label>SubCategory</label>
+											<select name="subcategory_id" class="gSubCategory">
+												<option value="all">all</option>
+							<?php			if (isset($subcategories) && $subcategories!=NULL){ 
+					foreach($subcategories as $key=>$subcategory){ ?>						
+													<option <?php echo isset($_GET['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_GET['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+							<?php 				} 
+				} ?>
+											</select>
+										</dd>
+									</dl>
+									<dl>
+										<dt>Location:</dt>
+										<dd>
+											<label>Country</label>
+											<select name="country_id">
+												<option value="all">all</option>
+							<?php			if (isset($countries) && $countries!=NULL){ 
+					foreach($countries as $key=>$country){ ?>						
+													<option <?php echo isset($_GET['country'])&&$country[CountryService::ID]==$_GET['country'] ? "selected='selected'" : NULL ; ?> value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+							<?php 				} 
+				} ?>
+											</select>
+											<label>Region</label>
+											<select name="region_id">
+												<option value="all">all</option>
+							<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+													<option <?php echo isset($_GET['region'])&&$region[RegionService::ID]==$_GET['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+							<?php 				} 
+				} ?>
+											</select>
+										</dd>
+									</dl>
+									<dl>
+										<dt>Price:</dt>
+										<dd>
+											<label> from</label>
+											<input class="inpTxt" name="price_from" type="text" value="<? if(isset($_GET['price_from'])) echo $_GET['price_from']; ?>"/>
+											<label>to</label>
+											<input class="inpTxt" name="price_until" type="text" value="<? if(isset($_GET['price_until'])) echo $_GET['price_until']; ?>"/>
+										</dd>
+									</dl>
+								</div>
 							</div>
 
 							<div class="unitESearch">
@@ -190,11 +175,60 @@ $pages = $mvc->getObject("pages");
 									</ul>
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
-				<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 			</div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
 		</div>
 	</div>
-</form>
+</div>
+
+<div class="wrapSSearch">
+	<div class="viewBox viewBoxC">
+		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+		<div class="cL">
+			<div class="cR">
+				<div class="bodyBox">
+					<h3>Sofort informiert sein über neue Angebote</h3>
+					<div class="unitYellow">
+						<p><input type="text" class="inpTxt" title="Ihre E-Mail-Adresse" /></p>
+						<p class="itemBtn">
+							<button type="submit"><span><strong>Jetzt eintragen</strong></span></button>
+						</p>
+						<p class="itemSmall">Wir informieren Sie sofort über neu eintreffende Angebote welche mit Ihrer Selektion übereinstimmen.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+	</div>
+	
+	<div class="viewBox viewBoxA">
+		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+		<div class="cL">
+			<div class="cR">
+				<div class="bodyBox">
+					<h3>So finden Sie das beste Angebot!</h3>
+					<div class="unitStep">
+						<ol>
+							<li>
+								<span><img src="images/nbrFindR01.gif" alt="Ihren Auftrag kostenlos eintragen" /></span>
+								<span>Ihren Auftrag kostenlos eintragen</span>
+							</li>
+							<li>
+								<span><img src="images/nbrFindR02.gif" alt="Angebote vergleichen" /></span>
+								<span>Angebote vergleichen</span>
+							</li>
+							<li>
+								<span><img src="images/nbrFindR03.gif" alt="Auftrag vergeben" /></span>
+								<span>Auftrag vergeben</span>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+	</div>
+</div>

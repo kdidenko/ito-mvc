@@ -232,8 +232,7 @@ class TradesmanContentController extends ContentController {
 			isset ( $requestParams [UsersService::DISABLE] ) ? BargainsService::updateFields ( $requestParams [UsersService::DISABLE], BargainsService::STATUS, '0' ) : NULL;
 			
 			isset ( $requestParams [self::DEL_ALL] ) ? 
-				//MailService::deleteMails ($requestParams ['itemSelect']) :
-				print_r($requestParams [self::DEL_ALL]) :
+				BargainsService::deleteBargains ($requestParams ['itemSelect']) :
 					null;
 			
 			$bargains = BargainsService::getBargains($id);
@@ -289,6 +288,104 @@ class TradesmanContentController extends ContentController {
 		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
 
 		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		$countries = RegionService::getRegions ();
+		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		
+		$regions = CountryService::getCountries ();
+		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		
+		return $mvc;
+	}
+	
+	public function handleEditBargain($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if(isset($requestParams['save'])){
+			$error = array();
+			foreach ($requestParams as $key => $value){
+				$error[] .= $value==NULL ? true : false;
+			}
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				$from_date = explode('/', $requestParams[BargainsService::FROM_DATE]);
+				$until_date = explode('/', $requestParams[BargainsService::UNTIL_DATE]);
+				$fields = array();
+				$fields[] .= $requestParams[BargainsService::BARGAIN_NAME];
+				$fields[] .= htmlspecialchars($requestParams[BargainsService::BARGAIN_DESC], ENT_QUOTES);
+				$fields[] .= $requestParams[BargainsService::CATEGORY_ID];
+				$fields[] .= $requestParams[BargainsService::SUBCATEGORY_ID];
+				$fields[] .= $requestParams[BargainsService::USUAL_PRICE];
+				$fields[] .= $requestParams[BargainsService::BARGAIN_PRICE];
+				$fields[] .= $requestParams[BargainsService::NUMBER];
+				$fields[] .= $requestParams[BargainsService::COUNTRY];
+				$fields[] .= $requestParams[BargainsService::REGION];
+				$fields[] .= $requestParams[BargainsService::CITY];
+				$fields[] .= $requestParams[BargainsService::ZIP];
+				$fields[] .= $requestParams[BargainsService::STREET];
+				$fields[] .= $requestParams[BargainsService::WEBSITE];
+				$fields[] .= $from_date[2] . '-' . $from_date[1] . '-' . $from_date[0];
+				$fields[] .= $until_date[2] . '-' . $until_date[1] . '-' . $until_date[0];
+				$vals = array();
+				$vals[] .= BargainsService::BARGAIN_NAME;
+				$vals[] .= BargainsService::BARGAIN_DESC;
+				$vals[] .= BargainsService::CATEGORY_ID;
+				$vals[] .= BargainsService::SUBCATEGORY_ID;
+				$vals[] .= BargainsService::USUAL_PRICE;
+				$vals[] .= BargainsService::BARGAIN_PRICE;
+				$vals[] .= BargainsService::NUMBER;
+				$vals[] .= BargainsService::COUNTRY;
+				$vals[] .= BargainsService::REGION;
+				$vals[] .= BargainsService::CITY;
+				$vals[] .= BargainsService::ZIP;
+				$vals[] .= BargainsService::STREET;
+				$vals[] .= BargainsService::WEBSITE;
+				$vals[] .= BargainsService::FROM_DATE;
+				$vals[] .= BargainsService::UNTIL_DATE;
+				BargainsService::updateFields($requestParams[BargainsService::ID], $vals, $fields);
+				$file = $_FILES ['bargain_image'];
+				if ($file['error']==0){
+					$date = mktime();
+					$height = 100;
+					$width = 100;
+					$path = $requestParams[UploadsService::PATH];
+					$path2 = $requestParams[UploadsService::PATH2];
+					if (isset ( $file ['name'] ) ) {
+						StorageService::uploadFile ( $path, $file );
+						self::setNoCashe();
+						$image = new ImageService();
+						$image->load($path);
+						$image->resize($width,$height);
+						$image->save($path2);
+					}
+				}
+				$mvc->addObject ( self::STATUS, "_i18n{You have successfully added a bookmark!}" );
+				//$id = SessionService::getAttribute(SessionService::USERS_ID);
+				//BargainsService::updateFields($id, $requestParams, $path);
+			} else {
+				$mvc->addObject ( self::ERROR, '_i18n{Please, fill in all fields.}' );
+			}
+		}
+		
+		$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
+		$bargain = BargainsService::getBargains ($where);
+		if ($bargain[0][UploadsService::PATH]!=NULL){
+			$part = explode('.',$bargain[0][UploadsService::PATH]);
+			$bargain[0][UploadsService::PATH2] = $part[0] . '-thumbnail.' . $part[1];
+		}
+		$from_date = explode('-', $bargain[0][BargainsService::FROM_DATE]);
+		$until_date = explode('-', $bargain[0][BargainsService::UNTIL_DATE]);
+		$bargain[0][BargainsService::FROM_DATE] = $from_date[2] . '/' . $from_date[1] . '/' . $from_date[0];
+		$bargain[0][BargainsService::UNTIL_DATE] = $until_date[2] . '/' . $until_date[1] . '/' . $until_date[0];
+		$bargain[0][BargainsService::BARGAIN_DESC] = htmlspecialchars_decode($bargain[0][BargainsService::BARGAIN_DESC], ENT_QUOTES);
+		isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
+		
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$cat_id = isset($bargain[0][BargainsService::CATEGORY_ID]) ? $bargain[0][BargainsService::CATEGORY_ID] : $category[0][CategoryService::ID];
+		$subcategory = SubCategoryService::getSubcatByCat ($cat_id);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		
 		$countries = RegionService::getRegions ();

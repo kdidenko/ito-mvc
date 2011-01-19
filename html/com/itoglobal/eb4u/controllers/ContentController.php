@@ -311,7 +311,7 @@ class ContentController extends SecureActionControllerImpl {
 							$mvc->addObject ( self::STATUS, "_i18n{You have successfully added a bookmark!}" );
 						} else {
 							OrdersService::removeBookmark($order[0][OrdersService::ID], $id);
-							$mvc->addObject ( self::STATUS, "_i18n{You have successfully remove a bookmark!}" );
+							$mvc->addObject ( self::STATUS, "_i18n{You have successfully removed a bookmark!}" );
 						}
 					}
 				} else {

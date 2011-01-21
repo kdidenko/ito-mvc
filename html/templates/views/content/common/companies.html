@@ -16,7 +16,7 @@ Category
 					foreach($categories as $key=>$category){ ?>
 			<option <?php echo isset($_GET['category_id'])&&$category[CategoryService::ID]==$_GET['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
 <?php 				} 
-				} ?>
+				} ?> 
 	</select>
 SubCategory
 	<select name="subcat_id" class="gSubCategory">

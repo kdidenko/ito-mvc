@@ -120,12 +120,26 @@ $pages = $mvc->getObject("pages");
 										</div>
 										<div class="itemText">
 											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[BargainsService::BARGAIN_NAME]; ?>"><?php echo $order[BargainsService::BARGAIN_NAME]; ?></a></h3>
-											<ul>
-												<li>category: <strong><?php echo $order[CategoryService::CAT_NAME]; ?></strong></li>
-												<li>country: <strong><?php echo $order[CountryService::COUNTRY_NAME]; ?></strong></li>
-												<li>subcategory: <strong><?php echo $order[SubCategoryService::SUBCAT_NAME]; ?></strong></li>
-												<li>city: <strong><?php echo $order[OrdersService::CITY]; ?></strong></li>
-											</ul>
+											<div class="unitEqColumns">
+												<dl>
+													<dt>category:</dt>
+													<dd><?php echo $order[CategoryService::CAT_NAME]; ?></dd>
+												</dl>
+												<dl>
+													<dt>subcategory:</dt>
+													<dd><?php echo $order[SubCategoryService::SUBCAT_NAME]; ?></dd>
+												</dl>
+											</div>
+											<div class="unitEqColumns">
+												<dl>
+													<dt>country:</dt>
+													<dd><?php echo $order[CountryService::COUNTRY_NAME]; ?></dd>
+												</dl>
+												<dl>
+													<dt>city:</dt>
+													<dd><?php echo $order[OrdersService::CITY]; ?></dd>
+												</dl>
+											</div>
 										</div>
 										<div class="itemPrice">
 											<?php echo $order[BargainsService::BARGAIN_PRICE]; ?> &euro;

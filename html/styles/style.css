@@ -179,6 +179,19 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapSSearch .unitStep ol {width:220px; padding:0}
 	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
 	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
+/* rating style */
+ul.unitRating, ul.unitRating a:hover, ul.unitRating li.itemCurrent {background-image:url(../images/ratingIcon.gif)}
+ul.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
+ul.unitRating li {display:inline}
+ul.unitRating a, ul.unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
+ul.unitRating li.itemCurrent {background-position:0 0}
+ul.unitRating a:hover {background-position:0 -60px}
+ul.unitRating li.itemOne a {width:20%; z-index:6}
+ul.unitRating li.itemTwo a {width:40%; z-index:5}
+ul.unitRating li.itemThree a {width:60%; z-index:4}
+ul.unitRating li.itemFour a {width:80%; z-index:3}
+ul.unitRating li.itemFive a {width:100%; z-index:2}
+ul.unitRating li.itemTwo a {width:40%; z-index:5}
 /* small video */
 .unitVideo {padding:0 12px 5px 12px}
 	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
@@ -407,12 +420,22 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .viewLSearch {padding:0 12px; overflow:hidden}
 .unitLSearch {padding:10px 0; border-top:1px solid #ccc; overflow:hidden; width:630px; position:relative; margin:-1px 0 0 0}
 	.unitLSearch .itemImg {float:left; padding:0 12px 0 0}
-	.unitLSearch .itemText {float:right; width:462px; padding:0 50px 0 0}
+		.unitLSearch .itemImg img {width:100px; vertival-align:top}
+	.unitLSearch .itemText {float:right; width:518px}
 	.unitLSearch .itemPrice {position:absolute; right:5px; top:10px; font-size:17px; color:#9F0206}
-	.unitLSearch h3 {padding:0 0 5px 0}
-	.unitLSearch p {padding:0 0 15px 0}
-	.unitLSearch ul {font-size:12px; line-height:normal; overflow:hidden; width:90%}
-	.unitLSearch li {float:left; width:45%}
+	.unitLSearch .itemQuote {position:absolute; right:0; top:8px}
+	.unitLSearch .itemQuote button span {background-position:right -78px}
+	.unitLSearch .itemQuote button span strong {background-position:left -52px; color:#292929}
+	.unitLSearch h3 {padding:0 100px 5px 0}
+	.unitLSearch p {padding:0 0 5px 0}
+	.unitLSearch button {float:right; marg3in:10px 0 0 0}
+	/*.unitLSearch ul {font-size:12px; line-height:normal; overflow:hidden; width:90%}
+	.unitLSearch li {float:left; width:45%}*/
+	.unitLSearch .unitEqColumns {float:left; width:231px; padding:15px 0 0 0}
+	.unitLSearch .unitEqColumns dl {overflow:hidden; width:231px; font-size:12px; line-height:normal; padding:1px 0}
+	.unitLSearch .unitEqColumns dt {width:85px; float:left}
+	.unitLSearch .unitEqColumns dd {width:136px; float:right; font-weight:bold}
+	.unitLSearch .unitEqColumns dd p {font-weight:normal; padding:5px 0}
 
 .unitTPagination {background:#EFEFEF; border-top:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
 .unitBPagination {background:#EFEFEF; border-bottom:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}

@@ -180,18 +180,18 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
 	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
 /* rating style */
-ul.unitRating, ul.unitRating a:hover, ul.unitRating li.itemCurrent {background-image:url(../images/ratingIcon.gif)}
-ul.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
-ul.unitRating li {display:inline}
-ul.unitRating a, ul.unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
-ul.unitRating li.itemCurrent {background-position:0 0}
-ul.unitRating a:hover {background-position:0 -60px}
-ul.unitRating li.itemOne a {width:20%; z-index:6}
-ul.unitRating li.itemTwo a {width:40%; z-index:5}
-ul.unitRating li.itemThree a {width:60%; z-index:4}
-ul.unitRating li.itemFour a {width:80%; z-index:3}
-ul.unitRating li.itemFive a {width:100%; z-index:2}
-ul.unitRating li.itemTwo a {width:40%; z-index:5}
+.unitRating, .unitRating a:hover, .unitRating li.itemCurrent {background-image:url(../images/ratingIcon.gif)}
+	.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
+	.unitRating li {display:inline}
+	.unitRating a, .unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
+	.unitRating li.itemCurrent {background-position:0 0}
+	.unitRating a:hover {background-position:0 -60px}
+	.unitRating li.itemOne a {width:20%; z-index:6}
+	.unitRating li.itemTwo a {width:40%; z-index:5}
+	.unitRating li.itemThree a {width:60%; z-index:4}
+	.unitRating li.itemFour a {width:80%; z-index:3}
+	.unitRating li.itemFive a {width:100%; z-index:2}
+	.unitRating li.itemTwo a {width:40%; z-index:5}
 /* small video */
 .unitVideo {padding:0 12px 5px 12px}
 	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
@@ -429,13 +429,11 @@ ul.unitRating li.itemTwo a {width:40%; z-index:5}
 	.unitLSearch h3 {padding:0 100px 5px 0}
 	.unitLSearch p {padding:0 0 5px 0}
 	.unitLSearch button {float:right; marg3in:10px 0 0 0}
-	/*.unitLSearch ul {font-size:12px; line-height:normal; overflow:hidden; width:90%}
-	.unitLSearch li {float:left; width:45%}*/
 	.unitLSearch .unitEqColumns {float:left; width:231px; padding:15px 0 0 0}
 	.unitLSearch .unitEqColumns dl {overflow:hidden; width:231px; font-size:12px; line-height:normal; padding:1px 0}
-	.unitLSearch .unitEqColumns dt {width:85px; float:left}
-	.unitLSearch .unitEqColumns dd {width:136px; float:right; font-weight:bold}
-	.unitLSearch .unitEqColumns dd p {font-weight:normal; padding:5px 0}
+	.unitLSearch .unitEqColumns dt {width:85px; float:left; font-weight:bold}
+	.unitLSearch .unitEqColumns dd {width:136px; float:right}
+	.unitLSearch .unitEqColumns dd p {padding:5px 0}
 
 .unitTPagination {background:#EFEFEF; border-top:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
 .unitBPagination {background:#EFEFEF; border-bottom:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
@@ -466,20 +464,26 @@ ul.unitRating li.itemTwo a {width:40%; z-index:5}
 	.unitDLeft .unitSingle img {width:243px; vertical-align:top}
 	
 .unitDRight {float:right; width:630px; padding:0 12px 0 0}
-	.unitDRight dl {width:630px; overflow:hidden; padding:4px 0}
-	.unitDRight dt {float:left; width:90px; font-weight:bold; padding:0 0 0 10px}
-	.unitDRight dd {float:right; width:510px; padding:0 10px 0 0}
+	.unitDRight dl {width:630px; overflow:hidden; padding:3px 0}
+	.unitDRight dt {float:left; width:90px; font-weight:bold; padding:1px 0 1px 10px}
+	.unitDRight dd {float:right; width:510px; padding:1px 10px 1px 0}
 	.unitDRight dd.itemPrice {font-size:15px; font-weight:bold; color:#9F0307; margin:-1px 0 0 0}
 	.unitDRight .unitEqColumns {float:left; width:315px; padding:4px 0}
 	.unitDRight .unitEqColumns dl {width:315px}
 	.unitDRight .unitEqColumns dd {width:195px}
-	.unitDRight .unitEqColumns dl.itemSmall {padding:1px 0; font-size:12px; line-height:normal}
+		.unitDRight .unitEqColumns dd p {padding:3px 0 0 0}
+	/*.unitDRight .unitEqColumns dl.itemSmall {padding:1px 0; font-size:12px; line-height:normal}*/
+	.unitDRight .unitEqDesc {float:right; width:305px; padding:4px 0 4px 10px}
+	.unitDRight .unitEqDesc dl {width:305px}
+	.unitDRight .unitEqDesc dt, .unitDRight .unitEqDesc dd {width:295px; padding:1px 0 1px 10px}
 	
 	.unitDRight .unitLine {border-bottom:1px dotted #ccc; height:0; line-height:1px; font-size:1px; overflow:hidden; width:630px}
 	.unitDRight .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 8px 7px; color:#f00; margin:0 0 5px 0; padding:6px 10px 6px 30px}
 		.unitDRight .itemWarning a {color:#9F0307; text-decoration:underline}
 		.unitDRight .itemWarning a:hover {text-decoration:none}
 	.unitDRight .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 8px 8px; color:#00A25B; margin:0 0 5px 0; padding:6px 10px 6px 30px}
+	
+	.unitDRight .unitCompany {width:630px; overflow:hidden; padding:4px 0}
 	
 	.unitDRight .unitOrder {background:#EFEFEF; width:630px; overflow:hidden; padding:4px 0}
 	.unitDRight .unitOrder p {padding:4px 10px 4px 0; float:right; clear:both}
@@ -493,3 +497,25 @@ ul.unitRating li.itemTwo a {width:40%; z-index:5}
 	.unitDRight .unitHistory th {background:url(../images/navBg.png) repeat-x 0 0 #7B0108; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; color:#fff; padding:3px 5px; text-align:left}
 	.unitDRight .unitHistory td {border-bottom:1px dotted #999; border-right:1px dotted #999; padding:3px 5px}
 	.unitDRight .unitHistory td.itemLast, .unitDRight .unitHistory th.itemLast {border-right-width:0}
+	
+	.tabsHead {float:left; width:934px; padding:10px 0 0 0; background:url(../images/tabsLineBg.gif) repeat-x left bottom}
+	.tabsHead ul {padding:0 12px; position:relative; margin:0 0 -1px 0}
+	.tabsHead li {float:left; padding:0 5px 0 0}
+	.tabsHead li a {float:left; background:url(../images/tabsBg.gif) no-repeat right -99px; padding:0 5px 0 0}
+	.tabsHead li a span {float:left; padding:7px 7px 6px 12px; font-weight:bold; color:#fff; line-height:14px; background:url(../images/tabsBg.gif) no-repeat left -66px}
+	.tabsHead li.itemCurrent a {background:url(../images/tabsBg.gif) no-repeat right -33px}
+	.tabsHead li.itemCurrent a span {padding:7px 7px 7px 12px; color:#393939; background:url(../images/tabsBg.gif) no-repeat left 0}
+	.tabsHead li a:hover {text-decoration:none}
+	
+	.tabsContent {overflow:hidden; width:934px}
+	
+	.viewDComment {padding:10px 12px 5px 12px}
+	.unitDComment {overflow:hidden; width:910px; background:#EFEFEF; margin:0 0 1px 0}
+	.viewDComment .unitOdd {background:#F8F8F8}
+		.unitDComment .itemTitle {overflow:hidden; width:910px; border-bottom:1px solid #999999; padding:5px 0}
+		.unitDComment h4 {font-size:13px; padding:0 0 0 10px; float:left}
+		.unitDComment p {padding:3px 0 0 0}
+		.unitDComment .itemDate {padding:0 10px 0 0; float:right}
+		.unitDComment .itemText {float:left; width:500px; padding:5px 0 10px 10px}
+		.unitDComment .itemRating {padding:5px 10px 10px 0; float:right; font-size:12px}
+	

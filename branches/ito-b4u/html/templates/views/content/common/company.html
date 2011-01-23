@@ -1,35 +1,157 @@
-<?php 
-$user = $mvc->getObject(UsersService::USERS);
-?> 
-<?php if (isset($user)&&$user!=NULL){?>
-<img src="<?php echo $user[UsersService::AVATAR] ?>"/>
-<br/>
-<h2><?php echo $user[UsersService::COMPANY] ?></h2>
-<br/>
-Category: <?php echo $user[CategoryService::CAT_NAME] ?>
-<br/>
-SubCategory: <?php echo $user[SubCategoryService::SUBCAT_NAME] ?>
-<br/>
-Address: <?php echo $user[UsersService::ADDRESS] ?>
-<br/>	
-City: <?php echo $user[UsersService::LOCATION] ?>
-<br/>
-Region: <?php echo $user[RegionService::REGION_NAME] ?>
-<br/> 
-Country: <?php echo $user[CountryService::COUNTRY_NAME] ?>
-<br/>
-ZIP: <?php echo $user[UsersService::ZIP] ?>
-<br/>
-Year: <?php echo $user[UsersService::COMPANY_YEAR] ?>
-<br/>
-Email: <?php echo $user[UsersService::EMAIL] ?>
-<br/>
-Phone: <?php echo $user[UsersService::PHONE] ?>
-<br/>
-Homepage: <?php echo $user[UsersService::HOMEPAGE] ?>
-<hr/>
-<b>Desc:</b>
-<br/>
-<?php echo $user[UsersService::COMPANY_DESC] ?>
-<hr/>
-<?php } ?>
+<?php $user = $mvc->getObject(UsersService::USERS); ?>
+<div class="wrapWSearch">
+	<div class="greyBox">
+		<div class="viewBox viewBoxA">
+			<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+			<div class="cL">
+				<div class="cR">
+					<div class="bodyBox">
+						<?php if (isset($user)&&$user!=NULL){?>
+						<h2><?php echo $user[UsersService::COMPANY] ?></h2>
+						<div class="unitDBlock">
+							<div class="unitDLeft">
+								<div class="unitImg">
+									<ul>
+										<li><a href="<?php echo $user[UsersService::AVATAR] ?>" title=""><img src="<?php echo $user[UsersService::AVATAR] ?>" alt="<?php echo $user[UsersService::COMPANY] ?>" /></a></li>
+									</ul>
+								</div>
+								
+							</div>
+							<div class="unitDRight">
+								<div class="unitCompany">
+									<div class="unitEqColumns">
+										<dl>
+											<dt>Rating:</dt>
+											<dd>
+												<ul class="unitRating">
+													<li class="itemCurrent" style="width:74%"></li>
+													<li class="itemOne"><a href="#" title="1">1</a></li>
+													<li class="itemTwo"><a href="#" title="2">2</a></li>
+													<li class="itemThree"><a href="#" title="3">3</a></li>
+													<li class="itemFour"><a href="#" title="4">4</a></li>
+													<li class="itemFive"><a href="#" title="5">5</a></li>
+												</ul>
+												<p><strong>32</strong> (74% positiv)</p>
+											</dd>
+										</dl>
+										<dl>
+											<dt>Category:</dt>
+											<dd><?php echo $user[CategoryService::CAT_NAME] ?></dd>
+											<dt>SubCategory:</dt>
+											<dd><?php echo $user[SubCategoryService::SUBCAT_NAME] ?></dd>
+										</dl>
+									</div>
+									<div class="unitEqColumns">
+										<dl>
+											<dt>Country:</dt>
+											<dd><?php echo $user[CountryService::COUNTRY_NAME] ?></dd>
+											<dt>Region:</dt>
+											<dd><?php echo $user[RegionService::REGION_NAME] ?></dd>
+											<dt>City:</dt>
+											<dd><?php echo $user[UsersService::LOCATION] ?></dd>
+											<dt>ZIP:</dt>
+											<dd><?php echo $user[UsersService::ZIP] ?></dd>
+											<dt>Address:</dt>
+											<dd><?php echo $user[UsersService::ADDRESS] ?></dd>
+										</dl>
+										<dl>
+											<dt>Email:</dt>
+											<dd><?php echo $user[UsersService::EMAIL] ?></dd>
+											<dt>Phone:</dt>
+											<dd><?php echo $user[UsersService::PHONE] ?></dd>
+											<dt>Homepage:</dt>
+											<dd><?php echo $user[UsersService::HOMEPAGE] ?></dd>
+										</dl>
+										<dl>
+											<dt>Year:</dt>
+											<dd><?php echo $user[UsersService::COMPANY_YEAR] ?></dd>
+										</dl>
+										
+									</div>
+									<dl>
+										<dt>Description:</dt>
+										<dd><?php echo $user[UsersService::COMPANY_DESC] ?></dd>
+									</dl>
+								</div>
+							</div>
+							<div class="tabsHead">
+								<ul>
+									<li class="itemCurrent"><a href="#" title="Ratings"><span>Ratings</span></a></li>
+									<li><a href="#" title="Company Profile"><span>Company Profile</span></a></li>
+									<li><a href="#" title="References"><span>References</span></a></li>
+								</ul>
+							</div>
+							<div class="tabsContent">
+								<div class="viewDComment">
+									<div class="unitDComment">
+										<div class="itemTitle">
+											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
+										</div>
+										<div class="itemText">
+											<p>"Excellent worker,compatible & very helpful"</p>
+											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
+										</div>
+										<div class="itemRating">
+											<ul class="unitRating">
+												<li class="itemCurrent" style="width:91%"></li>
+											</ul>
+											<p><strong>1</strong> (91% positiv)</p>
+										</div>
+									</div>
+									<div class="unitDComment unitOdd">
+										<div class="itemTitle">
+											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
+										</div>
+										<div class="itemText">
+											<p>"Excellent worker,compatible & very helpful"</p>
+											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
+										</div>
+										<div class="itemRating">
+											<ul class="unitRating">
+												<li class="itemCurrent" style="width:49%"></li>
+											</ul>
+											<p><strong>1</strong> (49% positiv)</p>
+										</div>
+									</div>
+									<div class="unitDComment">
+										<div class="itemTitle">
+											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
+										</div>
+										<div class="itemText">
+											<p>"Excellent worker,compatible & very helpful"</p>
+											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
+										</div>
+										<div class="itemRating">
+											<ul class="unitRating">
+												<li class="itemCurrent" style="width:100%"></li>
+											</ul>
+											<p><strong>1</strong> (100% positiv)</p>
+										</div>
+									</div>
+									<div class="unitDComment unitOdd">
+										<div class="itemTitle">
+											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
+										</div>
+										<div class="itemText">
+											<p>"Excellent worker,compatible & very helpful"</p>
+											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
+										</div>
+										<div class="itemRating">
+											<ul class="unitRating">
+												<li class="itemCurrent" style="width:80%"></li>
+											</ul>
+											<p><strong>1</strong> (80% positiv)</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+			<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+		</div>
+		<div class="lineHide"></div>
+	</div>
+</div>

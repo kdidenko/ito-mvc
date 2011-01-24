@@ -498,16 +498,17 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitDRight .unitHistory td {border-bottom:1px dotted #999; border-right:1px dotted #999; padding:3px 5px}
 	.unitDRight .unitHistory td.itemLast, .unitDRight .unitHistory th.itemLast {border-right-width:0}
 	
-	.tabsHead {float:left; width:934px; padding:10px 0 0 0; background:url(../images/tabsLineBg.gif) repeat-x left bottom}
+	.tabsHead {overflow:hidden; width:934px; padding:5px 0 0 0; background:url(../images/tabsLineBg.gif) repeat-x left bottom}
 	.tabsHead ul {padding:0 12px; position:relative; margin:0 0 -1px 0}
 	.tabsHead li {float:left; padding:0 5px 0 0}
-	.tabsHead li a {float:left; background:url(../images/tabsBg.gif) no-repeat right -99px; padding:0 5px 0 0}
+	.tabsHead li a {float:left; background:url(../images/tabsBg.gif) no-repeat right -99px; padding:0 5px 0 0; outline:none}
 	.tabsHead li a span {float:left; padding:7px 7px 6px 12px; font-weight:bold; color:#fff; line-height:14px; background:url(../images/tabsBg.gif) no-repeat left -66px}
-	.tabsHead li.itemCurrent a {background:url(../images/tabsBg.gif) no-repeat right -33px}
-	.tabsHead li.itemCurrent a span {padding:7px 7px 7px 12px; color:#393939; background:url(../images/tabsBg.gif) no-repeat left 0}
+	.tabsHead li.itemActive a {background:url(../images/tabsBg.gif) no-repeat right -33px}
+	.tabsHead li.itemActive a span {padding:7px 7px 7px 12px; color:#393939; background:url(../images/tabsBg.gif) no-repeat left 0}
 	.tabsHead li a:hover {text-decoration:none}
 	
-	.tabsContent {overflow:hidden; width:934px}
+	.tabsContent {overflow:hidden; width:934px; position:relative}
+	.tabsHide {width:1px; height:1px; overflow:hidden; position:absolute; top:-10px; left:-10px}
 	
 	.viewDComment {padding:10px 12px 5px 12px}
 	.unitDComment {overflow:hidden; width:910px; background:#EFEFEF; margin:0 0 1px 0}
@@ -518,4 +519,5 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitDComment .itemDate {padding:0 10px 0 0; float:right}
 		.unitDComment .itemText {float:left; width:500px; padding:5px 0 10px 10px}
 		.unitDComment .itemRating {padding:5px 10px 10px 0; float:right; font-size:12px}
+	.viewDProfile {padding:10px 12px 5px 12px}
 	

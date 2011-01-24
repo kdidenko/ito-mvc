@@ -399,6 +399,16 @@
 		<template name="index.html" path="templates/ajax/ajax-layout.html" />
 	</action>
 	
+	<action name="/get-comments.html" id="comments">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" method="handleGetSubcategory"/>
+		<template name="index.html" path="templates/ajax/ajax-comments.html" />
+	</action>
+	
+	<action name="/get-profile.html" id="profile">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" method="handleGetSubcategory"/>
+		<template name="index.html" path="templates/ajax/ajax-profile.html" />
+	</action>
+	
 	<action name="/js/i18n/jq.localisation.js" id="localisationjs">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="index.html" path="js/jq.localisation.js" />

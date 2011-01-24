@@ -3,12 +3,13 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.2.xsd  
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd ">
+	
 	<action name="/switchLanguage.html" id="switchLanguage">
 		<controller class="com.itoglobal.i18n.LocalizationController"	
 			method="switchLocale" />
 		<template name="index.html" path="templates/layout-one-column.html" />
-	</action>	
-	
+	</action>
+
 	<!-- Navigation views mapping begin -->
 	<action name="/navigation-*.html" id="navigation-$1">
 		<controller class="com.itoglobal.eb4u.controllers.NavigationController"/>
@@ -392,9 +393,7 @@
 	
 	
 	
-	<!-- ajax part -->
-	
-	<!-- alias name="/js/i18n/jq.localisation.js" target="js/jq.localisation.js" / -->
+	<!-- start of ajax part -->
 	<action name="/get-subcategory.html" id="getsubcategory">
 		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
 		<template name="index.html" path="templates/ajax/ajax-layout.html" />
@@ -405,7 +404,11 @@
 		<template name="index.html" path="js/jq.localisation.js" />
 	</action>
 	
-	<!-- ajax part -->
+	<action name="/feedback.html" id="feedback">
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleFeedback"/>
+		<template name="index.html" path="templates/ajax/feedback.html" />
+	</action>	
+	<!-- end of ajax part -->
 	
 	<!-- admin part -->
 	<action name="/manage-static-block.html" id="managestaticblock" roles="AR">

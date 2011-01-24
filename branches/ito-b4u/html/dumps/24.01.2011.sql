@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Хост: localhost
--- Время создания: Янв 14 2011 г., 18:16
+-- Время создания: Янв 24 2011 г., 13:27
 -- Версия сервера: 5.0.27
--- Версия PHP: 5.2.6
+-- Версия PHP: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -196,6 +196,32 @@ CREATE TABLE IF NOT EXISTS `category` (
 INSERT INTO `category` (`id`, `category_name`) VALUES 
 (1, 0x4954),
 (2, 0x66696e616e6365);
+
+-- --------------------------------------------------------
+
+-- 
+-- Структура таблицы `company_feedback`
+-- 
+
+DROP TABLE IF EXISTS `company_feedback`;
+CREATE TABLE IF NOT EXISTS `company_feedback` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `vote` int(11) NOT NULL,
+  `comment` text collate utf8_bin NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+
+-- 
+-- Дамп данных таблицы `company_feedback`
+-- 
+
+INSERT INTO `company_feedback` (`id`, `user_id`, `company_id`, `vote`, `comment`, `date`) VALUES 
+(1, 40, 42, 5, 0x49206c696b6520697421, '0000-00-00'),
+(2, 43, 42, 4, 0x676f6f6420776f726b21207468616e6b7321, '0000-00-00'),
+(3, 40, 46, 3, 0x74657374, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -581,7 +607,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `username`, `passwo
 (37, 'bookkeeper', 'bookkeeper', 'bookkeeper@gmail.com', 'bookkeeper', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-16 09:38:00', '2010-11-10 16:22:45', 1, 0, NULL, 'f69e505b08403ad2298b9f262659929a', 'BR', 'storage/uploads/users/bookkeeper/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),
 (41, 'John', 'Volt', 'john@gmail.com', 'promoter', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:21:50', '2010-11-10 16:40:27', 1, 0, NULL, '4c8c76b39d294759a9000cbda3a6571a', 'PR', 'storage/uploads/users/user2/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0),
 (40, 'Bill', 'Gates', 'bill@gmail.com', 'user', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:21:13', '2011-01-14 19:33:23', 1, 0, NULL, 'e0c7ccc47b2613c82d1073a4214deecc', 'UR', 'storage/uploads/users/tradesman2/profile/avatar.jpg', NULL, '', NULL, '', '', '', 8, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, 0, 3),
-(42, 'Andrew', 'Stabryn', 'astabryn@ito-global.com', 'tradesman', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:23:01', '2011-01-14 19:30:19', 1, 0, NULL, '309928d4b100a5d75adff48a9bfc1ddb', 'TR', 'storage/uploads/users/tradesman/profile/avatar.jpg', 'ITO-Global', 'we are good company', 'DH827265', 'Shyroka', '45465', 'lviv', 3, 1, '+384564645', 'www.ito-global.com', NULL, NULL, NULL, NULL, NULL, 1, 1994, 1, 2, 3),
+(42, 'Andrew', 'Stabryn', 'astabryn@gmail.com', 'tradesman', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-06-27 11:23:01', '2011-01-24 12:38:00', 1, 0, NULL, '309928d4b100a5d75adff48a9bfc1ddb', 'TR', 'storage/uploads/users/tradesman/profile/avatar.jpg', 'angebotholen.at', 'we are good company', 'DH827265', 'Klagenfurt', '45465', 'Klagenfurt', 3, 1, '+484564645', 'www.angebotholen.at', NULL, NULL, NULL, NULL, NULL, 1, 1994, 1, 2, 3),
 (43, 'Andrew', 'Stabryn', 'astabryn@gmail.com', 'astabryn', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-10-07 13:42:52', '2010-12-04 22:47:50', 0, 0, '2000-09-07', '9a1de01f893e0d2551ecbb7ce4dc963e', 'UR', 'storage/uploads/users/user4/profile/avatar.jpg', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0),
 (46, 'Sergey', 'Brin', 'google@test.test', 'google', '5f4dcc3b5aa765d61d8327deb882cf99', '2010-12-03 21:21:47', '2011-01-14 19:02:35', 1, 0, NULL, 'd8330f857a17c53d217014ee776bfd50', 'TR', 'storage/uploads/users/google/profile/avatar.jpg', 'Google', 'Google Search or Google Web Search is a web search engine owned by Google Inc. and is the most-used search engine on the Web.[3] Google receives several hundred million queries each day through its various services.[4] The main purpose of Google Search is to hunt for text in webpages, as opposed to other data, such as with Google Image Search. Google search was originally developed by Larry Page and Sergey Brin in 1997.[5]\r\nGoogle Search provides at least 22 special features beyond the original word-search capability.[6] These include synonyms, weather forecasts, time zones, stock quotes, maps, earthquake data, movie showtimes, airports, home listings, and sports scores. (see below: Special features). There are special features for numbers, including ranges (70..73),[7] prices, temperatures, money/unit conversions ("10.5 cm in inches"), calculations ( 3*4+sqrt(6)-pi/2 ), package tracking, patents, area codes,[6] and language translation of displayed pages.\r\nThe order of search results (ghits for Google hits) on Google''s search-results pages is based, in part, on a priority rank called a "PageRank". Google Search provides many options for customized search (see below: Search options), using Boolean operators such as: exclusion ("-xx"), inclusion ("+xx"), alternatives ("xx OR yy"), and wildcard ("x * x")', '4564654', 'street', '6567576', 'San Hose', 1, 1, '+48272362231', 'www.google.com', 1, '1', 'New York National Bank', '3243423423', 1, 1, 1997, 1, 3, 2),
 (47, 'Bill', 'dsad', 'test@email.com', 'test', '5f4dcc3b5aa765d61d8327deb882cf99', '2011-01-14 17:09:05', '0000-00-00 00:00:00', 0, 0, NULL, 'e21cece511f43a5cb18d4932429915ed', 'TR', NULL, 'on', NULL, '4154654', 'dasdasd', '116546', 'dsdasdas', 1, 1, '45456464', 'user', NULL, NULL, NULL, NULL, NULL, 1, 1954, NULL, NULL, 3);

@@ -16,6 +16,17 @@ class AjaxController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
+	
+	public function handleGetComment($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = $requestParams[UsersService::ID];
+		
+		$feedbacks = CompanyService::getFeedback ($requestParams[UsersService::ID]);
+		isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
+		
+		return $mvc;
+	}
+	
 	public function handleFeedback($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams['send'])){

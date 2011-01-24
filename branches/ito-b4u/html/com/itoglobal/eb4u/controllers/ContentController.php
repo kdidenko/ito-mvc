@@ -125,8 +125,6 @@ class ContentController extends SecureActionControllerImpl {
 			$users = UsersService::getUser ($requestParams[UsersService::ID], true);
 			isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
 	
-			$feedbacks = CompanyService::getFeedback ($requestParams[UsersService::ID]);
-			isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
 		}	
 		return $mvc;
 	}

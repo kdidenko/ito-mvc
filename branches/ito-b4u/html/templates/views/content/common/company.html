@@ -77,14 +77,17 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 									</dl>
 								</div>
 							</div>
-							<div class="tabsHead">
-								<ul>
-									<li class="itemCurrent"><a href="#" title="Ratings"><span>Ratings</span></a></li>
-									<li><a href="#" title="Company Profile"><span>Company Profile</span></a></li>
-									<li><a href="#" title="References"><span>References</span></a></li>
-								</ul>
-							</div>
-							<div class="tabsContent" style="overflow:visible;">
+						</div>
+						<div class="tabsHead">
+							<ul>
+								<li><a href="get-comments.html" title="Ratings"><span>Ratings</span></a></li>
+								<li><a href="get-profile.html" title="Company Profile"><span>Company Profile</span></a></li>
+								<li><a href="get-profile.html" title="References"><span>References</span></a></li>
+							</ul>
+						</div>
+						<div class="tabsContent"></div>
+						<div style="border:1px solid red">
+								<h3>remove this container</h3>
 								<div class="viewDComment">
 									<?php
 									foreach($feedbacks as $key =>$feedback){
@@ -124,7 +127,6 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 									 -->
 								</div>
 							</div>
-						</div>
 						<?php } ?>
 					</div>
 				</div>

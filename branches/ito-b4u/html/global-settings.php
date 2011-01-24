@@ -12,6 +12,7 @@
 	
 	//TODO: setting below must be stored somewhere else and have to be dynamically loaded 
 	//		by smth. like "SettingsService" which must be also implemented!
+	$support = 'astabryn@gmail.com'; 
 	
 	# db settings
 	$db_host = 'localhost';
@@ -27,4 +28,5 @@
 	
 	define('COMPANY_LOGO_HEIGHT', $height);
 	define('COMPANY_LOGO_WIDTH', $width);
+	define('SUPPORT', $support);
 ?>

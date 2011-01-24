@@ -16,7 +16,27 @@ class AjaxController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
-	
+	public function handleFeedback($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset($requestParams['send'])){
+			$error = array();
+			$error[] .= ValidationService::checkEmail($requestParams['email']);
+			$error[] .= !isset($requestParams['subject'])||$requestParams['subject']==NULL ? "_i18n{Please, write mail subject.}" : false;
+			$error[] .= !isset($requestParams['body'])||$requestParams['body']==NULL ? "_i18n{Please, write your problem in message body.}" : false;
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				$message = $requestParams['body'];
+				$email = SUPPORT;
+				$subject = "Support eBids4u : " .$requestParams['subject'];
+				$headers = 'From: eBids4U noreply@' . $_SERVER ['SERVER_NAME'];
+				MailerService::sendMail($message, $email, $subject, $headers);
+				$mvc->addObject ( 'success', true );
+			} else {
+				$mvc->addObject ( 'error', $error );
+			}
+		}
+		return $mvc;
+	}
 	
 }
 ?>

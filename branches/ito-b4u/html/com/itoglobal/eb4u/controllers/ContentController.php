@@ -79,7 +79,10 @@ class ContentController extends SecureActionControllerImpl {
 			$where .= $where!=NULL ? ' AND ' : NULL;
 			$where .= UsersService::USERS . '.' . UsersService::SUBCAT_ID . '=' . $requestParams [UsersService::SUBCAT_ID];
 		}
-		$users = UsersService::getUsersList ($where);
+		$users = UsersService::getUsersList ($where, null, true);
+		foreach($users as $key =>$company){
+			$users[$key][UsersService::COMPANY_DESC] = self::breakword($company[UsersService::COMPANY_DESC],255);
+		}
 		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
 		
 		$all_users = UsersService::countUsers ($where);
@@ -110,10 +113,21 @@ class ContentController extends SecureActionControllerImpl {
 
 	public function handleCompany($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		$users = UsersService::getUser ($requestParams[UsersService::ID]);
-		isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
-
+		if (isset($requestParams[UsersService::ID])){
+			if (isset($requestParams[CompanyService::VOTE])){
+				$user_id = SessionService::getAttribute(SessionService::USER_ID);
+				$company_id = $requestParams[UsersService::ID];
+				$vote = $requestParams[CompanyService::VOTE];
+				$comment = $requestParams[CompanyService::COMMENT];
+				CompanyService::feedbackCompany($user_id,$company_id,$vote,$comment);
+			}
+			
+			$users = UsersService::getUser ($requestParams[UsersService::ID], true);
+			isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
+	
+			$feedbacks = CompanyService::getFeedback ($requestParams[UsersService::ID]);
+			isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
+		}	
 		return $mvc;
 	}
 	
@@ -511,19 +525,28 @@ class ContentController extends SecureActionControllerImpl {
 	    $secs=floor(($newtime-time())-($days*86400)-($hours*3600)-($mins*60));
 		return "$days _i18n{days} $hours _i18n{hours} $mins _i18n{mins} $secs _i18n{secs}";
 	}
-	public static function createTeaser ($list){
-		if (count($list)>0){
-			foreach($list as $key => $value){
-				$chr = strpos($value[SchoolService::DESCRIPTION], '</p>');
-				$value[SchoolService::DESCRIPTION] = $chr != NULL ? 
-					substr($value[SchoolService::DESCRIPTION],0,$chr) : 
-						$value[SchoolService::DESCRIPTION];
-				$value[SchoolService::DESCRIPTION] = substr($value[SchoolService::DESCRIPTION], 0, 255);
-				$list[$key][SchoolService::DESCRIPTION] = strrev(strstr(strrev($value[SchoolService::DESCRIPTION]), ' '));
-			}
-		}
-		return $list;
+
+
+	private function breakword ($txt,$len,$delim='\s;,.!?:#') {
+	    $txt = preg_replace_callback ("#(</?[a-z]+(?:>|\s[^>]*>)|[^<]+)#mi"
+	                                  ,create_function('$a'
+	                                                  ,'static $len = '.$len.';'
+	                                                  .'$len1 = $len-1;'
+	                                                  .'$delim = \''.str_replace("#","\\#",$delim).'\';'
+	                                                  .'if ("<" == $a[0]{0}) return $a[0];'
+	                                                  .'if ($len<=0) return "";'
+	                                                  .'$res = preg_split("#(.{0,$len1}+(?=[$delim]))|(.{0,$len}[^$delim]*)#ms",$a[0],2,PREG_SPLIT_DELIM_CAPTURE);'
+	                                                  .'if ($res[1]) { $len -= strlen($res[1])+1; $res = $res[1];}'
+	                                                  .'else         { $len -= strlen($res[2]); $res = $res[2];}'
+	                                                  .'$res = rtrim($res);/*preg_replace("#[$delim]+$#m","",$res);*/'
+	                                                  .'return $res;')
+	                                  ,$txt);
+	     while (preg_match("#<([a-z]+)[^>]*>\s*</\\1>#mi",$txt)) {
+	         $txt = preg_replace("#<([a-z]+)[^>]*>\s*</\\1>#mi","",$txt);
+	     }
+	     return $txt;
 	}
+
 	public static function createTeaserWord ($word){
 		$word = substr($word, 0, 255);
 		$word = strrev(strstr(strrev($word), ' '));

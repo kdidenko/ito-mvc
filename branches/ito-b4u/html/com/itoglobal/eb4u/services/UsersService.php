@@ -187,19 +187,24 @@ class UsersService {
 	  * @var string defining the scroller of object
 	 */
 	const SCROLLER = 'scroller';
-	
+	/**
+	  * @var string defining the cat_id of object
+	 */
 	const CAT_ID = 'cat_id';
+	/**
+	  * @var string defining the subcat_id of object
+	 */
 	const SUBCAT_ID = 'subcat_id';
 	
-	public static function getUsersList($where = NULL, $from = NULL) {
+	public static function getUsersList($where = NULL, $from = NULL, $company = false) {
 		$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
 					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
-				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
-				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
-				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
-				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
+		$fields .= $company==true ? 
+				", SUM( company_feedback.vote ) / COUNT( company_feedback.id )*20 AS vote,
+				COUNT( company_feedback.vote ) AS count" : 
+					NULL;
 		$from = isset ( $from ) ? $from : self::USERS . 
 				SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
 				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
@@ -213,6 +218,11 @@ class UsersService {
 				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
 				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
 				self::USERS . '.' . self::COUNTRY;
+		$from .= $company==true ? 
+				SQLClient::LEFT . SQLClient::JOIN . CompanyService::COMPANY_FEEDBACK .	SQLClient::ON . 
+				CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::COMPANY_ID . '=' . 
+				self::USERS . '.' . self::ID : 
+					NULL;
 		$groupBy = self::USERS . '.' . self::ID;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
@@ -224,7 +234,7 @@ class UsersService {
 	 * @param integer $id the user id.
 	 * @return mixed user data or null if user with such id does not exists. 
 	 */
-	public static function getUser($id) {
+	public static function getUser($id, $company = false) {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
@@ -232,10 +242,10 @@ class UsersService {
 					', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
 					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
-				//self::USERS . '.' . self::ID . ', ' . self::USERNAME . ', ' . self::PASSWORD . ', ' . SessionService::FIRSTNAME . ', ' . 
-				//SessionService::LASTNAME . ', ' . SessionService::EMAIL . ', ' . self::ENABLED . ', ' . 
-				//self::DELETED . ', ' . self::ROLE . ', ' . self::AVATAR . ', ' . self::BIRTHDAY
-				 //. ', ' . self::SKYPE . ', ' . self::GENDER;
+			$fields .= $company==true ? 
+				", SUM( company_feedback.vote ) / COUNT( company_feedback.id )*20 AS vote,
+				COUNT( company_feedback.vote ) AS count" : 
+					NULL;
 			$from = self::USERS . 
 					SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
 					SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
@@ -249,9 +259,15 @@ class UsersService {
 					SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
 					CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
 					self::USERS . '.' . self::COUNTRY;
+			$from .= $company==true ? 
+				SQLClient::LEFT . SQLClient::JOIN . CompanyService::COMPANY_FEEDBACK .	SQLClient::ON . 
+				CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::COMPANY_ID . '=' . 
+				self::USERS . '.' . self::ID : 
+					NULL;
 			$where = self::USERS . '.' . self::ID . '=' . $id;
+			$groupBy = self::USERS . '.' . self::ID;
 			# executing query
-			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );
 			$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : null;
 		} 
 		return $result;
@@ -329,7 +345,6 @@ class UsersService {
 		#DBClientHandler::getInstance ()->execDelete ( $fields, $from, $vals, $where, '', '' );
 		DBClientHandler::getInstance ()->execDelete($from, $where, $orderBy, $limit);
 	}
-	
 	/*public static function createUserDirectory($directory){
 		StorageService::createDirectory ( $user_path . $directory );
 		StorageService::createDirectory ( $user_path . $directory . '/profile' );

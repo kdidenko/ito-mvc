@@ -20,6 +20,7 @@
 	require_once 'com/itoglobal/validation/ValidationService.php';
 	
 	require_once 'com/itoglobal/eb4u/services/UploadsService.php';
+	require_once 'com/itoglobal/eb4u/services/CompanyService.php';
 	require_once 'com/itoglobal/eb4u/services/UsersService.php';
     require_once 'com/itoglobal/eb4u/services/MailService.php';
     require_once 'com/itoglobal/eb4u/services/CategoryService.php';

@@ -115,9 +115,9 @@ $pages = $mvc->getObject("pages");
 														<dt>rating:</dt>
 														<dd>
 															<ul class="unitRating">
-																<li class="itemCurrent" style="width:74%"></li>
+																<li class="itemCurrent" style="width:<?php echo $user['vote']?>%"></li>
 															</ul>
-															<p><strong>32</strong> (74% positiv)</p>
+															<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv)</p>
 														</dd>
 													</dl>
 												</div>

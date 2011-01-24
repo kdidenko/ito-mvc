@@ -1,4 +1,7 @@
-<?php $user = $mvc->getObject(UsersService::USERS); ?>
+<?php 
+$user = $mvc->getObject(UsersService::USERS);
+$feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
+?>
 <div class="wrapWSearch">
 	<div class="greyBox">
 		<div class="viewBox viewBoxA">
@@ -24,14 +27,14 @@
 											<dt>Rating:</dt>
 											<dd>
 												<ul class="unitRating">
-													<li class="itemCurrent" style="width:74%"></li>
+													<li class="itemCurrent" style="width:<?php echo $user['vote']?>%"></li>
 													<li class="itemOne"><a href="#" title="1">1</a></li>
 													<li class="itemTwo"><a href="#" title="2">2</a></li>
 													<li class="itemThree"><a href="#" title="3">3</a></li>
 													<li class="itemFour"><a href="#" title="4">4</a></li>
 													<li class="itemFive"><a href="#" title="5">5</a></li>
 												</ul>
-												<p><strong>32</strong> (74% positiv)</p>
+												<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv)</p>
 											</dd>
 										</dl>
 										<dl>
@@ -83,22 +86,27 @@
 							</div>
 							<div class="tabsContent">
 								<div class="viewDComment">
-									<div class="unitDComment">
+									<?php
+									foreach($feedbacks as $key =>$feedback){
+									?>
+									<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
 										<div class="itemTitle">
-											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
+											<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
 										</div>
 										<div class="itemText">
-											<p>"Excellent worker,compatible & very helpful"</p>
-											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
+											<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
+											<!-- <p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p> -->
 										</div>
 										<div class="itemRating">
 											<ul class="unitRating">
-												<li class="itemCurrent" style="width:91%"></li>
+												<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
 											</ul>
-											<p><strong>1</strong> (91% positiv)</p>
+											<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
 										</div>
 									</div>
-									<div class="unitDComment unitOdd">
+									<?php }	?>
+									<!-- 
+									<div class="unitDComment">
 										<div class="itemTitle">
 											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
 										</div>
@@ -113,36 +121,7 @@
 											<p><strong>1</strong> (49% positiv)</p>
 										</div>
 									</div>
-									<div class="unitDComment">
-										<div class="itemTitle">
-											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
-										</div>
-										<div class="itemText">
-											<p>"Excellent worker,compatible & very helpful"</p>
-											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
-										</div>
-										<div class="itemRating">
-											<ul class="unitRating">
-												<li class="itemCurrent" style="width:100%"></li>
-											</ul>
-											<p><strong>1</strong> (100% positiv)</p>
-										</div>
-									</div>
-									<div class="unitDComment unitOdd">
-										<div class="itemTitle">
-											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
-										</div>
-										<div class="itemText">
-											<p>"Excellent worker,compatible & very helpful"</p>
-											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
-										</div>
-										<div class="itemRating">
-											<ul class="unitRating">
-												<li class="itemCurrent" style="width:80%"></li>
-											</ul>
-											<p><strong>1</strong> (80% positiv)</p>
-										</div>
-									</div>
+									 -->
 								</div>
 							</div>
 						</div>

@@ -400,12 +400,12 @@
 	</action>
 	
 	<action name="/get-comments.html" id="comments">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" method="handleGetSubcategory"/>
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetComment"/>
 		<template name="index.html" path="templates/ajax/ajax-comments.html" />
 	</action>
 	
 	<action name="/get-profile.html" id="profile">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" method="handleGetSubcategory"/>
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
 		<template name="index.html" path="templates/ajax/ajax-profile.html" />
 	</action>
 	

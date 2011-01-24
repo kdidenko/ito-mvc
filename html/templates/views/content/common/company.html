@@ -63,7 +63,7 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 											<dt>Phone:</dt>
 											<dd><?php echo $user[UsersService::PHONE] ?></dd>
 											<dt>Homepage:</dt>
-											<dd><?php echo $user[UsersService::HOMEPAGE] ?></dd>
+											<dd><a href="<?php echo $user[UsersService::HOMEPAGE] ?>" title="<?php echo $user[UsersService::COMPANY] ?>"><?php echo $user[UsersService::HOMEPAGE] ?></a></dd>
 										</dl>
 										<dl>
 											<dt>Year:</dt>
@@ -80,53 +80,12 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 						</div>
 						<div class="tabsHead">
 							<ul>
-								<li><a href="get-comments.html" title="Ratings"><span>Ratings</span></a></li>
-								<li><a href="get-profile.html" title="Company Profile"><span>Company Profile</span></a></li>
-								<li><a href="get-profile.html" title="References"><span>References</span></a></li>
+								<li><a href="get-comments.html?id=<?php echo $_GET['id']?>" title="Ratings"><span>Ratings</span></a></li>
+								<li><a href="get-profile.html?id=<?php echo $_GET['id']?>" title="Company Profile"><span>Company Profile</span></a></li>
+								<li><a href="get-profile.html?id=<?php echo $_GET['id']?>" title="References"><span>References</span></a></li>
 							</ul>
 						</div>
 						<div class="tabsContent"></div>
-						<div style="border:1px solid red">
-								<h3>remove this container</h3>
-								<div class="viewDComment">
-									<?php
-									foreach($feedbacks as $key =>$feedback){
-									?>
-									<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
-										<div class="itemTitle">
-											<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
-										</div>
-										<div class="itemText">
-											<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
-											<!-- <p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p> -->
-										</div>
-										<div class="itemRating">
-											<ul class="unitRating">
-												<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
-											</ul>
-											<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
-										</div>
-									</div>
-									<?php }	?>
-									<!-- 
-									<div class="unitDComment">
-										<div class="itemTitle">
-											<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
-										</div>
-										<div class="itemText">
-											<p>"Excellent worker,compatible & very helpful"</p>
-											<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
-										</div>
-										<div class="itemRating">
-											<ul class="unitRating">
-												<li class="itemCurrent" style="width:49%"></li>
-											</ul>
-											<p><strong>1</strong> (49% positiv)</p>
-										</div>
-									</div>
-									 -->
-								</div>
-							</div>
 						<?php } ?>
 					</div>
 				</div>

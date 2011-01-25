@@ -27,9 +27,9 @@ $pages = $mvc->getObject("pages");
 								</p>
 								<div class="unitFilter">
 									<dl>
-										<dt></dt>
+										<dt>_i18n{Industry}:</dt>
 										<dd>
-											<label>Category</label>
+											<label>_i18n{Category}</label>
 											<select name="category_id" class="gCategory">
 												<option value="all">all</option>
 							<?php			if (isset($categories) && $categories!=NULL){ 
@@ -38,7 +38,7 @@ $pages = $mvc->getObject("pages");
 							<?php 				} 
 				} ?>
 											</select>
-											<label>SubCategory</label>
+											<label>_i18n{SubCategory}</label>
 											<select name="subcategory_id" class="gSubCategory">
 												<option value="all">all</option>
 							<?php			if (isset($subcategories) && $subcategories!=NULL){ 
@@ -50,9 +50,9 @@ $pages = $mvc->getObject("pages");
 										</dd>
 									</dl>
 									<dl>
-										<dt>Location:</dt>
+										<dt>_i18n{Location}:</dt>
 										<dd>
-											<label>Country</label>
+											<label>_i18n{Country}</label>
 											<select name="country_id">
 												<option value="all">all</option>
 							<?php			if (isset($countries) && $countries!=NULL){ 
@@ -61,7 +61,7 @@ $pages = $mvc->getObject("pages");
 							<?php 				} 
 				} ?>
 											</select>
-											<label>Region</label>
+											<label>_i18n{Region}</label>
 											<select name="region_id">
 												<option value="all">all</option>
 							<?php			if (isset($regions) && $regions!=NULL){ 
@@ -73,11 +73,11 @@ $pages = $mvc->getObject("pages");
 										</dd>
 									</dl>
 									<dl>
-										<dt>Price:</dt>
+										<dt>_i18n{Price}:</dt>
 										<dd>
-											<label> from</label>
+											<label> _i18n{from}</label>
 											<input class="inpTxt" name="price_from" type="text" value="<? if(isset($_GET['price_from'])) echo $_GET['price_from']; ?>"/>
-											<label>to</label>
+											<label>_i18n{to}</label>
 											<input class="inpTxt" name="price_until" type="text" value="<? if(isset($_GET['price_until'])) echo $_GET['price_until']; ?>"/>
 										</dd>
 									</dl>
@@ -86,7 +86,7 @@ $pages = $mvc->getObject("pages");
 
 							<div class="unitESearch">
 								<div class="unitTPagination">
-									<p>found <span><?php echo $count;?></span> results for your request</p>
+									<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
 									<!-- <p>found <span><?php echo count($orders)?></span> results found for <span>empty</span></p> -->
 									<ul>
 										<?php for($i=0; $i<$pages; $i++){ ?>
@@ -123,21 +123,21 @@ $pages = $mvc->getObject("pages");
 											<h3><a href="/view-order.html?id=<?php echo $order[OrdersService::HASH]; ?>" title="<?php echo $order[BargainsService::BARGAIN_NAME]; ?>"><?php echo $order[BargainsService::BARGAIN_NAME]; ?></a></h3>
 											<div class="unitEqColumns">
 												<dl>
-													<dt>category:</dt>
+													<dt>_i18n{category}:</dt>
 													<dd><?php echo $order[CategoryService::CAT_NAME]; ?></dd>
 												</dl>
 												<dl>
-													<dt>subcategory:</dt>
+													<dt>_i18n{subcategory}:</dt>
 													<dd><?php echo $order[SubCategoryService::SUBCAT_NAME]; ?></dd>
 												</dl>
 											</div>
 											<div class="unitEqColumns">
 												<dl>
-													<dt>country:</dt>
+													<dt>_i18n{country}:</dt>
 													<dd><?php echo $order[CountryService::COUNTRY_NAME]; ?></dd>
 												</dl>
 												<dl>
-													<dt>city:</dt>
+													<dt>_i18n{city}:</dt>
 													<dd><?php echo $order[OrdersService::CITY]; ?></dd>
 												</dl>
 											</div>
@@ -244,7 +244,7 @@ $pages = $mvc->getObject("pages");
 									foreach($subcategories_new as $key=>$subcategory){ ?>
 									<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
 	<?php 						}
-								} ?>
+								} ?> 
 								</select>
 							</p>
 							<p class="itemBtn">

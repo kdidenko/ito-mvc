@@ -81,6 +81,10 @@ class UserContentController extends ContentController {
 		$orders = OrdersService::getOrders ($where);
 		isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
 		
+		$where = CompanyService::USER_ID . '=' . $id;
+		$recommendations = CompanyService::getRating (null,$where);
+		isset ( $recommendations ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $recommendations ) : null;
+		
 		$countries = RegionService::getRegions ();
 		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
 		

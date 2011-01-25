@@ -60,7 +60,7 @@ WHERE role='TR'
 GROUP BY users.id
 	 */
 	
-	public static function getRating($company_id = NULL) {
+	public static function getRating($company_id = NULL, $where = NULL) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
 					UsersService::AVATAR;
 		$from = self::COMPANY_FEEDBACK . 
@@ -68,7 +68,8 @@ GROUP BY users.id
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::COMPANY_FEEDBACK . '.' . self::USER_ID;
 		# executing the query
-		$where = self::COMPANY_ID . '=' . $company_id;
+		$where .= $where!=NULL&&$company_id!=NULL ? " AND " : NULL;
+		$where .= $company_id!=NULL ? self::COMPANY_ID . '=' . $company_id : NULL;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;

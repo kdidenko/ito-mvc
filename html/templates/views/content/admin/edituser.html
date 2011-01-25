@@ -1,44 +1,51 @@
+<h2>_i18n{Edit User}</h2>
+<div class="unitABlock unitABlockLast">
 <?php $user = $mvc->getObject('result'); if($user == NULL){ ?>
-	<span class="message warning">
+	<div class="itemWarning">
 		_i18n{Oops... seems the address you have entered is invalid. There are no schools for such criterias.}<br />
 		_i18n{But you may still chose another user of interest by browsing our} <a href="/manage-users.html" title="_i18n{Users}">_i18n{Users}</a> _i18n{directory.}
-	</span>
+	</div>
 <?php } else { ?>
-	<form action="manage-users.html" method="post" class="edit">
-		<span>_i18n{User name}:</span> 
-	 		<input type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/>
-			<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{First Name}:</span>
-	 		<input type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/>
-	 		<div class="clnr brdr">&nbsp;</div>
- 		<span>_i18n{Last Name}:</span>
-	 		<input type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/>
-	 		<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{Email}:</span>
-	 		<input type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/>
-	 		<div class="clnr brdr">&nbsp;</div>
-		<span>_i18n{Status}:</span>
-			<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>_i18n{Enabled}
-			<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>_i18n{Disabled}<br/>
-			<div class="clnr brdr">&nbsp;</div>
-		<!-- 
-		<span>Role:</span>
-	 		<select name="role">
-	 			<option><?php echo $user[UsersService::ROLE];?></option>
-	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_AR){ ?>
-	 			<option><?php echo UsersService::ROLE_AR ?></option>
-	 			<?php }?>
-	 			<?php if ($user[UsersService::ROLE] != UsersService::ROLE_UR){ ?>
-	 			<option><?php echo UsersService::ROLE_UR ?></option>
-	 			<?php }?>
-	 		</select>
-	 		<div class="clnr brdr">&nbsp;</div>
-	 	-->
-		<input type="hidden" name="id" value="<?php echo $user[UsersService::ID]; ?>"/>
-		<input type="hidden" name="role" value="<?php echo $user[UsersService::ROLE];?>"/>
-		<p class="btns">
-			<input class="defBtn" type="button" name="Cancel" value="_i18n{Cancel}" onclick="window.location = '/manage-users.html' " />
-			<input type="submit" name="submit" value="_i18n{Submit Changes}" class="defBtn" />
-		</p>
+	<form action="manage-users.html" method="post">
+		<div class="unitSnColumn">
+			<div class="itemForm">
+				<label>_i18n{User name}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="username" value="<?php echo $user[UsersService::USERNAME]; ?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{First Name}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="firstname" value="<?php echo $user[UsersService::FIRSTNAME]; ?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Last Name}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="lastname" value="<?php echo $user[UsersService::LASTNAME]; ?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Email}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="email" value="<?php echo $user[UsersService::EMAIL]; ?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Status}:</label>
+				<div class="itemData">
+					<input type="radio" name="enabled" value="1" <?php echo $user[UsersService::ENABLED] == 1 ? 'checked' : ''; ?>/>_i18n{Enabled}
+					<input type="radio" name="enabled" value="0" <?php echo $user[UsersService::ENABLED] == 1 ? '' : 'checked'; ?>/>_i18n{Disabled}<br/>
+				</div>
+			</div>
+			<input type="hidden" name="id" value="<?php echo $user[UsersService::ID]; ?>"/>
+			<input type="hidden" name="role" value="<?php echo $user[UsersService::ROLE];?>"/>
+		</div>
+		<div class="unitBtn">
+			<button name="submit"><span><strong>_i18n{Save}</strong></span></button>
+			<button name="Cancel"  onclick="window.location = '/manage-users.html' " ><span><strong>_i18n{Discard}</strong></span></button>
+		</div>
 	</form>	
 <?php } ?>
+</div>

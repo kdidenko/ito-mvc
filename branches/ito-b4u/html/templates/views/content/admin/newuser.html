@@ -2,14 +2,14 @@
 <div class="unitABlock unitABlockLast">
 <?php
 $forward = $mvc->getObject('forward');
+$errors = $mvc->getObject(UsersService::ERROR);
 if (isset($forward)){
 ?>
 	<div class="itemOk">
 		<p>_i18n{User should get email with registration confirmation.}</p>
 	</div>
 <?php } else { ?>
-<?php	$errors = $mvc->getObject(UsersService::ERROR);
-		if (isset($errors)){?>
+<?php	if (isset($errors)){?>
 			<div class="itemWarning">
 				<ul>
 <?php			foreach ($errors as $key => $value){
@@ -17,8 +17,12 @@ if (isset($forward)){
 				</ul>
 			</div>
 <?php 	} ?>
-	<form class="edit" action="new-user.html" method="post">
-		<div class="unitEqColumn">
+<div class="itemWarning">
+	_i18n{Note: After registration new user, he should get email with registration confirmation.}
+</div>
+	<form class="edit" action="/new-user.html" method="post">
+		<div class="unitSnColumn">
+		
 			<div class="itemForm">
 				<label>_i18n{User Name}:</label>
 				<div class="itemData">
@@ -47,29 +51,25 @@ if (isset($forward)){
 			<div class="itemForm">
 				<label>_i18n{Role}:</label>
 				<div class="itemData">
-					<input type="text" name="firstname" class="inpTxt" size="35" value="<? if(isset($_POST['firstname'])) echo $_POST['firstname']; ?>" />
+					<select name="role">
+						<option value="<?php echo UsersService::ROLE_PR ?>">_i18n{Promoter}</option>
+						<option value="<?php echo UsersService::ROLE_BR ?>">_i18n{Bookkeeper}</option>
+					</select>
 				</div>
 			</div>
 		</div>
-
-</div>
-		<span></span>
-			</input>
-			<div class="clnr brdr">&nbsp;</div>
-		<span></span>
-			</input>
-			<div class="clnr brdr">&nbsp;</div>
-		<span></span>
-			<select name="role">
-				<option value="<?php echo UsersService::ROLE_PR ?>">_i18n{Promoter}</option>
-				<option value="<?php echo UsersService::ROLE_BR ?>">_i18n{Bookkeeper}</option>
-			</select>
-			<div class="clnr brdr">&nbsp;</div>
-		<p><input type="checkbox" class="wide inpTxt" name="agreement"/>_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</p>
-		<p class="btns">
-			<input class="defBtn" type="button" name="Cancel" value="_i18n{Cancel}" onclick="window.location = '/manage-users.html' " />
-			<input type="submit" name="submit" value="_i18n{Add user}" class="defBtn" />
-		</p>
+		<div class="unitSnColumn">
+				<div class="itemForm">
+					<span class="itemData">
+						<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
+						<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="#" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+					</span>
+				</div>
+			</div>
+		<div class="unitBtn">
+			<button name="submit"><span><strong>_i18n{Save}</strong></span></button>
+			<button name="Cancel"  onclick="window.location = '/manage-users.html' " ><span><strong>_i18n{Discard}</strong></span></button>
+		</div>
 	</form>
-	<span class="message warning">_i18n{Note: After registration new user, he should get email with registration confirmation.}</span>
 <?php } ?>
+</div>

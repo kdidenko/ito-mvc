@@ -465,7 +465,6 @@ class ContentController extends SecureActionControllerImpl {
 		if(isset($requestParams[BargainsService::ID])){
 			$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
 			$bargain = BargainsService::getBargains($where);
-			
 			$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
 			
 			isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;

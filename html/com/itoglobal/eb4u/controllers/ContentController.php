@@ -34,6 +34,9 @@ class ContentController extends SecureActionControllerImpl {
 		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 
+		$regions = RegionService::getRegions ();
+		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
+		
 		return $mvc;
 	}
 	
@@ -102,11 +105,11 @@ class ContentController extends SecureActionControllerImpl {
 			isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		}
 		
-		$countries = RegionService::getRegions ();
-		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
+		$regions = RegionService::getRegions ();
+		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
 		
-		$regions = CountryService::getCountries ();
-		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
+		$countries = CountryService::getCountries ();
+		isset ( $countries ) ? $mvc->addObject ( CountryService::COUNTRY, $countries ) : null;
 		
 		return $mvc;
 	}
@@ -443,6 +446,9 @@ class ContentController extends SecureActionControllerImpl {
 			$subcategory = SubCategoryService::getSubcatByCat ($crntCategory);
 			isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		}
+		
+		$subcategory2 = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory2 ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY . "2", $subcategory2 ) : null;
 		
 		$countries = RegionService::getRegions ();
 		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;

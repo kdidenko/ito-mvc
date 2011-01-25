@@ -1,6 +1,7 @@
 <?php 
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$regions = $mvc->getObject(RegionService::REGIONS);
 ?>
 <div class="wrapMain">
 	<div class="greyBox">
@@ -113,7 +114,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 			<ul>
 			<?php foreach($categories as $key=>$category){
 				if ($middle==$key) { ?></ul><ul><?php } ?>
-				<li><a href="#<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
+				<li><a href="/view-orders.html?category_id=<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></li>
 				<?php } ?> 
 			</ul>
 			<?php	} ?>
@@ -127,17 +128,26 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 					<div class="bodyBox">
 						<h3>_i18n{Yellow Pages}</h3>
 						<div class="unitYellow">
-							<form action="">
+							<form action="/companies.html" method="get">
 								<p>
 									<label>_i18n{Industry}?</label>
-									<select>
-										<option>&nbsp;</option>
+									<select name="cat_id">
+		<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+		<?php 						} 
+								} ?>
 									</select>
 								</p>
 								<p>
 									<label>_i18n{Region}?</label>
-									<select>
-										<option>&nbsp;</option>
+									<select name="region">
+												<option value="all">all</option>
+										<?php			if (isset($regions) && $regions!=NULL){ 
+					foreach($regions as $key=>$region){ ?>
+												<option <?php echo isset($_GET['region'])&&$region[RegionService::ID]==$_GET['region'] ? "selected='selected'" : NULL ; ?> value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+										<?php 				} 
+				} ?>
 									</select>
 								</p>
 								<p class="itemBtn">

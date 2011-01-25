@@ -7,7 +7,7 @@ $bargains = $mvc->getObject(BargainsService::BARGAINS);
 		<div class="cL">
 			<div class="cR">
 				<div class="bodyBox viewSList">
-					<h2>_i18n{Bargains Catalog}</h2>
+					<h2><a href="/view-bargains.html" title="_i18n{Bargains Catalog}">_i18n{Bargains Catalog}</a></h2>
 					<ul>
 <?php 				if (isset($bargains)&&$bargains!=NULL){
 						foreach ($bargains as $key => $bargain){?>						

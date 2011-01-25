@@ -121,9 +121,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 					<div class="bodyBox">
 						<h2>Jetzt Mehrumsatz mit Produkten</h2>
 						<div class="unitSearch">
-							<form action="">
+							<form action="/view-bargains.html" method="get">
 								<p>
-									<select name="category" class="gCategory">
+									<select name="category_id" class="gCategory">
 		<?php					if (isset($categories) && $categories!=NULL){ 
 									foreach($categories as $key=>$category){ ?>
 										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
@@ -133,7 +133,7 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 									<label>Hauptkategorie?</label>
 								</p>
 								<p>
-									<select name="subcategory" class="gSubCategory">
+									<select name="subcategory_id" class="gSubCategory">
 		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
 									foreach($subcategories as $key=>$subcategory){ ?>
 										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
@@ -175,9 +175,9 @@ $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
 			<ul>
 			<?php if (isset($categories)&&$categories!=NULL){?>
 			<?php foreach($categories as $key=>$category){ ?>
-				<li><a href="#" title="<?php echo $category[CategoryService::CAT_NAME]?>"><?php echo $category[CategoryService::CAT_NAME]?></a></li>
+				<li><a href="/view-bargains.html?&category_id=<?php echo $category[CategoryService::ID]?>" title="<?php echo $category[CategoryService::CAT_NAME]?>"><?php echo $category[CategoryService::CAT_NAME]?></a></li>
 			<?php }?>
-				<li><a href="#" title="&raquo; weitere">&raquo; _i18n{more}</a></li>
+				<li><a href="/view-bargains.html" title="&raquo; weitere">&raquo; _i18n{more}</a></li>
 			<?php }?>
 			</ul>
 		</div>

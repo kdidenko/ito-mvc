@@ -33,7 +33,7 @@ $pages = $mvc->getObject("pages");
 												<option value="all">all</option>
 										<?php			if (isset($categories) && $categories!=NULL){ 
 					foreach($categories as $key=>$category){ ?>
-												<option <?php echo isset($_GET['category_id'])&&$category[CategoryService::ID]==$_GET['category_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+												<option <?php echo isset($_GET['cat_id'])&&$category[CategoryService::ID]==$_GET['cat_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
 										<?php 				} 
 				} ?>
 											</select>
@@ -42,7 +42,7 @@ $pages = $mvc->getObject("pages");
 												<option value="all">all</option>
 									<?php			if (isset($subcategories) && $subcategories!=NULL){ 
 					foreach($subcategories as $key=>$subcategory){ ?>						
-												<option <?php echo isset($_GET['subcategory_id'])&&$subcategory[SubCategoryService::ID]==$_GET['subcategory_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+												<option <?php echo isset($_GET['subcat_id'])&&$subcategory[SubCategoryService::ID]==$_GET['subcat_id'] ? "selected='selected'" : NULL ; ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
 									<?php 				} 
 				} ?>
 											</select>

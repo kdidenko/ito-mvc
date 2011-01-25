@@ -2,6 +2,7 @@
 $orders = $mvc->getObject(BargainsService::BARGAINS);
 $categories = $mvc->getObject(CategoryService::CATEGORY);
 $subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$subcategories_new = $mvc->getObject(SubCategoryService::SUBCATEGORY . "2");
 $regions = $mvc->getObject(RegionService::REGIONS);
 $countries = $mvc->getObject(CountryService::COUNTRY);
 $count = $mvc->getObject("count");
@@ -14,7 +15,7 @@ $pages = $mvc->getObject("pages");
 			<div class="cL">
 				<div class="cR">
 					<div class="bodyBox">
-						<h2>Find jobs</h2>
+						<h2>_i18n{Find bargain}</h2>
 						<form action="view-orders.html" method="get" id="search">
 							<div class="unitBSearch">
 								<p>
@@ -147,7 +148,7 @@ $pages = $mvc->getObject("pages");
 									</div>
 									<?php }
 									} else { ?>
-									NO ORDER LIKE YOU WHANT
+									_i18n{No Bargain like you want}
 									<?php } ?>
 								</div>
 								<div class="unitBPagination">
@@ -239,8 +240,8 @@ $pages = $mvc->getObject("pages");
 							<p>
 								<label>Unterkategorie?</label>
 								<select name="subcategory_id" class="gSubCategory">
-	<?php					if (isset($subcategories) && $subcategories!=NULL){ 
-									foreach($subcategories as $key=>$subcategory){ ?>
+	<?php					if (isset($subcategories_new) && $subcategories_new!=NULL){ 
+									foreach($subcategories_new as $key=>$subcategory){ ?>
 									<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
 	<?php 						}
 								} ?>

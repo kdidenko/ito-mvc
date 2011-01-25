@@ -281,7 +281,7 @@ class BargainsService {
 				SQLClient::ON . UploadsService::UPLOADS . '.' . UploadsService::ID . '=' .
 				self::BARGAIN_RELATIONS . '.' . self::UPLOAD_ID;
 		$date = date('Y-m-d');
-		$where = self::UNTIL_DATE . '>=' . $date . ' AND ' . self::NUMBER . '>0';
+		$where = self::UNTIL_DATE . ">='" . $date . "' AND " . self::NUMBER . '>0' . " AND " . self::STATUS . '=1';
 		$orderby = $footer==true ? "RAND()" : self::DISCOUNT . ' ' . SQLClient::DESC;
 		$limit = $footer==true ? '0,10' : '0,5';
 		# executing the query

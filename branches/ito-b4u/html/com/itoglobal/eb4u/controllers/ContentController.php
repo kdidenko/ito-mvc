@@ -383,7 +383,7 @@ class ContentController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		$date = date("Y-m-d h:m:s");
-		$where = BargainsService::UNTIL_DATE . ">='" . $date . "'";
+		$where = BargainsService::UNTIL_DATE . ">='" . $date . "' AND " . BargainsService::NUMBER . '>0' . " AND " . BargainsService::STATUS . '=1';
 		$onpage = isset ( $requestParams ['onpage'] )&& $requestParams ['onpage'] !=NULL ? $requestParams ['onpage'] : 5;
 		if (isset ( $requestParams ['page'] )&& $requestParams ['page'] !=NULL ){ 
 			$limit = ($requestParams ['page']-1)*$onpage . "," . $onpage;

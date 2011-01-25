@@ -82,7 +82,7 @@ $error = $mvc->getObject(ContentController::ERROR);
 <?php		if ($value[BargainsService::UNTIL_DATE]<$date){?>
 			<tr>
 				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $value[BargainsService::HASH]?>" /></td>
-				<td><a href="#" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
+				<td><a href="edit-bargain.html?id=<?php echo $value[BargainsService::HASH];?>" class="linkTr"><?php echo $value[BargainsService::ID]?></a></td>
 				<td><?php echo $value[CategoryService::CAT_NAME]?></td>
 				<td><?php echo $value[BargainsService::BARGAIN_NAME]?></td>
 				<td><?php echo $value[BargainsService::UNTIL_DATE]?></td>

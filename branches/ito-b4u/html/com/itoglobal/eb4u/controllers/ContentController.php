@@ -506,7 +506,6 @@ class ContentController extends SecureActionControllerImpl {
 			$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID];
 			$boughtBargains = BargainsService::getBoughtBargain($where);
 			$mvc->addObject ( BargainsService::BOUGHT_BARGAIN, $boughtBargains);
-			
 			if(isset($id)){
 				$where = BargainsService::BARGAINS . '.' . BargainsService::ID . '='. $bargain[0][BargainsService::ID] . ' AND ' . 
 						BargainsService::BOUGHT_BARGAIN . '.' . BargainsService::USER_ID . '=' . $id;

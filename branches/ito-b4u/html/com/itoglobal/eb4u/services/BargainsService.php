@@ -243,7 +243,7 @@ class BargainsService {
 				self::BARGAINS . '.' . self::COUNTRY .
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
-				self::BARGAINS . '.' . self::USER_ID;
+				self::BOUGHT_BARGAIN . '.' . self::USER_ID;
 		$orderby = self::BOUGHT_DATE;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , $orderby, '' );

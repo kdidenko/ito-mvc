@@ -1,1 +1,99 @@
-<h2>_i18n{user My Recommendations page content}</h2>
+<?php 
+$orders = $mvc->getObject(OrdersService::ORDERS);
+?>
+<ul class="viewIList">
+	<li class="itemNew"><a href="/new-order.html">New Order</a></li>
+</ul>
+<h2>_i18n{Write a Review}</h2>
+<div class="unitABlock">
+	<table cellpadding="0" cellspacing="0" class="viewList">
+		<thead>
+			<tr>
+				<th>_i18n{No}</th>
+				<th>_i18n{Order-No}</th>
+				<th>_i18n{Category}</th>
+				<th>_i18n{Name}</th>
+				<th>_i18n{End price}</th>
+				<th class="itemLast">_i18n{Date}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+			<?php if (isset($orders)&& $orders!=NULL){?>
+			<?php foreach($orders as $key => $order){?>
+			<tr>
+				<td><?php echo $key+1;?></td>
+				<td><?php echo $order[OrdersService::ID];?></td>
+				<td><?php echo $order[CategoryService::CAT_NAME];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>"><?php echo $order[OrdersService::ORDER_NAME];?></a></td>
+				<td><?php echo $order[OrdersService::PRICE];?> &euro;</td>
+				<td class="itemLast"><?php echo $order[OrdersService::CRDATE];?></td>
+			</tr>
+			<?php } } ?>
+		</tbody>
+	</table>
+</div>
+<h2>_i18n{My Recommendations}</h2>
+<div class="unitABlock unitABlockLast">
+	<table cellpadding="0" cellspacing="0" class="viewList">
+		<thead>
+			<tr>
+				<th>_i18n{No}</th>
+				<th>_i18n{Order-No}</th>
+				<th>_i18n{Category}</th>
+				<th>_i18n{Name}</th>
+				<th>_i18n{End price}</th>
+				<th class="itemLast">_i18n{Date}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>21</td>
+				<td>Category1</td>
+				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
+				<td>2323 &euro;</td>
+				<td class="itemLast">2011-22-11</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

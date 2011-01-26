@@ -465,9 +465,7 @@ class ContentController extends SecureActionControllerImpl {
 		if(isset($requestParams[BargainsService::ID])){
 			$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
 			$bargain = BargainsService::getBargains($where);
-			$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
 			
-			isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
 			if (isset($requestParams['buy']) && $bargain[0][BargainsService::NUMBER]>0){
 				$role = SessionService::getAttribute ( SessionService::ROLE );
 				if ($role!=NULL){
@@ -476,6 +474,10 @@ class ContentController extends SecureActionControllerImpl {
 							for($i=1;$i<=$requestParams['amount'];$i++){
 								BargainsService::buyBargain($bargain[0][BargainsService::ID], $id);
 							}
+							
+							$where = BargainsService::HASH . "='" . $requestParams[BargainsService::ID] . "'";
+							$bargain = BargainsService::getBargains($where);
+							
 							$subject = $bargain[0][BargainsService::BARGAIN_NAME];
 							$sender_id = SessionService::getAttribute ( SessionService::USERS_ID );
 							$user = SessionService::getAttribute ( SessionService::USERNAME );
@@ -495,6 +497,9 @@ class ContentController extends SecureActionControllerImpl {
 					$mvc->addObject ( self::ERROR, "_i18n{Please}, <a href='/login.html' title='_i18n{login}'>_i18n{login}</a> _i18n{if you alredy registred, or you can} <a href='/registration.html' title='_i18n{register}'>_i18n{register}</a>." );
 				}
 			}
+			
+			$bargain[0]['time_left'] = self::countTimeLeft($bargain[0]['until_date']);
+			isset ( $bargain ) ? $mvc->addObject ( BargainsService::BARGAINS, $bargain[0] ) : null;
 			
 			$images = BargainsService::getBargainImgs ($bargain[0][BargainsService::ID]);
 			foreach($images as $key => $value){

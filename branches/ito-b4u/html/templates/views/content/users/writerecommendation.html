@@ -1,1 +1,51 @@
-<h2>Form for writing recomendations</h2>
+<?php 
+$order = $mvc->getObject(OrdersService::ORDERS);
+$errors = $mvc->getObject(ContentController::ERROR);
+$status = $mvc->getObject(ContentController::STATUS);
+?>
+<h2>_i18n{Please, leave a comment.}</h2>
+<div class="unitABlock unitABlockLast">
+<?php if (isset($status )){?>
+	<div class="itemOk">
+		<?php echo $status ?>
+	</div>
+<?php } else {?>
+<?php if (isset($_GET['id'])||isset($_POST['id'])){ ?>
+<?php if (isset($errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<?php foreach ($errors as $key => $value){?>
+				<li><?php echo $value ?></li>
+			<?php } ?>					
+		</ul>
+	</div>
+<?php } ?>
+	<form action="/write-recommendation.html" method="POST">
+		<div class="unitSnColumn">
+			<dl class="itemForm">
+				<dt>_i18n{Order Name}:</dt>
+				<dd class="itemData"><b><?php echo $order[0][OrdersService::ORDER_NAME];?></b></dd>
+			</dl>
+			<div class="itemForm">
+				<label>_i18n{Rating}:</label>
+				<div class="itemData">
+					<input type="radio" name="vote" value="1"/>1
+					<input type="radio" name="vote" value="2"/>2
+					<input type="radio" name="vote" value="3"/>3
+					<input type="radio" name="vote" value="4"/>4
+					<input type="radio" name="vote" value="5"/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Comment}:</label>
+				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="comment"><?php echo isset($mail[MailService::SUBJECT]) ? $mail[MailService::TEXT] : NULL; ?></textarea></div>
+			</div>
+		</div>
+		<div class="unitBtn">
+			<input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : $_POST['id'];?>"></input>
+			<button name="send"><span><strong>_i18n{Send}</strong></span></button>
+			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
+		</div>
+	</form>
+<?php } } ?>
+</div>

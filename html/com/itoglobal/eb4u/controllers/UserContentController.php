@@ -127,6 +127,41 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleWriteRecommendation($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$user_id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		if (isset($requestParams[CompanyService::ID])){
+			if (isset($requestParams['send'])){
+				$error = array();
+				$error[] .= isset($requestParams[CompanyService::VOTE])&&$requestParams[CompanyService::VOTE]==NULL || !isset($requestParams[CompanyService::VOTE]) ? 
+					"_i18n{Please, evaluate this company.}" : false;
+				$error[] .= $requestParams[CompanyService::COMMENT]==NULL ? "_i18n{Please, write short comment.}" : false;
+				$error = array_filter ( $error );
+				if (count ( $error ) == 0) {
+					$date = date("Y-m-d");
+					$vals = array('0' => $requestParams[CompanyService::VOTE], 
+									'1'=>$requestParams[CompanyService::COMMENT], 
+									'2'=>$date, 
+									'3'=>'1');
+					$fields = array('0' => CompanyService::VOTE, 
+									'1'=> CompanyService::COMMENT,
+									'2' => CompanyService::DATE, 
+									'3'=> CompanyService::DONE);
+					CompanyService::postReview  ($requestParams[CompanyService::ID], $user_id, $fields, $vals);
+					$mvc->addObject(ContentController::STATUS, "_i18n{Thank you for your response! You can go back to continue your work.}");
+				} else {
+					$mvc->addObject ( self::ERROR, $error );
+				}
+			}
+			$where = CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::ID . '=' . $requestParams[CompanyService::ID];
+			$orders = CompanyService::getFeedback ($where);
+			isset ( $orders ) ? $mvc->addObject ( OrdersService::ORDERS, $orders ) : null;
+		}
+		
+		return $mvc;
+	}
+	
 	/*
 	private static function getUserRole(){
 		#prepeare value for sql query 

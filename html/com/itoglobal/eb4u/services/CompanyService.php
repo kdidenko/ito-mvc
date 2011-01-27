@@ -40,8 +40,12 @@ class CompanyService {
 	
 	public static function getFeedback($where) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
+				OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
 					UsersService::AVATAR . ', ' . self::COMPANY_FEEDBACK . '.' . self::VOTE."*20 AS count";
 		$from = self::COMPANY_FEEDBACK . 
+				SQLClient::LEFT . SQLClient::JOIN . OrdersService::ORDERS .	SQLClient::ON . 
+				OrdersService::ORDERS . '.' . OrdersService::ID . '=' . 
+				self::COMPANY_FEEDBACK . '.' . self::ORDER_ID . 
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::COMPANY_FEEDBACK . '.' . self::USER_ID;
@@ -107,17 +111,14 @@ GROUP BY users.id
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
-	/*
-	public static function feedbackCompany($user_id, $company_id, $vote, $comment) {
-		$into = self::COMPANY_FEEDBACK;
-		//$comment = htmlspecialchars($comment, ENT_QUOTES);
-		$fields = self::USER_ID . ', ' . self::COMPANY_ID . ', ' . 
-				elf::VOTE . ', ' . self::COMMENT; 
-		$values = "'" . $user_id . "', '" . $company_id . "', '" . $vote . "', '" . $comment . "'";
-		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
-		return $result;
+	
+	public static function postReview ($id, $user_id, $fields, $vals){
+		$from = self::COMPANY_FEEDBACK;
+		$where = self::ID . " = '" . $id . "' AND " . self::USER_ID . " = '" . $user_id . "'";;
+		# executing the query
+		DBClientHandler::getInstance ()->execUpdate ( $fields, $from, $vals, $where, '', '' );
 	}
-	*/
+	
 	public static function feedbackCompany($user_id, $company_id, $order_id) {
 		$into = self::COMPANY_FEEDBACK;
 		$fields = self::USER_ID . ', ' . self::COMPANY_ID . ', ' . self::ORDER_ID; 

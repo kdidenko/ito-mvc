@@ -1,9 +1,6 @@
 <?php 
 $recommendations = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 ?>
-<ul class="viewIList">
-	<li class="itemNew"><a href="/new-order.html">New Order</a></li>
-</ul>
 <h2>_i18n{Write a Review}</h2>
 <div class="unitABlock">
 	<table cellpadding="0" cellspacing="0" class="viewList">
@@ -54,7 +51,7 @@ $recommendations = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 				<!-- <td><?php echo $key+1;?></td> -->
 				<td><?php echo $recommendation[CompanyService::ID];?></td>
 				<td><?php echo $recommendation[CategoryService::CAT_NAME];?></td>
-				<td><?php echo $recommendation[OrdersService::ORDER_NAME];?></td>
+				<td><a class="linkTr" href="/company.html?id=<?php echo $recommendation[CompanyService::COMPANY_ID];?>" title="<?php echo $recommendation[OrdersService::ORDER_NAME];?>"><?php echo $recommendation[OrdersService::ORDER_NAME];?></a></td>
 				<td><?php echo $recommendation[UsersService::USERNAME];?></td>
 				<td class="itemLast"><?php echo $recommendation[CompanyService::DATE];?></td>
 			</tr>

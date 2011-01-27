@@ -9,7 +9,7 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 			<div class="cL">
 				<div class="cR">
 					<div class="bodyBox">
-						<?php if (isset($user)&&$user!=NULL){?>
+						<?php if (isset($user)&&$user!=NULL){ ?>
 						<h2><?php echo $user[UsersService::COMPANY] ?></h2>
 						<div class="unitDBlock">
 							<div class="unitDLeft">
@@ -18,7 +18,6 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 										<li><a href="<?php echo $user[UsersService::AVATAR] ?>" title=""><img src="<?php echo $user[UsersService::AVATAR] ?>" alt="<?php echo $user[UsersService::COMPANY] ?>" /></a></li>
 									</ul>
 								</div>
-								
 							</div>
 							<div class="unitDRight">
 								<div class="unitCompany">
@@ -86,6 +85,12 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 							</ul>
 						</div>
 						<div class="tabsContent"></div>
+						<?php } else { ?>
+							<div class="itemWarning">
+								<ul>
+									<li>_i18n{No company like you want.}</li>
+								</ul>
+							</div>
 						<?php } ?>
 					</div>
 				</div>

@@ -202,7 +202,7 @@ class UsersService {
 					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
 		$fields .= $company==true ? 
-				", SUM( company_feedback.vote ) / COUNT( company_feedback.id )*20 AS vote,
+				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
 				COUNT( company_feedback.vote ) AS count" : 
 					NULL;
 		$from = isset ( $from ) ? $from : self::USERS . 
@@ -224,6 +224,8 @@ class UsersService {
 				self::USERS . '.' . self::ID : 
 					NULL;
 		$groupBy = self::USERS . '.' . self::ID;
+		//$where .= $company==true && $where!=NULL ? ' AND ' : NULL;
+		//$where .= $company==true ? CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::DONE . '=1' : NULL;
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
 		//$result = $result != null && isset($result) && count($result) == 1 ? $result[0] : $result;
@@ -243,7 +245,7 @@ class UsersService {
 					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
 			$fields .= $company==true ? 
-				", SUM( company_feedback.vote ) / COUNT( company_feedback.id )*20 AS vote,
+				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
 				COUNT( company_feedback.vote ) AS count" : 
 					NULL;
 			$from = self::USERS . 
@@ -265,6 +267,7 @@ class UsersService {
 				self::USERS . '.' . self::ID : 
 					NULL;
 			$where = self::USERS . '.' . self::ID . '=' . $id;
+			//$where .= $company==true ? ' AND ' . CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::DONE . '=1' : NULL;
 			$groupBy = self::USERS . '.' . self::ID;
 			# executing query
 			$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy, '', '' );

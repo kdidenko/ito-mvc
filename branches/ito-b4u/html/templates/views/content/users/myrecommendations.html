@@ -1,5 +1,5 @@
 <?php 
-$orders = $mvc->getObject(OrdersService::ORDERS);
+$recommendations = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 ?>
 <ul class="viewIList">
 	<li class="itemNew"><a href="/new-order.html">New Order</a></li>
@@ -9,8 +9,8 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
+				<!-- <th>_i18n{No}</th> -->
 				<th>_i18n{No}</th>
-				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
 				<th>_i18n{Name}</th>
 				<th>_i18n{End price}</th>
@@ -18,41 +18,18 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($recommendations)&& $recommendations!=NULL){?>
+			<?php foreach($recommendations as $key => $recommendation){?>
+			<?php if($recommendation[CompanyService::DONE]==0){?>
 			<tr>
-				<td>1</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
+				<!-- <td><?php echo $key+1;?></td> -->
+				<td><?php echo $recommendation[CompanyService::ID];?></td>
+				<td><?php echo $recommendation[CategoryService::CAT_NAME];?></td>
+				<td><a class="linkTr" href="/write-recommendation.html?id=<?php echo $recommendation[CompanyService::ID];?>" title="<?php echo $recommendation[OrdersService::ORDER_NAME];?>"><?php echo $recommendation[OrdersService::ORDER_NAME];?></a></td>
+				<td><?php echo $recommendation[UsersService::USERNAME];?></td>
+				<td class="itemLast"><?php echo $recommendation[OrdersService::BOUGHT_DATE];?></td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
-			</tr>
-			<?php if (isset($orders)&& $orders!=NULL){?>
-			<?php foreach($orders as $key => $order){?>
-			<tr>
-				<td><?php echo $key+1;?></td>
-				<td><?php echo $order[OrdersService::ID];?></td>
-				<td><?php echo $order[CategoryService::CAT_NAME];?></td>
-				<td><a class="linkTr" href="view-order.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>"><?php echo $order[OrdersService::ORDER_NAME];?></a></td>
-				<td><?php echo $order[OrdersService::PRICE];?> &euro;</td>
-				<td class="itemLast"><?php echo $order[OrdersService::CRDATE];?></td>
-			</tr>
-			<?php } } ?>
+			<?php } } }?>
 		</tbody>
 	</table>
 </div>
@@ -61,8 +38,8 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 	<table cellpadding="0" cellspacing="0" class="viewList">
 		<thead>
 			<tr>
+				<!-- <th>_i18n{No}</th> -->
 				<th>_i18n{No}</th>
-				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
 				<th>_i18n{Name}</th>
 				<th>_i18n{End price}</th>
@@ -70,30 +47,18 @@ $orders = $mvc->getObject(OrdersService::ORDERS);
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($recommendations)&& $recommendations!=NULL){?>
+			<?php foreach($recommendations as $key => $recommendation){?>
+			<?php if($recommendation[CompanyService::DONE]==1){?>
 			<tr>
-				<td>1</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
+				<!-- <td><?php echo $key+1;?></td> -->
+				<td><?php echo $recommendation[CompanyService::ID];?></td>
+				<td><?php echo $recommendation[CategoryService::CAT_NAME];?></td>
+				<td><?php echo $recommendation[OrdersService::ORDER_NAME];?></td>
+				<td><?php echo $recommendation[UsersService::USERNAME];?></td>
+				<td class="itemLast"><?php echo $recommendation[CompanyService::DATE];?></td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>21</td>
-				<td>Category1</td>
-				<td><a class="linkTr" href="write-recommendation.html?id=<?php echo $order[OrdersService::HASH];?>" title="<?php echo $order[OrdersService::ORDER_NAME];?>">Build room</a></td>
-				<td>2323 &euro;</td>
-				<td class="itemLast">2011-22-11</td>
-			</tr>
+			<?php } } }?>
 		</tbody>
 	</table>
 </div>

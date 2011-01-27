@@ -126,7 +126,7 @@ class ContentController extends SecureActionControllerImpl {
 			}
 			
 			$users = UsersService::getUser ($requestParams[UsersService::ID], true);
-			isset ( $users ) ? $mvc->addObject ( UsersService::USERS, $users ) : null;
+			isset ( $users )&&$users[UsersService::ROLE]==UsersService::ROLE_TR ? $mvc->addObject ( UsersService::USERS, $users ) : null;
 	
 		}	
 		return $mvc;
@@ -218,6 +218,10 @@ class ContentController extends SecureActionControllerImpl {
 				$bids = OrdersService::buyOrder ($order[OrdersService::ID]);
 				
 				if(isset($bids)&&$bids!=NULL){
+					$user_id = $order[OrdersService::OWNER];
+					$company_id = $bids[0][OrdersService::USER_ID];
+					$order_id = $order[OrdersService::ID];
+					CompanyService::feedbackCompany($user_id, $company_id, $order_id);
 					$subject = $order[OrdersService::ORDER_NAME];
 					$sender_id = 4;
 					$user = SessionService::getAttribute ( SessionService::USERNAME );

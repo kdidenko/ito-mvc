@@ -116,6 +116,16 @@ class UserContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleMyRecommendations($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		
+		$where = CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::USER_ID . '=' . $id;
+		$recommendations = CompanyService::getRecommendations ($where);
+		isset ( $recommendations ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $recommendations ) : null;
+		
+		return $mvc;
+	}
 	
 	/*
 	private static function getUserRole(){

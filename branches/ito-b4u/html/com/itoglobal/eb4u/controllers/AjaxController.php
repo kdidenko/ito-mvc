@@ -21,7 +21,8 @@ class AjaxController extends SecureActionControllerImpl {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = $requestParams[UsersService::ID];
 		
-		$feedbacks = CompanyService::getFeedback ($requestParams[UsersService::ID]);
+		$where = CompanyService::COMPANY_ID . '=' . $requestParams[UsersService::ID] . ' AND ' . CompanyService::DONE . '=1';
+		$feedbacks = CompanyService::getFeedback ($where);
 		isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
 		
 		return $mvc;

@@ -1,5 +1,6 @@
 <?php 
 $data = $mvc->getObject(TradesmanContentController::RESULT);
+$feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 $image_errors = $mvc->getObject(TradesmanContentController::IMAGE_ERROR);
 $status = $mvc->getObject(TradesmanContentController::STATUS);
 ?>
@@ -122,13 +123,44 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 	</div>
 </div>
 <h2>_i18n{Company Info}</h2>
-<div class="unitABlock unitABlockLast">
+<div class="unitABlock">
 	<div class="unitInfo">
 		<textarea class="areaTxt" rows="10" cols="103" name="company_desc"><?php echo $data[UsersService::COMPANY_DESC] ?></textarea>
 	</div>
 	<div class="unitBtn">
 		<button name="companyInfoSbm"><span><strong>_i18n{Save}</strong></span></button>
 	</div>
+</div>
+<h2>_i18n{Company Comments}</h2>
+<div class="unitABlock unitABlockLast">
+<div class="viewDComment">
+	<?php
+if(isset($feedbacks)&&$feedbacks!=null){
+	foreach($feedbacks as $key =>$feedback){?>
+	<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>" style="width:auto;">
+		<div class="itemTitle">
+			<h4><?php echo $feedback[UsersService::USERNAME] ?> - <?php echo $feedback[OrdersService::ORDER_NAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
+		</div>
+		<div class="itemText">
+			<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
+			<!-- <p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p> -->
+		</div>
+		<div class="itemRating">
+			<ul class="unitRating">
+				<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
+			</ul>
+			<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
+		</div>
+	</div>
+	<?php } 
+} else { ?>
+	<div class="unitDComment unitOdd">
+		<div class="itemText">
+			<p>_i18n{Sorry, no comments yet.}</p>
+		</div>
+	</div>
+<?php } ?>
+</div>
 </div>
 <h2 style="display:none">Project</h2>
 <div style="display:none" class="unitWBlock">

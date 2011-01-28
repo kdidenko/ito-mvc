@@ -157,6 +157,11 @@ class TradesmanContentController extends ContentController {
 		#get user info
 		$result = UsersService::getUser ( $id );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
+		
+		$where = CompanyService::COMPANY_ID . '=' . $id . ' AND ' . CompanyService::DONE . '=1';
+		$feedbacks = CompanyService::getFeedback ($where);
+		isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
+		
 		return $mvc;
 	}
 	

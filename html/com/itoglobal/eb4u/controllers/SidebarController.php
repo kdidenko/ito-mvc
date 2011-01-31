@@ -42,6 +42,18 @@ class SidebarController extends SecureActionControllerImpl {
 		
 		return $mvc;
 	}
+	
+	public function handleCompanies($actionParams, $requestParams) {
+		$mvc = parent::handleActionRequest($actionParams, $requestParams);
+	
+		$category = CategoryService::getCategories ();
+		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
+
+		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
+		
+		return $mvc;
+	}
 }
 
 ?>

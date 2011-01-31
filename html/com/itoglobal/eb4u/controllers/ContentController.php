@@ -217,7 +217,7 @@ class ContentController extends SecureActionControllerImpl {
 		$result = OrdersService::checkOrders();
 		if($result!=NULL){
 			foreach($result as $key => $order){
-				$bids = OrdersService::buyOrder ($order[OrdersService::ID]);
+				$bids = OrdersService::buyOrder ($order[OrdersService::ID],$bids[0][OrdersService::USER_ID]);
 				
 				if(isset($bids)&&$bids!=NULL){
 					$user_id = $order[OrdersService::OWNER];

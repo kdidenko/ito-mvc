@@ -28,9 +28,12 @@
 	#display comments on page
 	$on_page = 1;
 	
+	#max size of file (in bytes)
+	$upload_file_size = 512000;
 	
 	define('COMPANY_LOGO_HEIGHT', $height);
 	define('COMPANY_LOGO_WIDTH', $width);
 	define('SUPPORT', $support);
 	define('ON_PAGE', $on_page);
+	define('FILE_SIZE', $upload_file_size);
 ?>

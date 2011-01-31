@@ -25,8 +25,12 @@
 	$height = 130;
 	$width = 240;
 	
+	#display comments on page
+	$on_page = 1;
+	
 	
 	define('COMPANY_LOGO_HEIGHT', $height);
 	define('COMPANY_LOGO_WIDTH', $width);
 	define('SUPPORT', $support);
+	define('ON_PAGE', $on_page);
 ?>

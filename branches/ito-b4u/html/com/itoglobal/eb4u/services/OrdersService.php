@@ -325,7 +325,7 @@ class OrdersService {
 		return $result;
 	}
 	
-	public static function getBoughtOrder($user_id){
+	public static function getBoughtOrder($user_id, $where = null){
 		$fields =  self::ORDERS . '.*, ' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
 					', ' . UsersService::USERS . '.' . UsersService::USERNAME . 
 					', ' . self::BOUGHT_ORDERS . '.' . self::BOUGHT_PRICE .
@@ -340,7 +340,9 @@ class OrdersService {
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS . SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
 				self::ORDERS . '.' . self::OWNER;
-		$where = self::USER_ID . "='" . $user_id . "'"; 
+		
+		$where .= $where != null ? ' AND ' : NULL;
+		$where .= self::USER_ID . "='" . $user_id . "'";
 		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;

@@ -423,10 +423,16 @@ class TradesmanContentController extends ContentController {
 	public function handleMyOrder($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = SessionService::getAttribute(SessionService::USERS_ID);
+		$date = date("Y-m-d");
 		
-		$won_orders = OrdersService::getBoughtOrder($id);
+		$where = OrdersService::ORDERS . '.' . OrdersService::IMP_UNTIL_DATE . ">='" . $date . "'";
+		$won_orders = OrdersService::getBoughtOrder($id,$where);
 		isset($won_orders) ? $mvc->addObject ( OrdersService::BOUGHT_ORDERS, $won_orders) : NULL;
 
+		$where = OrdersService::ORDERS . '.' . OrdersService::IMP_UNTIL_DATE . "<'" .  $date . "'";
+		$won_orders_archiv = OrdersService::getBoughtOrder($id,$where);
+		isset($won_orders_archiv) ? $mvc->addObject ( OrdersService::BOUGHT_ORDERS . '_archiv', $won_orders_archiv) : NULL;
+		
 		$crnt_orders = OrdersService::getCurrentOrders($id);
 		isset($crnt_orders) ? $mvc->addObject ( OrdersService::BIDS, $crnt_orders) : NULL;
 		

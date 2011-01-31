@@ -12,6 +12,7 @@ GROUP BY bids.order_id
 -->
 <?php 
 $won_orders = $mvc->getObject(OrdersService::BOUGHT_ORDERS);
+$won_orders_archiv = $mvc->getObject(OrdersService::BOUGHT_ORDERS . '_archiv');
 $bookmarks = $mvc->getObject(OrdersService::ORDER_BOOKMARKS);
 $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 ?>
@@ -142,22 +143,25 @@ $crnt_orders = $mvc->getObject(OrdersService::BIDS);
 				<th class="itemChk"></th>
 				<th>_i18n{Order-No}</th>
 				<th>_i18n{Category}</th>
-				<th>_i18n{Job Description}</th>
+				<th>_i18n{Job Name}</th>
 				<th>_i18n{End price}</th>
 				<th>_i18n{User}</th>
 				<th class="itemLast">_i18n{Date}</th>
 			</tr>
 		</thead>
 		<tbody>
+			<?php if (isset($won_orders_archiv)&& $won_orders_archiv!=NULL){?>
+			<?php foreach($won_orders_archiv as $key => $won_order_archiv){?>
 			<tr>
-				<td><input type="checkbox" class="inpChk" name="chkM" value="" /></td>
-				<td><a class="linkTr" href="#" title="A25">A25</a></td>
-				<td>Kategorie1</td>
-				<td>Beschreib...</td>
-				<td>50.00 &euro;</td>
-				<td>user112</td>
-				<td class="itemLast">03/01/2010</td>
+				<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $won_order_archiv[OrdersService::HASH];?>" /></td>
+				<td><?php echo $won_order_archiv[OrdersService::ID];?></td>
+				<td><?php echo $won_order_archiv[CategoryService::CAT_NAME];?></td>
+				<td><a class="linkTr" href="view-order.html?id=<?php echo $won_order_archiv[OrdersService::HASH];?>" title="<?php echo $won_order_archiv[OrdersService::ORDER_DESC];?>"><?php echo $won_order_archiv[OrdersService::ORDER_NAME];?></a></td>
+				<td><?php echo $won_order_archiv[OrdersService::BOUGHT_PRICE];?> &euro;</td>
+				<td><?php echo $won_order_archiv[UsersService::USERNAME];?></td>
+				<td class="itemLast"><?php echo $won_order_archiv[OrdersService::BOUGHT_DATE];?></td>
 			</tr>
+			<?php } } ?>
 		</tbody>
 	</table>
 </div>

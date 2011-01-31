@@ -11,7 +11,7 @@ if(isset($feedbacks)&&$feedbacks!=null){
 		</div>
 		<div class="itemText">
 			<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
-			<!-- <p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p> -->
+			<p><strong>_i18n{Order}:</strong> <a href="/view-order.html?id=<?php echo $feedback[OrdersService::HASH] ?>" title="<?php echo $feedback[OrdersService::ORDER_NAME] ?>"><?php echo $feedback[OrdersService::ORDER_NAME] ?></a></p>
 		</div>
 		<div class="itemRating">
 			<ul class="unitRating">

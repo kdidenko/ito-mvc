@@ -41,6 +41,7 @@ class CompanyService {
 	public static function getFeedback($where) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
 				OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
+				OrdersService::ORDERS . '.' . OrdersService::HASH . ', ' .
 					UsersService::AVATAR . ', ' . self::COMPANY_FEEDBACK . '.' . self::VOTE."*20 AS count";
 		$from = self::COMPANY_FEEDBACK . 
 				SQLClient::LEFT . SQLClient::JOIN . OrdersService::ORDERS .	SQLClient::ON . 

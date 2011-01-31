@@ -15,7 +15,7 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 					<div class="bodyBox">
 						<h2>Jetzt Angebote einholen</h2>
 						<div class="unitSearch">
-							<form action="/new-order.html">
+							<form action="/new-order.html" method="post">
 								<p>
 									<select name="category_id" class="gCategory">
 		<?php					if (isset($categories) && $categories!=NULL){ 

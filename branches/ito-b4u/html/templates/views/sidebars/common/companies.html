@@ -1,0 +1,111 @@
+<?php 
+$categories = $mvc->getObject(CategoryService::CATEGORY);
+$subcategories = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+?>
+<div class="wrapSSearch">
+	
+	<div class="viewBox viewBoxA">
+		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+		<div class="cL">
+			<div class="cR">
+				<div class="bodyBox">
+					<div class="unitSearch">
+						<form action="/view-orders.html">
+							<p> 
+								<label>Hauptkategorie?</label>
+								<select name="category_id" class="gCategory">
+	<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+	<?php 						} 
+								} ?>
+								</select>
+							</p>
+							<p>
+								<label>Unterkategorie?</label>
+								<select name="subcategory_id" class="gSubCategory">
+	<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+									foreach($subcategories as $key=>$subcategory){ ?>
+									<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+	<?php 						}
+								} ?> 
+								</select>
+							</p>
+							<p class="itemBtn">
+								<button type="submit"><span><strong>Angebot kostenlos holen!</strong></span></button>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+	</div>
+	
+	<div class="viewBox viewBoxA">
+		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+		<div class="cL">
+			<div class="cR">
+				<div class="bodyBox">
+						<h3>Jetzt Mehrumsatz mit Produkten</h3>
+					<div class="unitSearch">
+						<form action="/view-orders.html">
+							<p> 
+								<label>Hauptkategorie?</label>
+								<select name="category_id" class="gCategory">
+	<?php					if (isset($categories) && $categories!=NULL){ 
+									foreach($categories as $key=>$category){ ?>
+									<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+	<?php 						} 
+								} ?>
+								</select>
+							</p>
+							<p>
+								<label>Unterkategorie?</label>
+								<select name="subcategory_id" class="gSubCategory">
+	<?php					if (isset($subcategories) && $subcategories!=NULL){ 
+									foreach($subcategories as $key=>$subcategory){ ?>
+									<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+	<?php 						}
+								} ?> 
+								</select>
+							</p>
+							<p class="itemBtn">
+								<button type="submit"><span><strong>Jetzt Produkte einstellen!</strong></span></button>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+	</div>	
+	
+	<div class="viewBox viewBoxA">
+		<div class="cT"><em class="cL"></em><em class="cR"></em></div>
+		<div class="cL">
+			<div class="cR">
+				<div class="bodyBox">
+					<h3>So finden Sie das beste Angebot!</h3>
+					<div class="unitStep">
+						<ol>
+							<li>
+								<span><img src="images/nbrFindR01.gif" alt="Ihren Auftrag kostenlos eintragen" /></span>
+								<span>Ihren Auftrag kostenlos eintragen</span>
+							</li>
+							<li>
+								<span><img src="images/nbrFindR02.gif" alt="Angebote vergleichen" /></span>
+								<span>Angebote vergleichen</span>
+							</li>
+							<li>
+								<span><img src="images/nbrFindR03.gif" alt="Auftrag vergeben" /></span>
+								<span>Auftrag vergeben</span>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cB"><em class="cL"></em><em class="cR"></em></div>
+	</div>
+</div>

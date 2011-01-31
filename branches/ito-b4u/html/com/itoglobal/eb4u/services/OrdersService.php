@@ -248,7 +248,7 @@ class OrdersService {
 		return $result;
 	}
 	
-	public static function buyOrder ($order_id){
+	public static function buyOrder ($order_id, $user_id){
 		$from = self::ORDERS;
 		$where = self::ID . " = '" . $order_id . "'";
 		$fields = self::BOUGHT;
@@ -258,11 +258,10 @@ class OrdersService {
 		$bids = self::getBids($order_id);
 		if(isset($bids)&&$bids!=NULL){
 			$date = gmdate ( "Y-m-d H:i:s" );
-			$id = SessionService::getAttribute ( SessionService::USERS_ID );
 			$into = self::BOUGHT_ORDERS;
 			$fields = self::BOUGHT_PRICE . ', ' . self::USER_ID . ', ' . self::ORDER_ID . ', ' . 
 						self::BOUGHT_DATE;
-			$values = 	"'" . $bids[0][self::BID] . "','" . $id . "','" . 
+			$values = 	"'" . $bids[0][self::BID] . "','" . $user_id . "','" . 
 						$order_id . "','" .	$date . "'";
 			$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into );
 		}

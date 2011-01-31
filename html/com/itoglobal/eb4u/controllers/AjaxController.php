@@ -42,7 +42,7 @@ class AjaxController extends SecureActionControllerImpl {
 	
 	public function handleFeedback($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		if (isset($requestParams['send'])){
+		if (isset($_POST)&&$_POST!=NULL){
 			$error = array();
 			$error[] .= ValidationService::checkEmail($requestParams['email']);
 			$error[] .= !isset($requestParams['subject'])||$requestParams['subject']==NULL ? "_i18n{Please, write mail subject.}" : false;

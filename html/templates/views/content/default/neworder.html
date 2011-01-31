@@ -37,7 +37,7 @@ $errors = $mvc->getObject(ContentController::ERROR);
 					<select name="category_id" class="gCategory">
 	<?php			if (isset($categories) && $categories!=NULL){ 
 					foreach($categories as $key=>$category){ ?>
-							<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+							<option <?php if($_GET['category_id']==$category[CategoryService::ID]){echo "selected";} ?> value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
 	<?php 				} 
 				} ?>
 					</select>
@@ -49,7 +49,7 @@ $errors = $mvc->getObject(ContentController::ERROR);
 					<select name="subcategory_id" class="gSubCategory">
 	<?php			if (isset($subcategories) && $subcategories!=NULL){ 
 					foreach($subcategories as $key=>$subcategory){ ?>						
-							<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
+							<option <?php if($_GET['subcategory_id']==$subcategory[SubCategoryService::ID]){echo "selected";} ?> value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>
 	<?php 				} 
 				} ?>
 					</select>

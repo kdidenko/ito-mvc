@@ -196,7 +196,9 @@ class ContentController extends SecureActionControllerImpl {
 		$category = CategoryService::getCategories ();
 		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
 
-		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
+		$crntCategory = isset ($requestParams[OrdersService::CATEGORY_ID]) ? $requestParams[OrdersService::CATEGORY_ID] : $category[0][CategoryService::ID];
+		
+		$subcategory = SubCategoryService::getSubcatByCat ($crntCategory);
 		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
 		
 		$countries = RegionService::getRegions ();

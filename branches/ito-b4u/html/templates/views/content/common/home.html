@@ -17,7 +17,7 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 						<div class="unitSearch">
 							<form action="/new-order.html">
 								<p>
-									<select name="category" class="gCategory">
+									<select name="category_id" class="gCategory">
 		<?php					if (isset($categories) && $categories!=NULL){ 
 									foreach($categories as $key=>$category){ ?>
 										<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
@@ -27,7 +27,7 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 									<label>_i18n{Category}?</label>
 								</p>
 								<p>
-									<select name="subcategory" class="gSubCategory">
+									<select name="subcategory_id" class="gSubCategory">
 		<?php					if (isset($subcategories) && $subcategories!=NULL){ 
 									foreach($subcategories as $key=>$subcategory){ ?>
 										<option value="<?php echo $subcategory[SubCategoryService::ID] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></option>

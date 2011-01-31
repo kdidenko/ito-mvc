@@ -1,44 +1,47 @@
 <?php
 $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
+$count = $mvc->getObject("count");
+$pages = $mvc->getObject("pages");
 ?>
 <div class="viewDComment">
-	<?php
+<?php
 if(isset($feedbacks)&&$feedbacks!=null){
 	foreach($feedbacks as $key =>$feedback){?>
-	<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
-		<div class="itemTitle">
-			<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
+		<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
+			<div class="itemTitle">
+				<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
+			</div>
+			<div class="itemText">
+				<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
+				<p><strong>_i18n{Order}:</strong> <a href="/view-order.html?id=<?php echo $feedback[OrdersService::HASH] ?>" title="<?php echo $feedback[OrdersService::ORDER_NAME] ?>"><?php echo $feedback[OrdersService::ORDER_NAME] ?></a></p>
+			</div>
+			<div class="itemRating">
+				<ul class="unitRating">
+					<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
+				</ul>
+				<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
+			</div>
 		</div>
-		<div class="itemText">
-			<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
-			<p><strong>_i18n{Order}:</strong> <a href="/view-order.html?id=<?php echo $feedback[OrdersService::HASH] ?>" title="<?php echo $feedback[OrdersService::ORDER_NAME] ?>"><?php echo $feedback[OrdersService::ORDER_NAME] ?></a></p>
-		</div>
-		<div class="itemRating">
-			<ul class="unitRating">
-				<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
-			</ul>
-			<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
-		</div>
-	</div>
-	<!-- 
-	<div class="unitDComment unitOdd">
-		<div class="itemTitle">
-			<h4>internal doors hung</h4><span class="itemDate">19/01/2011</span>
-		</div>
-		<div class="itemText">
-			<p>"Excellent worker,compatible & very helpful"</p>
-			<p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p>
-		</div>
-		<div class="itemRating">
-			<ul class="unitRating">
-				<li class="itemCurrent" style="width:80%"></li>
-			</ul>
-			<p><strong>1</strong> (80% positiv)</p>
-		</div>
-	</div>
- 	-->
-	<?php } 
-} else { ?>
+	<?php } ?>
+	<div class="unitTDagination">
+	<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
+	<ul>
+		<?php for($i=0; $i<$pages; $i++){ ?>
+			<li>
+			<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
+				<span><?php echo $i+1; ?></span>
+			<?php }else{ ?>
+				<a href="/company.html?comment_page=<?php echo $i+1; ?>
+					<?php echo isset($_GET['id']) ? '&id='.$_GET["id"] : NULL ; ?> 
+				">
+				<?php echo $i+1; ?>
+				</a>
+			<?php }?>
+			</li>
+		<?php } ?>
+	</ul>
+</div>
+<?php } else { ?>
 	<div class="unitDComment unitOdd">
 		<div class="itemText">
 			<p>_i18n{Sorry, no comments yet.}</p>

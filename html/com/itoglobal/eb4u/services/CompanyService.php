@@ -38,7 +38,7 @@ class CompanyService {
 	 */
 	const DONE = 'done';
 	
-	public static function getFeedback($where) {
+	public static function getFeedback($where,$limit=NULL) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
 				OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
 				OrdersService::ORDERS . '.' . OrdersService::HASH . ', ' .
@@ -52,7 +52,7 @@ class CompanyService {
 				self::COMPANY_FEEDBACK . '.' . self::USER_ID;
 		# executing the query
 		$groupBy = self::COMPANY_FEEDBACK . '.' . self::ID;
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', $limit );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;
 	}
@@ -83,6 +83,13 @@ class CompanyService {
 		return $result;
 	}
 	
+	public static function countFeedback ($where = NULL){
+		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::COMPANY_FEEDBACK;
+		$from = self::COMPANY_FEEDBACK;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
+		return $result;
+	}
 	/*
 	 
 	 SELECT SUM( vote ) / COUNT( id ) AS count

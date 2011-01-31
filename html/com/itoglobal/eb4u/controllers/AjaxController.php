@@ -20,11 +20,23 @@ class AjaxController extends SecureActionControllerImpl {
 	public function handleGetComment($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		$id = $requestParams[UsersService::ID];
-		
-		$where = CompanyService::COMPANY_ID . '=' . $requestParams[UsersService::ID] . ' AND ' . CompanyService::DONE . '=1';
-		$feedbacks = CompanyService::getFeedback ($where);
-		isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
-		
+		if(isset($id)){
+			$onpage = ON_PAGE;
+			if (isset ( $requestParams ['comment_page'] )&& $requestParams ['comment_page'] !=NULL ){ 
+				$limit = ($requestParams ['comment_page']-1)*$onpage . "," . $onpage;
+			} else {
+				$limit = "0,$onpage";
+			}
+			$where = CompanyService::COMPANY_ID . '=' . $id . ' AND ' . CompanyService::DONE . '=1';
+			$feedbacks = CompanyService::getFeedback ($where,$limit);
+			isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
+			
+			$all_feedback = CompanyService::countFeedback ($where);
+			isset ( $feedbacks ) ? $mvc->addObject ( "count",  $all_feedback[CompanyService::COMPANY_FEEDBACK] ) : null;
+			
+			$pages = $all_feedback[CompanyService::COMPANY_FEEDBACK]/$onpage; 
+			isset ( $feedbacks ) ? $mvc->addObject ( "pages",  $pages ) : null;
+		}
 		return $mvc;
 	}
 	

@@ -25,7 +25,7 @@ class AdminContentController extends ContentController {
 		isset($requestParams['back']) ? $this->forwardActionRequest ( $location ) : NULL;
 		
 		if(isset($requestParams[StaticBlockService::SAVE])){
-			StaticBlockService::createBlock($requestParams[StaticBlockService::BLOCK_TITLE],$requestParams[StaticBlockService::BLOCK_DESC]);
+			StaticBlockService::createBlock($requestParams[StaticBlockService::BLOCK_TITLE],$requestParams[StaticBlockService::BLOCK_DESC],$requestParams[StaticBlockService::BLOCK_PAGE]);
 			$this->forwardActionRequest ( $location );
 		}
 		return $mvc;
@@ -43,8 +43,10 @@ class AdminContentController extends ContentController {
 				$vals = array();
 				$fields[] .= StaticBlockService::BLOCK_TITLE;
 				$fields[] .= StaticBlockService::BLOCK_DESC;
+				$fields[] .= StaticBlockService::BLOCK_PAGE;
 				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_TITLE], ENT_QUOTES);
 				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_DESC], ENT_QUOTES);
+				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_PAGE], ENT_QUOTES);
 				StaticBlockService::updateBlock($id, $fields, $vals);
 				isset($requestParams[StaticBlockService::SAVE]) ? $this->forwardActionRequest ( $location ) : NULL;
 				$mvc->addObject ( self::STATUS, 'successful' );
@@ -114,9 +116,6 @@ class AdminContentController extends ContentController {
 		isset ( $requestParams [UsersService::ENABLED] ) ? UsersService::updateFields ( $requestParams [UsersService::ENABLED], UsersService::ENABLED, '1' ) : '';
 		isset ( $requestParams [UsersService::DISABLE] ) ? UsersService::updateFields ( $requestParams [UsersService::DISABLE], UsersService::ENABLED, '0' ) : '';
 		isset ( $requestParams [UsersService::DELETED] ) ? UsersService::deleteUser ( $requestParams [UsersService::DELETED]) : '';
-		#isset ( $requestParams [UsersService::DELETED] ) ? UsersService::updateFields ( $requestParams [UsersService::DELETED], UsersService::DELETED, '1' ) : '';
-		
-		
 		
 		$where = NULL;
 		#user sorting
@@ -153,12 +152,15 @@ class AdminContentController extends ContentController {
 		#for admin and moderator
 		//calling parent to get the model
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$location = $this->onSuccess( $actionParams );
+		
+		isset($requestParams['cancel']) ? $this->forwardActionRequest ( $location ) : NULL;
+		
 		if (isset ( $requestParams ['submit'] )) {
 			//server-side validation
 			$error = UsersService::validation ( $requestParams );
 			if (count ( $error ) == 0) {
 				// Insert new users to DB
-				//UsersService::createUserDirectory($requestParams [UsersService::USERNAME]);
 				StorageService::createDirectory ( StorageService::USERS_FOLDER . $requestParams [UsersService::USERNAME] );
 				StorageService::createDirectory ( StorageService::USERS_FOLDER . $requestParams [UsersService::USERNAME] . StorageService::USER_PROFILE );
 				$path = StorageService::USERS_FOLDER . $requestParams [UsersService::USERNAME] . StorageService::USER_PROFILE . StorageService::USER_AVATAR;

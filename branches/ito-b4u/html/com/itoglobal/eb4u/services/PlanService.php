@@ -29,7 +29,10 @@ class PlanService {
 	 * @var  string defining the plan_desc field name
 	 */
 	const PLAN_DESC = 'plan_desc';
-	
+	/**
+	 * @var  string defining the yellow_pages field name
+	 */
+	const YELLOW_PAGES = 'yellow_pages';
 	
 	const CRNT_PLAN = 'crnt_plan';
 	

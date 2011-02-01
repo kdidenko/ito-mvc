@@ -202,6 +202,7 @@ class UsersService {
 					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
 					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
 		$fields .= $company==true ? 
+				', ' . PlanService::PLAN . '.' . PlanService::YELLOW_PAGES . 
 				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
 				COUNT( company_feedback.vote ) AS count" : 
 					NULL;
@@ -221,7 +222,10 @@ class UsersService {
 		$from .= $company==true ? 
 				SQLClient::LEFT . SQLClient::JOIN . CompanyService::COMPANY_FEEDBACK .	SQLClient::ON . 
 				CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::COMPANY_ID . '=' . 
-				self::USERS . '.' . self::ID : 
+				self::USERS . '.' . self::ID . 
+				SQLClient::LEFT . SQLClient::JOIN . PlanService::PLAN .	SQLClient::ON . 
+				PlanService::PLAN . '.' . PlanService::ID . '=' . 
+				self::USERS . '.' . self::PLAN_ID : 
 					NULL;
 		$groupBy = self::USERS . '.' . self::ID;
 		//$where .= $company==true && $where!=NULL ? ' AND ' : NULL;
@@ -296,8 +300,12 @@ class UsersService {
 	}
 	
 	public static function countUsers ($where = NULL){
-		$fields =  SQLClient::COUNT . "(" . self::ID . ") as " . self::USERS;
-		$from = self::USERS;
+		$fields =  SQLClient::COUNT . "(" . self::USERS . '.' . self::ID . ") as " . self::USERS; 
+		$from = self::USERS . 
+				SQLClient::LEFT . SQLClient::JOIN . PlanService::PLAN .	SQLClient::ON . 
+				PlanService::PLAN . '.' . PlanService::ID . '=' . 
+				self::USERS . '.' . self::PLAN_ID;
+		$groupBy = self::USERS . '.' . self::ID;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '', '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
 		return $result;

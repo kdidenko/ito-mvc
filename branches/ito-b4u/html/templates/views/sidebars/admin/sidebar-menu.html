@@ -6,6 +6,7 @@
 	<h2>_i18n{Navigation}</h2>
 	<div class="viewMenu">
 		<ul>
+			<li <?php if($crnt == 'sidebar-myprofile') echo 'class="itemActive"';?>><a href="/my-profile.html" title="_i18n{My Profile}">_i18n{My Profile}</a></li>
 			<li <?php if($crnt == 'sidebar-manageusers') echo 'class="itemActive"';?>><a href="/manage-users.html" title="_i18n{Manage Users}">_i18n{Manage Users}</a>
 <?php if($crnt == 'sidebar-manageusers' || $crnt == 'sidebar-newuser') { ?>
 				<ul>

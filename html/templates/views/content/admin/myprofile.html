@@ -1,0 +1,171 @@
+<?php 
+$data = $mvc->getObject(ContentController::RESULT);
+$regions = $mvc->getObject(RegionService::REGIONS);
+$countries = $mvc->getObject(CountryService::COUNTRY);
+$psw_errors = $mvc->getObject(ContentController::PSW_ERROR);
+$status = $mvc->getObject(ContentController::STATUS);
+?>
+<h2>_i18n{Basic information is open to everyone. Please, entered real data.}</h2>
+<div class="unitABlock">
+	<form action="/my-profile.html" method="post">
+		<?php if (isset($status)){?>
+			<div class="itemOk">
+				<p>_i18n{Successfully Saved.}</p>
+			</div>
+		<?php } ?>
+		<div class="unitEqColumn">
+			<div class="itemForm">
+				<label>_i18n{Salutation}:</label>
+				<div class="itemData">
+					<select name="salutation">
+						<?php if ($data[UsersService::SALUTATION]==NULL || $data[UsersService::SALUTATION]==0){?>
+						<option value="0">_i18n{Please choose}</option>
+						<option value="1">_i18n{Mr.}</option>
+						<option value="2">_i18n{Ms.}</option>
+						<?php } else { 
+								if($data[UsersService::SALUTATION]==1) {?>
+									<option value="1">_i18n{Mr.}</option>
+									<option value="2">_i18n{Ms.}</option>
+								<?php } else { ?>
+									<option value="2">_i18n{Ms.}</option>
+									<option value="1">_i18n{Mr.}</option>
+						<?php } }  ?>
+					</select>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{First Name}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="firstname" value="<?php echo $data[UsersService::FIRSTNAME]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Last Name}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="lastname" value="<?php echo $data[UsersService::LASTNAME]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Street}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="address" value="<?php echo $data[UsersService::ADDRESS]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{ZIP}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="zip" value="<?php echo $data[UsersService::ZIP]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Location}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="location" value="<?php echo $data[UsersService::LOCATION]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Country}:</label>
+				<div class="itemData">
+					<select name="country" >
+						<option selected="selected" value="<?php echo $data[UsersService::COUNTRY]?>"><?php echo $data[CountryService::COUNTRY_NAME];?></option>
+<?php	if (isset($countries) && $countries!=NULL){ 
+			foreach($countries as $key=>$country){ 
+				if ($country[CategoryService::ID]!=$data[UsersService::COUNTRY]){ ?>					
+						<option value="<?php echo $country[CountryService::ID] ?>"><?php echo $country[CountryService::COUNTRY_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+					</select>
+				</div>
+			</div>		
+			<div class="itemForm">
+				<label>_i18n{State}:</label>
+				<div class="itemData">
+					<select name="region" >
+						<option selected="selected" value="<?php echo $data[UsersService::REGION]?>"><?php echo $data[RegionService::REGION_NAME];?></option>
+<?php	if (isset($regions) && $regions!=NULL){ 
+			foreach($regions as $key=>$region){ 
+				if ($region[RegionService::ID]!=$data[UsersService::REGION]){ ?>
+						<option value="<?php echo $region[RegionService::ID] ?>"><?php echo $region[RegionService::REGION_NAME] ?></option>
+<?php			}
+			} 
+		} ?>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="unitEqColumn">
+			<div class="itemForm">
+				<label>_i18n{Mobile phone}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="phone" value="<?php echo $data[UsersService::PHONE]?>"/>
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{E-Mail}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="email" value="<?php echo $data[UsersService::EMAIL]?>"/>
+				</div>
+			</div>
+			<h3>User Help</h3>
+			<div class="itemForm">
+				<label>Visibly:</label>
+				<div class="itemData">
+					<select>
+						<option>L1 - hide help, show "?" only</option>
+						<option>L2 - show medium help</option>
+						<option>L3 - show help always</option>
+					</select>
+				</div>
+			</div>
+			<h3>Progress</h3>
+			<dl class="itemForm">
+				<dt>_i18n{You registered}:</dt>
+				<dd class="itemData"><?php echo $data[UsersService::CRDATE];?></dd>
+			</dl>
+		</div>
+		<div class="unitBtn">
+			<button name="personalSbm"><span><strong>_i18n{Save}</strong></span></button>
+		</div>
+	</form>
+</div>
+
+<h2>_i18n{Change Password}</h2>
+<div class="unitABlock unitABlockLast">
+<?php if (isset($psw_errors )){?>
+	<div class="itemWarning">
+		<ul>
+			<?php foreach ($psw_errors as $key => $value){?>
+				<li><?php echo $value ?></li>
+			<?php } ?>					
+		</ul>
+	</div>
+<?php } ?>
+	<form action="/my-profile.html" method="post">
+		<div class="unitEqColumn">
+			<div class="itemForm">
+				<label>_i18n{Old Password}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="old_password" />
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{New Password}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="password" />
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>_i18n{Confirm Password}:</label>
+				<div class="itemData">
+					<input class="inpTxt" type="text" name="confirm_password" />
+				</div>
+			</div>
+		</div>
+		<div class="unitBtn">
+			<button name="pswSbm"><span><strong>_i18n{Save}</strong></span></button>
+		</div>
+	</form>
+</div>
+
+			

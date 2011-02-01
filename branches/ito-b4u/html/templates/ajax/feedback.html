@@ -3,42 +3,52 @@ $errors = $mvc->getObject('error');
 $success = $mvc->getObject('success');
 ?>
 <?php if (!isset($success )){?>
-<h2>_i18n{Please feel all fields!}</h2>
-<div class="unitABlock unitABlockLast">
-<?php if (isset($errors )){?>
-	<div class="itemWarning">
-		<ul>
-			<?php foreach ($errors as $key => $value){?>
-				<li><?php echo $value ?></li>
-			<?php } ?>					
-		</ul>
+<div class="viewLight">
+	<h2>_i18n{Please feel all fields!}</h2>
+	<div class="unitABlock unitABlockLast">
+	<?php if (isset($errors )){?>
+		<div class="itemWarning">
+			<ul>
+				<?php foreach ($errors as $key => $value){?>
+					<li><?php echo $value ?></li>
+				<?php } ?>					
+			</ul>
+		</div>
+	<?php } ?>
+		<form action="/feedback.html" method="POST">
+			<div class="unitSnColumn">
+				<div class="itemForm">
+					<label>_i18n{Your Email}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="email" value="<?php if (isset($_POST['email']))echo $_POST['email'];?>"/>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Subject}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="subject" value="<?php if (isset($_POST['subject']))echo $_POST['subject'];?>"/>
+					</div>
+				</div>
+				<div class="itemForm">
+					<label>_i18n{Body}:</label>
+					<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="body"><?php if (isset($_POST['body']))echo $_POST['body'];?></textarea></div>
+				</div>
+			</div>
+			<div class="unitBtn">
+				<button><span><strong>_i18n{Send}</strong></span></button>
+				<button class="itemHide"><span><strong>_i18n{Discard}</strong></span></button>
+			</div>
+		</form>
 	</div>
-<?php } ?>
-	<form action="/feedback.html" method="POST">
-		<div class="unitSnColumn">
-			<div class="itemForm">
-				<label>_i18n{Your Email}:</label>
-				<div class="itemData">
-					<input class="inpTxt" type="text" name="email" value="<?php if (isset($_POST['email']))echo $_POST['email'];?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Subject}:</label>
-				<div class="itemData">
-					<input class="inpTxt" type="text" name="subject" value="<?php if (isset($_POST['subject']))echo $_POST['subject'];?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
-				<label>_i18n{Body}:</label>
-				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="body"><?php if (isset($_POST['body']))echo $_POST['body'];?></textarea></div>
-			</div>
-		</div>
-		<div class="unitBtn">
-			<button><span><strong>_i18n{Send}</strong></span></button>
-			<button><span><strong>_i18n{Discard}</strong></span></button>
-		</div>
-	</form>
 </div>
 <?php } else {?>
-<h2>_i18n{Thank you!}</h2>
+<div class="viewLight">
+	<h2>_i18n{Thank you!}</h2>
+	<div class="unitABlock unitABlockLast">
+		<div class="itemOk">Message send</div>
+		<div class="unitBtn">
+			<button class="itemBack"><span><strong>Close</strong></span></button>
+		</div>
+	</div>
+</div>
 <?php }?>

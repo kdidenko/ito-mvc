@@ -152,7 +152,7 @@ class AdminContentController extends ContentController {
 			CategoryService::deleteCategory($requestParams['editCategory']) :
 				NULL;
 				
-		isset($requestParams[SubCategoryService::NEW_SUBCAT]) ? 
+		isset($requestParams[SubCategoryService::NEW_SUBCAT])&&$requestParams[SubCategoryService::SUBCATEGORY] ? 
 			SubCategoryService::createNewSubCat($requestParams[SubCategoryService::SUBCATEGORY], $requestParams[SubCategoryService::CAT_ID]) :
 				NULL;
 		isset($requestParams['delSubCategory']) ?  

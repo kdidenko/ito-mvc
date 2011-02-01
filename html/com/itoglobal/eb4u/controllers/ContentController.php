@@ -82,6 +82,7 @@ class ContentController extends SecureActionControllerImpl {
 			$where .= $where!=NULL ? ' AND ' : NULL;
 			$where .= UsersService::USERS . '.' . UsersService::SUBCAT_ID . '=' . $requestParams [UsersService::SUBCAT_ID];
 		}
+		$where .= " AND " .	PlanService::PLAN . '.' . PlanService::YELLOW_PAGES . "=1";
 		$users = UsersService::getUsersList ($where, null, true);
 		foreach($users as $key =>$company){
 			$users[$key][UsersService::COMPANY_DESC] = self::breakword($company[UsersService::COMPANY_DESC],255);

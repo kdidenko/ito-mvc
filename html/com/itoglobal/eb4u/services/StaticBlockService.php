@@ -17,6 +17,10 @@ class StaticBlockService {
 	 * @var string defining the block_desc field name
 	 */
 	const BLOCK_DESC = 'block_desc';
+	/**
+	 * @var string defining the block_page field name
+	 */
+	const BLOCK_PAGE = 'block_page';
 	
 	const SAVE = 'save';
 	const SAVE_CONTINUE = 'save_continue';
@@ -57,12 +61,12 @@ class StaticBlockService {
 		return $result;
 	}
 	
-	public static function createBlock($title, $body){
+	public static function createBlock($title, $body, $page){
 		$into = self::STATIC_BLOCK;
 		$title = htmlspecialchars($title, ENT_QUOTES);
 		$body =  htmlspecialchars($body, ENT_QUOTES);
-		$fields = self::BLOCK_TITLE . ', ' . self::BLOCK_DESC; 
-		$values = "'" . $title . "', '" . $body . "'";
+		$fields = self::BLOCK_TITLE . ', ' . self::BLOCK_DESC . ', ' . self::BLOCK_PAGE; 
+		$values = "'" . $title . "', '" . $body . "', '" . $page . "'";
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
 	} 
 	

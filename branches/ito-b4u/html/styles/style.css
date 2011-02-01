@@ -124,11 +124,11 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.cT, .cT .cL, .cT .cR {height:9px}
 	.cB, .cB .cL, .cB .cR {height:12px}
 .cT {background-position:0 0}
-	.cT .cL {background-position:-5px 0}
-	.cT .cR {background-position:-17px 0}
+	.cT .cL {background-position:-13px 0}
+	.cT .cR {background-position:-25px 0}
 .cB {background-position:0 -9px}
-	.cB .cL {background-position:-5px -9px}
-	.cB .cR {background-position:-17px -9px}
+	.cB .cL {background-position:-13px -9px}
+	.cB .cR {background-position:-25px -9px}
 	
 	.viewBox h2 {font-size:15px; color:#9F0307; padding:0 12px 5px 12px}
 	.viewBox h3 {font-size:15px; padding:0 12px 5px 12px}
@@ -153,6 +153,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 /* side catalog style */
 .viewSList {}
 	.viewSList h2 {font-size:18px; line-height:normal; padding:5px 14px}
+		.viewSList h2 a {color:#9F0307}
 	.viewSList ul {padding:5px 14px}
 	.viewSList li {border-top:1px solid #EDECEC; padding:7px 0}
 	.viewSList li.itemFirst {border-top:none}
@@ -520,4 +521,48 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitDComment .itemText {float:left; width:500px; padding:5px 0 10px 10px}
 		.unitDComment .itemRating {padding:5px 10px 10px 0; float:right; font-size:12px}
 	.viewDProfile {padding:10px 12px 5px 12px}
+
+/* light box style */
+#overlayLightBox {position:absolute; top:0; left:0; width:100%; z-index:1100; display:none}
+#tmpLightBox {padding:0; margin:0; border:0; overflow:auto; display:none}
+#frameLightBox {position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1101}
+#frameInnerLightBox {width:100%; height:100%; border:none; display:block}
+#imgLightBox {width:100%; height:100%; padding:0; margin:0; border:none; outline:none; line-height:0; vertical-align:top}
+.loadingLightBox {position:fixed; top:50%; left:50%; width:32px; height:32px; margin-top:-16px; margin-left:-16px; cursor:pointer; overflow:hidden; z-index:1104; display:none}
+	.loadingLightBox div {position:absolute; top:0; left:0; width:32px; height:480px; background-image:url(../images/preloadBg.gif)}
+.wrapLightBox {position:absolute; top:0; left:0; padding:12px; z-index:1101; outline:none; display:none}
+	.wrapLightBox .viewOuter {position:relative; width:100%; height:100%; background:#fff}
+	.wrapLightBox .viewLightBox {width:0; height:0; padding:0; outline:none; position:relative; overflow:hidden; z-index:1102; border:0px solid #fff}
+.wrapLightBox .unitTitle {z-index:1102}
+.wrapLightBox .itemClose {position:absolute; top:-2px; right:-1px; width:12px; height:12px; background:url(../images/closeIcon.gif) 0 0; cursor:pointer; z-index:1103; display:none}
+
+.wrapLightBox .lBg {position:absolute; padding:0; margin:0; border:0; width:12px; height:12px; z-index:1001}
+	.wrapLightBox .lBgT {top:-12px; left:0; width:100%; background:url(../images/boxE02v.png) repeat-x 0 2px}
+	.wrapLightBox .lBgR {top:0; right:-12px; height:100%; background:url(../images/boxE02.png) repeat-y right 0}
+	.wrapLightBox .lBgB {bottom:-12px; left:0; width:100%; background:url(../images/boxE02v.png) repeat-x 0 -9px}
+	.wrapLightBox .lBgL {top:0; left:-12px; height:100%; background:url(../images/boxE02.png) repeat-y left 0}
 	
+	.wrapLightBox .lBgTR {top:-12px; right:-12px; background:url(../images/boxE02.png) no-repeat -25px 2px}
+	.wrapLightBox .lBgBR {bottom:-12px; right:-12px; background:url(../images/boxE02.png) no-repeat -25px -9px}
+	.wrapLightBox .lBgBL {bottom:-12px; left:-12px; background:url(../images/boxE02.png) no-repeat -13px -9px}
+	.wrapLightBox .lBgTL {top:-12px; left:-12px; background:url(../images/boxE02.png) no-repeat -13px 2px}
+	
+.viewLight {text-align:left}/*-40 - 40 */
+	.viewLight h2 {font-size:15px; color:#9F0307; padding:0 4px 5px 4px}
+	.viewLight .unitABlock {width:598px}
+	.viewLight .unitABlock .unitSnColumn {padding:0 0 0 4px}
+	.viewLight .unitABlock .itemForm, .viewLight .unitABlock .unitBtn {width:596px}
+	.viewLight .unitABlock .itemForm label {width:100px}
+	.viewLight .unitABlock .unitSnColumn textarea.areaTxt, .viewLight .unitABlock .unitSnColumn input.inpTxt {width:472px}
+	.viewLight .unitABlock .itemForm .itemData {width:486px}
+	.viewLight .itemWarning, .viewLight .itemOk {margin:0 4px 5px}
+
+.leftLightBox, .rightLightBox {position:absolute; bottom:0px; height:100%; width:30%; cursor:pointer; outline:none; z-index:1102; display:none}
+.leftLightBox {left:0px}
+.rightLightBox {right:0px}
+.leftLightBox span, .rightLightBox span {position:absolute; top:50%; left:-9999px; width:30px; height:30px; margin-top:-15px; cursor:pointer; z-index:1102; display:block}
+/*.leftLightBox span {background-image:none; background-position:-40px -30px}
+.rightLightBox span {background-image:none; background-position:-40px -60px}
+.leftLightBox:hover, .rightLightBox:hover {visibility:visible}
+.leftLightBox:hover span {left:20px}
+.rightLightBox:hover span {left:auto; right:20px}*/

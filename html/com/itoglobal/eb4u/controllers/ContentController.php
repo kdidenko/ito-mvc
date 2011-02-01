@@ -337,17 +337,23 @@ class ContentController extends SecureActionControllerImpl {
 				$role = SessionService::getAttribute ( SessionService::ROLE );
 				if ($role!=NULL){
 					if ($role==UsersService::ROLE_TR){
-						if ($order[0][OrdersService::PRICE]>=$requestParams[OrdersService::BID]){
-							$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 
-							$smaller = OrdersService::getBids($order[0][OrdersService::ID], $where);
-							if ($smaller ==NULL && count($smaller)>=1){
-								OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
-								$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
+						$plan_id = SessionService::getAttribute ( SessionService::PLAN_ID );
+						$plan = PlanService::getPlan($plan_id);
+						if ($plan[PlanService::TENDER_TO]>=$order[0][OrdersService::PRICE]){
+							if ($order[0][OrdersService::PRICE]>=$requestParams[OrdersService::BID]){
+								$where = OrdersService::BID . '<=' . $requestParams[OrdersService::BID]; 
+								$smaller = OrdersService::getBids($order[0][OrdersService::ID], $where);
+								if ($smaller ==NULL && count($smaller)>=1){
+									OrdersService::makeBid($requestParams[OrdersService::ID], $requestParams[OrdersService::BID]);
+									$mvc->addObject ( self::STATUS, "_i18n{You bid successfully saved!}" );
+								} else {
+									$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then current bid} ".$smaller[0]['bid'] . " &euro;" );
+								}
 							} else {
-								$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then current bid} ".$smaller[0]['bid'] . " &euro;" );
+								$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then order price} ".$order[0][OrdersService::PRICE] . " &euro;" );
 							}
 						} else {
-							$mvc->addObject ( self::ERROR, "_i18n{Your bid should be smaller then order price} ".$order[0][OrdersService::PRICE] . " &euro;" );
+							$mvc->addObject ( self::ERROR, "_i18n{You have no access yet. Please, upgrade your} <a href='/my-plan.html' title='_i18n{Change Plan}'>_i18n{plan}</a>." );
 						}
 					} else {
 						$mvc->addObject ( self::ERROR, "_i18n{Only tradesman can make a bid, you can} <a href='/registration.html?role=2' title='_i18n{register}'>_i18n{register}</a> like tradesman." );

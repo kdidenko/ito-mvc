@@ -139,17 +139,17 @@ if(isset($feedbacks)&&$feedbacks!=null){
 	foreach($feedbacks as $key =>$feedback){?>
 	<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>" style="width:auto;">
 		<div class="itemTitle">
-			<h4><?php echo $feedback[UsersService::USERNAME] ?> - <?php echo $feedback[OrdersService::ORDER_NAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
+			<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
 		</div>
 		<div class="itemText">
 			<p><?php echo $feedback[CompanyService::COMMENT] ?></p>
-			<!-- <p><strong>Work:</strong> 6 internal doors standard size 30'' wide in the next 2 weeks</p> -->
+			<p><strong>_i18n{Order}:</strong> <a href="/view-order.html?id=<?php echo $feedback[OrdersService::HASH] ?>" title="<?php echo $feedback[OrdersService::ORDER_NAME] ?>"><?php echo $feedback[OrdersService::ORDER_NAME] ?></a></p>
 		</div>
 		<div class="itemRating">
 			<ul class="unitRating">
-				<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
+				<li class="itemCurrent" style="width:<?php echo $feedback[CompanyService::VOTE] ?>%"></li>
 			</ul>
-			<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
+			<p><strong>1</strong> (<?php echo $feedback[CompanyService::VOTE] ?>% positiv)</p>
 		</div>
 	</div>
 	<?php } 

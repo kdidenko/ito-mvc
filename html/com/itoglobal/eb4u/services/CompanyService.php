@@ -78,13 +78,15 @@ class CompanyService {
 		$groupBy = self::COMPANY_FEEDBACK . '.' . self::ID;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', $limit );
 		if($result != null && isset($result) && count($result) > 0){
-			$result[0][self::VOTE] = round($result[0][self::VOTE]*20);
-			$result[0][self::VOTE1] = round($result[0][self::VOTE1]*20);
-			$result[0][self::VOTE2] = round($result[0][self::VOTE2]*20);
-			$result[0][self::VOTE3] = round($result[0][self::VOTE3]*20);
-			$result[0][self::VOTE4] = round($result[0][self::VOTE4]*20);
-			$result[0][self::VOTE5] = round($result[0][self::VOTE5]*20);
-			$result[0][self::VOTE6] = round($result[0][self::VOTE6]*20);
+			foreach($result as $key => $value){
+				$result[$key][self::VOTE] = round($value[self::VOTE]*20);
+				$result[$key][self::VOTE1] = round($value[self::VOTE1]*20);
+				$result[$key][self::VOTE2] = round($value[self::VOTE2]*20);
+				$result[$key][self::VOTE3] = round($value[self::VOTE3]*20);
+				$result[$key][self::VOTE4] = round($value[self::VOTE4]*20);
+				$result[$key][self::VOTE5] = round($value[self::VOTE5]*20);
+				$result[$key][self::VOTE6] = round($value[self::VOTE6]*20);
+			}
 		}else{
 			$result = false;
 		}

@@ -26,9 +26,9 @@ $pages = $mvc->getObject("pages");
 								</p>
 								<div class="unitFilter">
 									<dl>
-										<dt></dt>
+										<dt>_i18n{Industry}:</dt>
 										<dd>
-											<label>Category</label>
+											<label>_i18n{Category}</label>
 											<select name="cat_id" class="gCategory">
 												<option value="all">all</option>
 										<?php			if (isset($categories) && $categories!=NULL){ 
@@ -37,7 +37,7 @@ $pages = $mvc->getObject("pages");
 										<?php 				} 
 				} ?>
 											</select>
-											<label>SubCategory</label>
+											<label>_i18n{SubCategory}</label>
 											<select name="subcat_id" class="gSubCategory">
 												<option value="all">all</option>
 									<?php			if (isset($subcategories) && $subcategories!=NULL){ 
@@ -49,9 +49,9 @@ $pages = $mvc->getObject("pages");
 										</dd>
 									</dl>
 									<dl>
-										<dt>Location:</dt>
+										<dt>_i18n{Location}:</dt>
 										<dd>
-											<label>Country</label>
+											<label>_i18n{Country}</label>
 											<select name="country">
 												<option value="all">all</option>
 									<?php			if (isset($countries) && $countries!=NULL){ 
@@ -60,7 +60,7 @@ $pages = $mvc->getObject("pages");
 									<?php 				} 
 				} ?>
 											</select>
-											<label>Region</label>
+											<label>_i18n{Region}</label>
 											<select name="region">
 												<option value="all">all</option>
 										<?php			if (isset($regions) && $regions!=NULL){ 
@@ -76,7 +76,7 @@ $pages = $mvc->getObject("pages");
 							
 							<div class="unitESearch">
 								<div class="unitTPagination">
-									<p>found <span><?php echo $count;?></span> results for your request</p>
+									<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
 									<ul>
 										<?php for($i=0; $i<$pages; $i++){ ?>
 											<li>
@@ -112,38 +112,38 @@ $pages = $mvc->getObject("pages");
 												<p><?php echo $user[UsersService::COMPANY_DESC] ?></p>
 												<div class="unitEqColumns">
 													<dl>
-														<dt>rating:</dt>
+														<dt>_i18n{rating}:</dt>
 														<dd>
 															<ul class="unitRating">
 																<li class="itemCurrent" style="width:<?php echo $user['vote']?>%"></li>
 															</ul>
-															<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv)</p>
+															<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% _i18n{positiv})</p>
 														</dd>
 													</dl>
 												</div>
 												<div class="unitEqColumns">
 													<dl>
-														<dt>category:</dt>
+														<dt>_i18n{category}:</dt>
 														<dd><?php echo $user[CategoryService::CAT_NAME] ?></dd>
 													</dl>
 													<dl>
-														<dt>subcategory:</dt>
+														<dt>_i18n{subcategory}:</dt>
 														<dd><?php echo $user[SubCategoryService::SUBCAT_NAME] ?></dd>
 													</dl>
 													<dl>
-														<dt>address:</dt>
+														<dt>_i18n{address}:</dt>
 														<dd><?php echo $user[UsersService::ADDRESS] ?>, <?php echo $user[UsersService::LOCATION] ?></dd>
 														<dd><?php echo $user[RegionService::REGION_NAME] ?> , <?php echo $user[CountryService::COUNTRY_NAME] ?></dd>
 													</dl>
 												</div>
 											</div>
 											<div class="itemQuote">
-												<button><span><strong>Get a Quote</strong></span></button>
+												<button><span><strong>_i18n{Get a Quote}</strong></span></button>
 											</div>
 										</div>
 									<?php }
 									} else { ?>
-									NO ORDER LIKE YOU WHANT
+										_i18n{No company like you whant}
 									<?php } ?>
 								</div>
 								<div class="unitBPagination">

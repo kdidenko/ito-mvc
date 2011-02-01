@@ -134,20 +134,44 @@ class UserContentController extends ContentController {
 		if (isset($requestParams[CompanyService::ID])){
 			if (isset($requestParams['send'])){
 				$error = array();
-				$error[] .= isset($requestParams[CompanyService::VOTE])&&$requestParams[CompanyService::VOTE]==NULL || !isset($requestParams[CompanyService::VOTE]) ? 
-					"_i18n{Please, evaluate this company.}" : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE1])&&$requestParams[CompanyService::VOTE1]==NULL || isset($requestParams[CompanyService::VOTE1])&&$requestParams[CompanyService::VOTE1]<1 || isset($requestParams[CompanyService::VOTE1])&&$requestParams[CompanyService::VOTE1]>5 || !isset($requestParams[CompanyService::VOTE1]) ? 
+					"Please, evaluate1 this company." : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE2])&&$requestParams[CompanyService::VOTE2]==NULL || isset($requestParams[CompanyService::VOTE2])&&$requestParams[CompanyService::VOTE2]<1 || isset($requestParams[CompanyService::VOTE2])&&$requestParams[CompanyService::VOTE2]>5 || !isset($requestParams[CompanyService::VOTE2]) ? 
+					"Please, evaluate2 this company." : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE3])&&$requestParams[CompanyService::VOTE3]==NULL || isset($requestParams[CompanyService::VOTE3])&&$requestParams[CompanyService::VOTE3]<1 || isset($requestParams[CompanyService::VOTE3])&&$requestParams[CompanyService::VOTE3]>5 || !isset($requestParams[CompanyService::VOTE3]) ? 
+					"Please, evaluate3 this company." : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE4])&&$requestParams[CompanyService::VOTE4]==NULL || isset($requestParams[CompanyService::VOTE4])&&$requestParams[CompanyService::VOTE4]<1 || isset($requestParams[CompanyService::VOTE4])&&$requestParams[CompanyService::VOTE4]>5 || !isset($requestParams[CompanyService::VOTE4]) ? 
+					"Please, evaluate4 this company." : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE5])&&$requestParams[CompanyService::VOTE5]==NULL || isset($requestParams[CompanyService::VOTE5])&&$requestParams[CompanyService::VOTE5]<1 || isset($requestParams[CompanyService::VOTE5])&&$requestParams[CompanyService::VOTE5]>5 || !isset($requestParams[CompanyService::VOTE5]) ? 
+					"Please, evaluate5 this company." : false;
+				$error[] .= isset($requestParams[CompanyService::VOTE6])&&$requestParams[CompanyService::VOTE6]==NULL || isset($requestParams[CompanyService::VOTE6])&&$requestParams[CompanyService::VOTE6]<1 || isset($requestParams[CompanyService::VOTE6])&&$requestParams[CompanyService::VOTE6]>5 || !isset($requestParams[CompanyService::VOTE6]) ? 
+					"Please, evaluate6 this company." : false;
 				$error[] .= $requestParams[CompanyService::COMMENT]==NULL ? "_i18n{Please, write short comment.}" : false;
 				$error = array_filter ( $error );
 				if (count ( $error ) == 0) {
+					exit;
+					$vote=round(($requestParams[CompanyService::VOTE1]+$requestParams[CompanyService::VOTE2]+$requestParams[CompanyService::VOTE3]+$requestParams[CompanyService::VOTE4]+$requestParams[CompanyService::VOTE5]+$requestParams[CompanyService::VOTE6])/6, 2);
 					$date = date("Y-m-d");
-					$vals = array('0' => $requestParams[CompanyService::VOTE], 
-									'1'=>$requestParams[CompanyService::COMMENT], 
-									'2'=>$date, 
-									'3'=>'1');
-					$fields = array('0' => CompanyService::VOTE, 
-									'1'=> CompanyService::COMMENT,
-									'2' => CompanyService::DATE, 
-									'3'=> CompanyService::DONE);
+					$vals = array('0' => $requestParams[CompanyService::VOTE1]*20, 
+									'1' => $requestParams[CompanyService::VOTE2]*20,
+									'2' => $requestParams[CompanyService::VOTE3]*20,
+									'3' => $requestParams[CompanyService::VOTE4]*20,
+									'4' => $requestParams[CompanyService::VOTE5]*20,
+									'5' => $requestParams[CompanyService::VOTE6]*20,
+									'6'=>$vote,
+									'7'=>$requestParams[CompanyService::COMMENT], 
+									'8'=>$date, 
+									'9'=>'1');
+					$fields = array('0' => CompanyService::VOTE1, 
+									'1' => CompanyService::VOTE2,
+									'2' => CompanyService::VOTE3,
+									'3' => CompanyService::VOTE4,
+									'4' => CompanyService::VOTE5,
+									'5' => CompanyService::VOTE6,
+									'6' => CompanyService::VOTE,
+									'7'=> CompanyService::COMMENT,
+									'8' => CompanyService::DATE, 
+									'9'=> CompanyService::DONE);
 					CompanyService::postReview  ($requestParams[CompanyService::ID], $user_id, $fields, $vals);
 					$mvc->addObject(ContentController::STATUS, "_i18n{Thank you for your response! You can go back to continue your work.}");
 				} else {

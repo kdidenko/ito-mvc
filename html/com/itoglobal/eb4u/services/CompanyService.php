@@ -26,6 +26,30 @@ class CompanyService {
 	 */
 	const VOTE = 'vote';
 	/**
+	 * @var  string defining the vote1 field name
+	 */
+	const VOTE1 = 'vote1';
+	/**
+	 * @var  string defining the vote2 field name
+	 */
+	const VOTE2 = 'vote2';
+	/**
+	 * @var  string defining the vote3 field name
+	 */
+	const VOTE3 = 'vote3';
+	/**
+	 * @var  string defining the vote4 field name
+	 */
+	const VOTE4 = 'vote4';
+	/**
+	 * @var  string defining the vote5 field name
+	 */
+	const VOTE5 = 'vote5';
+	/**
+	 * @var  string defining the vote6 field name
+	 */
+	const VOTE6 = 'vote6';
+	/**
 	 * @var  string defining the comment field name
 	 */
 	const COMMENT = 'comment';
@@ -42,7 +66,7 @@ class CompanyService {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
 				OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
 				OrdersService::ORDERS . '.' . OrdersService::HASH . ', ' .
-					UsersService::AVATAR . ', ' . self::COMPANY_FEEDBACK . '.' . self::VOTE."*20 AS count";
+					UsersService::AVATAR;
 		$from = self::COMPANY_FEEDBACK . 
 				SQLClient::LEFT . SQLClient::JOIN . OrdersService::ORDERS .	SQLClient::ON . 
 				OrdersService::ORDERS . '.' . OrdersService::ID . '=' . 
@@ -53,7 +77,17 @@ class CompanyService {
 		# executing the query
 		$groupBy = self::COMPANY_FEEDBACK . '.' . self::ID;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', $limit );
-		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		if($result != null && isset($result) && count($result) > 0){
+			$result[0][self::VOTE] = round($result[0][self::VOTE]*20);
+			$result[0][self::VOTE1] = round($result[0][self::VOTE1]*20);
+			$result[0][self::VOTE2] = round($result[0][self::VOTE2]*20);
+			$result[0][self::VOTE3] = round($result[0][self::VOTE3]*20);
+			$result[0][self::VOTE4] = round($result[0][self::VOTE4]*20);
+			$result[0][self::VOTE5] = round($result[0][self::VOTE5]*20);
+			$result[0][self::VOTE6] = round($result[0][self::VOTE6]*20);
+		}else{
+			$result = false;
+		}
 		return $result;
 	}
 	
@@ -62,7 +96,7 @@ class CompanyService {
 					CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME . ', ' .
 					OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
 					OrdersService::BOUGHT_ORDERS . '.' . OrdersService::BOUGHT_DATE . ', ' .
-					UsersService::AVATAR . ', ' . self::COMPANY_FEEDBACK . '.' . self::VOTE."*20 AS count";
+					UsersService::AVATAR;
 		$from = self::COMPANY_FEEDBACK . 
 				SQLClient::LEFT . SQLClient::JOIN . UsersService::USERS .	SQLClient::ON . 
 				UsersService::USERS . '.' . UsersService::ID . '=' . 
@@ -114,7 +148,7 @@ GROUP BY users.id
 		# executing the query
 		$where .= $where!=NULL&&$company_id!=NULL ? " AND " : NULL;
 		$where .= $company_id!=NULL ? self::COMPANY_ID . '=' . $company_id : NULL;
-	 	$where .= ' AND ' . self::DONE . '=1';
+	 	$where .= ' AND ' . self::DONE . '=5';
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
 		return $result;

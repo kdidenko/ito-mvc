@@ -117,14 +117,7 @@ class ContentController extends SecureActionControllerImpl {
 	public function handleCompany($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($requestParams[UsersService::ID])){
-			if (isset($requestParams[CompanyService::VOTE])){
-				$user_id = SessionService::getAttribute(SessionService::USER_ID);
-				$company_id = $requestParams[UsersService::ID];
-				$vote = $requestParams[CompanyService::VOTE];
-				$comment = $requestParams[CompanyService::COMMENT];
-				CompanyService::feedbackCompany($user_id,$company_id,$vote,$comment);
-			}
-			
+
 			$users = UsersService::getUser ($requestParams[UsersService::ID], true);
 			isset ( $users )&&$users[UsersService::ROLE]==UsersService::ROLE_TR ? $mvc->addObject ( UsersService::USERS, $users ) : null;
 	

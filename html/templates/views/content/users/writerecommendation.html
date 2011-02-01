@@ -27,18 +27,68 @@ $status = $mvc->getObject(ContentController::STATUS);
 				<dd class="itemData"><b><?php echo $order[0][OrdersService::ORDER_NAME];?></b></dd>
 			</dl>
 			<div class="itemForm">
-				<label>_i18n{Rating}:</label>
+				<label>arbeitsqualitat:</label>
 				<div class="itemData">
-					<input type="radio" name="vote" value="1"/>1
-					<input type="radio" name="vote" value="2"/>2
-					<input type="radio" name="vote" value="3"/>3
-					<input type="radio" name="vote" value="4"/>4
-					<input type="radio" name="vote" value="5"/>5
+					<input type="radio" name="vote1" value="1" <?php echo isset($_POST[CompanyService::VOTE1])&&$_POST[CompanyService::VOTE1]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote1" value="2" <?php echo isset($_POST[CompanyService::VOTE1])&&$_POST[CompanyService::VOTE1]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote1" value="3" <?php echo isset($_POST[CompanyService::VOTE1])&&$_POST[CompanyService::VOTE1]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote1" value="4" <?php echo isset($_POST[CompanyService::VOTE1])&&$_POST[CompanyService::VOTE1]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote1" value="5" <?php echo isset($_POST[CompanyService::VOTE1])&&$_POST[CompanyService::VOTE1]==5? "checked" : NULL; ?>/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>zuverlassigkeit:</label>
+				<div class="itemData">
+					<input type="radio" name="vote2" value="1" <?php echo isset($_POST[CompanyService::VOTE2])&&$_POST[CompanyService::VOTE2]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote2" value="2" <?php echo isset($_POST[CompanyService::VOTE2])&&$_POST[CompanyService::VOTE2]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote2" value="3" <?php echo isset($_POST[CompanyService::VOTE2])&&$_POST[CompanyService::VOTE2]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote2" value="4" <?php echo isset($_POST[CompanyService::VOTE2])&&$_POST[CompanyService::VOTE2]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote2" value="5" <?php echo isset($_POST[CompanyService::VOTE2])&&$_POST[CompanyService::VOTE2]==5? "checked" : NULL; ?>/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>sauberkeit:</label>
+				<div class="itemData">
+					<input type="radio" name="vote3" value="1" <?php echo isset($_POST[CompanyService::VOTE3])&&$_POST[CompanyService::VOTE3]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote3" value="2" <?php echo isset($_POST[CompanyService::VOTE3])&&$_POST[CompanyService::VOTE3]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote3" value="3" <?php echo isset($_POST[CompanyService::VOTE3])&&$_POST[CompanyService::VOTE3]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote3" value="4" <?php echo isset($_POST[CompanyService::VOTE3])&&$_POST[CompanyService::VOTE3]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote3" value="5" <?php echo isset($_POST[CompanyService::VOTE3])&&$_POST[CompanyService::VOTE3]==5? "checked" : NULL; ?>/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>preis/leistung:</label>
+				<div class="itemData">
+					<input type="radio" name="vote4" value="1" <?php echo isset($_POST[CompanyService::VOTE4])&&$_POST[CompanyService::VOTE4]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote4" value="2" <?php echo isset($_POST[CompanyService::VOTE4])&&$_POST[CompanyService::VOTE4]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote4" value="3" <?php echo isset($_POST[CompanyService::VOTE4])&&$_POST[CompanyService::VOTE4]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote4" value="4" <?php echo isset($_POST[CompanyService::VOTE4])&&$_POST[CompanyService::VOTE4]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote4" value="5" <?php echo isset($_POST[CompanyService::VOTE4])&&$_POST[CompanyService::VOTE4]==5? "checked" : NULL; ?>/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>angebot gehalten:</label>
+				<div class="itemData">
+					<input type="radio" name="vote5" value="1" <?php echo isset($_POST[CompanyService::VOTE5])&&$_POST[CompanyService::VOTE5]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote5" value="2" <?php echo isset($_POST[CompanyService::VOTE5])&&$_POST[CompanyService::VOTE5]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote5" value="3" <?php echo isset($_POST[CompanyService::VOTE5])&&$_POST[CompanyService::VOTE5]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote5" value="4" <?php echo isset($_POST[CompanyService::VOTE5])&&$_POST[CompanyService::VOTE5]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote5" value="5" <?php echo isset($_POST[CompanyService::VOTE5])&&$_POST[CompanyService::VOTE5]==5? "checked" : NULL; ?>/>5
+				</div>
+			</div>
+			<div class="itemForm">
+				<label>beratung service:</label>
+				<div class="itemData">
+					<input type="radio" name="vote6" value="1" <?php echo isset($_POST[CompanyService::VOTE6])&&$_POST[CompanyService::VOTE6]==1? "checked" : NULL; ?>/>1
+					<input type="radio" name="vote6" value="2" <?php echo isset($_POST[CompanyService::VOTE6])&&$_POST[CompanyService::VOTE6]==2? "checked" : NULL; ?>/>2
+					<input type="radio" name="vote6" value="3" <?php echo isset($_POST[CompanyService::VOTE6])&&$_POST[CompanyService::VOTE6]==3? "checked" : NULL; ?>/>3
+					<input type="radio" name="vote6" value="4" <?php echo isset($_POST[CompanyService::VOTE6])&&$_POST[CompanyService::VOTE6]==4? "checked" : NULL; ?>/>4
+					<input type="radio" name="vote6" value="5" <?php echo isset($_POST[CompanyService::VOTE6])&&$_POST[CompanyService::VOTE6]==5? "checked" : NULL; ?>/>5
 				</div>
 			</div>
 			<div class="itemForm">
 				<label>_i18n{Comment}:</label>
-				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="comment"><?php echo isset($mail[MailService::SUBJECT]) ? $mail[MailService::TEXT] : NULL; ?></textarea></div>
+				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="comment"><?php echo isset($_POST[CompanyService::COMMENT]) ? $_POST[CompanyService::COMMENT] : NULL; ?></textarea></div>
 			</div>
 		</div>
 		<div class="unitBtn">
@@ -47,5 +97,11 @@ $status = $mvc->getObject(ContentController::STATUS);
 			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
 		</div>
 	</form>
+<?php } else { ?>
+	<div class="itemWarning">
+		<ul>
+			<li>_i18n{Oops wrong url. Please, go back}.</li>
+		</ul>
+	</div>
 <?php } } ?>
 </div>

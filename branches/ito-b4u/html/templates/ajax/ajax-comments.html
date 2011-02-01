@@ -17,9 +17,9 @@ if(isset($feedbacks)&&$feedbacks!=null){
 			</div>
 			<div class="itemRating">
 				<ul class="unitRating">
-					<li class="itemCurrent" style="width:<?php echo round($feedback['count']) ?>%"></li>
+					<li class="itemCurrent" style="width:<?php echo $feedback[CompanyService::VOTE] ?>%"></li>
 				</ul>
-				<p><strong>1</strong> (<?php echo round($feedback['count']) ?>% positiv)</p>
+				<p><strong>1</strong> (<?php echo $feedback[CompanyService::VOTE] ?>% positiv)</p>
 			</div>
 		</div>
 	<?php } ?>

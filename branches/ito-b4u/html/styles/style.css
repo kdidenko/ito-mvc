@@ -436,18 +436,22 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitLSearch .unitEqColumns dd {width:136px; float:right}
 	.unitLSearch .unitEqColumns dd p {padding:5px 0}
 
-.unitTPagination {background:#EFEFEF; border-top:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
-.unitBPagination {background:#EFEFEF; border-bottom:1px dotted #393939; width:654px; overflow:hidden; padding:5px 0}
-	.unitTPagination p {float:left; padding:0 0 0 12px; font-size:14px; color:#9F0106}
-	.unitTPagination p span {font-weight:bold}
-	.unitTPagination ul, .unitBPagination ul {float:right; padding:0 12px 0 0}
-	.unitTPagination li, .unitBPagination li {float:left; padding:0 0 0 3px; line-height:14px}
-	.unitTPagination li a, .unitBPagination li a {float:left; padding:1px 4px 2px 4px; border:1px solid #393939; background:#E1E1E1}
-	.unitTPagination li a:hover, .unitBPagination li a:hover {border:1px solid #9F0307; color:#9F0307; background:#fff; text-decoration:none}
-	.unitTPagination li span, .unitBPagination li span {float:left; padding:1px 4px 2px 4px; border:1px solid #9F0307; color:#9F0307; font-weight:bold; background:#fff}
-	.unitBPagination .itemPage {float:left; padding:0 0 0 10px; margin:-1px 0 -2px 0; position:relative}
-	.unitBPagination label {float:left; padding:1px 5px 0 0}
-	.unitBPagination select {float:left; font-size:11px; width:50px}
+.unitPagination {background:#EFEFEF; width:654px; overflow:hidden; padding:5px 0}
+.unitTPagination {border-top:1px dotted #393939}
+.unitBPagination {border-bottom:1px dotted #393939}
+	.unitPagination p {float:left; padding:0 0 0 12px; font-size:14px; color:#9F0106}
+	.unitPagination p span {font-weight:bold}
+	.unitPagination ul {float:right; padding:0 12px 0 0}
+	.unitPagination li {float:left; padding:0 0 0 3px; line-height:14px}
+	.unitPagination li a {float:left; padding:1px 4px 2px 4px; border:1px solid #393939; background:#E1E1E1}
+	.unitPagination li a:hover {border:1px solid #9F0307; color:#9F0307; background:#fff; text-decoration:none}
+	.unitPagination li span {float:left; padding:1px 4px 2px 4px; border:1px solid #9F0307; color:#9F0307; font-weight:bold; background:#fff}
+	.unitPagination .itemPage {float:left; padding:0 0 0 10px; margin:-1px 0 -2px 0; position:relative}
+	.unitPagination label {float:left; padding:1px 5px 0 0}
+	.unitPagination select {float:left; font-size:11px; width:50px}
+	
+	.viewDComment .unitPagination {border:none; width:910px}
+	.viewDComment .unitPagination p {font-size:13px}
 
 .unitDBlock {overflow:hidden; padding:5px 0; width:932px}
 .unitDLeft {float:left; width:263px; padding:0 0 0 12px}
@@ -510,6 +514,9 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	
 	.tabsContent {overflow:hidden; width:934px; position:relative}
 	.tabsHide {width:1px; height:1px; overflow:hidden; position:absolute; top:-10px; left:-10px}
+	.tabsLoading {position:absolute; top:50%; left:50%; width:32px; height:32px; margin-top:-16px; margin-left:-16px; cursor:pointer; overflow:hidden; z-index:1104; display:none}
+		.tabsLoading div {position:absolute; top:0; left:0; width:32px; height:480px; background-image:url(../images/preloadBg.gif)}
+	
 	
 	.viewDComment {padding:10px 12px 5px 12px}
 	.unitDComment {overflow:hidden; width:910px; background:#EFEFEF; margin:0 0 1px 0}
@@ -520,6 +527,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitDComment .itemDate {padding:0 10px 0 0; float:right}
 		.unitDComment .itemText {float:left; width:500px; padding:5px 0 10px 10px}
 		.unitDComment .itemRating {padding:5px 10px 10px 0; float:right; font-size:12px}
+	.unitABlock .unitDComment, .unitABlock .unitDComment .itemTitle {width:667px}
 	.viewDProfile {padding:10px 12px 5px 12px}
 
 /* light box style */

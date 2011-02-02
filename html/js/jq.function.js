@@ -431,7 +431,7 @@ if(jQuery)(function($){
 		$('.unitBPagination select').bind('change', function(){$(this).parents('form').submit()})
 		$('.unitYellow input:text').inputEmptyAn();
 		$('.wrapWSearch').tabsAn();
-		$(".viewEHead .itemMail a").lpAn({autoReload:false});
+		$(".viewEHead .itemMail a, .feedbackLink a").lpAn({autoReload:false});
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

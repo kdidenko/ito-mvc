@@ -85,7 +85,7 @@ $pages = $mvc->getObject("pages");
 							</div>
 
 							<div class="unitESearch">
-								<div class="unitTPagination">
+								<div class="unitPagination unitTPagination">
 									<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
 									<!-- <p>found <span><?php echo count($orders)?></span> results found for <span>empty</span></p> -->
 									<ul>
@@ -151,7 +151,7 @@ $pages = $mvc->getObject("pages");
 									_i18n{No Order like you want}
 									<?php } ?>
 								</div>
-								<div class="unitBPagination">
+								<div class="unitPagination unitBPagination">
 									<div class="itemPage">
 										<label>_i18n{Items per page}:</label>
 										<select name="onpage">

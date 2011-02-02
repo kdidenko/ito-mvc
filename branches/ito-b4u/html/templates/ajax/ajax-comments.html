@@ -23,24 +23,25 @@ if(isset($feedbacks)&&$feedbacks!=null){
 			</div>
 		</div>
 	<?php } ?>
-	<div class="unitTDagination">
-	<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
-	<ul>
-		<?php for($i=0; $i<$pages; $i++){ ?>
-			<li>
-			<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
-				<span><?php echo $i+1; ?></span>
-			<?php }else{ ?>
-				<a href="/company.html?comment_page=<?php echo $i+1; ?>
-					<?php echo isset($_GET['id']) ? '&id='.$_GET["id"] : NULL ; ?> 
-				">
-				<?php echo $i+1; ?>
-				</a>
-			<?php }?>
-			</li>
-		<?php } ?>
-	</ul>
-</div>
+	<div class="unitPagination">
+		<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
+		<ul>
+			<li><a href="/get-comments.html?comment_page=1&id=42">11</a></li>
+			<?php for($i=0; $i<$pages; $i++){ ?>
+				<li>
+				<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
+					<span><?php echo $i+1; ?></span>
+				<?php }else{ ?>
+					<a href="/get-comments.html?comment_page=<?php echo $i+1; ?><?php
+						echo isset($_GET['id']) ? '&id='.$_GET["id"] : NULL; 
+					 ?>">
+					<?php echo $i+1; ?>
+					</a>
+				<?php }?>
+				</li>
+			<?php } ?>
+		</ul>
+	</div>
 <?php } else { ?>
 	<div class="unitDComment unitOdd">
 		<div class="itemText">

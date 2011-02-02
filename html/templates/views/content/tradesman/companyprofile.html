@@ -137,7 +137,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 	<?php
 if(isset($feedbacks)&&$feedbacks!=null){
 	foreach($feedbacks as $key =>$feedback){?>
-	<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>" style="width:auto;">
+	<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
 		<div class="itemTitle">
 			<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
 		</div>

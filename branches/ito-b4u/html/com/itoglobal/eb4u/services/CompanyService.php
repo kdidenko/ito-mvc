@@ -62,6 +62,33 @@ class CompanyService {
 	 */
 	const DONE = 'done';
 	
+	/**
+	 * @var  string defining the company_projects table name
+	 */
+	const COMPANY_PROJECT = 'company_projects';
+	/**
+	 * @var  string defining the project_url field name
+	 */
+	const PROJECT_URL = 'project_url';
+	
+	/**
+	 * @var  string defining the company_certificates table name
+	 */
+	const COMPANY_CARTIFICATES = 'company_certificates';
+	/**
+	 * @var  string defining the certificate_titile field name
+	 */
+	const CARTIFICATES_TITLE = 'certificate_titile';
+	
+	/**
+	 * @var  string defining the company_references table name
+	 */
+	const COMPANY_REFERENCES = 'company_references';
+	/**
+	 * @var  string defining the reference_title field name
+	 */
+	const REFERENCE_TITLE = 'reference_title';
+	
 	public static function getFeedback($where,$limit=NULL) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 
 				OrdersService::ORDERS . '.' . OrdersService::ORDER_NAME . ', ' .
@@ -126,19 +153,81 @@ class CompanyService {
 		$result = $result != null && isset($result) && count($result) > 0 ? $result[0] : false;
 		return $result;
 	}
-	/*
-	 
-	 SELECT SUM( vote ) / COUNT( id ) AS count
-	FROM  `company_feedback`
-	 
-	 SELECT users.*, SUM( company_feedback.vote ) / COUNT( company_feedback.id ) AS vote,
-COUNT( company_feedback.vote ) AS count
-FROM users 
-LEFT JOIN company_feedback
-ON company_feedback.company_id=users.id
-WHERE role='TR'
-GROUP BY users.id
-	 */
+	
+	public static function getProjects($company_id, $where=null) {
+		$fields = self::COMPANY_PROJECT . '.*';
+		$from = self::COMPANY_PROJECT;
+		# executing the query
+		$where .= $where!=NULL ? " AND " : NULL;
+		$where .= self::COMPANY_ID . '=' . $company_id;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function setPoject($company_id, $project_url) {
+		$into = self::COMPANY_PROJECT;
+		$fields = self::COMPANY_ID . ', ' . self::PROJECT_URL; 
+		$values = "'" . $company_id . "', '" . $project_url . "'";
+		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
+		return $result;
+	}
+	
+	public static function delPoject($company_id, $project_id) {
+		# setting the query variables
+		$from = self::COMPANY_PROJECT;
+		$where = self::ID . " = " . $project_id . " AND " . self::COMPANY_ID . '=' . $company_id;
+		# executing the query
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
+	}
+	
+	public static function getCertificates($company_id, $where=null) {
+		$fields = self::COMPANY_CARTIFICATES . '.*' . ', ' . UploadsService::PATH;
+		$from = self::COMPANY_CARTIFICATES . 
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS .	SQLClient::ON . 
+				UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				self::COMPANY_CARTIFICATES . '.' . self::UPLOAD_ID;
+		# executing the query
+		$where .= $where!=NULL ? " AND " : NULL;
+		$where .= self::COMPANY_ID . '=' . $company_id;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function delCertificate($company_id, $project_id, $upload_id, $path) {
+		# delete from certificates table
+		$from = self::COMPANY_CARTIFICATES;
+		$where = self::ID . " = " . $project_id . " AND " . self::COMPANY_ID . '=' . $company_id;
+		# executing the query
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
+		#delete from upload table
+		UploadsService::delUploads($upload_id, path);
+	}
+	
+	public static function getReferences($company_id, $where=null) {
+		$fields = self::COMPANY_REFERENCES . '.*' . ', ' . UploadsService::PATH;
+		$from = self::COMPANY_REFERENCES . 
+				SQLClient::LEFT . SQLClient::JOIN . UploadsService::UPLOADS .	SQLClient::ON . 
+				UploadsService::UPLOADS . '.' . UploadsService::ID . '=' . 
+				self::COMPANY_REFERENCES . '.' . self::UPLOAD_ID;
+		# executing the query
+		$where .= $where!=NULL ? " AND " : NULL;
+		$where .= self::COMPANY_ID . '=' . $company_id;
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
+		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function delReference($company_id, $project_id, $upload_id, $path) {
+		# delete from certificates table
+		$from = self::COMPANY_REFERENCES;
+		$where = self::ID . " = " . $project_id . " AND " . self::COMPANY_ID . '=' . $company_id;
+		# executing the query
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
+		#delete from upload table
+		UploadsService::delUploads($upload_id, $path);
+	}
 	
 	public static function getRating($company_id = NULL, $where = NULL) {
 		$fields = self::COMPANY_FEEDBACK . '.*' . ', ' . UsersService::USERNAME . ', ' . 

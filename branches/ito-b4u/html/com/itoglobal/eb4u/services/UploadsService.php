@@ -37,6 +37,14 @@ class UploadsService {
 		return $result;
 	}
 
+	public static function delUploads($upload_id, $path) {
+		$from = self::UPLOADS;
+		$where = self::ID . " = " . $upload_id;
+		# executing the query
+		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
+		StorageService::deleteDirectory($path);
+	}
+	
 }
 
 ?>

@@ -398,13 +398,14 @@ if(jQuery)(function($){
 	$.fn.lpAn = function(params){
 		var conf = $.extend({
 			autoReload:true,
-			loadContent:$(this).attr('href')
+			loadContent:0
 		}, params);
 		return this.each(function(){
-			var o=$(this),f=this,c=conf,g=false;
+			var o=$(this),f=this,c=conf,g=false,u;
 			$.extend(f,{
 				reloadPage:function(){if(c.autoReload && g){parent.location.reload(true)}},
 			});
+			u=c.loadContent?c.loadContent:o.attr('href');
 			o.lightBoxAn({
 				href:c.loadContent,type:'ajax',
 				onComplete:function(){
@@ -447,6 +448,7 @@ if(jQuery)(function($){
 		$('.unitYellow input:text').inputEmptyAn();
 		$('.wrapWSearch').tabsAn();
 		$(".viewEHead .itemMail a, .feedbackLink a").lpAn({autoReload:false});
+		$(".linkLight").lpAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

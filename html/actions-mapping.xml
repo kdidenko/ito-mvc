@@ -176,8 +176,17 @@
 	</action>
 	
 	<action name="/edit-category.html" id="editcategory" roles="AR">
-		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<controller class="com.itoglobal.eb4u.controllers.AdminContentController" method="handleEditCategory"/>
 		<template name="index.html" path="templates/views/content/admin/editcategory.html" />
+		<forwards>
+			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
+	<action name="/edit-subcategory.html" id="editsubcategory" roles="AR">
+		<controller class="com.itoglobal.eb4u.controllers.AdminContentController" method="handleEditSubCategory"/>
+		<template name="index.html" path="templates/views/content/admin/editsubcategory.html" />
 		<forwards>
 			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>

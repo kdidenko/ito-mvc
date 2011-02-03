@@ -169,6 +169,49 @@ class AdminContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleEditCategory($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams[CategoryService::ID])){
+			$id = $requestParams[CategoryService::ID];
+			if (isset($_POST)&&$_POST!=NULL){
+				if (isset($requestParams[CategoryService::CAT_NAME])||$requestParams[CategoryService::CAT_NAME]==NULL) {
+					CategoryService::updateCategory($id,CategoryService::CAT_NAME,"'".$requestParams[CategoryService::CAT_NAME]."'");
+					$mvc->addObject ( ContentController::STATUS, true );
+				} else {
+					$mvc->addObject ( ContentController::ERROR, "_i18n{Category name can't be empty.}" );
+				}
+			}
+			$category = CategoryService::getCategory($id);
+			isset($category) ? $mvc->addObject ( CategoryService::CATEGORY, $category) : NULL;
+		}
+		return $mvc;
+	}
+	
+	public function handleEditSubCategory($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams[SubCategoryService::ID])){
+			$id = $requestParams[SubCategoryService::ID];
+			if (isset($_POST)&&$_POST!=NULL){
+				if (isset($requestParams[SubCategoryService::SUBCAT_NAME])||$requestParams[SubCategoryService::SUBCAT_NAME]==NULL) {
+					$fields = array(0=>SubCategoryService::SUBCAT_NAME,
+									1=>SubCategoryService::CAT_ID);
+					$value = array(0=>$requestParams[SubCategoryService::SUBCAT_NAME],
+									1=>$requestParams[SubCategoryService::CAT_ID]);
+					SubCategoryService::updateSubCategory($id,$fields,$value);
+					$mvc->addObject ( ContentController::STATUS, true );
+				} else {
+					$mvc->addObject ( ContentController::ERROR, "_i18n{SubCategory name can't be empty.}" );
+				}
+			}
+			$subcategory = SubCategoryService::getSubCategory($id);
+			isset($subcategory) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory) : NULL;
+			
+			$categories = CategoryService::getCategories();
+			isset($categories) ? $mvc->addObject ( CategoryService::CATEGORY, $categories) : NULL;
+		
+		}
+		return $mvc;
+	}
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#update users info

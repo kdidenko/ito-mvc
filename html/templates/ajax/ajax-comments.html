@@ -5,8 +5,26 @@ $pages = $mvc->getObject("pages");
 ?>
 <div class="viewDComment">
 <?php
-if(isset($feedbacks)&&$feedbacks!=null){
-	foreach($feedbacks as $key =>$feedback){?>
+if(isset($feedbacks)&&$feedbacks!=null){ ?>
+	<div class="unitPagination">
+		<p><span><?php echo $count;?></span> _i18n{comments}</p>
+		<ul>
+			<?php for($i=0; $i<$pages; $i++){ ?>
+				<li>
+				<?php if(isset($_GET['comment_page'])&&$_GET['comment_page']==$i+1  || !isset($_GET['comment_page'])&&$i==0) { ?>
+					<span><?php echo $i+1; ?></span>
+				<?php }else{ ?>
+					<a href="/get-comments.html?comment_page=<?php echo $i+1; ?><?php
+						echo isset($_GET['id']) ? '&id='.$_GET["id"] : NULL; 
+					 ?>">
+					<?php echo $i+1; ?>
+					</a>
+				<?php }?>
+				</li>
+			<?php } ?>
+		</ul>
+	</div>
+<?php foreach($feedbacks as $key =>$feedback){?>
 		<div class="unitDComment <?php echo ($key%2) == 0 ? 'unitOdd':null;?>">
 			<div class="itemTitle">
 				<h4><?php echo $feedback[UsersService::USERNAME] ?></h4><span class="itemDate"><?php echo $feedback[CompanyService::DATE] ?></span>
@@ -23,25 +41,6 @@ if(isset($feedbacks)&&$feedbacks!=null){
 			</div>
 		</div>
 	<?php } ?>
-	<div class="unitPagination">
-		<p>_i18n{found} <span><?php echo $count;?></span> _i18n{results for your request}</p>
-		<ul>
-			<li><a href="/get-comments.html?comment_page=1&id=42">11</a></li>
-			<?php for($i=0; $i<$pages; $i++){ ?>
-				<li>
-				<?php if(isset($_GET['page'])&&$_GET['page']==$i+1  || !isset($_GET['page'])&&$i==0) { ?>
-					<span><?php echo $i+1; ?></span>
-				<?php }else{ ?>
-					<a href="/get-comments.html?comment_page=<?php echo $i+1; ?><?php
-						echo isset($_GET['id']) ? '&id='.$_GET["id"] : NULL; 
-					 ?>">
-					<?php echo $i+1; ?>
-					</a>
-				<?php }?>
-				</li>
-			<?php } ?>
-		</ul>
-	</div>
 <?php } else { ?>
 	<div class="unitDComment unitOdd">
 		<div class="itemText">

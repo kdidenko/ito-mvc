@@ -23,7 +23,7 @@ $subcategories = $mvc->getObject('subcategory');
 				<tr>
 					<td><input type="checkbox" class="inpChk" /></td>
 					<td><?php echo $category[CategoryService::ID] ?></td>
-					<td class="itemLast"><a class="linkLightTr" href="/edit-category.html?<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></td>
+					<td class="itemLast"><a class="linkLightTr" href="/edit-category.html?id=<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></td>
 				</tr>
 				<?php } }else{ ?>
 				<tr class="unitNoMail">
@@ -39,42 +39,22 @@ $subcategories = $mvc->getObject('subcategory');
 		<table cellpadding="0" cellspacing="0" class="viewList">
 			<thead>
 				<tr>
+					<th class="itemChk"></th>
 					<th>_i18n{ID}</th>
 					<th>_i18n{SubCategory}</th>
-					<th>_i18n{Category}</th>
-					<th class="itemLast">_i18n{Action}</th>
+					<th class="itemLast">_i18n{Category}</th>
 				</tr>
 			</thead>
 			<tbody>
 	<?php 	if (count($subcategories)>0 && $subcategories!=NULL){
 				foreach($subcategories as $key => $subcategory){ ?>
 					<tr>
+						<td><input type="checkbox" class="inpChk" /></td>
 						<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
-						<td><a class="linkLightTr" href="/edit-category.html?<?php echo $subcategory[SubCategoryService::ID] ?>" title="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></a></td>
-						<td><?php echo $subcategory[CategoryService::CAT_NAME] ?></td>
-						<td class="itemLast">
-							<!-- 
-							<button name="editSubCategory">Edit</button>
-							<button name="saveSubCategory" value="<?php echo $subcategory[SubCategoryService::ID] ?>">Submit</button>
-							 -->
-							<button name="delSubCategory" value="<?php echo $subcategory[SubCategoryService::ID] ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button>
-						</td>
+						<td><a class="linkLightTr" href="/edit-subcategory.html?id=<?php echo $subcategory[SubCategoryService::ID] ?>" title="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></a></td>
+						<td class="itemLast"><?php echo $subcategory[CategoryService::CAT_NAME] ?></td>
 					</tr>
 	<?php } ?>
-					<tr>
-						<td><?php echo $subcategory[SubCategoryService::ID]+1; ?></td>
-						<td><input type="text" name="subcategory"></td>
-						<td>
-							<select name="category_id">
-<?php	if (isset($categories) && $categories!=NULL){ 
-			foreach($categories as $key=>$category){ ?>
-								<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
-<?php 		} 
-		} ?>
-							</select>
-						</td>
-						<td class="itemLast"><button name="newSubCategory">Submit</button></td>
-					</tr>
 	<?php	}else {?>
 				<tr class="unitNoMail">
 					<td colspan="5">_i18n{No SubCategory}</td>

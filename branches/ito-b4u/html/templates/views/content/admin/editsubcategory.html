@@ -1,11 +1,12 @@
 <?php
-$category = $mvc->getObject(CategoryService::CATEGORY);
+$subcategory = $mvc->getObject(SubCategoryService::SUBCATEGORY);
+$categories = $mvc->getObject(CategoryService::CATEGORY);
 $errors = $mvc->getObject(ContentController::ERROR);
 $success = $mvc->getObject(ContentController::STATUS);
 ?>
 <?php if (!isset($success )){?>
 <div class="viewLight">
-	<h2>_i18n{Edit Category!}</h2>
+	<h2>_i18n{Edit SubCategory!}</h2>
 	<div class="unitABlock unitABlockLast">
 	<?php if (isset($errors )){?>
 		<div class="itemWarning">
@@ -16,15 +17,28 @@ $success = $mvc->getObject(ContentController::STATUS);
 			</ul>
 		</div>
 	<?php } ?>
-		<form action="/edit-category.html" method="POST">
+		<form action="/edit-subcategory.html" method="POST">
 			<div class="unitSnColumn">
 				<div class="itemForm">
-					<label>Name category:</label>
+					<label>_i18n{Category}:</label>
 					<div class="itemData">
-						<input class="inpTxt" type="text" name="category_name" value="<?php echo $category[CategoryService::CAT_NAME]?>" />
-						<input type="hidden" name="id" value="<?php echo $category[CategoryService::ID]?>"/>
+						<select name="category_id">
+<?php	if (isset($categories) && $categories!=NULL){ 
+			foreach($categories as $key=>$category){ ?>
+							<option value="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></option>
+<?php 		} 
+		} ?>
+						</select>
 					</div>
 				</div>
+				<div class="itemForm">
+					<label>_i18n{SubCategory Name}:</label>
+					<div class="itemData">
+						<input class="inpTxt" type="text" name="subcategory_name" value="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME]?>" />
+						<input type="hidden" name="id" value="<?php echo $category[SubCategoryService::ID]?>"/>
+					</div>
+				</div>
+
 			</div>
 			<div class="unitBtn">
 				<button><span><strong>_i18n{Send}</strong></span></button>

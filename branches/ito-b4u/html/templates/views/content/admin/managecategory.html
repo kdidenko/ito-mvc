@@ -5,7 +5,7 @@ $subcategories = $mvc->getObject('subcategory');
 <form action="/manage-category.html" method="post">
 	<ul class="viewIList">
 		<li class="itemNewC"><a href="#" title="_i18n{New Category}">_i18n{New Category}</a></li>
-		<li class="itemNewSC"><a title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
+		<li class="itemNewSC"><a href="#" title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
 	</ul>
 	<h2>_i18n{Category}</h2>
 	<div class="unitABlock">
@@ -23,49 +23,9 @@ $subcategories = $mvc->getObject('subcategory');
 				<tr>
 					<td><input type="checkbox" class="inpChk" /></td>
 					<td><?php echo $category[CategoryService::ID] ?></td>
-					<td class="itemLast"><span class="linkTr" title="<?php echo $category[CategoryService::ID] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></span></td>
-					<!-- <td>
-						
-						<button name="editCategory">Edit</button>
-						<button name="saveCategory" value="<?php echo $category[CategoryService::ID] ?>">Submit</button>
-						
-						<button name="delCategory" value="<?php echo $category[CategoryService::ID] ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete}</button> -->
-					</td>
+					<td class="itemLast"><a class="linkLightTr" href="/edit-category.html?<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></td>
 				</tr>
-				<?php } ?>
-				<tr class="unitCategoryEdit unitCategory">
-					<td colspan="3">
-						<div class="unitP">
-							<div class="itemForm">
-								<label>Edit category:</label>
-								<div class="itemData">
-									<input type="text" name="itemCategory" class="inpTxt" />
-									<input type="hidden" name="idCategory" />
-								</div>
-							</div>
-						</div>
-						<div class="linkSave">
-							<button>Save category</button>
-						</div>
-					</td>
-				</tr>
-				<tr class="unitCategoryNew unitCategory">
-					<td colspan="3">
-						<div class="unitP">
-							<div class="itemForm">
-								<label>New category:</label>
-								<div class="itemData">
-									<input type="text" name="you_need" class="inpTxt" />
-									<input type="hidden" name="<?php echo $category[CategoryService::ID]+1; ?>" />
-								</div>
-							</div>
-						</div>
-						<div class="linkSave">
-							<button>Save category</button>
-						</div>
-					</td>
-				</tr>
-				<?php }else{ ?>
+				<?php } }else{ ?>
 				<tr class="unitNoMail">
 					<td colspan="5">_i18n{No Category}</td>
 				</tr>
@@ -90,7 +50,7 @@ $subcategories = $mvc->getObject('subcategory');
 				foreach($subcategories as $key => $subcategory){ ?>
 					<tr>
 						<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
-						<td><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></td>
+						<td><a class="linkLightTr" href="/edit-category.html?<?php echo $subcategory[SubCategoryService::ID] ?>" title="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></a></td>
 						<td><?php echo $subcategory[CategoryService::CAT_NAME] ?></td>
 						<td class="itemLast">
 							<!-- 

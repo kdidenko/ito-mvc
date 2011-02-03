@@ -335,6 +335,25 @@ if(jQuery)(function($){
 			}
 		})
 	};
+	$.fn.ratingAn = function(params){
+		var conf = $.extend({
+			valueInput:'input[type="hidden"]'
+		}, params);
+		return this.each(function(){
+			var o=$(this),c=conf,f=this,v=$(c.valueInput, o);
+			$.extend(f,{getAllItem:function(){return $('li a', o)}});
+			if(v.length==1){
+				f.getAllItem().each(function(){
+					$(this).bind('click', function(){
+						f.getAllItem().removeClass('itemSelect');
+						$(this).addClass('itemSelect'); v.val($(this).html());
+						return false;
+					})
+					if(v.val()==$(this).html()){$(this).trigger('click')}
+				})
+			}
+		})
+	};
 	$.fn.tabsAn = function(params){
 		var conf = $.extend({
 			headBlock:'.tabsHead',
@@ -403,7 +422,7 @@ if(jQuery)(function($){
 		return this.each(function(){
 			var o=$(this),f=this,c=conf,g=false,u;
 			$.extend(f,{
-				reloadPage:function(){if(c.autoReload && g){parent.location.reload(true)}},
+				reloadPage:function(){if(c.autoReload && g){parent.location.reload(true)}}
 			});
 			u=c.loadContent?c.loadContent:o.attr('href');
 			o.lightBoxAn({
@@ -449,6 +468,7 @@ if(jQuery)(function($){
 		$('.wrapWSearch').tabsAn();
 		$(".viewEHead .itemMail a, .feedbackLink a").lpAn({autoReload:false});
 		$(".linkLight").lpAn();
+		$('.unitRating').ratingAn();
 	});
 	$(window).load(function(){$('input:file').fileAn()})
 })(jQuery);

@@ -181,7 +181,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
 	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
 /* rating style */
-.unitRating, .unitRating a:hover, .unitRating li.itemCurrent {background-image:url(../images/ratingIcon.gif)}
+.unitRating, .unitRating a:hover, .unitRating li.itemCurrent, .unitRating li a.itemSelect {background-image:url(../images/ratingIcon.gif)}
 	.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
 	.unitRating li {display:inline}
 	.unitRating a, .unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
@@ -192,7 +192,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitRating li.itemThree a {width:60%; z-index:4}
 	.unitRating li.itemFour a {width:80%; z-index:3}
 	.unitRating li.itemFive a {width:100%; z-index:2}
-	.unitRating li.itemTwo a {width:40%; z-index:5}
+	.unitRating li a.itemSelect {background-position:0 -60px}
 /* small video */
 .unitVideo {padding:0 12px 5px 12px}
 	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}

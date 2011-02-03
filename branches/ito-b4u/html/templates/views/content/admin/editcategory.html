@@ -19,7 +19,7 @@ $success = $mvc->getObject(ContentController::STATUS);
 		<form action="/edit-category.html" method="POST">
 			<div class="unitSnColumn">
 				<div class="itemForm">
-					<label>Name category:</label>
+					<label>_i18n{Category Name}:</label>
 					<div class="itemData">
 						<input class="inpTxt" type="text" name="category_name" value="<?php echo $category[CategoryService::CAT_NAME]?>" />
 						<input type="hidden" name="id" value="<?php echo $category[CategoryService::ID]?>"/>
@@ -37,9 +37,9 @@ $success = $mvc->getObject(ContentController::STATUS);
 <div class="viewLight">
 	<h2>_i18n{Thank you!}</h2>
 	<div class="unitABlock unitABlockLast">
-		<div class="itemOk">Category store!</div>
+		<div class="itemOk">_i18n{Category saved!}</div>
 		<div class="unitBtn">
-			<button class="itemBack"><span><strong>Close</strong></span></button>
+			<button class="itemBack"><span><strong>_i18n{Close}</strong></span></button>
 		</div>
 	</div>
 </div>

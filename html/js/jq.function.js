@@ -188,7 +188,8 @@ if(jQuery)(function($){
 			addCategory:'.itemNewC a',
 			noDataRow:'.unitNoData',
 			dataClass:'unitData',
-			linkWide:'.linkTr'
+			linkWide:'.linkTr',
+			linkLightBox:'.linkLightTr'
 		}, params);
 		return this.each(function(){
 			var c=conf,o=$(this),f=this,v=[],e=null,n=null,t=null;
@@ -196,6 +197,13 @@ if(jQuery)(function($){
 				getBlock:function(){return o.find(c.tableBlock)},
 				getRow:function(){return $('tbody tr:not('+c.noDataRow+')', f.getBlock())},
 				getHidden:function(){return $('input[name="itemSelect"]', o)},
+				advFunctRow:function(r){
+					$('input[type="checkbox"]', r).bind('click', function(e){var h=$(this);
+					if(h.attr('checked')){v.push(h.attr('value')); r.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); r.removeClass('unitChecked')}
+					f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
+				});
+				$('a', r).bind('click', function(e){e.stopImmediatePropagation()})
+				}
 				//getHBlock:function(){e=$(c.eBlock, o).remove()},
 				//getNBlock:function(){n=$(c.nBlock, o).remove()},
 				//bindCategory:function(k, h, r){if(t!=null){t.removeClass('hideElement')}; t=r.before(h); k.remove()}
@@ -208,26 +216,17 @@ if(jQuery)(function($){
 				$('tbody tr:odd', f.getBlock()).addClass('unitOdd');
 				f.getRow().each(function(){var i=$(this);
 					i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
-					if($(c.linkWide, i).length){
+					if($('a'+c.linkWide, i).length){
 						i.addClass(c.dataClass);
-						if($('a'+c.linkWide, i).length){
-							var l=$(c.linkWide, i); l.replaceWith(l.text());
-							i.bind('click', function(){document.location=l.attr('href')});
-						}
-						if($('span'+c.linkWide, i).length){
-							var l=$(c.linkWide, i); l.replaceWith(l.text());
-							i.bind('click', function(){
-								$(".viewEHead .itemMail a").lpAn();
-								//f.bindCategory(n, e, i.addClass('hideElement'));
-								//$('input[name="itemCategory"]', e).attr('value', l.text());
-								//$('input[name="idCategory"]', e).attr('value', l.attr('title'));
-							});
-						};
-						$('input[type="checkbox"]', i).bind('click', function(e){var h=$(this);
-							if(h.attr('checked')){v.push(h.attr('value')); i.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); i.removeClass('unitChecked')}
-							f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
-						});
-						$('a', i).bind('click', function(e){e.stopImmediatePropagation()})
+						var l=$(c.linkWide, i); l.replaceWith(l.text());
+						i.bind('click', function(){document.location=l.attr('href')});
+						f.advFunctRow(i);
+					}
+					if($('a'+c.linkLightBox, i).length){
+						i.addClass(c.dataClass);
+						var l=$(c.linkLightBox, i); l.replaceWith(l.text());
+						i.lpAn({loadContent:l.attr('href')});
+						f.advFunctRow(i);
 					}
 				})
 			}
@@ -398,26 +397,22 @@ if(jQuery)(function($){
 	};
 	$.fn.lpAn = function(params){
 		var conf = $.extend({
-			autoReload:true
+			autoReload:true,
+			loadContent:$(this).attr('href')
 		}, params);
 		return this.each(function(){
 			var o=$(this),f=this,c=conf,g=false;
 			$.extend(f,{
-				reloadPage:function(){if(c.autoReload && g){
-					parent.location.reload(true);
-				}}
+				reloadPage:function(){if(c.autoReload && g){parent.location.reload(true)}},
 			});
 			o.lightBoxAn({
+				href:c.loadContent,type:'ajax',
 				onComplete:function(){
 					var a=arguments.callee,i=$('.wrapLightBox');
-					$('button[class="itemHide"]',i).bind('click', function(){
+					$('button[class="itemHide"], button[class="itemBack"]',i).bind('click', function(){
 						$.lightBoxAn.close();
 						return false;
 					});
-					$('button[class="itemBack"]',i).bind('click', function(){
-						$.lightBoxAn.close();
-						return false;
-					})
 					if($('button[class="itemBack"]',i).length){
 						g=true;
 						setTimeout(function(){$.lightBoxAn.close()},3000);
@@ -426,8 +421,7 @@ if(jQuery)(function($){
 						var l=$(this);
 						$.lightBoxAn.showActivity();
 						$.post(
-							l.attr('action'),
-							l.serialize(),
+							l.attr('action'),l.serialize(),
 							function(d){$.lightBoxAn({content:d, onComplete:a, onClosed:function(){f.reloadPage()}})}
 						);
 						return false;

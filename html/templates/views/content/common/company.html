@@ -27,11 +27,6 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 											<dd>
 												<ul class="unitRating">
 													<li class="itemCurrent" style="width:<?php echo $user['vote']?>%"></li>
-													<li class="itemOne"><a href="#" title="1">1</a></li>
-													<li class="itemTwo"><a href="#" title="2">2</a></li>
-													<li class="itemThree"><a href="#" title="3">3</a></li>
-													<li class="itemFour"><a href="#" title="4">4</a></li>
-													<li class="itemFive"><a href="#" title="5">5</a></li>
 												</ul>
 												<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv)</p>
 											</dd>

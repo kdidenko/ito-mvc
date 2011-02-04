@@ -3,9 +3,11 @@ $categories = $mvc->getObject('category');
 $subcategories = $mvc->getObject('subcategory');
 ?>
 <form action="/manage-category.html" method="post">
+	<input type="hidden" name="selectCategory" />
+	<input type="hidden" name="selectSubcategory" />
 	<ul class="viewIList">
 		<li class="itemNewC"><a href="/new-category.html" class="linkLight" title="_i18n{New Category}">_i18n{New Category}</a></li>
-		<li class="itemNewSC"><a href="/new-subcategory.html" class="linkLight" title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
+		<li class="itemDelete"><button name="delCategory" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete Category}</button></li>
 	</ul>
 	<h2>_i18n{Category}</h2>
 	<div class="unitABlock">
@@ -21,7 +23,7 @@ $subcategories = $mvc->getObject('subcategory');
 			<?php if (count($categories)>0 && $categories!=NULL){
 			foreach($categories as $key => $category){ ?>
 				<tr>
-					<td><input type="checkbox" class="inpChk" /></td>
+					<td><input type="checkbox" class="inpChk" name="chkM" value="<?php echo $category[CategoryService::ID]; ?>" /></td>
 					<td><?php echo $category[CategoryService::ID] ?></td>
 					<td class="itemLast"><a class="linkLightTr" href="/edit-category.html?id=<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></td>
 				</tr>
@@ -34,6 +36,10 @@ $subcategories = $mvc->getObject('subcategory');
 		</table>
 		<div class="unitBtn"></div>
 	</div>
+	<ul class="viewIList">
+		<li class="itemNewSC"><a href="/new-subcategory.html" class="linkLight" title="_i18n{New SubCategory}">_i18n{New SubCategory}</a></li>
+		<li class="itemDelete"><button name="delSubCategory" onclick="return confirm('_i18n{You sure you want to delete?}');" >_i18n{Delete SubCategory}</button></li>
+	</ul>
 	<h2>_i18n{SubCategory}</h2>
 	<div class="unitABlock unitABlockLast">
 		<table cellpadding="0" cellspacing="0" class="viewList">

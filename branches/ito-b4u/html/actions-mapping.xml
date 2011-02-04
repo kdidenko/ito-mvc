@@ -167,8 +167,17 @@
 	</action>
 	
 	<action name="/new-category.html" id="newcategory" roles="AR">
-		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<controller class="com.itoglobal.eb4u.controllers.AdminContentController"  method="handleNewCategory"/>
 		<template name="index.html" path="templates/views/content/admin/newcategory.html" />
+		<forwards>
+			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
+	<action name="/new-subcategory.html" id="newcsubategory" roles="AR">
+		<controller class="com.itoglobal.eb4u.controllers.AdminContentController"  method="handleNewSubCategory"/>
+		<template name="index.html" path="templates/views/content/admin/newsubcategory.html" />
 		<forwards>
 			<target location="/manage-category.html" name="managecategory" condition="onsuccess"/>
 			<target condition="onsignedoff" location="/login.html"/>

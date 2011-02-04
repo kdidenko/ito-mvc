@@ -1,20 +1,42 @@
+<?php 
+$errors = $mvc->getObject(ContentController::ERROR);
+$success = $mvc->getObject(ContentController::STATUS);
+?>
+<?php if (!isset($success )){?>
 <div class="viewLight">
-	<h2>NEW CATEGORY</h2>
+	<h2>_i18n{New Category!}</h2>
 	<div class="unitABlock unitABlockLast">
-		<form action="/edit-category.html" method="POST">
+	<?php if (isset($errors )){?>
+		<div class="itemWarning">
+			<ul>
+				<li><?php echo $errors ?></li>
+			</ul>
+		</div>
+	<?php } ?>
+		<form action="/new-category.html" method="POST">
 			<div class="unitSnColumn">
 				<div class="itemForm">
-					<label>Name category:</label>
+					<label>_i18n{Category Name}:</label>
 					<div class="itemData">
-						<input class="inpTxt" type="text" name="itemCategory" value="" />
-						<input type="hidden" name="idCategory" />
+						<input class="inpTxt" type="text" name="category_name" value="<?php echo isset($_POST[CategoryService::CAT_NAME])?$_POST[CategoryService::CAT_NAME]:NULL;?>" />
 					</div>
 				</div>
 			</div>
 			<div class="unitBtn">
-				<button><span><strong>Save</strong></span></button>
+				<button><span><strong>_i18n{Save}</strong></span></button>
 				<button class="itemHide"><span><strong>_i18n{Discard}</strong></span></button>
 			</div>
 		</form>
 	</div>
 </div>
+<?php } else {?>
+<div class="viewLight">
+	<h2>_i18n{Thank you!}</h2>
+	<div class="unitABlock unitABlockLast">
+		<div class="itemOk">_i18n{Category saved!}</div>
+		<div class="unitBtn">
+			<button class="itemBack"><span><strong>_i18n{Close}</strong></span></button>
+		</div>
+	</div>
+</div>
+<?php }?>

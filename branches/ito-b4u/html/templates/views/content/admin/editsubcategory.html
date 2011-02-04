@@ -11,9 +11,7 @@ $success = $mvc->getObject(ContentController::STATUS);
 	<?php if (isset($errors )){?>
 		<div class="itemWarning">
 			<ul>
-				<?php foreach ($errors as $key => $value){?>
-					<li><?php echo $value ?></li>
-				<?php } ?>					
+				<li><?php echo $errors ?></li>
 			</ul>
 		</div>
 	<?php } ?>
@@ -35,7 +33,7 @@ $success = $mvc->getObject(ContentController::STATUS);
 					<label>_i18n{SubCategory Name}:</label>
 					<div class="itemData">
 						<input class="inpTxt" type="text" name="subcategory_name" value="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME]?>" />
-						<input type="hidden" name="id" value="<?php echo $category[SubCategoryService::ID]?>"/>
+						<input type="hidden" name="id" value="<?php echo $subcategory[SubCategoryService::ID]?>"/>
 					</div>
 				</div>
 

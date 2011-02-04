@@ -141,20 +141,29 @@ class AdminContentController extends ContentController {
 	public function handleManageCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		isset($requestParams[CategoryService::NEW_CAT]) ?  
-			CategoryService::createNewCat($requestParams[CategoryService::CATEGORY]) :
-				NULL;
-		isset($requestParams['delCategory']) ?  
-			CategoryService::deleteCategory($requestParams['delCategory']) :
-				NULL;
-				
-		isset($requestParams['editCategory']) ?  
-			CategoryService::deleteCategory($requestParams['editCategory']) :
-				NULL;
-				
-		isset($requestParams[SubCategoryService::NEW_SUBCAT])&&$requestParams[SubCategoryService::SUBCATEGORY] ? 
-			SubCategoryService::createNewSubCat($requestParams[SubCategoryService::SUBCATEGORY], $requestParams[SubCategoryService::CAT_ID]) :
-				NULL;
+		if(isset($requestParams['delCategory'])){  
+			print_r($requestParams);
+			/*
+			if (isset($requestParams["itemSelect"]) && count($requestParams["itemSelect"])>0){
+				$array = explode(',', $requestParams["itemSelect"]);
+				foreach ($array as $id){
+					CategoryService::deleteCategory($id);
+				}
+			}
+			*/
+		}
+
+		if(isset($requestParams['delSubCategory'])){  
+			print_r($requestParams);
+			/*
+			if (isset($requestParams["itemSelect"]) && count($requestParams["itemSelect"])>0){
+				$array = explode(',', $requestParams["itemSelect"]);
+				foreach ($array as $id){
+					CategoryService::deleteCategory($id);
+				}
+			}
+			*/
+		}
 		isset($requestParams['delSubCategory']) ?  
 			SubCategoryService::deleteSubCategory($requestParams['delSubCategory']) :
 				NULL;
@@ -169,12 +178,35 @@ class AdminContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleNewCategory($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset($_POST)&&$_POST!=NULL){
+			$length = strlen ($requestParams[CategoryService::CAT_NAME])  -   substr_count($requestParams[CategoryService::CAT_NAME], ' '); 
+			if (isset($requestParams[CategoryService::CAT_NAME])&&$requestParams[CategoryService::CAT_NAME]!=NULL&&$length>0) {
+				$where = CategoryService::CAT_NAME . "='" . $requestParams[CategoryService::CAT_NAME] . "'";
+				$catgories = CategoryService::getCategories($where);
+				if (isset($catgories)&&$catgories==NULL){
+					CategoryService::createNewCat($requestParams[CategoryService::CAT_NAME]);
+					$mvc->addObject ( ContentController::STATUS, true );
+				} else {
+					$mvc->addObject ( ContentController::ERROR, "_i18n{Such category already exist.}" );
+				}
+			} else {
+				$mvc->addObject ( ContentController::ERROR, "_i18n{Category name can't be empty.}" );
+			}
+		}
+
+		return $mvc;
+	}
+	
 	public function handleEditCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if(isset($requestParams[CategoryService::ID])){
 			$id = $requestParams[CategoryService::ID];
 			if (isset($_POST)&&$_POST!=NULL){
-				if (isset($requestParams[CategoryService::CAT_NAME])||$requestParams[CategoryService::CAT_NAME]==NULL) {
+				$length = strlen ($requestParams[CategoryService::CAT_NAME])  -   substr_count($requestParams[CategoryService::CAT_NAME], ' '); 
+				if (isset($requestParams[CategoryService::CAT_NAME])&&$requestParams[CategoryService::CAT_NAME]!=NULL&&$length>0) {
 					CategoryService::updateCategory($id,CategoryService::CAT_NAME,"'".$requestParams[CategoryService::CAT_NAME]."'");
 					$mvc->addObject ( ContentController::STATUS, true );
 				} else {
@@ -187,18 +219,50 @@ class AdminContentController extends ContentController {
 		return $mvc;
 	}
 	
+	public function handleNewSubCategory($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset($_POST)&&$_POST!=NULL){
+			$length = strlen ($requestParams[SubCategoryService::SUBCAT_NAME])  -   substr_count($requestParams[SubCategoryService::SUBCAT_NAME], ' '); 
+			if (isset($requestParams[SubCategoryService::SUBCAT_NAME])&&$requestParams[SubCategoryService::SUBCAT_NAME]!=NULL&&$length>0) {
+				$where = SubCategoryService::SUBCAT_NAME . "='" . $requestParams[SubCategoryService::SUBCAT_NAME] . "'";
+				$subcatgories = SubCategoryService::getSubCategories($where);
+				if (isset($subcatgories)&&$subcatgories==NULL){
+					SubCategoryService::createNewSubCat($requestParams[SubCategoryService::SUBCAT_NAME],$requestParams[SubCategoryService::CAT_ID]);
+					$mvc->addObject ( ContentController::STATUS, true );
+				} else {
+					$mvc->addObject ( ContentController::ERROR, "_i18n{Such SubCategory already exist in} <b>" . $subcatgories[0][CategoryService::CAT_NAME] . "</b> _i18n{Category}." );
+				}
+			} else {
+				$mvc->addObject ( ContentController::ERROR, "_i18n{SubCategory name can't be empty.}" );
+			}
+		}
+		
+		$categories = CategoryService::getCategories();
+		isset($categories) ? $mvc->addObject ( CategoryService::CATEGORY, $categories) : NULL;
+		
+		return $mvc;
+	}
+	
 	public function handleEditSubCategory($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if(isset($requestParams[SubCategoryService::ID])){
 			$id = $requestParams[SubCategoryService::ID];
 			if (isset($_POST)&&$_POST!=NULL){
-				if (isset($requestParams[SubCategoryService::SUBCAT_NAME])||$requestParams[SubCategoryService::SUBCAT_NAME]==NULL) {
-					$fields = array(0=>SubCategoryService::SUBCAT_NAME,
-									1=>SubCategoryService::CAT_ID);
-					$value = array(0=>$requestParams[SubCategoryService::SUBCAT_NAME],
-									1=>$requestParams[SubCategoryService::CAT_ID]);
-					SubCategoryService::updateSubCategory($id,$fields,$value);
-					$mvc->addObject ( ContentController::STATUS, true );
+				$length = strlen ($requestParams[SubCategoryService::SUBCAT_NAME])  -   substr_count($requestParams[SubCategoryService::SUBCAT_NAME], ' '); 
+				if (isset($requestParams[SubCategoryService::SUBCAT_NAME])&&$requestParams[SubCategoryService::SUBCAT_NAME]!=NULL&&$length>0) {
+					$where = SubCategoryService::SUBCAT_NAME . "='" . $requestParams[SubCategoryService::SUBCAT_NAME] . "'";
+					$subcatgories = SubCategoryService::getSubCategories($where);
+					if (isset($subcatgories)&&$subcatgories==NULL){
+						$fields = array(0=>SubCategoryService::SUBCAT_NAME,
+										1=>SubCategoryService::CAT_ID);
+						$value = array(0=>$requestParams[SubCategoryService::SUBCAT_NAME],
+										1=>$requestParams[SubCategoryService::CAT_ID]);
+						SubCategoryService::updateSubCategory($id,$fields,$value);
+						$mvc->addObject ( ContentController::STATUS, true );
+					} else {
+						$mvc->addObject ( ContentController::ERROR, "_i18n{Such SubCategory already exist in} <b>" . $subcatgories[0][CategoryService::CAT_NAME] . "</b> _i18n{Category}." );
+					}
 				} else {
 					$mvc->addObject ( ContentController::ERROR, "_i18n{SubCategory name can't be empty.}" );
 				}
@@ -212,6 +276,7 @@ class AdminContentController extends ContentController {
 		}
 		return $mvc;
 	}
+	
 	public function handleManageUsers($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		#update users info

@@ -181,11 +181,8 @@ if(jQuery)(function($){
 	};
 	$.fn.dataAn = function(params){
 		var conf = $.extend({
-			eBlock:'.unitCategoryEdit',
-			nBlock:'.unitCategoryNew',
 			tableBlock:'table.viewList',
 			hoverClass:'unitHover',
-			addCategory:'.itemNewC a',
 			noDataRow:'.unitNoData',
 			dataClass:'unitData',
 			linkWide:'.linkTr',
@@ -194,42 +191,52 @@ if(jQuery)(function($){
 		return this.each(function(){
 			var c=conf,o=$(this),f=this,v=[],e=null,n=null,t=null;
 			$.extend(f,{
-				getBlock:function(){return o.find(c.tableBlock)},
-				getRow:function(){return $('tbody tr:not('+c.noDataRow+')', f.getBlock())},
-				getHidden:function(){return $('input[name="itemSelect"]', o)},
-				advFunctRow:function(r){
-					$('input[type="checkbox"]', r).bind('click', function(e){var h=$(this);
-					if(h.attr('checked')){v.push(h.attr('value')); r.addClass('unitChecked')}else{v.splice($.inArray(h.attr('value'), v), 1); r.removeClass('unitChecked')}
-					f.getHidden().attr('value', v.toString()); e.stopImmediatePropagation();
-				});
+				getBlock:function(){return $(c.tableBlock, o)},
+				getRow:function(k){return $('tbody tr:not('+c.noDataRow+')', k)},
+				getHidden:function(h, hn){
+					return $('input[name="itemSelect'+hn+'"]', h).length ? $('input[name="itemSelect'+hn+'"]', h) : $('input[name="itemSelect"]', o);
+					/*if($('input[name="itemSelect'+hn+'"]', h).length){
+						z=$('input[name="itemSelect'+hn+'"]', h);
+					}else{z=$('input[name="itemSelect"]', o)}
+					return z;*/ 
+				},
+				advFunctRow:function(r, rv, rb){
+					$('input[type="checkbox"]', r).bind('click', function(e){
+						var h=$(this), a;
+						if($('input[name="itemSelect'+h.attr('name')+'"]', rb).length){
+							n=$('input[name="itemSelect'+h.attr('name')+'"]', rb); a=rv;
+						}else{
+							n=$('input[name="itemSelect"]', o); a=v;
+						}
+						if(h.attr('checked')){a.push(h.attr('value')); r.addClass('unitChecked')}else{a.splice($.inArray(h.attr('value'), a), 1); r.removeClass('unitChecked')}
+						n.attr('value', a.toString()); e.stopImmediatePropagation();
+					});
 				$('a', r).bind('click', function(e){e.stopImmediatePropagation()})
 				}
-				//getHBlock:function(){e=$(c.eBlock, o).remove()},
-				//getNBlock:function(){n=$(c.nBlock, o).remove()},
-				//bindCategory:function(k, h, r){if(t!=null){t.removeClass('hideElement')}; t=r.before(h); k.remove()}
 			});
-			if(f.getBlock().length){
-				//f.getHBlock(); f.getNBlock();
-				/*$(c.addCategory, o).bind('click', function(){
-					f.bindCategory(e, n, f.getRow().eq(0)); return false
-				})*/
-				$('tbody tr:odd', f.getBlock()).addClass('unitOdd');
-				f.getRow().each(function(){var i=$(this);
-					i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
-					if($('a'+c.linkWide, i).length){
-						i.addClass(c.dataClass);
-						var l=$(c.linkWide, i); l.replaceWith(l.text());
-						i.bind('click', function(){document.location=l.attr('href')});
-						f.advFunctRow(i);
-					}
-					if($('a'+c.linkLightBox, i).length){
-						i.addClass(c.dataClass);
-						var l=$(c.linkLightBox, i); l.replaceWith(l.text());
-						i.lpAn({loadContent:l.attr('href')});
-						f.advFunctRow(i);
-					}
+			//if(f.getBlock().length){
+				f.getBlock().each(function(){
+					var vi=[], b=$(this);
+					$('tbody tr:odd', b).addClass('unitOdd');
+					f.getRow(b).each(function(){var i=$(this);
+						i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
+						if($('a'+c.linkWide, i).length){
+							i.addClass(c.dataClass);
+							var l=$(c.linkWide, i); l.replaceWith(l.text());
+							i.bind('click', function(){document.location=l.attr('href')});
+							f.advFunctRow(i, vi, b);
+						}
+						if($('a'+c.linkLightBox, i).length){
+							i.addClass(c.dataClass);
+							var l=$(c.linkLightBox, i); l.replaceWith(l.text());
+							i.lpAn({loadContent:l.attr('href')});
+							f.advFunctRow(i, vi, b);
+						}
+					})
 				})
-			}
+				
+				
+			//}
 		})
 	};
 	$.fn.rtfAn = function(params){

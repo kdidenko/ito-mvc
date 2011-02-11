@@ -121,10 +121,8 @@ class AdminContentController extends ContentController {
 				$vals = array();
 				$fields[] .= StaticBlockService::BLOCK_TITLE;
 				$fields[] .= StaticBlockService::BLOCK_DESC;
-				$fields[] .= StaticBlockService::BLOCK_PAGE;
 				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_TITLE], ENT_QUOTES);
 				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_DESC], ENT_QUOTES);
-				$vals[] .= htmlspecialchars($requestParams[StaticBlockService::BLOCK_PAGE], ENT_QUOTES);
 				StaticBlockService::updateBlock($id, $fields, $vals);
 				isset($requestParams[StaticBlockService::SAVE]) ? $this->forwardActionRequest ( $location ) : NULL;
 				$mvc->addObject ( self::STATUS, 'successful' );
@@ -133,7 +131,22 @@ class AdminContentController extends ContentController {
 			$block = StaticBlockService::getBlockInfo($id);
 			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
 		}
-				
+		
+		if(isset($requestParams['preview'])){
+			$location = $this->onRole( $actionParams );
+			$this->forwardActionRequest ( $location );
+		}
+		return $mvc;
+	}
+	
+	public function handleBlockPreview($actionParams, $requestParams){
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$location = $this->onSuccess( $actionParams );
+		
+		if(isset($requestParams[StaticBlockService::ID])){
+			$block = StaticBlockService::getBlockInfo($requestParams[StaticBlockService::ID]);
+			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
+		}
 		
 		return $mvc;
 	}

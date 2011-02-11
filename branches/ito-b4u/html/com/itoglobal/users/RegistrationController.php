@@ -249,6 +249,9 @@ class RegistrationController extends SecureActionControllerImpl {
 		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
 		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
 		
+		$plans = PlanService::getPlans();
+		isset ( $plans ) ? $mvc->addObject ( PlanService::PLAN, $plans ) : null;
+		
 		return $mvc;
 	}
 	

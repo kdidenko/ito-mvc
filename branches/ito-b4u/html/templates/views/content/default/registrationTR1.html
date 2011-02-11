@@ -234,12 +234,10 @@
 										<?php } ?>
 									</tr>
 									<tr>
-										<th>_i18n{Standard Business Directory}</th>
-										<td>_i18n{included}</td>
-										<td>_i18n{included}</td>
-										<td>_i18n{included}</td>
-										<td>_i18n{included}</td>
-										<td>_i18n{included}</td>
+										<th>_i18n{Business Directory (Yellow Pages)}</th>
+										<?php foreach($plans as $key=>$plan) { ?>
+										<td><?php echo $plan[PlanService::YELLOW_PAGES]==0 ? "_i18n{no}" : "_i18n{included}" ?></td>
+										<?php } ?>
 									</tr>
 								</table>
 								<div class="unitSnColumn">

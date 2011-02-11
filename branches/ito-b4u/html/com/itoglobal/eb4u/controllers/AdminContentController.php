@@ -142,32 +142,23 @@ class AdminContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if(isset($requestParams['delCategory'])){  
-			print_r($requestParams);
+			print_r($requestParams['itemSelectCategory']);
+			print_r($requestParams['itemSelectSubCategory']);
 			/*
-			if (isset($requestParams["itemSelect"]) && count($requestParams["itemSelect"])>0){
-				$array = explode(',', $requestParams["itemSelect"]);
+			if (isset($requestParams['itemSelectCategory']) && strlen($requestParams['itemSelectCategory'])>0){
+				$array = explode(',', $requestParams["itemSelectCategory"]);
 				foreach ($array as $id){
 					CategoryService::deleteCategory($id);
 				}
 			}
-			*/
-		}
-
-		if(isset($requestParams['delSubCategory'])){  
-			print_r($requestParams);
-			/*
-			if (isset($requestParams["itemSelect"]) && count($requestParams["itemSelect"])>0){
-				$array = explode(',', $requestParams["itemSelect"]);
+			if (isset($requestParams['itemSelectSubCategory']) && strlen($requestParams['itemSelectSubCategory'])>0){
+				$array = explode(',', $requestParams["itemSelectSubCategory"]);
 				foreach ($array as $id){
-					CategoryService::deleteCategory($id);
+					SubCategoryService::deleteSubCategory($id);
 				}
 			}
 			*/
 		}
-		isset($requestParams['delSubCategory']) ?  
-			SubCategoryService::deleteSubCategory($requestParams['delSubCategory']) :
-				NULL;
-				
 				
 		$categories = CategoryService::getCategories();
 		isset($categories) ? $mvc->addObject ( CategoryService::CATEGORY, $categories) : NULL;

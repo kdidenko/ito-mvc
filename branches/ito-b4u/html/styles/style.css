@@ -180,19 +180,6 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.wrapSSearch .unitStep ol {width:220px; padding:0}
 	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
 	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
-/* rating style */
-.unitRating, .unitRating a:hover, .unitRating li.itemCurrent, .unitRating li a.itemSelect {background-image:url(../images/ratingIcon.gif)}
-	.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
-	.unitRating li {display:inline}
-	.unitRating a, .unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
-	.unitRating li.itemCurrent {background-position:0 0}
-	.unitRating a:hover {background-position:0 -60px}
-	.unitRating li.itemOne a {width:20%; z-index:6}
-	.unitRating li.itemTwo a {width:40%; z-index:5}
-	.unitRating li.itemThree a {width:60%; z-index:4}
-	.unitRating li.itemFour a {width:80%; z-index:3}
-	.unitRating li.itemFive a {width:100%; z-index:2}
-	.unitRating li a.itemSelect {background-position:0 -60px}
 /* small video */
 .unitVideo {padding:0 12px 5px 12px}
 	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
@@ -435,6 +422,10 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitLSearch .unitEqColumns dt {width:85px; float:left; font-weight:bold}
 	.unitLSearch .unitEqColumns dd {width:136px; float:right}
 	.unitLSearch .unitEqColumns dd p {padding:5px 0}
+	
+	.unitLSearch .unitEqColumns .unitRating dl {width:126px}
+	.unitLSearch .unitEqColumns .unitRating dt {width:126px; font-weight:normal; text-align:left}
+	.unitLSearch .unitEqColumns .unitRating dd {width:75px}
 
 .unitPagination {background:#EFEFEF; width:654px; overflow:hidden; padding:5px 0}
 .unitTPagination {border-top:1px dotted #393939}
@@ -476,7 +467,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.unitDRight .unitEqColumns {float:left; width:315px; padding:4px 0}
 	.unitDRight .unitEqColumns dl {width:315px}
 	.unitDRight .unitEqColumns dd {width:195px}
-		.unitDRight .unitEqColumns dd p {padding:3px 0 0 0}
+		/*.unitDRight .unitEqColumns dd p {padding:3px 0 0 0}*/
 	/*.unitDRight .unitEqColumns dl.itemSmall {padding:1px 0; font-size:12px; line-height:normal}*/
 	.unitDRight .unitEqDesc {float:right; width:305px; padding:4px 0 4px 10px}
 	.unitDRight .unitEqDesc dl {width:305px}
@@ -528,8 +519,46 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 		.unitDComment .itemRating {padding:5px 10px 10px 0; float:right; font-size:12px}
 	.unitABlock .viewDComment {padding:0 12px 5px 12px}
 	.unitABlock .unitDComment, .unitABlock .unitDComment .itemTitle {width:667px}
+	.unitABlock .unitDComment .itemText {width:450px}
 	.viewDProfile {padding:10px 12px 5px 12px}
 
+/* rating style */
+.unitRating {}
+	.simpleRating {}
+		.simpleRating ul, .simpleRating ul a:hover, .simpleRating ul li.itemCurrent, .simpleRating ul li a.itemSelect {background-image:url(../images/ratingIcon.gif)}
+		.simpleRating ul {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
+		.simpleRating ul li {display:inline}
+		.simpleRating ul a, .simpleRating ul li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
+		.simpleRating ul li.itemCurrent {background-position:0 0}
+		.simpleRating ul a:hover {background-position:0 -60px}
+		.simpleRating ul li.itemOne a {width:20%; z-index:6}
+		.simpleRating ul li.itemTwo a {width:40%; z-index:5}
+		.simpleRating ul li.itemThree a {width:60%; z-index:4}
+		.simpleRating ul li.itemFour a {width:80%; z-index:3}
+		.simpleRating ul li.itemFive a {width:100%; z-index:2}
+		.simpleRating ul li a.itemSelect {background-position:0 -60px}
+		.simpleRating p {padding:3px 0 0 0}
+	.extendRating {display:none}
+		.extendRating dl, .unitDRight .extendRating dl {overflow:hidden; width:195px; padding:2px 0 0 0}
+		.extendRating dt {padding:0; float:left; width:115px; font-size:12px; font-weight:normal; text-align:right}
+		.extendRating dd, .unitDRight .extendRating dd {width:75px; height:15px; float:right; padding:2px 0 0 0; background:url(../images/ratingSIcon.gif) repeat-x 0 -18px}
+		.extendRating dd span {display:block; height:15px; background:url(../images/ratingSIcon.gif) repeat-x 0 0}
+		.extendRating p {text-align:right; padding:0}
+		.simpleRating p a, .extendRating p a {font-size:11px; color:#9F0307; text-decoration:underline}
+		.simpleRating p a:hover .extendRating p a:hover {text-decoration:none}
+/*
+.unitRating, .unitRating a:hover, .unitRating li.itemCurrent, .unitRating li a.itemSelect {background-image:url(../images/ratingIcon.gif)}
+	.unitRating {width:105px; height:20px; background-position:0 -30px; overflow:hidden; position:relative}
+	.unitRating li {display:inline}
+	.unitRating a, .unitRating li.itemCurrent {position:absolute; top:0; left:0; text-indent:-900px; height:20px; line-height:20px; outline:none; overflow:hidden; border:none; font-size:20px}
+	.unitRating li.itemCurrent {background-position:0 0}
+	.unitRating a:hover {background-position:0 -60px}
+	.unitRating li.itemOne a {width:20%; z-index:6}
+	.unitRating li.itemTwo a {width:40%; z-index:5}
+	.unitRating li.itemThree a {width:60%; z-index:4}
+	.unitRating li.itemFour a {width:80%; z-index:3}
+	.unitRating li.itemFive a {width:100%; z-index:2}
+	.unitRating li a.itemSelect {background-position:0 -60px}*/
 /* light box style */
 #overlayLightBox {position:absolute; top:0; left:0; width:100%; z-index:1100; display:none}
 #tmpLightBox {padding:0; margin:0; border:0; overflow:auto; display:none}

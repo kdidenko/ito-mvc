@@ -448,6 +448,15 @@
 		</forwards>
 	</action>
 	
+	<action name="/block-preview.html" id="blockpreview" roles="AR">
+		<controller class="com.itoglobal.eb4u.controllers.AdminContentController"  method="handleBlockPreview"/>
+		<template name="index.html" path="templates/views/content/admin/blockpreview.html" />
+		<forwards>
+			<target location="/manage-static-block.html" name="managestaticblock" condition="onsuccess"/>
+			<target condition="onsignedoff" location="/login.html"/>
+		</forwards>
+	</action>
+	
 	<action name="/new-block.html" id="newblock" roles="AR">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
@@ -462,6 +471,7 @@
 		<template name="index.html" path="templates/layout-two-columns-left.html" />
 		<forwards>
 			<target location="/manage-static-block.html" name="home" condition="onsuccess"/>
+			<target location="/block-preview.html" name="home" condition="onrole"/>
 			<target condition="onsignedoff" location="/login.html"/>
 		</forwards>
 	</action>

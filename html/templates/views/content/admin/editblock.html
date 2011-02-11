@@ -3,9 +3,8 @@ $block = $mvc->getObject(StaticBlockService::STATIC_BLOCK);
 $status = $mvc->getObject(AdminContentController::STATUS);
 ?>
 <ul class="viewIList viewITList">
-				<li class="itemDelete"><a href="/manage-static-block.html?del=<?php echo $block[StaticBlockService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
-			</ul>
-</form>
+	<li class="itemDelete"><a href="/manage-static-block.html?del=<?php echo $block[StaticBlockService::ID]; ?>" onclick="return confirm('_i18n{You sure you want to delete?}');" title="_i18n{Delete}">_i18n{Delete}</a></li>
+</ul>
 <h2>_i18n{Edit Block}</h2>
 <div class="unitABlock unitABlockLast">
 <?php if (isset($status )){?>
@@ -25,12 +24,6 @@ $status = $mvc->getObject(AdminContentController::STATUS);
 				</div>
 			</div>
 			<div class="itemForm">
-				<label>_i18n{Page}:</label>
-				<div class="itemData">
-					<input class="inpTxt" type="text" name="<?php echo StaticBlockService::BLOCK_PAGE ?>" value="<?php echo isset($block[StaticBlockService::BLOCK_PAGE]) ? $block[StaticBlockService::BLOCK_PAGE] : NULL; ?>"/>
-				</div>
-			</div>
-			<div class="itemForm">
 				<label>_i18n{Body}:</label>
 				<div class="itemData"><textarea class="areaTxt" rows="10" cols="82" name="<?php echo StaticBlockService::BLOCK_DESC ?>"><?php echo isset($block[StaticBlockService::BLOCK_DESC]) ? $block[StaticBlockService::BLOCK_DESC] : NULL; ?></textarea></div>
 			</div>
@@ -38,7 +31,7 @@ $status = $mvc->getObject(AdminContentController::STATUS);
 		<div class="unitBtn">
 			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
 			<button name="save_continue"><span><strong>_i18n{Save and Continue}</strong></span></button>
-			<button name="preview"><span><strong>_i18n{Preview}</strong></span></button>
+			<a href="/block-preview.html?id=<?php echo $block[StaticBlockService::ID];?>"><span><strong>_i18n{Preview}</strong></span></a>
 			<button name="back"><span><strong>_i18n{Discard}</strong></span></button>
 		</div>
 	</form>

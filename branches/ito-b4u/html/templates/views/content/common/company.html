@@ -30,32 +30,32 @@ $feedbacks = $mvc->getObject(CompanyService::COMPANY_FEEDBACK);
 														<ul>
 															<li class="itemCurrent" style="width:<?php echo $user['vote']?>%"></li>
 														</ul>
-														<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv) <a href="#" title="Extended">Extended</a></p>
+														<p><strong><?php echo $user['count']?></strong> (<?php echo round($user['vote'])?>% positiv) <?php if ($user['vote']!=NULL){?><a href="#" title="Extended">Extended</a><?php } ?></p>
 													</div>
 													<div class="extendRating">
 														<dl>
-															<dt>Quality of work:</dt>
-															<dd><span class="itemCurrent" style="width:20%"></span></dd>
+															<dt>_i18n{Quality of work}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE1] ?>%"></span></dd>
 														</dl>
 														<dl>
-															<dt>Reliability:</dt>
-															<dd><span class="itemCurrent" style="width:90%"></span></dd>
+															<dt>_i18n{Reliability}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE2] ?>%"></span></dd>
 														</dl>
 														<dl>
-															<dt>Cleanliness:</dt>
-															<dd><span class="itemCurrent" style="width:78%"></span></dd>
+															<dt>_i18n{Cleanliness}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE3] ?>%"></span></dd>
 														</dl>
 														<dl>
-															<dt>Price/Performance:</dt>
-															<dd><span class="itemCurrent" style="width:36%"></span></dd>
+															<dt>_i18n{Price/Performance}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE4] ?>%"></span></dd>
 														</dl>
 														<dl>
-															<dt>Project delivered:</dt>
-															<dd><span class="itemCurrent" style="width:78%"></span></dd>
+															<dt>_i18n{Project delivered}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE5] ?>%"></span></dd>
 														</dl>
 														<dl>
-															<dt>Consulting Services:</dt>
-															<dd><span class="itemCurrent" style="width:78%"></span></dd>
+															<dt>_i18n{Consulting Services}:</dt>
+															<dd><span class="itemCurrent" style="width:<?php echo $user[CompanyService::VOTE6] ?>%"></span></dd>
 														</dl>
 														<p><a href="#" title="Avarage">Avarage</a></p>
 													</div>

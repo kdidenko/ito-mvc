@@ -5,7 +5,8 @@ $regions = $mvc->getObject(RegionService::REGIONS);
 $remind_regions = $mvc->getObject(RemindService::REGION_ID);
 $errors = $mvc->getObject(ContentController::ERROR);
 $message = $mvc->getObject(UsersService::ON_SUCCESS);
-$role = $mvc->getObject(UsersService::ROLE); 
+$role = $mvc->getObject(UsersService::ROLE);
+$plans = $mvc->getObject(PlanService::PLAN);
 ?>
 
 <div class="wrapLogin">
@@ -101,12 +102,20 @@ $role = $mvc->getObject(UsersService::ROLE);
 												</div>
 											</div>
 											<div class="itemForm">
-												<label for="frmR7">Auftragsvolumen:</label>
+												<label for="frmCp">_i18n{Price}:</label>
 												<div class="itemData">
 													<select id="frmCp" name="plan">
-														<option>0-1.000 Euro</option>
-														<option>1.000-5.000 Euro</option>
-														<option>5.000-unbegrenzt</option>
+							<?php					if (isset($plans) && $plans!=NULL){ 
+														foreach($plans as $key=>$plan){ ?>
+															<option value="<?php echo $plan[PlanService::ID] ?>">
+																<?php if ($plan[PlanService::TENDER_TO]!=0) { ?>
+																	_i18n{up to} <?php echo $plan[PlanService::TENDER_TO] ?> &euro;
+																<?php } else { ?>
+																 	_i18n{up to} <?php echo $plans[$key-1][PlanService::TENDER_TO] ?> &euro; _i18n{and more} 
+																 <?php } ?>
+															</option>
+							<?php 						}
+													} ?>
 													</select>
 												</div>
 											</div>

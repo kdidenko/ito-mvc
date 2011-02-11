@@ -195,10 +195,6 @@ if(jQuery)(function($){
 				getRow:function(k){return $('tbody tr:not('+c.noDataRow+')', k)},
 				getHidden:function(h, hn){
 					return $('input[name="itemSelect'+hn+'"]', h).length ? $('input[name="itemSelect'+hn+'"]', h) : $('input[name="itemSelect"]', o);
-					/*if($('input[name="itemSelect'+hn+'"]', h).length){
-						z=$('input[name="itemSelect'+hn+'"]', h);
-					}else{z=$('input[name="itemSelect"]', o)}
-					return z;*/ 
 				},
 				advFunctRow:function(r, rv, rb){
 					$('input[type="checkbox"]', r).bind('click', function(e){
@@ -214,29 +210,25 @@ if(jQuery)(function($){
 				$('a', r).bind('click', function(e){e.stopImmediatePropagation()})
 				}
 			});
-			//if(f.getBlock().length){
-				f.getBlock().each(function(){
-					var vi=[], b=$(this);
-					$('tbody tr:odd', b).addClass('unitOdd');
-					f.getRow(b).each(function(){var i=$(this);
-						i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
-						if($('a'+c.linkWide, i).length){
-							i.addClass(c.dataClass);
-							var l=$(c.linkWide, i); l.replaceWith(l.text());
-							i.bind('click', function(){document.location=l.attr('href')});
-							f.advFunctRow(i, vi, b);
-						}
-						if($('a'+c.linkLightBox, i).length){
-							i.addClass(c.dataClass);
-							var l=$(c.linkLightBox, i); l.replaceWith(l.text());
-							i.lpAn({loadContent:l.attr('href')});
-							f.advFunctRow(i, vi, b);
-						}
-					})
+			f.getBlock().each(function(){
+				var vi=[], b=$(this);
+				$('tbody tr:odd', b).addClass('unitOdd');
+				f.getRow(b).each(function(){var i=$(this);
+					i.hover(function(){i.addClass(c.hoverClass)}, function(){i.removeClass(c.hoverClass)})
+					if($('a'+c.linkWide, i).length){
+						i.addClass(c.dataClass);
+						var l=$(c.linkWide, i); l.replaceWith(l.text());
+						i.bind('click', function(){document.location=l.attr('href')});
+						f.advFunctRow(i, vi, b);
+					}
+					if($('a'+c.linkLightBox, i).length){
+						i.addClass(c.dataClass);
+						var l=$(c.linkLightBox, i); l.replaceWith(l.text());
+						i.lpAn({loadContent:l.attr('href')});
+						f.advFunctRow(i, vi, b);
+					}
 				})
-				
-				
-			//}
+			})
 		})
 	};
 	$.fn.rtfAn = function(params){
@@ -344,11 +336,20 @@ if(jQuery)(function($){
 	};
 	$.fn.ratingAn = function(params){
 		var conf = $.extend({
-			valueInput:'input[type="hidden"]'
+			valueInput:'input[type="hidden"]',
+			simpleItem:'.simpleRating',
+			extendItem:'.extendRating'				
 		}, params);
 		return this.each(function(){
-			var o=$(this),c=conf,f=this,v=$(c.valueInput, o);
-			$.extend(f,{getAllItem:function(){return $('li a', o)}});
+			var o=$(this),c=conf,f=this,v=$(c.valueInput, o),s=$(c.simpleItem, o),e=$(c.extendItem, o);
+			$.extend(f,{
+				getAllItem:function(){return $('li a', o)},
+				clickItem:function(k, h){
+					$('p a',k).bind('click',function(){
+						k.hide(); h.show(); return false
+					});
+				}
+			});
 			if(v.length==1){
 				f.getAllItem().each(function(){
 					$(this).bind('click', function(){
@@ -359,6 +360,7 @@ if(jQuery)(function($){
 					if(v.val()==$(this).html()){$(this).trigger('click')}
 				})
 			}
+			if(s.length&&e.length){f.clickItem(s, e); f.clickItem(e, s)}
 		})
 	};
 	$.fn.tabsAn = function(params){
@@ -398,7 +400,8 @@ if(jQuery)(function($){
 							v.html(d);
 							w.animate({height:v.children().outerHeight()}, c.timeAnimate, function(){
 								wi.html(d).css({height:'auto'}); v.empty();
-								
+								w.height('auto');
+								$('.unitRating', wi).ratingAn();
 							});
 						}
 					})

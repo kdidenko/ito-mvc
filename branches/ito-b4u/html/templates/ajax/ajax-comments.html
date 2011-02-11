@@ -34,10 +34,41 @@ if(isset($feedbacks)&&$feedbacks!=null){ ?>
 				<p><strong>_i18n{Order}:</strong> <a href="/view-order.html?id=<?php echo $feedback[OrdersService::HASH] ?>" title="<?php echo $feedback[OrdersService::ORDER_NAME] ?>"><?php echo $feedback[OrdersService::ORDER_NAME] ?></a></p>
 			</div>
 			<div class="itemRating">
-				<ul class="unitRating">
-					<li class="itemCurrent" style="width:<?php echo $feedback[CompanyService::VOTE] ?>%"></li>
-				</ul>
-				<p><strong>1</strong> (<?php echo $feedback[CompanyService::VOTE] ?>% positiv)</p>
+				<div class="unitRating">
+					<div class="simpleRating">
+						<ul>
+							<li class="itemCurrent" style="width:<?php echo $feedback[CompanyService::VOTE] ?>%"></li>
+						</ul>
+						<p><strong>1</strong> (<?php echo $feedback[CompanyService::VOTE] ?>% positiv) <a href="#" title="Extended">Extended</a></p>
+					</div>
+					<div class="extendRating">
+						<dl>
+							<dt>Quality of work:</dt>
+							<dd><span class="itemCurrent" style="width:20%"></span></dd>
+						</dl>
+						<dl>
+							<dt>Reliability:</dt>
+							<dd><span class="itemCurrent" style="width:90%"></span></dd>
+						</dl>
+						<dl>
+							<dt>Cleanliness:</dt>
+							<dd><span class="itemCurrent" style="width:78%"></span></dd>
+						</dl>
+						<dl>
+							<dt>Price/Performance:</dt>
+							<dd><span class="itemCurrent" style="width:36%"></span></dd>
+						</dl>
+						<dl>
+							<dt>Project delivered:</dt>
+							<dd><span class="itemCurrent" style="width:78%"></span></dd>
+						</dl>
+						<dl>
+							<dt>Consulting Services:</dt>
+							<dd><span class="itemCurrent" style="width:78%"></span></dd>
+						</dl>
+						<p><a href="#" title="Avarage">Avarage</a></p>
+					</div>
+				</div>
 			</div>
 		</div>
 	<?php } ?>

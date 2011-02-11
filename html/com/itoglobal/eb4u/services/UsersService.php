@@ -204,6 +204,12 @@ class UsersService {
 		$fields .= $company==true ? 
 				', ' . PlanService::PLAN . '.' . PlanService::YELLOW_PAGES . 
 				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
+				SUM( company_feedback.vote1 ) / COUNT( company_feedback.vote1 )*20 AS vote1,
+				SUM( company_feedback.vote2 ) / COUNT( company_feedback.vote2 )*20 AS vote2,
+				SUM( company_feedback.vote3 ) / COUNT( company_feedback.vote3 )*20 AS vote3,
+				SUM( company_feedback.vote4 ) / COUNT( company_feedback.vote4 )*20 AS vote4,
+				SUM( company_feedback.vote5 ) / COUNT( company_feedback.vote5 )*20 AS vote5,
+				SUM( company_feedback.vote6 ) / COUNT( company_feedback.vote6 )*20 AS vote6,
 				COUNT( company_feedback.vote ) AS count" : 
 					NULL;
 		$from = isset ( $from ) ? $from : self::USERS . 

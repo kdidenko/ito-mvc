@@ -1,25 +1,50 @@
+<?php
+$errors = $mvc->getObject('error');
+$success = $mvc->getObject('success');
+?>
+<?php if (!isset($success )){?>
 <div class="viewLight">
-	<h2>New certificate</h2>
+	<h2>_i18n{New certificate}</h2>
 	<div class="unitABlock unitABlockLast">
-		<form method="POST">
+	<?php if (isset($errors )){?>
+		<div class="itemWarning">
+			<ul>
+				<?php foreach ($errors as $key => $value){?>
+					<li><?php echo $value ?></li>
+				<?php } ?>					
+			</ul>
+		</div>
+	<?php } ?>
+		<form method="POST" action="/new-profile-certificate.html" enctype="multipart/form-data">
 			<div class="unitSnColumn">
 				<div class="itemForm">
-					<label>Description:</label>
+					<label>_i18n{Description}:</label>
 					<div class="itemData">
-						<input class="inpTxt" type="text" value=""/>
+						<input class="inpTxt" type="text" name="certificate_titile" value="<?php if (isset($_POST['certificate_titile']))echo $_POST['certificate_titile'];?>"/>
 					</div>
 				</div>
 				<div class="itemForm">
-					<label>File:</label>
+					<label>_i18n{File}:</label>
 					<div class="itemData">
-						<input class="inpTxt" type="file" value=""/>
+						<input class="inpTxt" type="file" name="file" />
 					</div>
 				</div>
 			</div>
 			<div class="unitBtn">
-				<button><span><strong>_i18n{Send}</strong></span></button>
+				<button><span><strong>_i18n{Save}</strong></span></button>
 				<button class="itemHide"><span><strong>_i18n{Discard}</strong></span></button>
 			</div>
 		</form>
 	</div>
 </div>
+<?php } else {?>
+<div class="viewLight">
+	<h2>_i18n{Thank you!}</h2>
+	<div class="unitABlock unitABlockLast">
+		<div class="itemOk">_i18n{Certificate saved!}</div>
+		<div class="unitBtn">
+			<button class="itemBack"><span><strong>_i18n{Close}</strong></span></button>
+		</div>
+	</div>
+</div>
+<?php }?>

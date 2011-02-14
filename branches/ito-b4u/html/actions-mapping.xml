@@ -438,17 +438,22 @@
 	</action>
 	
 	<action name="/new-profile-image.html" id="newprofileimage">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.eb4u.controllers.TradesmanContentController"  method="handleNewProfileImage"/>
 		<template name="index.html" path="templates/ajax/new-profile-image.html" />
 	</action>
 	
-	<action name="/new-profile-certificate.html" id="newprofilecertificate">
+	<action name="/storage/uploads/users/*" id="download">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="/storage/uploads/users/$1" />
+	</action>
+	
+	<action name="/new-profile-certificate.html" id="newprofilecertificate">
+		<controller class="com.itoglobal.eb4u.controllers.TradesmanContentController"  method="handleNewProfileCertificate"/>
 		<template name="index.html" path="templates/ajax/new-profile-certificate.html" />
 	</action>
 	
 	<action name="/new-profile-project.html" id="newprofileproject">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.eb4u.controllers.TradesmanContentController"  method="handleNewProfileProject"/>
 		<template name="index.html" path="templates/ajax/new-profile-project.html" />
 	</action>
 	<!-- end of ajax part -->

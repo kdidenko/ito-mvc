@@ -40,6 +40,14 @@ class ValidationService {
 		return $result;
 	}
 	
+	public static function checkFileSize($file) {
+		$result = false;
+		$file_size = FILE_SIZE;
+		$result = $file ['size'] != 0 and $file ['size'] <= $file_size ?
+			false:
+				"_i18n{Allowed file size} $file_size.";
+		return $result;
+	}
 }
 
 ?>

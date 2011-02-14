@@ -37,6 +37,14 @@ class StorageService {
 	 */
 	const USER_PROFILE = '/profile/';
 	/**
+	 * @var string - projects directory name 
+	 */
+	const USER_PROJECTS = '/projects/';
+	/**
+	 * @var string - certificates directory name 
+	 */
+	const USER_CARTIFICATES = '/certificates/';
+	/**
 	 * @var string - default user avatar directory name 
 	 */
 	const DEF_USER_AVATAR = 'storage/uploads/default-avatar.jpg';

@@ -435,7 +435,22 @@
 	<action name="/feedback.html" id="feedback">
 		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleFeedback"/>
 		<template name="index.html" path="templates/ajax/feedback.html" />
-	</action>	
+	</action>
+	
+	<action name="/new-profile-image.html" id="newprofileimage">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/ajax/new-profile-image.html" />
+	</action>
+	
+	<action name="/new-profile-certificate.html" id="newprofilecertificate">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/ajax/new-profile-certificate.html" />
+	</action>
+	
+	<action name="/new-profile-project.html" id="newprofileproject">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<template name="index.html" path="templates/ajax/new-profile-project.html" />
+	</action>
 	<!-- end of ajax part -->
 	
 	<!-- admin part -->

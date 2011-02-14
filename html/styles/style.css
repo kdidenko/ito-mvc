@@ -371,6 +371,9 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.viewIList li.itemNewC {background-position:13px -225px}
 	.viewIList li.itemNewSC {background-position:13px -270px}
 	.viewIList li.itemNewB {background-position:13px -316px}
+	.viewIList li.itemNewI {background-position:13px -759px}
+	.viewIList li.itemNewP {background-position:13px -577px}
+	.viewIList li.itemNewS {background-position:13px -623px}
 /*	.viewIList li.itemArhiv a, .viewIList li.itemArhiv button {background-position:3px -363px}*/
 
 /* ------------------ login style ------------------ */
@@ -508,7 +511,7 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 	.tabsLoading {position:absolute; top:50%; left:50%; width:32px; height:32px; margin-top:-16px; margin-left:-16px; cursor:pointer; overflow:hidden; z-index:1104; display:none}
 		.tabsLoading div {position:absolute; top:0; left:0; width:32px; height:480px; background-image:url(../images/preloadBg.gif)}
 	
-	.viewDComment {padding:10px 12px 5px 12px}
+	.viewDComment {padding:10px 0 5px 12px}
 	.unitDComment {overflow:hidden; width:910px; background:#EFEFEF; margin:0 0 1px 0}
 	.viewDComment .unitOdd {background:#F8F8F8}
 		.unitDComment .itemTitle {overflow:hidden; width:910px; border-bottom:1px solid #999999; padding:5px 0}
@@ -603,3 +606,21 @@ button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px
 .leftLightBox:hover, .rightLightBox:hover {visibility:visible}
 .leftLightBox:hover span {left:20px}
 .rightLightBox:hover span {left:auto; right:20px}*/
+
+.unitRef {width:676px; float:left; padding:0 4px 0 11px}
+	.unitRef h3 {padding:0 0 8px 0}
+	.unitRef .unitImg {width:214px; float:left; padding:0 11px 11px 0}
+	.unitRef .unitImg p {padding:5px 0 0 0}
+	.unitRef .unitImg img {vertical-align:top; width:202px; border:1px solid #999999}
+	.unitRef .unitProject, .unitRef .unitCertificate {width:670px; float:left; padding:0 0 11px 0}
+	.unitRef .unitProject .innerP a {font-weight:bold; background:url(../images/actionIcon.gif) no-repeat 0 -669px; padding:0 0 0 18px}
+	.unitRef .unitCertificate .innerP a {font-weight:bold; background:url(../images/actionIcon.gif) no-repeat 0 -715px; padding:0 0 0 18px}
+	.unitRef .innerP {background:#EFEFEF; padding:5px}
+	.unitRef .linkDelete {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
+	.unitRef .linkDelete a {float:left; line-height:14px; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
+
+	.viewDProfile .unitRef {width:921px; overflow:hidden; padding:0}
+	.viewDProfile .unitRef .unitImg {padding:0 16px 11px 0}
+	.viewDProfile .unitEqColumn {width:921px; overflow:hidden; padding:0}
+	.viewDProfile .unitEqColumn .unitRef {width:460px; float:left; padding:0}
+	.viewDProfile .unitRef .unitProject, .viewDProfile .unitRef .unitCertificate {width:444px; float:left; padding:0 0 11px 0}

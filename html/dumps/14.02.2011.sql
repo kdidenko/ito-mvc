@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Хост: localhost
--- Время создания: Фев 02 2011 г., 07:28
+-- Время создания: Фев 14 2011 г., 08:21
 -- Версия сервера: 5.0.27
 -- Версия PHP: 5.2.4
 
@@ -19,8 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Структура таблицы `bargains`
 -- 
 
-DROP TABLE IF EXISTS `bargains`;
-CREATE TABLE IF NOT EXISTS `bargains` (
+CREATE TABLE `bargains` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `bargain_name` varchar(255) collate utf8_bin NOT NULL,
@@ -65,8 +64,7 @@ INSERT INTO `bargains` (`id`, `user_id`, `bargain_name`, `bargain_desc`, `catego
 -- Структура таблицы `bargain_relations`
 -- 
 
-DROP TABLE IF EXISTS `bargain_relations`;
-CREATE TABLE IF NOT EXISTS `bargain_relations` (
+CREATE TABLE `bargain_relations` (
   `id` int(11) NOT NULL auto_increment,
   `bargain_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -92,8 +90,7 @@ INSERT INTO `bargain_relations` (`id`, `bargain_id`, `upload_id`) VALUES
 -- Структура таблицы `bids`
 -- 
 
-DROP TABLE IF EXISTS `bids`;
-CREATE TABLE IF NOT EXISTS `bids` (
+CREATE TABLE `bids` (
   `id` int(11) NOT NULL auto_increment,
   `bid` float NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -124,8 +121,7 @@ INSERT INTO `bids` (`id`, `bid`, `user_id`, `order_id`, `date`) VALUES
 -- Структура таблицы `bought_bargain`
 -- 
 
-DROP TABLE IF EXISTS `bought_bargain`;
-CREATE TABLE IF NOT EXISTS `bought_bargain` (
+CREATE TABLE `bought_bargain` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `bargain_id` int(11) NOT NULL,
@@ -168,8 +164,7 @@ INSERT INTO `bought_bargain` (`id`, `user_id`, `bargain_id`, `bought_date`) VALU
 -- Структура таблицы `bought_orders`
 -- 
 
-DROP TABLE IF EXISTS `bought_orders`;
-CREATE TABLE IF NOT EXISTS `bought_orders` (
+CREATE TABLE `bought_orders` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -191,12 +186,11 @@ INSERT INTO `bought_orders` (`id`, `order_id`, `user_id`, `bought_date`, `bought
 -- Структура таблицы `category`
 -- 
 
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL auto_increment,
   `category_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- 
 -- Дамп данных таблицы `category`
@@ -204,7 +198,10 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`id`, `category_name`) VALUES 
 (1, 0x4954),
-(2, 0x66696e616e6365);
+(2, 0x66696e616e6365),
+(3, ''),
+(4, 0x202020202020),
+(5, 0x4954);
 
 -- --------------------------------------------------------
 
@@ -212,18 +209,20 @@ INSERT INTO `category` (`id`, `category_name`) VALUES
 -- Структура таблицы `company_certificates`
 -- 
 
-DROP TABLE IF EXISTS `company_certificates`;
-CREATE TABLE IF NOT EXISTS `company_certificates` (
+CREATE TABLE `company_certificates` (
   `id` int(11) NOT NULL auto_increment,
   `company_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
+  `certificate_titile` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
 -- 
 -- Дамп данных таблицы `company_certificates`
 -- 
 
+INSERT INTO `company_certificates` (`id`, `company_id`, `upload_id`, `certificate_titile`) VALUES 
+(1, 42, 18, 0xd196d184d196d184d196);
 
 -- --------------------------------------------------------
 
@@ -231,8 +230,7 @@ CREATE TABLE IF NOT EXISTS `company_certificates` (
 -- Структура таблицы `company_feedback`
 -- 
 
-DROP TABLE IF EXISTS `company_feedback`;
-CREATE TABLE IF NOT EXISTS `company_feedback` (
+CREATE TABLE `company_feedback` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
@@ -263,14 +261,35 @@ INSERT INTO `company_feedback` (`id`, `user_id`, `company_id`, `order_id`, `vote
 -- --------------------------------------------------------
 
 -- 
+-- Структура таблицы `company_projects`
+-- 
+
+CREATE TABLE `company_projects` (
+  `id` int(11) NOT NULL auto_increment,
+  `company_id` int(11) NOT NULL,
+  `project_url` varchar(255) collate utf8_bin NOT NULL,
+  `project_title` varchar(255) collate utf8_bin NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+
+-- 
+-- Дамп данных таблицы `company_projects`
+-- 
+
+INSERT INTO `company_projects` (`id`, `company_id`, `project_url`, `project_title`) VALUES 
+(1, 42, 0x687474703a2f2f7777772e676f6f676c652e636f6d, 0x496e206164646974696f6e20746f2070726f766964696e6720656173792061636365737320746f2062696c6c696f6e73206f66207765622070616765732c20476f6f676c6520686173206d616e79207370656369616c20666561747572657320746f2068656c7020796f7520746f2066696e642065786163746c79207768617420796f7526233033393b7265206c6f6f6b696e6720666f722e20536f6d65206f66206f7572206d6f737420706f70756c617220666561747572657320617265206c69737465642062656c6f772e);
+
+-- --------------------------------------------------------
+
+-- 
 -- Структура таблицы `company_references`
 -- 
 
-DROP TABLE IF EXISTS `company_references`;
-CREATE TABLE IF NOT EXISTS `company_references` (
+CREATE TABLE `company_references` (
   `id` int(11) NOT NULL auto_increment,
   `company_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
+  `reference_title` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -285,8 +304,7 @@ CREATE TABLE IF NOT EXISTS `company_references` (
 -- Структура таблицы `country`
 -- 
 
-DROP TABLE IF EXISTS `country`;
-CREATE TABLE IF NOT EXISTS `country` (
+CREATE TABLE `country` (
   `id` int(11) NOT NULL auto_increment,
   `country_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -305,8 +323,7 @@ INSERT INTO `country` (`id`, `country_name`) VALUES
 -- Структура таблицы `mails`
 -- 
 
-DROP TABLE IF EXISTS `mails`;
-CREATE TABLE IF NOT EXISTS `mails` (
+CREATE TABLE `mails` (
   `id` int(11) NOT NULL auto_increment,
   `subject` varchar(255) collate utf8_bin NOT NULL,
   `text` text collate utf8_bin NOT NULL,
@@ -370,8 +387,7 @@ INSERT INTO `mails` (`id`, `subject`, `text`, `crdate`, `sender_id`, `getter_id`
 -- Структура таблицы `orders`
 -- 
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL auto_increment,
   `owner` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -410,8 +426,7 @@ INSERT INTO `orders` (`id`, `owner`, `category_id`, `subcategory_id`, `order_nam
 -- Структура таблицы `order_bookmarks`
 -- 
 
-DROP TABLE IF EXISTS `order_bookmarks`;
-CREATE TABLE IF NOT EXISTS `order_bookmarks` (
+CREATE TABLE `order_bookmarks` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -432,8 +447,7 @@ INSERT INTO `order_bookmarks` (`id`, `order_id`, `user_id`) VALUES
 -- Структура таблицы `order_relations`
 -- 
 
-DROP TABLE IF EXISTS `order_relations`;
-CREATE TABLE IF NOT EXISTS `order_relations` (
+CREATE TABLE `order_relations` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -456,8 +470,7 @@ INSERT INTO `order_relations` (`id`, `order_id`, `upload_id`) VALUES
 -- Структура таблицы `plan`
 -- 
 
-DROP TABLE IF EXISTS `plan`;
-CREATE TABLE IF NOT EXISTS `plan` (
+CREATE TABLE `plan` (
   `id` int(11) NOT NULL auto_increment,
   `plan_desc` text collate utf8_bin NOT NULL,
   `plan_name` varchar(255) collate utf8_bin NOT NULL,
@@ -485,8 +498,7 @@ INSERT INTO `plan` (`id`, `plan_desc`, `plan_name`, `plan_price`, `tender_to`, `
 -- Структура таблицы `regions`
 -- 
 
-DROP TABLE IF EXISTS `regions`;
-CREATE TABLE IF NOT EXISTS `regions` (
+CREATE TABLE `regions` (
   `id` int(11) NOT NULL auto_increment,
   `region_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -514,8 +526,7 @@ INSERT INTO `regions` (`id`, `region_name`) VALUES
 -- Структура таблицы `reminders`
 -- 
 
-DROP TABLE IF EXISTS `reminders`;
-CREATE TABLE IF NOT EXISTS `reminders` (
+CREATE TABLE `reminders` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -549,8 +560,7 @@ INSERT INTO `reminders` (`id`, `user_id`, `category_id`, `subcategory_id`, `plan
 -- Структура таблицы `static_block`
 -- 
 
-DROP TABLE IF EXISTS `static_block`;
-CREATE TABLE IF NOT EXISTS `static_block` (
+CREATE TABLE `static_block` (
   `id` int(11) NOT NULL auto_increment,
   `block_title` varchar(255) collate utf8_bin NOT NULL,
   `block_desc` text collate utf8_bin NOT NULL,
@@ -574,8 +584,7 @@ INSERT INTO `static_block` (`id`, `block_title`, `block_desc`) VALUES
 -- Структура таблицы `subcategory`
 -- 
 
-DROP TABLE IF EXISTS `subcategory`;
-CREATE TABLE IF NOT EXISTS `subcategory` (
+CREATE TABLE `subcategory` (
   `id` int(11) NOT NULL auto_increment,
   `subcategory_name` varchar(255) collate utf8_bin NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -599,12 +608,11 @@ INSERT INTO `subcategory` (`id`, `subcategory_name`, `category_id`) VALUES
 -- Структура таблицы `uploads`
 -- 
 
-DROP TABLE IF EXISTS `uploads`;
-CREATE TABLE IF NOT EXISTS `uploads` (
+CREATE TABLE `uploads` (
   `id` int(11) NOT NULL auto_increment,
   `path` varchar(1000) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=19 ;
 
 -- 
 -- Дамп данных таблицы `uploads`
@@ -623,7 +631,8 @@ INSERT INTO `uploads` (`id`, `path`) VALUES
 (11, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239343135353737312e6a7067),
 (14, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239343135373038332e6a7067),
 (15, 0x73746f726167652f75706c6f6164732f6261726761696e732f6261726761696e2d313239343135373330302e6a7067),
-(16, 0x73746f726167652f75706c6f6164732f6f72646572732f6f726465722d313239343931353733382d312e6a7067);
+(16, 0x73746f726167652f75706c6f6164732f6f72646572732f6f726465722d313239343931353733382d312e6a7067),
+(18, 0x73746f726167652f75706c6f6164732f75736572732f7472616465736d616e2f6365727469666963617465732f68616c6c2d556b7261696e65436869636b436f7265612e786c73);
 
 -- --------------------------------------------------------
 
@@ -631,8 +640,7 @@ INSERT INTO `uploads` (`id`, `path`) VALUES
 -- Структура таблицы `users`
 -- 
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL auto_increment,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,

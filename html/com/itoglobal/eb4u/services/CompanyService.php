@@ -70,11 +70,19 @@ class CompanyService {
 	 * @var  string defining the project_url field name
 	 */
 	const PROJECT_URL = 'project_url';
+	/**
+	 * @var  string defining the project_title field name
+	 */
+	const PROJECT_TITLE = 'project_title';
 	
 	/**
 	 * @var  string defining the company_certificates table name
 	 */
 	const COMPANY_CARTIFICATES = 'company_certificates';
+	/**
+	 * @var  string defining the upload_id table name
+	 */
+	const UPLOAD_ID = 'upload_id';
 	/**
 	 * @var  string defining the certificate_titile field name
 	 */
@@ -165,10 +173,10 @@ class CompanyService {
 		return $result;
 	}
 	
-	public static function setPoject($company_id, $project_url) {
+	public static function setPoject($company_id, $project_url, $project_title) {
 		$into = self::COMPANY_PROJECT;
-		$fields = self::COMPANY_ID . ', ' . self::PROJECT_URL; 
-		$values = "'" . $company_id . "', '" . $project_url . "'";
+		$fields = self::COMPANY_ID . ', ' . self::PROJECT_URL . ', ' . self::PROJECT_TITLE; 
+		$values = "'" . $company_id . "', '" . $project_url . "', '" . $project_title . "'";
 		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
 		return $result;
 	}
@@ -192,6 +200,14 @@ class CompanyService {
 		$where .= self::COMPANY_ID . '=' . $company_id;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+
+	public static function setCertificates($company_id, $upload_id, $cartificates_title) {
+		$into = self::COMPANY_CARTIFICATES;
+		$fields = self::COMPANY_ID . ', ' . self::UPLOAD_ID . ', ' . self::CARTIFICATES_TITLE; 
+		$values = "'" . $company_id . "', '" . $upload_id . "', '" . $cartificates_title . "'";
+		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
 		return $result;
 	}
 	

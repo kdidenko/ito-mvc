@@ -154,6 +154,7 @@ class TradesmanContentController extends ContentController {
 			$mvc->addObject ( self::STATUS, 'successful' );
 		}
 		
+		
 		#get user info
 		$result = UsersService::getUser ( $id );
 		isset ( $result ) ? $mvc->addObject ( self::RESULT, $result ) : null;
@@ -161,6 +162,93 @@ class TradesmanContentController extends ContentController {
 		$where = CompanyService::COMPANY_ID . '=' . $id . ' AND ' . CompanyService::DONE . '=1';
 		$feedbacks = CompanyService::getFeedback ($where);
 		isset ( $feedbacks ) ? $mvc->addObject ( CompanyService::COMPANY_FEEDBACK, $feedbacks ) : null;
+		
+		$projects = CompanyService::getProjects ($id);
+		isset ( $projects ) ? $mvc->addObject ( CompanyService::COMPANY_PROJECT, $projects ) : null;
+		
+		$certificates = CompanyService::getCertificates ($id);
+		isset ( $certificates ) ? $mvc->addObject ( CompanyService::COMPANY_CARTIFICATES, $certificates ) : null;
+		
+		$references = CompanyService::getReferences ($id);
+		isset ( $references ) ? $mvc->addObject ( CompanyService::COMPANY_REFERENCES, $references ) : null;
+
+		return $mvc;
+	}
+	
+	public function handleNewProfileProject($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if (isset($_POST)&&$_POST!=NULL){
+			$error = array();
+			$error[] .= !isset($requestParams[CompanyService::PROJECT_TITLE])||$requestParams[CompanyService::PROJECT_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
+			$error[] .= !isset($requestParams[CompanyService::PROJECT_URL])||$requestParams[CompanyService::PROJECT_URL]==NULL ? "_i18n{Please, write correct link.}" : false;
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$project_url = htmlspecialchars($requestParams [CompanyService::PROJECT_URL], ENT_QUOTES);
+				$project_title = htmlspecialchars($requestParams [CompanyService::PROJECT_TITLE], ENT_QUOTES);
+				CompanyService::setPoject($id, $project_url,$project_title);
+				$mvc->addObject ( 'success', true );
+			} else {
+				$mvc->addObject ( 'error', $error );
+			}
+		}
+		return $mvc;
+	}
+	
+	public function handleNewProfileImage($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		
+		if (isset ( $requestParams ['referenceSbm'] )) {
+			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+				$file = $_FILES ['file'];
+				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_PROFILE . "avatar.jpg";
+				$error[] .= ValidationService::checkAvatar ( $file );
+			} else {
+				$error[] .= "Please image";
+			}
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+					StorageService::uploadFile ( $path, $file );
+					$mvc->addObject ( self::STATUS, 'successful' );
+					self::setNoCashe();
+				}
+			} else {
+				$mvc->addObject ( self::IMAGE_ERROR, $error );
+			}
+		}
+		
+		return $mvc;
+	}
+	
+	public function handleNewProfileCertificate($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+	
+		if (isset($_POST)&&$_POST!=NULL){
+			$error = array();
+			print_r($_FILES);
+			print_r($requestParams);
+			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+				$username = SessionService::getAttribute(SessionService::USERNAME);
+				$file = $_FILES ['file'];
+				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_CARTIFICATES . $file['name'];
+				$error[] .= ValidationService::checkFileSize ( $file );
+			} else {
+				$error[] .= "_i18n{Please, upload file.}";
+			}
+			$error[] .= !isset($requestParams[CompanyService::CARTIFICATES_TITLE])||$requestParams[CompanyService::CARTIFICATES_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$cartificates_title = htmlspecialchars($requestParams [CompanyService::CARTIFICATES_TITLE], ENT_QUOTES);
+				StorageService::uploadFile ( $path, $file );
+				$upload_id = UploadsService::setUploadsPath($path);
+				CompanyService::setCertificates($id, $upload_id, $cartificates_title);
+				$mvc->addObject ( 'success', true );
+			} else {
+				$mvc->addObject ( 'error', $error );
+			}
+		}
 		
 		return $mvc;
 	}

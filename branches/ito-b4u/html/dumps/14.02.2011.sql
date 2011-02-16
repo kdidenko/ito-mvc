@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Хост: localhost
--- Время создания: Фев 14 2011 г., 08:21
+-- Время создания: Фев 16 2011 г., 12:10
 -- Версия сервера: 5.0.27
 -- Версия PHP: 5.2.4
 
@@ -19,7 +19,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Структура таблицы `bargains`
 -- 
 
-CREATE TABLE `bargains` (
+DROP TABLE IF EXISTS `bargains`;
+CREATE TABLE IF NOT EXISTS `bargains` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `bargain_name` varchar(255) collate utf8_bin NOT NULL,
@@ -64,7 +65,8 @@ INSERT INTO `bargains` (`id`, `user_id`, `bargain_name`, `bargain_desc`, `catego
 -- Структура таблицы `bargain_relations`
 -- 
 
-CREATE TABLE `bargain_relations` (
+DROP TABLE IF EXISTS `bargain_relations`;
+CREATE TABLE IF NOT EXISTS `bargain_relations` (
   `id` int(11) NOT NULL auto_increment,
   `bargain_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -90,7 +92,8 @@ INSERT INTO `bargain_relations` (`id`, `bargain_id`, `upload_id`) VALUES
 -- Структура таблицы `bids`
 -- 
 
-CREATE TABLE `bids` (
+DROP TABLE IF EXISTS `bids`;
+CREATE TABLE IF NOT EXISTS `bids` (
   `id` int(11) NOT NULL auto_increment,
   `bid` float NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -121,7 +124,8 @@ INSERT INTO `bids` (`id`, `bid`, `user_id`, `order_id`, `date`) VALUES
 -- Структура таблицы `bought_bargain`
 -- 
 
-CREATE TABLE `bought_bargain` (
+DROP TABLE IF EXISTS `bought_bargain`;
+CREATE TABLE IF NOT EXISTS `bought_bargain` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `bargain_id` int(11) NOT NULL,
@@ -164,7 +168,8 @@ INSERT INTO `bought_bargain` (`id`, `user_id`, `bargain_id`, `bought_date`) VALU
 -- Структура таблицы `bought_orders`
 -- 
 
-CREATE TABLE `bought_orders` (
+DROP TABLE IF EXISTS `bought_orders`;
+CREATE TABLE IF NOT EXISTS `bought_orders` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -186,7 +191,8 @@ INSERT INTO `bought_orders` (`id`, `order_id`, `user_id`, `bought_date`, `bought
 -- Структура таблицы `category`
 -- 
 
-CREATE TABLE `category` (
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL auto_increment,
   `category_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -209,7 +215,8 @@ INSERT INTO `category` (`id`, `category_name`) VALUES
 -- Структура таблицы `company_certificates`
 -- 
 
-CREATE TABLE `company_certificates` (
+DROP TABLE IF EXISTS `company_certificates`;
+CREATE TABLE IF NOT EXISTS `company_certificates` (
   `id` int(11) NOT NULL auto_increment,
   `company_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -230,7 +237,8 @@ INSERT INTO `company_certificates` (`id`, `company_id`, `upload_id`, `certificat
 -- Структура таблицы `company_feedback`
 -- 
 
-CREATE TABLE `company_feedback` (
+DROP TABLE IF EXISTS `company_feedback`;
+CREATE TABLE IF NOT EXISTS `company_feedback` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
@@ -264,7 +272,8 @@ INSERT INTO `company_feedback` (`id`, `user_id`, `company_id`, `order_id`, `vote
 -- Структура таблицы `company_projects`
 -- 
 
-CREATE TABLE `company_projects` (
+DROP TABLE IF EXISTS `company_projects`;
+CREATE TABLE IF NOT EXISTS `company_projects` (
   `id` int(11) NOT NULL auto_increment,
   `company_id` int(11) NOT NULL,
   `project_url` varchar(255) collate utf8_bin NOT NULL,
@@ -285,7 +294,8 @@ INSERT INTO `company_projects` (`id`, `company_id`, `project_url`, `project_titl
 -- Структура таблицы `company_references`
 -- 
 
-CREATE TABLE `company_references` (
+DROP TABLE IF EXISTS `company_references`;
+CREATE TABLE IF NOT EXISTS `company_references` (
   `id` int(11) NOT NULL auto_increment,
   `company_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -304,7 +314,8 @@ CREATE TABLE `company_references` (
 -- Структура таблицы `country`
 -- 
 
-CREATE TABLE `country` (
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL auto_increment,
   `country_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -323,7 +334,8 @@ INSERT INTO `country` (`id`, `country_name`) VALUES
 -- Структура таблицы `mails`
 -- 
 
-CREATE TABLE `mails` (
+DROP TABLE IF EXISTS `mails`;
+CREATE TABLE IF NOT EXISTS `mails` (
   `id` int(11) NOT NULL auto_increment,
   `subject` varchar(255) collate utf8_bin NOT NULL,
   `text` text collate utf8_bin NOT NULL,
@@ -387,7 +399,8 @@ INSERT INTO `mails` (`id`, `subject`, `text`, `crdate`, `sender_id`, `getter_id`
 -- Структура таблицы `orders`
 -- 
 
-CREATE TABLE `orders` (
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) NOT NULL auto_increment,
   `owner` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -426,7 +439,8 @@ INSERT INTO `orders` (`id`, `owner`, `category_id`, `subcategory_id`, `order_nam
 -- Структура таблицы `order_bookmarks`
 -- 
 
-CREATE TABLE `order_bookmarks` (
+DROP TABLE IF EXISTS `order_bookmarks`;
+CREATE TABLE IF NOT EXISTS `order_bookmarks` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -447,7 +461,8 @@ INSERT INTO `order_bookmarks` (`id`, `order_id`, `user_id`) VALUES
 -- Структура таблицы `order_relations`
 -- 
 
-CREATE TABLE `order_relations` (
+DROP TABLE IF EXISTS `order_relations`;
+CREATE TABLE IF NOT EXISTS `order_relations` (
   `id` int(11) NOT NULL auto_increment,
   `order_id` int(11) NOT NULL,
   `upload_id` int(11) NOT NULL,
@@ -470,7 +485,8 @@ INSERT INTO `order_relations` (`id`, `order_id`, `upload_id`) VALUES
 -- Структура таблицы `plan`
 -- 
 
-CREATE TABLE `plan` (
+DROP TABLE IF EXISTS `plan`;
+CREATE TABLE IF NOT EXISTS `plan` (
   `id` int(11) NOT NULL auto_increment,
   `plan_desc` text collate utf8_bin NOT NULL,
   `plan_name` varchar(255) collate utf8_bin NOT NULL,
@@ -498,7 +514,8 @@ INSERT INTO `plan` (`id`, `plan_desc`, `plan_name`, `plan_price`, `tender_to`, `
 -- Структура таблицы `regions`
 -- 
 
-CREATE TABLE `regions` (
+DROP TABLE IF EXISTS `regions`;
+CREATE TABLE IF NOT EXISTS `regions` (
   `id` int(11) NOT NULL auto_increment,
   `region_name` varchar(255) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -526,7 +543,8 @@ INSERT INTO `regions` (`id`, `region_name`) VALUES
 -- Структура таблицы `reminders`
 -- 
 
-CREATE TABLE `reminders` (
+DROP TABLE IF EXISTS `reminders`;
+CREATE TABLE IF NOT EXISTS `reminders` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -560,7 +578,8 @@ INSERT INTO `reminders` (`id`, `user_id`, `category_id`, `subcategory_id`, `plan
 -- Структура таблицы `static_block`
 -- 
 
-CREATE TABLE `static_block` (
+DROP TABLE IF EXISTS `static_block`;
+CREATE TABLE IF NOT EXISTS `static_block` (
   `id` int(11) NOT NULL auto_increment,
   `block_title` varchar(255) collate utf8_bin NOT NULL,
   `block_desc` text collate utf8_bin NOT NULL,
@@ -584,7 +603,8 @@ INSERT INTO `static_block` (`id`, `block_title`, `block_desc`) VALUES
 -- Структура таблицы `subcategory`
 -- 
 
-CREATE TABLE `subcategory` (
+DROP TABLE IF EXISTS `subcategory`;
+CREATE TABLE IF NOT EXISTS `subcategory` (
   `id` int(11) NOT NULL auto_increment,
   `subcategory_name` varchar(255) collate utf8_bin NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -608,7 +628,8 @@ INSERT INTO `subcategory` (`id`, `subcategory_name`, `category_id`) VALUES
 -- Структура таблицы `uploads`
 -- 
 
-CREATE TABLE `uploads` (
+DROP TABLE IF EXISTS `uploads`;
+CREATE TABLE IF NOT EXISTS `uploads` (
   `id` int(11) NOT NULL auto_increment,
   `path` varchar(1000) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
@@ -640,7 +661,8 @@ INSERT INTO `uploads` (`id`, `path`) VALUES
 -- Структура таблицы `users`
 -- 
 
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL auto_increment,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,

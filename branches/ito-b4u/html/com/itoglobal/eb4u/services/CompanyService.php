@@ -203,7 +203,7 @@ class CompanyService {
 		return $result;
 	}
 
-	public static function setCertificates($company_id, $upload_id, $cartificates_title) {
+	public static function setCertificate($company_id, $upload_id, $cartificates_title) {
 		$into = self::COMPANY_CARTIFICATES;
 		$fields = self::COMPANY_ID . ', ' . self::UPLOAD_ID . ', ' . self::CARTIFICATES_TITLE; 
 		$values = "'" . $company_id . "', '" . $upload_id . "', '" . $cartificates_title . "'";
@@ -232,6 +232,14 @@ class CompanyService {
 		$where .= self::COMPANY_ID . '=' . $company_id;
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) && count($result) > 0 ? $result : false;
+		return $result;
+	}
+	
+	public static function setReference($company_id, $upload_id, $reference_title) {
+		$into = self::COMPANY_REFERENCES;
+		$fields = self::COMPANY_ID . ', ' . self::UPLOAD_ID . ', ' . self::REFERENCE_TITLE; 
+		$values = "'" . $company_id . "', '" . $upload_id . "', '" . $reference_title . "'";
+		$result = DBClientHandler::getInstance ()->execInsert ( $fields, $values, $into);
 		return $result;
 	}
 	

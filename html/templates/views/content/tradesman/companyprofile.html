@@ -116,7 +116,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 <div class="unitABlock">
 	<div class="unitSnColumn">
 		<div class="itemForm">
-			<img alt="" src="/<?php echo $data[UsersService::AVATAR] ?>">
+			<img alt="" src="/<?php echo $data[UsersService::AVATAR] ?>" />
 		</div>
 		<div class="itemForm">
 			<input type="file" name="file" />
@@ -189,7 +189,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 	foreach($projects as $key =>$project){?>
 		<div class="unitProject">
 			<div class="innerP">
-				<a target="blank" href="<?php echo $project[CompanyService::PROJECT_URL]?>" title="<?php echo $project[CompanyService::PROJECT_URL]?>"><?php echo $project[CompanyService::PROJECT_URL]?></a> - <?php echo $project[CompanyService::PROJECT_TITLE]?>
+				<a href="<?php echo $project[CompanyService::PROJECT_URL]?>" title="<?php echo $project[CompanyService::PROJECT_URL]?>"><?php echo $project[CompanyService::PROJECT_URL]?></a> - <?php echo $project[CompanyService::PROJECT_TITLE]?>
 			</div>
 			<div class="linkDelete">
 				<a href="#" rel="5" title="_i18n{Remove}">_i18n{Remove}</a>

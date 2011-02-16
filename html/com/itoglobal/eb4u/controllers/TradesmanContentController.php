@@ -198,23 +198,29 @@ class TradesmanContentController extends ContentController {
 	public function handleNewProfileImage($actionParams, $requestParams) {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
-		if (isset ( $requestParams ['referenceSbm'] )) {
+		if (isset($_POST)&&$_POST!=NULL){
+			$error = array();
+			print_r($_FILES);
+			print_r($requestParams);
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
+				$username = SessionService::getAttribute(SessionService::USERNAME);
 				$file = $_FILES ['file'];
-				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_PROFILE . "avatar.jpg";
-				$error[] .= ValidationService::checkAvatar ( $file );
+				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_PROJECTS . $file['name'];
+				$error[] .= ValidationService::checkFileSize ( $file );
 			} else {
-				$error[] .= "Please image";
+				$error[] .= "_i18n{Please, upload file.}";
 			}
+			$error[] .= !isset($requestParams[CompanyService::CARTIFICATES_TITLE])||$requestParams[CompanyService::CARTIFICATES_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
 			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
-				if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
-					StorageService::uploadFile ( $path, $file );
-					$mvc->addObject ( self::STATUS, 'successful' );
-					self::setNoCashe();
-				}
+				$id = SessionService::getAttribute(SessionService::USERS_ID);
+				$reference_title = htmlspecialchars($requestParams [CompanyService::REFERENCE_TITLE], ENT_QUOTES);
+				StorageService::uploadFile ( $path, $file );
+				$upload_id = UploadsService::setUploadsPath($path);
+				CompanyService::setReference($id, $upload_id, $reference_title);
+				$mvc->addObject ( 'success', true );
 			} else {
-				$mvc->addObject ( self::IMAGE_ERROR, $error );
+				$mvc->addObject ( 'error', $error );
 			}
 		}
 		
@@ -243,7 +249,7 @@ class TradesmanContentController extends ContentController {
 				$cartificates_title = htmlspecialchars($requestParams [CompanyService::CARTIFICATES_TITLE], ENT_QUOTES);
 				StorageService::uploadFile ( $path, $file );
 				$upload_id = UploadsService::setUploadsPath($path);
-				CompanyService::setCertificates($id, $upload_id, $cartificates_title);
+				CompanyService::setCertificate($id, $upload_id, $cartificates_title);
 				$mvc->addObject ( 'success', true );
 			} else {
 				$mvc->addObject ( 'error', $error );

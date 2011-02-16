@@ -22,7 +22,7 @@ $subcategories = $mvc->getObject('subcategory');
 			<?php if (count($categories)>0 && $categories!=NULL){
 			foreach($categories as $key => $category){ ?>
 				<tr>
-					<td><input type="checkbox" class="inpChk" name="Category" value="<?php echo $category[CategoryService::ID]; ?>ccc" /></td>
+					<td><input type="checkbox" class="inpChk" name="Category" value="<?php echo $category[CategoryService::ID]; ?>" /></td>
 					<td><?php echo $category[CategoryService::ID] ?></td>
 					<td class="itemLast"><a class="linkLightTr" href="/edit-category.html?id=<?php echo $category[CategoryService::ID] ?>" title="<?php echo $category[CategoryService::CAT_NAME] ?>"><?php echo $category[CategoryService::CAT_NAME] ?></a></td>
 				</tr>
@@ -50,7 +50,7 @@ $subcategories = $mvc->getObject('subcategory');
 	<?php 	if (count($subcategories)>0 && $subcategories!=NULL){
 				foreach($subcategories as $key => $subcategory){ ?>
 					<tr>
-						<td><input type="checkbox" class="inpChk" name="SubCategory" value="<?php echo $subcategory[SubCategoryService::ID] ?>sss" /></td>
+						<td><input type="checkbox" class="inpChk" name="SubCategory" value="<?php echo $subcategory[SubCategoryService::ID] ?>" /></td>
 						<td><?php echo $subcategory[SubCategoryService::ID] ?></td>
 						<td><a class="linkLightTr" href="/edit-subcategory.html?id=<?php echo $subcategory[SubCategoryService::ID] ?>" title="<?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?>"><?php echo $subcategory[SubCategoryService::SUBCAT_NAME] ?></a></td>
 						<td class="itemLast"><?php echo $subcategory[CategoryService::CAT_NAME] ?></td>

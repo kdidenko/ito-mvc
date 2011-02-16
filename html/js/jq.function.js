@@ -1,4 +1,5 @@
 if(jQuery)(function($){
+
 	$.fn.carouselAn = function(params){
 		var conf = $.extend({
 			clipBlock:'.itemClip',
@@ -452,12 +453,12 @@ if(jQuery)(function($){
 					$('form',i).submit(function(){
 						var l=$(this);
 						$.lightBoxAn.showActivity();
-						$.post(
-							l.attr('action'),l.serialize(),
-							function(d){$.lightBoxAn({content:d, onComplete:a, onClosed:function(){f.reloadPage()}})}
-						);
+						l.ajaxSubmit({
+							success:function(d){
+								$.lightBoxAn({content:d, onComplete:a, onClosed:function(){f.reloadPage()}})
+							}
+						});
 						return false;
-
 					});
 				}
 			})

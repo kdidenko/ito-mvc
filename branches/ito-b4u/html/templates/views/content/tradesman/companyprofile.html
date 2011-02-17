@@ -145,43 +145,25 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 	<div class="unitRef">
 	<!-- $references -->
 		<h3>_i18n{Reference images}</h3>
+
+<?php if(isset($references)&&$references!=null){
+	foreach($references as $key =>$reference){?>		
 		<div class="unitImg">
 			<div class="innerP">
-				<img src="/storage/uploads/users/google/profile/avatar.jpg" alt="" />
-				<p>Nullam vel nulla sem, ut convallis lacus.</p>
+				<img src="<?php echo $reference[UploadsService::PATH]?>" alt="<?php echo $reference[CompanyService::REFERENCE_TITLE]?>" />
+				<p><?php echo $reference[CompanyService::REFERENCE_TITLE]?></p>
 			</div>
 			<div class="linkDelete">
-				<a href="#" rel="1" title="Remove">Remove</a>
+				<a href="/company-profile.html?delImage=<?php echo $reference[CompanyService::ID]?>&upload_id=<?php echo $reference[CompanyService::UPLOAD_ID]?>" rel="1" title="Remove">Remove</a>
 			</div>
 		</div>
-		<div class="unitImg">
+<?php } } else { ?>
+		<div class="unitProject">
 			<div class="innerP">
-				<img src="/storage/uploads/users/tradesman/profile/avatar.jpg" alt="" />
-				<p>Nullam vel nulla sem, ut convallis lacus.</p>
-			</div>
-			<div class="linkDelete">
-				<a href="#" rel="2" title="Remove">Remove</a>
+				_i18n{Sorry, no reference project yet.}
 			</div>
 		</div>
-		<div class="unitImg">
-			<div class="innerP">
-				<img src="/storage/uploads/bargains/bargain-1294156405.jpg" alt="" />
-				<p>Nunc at ante ut mi tempor aliquet.</p>
-			</div>
-			<div class="linkDelete">
-				<a href="#" rel="3" title="Remove">Remove</a>
-			</div>
-		</div>
-		
-		<div class="unitImg">
-			<div class="innerP">
-				<img src="/storage/uploads/users/tradesman/profile/avatar.jpg" alt="" />
-				<p>Nulla iaculis porttitor ante, at eleifend justo hendrerit sed.</p>
-			</div>
-			<div class="linkDelete">
-				<a href="#" rel="4" title="Remove">Remove</a>
-			</div>
-		</div>
+<?php } ?>
 	</div>
 	<div class="unitRef">
 		<h3>_i18n{Reference project}</h3>
@@ -192,7 +174,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<a href="<?php echo $project[CompanyService::PROJECT_URL]?>" title="<?php echo $project[CompanyService::PROJECT_URL]?>"><?php echo $project[CompanyService::PROJECT_URL]?></a> - <?php echo $project[CompanyService::PROJECT_TITLE]?>
 			</div>
 			<div class="linkDelete">
-				<a href="#" rel="5" title="_i18n{Remove}">_i18n{Remove}</a>
+				<a href="/company-profile.html?delProject=<?php echo $project[CompanyService::ID]?>" rel="5" title="_i18n{Remove}">_i18n{Remove}</a>
 			</div>
 		</div>
 <?php } } else { ?>
@@ -212,7 +194,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<a href="<?php echo $certificate[UploadsService::PATH]?>" title="<?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>"><?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?></a> (763kB) - <?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>
 			</div>
 			<div class="linkDelete">
-				<a href="#" rel="8" title="_i18n{Remove}">_i18n{Remove}</a>
+				<a href="/company-profile.html?delCert=<?php echo $certificate[CompanyService::ID]?>&upload_id=<?php echo $certificate[CompanyService::UPLOAD_ID]?>" rel="8" title="_i18n{Remove}">_i18n{Remove}</a>
 			</div>
 		</div>
 <?php } } else { ?>

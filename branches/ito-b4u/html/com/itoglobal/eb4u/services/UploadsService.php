@@ -23,7 +23,7 @@ class UploadsService {
 		$from = self::UPLOADS;
 		$where = self::ID . '=' . $where;
 		# executing the query
-		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, '', '' , '', '' );
+		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, '' , '', '' );
 		$result = $result != null && isset($result) ? $result : false;
 		return $result;
 	}

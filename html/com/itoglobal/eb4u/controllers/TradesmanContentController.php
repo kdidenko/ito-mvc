@@ -154,6 +154,17 @@ class TradesmanContentController extends ContentController {
 			$mvc->addObject ( self::STATUS, 'successful' );
 		}
 		
+		if(isset($requestParams['delImage'])&&isset($requestParams['upload_id'])){
+			CompanyService::delReference($id, $requestParams['delImage'],$requestParams['upload_id']);
+		}
+	
+		if(isset($requestParams['delProject'])&&isset($requestParams['upload_id'])){
+			CompanyService::delPoject($id, $requestParams['delProject']);
+		}
+		
+		if(isset($requestParams['delCert'])&&isset($requestParams['upload_id'])){
+			CompanyService::delCertificate($id, $requestParams['delCert'],$requestParams['upload_id']);
+		}
 		
 		#get user info
 		$result = UsersService::getUser ( $id );
@@ -200,24 +211,25 @@ class TradesmanContentController extends ContentController {
 		
 		if (isset($_POST)&&$_POST!=NULL){
 			$error = array();
-			print_r($_FILES);
-			print_r($requestParams);
+			//print_r($_FILES);
+			//print_r($requestParams);
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 				$username = SessionService::getAttribute(SessionService::USERNAME);
 				$file = $_FILES ['file'];
-				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_PROJECTS . $file['name'];
+				$path = StorageService::USERS_FOLDER . $username . StorageService::USER_CARTIFICATES . $file['name'];
 				$error[] .= ValidationService::checkFileSize ( $file );
 			} else {
 				$error[] .= "_i18n{Please, upload file.}";
 			}
-			$error[] .= !isset($requestParams[CompanyService::CARTIFICATES_TITLE])||$requestParams[CompanyService::CARTIFICATES_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
+			
+			$error[] .= !isset($requestParams[CompanyService::REFERENCE_TITLE])||$requestParams[CompanyService::REFERENCE_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
 			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {
 				$id = SessionService::getAttribute(SessionService::USERS_ID);
-				$reference_title = htmlspecialchars($requestParams [CompanyService::REFERENCE_TITLE], ENT_QUOTES);
+				$cartificates_title = htmlspecialchars($requestParams [CompanyService::REFERENCE_TITLE], ENT_QUOTES);
 				StorageService::uploadFile ( $path, $file );
 				$upload_id = UploadsService::setUploadsPath($path);
-				CompanyService::setReference($id, $upload_id, $reference_title);
+				CompanyService::setReference($id, $upload_id, $cartificates_title);
 				$mvc->addObject ( 'success', true );
 			} else {
 				$mvc->addObject ( 'error', $error );
@@ -232,8 +244,8 @@ class TradesmanContentController extends ContentController {
 	
 		if (isset($_POST)&&$_POST!=NULL){
 			$error = array();
-			print_r($_FILES);
-			print_r($requestParams);
+			//print_r($_FILES);
+			//print_r($requestParams);
 			if (isset ( $_FILES ['file'] ['name'] ) && $_FILES ['file'] ['error'] == 0) {
 				$username = SessionService::getAttribute(SessionService::USERNAME);
 				$file = $_FILES ['file'];
@@ -242,6 +254,7 @@ class TradesmanContentController extends ContentController {
 			} else {
 				$error[] .= "_i18n{Please, upload file.}";
 			}
+			
 			$error[] .= !isset($requestParams[CompanyService::CARTIFICATES_TITLE])||$requestParams[CompanyService::CARTIFICATES_TITLE]==NULL ? "_i18n{Please, write short description.}" : false;
 			$error = array_filter ( $error );
 			if (count ( $error ) == 0) {

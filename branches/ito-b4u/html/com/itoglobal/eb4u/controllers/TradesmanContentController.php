@@ -109,7 +109,7 @@ class TradesmanContentController extends ContentController {
 		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		$error = array ();
 		
-		
+		print_r($requestParams);
 		if (isset ( $requestParams ['companyInfoSbm'] )) {
 			$fields = array ('0'=>UsersService::COMPANY_DESC);
 			$vals = array ('0'=>$requestParams [UsersService::COMPANY_DESC]);

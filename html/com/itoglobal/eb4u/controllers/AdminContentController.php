@@ -155,9 +155,8 @@ class AdminContentController extends ContentController {
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		
 		if(isset($requestParams['delCategory'])){  
-			print_r($requestParams['itemSelectCategory']);
-			print_r($requestParams['itemSelectSubCategory']);
-			/*
+			//print_r($requestParams['itemSelectCategory']);
+			//print_r($requestParams['itemSelectSubCategory']);
 			if (isset($requestParams['itemSelectCategory']) && strlen($requestParams['itemSelectCategory'])>0){
 				$array = explode(',', $requestParams["itemSelectCategory"]);
 				foreach ($array as $id){
@@ -170,7 +169,6 @@ class AdminContentController extends ContentController {
 					SubCategoryService::deleteSubCategory($id);
 				}
 			}
-			*/
 		}
 				
 		$categories = CategoryService::getCategories();

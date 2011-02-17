@@ -1,63 +1,43 @@
+<?php 
+$projects = $mvc->getObject(CompanyService::COMPANY_PROJECT);
+$references = $mvc->getObject(CompanyService::COMPANY_REFERENCES);
+?>
 <div class="viewDProfile">
 	<div class="unitRef">
 		<h3>Reference images</h3>
+<?php if(isset($references)&&$references!=null){
+	foreach($references as $key =>$reference){?>		
 		<div class="unitImg">
 			<div class="innerP">
-				<img src="/storage/uploads/users/google/profile/avatar.jpg" alt="" />
-				<p>Nullam vel nulla sem, ut convallis lacus.</p>
+				<img src="<?php echo $reference[UploadsService::PATH]?>" alt="<?php echo $reference[CompanyService::REFERENCE_TITLE]?>" />
+				<p><?php echo $reference[CompanyService::REFERENCE_TITLE]?></p>
 			</div>
 		</div>
-		<div class="unitImg">
+<?php } } else { ?>
+		<div class="unitProject">
 			<div class="innerP">
-				<img src="/storage/uploads/users/tradesman/profile/avatar.jpg" alt="" />
-				<p>Nullam vel nulla sem, ut convallis lacus.</p>
+				_i18n{Sorry, no reference project yet.}
 			</div>
 		</div>
-		<div class="unitImg">
-			<div class="innerP">
-				<img src="/storage/uploads/bargains/bargain-1294156405.jpg" alt="" />
-				<p>Nunc at ante ut mi tempor aliquet.</p>
-			</div>
-		</div>
-		
-		<div class="unitImg">
-			<div class="innerP">
-				<img src="/storage/uploads/users/tradesman/profile/avatar.jpg" alt="" />
-				<p>Nulla iaculis porttitor ante, at eleifend justo hendrerit sed.</p>
-			</div>
-		</div>
+<?php } ?>
 	</div>
 	<div class="unitEqColumn">
 		<div class="unitRef">
 			<h3>Reference project</h3>
-			<div class="unitProject">
-				<div class="innerP">
-					<a href="#" title="http://ito-b4u">http://ito-b4u</a> - Etiam convallis gravida nunc, suscipit luctus dolor varius varius.
-				</div>
-			</div>
-			<div class="unitProject">
-				<div class="innerP">
-					<a href="#" title="http://google.com">http://google.com</a> - Nam eu turpis non neque viverra tincidunt et laoreet diam.
-				</div>
-			</div>
-			<div class="unitProject">
-				<div class="innerP">
-					<a href="#" title="http://php.net">http://php.net</a> - Morbi posuere odio vitae sapien interdum quis fermentum nisi tempus.
-				</div>
+<?php if(isset($projects)&&$projects!=null){
+	foreach($projects as $key =>$project){?>
+		<div class="unitProject">
+			<div class="innerP">
+				<a href="<?php echo $project[CompanyService::PROJECT_URL]?>" title="<?php echo $project[CompanyService::PROJECT_URL]?>"><?php echo $project[CompanyService::PROJECT_URL]?></a> - <?php echo $project[CompanyService::PROJECT_TITLE]?>
 			</div>
 		</div>
-		<div class="unitRef">
-			<h3>Certificates</h3>
-			<div class="unitCertificate">
-				<div class="innerP">
-					<a href="#" title="Maecenas volutpat risus.doc">Maecenas volutpat risus.doc</a> (763kB) - Nam eu turpis non neque viverra tincidunt et laoreet diam.
-				</div>
+<?php } } else { ?>
+		<div class="unitProject">
+			<div class="innerP">
+				_i18n{Sorry, no reference project yet.}
 			</div>
-			<div class="unitCertificate">
-				<div class="innerP">
-					<a href="#" title="Etiam vehicula.pdf">Etiam vehicula.pdf</a> (220kB) - Etiam convallis gravida nunc, suscipit luctus dolor varius varius.
-				</div>
-			</div>
+		</div>
+<?php } ?>			
 		</div>
 	</div>
 </div>

@@ -423,8 +423,13 @@
 	</action>
 	
 	<action name="/get-profile.html" id="profile">
-		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetSubcategory"/>
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetProfile"/>
 		<template name="index.html" path="templates/ajax/ajax-profile.html" />
+	</action>
+	
+	<action name="/get-certificate.html" id="profile">
+		<controller class="com.itoglobal.eb4u.controllers.AjaxController" method="handleGetCertificate"/>
+		<template name="index.html" path="templates/ajax/ajax-certificates.html" />
 	</action>
 	
 	<action name="/js/i18n/jq.localisation.js" id="localisationjs">

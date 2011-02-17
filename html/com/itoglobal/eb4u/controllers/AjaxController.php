@@ -40,6 +40,33 @@ class AjaxController extends SecureActionControllerImpl {
 		return $mvc;
 	}
 	
+	public function handleGetProfile($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = $requestParams[UsersService::ID];
+		if(isset($id)){
+
+			$projects = CompanyService::getProjects ($id);
+			isset ( $projects ) ? $mvc->addObject ( CompanyService::COMPANY_PROJECT, $projects ) : null;
+			
+			$references = CompanyService::getReferences ($id);
+			isset ( $references ) ? $mvc->addObject ( CompanyService::COMPANY_REFERENCES, $references ) : null;
+				
+		}
+		return $mvc;
+	}
+	
+	public function handleGetCertificate($actionParams, $requestParams) {
+		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		$id = $requestParams[UsersService::ID];
+		if(isset($id)){
+
+			$certificates = CompanyService::getCertificates ($id);
+			isset ( $certificates ) ? $mvc->addObject ( CompanyService::COMPANY_CARTIFICATES, $certificates ) : null;
+			
+		}
+		return $mvc;
+	}
+	
 	public function handleFeedback($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
 		if (isset($_POST)&&$_POST!=NULL){

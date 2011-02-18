@@ -141,9 +141,9 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 </ul>
 <h2>_i18n{Reference}</h2>
 <div class="unitABlock">
-	<input type="hidden" name="deleteItem" />
 	<div class="unitRef">
 	<!-- $references -->
+		<input type="hidden" name="deleteReferences" />
 		<h3>_i18n{Reference images}</h3>
 
 <?php if(isset($references)&&$references!=null){
@@ -154,7 +154,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<p><?php echo $reference[CompanyService::REFERENCE_TITLE]?></p>
 			</div>
 			<div class="linkDelete">
-				<a href="/company-profile.html?delImage=<?php echo $reference[CompanyService::ID]?>&upload_id=<?php echo $reference[CompanyService::UPLOAD_ID]?>" rel="1" title="Remove">Remove</a>
+				<a href="/company-profile.html?delImage=<?php echo $reference[CompanyService::ID]?>&upload_id=<?php echo $reference[CompanyService::UPLOAD_ID]?>" rel="<?php echo $reference[CompanyService::UPLOAD_ID]?>" title="Remove">Remove</a>
 			</div>
 		</div>
 <?php } } else { ?>
@@ -166,6 +166,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 <?php } ?>
 	</div>
 	<div class="unitRef">
+		<input type="hidden" name="deleteProject" />
 		<h3>_i18n{Reference project}</h3>
 <?php if(isset($projects)&&$projects!=null){
 	foreach($projects as $key =>$project){?>
@@ -174,7 +175,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<a href="<?php echo $project[CompanyService::PROJECT_URL]?>" title="<?php echo $project[CompanyService::PROJECT_URL]?>"><?php echo $project[CompanyService::PROJECT_URL]?></a> - <?php echo $project[CompanyService::PROJECT_TITLE]?>
 			</div>
 			<div class="linkDelete">
-				<a href="/company-profile.html?delProject=<?php echo $project[CompanyService::ID]?>" rel="5" title="_i18n{Remove}">_i18n{Remove}</a>
+				<a href="/company-profile.html?delProject=<?php echo $project[CompanyService::ID]?>" rel="<?php echo $project[CompanyService::ID]?>" title="_i18n{Remove}">_i18n{Remove}</a>
 			</div>
 		</div>
 <?php } } else { ?>
@@ -186,6 +187,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 <?php } ?>
 	</div>
 	<div class="unitRef">
+		<input type="hidden" name="deleteCertificates" />
 		<h3>_i18n{Certificates}</h3>
 <?php if(isset($certificates)&&$certificates!=null){
 	foreach($certificates as $key =>$certificate){?>
@@ -194,7 +196,7 @@ $status = $mvc->getObject(TradesmanContentController::STATUS);
 				<a href="<?php echo $certificate[UploadsService::PATH]?>" title="<?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>"><?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?></a> (763kB) - <?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>
 			</div>
 			<div class="linkDelete">
-				<a href="/company-profile.html?delCert=<?php echo $certificate[CompanyService::ID]?>&upload_id=<?php echo $certificate[CompanyService::UPLOAD_ID]?>" rel="8" title="_i18n{Remove}">_i18n{Remove}</a>
+				<a href="/company-profile.html?delCert=<?php echo $certificate[CompanyService::ID]?>&upload_id=<?php echo $certificate[CompanyService::UPLOAD_ID]?>" rel="<?php echo $certificate[CompanyService::UPLOAD_ID]?>" title="_i18n{Remove}">_i18n{Remove}</a>
 			</div>
 		</div>
 <?php } } else { ?>

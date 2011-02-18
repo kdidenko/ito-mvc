@@ -466,12 +466,12 @@ if(jQuery)(function($){
 	};
 	$.fn.profileImgAn = function(){
 		return this.each(function(){
-			var o=$(this),f=o.parents('form'),h=0,i=$('.unitImg .innerP', o);
+			var o=$(this),f=$('input[type="hidden"]', o),h=0,i=$('.unitImg .innerP', o);
 			i.each(function(){if($(this).height()>h){h=$(this).height()}})
 			i.height(h);
 			$('.linkDelete a', o).each(function(){
 				$(this).bind('click', function(){
-					$('input[name="deleteItem"]', f).val($(this).attr('rel'));
+					f.val($(this).attr('rel'));
 					f.submit(); return false;
 				})
 			})

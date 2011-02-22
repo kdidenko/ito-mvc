@@ -472,7 +472,7 @@ if(jQuery)(function($){
 			$('.linkDelete a', o).each(function(){
 				$(this).bind('click', function(){
 					f.val($(this).attr('rel'));
-					f.submit(); return false;
+					f.parents('form').submit(); return false;
 				})
 			})
 			

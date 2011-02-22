@@ -109,7 +109,7 @@ class TradesmanContentController extends ContentController {
 		$username = SessionService::getAttribute ( UsersService::USERNAME );
 		$error = array ();
 		
-		print_r($requestParams);
+		//print_r($requestParams);
 		if (isset ( $requestParams ['companyInfoSbm'] )) {
 			$fields = array ('0'=>UsersService::COMPANY_DESC);
 			$vals = array ('0'=>$requestParams [UsersService::COMPANY_DESC]);
@@ -154,16 +154,16 @@ class TradesmanContentController extends ContentController {
 			$mvc->addObject ( self::STATUS, 'successful' );
 		}
 		
-		if(isset($requestParams['delImage'])&&isset($requestParams['upload_id'])){
-			CompanyService::delReference($id, $requestParams['delImage'],$requestParams['upload_id']);
+		if(isset($requestParams['deleteReferences'])&&$requestParams['deleteReferences']!=NULL){
+			CompanyService::delReference($id, $requestParams['deleteReferences']);
 		}
 	
-		if(isset($requestParams['delProject'])&&isset($requestParams['upload_id'])){
-			CompanyService::delPoject($id, $requestParams['delProject']);
+		if(isset($requestParams['deleteProject'])&&$requestParams['deleteProject']!=NULL){
+			CompanyService::delPoject($id, $requestParams['deleteProject']);
 		}
 		
-		if(isset($requestParams['delCert'])&&isset($requestParams['upload_id'])){
-			CompanyService::delCertificate($id, $requestParams['delCert'],$requestParams['upload_id']);
+		if(isset($requestParams['deleteCertificates'])&&$requestParams['deleteCertificates']!=NULL){
+			CompanyService::delCertificate($id, $requestParams['deleteCertificates']);
 		}
 		
 		#get user info

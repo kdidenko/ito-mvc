@@ -131,11 +131,12 @@ class AdminContentController extends ContentController {
 			$block = StaticBlockService::getBlockInfo($id);
 			isset($block) ? $mvc->addObject ( StaticBlockService::STATIC_BLOCK, $block) : NULL;
 		}
-		
+		/*
 		if(isset($requestParams['preview'])){
 			$location = $this->onRole( $actionParams );
 			$this->forwardActionRequest ( $location );
 		}
+		*/
 		return $mvc;
 	}
 	

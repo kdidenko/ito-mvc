@@ -9,7 +9,7 @@ $certificates = $mvc->getObject(CompanyService::COMPANY_CARTIFICATES);
 	foreach($certificates as $key =>$certificate){?>
 		<div class="unitCertificate">
 			<div class="innerP">
-				<a href="<?php echo $certificate[UploadsService::PATH]?>" title="<?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>"><?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?></a> (763kB) - <?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>
+				<a href="<?php echo $certificate[UploadsService::PATH]?>" title="<?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?>"><?php echo $certificate[CompanyService::CARTIFICATES_TITLE]?></a>
 			</div>
 		</div>
 <?php } } else { ?>

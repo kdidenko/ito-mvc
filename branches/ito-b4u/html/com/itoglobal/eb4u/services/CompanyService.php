@@ -211,14 +211,16 @@ class CompanyService {
 		return $result;
 	}
 	
-	public static function delCertificate($company_id, $project_id, $upload_id) {
+	public static function delCertificate($company_id, $project_id) {
+		$where = self::COMPANY_CARTIFICATES . '.' . self::ID . " = " . $project_id;
+		$upload = self::getCertificates ($company_id,$where);
 		# delete from certificates table
 		$from = self::COMPANY_CARTIFICATES;
 		$where = self::ID . " = " . $project_id . " AND " . self::COMPANY_ID . '=' . $company_id;
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
 		#delete from upload table
-		UploadsService::delUploads($upload_id, path);
+		UploadsService::delUploads($upload[0][self::UPLOAD_ID],$upload[0][UploadsService::PATH]);
 	}
 	
 	public static function getReferences($company_id, $where=null) {
@@ -243,15 +245,16 @@ class CompanyService {
 		return $result;
 	}
 	
-	public static function delReference($company_id, $project_id, $upload_id) {
-		$upload = UploadsService::getUploadsPath ($upload_id);
+	public static function delReference($company_id, $project_id) {
+		$where = self::COMPANY_REFERENCES . '.' . self::ID . " = " . $project_id;
+		$upload = self::getReferences ($company_id,$where);
 		# delete from certificates table
 		$from = self::COMPANY_REFERENCES;
 		$where = self::ID . " = " . $project_id . " AND " . self::COMPANY_ID . '=' . $company_id;
 		# executing the query
 		DBClientHandler::getInstance ()->execDelete($from, $where, '', '');
 		#delete from upload table
-		UploadsService::delUploads($upload[0][UploadsService::ID],$upload[0][UploadsService::PATH]);
+		UploadsService::delUploads($upload[0][self::UPLOAD_ID],$upload[0][UploadsService::PATH]);
 	}
 	
 	public static function getRating($company_id = NULL, $where = NULL) {

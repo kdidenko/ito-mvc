@@ -1,0 +1,15 @@
+<?php $crnt = $mvc->getView();?>
+<ul class="userNav">
+	<li <?php if($crnt == 'navigation-registration') echo 'class="itemActive"';?>>
+	<a class="linkBtn" href="/registration.html" title="_i18n{Register}"><span><strong>_i18n{Register}</strong></span></a>
+	</li>
+	<li <?php if($crnt == 'navigation-login') echo 'class="itemActive"';?>>
+	<a class="linkBtn" href="/html.html" title="_i18n{Login}"><span><strong>_i18n{Login}</strong></span></a>
+	</li>
+</ul>
+<ul class="mainNav">
+	<li <?php if($crnt == 'navigation-home') echo 'class="itemActive"';?>><a href="/" title="_i18n{Home}">_i18n{Home}</a></li>
+	<li <?php if($crnt == 'navigation-forentrepreneurs') echo 'class="itemActive"';?>><a href="/for-entrepreneurs.html" title="_i18n{For Entrepreneurs}">_i18n{For Entrepreneurs}</a></li>
+	<li <?php if($crnt == 'navigation-companies') echo 'class="itemActive"';?>><a href="/companies.html" title="_i18n{Yellow Pages}">_i18n{Yellow Pages}</a></li>
+	<li <?php if($crnt == 'navigation-viewbargains') echo 'class="itemActive"';?>><a href="/view-bargains.html" title="_i18n{Bargain}">_i18n{Bargain}</a></li>
+</ul>

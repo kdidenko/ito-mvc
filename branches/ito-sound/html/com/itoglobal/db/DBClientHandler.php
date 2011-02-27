@@ -50,7 +50,12 @@ class DBClientHandler {
 	 * @see com/itoglobal/db/sql/SQLClientInterface#exec($sql)
 	 */
 	public function exec($sql) {
-		return $this->client->exec ( $sql, $this->connection );
+		$ref = $this->client->exec ( $sql, $this->connection );
+		$result = array ();
+		while ( $row = mysql_fetch_assoc ( $ref ) ) {
+			array_push ( $result, $row );
+		}
+		return $result;
 	}
 	
 	/* (non-PHPdoc)
@@ -58,6 +63,12 @@ class DBClientHandler {
 	 */
 	public function execInsert($fields, $values, $into) {
 		return $this->client->execInsert ( $fields, $values, $into, $this->connection );
+	}
+	/* (non-PHPdoc)
+	 * @see com/itoglobal/db/sql/SQLClientInterface#execMultipleInsert($fields, $values, $into)
+	 */
+	public function execMultipleInsert($fields, $values, $into) {
+		return $this->client->execMultipleInsert ( $fields, $values, $into, $this->connection );
 	}
 	
 	/* (non-PHPdoc)

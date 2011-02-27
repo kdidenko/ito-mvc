@@ -1,7 +1,6 @@
 <?php
 
 class StorageService {
-	
 	const PATH_SEPARATOR = '/';
 	
 	const TYPE_ALL = - 1;
@@ -17,6 +16,42 @@ class StorageService {
 	 * @var string - images directory name 
 	 */
 	const IMAGES = 'images';
+	/**
+	 * @var string - user directory name 
+	 */
+	const USERS_FOLDER = 'storage/uploads/users/';
+	/**
+	 * @var string - bargains directory name 
+	 */
+	const BARGAINS_FOLDER = 'storage/uploads/bargains/';
+	/**
+	 * @var string - bargains directory name 
+	 */
+	const ORDERS_FOLDER = 'storage/uploads/orders/';
+	/**
+	 * @var string - user avatar directory name 
+	 */
+	const USER_AVATAR = 'avatar.jpg';
+	/**
+	 * @var string - profile directory name 
+	 */
+	const USER_PROFILE = '/profile/';
+	/**
+	 * @var string - projects directory name 
+	 */
+	const USER_PROJECTS = '/projects/';
+	/**
+	 * @var string - certificates directory name 
+	 */
+	const USER_CARTIFICATES = '/certificates/';
+	/**
+	 * @var string - default user avatar directory name 
+	 */
+	const DEF_USER_AVATAR = 'storage/uploads/default-avatar.jpg';
+	/**
+	 * @var string - default user avatar directory name 
+	 */
+	const DEF_ORDER_AVATAR = 'storage/uploads/default-order-avatar.jpg';
 	/**
 	 * @var string - templates directory name 
 	 */
@@ -166,7 +201,8 @@ class StorageService {
 	
 	public static function uploadFile($path, $file) {
 		if (is_uploaded_file ( $file ['tmp_name'] )) {
-			if ($file ['size'] != 0 and $file ['size'] <= 512000) {
+			$file_size = FILE_SIZE;
+			if ($file ['size'] != 0 and $file ['size'] <= $file_size) {
 				move_uploaded_file ( $file ['tmp_name'], $path ) ? 
 					null :
 						error_log ( 'Invalid mooving file to' . $path );

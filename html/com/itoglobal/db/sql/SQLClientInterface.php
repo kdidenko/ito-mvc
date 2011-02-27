@@ -43,6 +43,22 @@ interface SQLClientInterface {
      */
     const SET = ' SET ';
     /**
+     * @var string SQL JOIN statement identifier.
+     */
+    const JOIN = ' JOIN ';
+    /**
+     * @var string SQL ON statement identifier.
+    */
+    const ON = ' ON ';
+    /**
+     * @var string SQL LEFT statement identifier.
+     */
+    const LEFT = ' LEFT ';
+    /**
+     * @var string SQL RIGHT statement identifier.
+     */
+    const RIGHT = ' RIGHT ';
+    /**
      * @var string SQL GROUP BY statement identifier.
      */
     const GROUOPBY = ' GROUP BY ';
@@ -50,7 +66,34 @@ interface SQLClientInterface {
      * @var string SQL GROUP BY statement identifier.
      */
     const ORDERBY = ' ORDER BY ';
-
+    /**
+     * @var string SQL ASC statement identifier.
+     */
+    const ASC = 'ASC';
+    /**
+     * @var string SQL DESC statement identifier.
+     */
+    const DESC = 'DESC';
+	/**
+	 * @var string SQL NOT statement identifier.
+	 */
+	const NOT = ' NOT ';
+	/**
+	 * @var string SQL IN statement identifier.
+	 */
+	const IN = ' IN ';
+    /**
+     * @var string SQL COUNT statement identifier.
+     */
+    const COUNT = ' COUNT';
+    /**
+     * @var string SQL AS statement identifier.
+     */
+    const SQL_AS = ' AS ';
+    /**
+     * @var string SQL IS NULL statement identifier.
+     */
+    const IS_NULL = ' IS NULL ';
     /**
      * Executes the SQL query and returns the execution result status.
      * @param $sql string - query string to execute.
@@ -67,6 +110,15 @@ interface SQLClientInterface {
      * @return integer - zero if execution was successful. Non-zero if an error occurred.
      */
     public static function execInsert ($fields, $values, $into, $lnk);
+    /**
+     * Executes SQL INSERT statement.
+     * @param $fields string - comma separated fields list of inserted values.
+     * @param $values array - comma separated values list to be inserted.
+     * @param $into string - tebale name to insert values.
+     * @param $into mixed - db link to use for execution
+     * @return integer - zero if execution was successful. Non-zero if an error occurred.
+     */
+    public static function execMultipleInsert ($fields, $values, $into, $lnk);
     /**
      * Prepares and executes SQL SELECT statement.
      * @param $fields string - comma separated list of fields to select.

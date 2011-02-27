@@ -7,13 +7,13 @@
 	ini_set('log_errors', TRUE);
     ini_set('html_errors', TRUE);
 	ini_set('display_errors', TRUE);
-
     # include all required code
 	include_once 'global-includes.php';
 
+
 	# session may be started now
 	SessionService::startSession();
-	
+		
 	# initialize the DAO object
 	$dao = DBClientHandler::getInstance();
 	$dao->init($db_name, $db_host, $db_user, $db_pass, $charset);
@@ -22,13 +22,17 @@
 	$rd = RequestDispatcher::getInstance();
 	$mvc = $rd->dispatchHttpRequest($_SERVER);
 	
+	# get current locale
+	$locale = SessionService::getAttribute(SessionService::LOCALE);
+	$locale = $locale ? $locale : DEFAULT_LOCALE;
+	
 	# initialize the Messages Service
-	//TODO: temporary disabled
-	//$messages = MessageService::getInstance();
-	//$messages->loadMessages(DEFAULT_LOCALE);
-
+	$messages = MessageService::getInstance();
+	$messages->loadMessages($locale);
+	
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.
+    
     # start output buffering with registered i18n for an output postprocessing
     ob_start('_i18n');
         # go! go! go!

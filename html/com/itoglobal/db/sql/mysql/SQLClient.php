@@ -56,6 +56,20 @@ class SQLClient implements SQLClientInterface {
 	public static function execInsert($fields, $values, $into, $link) {
 		$sql = self::INSERT . self::INTO . $into . " (" . $fields . ") VALUES (" . $values . ")";
 		$result = self::exec ( $sql, $link );
+		$result = mysql_insert_id($link);
+		return $result;
+	}
+	public static function execMultipleInsert($fields, $values, $into, $link) {
+		$sql = self::INSERT . self::INTO . $into . " (" . $fields . ") VALUES (";
+	 	foreach($values as $key=>$item){
+	 		$sql .= $item;
+			$sql .= count($values)!=$key+1 ? "),(" : NULL;	 		
+	 	}
+		$sql .= ")";
+		//print_r($sql);
+		//exit;
+		$result = self::exec ( $sql, $link );
+		$result = mysql_insert_id($link);
 		return $result;
 	}
 	public static function execSelect($fields, $from, $where, $groupBy, $orderBy, $limit, $link) {

@@ -5,6 +5,10 @@ require_once "com/itoglobal/mvc/defaults/SecureActionController.php";
 
 class SecureActionControllerImpl extends BaseActionControllerImpl implements SecureActionController {
 	
+	const ROLE_DELIMETER = ',';
+	
+	const SIGNED_OFF_MESSAGE = 'Your session has expired, please login';
+	
 	/**
 	 * Basic implementation of onSignedOff method defined by
 	 * com.itoglobal.mvc.defaults.SecureActionController interface.
@@ -16,13 +20,44 @@ class SecureActionControllerImpl extends BaseActionControllerImpl implements Sec
 	}
 	
 	/**
-	 * Basic implementation of onAbort method defined by
+	 * Basic implementation of onLoggedIn method defined by
 	 * com.itoglobal.mvc.defaults.SecureActionController interface.
 	 *
 	 * @see SecureActionController->onLoggedIn($actionParams)
 	 */
 	public function onLoggedIn($actionParams) {
 		return self::getLocationOnCondition ( $actionParams, self::MVC_ON_LOGGED_IN );
+	}
+	
+	/**
+	 * Basic implementation of onRole method defined by
+	 * com.itoglobal.mvc.defaults.SecureActionController interface.
+	 *
+	 * @see SecureActionController->onLoggedIn($actionParams)
+	 */
+	public function onRole($actionParams) {
+		return self::getMethodOnCondition ( $actionParams, self::MVC_ON_ROLE );
+	}
+	
+	/**
+	 * Retreives the method name parameter for a specified action processing
+	 * state condition using action configuration model object.
+	 *
+	 * @param $actionParams
+	 * @param $condition
+	 * @return unknown_type
+	 */
+	public function getMethodOnCondition($actionParams, $condition) {
+		$result = null;
+		if ($actionParams && ($forwards = $actionParams->forwards)) {
+			foreach ( $forwards->target as $opt ) {
+				if ($opt ['condition'] && $condition == ( string ) $opt ['condition']) {
+					$result = ( string ) $opt ['class'];
+					break;
+				}
+			}
+		}
+		return $result;
 	}
 	
 	/**
@@ -35,9 +70,19 @@ class SecureActionControllerImpl extends BaseActionControllerImpl implements Sec
 	 */
 	public function handleActionRequest($actionParams, $requestParams) {
 		$result = parent::handleActionRequest ( $actionParams, $requestParams );
-		$template = $actionParams->template;
-		if (isset ( $template->role )) {
-			$role = SessionService::getRole ();
+		$role = SessionService::getRole ();
+		$template = $actionParams->template;		
+		if (isset ( $actionParams ['roles'] )) {
+			$permitted = explode ( self::ROLE_DELIMETER, ( string ) $actionParams ['roles'] );
+			if (in_array ( $role, $permitted )) {
+				$result->setTemplate ( $template );
+			} else {
+				//TODO: forward do not contains ModelAndView Object for now.
+				$result->addObject ( UsersService::ERROR, self::SIGNED_OFF_MESSAGE );
+				$location = self::onSignedOff ( $actionParams );
+				self::forwardActionRequest ($location);
+			}
+		} else if (isset ( $template->role )) {
 			foreach ( $template->role as $key => $value ) {
 				if ($role == ( string ) $value ['type']) {
 					$result->setTemplate ( $value );

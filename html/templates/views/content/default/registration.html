@@ -1,0 +1,69 @@
+<div class="wrapLogin">
+	<div class="bodyBox">
+		<h2>_i18n{Tell us about yourself}</h2>
+		
+		
+				<?php	$message = $mvc->getObject(UsersService::ON_SUCCESS);
+						if (isset($message) && $message!=NULL){?>
+				<div class="itemOk"><?php echo $message; ?></div>
+			<?php	} else { ?>
+				<?php 	$errors = $mvc->getObject(UsersService::ERROR);
+							if (isset($errors)){?>
+				<div class="itemWarning">
+					<ul>
+					<?php foreach ($errors as $key => $value){ ?>
+						<li><?php echo $value; ?></li>
+					<?php	} ?>
+					</ul>
+				</div>
+		<?php	} ?>
+			<div class="unitABlock unitABlockLast unitRegistration">
+			<form action="registration.html" method="post" name="registration">
+				<div class="unitEqColumn">
+					<div class="itemForm">
+						<label for="frmR15">_i18n{Username}:<span class="itemReq">*</span></label>
+						<span class="itemData"><input type="text" id="frmR15" class="inpTxt" name="username" value="<? if(isset($_POST['username'])) echo $_POST['username']; ?>" /></span>
+					</div>
+					<div class="itemForm">
+						<label for="frmR12">_i18n{Your Email}:<span class="itemReq">*</span></label>
+						<span class="itemData">
+							<input type="text" id="frmR12" class="inpTxt" name="email" value="<? if(isset($_POST['email'])) echo $_POST['email']; ?>"/>
+						</span>
+					</div>
+					<div class="itemForm">
+						<label for="frmR16">_i18n{Password}:<span class="itemReq">*</span></label>
+						<span class="itemData"><input type="password" id="frmR16" class="inpTxt" name="password"/></span>
+					</div>
+					<div class="itemForm">
+						<label for="frmR17">_i18n{Repeat Password}:<span class="itemReq">*</span></label>
+						<span class="itemData"><input type="password" id="frmR17" class="inpTxt" name="confirm_password"/></span>
+					</div>
+				</div>
+				<div class="unitEqColumn">
+					<div class="itemForm">
+						<span class="itemData">
+							<input type="checkbox" id="frmR18" class="inpChk" name="agreement"/>
+							<label for="frmR18">_i18n{I read, understood, and agree to eBids4U} <a href="/user-agreement.html" class="nnn" target="blank" title="_i18n{eBid4U User Agreement}">_i18n{User Agreement}</a>.</label>
+						</span>
+					</div>
+				</div>	
+				<div class="unitBtn">
+					<input type="hidden" name="role" value="<?php echo $role ?>"/>
+					<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
+					<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
+				</div>
+				</form>
+			</div>
+			<div class="unitText">
+					<h3>TEXT</h3>
+					<p>text text text text</p>
+					<h3>TEXT</h3>
+					<p>text text text text</p>
+				</div>
+		
+		<?php } ?>
+	</div>
+	<!-- fix gradient on -->
+	<div class="lineHide"></div>
+	<!-- fix gradient off -->
+</div>

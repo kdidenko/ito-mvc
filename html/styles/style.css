@@ -1,0 +1,387 @@
+body {margin:0; padding:0; text-align:center; font-family:"Trebuchet MS", Arial, sans-serif; font-size:13px; line-height:143%; background:black; color:#393939; position:relative; min-width:970px}
+h1, h2, h3, h4, p, ul, ol, li, dl, dt, dd, form {margin:0; padding:0; list-style:none}
+img {border:none}
+a {color:#393939; text-decoration:none}
+a:hover {text-decoration:underline}
+
+input, select, button, textarea {font-family:"Trebuchet MS", Arial, sans-serif; font-size:13px; padding:0; margin:0; vertical-align:middle}
+input.inpTxt {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px; width:182px}
+select {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:1px 3px; width:200px}
+textarea {border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969; padding:2px 3px}
+input.inpChk {margin:5px 0 0 0; width:14px; height:14px; float:left}
+	* html input.inpChk {margin:6px 0 0 0}
+button::-moz-focus-inner {border:0; padding:0}
+button, a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
+	button span, a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg.gif) no-repeat right -26px; cursor:pointer; text-align:center; height:24px}
+	button span strong, a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:23px; line-height:21px; padding:1px 0 0 12px; background:url(../images/btnBg.gif) no-repeat left 0; font-size:13px}
+	a.linkBtn:hover {color:#fff; text-decoration:none}
+.hideElement {display:none}
+
+/* ------------------ feedback style ------------------ */
+.feedbackLink {position:fixed; left:0; top:50%; z-index:500}
+	.feedbackLink a {display:block; width:32px; height:114px; background:url(../images/feedbackBg.png) no-repeat 0 0; overflow:hidden; text-indent:99px; margin:-57px 0 0 0; position:relative}
+/* fix for IE6 */
+
+* html .feedbackLink {position:absolute}
+	* html .feedbackLink a {background-image:url(../images/feedbackBg.gif)}
+
+.wrapInner {width:970px; margin:0 auto; text-align:left; overflow:hidden}
+/* ------------------ header style ------------------ */
+.wrapHeader {height:175px}
+	.wrapHeader .unitLogo {float:left; padding:25px 0 25px 10px}
+	.wrapHeader .unitSlogan {float:right; width:680px; height:175px; background:url(../images/headerSloganBg.gif) no-repeat 0 20px}
+	.wrapHeader .unitSlogan p {font-size:20px; font-weight:bold; line-height:normal; letter-spacing:1px; color:#9f0307; margin:95px 0 0 100px; background:#fff; padding:7px}
+/* ------------------ top navigation style ------------------ */
+.wrapNav {background:#00b5d5;/*url(../images/navBg.png) repeat-x 0 1px; */position:relative; z-index:100}
+	.wrapNav .wrapInner {padding:0 5px 0 40px; height:140px; width:925px; overflow:auto; margin:0 auto -4px auto; position:relative; z-index:100}
+.mainNav {float:right; overflow:hidden; height:37px; background: #bfecf5;margin-top:50px;}
+	.mainNav li {float:left; font-size:15px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101;}
+	.mainNav li a {float:left; padding:6px 13px; /*background:url(../images/navItemBg.png) no-repeat 0 center;*/color:#fff; text-decoration:none}
+	.mainNav li a:hover {background:#850208; text-decoration:none}
+	.mainNav li.itemActive {padding:0; z-index:102}
+	.mainNav li.itemActive a, .mainNav li.itemActive a:hover {padding:8px 13px 12px 13px; /*background:url(../images/navItemActiveBg.png) repeat-x 0 0; */color:#c60404}
+.userNav {float:left; overflow:hidden; height:48px; background: none;margin-top:50px;}
+
+	.userNav a.linkBtn {overflow:visible; background:none; border:none; padding:0 1px 1px 0; cursor:pointer; position:relative; float:left; text-decoration:none}
+	.userNav a.linkBtn span {float:left; padding:0 12px 0 0; background:url(../images/btnBg2.png) no-repeat right -53px; cursor:pointer; text-align:center; height:46px}
+	.userNav a.linkBtn span strong {color:#fff; float:left; cursor:pointer; white-space:nowrap; height:46px; line-height:41px; padding:0 0 0 12px; background:url(../images/btnBg2.png) no-repeat left 0!important; font-size:13px}
+	
+	.userNav li {float:left; font-size:15px; font-weight:bold; padding:1px 0 0 0; margin:0 0 0 -1px; position:relative; z-index:101;margin-right: 5px;}
+	.userNav li a {float:left; padding:6px 13px; /*background:url(../images/navItemBg.png) no-repeat 0 center;*/color:#fff; text-decoration:none}
+	.userNav li.itemActive {padding:0; z-index:102}
+/* ------------------ Content ------------------ */
+.wrapContent {background:url(/images/contentBg.png) repeat;overflow: hidden;}
+/* ------------------ footer & line style ------------------ */
+.wrapFooter {background-color: black;}
+	.wrapFooter .wrapInner {}
+	.wrapFooter dl {float:left; padding:10px 0 10px 25px}
+	.wrapFooter dt {font-size:15px; font-weight:bold; color:#fff; padding:0 0 8px 0}
+	.wrapFooter dd a {color:#888987;}
+.wrapBtmLine {border-top:7px solid #850208; height:20px}
+/* ------------------ content wrap style ------------------ */
+.stationContent {width:970px; background:#EFEFEF url(/images/mainBg.png) repeat; padding: 20px;overflow:hidden}
+
+/* home wrap style */
+.wrapMain {float:left; width:702px}
+	.wrapMain .greyBox {width:662px}
+	.wrapMain .greyBox .itemFace {width:312px; height:98px; background:url(../images/contentImg07.jpg) no-repeat 0 0}
+	.wrapMain .greyBox .itemHand {width:23px; height:28px; top:95px; right:-11px; background:url(../images/contentImg08.gif) no-repeat 0 0}
+.wrapSide {float:right; width:252px} /* width:213px */
+	.wrapMain .viewBoxB {width:442px; float:left}
+	.wrapMain .viewBoxC {width:195px; float:right}
+/* enterprice wrap style */
+.wrapEqColumns {float:left; width:472px}
+	.wrapRight {float:right}
+	.wrapEqColumns .greyBox {width:442px; padding:25px 15px 80px 15px}
+	.wrapEqColumns .greyBox .itemFace {background:url(../images/headImg03.jpg) no-repeat 0 0; height:124px; width:251px}
+	.wrapEqColumns .viewDlist {float:left; padding:8px 0 0 4px; width:230px}
+	.wrapEqColumns .viewBoxC {width:195px; float:right}
+/* login & registration wrap style */
+.wrapLogin {width:970px}
+	.wrapLogin .greyBox {width:940px; text-align:center}
+	.wrapLogin .viewBox {margin:10px auto 0 auto}
+/* admin wrap style */
+.wrapLAdmin {float:left; width:215px}
+	.wrapLAdmin .greyBox {width:185px}
+.wrapRAdmin {float:right; width:729px}
+	.wrapRAdmin .greyBox {width:699px}
+/* search wrap style */
+/*.wrapLSearch {float:right; width:235px}
+	.wrapLSearch .greyBox {width:205px}*/
+.wrapSSearch {float:right; width:252px}
+.wrapLSearch {float:left; width:702px}
+	.wrapLSearch .greyBox {width:662px}
+.wrapWSearch {float:left; width:970px}
+	.wrapWSearch .greyBox {width:940px}
+
+/* ------------------ title wrap style ------------------ */
+.wrapTitle {float:left; width:970px; height:95px; position:relative; z-index:20}
+	.viewTHead {float:left; width:730px; padding:20px 0 5px 15px; line-height:normal}
+	.viewTHead h1 {font-size:24px}
+	.viewTHead p {font-size:15px; padding:5px 0 0 0; font-weight:bold}
+	
+	.viewEHead {float:right; width:212px; padding:10px 0 0 0; text-align:right}
+	.viewEHead p {font-size:14px; color:#9F0307; line-height:18px}
+	.viewEHead p a {color:#9F0307; text-decoration:underline}
+	.viewEHead ul {float:right; padding:15px 0 0 0}
+	.viewEHead li {float:left; padding:0 0 0 2px}
+	.viewEHead li a {display:block; float:left; text-indent:99px; overflow:hidden; width:22px; height:22px}
+	.viewEHead li.itemMail a {background:url(../images/extraIcon.gif) no-repeat 0 -144px}
+	.viewEHead li.itemFacebook a {background:url(../images/extraIcon.gif) no-repeat 0 0}
+	.viewEHead li.itemTwitter a {background:url(../images/extraIcon.gif) no-repeat 0 -72px}
+	
+	.viewTHeadEq {width:350px}
+	.wrapEqColumns .wrapTitle {width:350px; margin:-95px 0 0 0}
+
+/* ------------------ box style ------------------ */
+.viewBox {margin:0 0 10px 0; position:relative} /* position:relative is need??? */
+	.viewBox .bodyBox {background:#fff}
+.cL {padding:0 0 0 4px; background:url(../images/boxE01.png) repeat-y left 0; position:relative; bo4rder:1px solid green}
+.cR {padding:0 4px 0 0; background:url(../images/boxE01.png) repeat-y right 0}
+.cT, .cT .cL, .cT .cR, .cB, .cB .cL, .cB .cR {position:relative; font-size:1px; line-height:1px; background:url(../images/boxE01.png); background-repeat:no-repeat; padding:0}
+	.cT, .cB {margin:0 12px 0 12px; background-image:url(../images/boxE01v.png); background-repeat:repeat-x}
+	.cT .cL, .cB .cL {float:left; margin:0 0 0 -12px; width:12px}
+	.cT .cR, .cB .cR {float:right; margin:0 -12px 0 0; width:12px}
+	.cT, .cT .cL, .cT .cR {height:9px}
+	.cB, .cB .cL, .cB .cR {height:12px}
+.cT {background-position:0 0}
+	.cT .cL {background-position:-13px 0}
+	.cT .cR {background-position:-25px 0}
+.cB {background-position:0 -9px}
+	.cB .cL {background-position:-13px -9px}
+	.cB .cR {background-position:-25px -9px}
+	
+	.viewBox h2 {font-size:15px; color:#9F0307; padding:0 12px 5px 12px}
+	.viewBox h3 {font-size:15px; padding:0 12px 5px 12px}
+
+.viewBoxA .cL, .viewBoxA .cR {background-image:url(../images/boxE02.png)}
+.viewBoxA .cT, .viewBoxA .cB {background-image:url(../images/boxE02v.png)}
+
+.viewBoxB .cL, .viewBoxB .cR {background-image:url(../images/boxE03.png)}
+.viewBoxB .cT, .viewBoxB .cB {background-image:url(../images/boxE03v.png)}
+
+.viewBoxC .cL, .viewBoxC .cR {background-image:url(../images/boxE04.png)}
+.viewBoxC .cT, .viewBoxC .cB {background-image:url(../images/boxE04v.png)}
+.viewBoxC .bodyBox {background:#F5F5F3}
+
+.wrapCarousel {overflow:hidden; width:970px; padding:10px 0 0 0; border-top:1px solid #850208}
+	.wrapCarousel .itemClip {margin:0 13px; padding:5px 0; height:95px; width:936px; overflow:hidden; position:relative}
+	.wrapCarousel ul {width:1000em; position:absolute; left:0}
+	.wrapCarousel li {float:left; width:117px; font-size:16px; text-align:center; cursor:pointer}
+	.wrapCarousel li span, .wrapCarousel li a {display:block}
+	.wrapCarousel li span.itemImg {width:117px; height:75px}
+
+/* side catalog style */
+.viewSList {}
+	.viewSList h2 {font-size:18px; line-height:normal; padding:5px 14px}
+		.viewSList h2 a {color:#9F0307}
+	.viewSList ul {padding:5px 14px}
+	.viewSList li {border-top:1px solid #EDECEC; padding:7px 0}
+	.viewSList li.itemFirst {border-top:none}
+	.viewSList li a {text-decoration:none; display:block; height:1%}
+	.viewSList li img {vertical-align:text-bottom; padding:0 3px 0 0}
+/* search block style */
+.unitSearch {overflow:hidden; width:420px; padding:5px 0 0 12px}
+	.unitSearch p {float:left; width:205px; padding:0 0 5px 0}
+	.unitSearch p.itemBtn {width:400px}
+	.unitSearch p.itemBtn button {float:right}
+	.unitSearch label {display:block; padding:5px 0 0 0}
+	.unitSearch select {width:195px}
+	
+	.wrapSSearch .unitSearch {width:220px; padding:0 0 0 12px}
+	.wrapSSearch .unitSearch p {width:220px; padding:2px 0 5px 0}
+	.wrapSSearch .unitSearch select {width:218px}
+	.wrapSSearch .unitSearch p.itemBtn button strong {float:left; width:195px}
+/* step block style */
+.unitStep {padding:0 1px 0 12px}
+	.unitStep ol {overflow:hidden; width:420px; padding:5px 0 0 0}
+	.unitStep li {float:left; width:122px; padding:0 10px 5px 8px}
+	.unitStep li span {display:block; color:#616161}
+	
+	.wrapSSearch .unitStep ol {width:220px; padding:0}
+	.wrapSSearch .unitStep li {width:220px; padding:10px 0; border-top:1px solid #CCC; margin:-1px 0 0 0; position:relative}
+	.wrapSSearch .unitStep li span {width:110px; font-size:12px; float:left}
+/* small video */
+.unitVideo {padding:0 12px 5px 12px}
+	.unitVideo .itemVideo {border:2px solid #D1CFCF; background:#fff}
+/* small form */
+.unitYellow {padding:0 12px}
+	.unitYellow p {padding:2px 0 5px 0; overflow:hidden; width:161px}
+	.unitYellow p.itemSmall {font-size:12px}
+	.unitYellow label {display:block}
+	.unitYellow select {width:160px}
+	.unitYellow button span {background-position:right -78px}
+	.unitYellow button span strong {background-position:left -52px; color:#292929}
+	.unitYellow .inpEmpty {color:#ccc}
+	
+	.wrapSSearch .unitYellow p {width:220px}
+	.wrapSSearch .unitYellow input {width:211px}
+		
+.viewPlatform {float:left; width:442px; position:relative; padding:5px 0 10px 0}
+	.viewPlatform p {font-size:17px; font-weight:normal; padding:10px 30px 10px 135px; line-height:135%; position:relative; z-index:2}
+	.viewPlatform p.itemSlide {padding:10px 20px 10px 20px; text-align:right}
+	.viewPlatform .peopleTrunk {background:url(../images/platformBg.gif) no-repeat; width:151px; height:193px; position:absolute; bottom:10px; left:0; z-index:1}
+/* list style */
+.viewDlist {float:right; width:195px; padding:0 0 10px 0}
+	.viewDlist h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:0 5px 5px 12px}
+	.viewDlist ul {padding:0 5px 0 12px}
+	.viewDlist li {background:url(../images/listBullet.gif) no-repeat 0 7px; padding:0 0 0 10px}
+.viewTList {float:left; width:422px}
+	.viewTList ul {float:left; width:195px; padding:0 0 10px 16px}
+.viewEList {float:right; width:182px; padding:8px 0 0 0}
+	.viewEList h3 {font-size:15px; font-weight:bold; color:#9F0307; padding:0 5px 5px 0}
+	.viewEList ul a {text-decoration:underline}
+
+/* ------------------ admin left style ------------------ */
+.viewMenu {}
+	.viewMenu ul {border-top:1px dotted #ccc; padding:0 0 10px 0}
+	.viewMenu li {border-bottom:1px dotted #ccc}
+	.viewMenu li a {display:block; overflow:hidden; width:153px; padding:5px 10px 4px 14px; font-size:13px; font-weight:bold}
+	.viewMenu li a:hover, .viewMenu li.itemActive a {background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff; text-decoration:none}
+	/* sub list */
+	.viewMenu li ul {padding:0; border:none}
+	.viewMenu li ul li {border-top:1px dotted #ccc; border-bottom:none}
+	.viewMenu li ul li a, .viewMenu li.itemActive ul li a {font-size:12px; background:#fff; width:150px; padding:3px 7px 1px 20px; color:#393939; font-weight:normal}
+	.viewMenu li ul li a:hover, .viewMenu li ul li.itemActive a {background:#E2E2E2; color:#393939}
+.viewPackage {}
+	.viewPackage p {padding:0 11px 5px 11px}
+	.viewPackage p span.itemCurrent {font-size:14px; font-weight:bold; color:#9F0307}
+	.viewPackage select {width:50px; vertical-align:middle}
+	.viewPackage button {float:none; vertical-align:middle; margin:0 0 0 5px}
+/* ------------------ admin content style ------------------ */
+.unitRegistration {width:391px;float: left;}
+.unitText {width:391px;float: right;}
+.unitABlock {width:391px; margin:0 0 5px 0; padding:5px 0; border-bottom:1px dotted #393939; overflow:hidden}
+	.unitABlockLast {margin:0; border:none}
+	.unitABlock .unitEqColumn {float:left; width:325px; padding:0 4px 0 11px}
+	.unitABlock .unitSnColumn {float:left; /*width:676px; */padding:0 4px 0 11px}
+	.unitABlock h3 {font-size:14px; padding:5px 0 8px}
+	
+	.unitABlock .itemWarning {border:1px solid #f00; background:#FFF2F2 url(../images/iconError.gif) no-repeat 8px 7px; color:#f00; margin:0 14px 5px 14px; padding:6px 10px 6px 30px}
+		.unitABlock .itemWarning a {color:#9F0307; text-decoration:underline}
+		.unitABlock .itemWarning a:hover {text-decoration:none}
+	.unitABlock .itemOk {border:1px solid #00A25B; background:#FFFED6 url(../images/iconOk.gif) no-repeat 8px 8px; color:#00A25B; margin:0 14px 5px 14px; padding:6px 10px 6px 30px}
+	
+	/* button style */
+	.unitABlock .unitBtn {/*width:678px; */float:left; padding:4px 0}
+		.unitABlock .unitBtn button, .unitABlock .unitBtn a.linkBtn {float:right; margin:0 0 0 5px}
+	/* form element two column */
+	.unitABlock .itemForm {overflow:hidden; width:325px; padding:4px 0}
+	.unitABlock label {float:left; width:115px; text-align:right; padding:3px 0 0 0; position:relative}
+	.unitABlock .itemData {float:right; width:200px}
+	.unitABlock .itemData label {text-align:left; display:table; height:1%; padding:2px 10px 0 4px; width:auto; float:none}
+	.unitABlock input.inpTxt {width:192px}
+	.unitABlock .itemReq {position:absolute; right:-8px; font-size:16px; color:#f00}
+	
+	.unitABlock dt {float:left; width:115px; text-align:right; padding:3px 0 0 0}
+	.unitABlock dd.itemData {float:right; width:192px; padding:3px 4px 2px 4px; color:#999}
+	
+	.unitABlock .unitInfo {padding:0 12px 5px 12px}
+	.unitABlock .unitInfo textarea.areaTxt {width:656px}
+	
+	.unitABlock label.labelDate {float:left; padding:3px 5px 0 0; width:auto}
+	.unitABlock input.inpDate {border-color:#696969 #C8C8C8 #C8C8C8 #696969; border-style:solid; border-width:1px; padding:2px 3px; margin:0 5px 0 0; width:120px; float:left}
+	.unitABlock .chooseDate {background:url(../images/actionIcon.gif) no-repeat 0 -407px; width:16px; height:16px; overflow:hidden; float:left; text-indent:-200px; margin:5px 20px 0 0}
+	
+	.unitABlock .unitSnColumn .itemForm {/*width:671px*/}
+	.unitABlock .unitSnColumn .itemData {width:546px}
+	.unitABlock .unitSnColumn input.inpTxt {width:532px}
+	.unitABlock .unitSnColumn textarea.areaTxt {width:532px; height:300px}
+	.unitABlock .unitSnColumn dd.itemData {width:538px}
+	
+	.unitABlock .inpFile {position:relative; overflow:hidden; float:left; margin:0 5px 0 0}
+	.unitABlock .inpFile .txtBg {width:150px; overflow:hidden; height:18px; padding:2px 3px; margin:0 5px 0 0; float:left; border:1px solid; border-color:#696969 #C8C8C8 #C8C8C8 #696969}
+	.unitABlock .inpFile button span {background-position:right -78px}
+	.unitABlock .inpFile button span strong {background-position:left -52px; color:#292929}
+/* list user */
+.viewUList {overflow:hidden; width:671px; line-height:14px; padding:0 0 10px 0}
+	.viewUList li {float:left; padding:0 11px 0 10px; border-left:1px solid #999; margin:0 0 0 -1px; position:relative}
+	.viewUList li a.itemActive {font-weight:bold}
+/* rtf out */
+.unitABlock .unitRtf {}
+	.unitABlock .unitRtf ol {padding:0 0 0 20px}
+	.unitABlock .unitRtf ol li {list-style:decimal}
+	.unitABlock .unitRtf ul li {background:url(../images/listBullet.gif) no-repeat 2px 6px; padding:0 0 0 20px}
+	.unitABlock .unitRtf a {text-decoration:underline}
+/* table list style */
+.viewList {width:667px; border-collapse:collapse; margin:0 12px 5px 12px}
+	.viewList th {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999; border-top:1px dotted #999; background:#7B0108 url(../images/navBg.png) repeat-x 0 0; color:#fff}
+	.viewList td {text-align:left; padding:3px 5px; border-bottom:1px dotted #999; border-right:1px dotted #999}
+	.viewList td.itemLast, .viewList th.itemLast {border-right-width:0}
+	.viewList .unitData {cursor:pointer}
+	.viewList .unitOdd td {background:#EFEFEF}
+	.viewList .unitNoRead {font-weight:bold}
+	.viewList tr.unitNoData td {border-right-width:0}
+	.viewList tr.unitChecked td {background:#FFFFCC}
+	.viewList tr.unitHover td {background:#E2E2E2}
+	.viewList th.itemChk {width:14px}
+		.viewList td input.inpChk {margin:1px 0 0 0}
+
+/* icon action */
+.viewIList {float:right; white-space:nowrap; padding:1px 15px 0 0}
+	.viewIList li {float:left; padding:1px 0 0 10px; background-image:url(../images/actionIcon.gif); background-repeat:no-repeat}
+	.viewIList li a, .viewIList li button {float:left; line-height:14px; padding:1px 5px 1px 25px; font-weight:normal}
+	.viewIList li a:hover {text-decoration:none}
+	.viewIList li.itemReply {background-position:13px 1px}
+	.viewIList li.itemPrint a {background-position:3px -45px}
+	.viewIList li.itemForward {background-position:13px -90px}
+	.viewIList li.itemDelete {background-position:13px -135px}
+	.viewIList li.itemNew {background-position:13px -181px}
+	.viewIList li.itemNewC {background-position:13px -225px}
+	.viewIList li.itemNewSC {background-position:13px -270px}
+	.viewIList li.itemNewB {background-position:13px -316px}
+	.viewIList li.itemNewI {background-position:13px -759px}
+	.viewIList li.itemNewP {background-position:13px -577px}
+	.viewIList li.itemNewS {background-position:13px -623px}
+/*	.viewIList li.itemArhiv a, .viewIList li.itemArhiv button {background-position:3px -363px}*/
+
+/* ------------------ login style ------------------ */
+.viewBoxL {width:400px; text-align:left}
+	.viewBoxL .unitABlock {width:392px}
+	.viewBoxL .unitABlock .unitBtn {width:335px}
+	.viewBoxL .unitBtn a {float:right; margin:3px 15px 0 0; text-decoration:underline}
+.viewBoxR {width:699px; text-align:left}
+/* ------------------ search style ------------------ */
+/* light box style */
+#overlayLightBox {position:absolute; top:0; left:0; width:100%; z-index:1100; display:none}
+#tmpLightBox {padding:0; margin:0; border:0; overflow:auto; display:none}
+#frameLightBox {position:absolute; top:0; left:0; width:100%; height:100%; background:transparent; z-index:1101}
+#frameInnerLightBox {width:100%; height:100%; border:none; display:block}
+#imgLightBox {width:100%; height:100%; padding:0; margin:0; border:none; outline:none; line-height:0; vertical-align:top}
+.loadingLightBox {position:fixed; top:50%; left:50%; width:32px; height:32px; margin-top:-16px; margin-left:-16px; cursor:pointer; overflow:hidden; z-index:1104; display:none}
+	.loadingLightBox div {position:absolute; top:0; left:0; width:32px; height:480px; background-image:url(../images/preloadBg.gif)}
+.wrapLightBox {position:absolute; top:0; left:0; padding:12px; z-index:1101; outline:none; display:none}
+	.wrapLightBox .viewOuter {position:relative; width:100%; height:100%; background:#fff}
+	.wrapLightBox .viewLightBox {width:0; height:0; padding:0; outline:none; position:relative; overflow:hidden; z-index:1102; border:0px solid #fff}
+.wrapLightBox .unitTitle {z-index:1102}
+.wrapLightBox .itemClose {position:absolute; top:-2px; right:-1px; width:12px; height:12px; background:url(../images/closeIcon.gif) 0 0; cursor:pointer; z-index:1103; display:none}
+
+.wrapLightBox .lBg {position:absolute; padding:0; margin:0; border:0; width:12px; height:12px; z-index:1001}
+	.wrapLightBox .lBgT {top:-12px; left:0; width:100%; background:url(../images/boxE02v.png) repeat-x 0 2px}
+	.wrapLightBox .lBgR {top:0; right:-12px; height:100%; background:url(../images/boxE02.png) repeat-y right 0}
+	.wrapLightBox .lBgB {bottom:-12px; left:0; width:100%; background:url(../images/boxE02v.png) repeat-x 0 -9px}
+	.wrapLightBox .lBgL {top:0; left:-12px; height:100%; background:url(../images/boxE02.png) repeat-y left 0}
+	
+	.wrapLightBox .lBgTR {top:-12px; right:-12px; background:url(../images/boxE02.png) no-repeat -25px 2px}
+	.wrapLightBox .lBgBR {bottom:-12px; right:-12px; background:url(../images/boxE02.png) no-repeat -25px -9px}
+	.wrapLightBox .lBgBL {bottom:-12px; left:-12px; background:url(../images/boxE02.png) no-repeat -13px -9px}
+	.wrapLightBox .lBgTL {top:-12px; left:-12px; background:url(../images/boxE02.png) no-repeat -13px 2px}
+	
+.viewLight {text-align:left}/*-40 - 40 */
+	.viewLight h2 {font-size:15px; color:#9F0307; padding:0 4px 5px 4px}
+	.viewLight .unitABlock {width:598px}
+	.viewLight .unitABlock .unitSnColumn {padding:0 0 0 4px}
+	.viewLight .unitABlock .itemForm, .viewLight .unitABlock .unitBtn {width:596px}
+	.viewLight .unitABlock .itemForm label {width:100px}
+	.viewLight .unitABlock .unitSnColumn textarea.areaTxt, .viewLight .unitABlock .unitSnColumn input.inpTxt {width:472px}
+	.viewLight .unitABlock .itemForm .itemData {width:486px}
+	.viewLight .itemWarning, .viewLight .itemOk {margin:0 4px 5px}
+	.viewLight .unitABlock .unitRtf {padding:0 4px 5px 4px}
+
+.leftLightBox, .rightLightBox {position:absolute; bottom:0px; height:100%; width:30%; cursor:pointer; outline:none; z-index:1102; display:none}
+.leftLightBox {left:0px}
+.rightLightBox {right:0px}
+.leftLightBox span, .rightLightBox span {position:absolute; top:50%; left:-9999px; width:30px; height:30px; margin-top:-15px; cursor:pointer; z-index:1102; display:block}
+/*.leftLightBox span {background-image:none; background-position:-40px -30px}
+.rightLightBox span {background-image:none; background-position:-40px -60px}
+.leftLightBox:hover, .rightLightBox:hover {visibility:visible}
+.leftLightBox:hover span {left:20px}
+.rightLightBox:hover span {left:auto; right:20px}*/
+
+.unitRef {width:676px; float:left; padding:0 4px 0 11px}
+	.unitRef h3 {padding:0 0 8px 0}
+	.unitRef .unitImg {width:214px; float:left; padding:0 11px 11px 0}
+	.unitRef .unitImg p {padding:5px 0 0 0}
+	.unitRef .unitImg img {vertical-align:top; width:202px; border:1px solid #999999}
+	.unitRef .unitProject, .unitRef .unitCertificate {width:670px; float:left; padding:0 0 11px 0}
+	.unitRef .unitProject .innerP a {font-weight:bold; background:url(../images/actionIcon.gif) no-repeat 0 -669px; padding:0 0 0 18px}
+	.unitRef .unitCertificate .innerP a {font-weight:bold; background:url(../images/actionIcon.gif) no-repeat 0 -715px; padding:0 0 0 18px}
+	.unitRef .innerP {background:#EFEFEF; padding:5px}
+	.unitRef .linkDelete {float:right; background:#EFEFEF; padding:2px 5px 4px 5px}
+	.unitRef .linkDelete a {float:left; line-height:14px; overflow:hidden; background:url(../images/actionIcon.gif) 3px -136px no-repeat; padding:1px 5px 1px 25px; font-weight:normal}
+
+	.viewDProfile .unitRef {width:921px; overflow:hidden; padding:0}
+	.viewDProfile .unitRef .unitImg {padding:0 16px 11px 0}
+	.viewDProfile .unitEqColumn {width:921px; overflow:hidden; padding:0}
+	.viewDProfile .unitEqColumn .unitRef {width:460px; float:left; padding:0}
+	.viewDProfile .unitRef .unitProject, .viewDProfile .unitRef .unitCertificate {width:444px; float:left; padding:0 0 11px 0}

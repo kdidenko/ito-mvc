@@ -10,8 +10,6 @@
 		<template name="index.html" path="templates/layout-one-column.html" />
 	</action>
 
-<alias name="/soundshare/" target="/dev/soundshare/"/>
-
 	<!-- Navigation views mapping begin -->
 	<action name="/navigation-*.html" id="navigation-$1">
 		<controller class="com.itoglobal.sound.controllers.NavigationController"/>

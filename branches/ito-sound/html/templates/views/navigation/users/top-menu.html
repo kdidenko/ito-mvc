@@ -1,10 +1,11 @@
-<?php $crnt = $mvc->getView();?>
+<?php 
+	$crnt = $mvc->getView();
+	$usr = SessionService::getAttribute(SessionService::USERNAME);
+?>
 <ul class="userNav">
-	<li <?php if($crnt == 'navigation-registration') echo 'class="itemActive"';?>>
-	<a class="linkBtn" href="/registration.html" title="_i18n{Register}"><span><strong>_i18n{Register}</strong></span></a>
-	</li>
+	<li>_i18n{You are logged in as} <b><?php echo $usr;?></b>.</li>
 	<li <?php if($crnt == 'navigation-login') echo 'class="itemActive"';?>>
-	<a class="linkBtn" href="/login.html" title="_i18n{Login}"><span><strong>_i18n{Login}</strong></span></a>
+	<a class="linkBtn" href="/logout.html" title="_i18n{Logout}"><span><strong>_i18n{Logout}</strong></span></a>
 	</li>
 </ul>
 <ul class="mainNav">

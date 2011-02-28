@@ -176,7 +176,6 @@ $plans = $mvc->getObject(PlanService::PLAN);
 								<div class="unitBtn">
 									<input type="hidden" name="id" value="<? if(isset($_GET['id'])) echo $_GET['id']; if(isset($_POST['id'])) echo $_POST['id'];?>"/>
 									<input type="hidden" name="validation_id" value="<? if(isset($_GET['validation_id'])) echo $_GET['validation_id']; if(isset($_POST['validation_id'])) echo $_POST['validation_id'];?>"/>
-									<input type="hidden" name="role" value="<?php echo $role ?>"/>
 									<button type="submit" name="submit"><span><strong>_i18n{Sign Up}</strong></span></button>
 									<a class="linkBtn" href="/registration.html"><span><strong>_i18n{Cancel}</strong></span></a>
 								</div>

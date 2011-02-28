@@ -15,10 +15,6 @@ class SidebarController extends SecureActionControllerImpl {
 		$mvc = parent::handleActionRequest($actionParams, $requestParams);
 		
 		$id = SessionService::getAttribute ( SessionService::USERS_ID );
-		if (isset ($id) && $id != null){
-			$new_mails = MailService::countNew($id);
-			$mvc->addObject ( MailService::NEW_MAILS, $new_mails[MailService::NEW_MAILS]);
-		}
 		
 		//TODO: put navigation handling here
 		return $mvc;		

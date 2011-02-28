@@ -221,8 +221,8 @@
 			method="login" />
 		<template name="login.html" path="templates/layout-one-column.html"/>	
 		<forwards>
-			<target location="/index.html" name="home" condition="onsuccess"/>
-			<target condition="onsignedoff" location="/index.html"/>
+			<target location="index.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="index.html"/>
 		</forwards>
 	</action>
 	
@@ -241,8 +241,8 @@
 		<controller class="com.itoglobal.users.AuthenticationController" 
 			method="logout" />
 		<forwards>
-			<target location="/index.html" name="home" condition="onsuccess"/>
-			<target condition="onsignedoff" location="/login.html"/>
+			<target location="index.html" name="home" condition="onsuccess"/>
+			<target condition="onsignedoff" location="login.html"/>
 		</forwards>
 	</action>
 	<!-- end user log out -->

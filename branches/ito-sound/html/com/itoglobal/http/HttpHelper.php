@@ -75,7 +75,7 @@ class HttpHelper {
             // check for existing params for complicated requests
     	    $req_uri = self::getValOrNull($env, self::REQ_URI);
     	    // remove context path if application is not in document root
-    	    $req_uri = self::trimContextPath($req_uri, $env);
+    	    //$req_uri = self::trimContextPath($req_uri, $env);
     	    $req_qri = self::getValOrNull($env, self::REQ_QUERY);
     	    
     	    
@@ -98,12 +98,12 @@ class HttpHelper {
     /**
      * Removes useless context path if application is not in a document root
      */
-    private static function trimContextPath($req, $env){
+    /*private static function trimContextPath($req, $env){
     	$path = str_replace($env[self::DOC_ROOT], '', $env[self::SCRIPT_NAME]);
     	$path = str_replace(DEFAULT_SCRIPT, '', $path);
     	//TODO: temporary solution with slash 
 		return  '/' . str_replace($path, '', $req);   	
-    }
+    }*/
     
 
     private static function parseActionParams(){

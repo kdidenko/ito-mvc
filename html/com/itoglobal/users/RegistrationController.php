@@ -24,13 +24,11 @@ class RegistrationController extends SecureActionControllerImpl {
 			$error = UsersService::validation ( $requestParams );
 			if (count ( $error ) == 0) {
 				#Insert new users to DB
-				$fields = UsersService::USERNAME . ', ' . UsersService::FIRSTNAME . ', ' . UsersService::LASTNAME . ', ' . 
-							UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . UsersService::CRDATE . ', ' . 
-							UsersService::VALIDATION . ', ' . UsersService::ROLE;
+				$fields = UsersService::USERNAME . ', ' . UsersService::EMAIL . ', ' . UsersService::PASSWORD . ', ' . 
+							UsersService::CRDATE . ', ' . UsersService::VALIDATION . ', ' . UsersService::ROLE;
 				$hash = md5 ( rand ( 1, 9999 ) );
 				$role = $requestParams[UsersService::ROLE]==2 ? 'TR' : 'UR';
-				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::FIRSTNAME] . "','" . 
-							$requestParams [UsersService::LASTNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . 
+				$values = "'" . $requestParams [UsersService::USERNAME] . "','" . $requestParams [UsersService::EMAIL] . "','" . 
 							md5 ( $requestParams [UsersService::PASSWORD] ) . "','" . gmdate ( "Y-m-d H:i:s" ) . "','" . 
 							$hash . "','" . $role . "'";
 				$into = UsersService::USERS;
@@ -41,7 +39,7 @@ class RegistrationController extends SecureActionControllerImpl {
 				$plain = $mvc->getProperty ( 'template' );
 				$url = 'http://' . $_SERVER ['SERVER_NAME'] . '/confirm-registration.html?id=' . $id . '&validation_id=' . $hash;
 				#call method for sending mail
-				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], $requestParams [UsersService::FIRSTNAME], $requestParams [UsersService::LASTNAME], $plain, $url );
+				MailerService::replaceVars ( $requestParams [UsersService::EMAIL], $requestParams [UsersService::USERNAME], null, null, $plain, $url );
 				$mvc->addObject ( UsersService::ON_SUCCESS, '_i18n{Your registration successful. Please check your email to confirm your account.}' );
 			} else {
 				$mvc->addObject ( UsersService::ERROR, $error );

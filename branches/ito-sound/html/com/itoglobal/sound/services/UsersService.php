@@ -378,28 +378,13 @@ class UsersService {
 	
 	public static function validation($requestParams, $_FILES = null){
 		$error = array ();
-		$error [] .= isset($requestParams [self::ROLE]) ? false : '_i18n{Please, choose your type of user.}';
 		$error [] .= isset($requestParams [self::USERNAME])? self::checkUsername ( $requestParams [self::USERNAME] ) : false;
-		$error [] .= $requestParams [self::FIRSTNAME] ? false : '_i18n{Please, enter your First Name.}';
-		$error [] .= $requestParams [self::LASTNAME] ? false : '_i18n{Please, enter your Last Name.}';
 		$error [] .= self::checkEmail ( $requestParams [self::EMAIL] );
 		$error [] .= isset($requestParams [self::PASSWORD])? self::checkPassword ( $requestParams [self::PASSWORD] ) : false;
 		$error [] .= isset($requestParams [self::CONFIRM])? self::checkConfirmPassword ( $requestParams [self::PASSWORD], $requestParams [self::CONFIRM] ) : false;
 		$error [] .= isset($requestParams [self::AGREEMENT]) ? false : '_i18n{Please, check user agreement.}';
 		if(isset($_FILES)) {
 			$error [] .= $_FILES ['file'] ['error'] == 0 ? ValidationService::checkAvatar( $_FILES ['file'] ) : false;
-		}
-		if ($requestParams[self::ROLE]==2){
-			$error [] .= $requestParams [self::COMPANY] ? false : '_i18n{Please, enter name of company.}';
-			$error [] .= $requestParams [self::VAT] ? false : '_i18n{Please, enter vat of company.}';
-			$error [] .= $requestParams [self::COMPANY_YEAR] ? false : '_i18n{Please, enter year of foundation your company.}';
-			$error [] .= $requestParams [self::ADDRESS] ? false : '_i18n{Please, enter your address.}';
-			$error [] .= $requestParams [self::ZIP] ? false : '_i18n{Please, enter your zip code.}';
-			$error [] .= $requestParams [self::LOCATION] ? false : '_i18n{Please, enter your location.}';
-			$error [] .= $requestParams [self::REGION] ? false : '_i18n{Please, enter your region.}';
-			$error [] .= $requestParams [self::COUNTRY] ? false : '_i18n{Please, enter your country.}';
-			$error [] .= $requestParams [self::SALUTATION] && $requestParams [self::SALUTATION]!=0 ? false : '_i18n{Please, choose your salutation.}';
-			$error [] .= $requestParams [self::PLAN_ID] ? false : '_i18n{Please, choose your plan.}';
 		}
 		return array_filter ( $error );
 	}

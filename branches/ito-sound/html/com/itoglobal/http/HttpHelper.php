@@ -103,7 +103,7 @@ class HttpHelper {
     	$path = str_replace(DEFAULT_SCRIPT, '', $path);
     	$path = str_replace($path, '', $req);
     	//TODO: temporary solution with slash 
-		return  strpos($path, '/', 1) == 0 ? '/' . $path : $path;   	
+		return  strpos($path, '/', 1) == -1 ? '/' . $path : $path;   	
     }
     
 

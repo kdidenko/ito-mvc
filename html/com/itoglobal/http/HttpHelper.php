@@ -100,8 +100,9 @@ class HttpHelper {
      */
     private static function trimContextPath($req, $env){
     	$path = str_replace($env[self::DOC_ROOT], '', $env[self::SCRIPT_NAME]);
-    	$path = str_replace(DEFAULT_SCRIPT, '', $path); 
-		return  str_replace($path, '', $req);   	
+    	$path = str_replace(DEFAULT_SCRIPT, '', $path);
+    	//TODO: temporary solution with slash 
+		return  '/' . str_replace($path, '', $req);   	
     }
     
 

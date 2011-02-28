@@ -25,6 +25,10 @@ class HttpHelper {
     const MVC_MAPNG = 'MAPPING';
 
     const DEFAULT_DOCUMENT_NAME = 'index.html';
+    
+    const DOC_ROOT = 'DOCUMENT_ROOT';
+    
+    const SCRIPT_NAME = 'SCRIPT_FILENAME';
 
     private static $contextName = '';
 
@@ -44,6 +48,7 @@ class HttpHelper {
                     self::$reqOpts[self::REQ_PROTOCOL] = strtolower($n) . '://';
                 }
             }
+            
             $str = self::getValOrNull($env, self::REQ_HOST);
             if ($str != null) {
                 self::$reqOpts[self::REQ_HOST] = $str;
@@ -60,6 +65,7 @@ class HttpHelper {
             if ($str != null) {
                 self::$reqOpts[self::SRV_PORT] = (int) $str;
             }
+            
             /* request protocol properties block end */
             self::parseReqUrl($env);
         }
@@ -68,8 +74,11 @@ class HttpHelper {
     private static function parseReqUrl ($env) {
             // check for existing params for complicated requests
     	    $req_uri = self::getValOrNull($env, self::REQ_URI);
+    	    // remove context path if application is not in document root
+    	    $req_uri = self::trimContextPath($req_uri, $env);
     	    $req_qri = self::getValOrNull($env, self::REQ_QUERY);
-
+    	    
+    	    
     	    if ($req_qri != null) {
                 self::$reqOpts[self::REQ_QUERY] = $req_qri;
                 $req_uri = $req_uri != null ? str_replace($req_qri, '', $req_uri) : null;
@@ -85,6 +94,16 @@ class HttpHelper {
 
             self::parseActionParams();
     }
+    
+    /**
+     * Removes useless context path if application is not in a document root
+     */
+    private static function trimContextPath($req, $env){
+    	$path = str_replace($env[self::DOC_ROOT], '', $env[self::SCRIPT_NAME]);
+    	$path = str_replace(DEFAULT_SCRIPT, '', $path); 
+		return  str_replace($path, '', $req);   	
+    }
+    
 
     private static function parseActionParams(){
         // get the mepping config name
@@ -104,9 +123,7 @@ class HttpHelper {
     }
 
     public static function getActionName () {
-        return (self::$actName=='' || self::$actName=='/') ?
-        								'/'. self::DEFAULT_DOCUMENT_NAME :
-                                                      self::$actName;
+        return (self::$actName=='' || self::$actName=='/') ? '/'. self::DEFAULT_DOCUMENT_NAME : self::$actName;
     }
 
     public static function getContextName () {

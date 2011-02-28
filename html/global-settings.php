@@ -1,5 +1,6 @@
 <?php
 	define('DOCUMENT_ROOT', rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/');
+	define('DEFAULT_SCRIPT', 'index.php');	
 	define('STORAGE_PATH', DOCUMENT_ROOT . 'storage/');
 	define('SESSION_PATH', DOCUMENT_ROOT . 'storage/sessions/');
 	define('TEMPLATES_PATH', DOCUMENT_ROOT . 'templates/');	

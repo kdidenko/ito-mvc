@@ -67,75 +67,6 @@ class UsersService {
 	const BIRTHDAY = 'birthday';
 	
 	/**
-	 * @var string defining the company field name
-	 */
-	const COMPANY = 'company';
-	/**
-	 * @var string defining the company_desc field name
-	 */
-	const COMPANY_DESC = 'company_desc';
-	/**
-	 * @var string defining the company_year field name
-	 */
-	const COMPANY_YEAR = 'company_year';
-	/**
-	 * @var string defining the vat field name
-	 */
-	const VAT = 'vat';
-	/**
-	 * @var string defining the address field name
-	 */
-	const ADDRESS = 'address';
-	/**
-	 * @var string defining the zip field name
-	 */
-	const ZIP = 'zip';
-	/**
-	 * @var string defining the location field name
-	 */
-	const LOCATION = 'location';
-	/**
-	 * @var string defining the region field name
-	 */
-	const REGION = 'region';
-	/**
-	 * @var string defining the country field name
-	 */
-	const COUNTRY = 'country';
-	/**
-	 * @var string defining the phone field name
-	 */
-	const PHONE = 'phone';
-	/**
-	 * @var string defining the homepage field name
-	 */
-	const HOMEPAGE = 'homepage';
-	/**
-	 * @var string defining the send job field name
-	 */
-	const SEND_JOB = 'send_job';
-	/**
-	 * @var string defining the newsletter field name
-	 */
-	const NEWSLETTER = 'newsletter';
-	/**
-	 * @var string defining the bank field name
-	 */
-	const BANK = 'bank';
-	/**
-	 * @var string defining the bank code field name
-	 */
-	const BANK_CODE = 'bank_code';
-	/**
-	 * @var string defining the account number field name
-	 */
-	const ACCOUNT_NUMBER = 'account_number';
-	/**
-	 * @var string defining the payment field name
-	 */
-	const PAYMENT = 'payment';
-	
-	/**
 	 * @var string defining the role field name
 	 */
 	const ROLE = 'role';
@@ -148,17 +79,9 @@ class UsersService {
 	 */
 	const ROLE_UR = 'UR';
 	/**
-	 * @var string defining the Bookkeeper role type
+	 * @var string defining the Moderator role type
 	 */
-	const ROLE_BR = 'BR';
-	/**
-	 * @var string defining the Promoter role type
-	 */
-	const ROLE_PR = 'PR';
-	/**
-	 * @var string defining the Tradesman role type
-	 */
-	const ROLE_TR = 'TR';
+	const ROLE_MR = 'MR';
 	/**
 	 * @var string defining the administrator role type
 	 */
@@ -167,10 +90,6 @@ class UsersService {
 	 * @var string defining the avatar field name
 	 */
 	const AVATAR = 'avatar';
-	/**
-	 * @var string defining the plan_id field name
-	 */
-	const PLAN_ID = 'plan_id';
 	/**
 	 * @var string defining the name of object
 	 */
@@ -183,60 +102,11 @@ class UsersService {
 	 * @var string defining the name of object
 	 */
 	const AGREEMENT = 'agreement';
-	/**
-	  * @var string defining the scroller of object
-	 */
-	const SCROLLER = 'scroller';
-	/**
-	  * @var string defining the cat_id of object
-	 */
-	const CAT_ID = 'cat_id';
-	/**
-	  * @var string defining the subcat_id of object
-	 */
-	const SUBCAT_ID = 'subcat_id';
 	
-	public static function getUsersList($where = NULL, $from = NULL, $company = false) {
-		$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
-					',' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
-					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
-					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
-		$fields .= $company==true ? 
-				', ' . PlanService::PLAN . '.' . PlanService::YELLOW_PAGES . 
-				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
-				SUM( company_feedback.vote1 ) / COUNT( company_feedback.vote1 )*20 AS vote1,
-				SUM( company_feedback.vote2 ) / COUNT( company_feedback.vote2 )*20 AS vote2,
-				SUM( company_feedback.vote3 ) / COUNT( company_feedback.vote3 )*20 AS vote3,
-				SUM( company_feedback.vote4 ) / COUNT( company_feedback.vote4 )*20 AS vote4,
-				SUM( company_feedback.vote5 ) / COUNT( company_feedback.vote5 )*20 AS vote5,
-				SUM( company_feedback.vote6 ) / COUNT( company_feedback.vote6 )*20 AS vote6,
-				COUNT( company_feedback.vote ) AS count" : 
-					NULL;
-		$from = isset ( $from ) ? $from : self::USERS . 
-				SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
-				SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
-				self::USERS . '.' . self::CAT_ID . 
-				SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY . SQLClient::ON . 
-				SubCategoryService::SUBCATEGORY . '.' .	SubCategoryService::ID . '=' . 
-				self::USERS . '.' . self::SUBCAT_ID . 
-				SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
-				RegionService::REGIONS . '.' . RegionService::ID . '=' . 
-				self::USERS . '.' . self::REGION . 
-				SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
-				CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
-				self::USERS . '.' . self::COUNTRY;
-		$from .= $company==true ? 
-				SQLClient::LEFT . SQLClient::JOIN . CompanyService::COMPANY_FEEDBACK .	SQLClient::ON . 
-				CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::COMPANY_ID . '=' . 
-				self::USERS . '.' . self::ID . 
-				SQLClient::LEFT . SQLClient::JOIN . PlanService::PLAN .	SQLClient::ON . 
-				PlanService::PLAN . '.' . PlanService::ID . '=' . 
-				self::USERS . '.' . self::PLAN_ID : 
-					NULL;
+	public static function getUsersList($where = NULL) {
+		$fields = self::USERS . '.*';
+		$from = self::USERS;
 		$groupBy = self::USERS . '.' . self::ID;
-		//$where .= $company==true && $where!=NULL ? ' AND ' : NULL;
-		//$where .= $company==true ? CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::DONE . '=1' : NULL;
-		# executing the query
 		$result = DBClientHandler::getInstance ()->execSelect ( $fields, $from, $where, $groupBy , '', '' );
 		//$result = $result != null && isset($result) && count($result) == 1 ? $result[0] : $result;
 		return $result;
@@ -246,42 +116,12 @@ class UsersService {
 	 * @param integer $id the user id.
 	 * @return mixed user data or null if user with such id does not exists. 
 	 */
-	public static function getUser($id, $company = false) {
+	public static function getUser($id) {
 		$result = null;		
 		if(isset($id) && $id != ''){
 			# preparing query
-			$fields = self::USERS . '.*,' . CategoryService::CATEGORY . '.' . CategoryService::CAT_NAME .
-					', ' . SubCategoryService::SUBCATEGORY . '.' . SubCategoryService::SUBCAT_NAME . 
-					', ' . RegionService::REGIONS . '.' . RegionService::REGION_NAME . 
-					', ' . CountryService::COUNTRY . '.' . CountryService::COUNTRY_NAME;
-			$fields .= $company==true ? 
-				", SUM( company_feedback.vote ) / COUNT( company_feedback.vote )*20 AS vote,
-				SUM( company_feedback.vote1 ) / COUNT( company_feedback.vote1 )*20 AS vote1,
-				SUM( company_feedback.vote2 ) / COUNT( company_feedback.vote2 )*20 AS vote2,
-				SUM( company_feedback.vote3 ) / COUNT( company_feedback.vote3 )*20 AS vote3,
-				SUM( company_feedback.vote4 ) / COUNT( company_feedback.vote4 )*20 AS vote4,
-				SUM( company_feedback.vote5 ) / COUNT( company_feedback.vote5 )*20 AS vote5,
-				SUM( company_feedback.vote6 ) / COUNT( company_feedback.vote6 )*20 AS vote6,
-				COUNT( company_feedback.vote ) AS count" : 
-					NULL;
-			$from = self::USERS . 
-					SQLClient::LEFT . SQLClient::JOIN .	CategoryService::CATEGORY .	
-					SQLClient::ON . CategoryService::CATEGORY . '.' . CategoryService::ID . '=' . 
-					self::USERS . '.' . self::CAT_ID . 
-					SQLClient::LEFT . SQLClient::JOIN .	SubCategoryService::SUBCATEGORY . SQLClient::ON . 
-					SubCategoryService::SUBCATEGORY . '.' .	SubCategoryService::ID . '=' . 
-					self::USERS . '.' . self::SUBCAT_ID . 
-					SQLClient::LEFT . SQLClient::JOIN . RegionService::REGIONS .	SQLClient::ON . 
-					RegionService::REGIONS . '.' . RegionService::ID . '=' . 
-					self::USERS . '.' . self::REGION . 
-					SQLClient::LEFT . SQLClient::JOIN . CountryService::COUNTRY .	SQLClient::ON . 
-					CountryService::COUNTRY . '.' . CountryService::ID . '=' . 
-					self::USERS . '.' . self::COUNTRY;
-			$from .= $company==true ? 
-				SQLClient::LEFT . SQLClient::JOIN . CompanyService::COMPANY_FEEDBACK .	SQLClient::ON . 
-				CompanyService::COMPANY_FEEDBACK . '.' . CompanyService::COMPANY_ID . '=' . 
-				self::USERS . '.' . self::ID : 
-					NULL;
+			$fields = self::USERS . '.*';
+			$from = self::USERS;
 			$where = self::USERS . '.' . self::ID . '=' . $id;
 			$groupBy = self::USERS . '.' . self::ID;
 			# executing query

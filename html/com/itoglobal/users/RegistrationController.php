@@ -65,117 +65,35 @@ class RegistrationController extends SecureActionControllerImpl {
 		$result = UsersService::getUser($id);
 		#cheking hash
 		if (isset ( $result [UsersService::VALIDATION] ) && $result [UsersService::VALIDATION] == $hash) {
-			$mvc->addObject ( UsersService::ROLE, $result[UsersService::ROLE] );
-			if (isset ( $requestParams ['submit'] ) && $requestParams [UsersService::ROLE]=='UR') {
-				$error = array();
-				/*
-				 * user fields
-				 * address	zip	location region	country	phone homepage newsletter bank bank_code acoount_number
-				*/
-				$error [] .= $requestParams [UsersService::ADDRESS] ? false : true;
-				$error [] .= $requestParams [UsersService::LOCATION] ? false : true;
-				$error [] .= $requestParams [UsersService::REGION] ? false : true;
-				$error [] .= $requestParams [UsersService::COUNTRY] ? false : true;
-				$error [] .= $requestParams [UsersService::PHONE] ? false : true;
-				$error  = array_filter ( $error );
-				if (count ( $error ) == 0) {
-					$this->createNewUser($requestParams, $result);
-					$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
-					//$mvc->addObject ( UsersService::ERROR, $message );
-					$mvc->addObject ( UsersService::ON_SUCCESS, $message );
-				} else {
-					$mvc->addObject ( UsersService::ERROR, $error );
-				}
-			}
-			if (isset ( $requestParams ['submit'] ) && $requestParams [UsersService::ROLE]=='TR') {
-				$error = array();
-				/*
-				 * user fields
-				 * address	zip	location region	country	phone homepage newsletter bank bank_code acoount_number
-				*/
-				$error [] .= $requestParams [UsersService::BANK] ? false : "_i18n{Please, enter bank info.}";
-				$error [] .= $requestParams [UsersService::ACCOUNT_NUMBER] ? false : "_i18n{Please, enter account number.}";
-				$error [] .= $requestParams [UsersService::PAYMENT] ? false : "_i18n{Please, choose payment method.}";
-				$error  = array_filter ( $error );
-				if (count ( $error ) == 0) {
-					//$this->createNewUser($requestParams, $result);
-					
-					#creating directories for user
-					StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] );
-					StorageService::createDirectory ( StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE );
-					$path = StorageService::USERS_FOLDER . $result [UsersService::USERNAME] . StorageService::USER_PROFILE . StorageService::USER_AVATAR;
-					copy ( StorageService::DEF_USER_AVATAR, $path );
-					
-					# setting the query variables
-					$fields = array ( '0' => UsersService::ENABLED, '1' => UsersService::AVATAR);
-					$fields[] .= $requestParams[UsersService::BANK] ? UsersService::BANK : false;
-					$fields[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? UsersService::ACCOUNT_NUMBER : false;
-					$fields[] .= $requestParams[UsersService::PAYMENT] ? UsersService::PAYMENT : false;
-					$fields[] .= isset($requestParams[UsersService::NEWSLETTER]) && $requestParams[UsersService::NEWSLETTER]!=NULL ? 'newsletter' : false;
-					$vals = array ('0' => '1', '1' => $path);
-					$vals[] .= $requestParams[UsersService::BANK] ? $requestParams[UsersService::BANK] : false;
-					$vals[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? $requestParams[UsersService::ACCOUNT_NUMBER] : false;
-					$vals[] .= $requestParams[UsersService::PAYMENT] ? $requestParams[UsersService::PAYMENT] : false;
-					$vals[] .= isset($requestParams[UsersService::NEWSLETTER])&&$requestParams[UsersService::NEWSLETTER]!=NULL ? $requestParams[UsersService::NEWSLETTER] : false;
-					$vals  = array_filter ( $vals );
-					$fields  = array_filter ( $fields );
-						
-					#update user information
-					UsersService::updateFields($requestParams[UsersService::ID], $fields, $vals );
-					
-					if (isset($requestParams['region'])){
-						if (isset($requestParams[CategoryService::CATEGORY]) && count($requestParams[CategoryService::CATEGORY])>0){
-							$value = array();
-							$categories = $requestParams[CategoryService::CATEGORY];
-							$subcategories = $requestParams[SubCategoryService::SUBCATEGORY];
-							$plan = $requestParams[PlanService::PLAN];
-							$region = $requestParams['region'];
-							
-							RemindService::deleteByUser($id);
-							
-							foreach ($region as $region_key=>$region_item){
-								foreach($categories as $key=>$category){
-									$subcategory = $subcategories[$key];
-									$price = 1;
-									$region = $region_item;
-									$values[] .= $id . ', ' . $category . ', ' . $subcategory . ', ' . 
-												$price . ', ' . $region;
-								}
-							}
-							
-							RemindService::setRemind($id, $values);
-						} 
-					}
-					
-					$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
-					//$mvc->addObject ( UsersService::ERROR, $message );
-					$mvc->addObject ( UsersService::ON_SUCCESS, $message );
-				} else {
-					$mvc->addObject ( UsersService::ERROR, $error );
-				}
-			}
+			$this->createNewUser($requestParams, $result);
+			$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
+			//$mvc->addObject ( UsersService::ERROR, $message );
+			$mvc->addObject ( UsersService::ON_SUCCESS, $message );
+			//$error = array();
+			/*
+			 * user fields
+			 * address	zip	location region	country	phone homepage newsletter bank bank_code acoount_number
+			*/
+			/*
+			$error [] .= $requestParams [UsersService::ADDRESS] ? false : true;
+			$error [] .= $requestParams [UsersService::LOCATION] ? false : true;
+			$error [] .= $requestParams [UsersService::REGION] ? false : true;
+			$error [] .= $requestParams [UsersService::COUNTRY] ? false : true;
+			$error [] .= $requestParams [UsersService::PHONE] ? false : true;
+			$error  = array_filter ( $error );
 			
+			if (count ( $error ) == 0) {
+				$this->createNewUser($requestParams, $result);
+				$message = '_i18n{Your registration complete. Now you can} <a href="/login.html">_i18n{login.}</a>';
+				//$mvc->addObject ( UsersService::ERROR, $message );
+				$mvc->addObject ( UsersService::ON_SUCCESS, $message );
+			} else {
+				$mvc->addObject ( UsersService::ERROR, $error );
+			}*/
 		} else {
 			$location = $this->onFailure ( $actionParams );
 			$this->forwardActionRequest ( $location );
 		}
-		$category = CategoryService::getCategories ();
-		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
-
-		$subcategory = SubCategoryService::getSubCategories ();
-		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
-		
-		$countries = RegionService::getRegions ();
-		isset ( $countries ) ? $mvc->addObject ( RegionService::REGIONS, $countries ) : null;
-		
-		$regions = CountryService::getCountries ();
-		isset ( $regions ) ? $mvc->addObject ( CountryService::COUNTRY, $regions ) : null;
-		
-		$reminds_regions = RemindService::getRemindsRegionsByUser ($id);
-		isset ( $reminds_regions ) ? $mvc->addObject ( RemindService::REGION_ID, $reminds_regions ) : null;
-		
-		$plans = PlanService::getPlans();
-		isset ( $plans ) ? $mvc->addObject ( PlanService::PLAN, $plans ) : null;
 		
 		return $mvc;
 	}
@@ -189,33 +107,7 @@ class RegistrationController extends SecureActionControllerImpl {
 		
 		# setting the query variables
 		$fields = array ( '0' => UsersService::ENABLED, '1' => UsersService::AVATAR);
-		$fields[] .= $requestParams[UsersService::ADDRESS] ? 'address' : false;
-		$fields[] .= $requestParams[UsersService::ZIP] ? 'zip' : false;
-		$fields[] .= $requestParams[UsersService::LOCATION] ? 'location' : false;
-		$fields[] .= $requestParams[UsersService::REGION] ? 'region' : false;
-		$fields[] .= $requestParams[UsersService::COUNTRY] ? 'country' : false;
-		$fields[] .= $requestParams[UsersService::PHONE] ? 'phone' : false;
-		$fields[] .= $requestParams[UsersService::HOMEPAGE] ? 'homepage' : false;
-		$fields[] .= $requestParams[UsersService::NEWSLETTER] ? 'newsletter' : false;
-		$fields[] .= $requestParams[UsersService::BANK] ? 'bank' : false;
-		//$fields[] .= $requestParams[UsersService::BANK_CODE] ? 'bank_code' : false;
-		$fields[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? 'account_number' : false;
-		$fields[] .= isset($requestParams[UsersService::COMPANY]) && $requestParams[UsersService::COMPANY] !=NULL ? 'company' : false;
-		$fields[] .= isset($requestParams[UsersService::SEND_JOB]) && $requestParams[UsersService::SEND_JOB]!=NULL ? 'send_job' : false;
 		$vals = array ('0' => '1', '1' => $path);
-		$vals[] .= $requestParams[UsersService::ADDRESS] ? $requestParams[UsersService::ADDRESS] : false;
-		$vals[] .= $requestParams[UsersService::ZIP] ? $requestParams[UsersService::ZIP] : false;
-		$vals[] .= $requestParams[UsersService::LOCATION] ? $requestParams[UsersService::LOCATION] : false;
-		$vals[] .= $requestParams[UsersService::REGION] ? $requestParams[UsersService::REGION] : false;
-		$vals[] .= $requestParams[UsersService::COUNTRY] ? $requestParams[UsersService::COUNTRY] : false;
-		$vals[] .= $requestParams[UsersService::PHONE] ? $requestParams[UsersService::PHONE] : false;
-		$vals[] .= $requestParams[UsersService::HOMEPAGE] ? $requestParams[UsersService::HOMEPAGE] : false;
-		$vals[] .= $requestParams[UsersService::NEWSLETTER] ? $requestParams[UsersService::NEWSLETTER] : false;
-		$vals[] .= $requestParams[UsersService::BANK] ? $requestParams[UsersService::BANK] : false;
-		//$vals[] .= $requestParams[UsersService::BANK_CODE] ? $requestParams[UsersService::BANK_CODE] : false;
-		$vals[] .= $requestParams[UsersService::ACCOUNT_NUMBER] ? $requestParams[UsersService::ACCOUNT_NUMBER] : false;
-		$vals[] .= isset($requestParams[UsersService::COMPANY])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::COMPANY] : false;
-		$vals[] .= isset($requestParams[UsersService::SEND_JOB])&&$requestParams[UsersService::COMPANY]!=NULL ? $requestParams[UsersService::SEND_JOB] : false;
 		$vals  = array_filter ( $vals );
 		$fields  = array_filter ( $fields );
 		

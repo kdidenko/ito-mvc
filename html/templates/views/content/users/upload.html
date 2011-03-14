@@ -1,0 +1,142 @@
+<?php
+$usr = SessionService::getAttribute(SessionService::USERNAME);
+$errors = $mvc->getObject(ContentController::ERROR);
+?>
+<h2>Upload your music!</h2>
+<?php
+if (isset($errors)&&$errors!=NULL){
+foreach($errors as $key=>$error){
+	echo $error . '<br/>';
+}
+}
+?>
+<div class="mainContent">
+	<form action="upload.html" method="post" enctype="multipart/form-data">
+		Исполнитель
+		<br/>
+		<input type="text" name="author" value="<?php echo isset($_POST['author']) ? $_POST['author'] : $usr; ?>"/>
+		<br/>
+		Название трека (обязательное поле)
+		<br/>
+		<input type="text" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : NULL; ?>"/>
+		<br/>
+		Тип загружаемого трека (djmix, композиция, livemix…)
+		<br/>
+		<input type="text" name="type" value="<?php echo isset($_POST['type']) ? $_POST['type'] : NULL; ?>"/>
+		<br/>
+		Жанр музыки
+		<br/>
+		<select name="genre" >
+			<option>2 Step</option>
+			<option>8-bit</option>
+			<option>Acid</option>
+			<option>AcidHouse</option>
+			<option>AcidJazz</option>
+			<option>AcidTechno</option>
+			<option>AcidTrance</option>
+			<option>Ambient</option>
+			<option>AmbientDub</option>
+			<option>AmbientGoa</option>
+			<option>AmbientHouse</option>
+			<option>Beatboxing</option>
+			<option>BigBeat</option>
+			<option>Breakcore</option>
+			<option>Breaks</option>
+			<option>Breakstep</option>
+			<option>ChicagoHouse</option>
+			<option>Chillout</option>
+			<option>ClubHouse</option>
+			<option>DeepHouse</option>
+			<option>DetroitTechno</option>
+			<option>DiscoFunk</option>
+			<option>DiscoHouse</option>
+			<option>DiscoSoul</option>
+			<option>Downtempo</option>
+			<option>Drum&Bass</option>
+			<option>Dub</option>
+			<option>DubTechno</option>
+			<option>Dubstep</option>
+			<option>DutchHouse</option>
+			<option>Electro</option>
+			<option>ElectroHouse</option>
+			<option>ElectroProgressive</option>
+			<option>Electroclash</option>
+			<option>Electropop</option>
+			<option>EuroTrance</option>
+			<option>Experimental</option>
+			<option>Funk</option>
+			<option>FunkyBreaks</option>
+			<option>FunkyHouse</option>
+			<option>TribalHouse</option>
+			<option>TribalTechno</option>
+			<option>Trip-Hop</option>
+			<option>Turntablism</option>
+			<option>VocalHouse</option>
+			<option>FutureJazz</option>
+			<option>Garage</option>
+			<option>GoaTrance</option>
+			<option>HardHouse</option>
+			<option>HardHouse</option>
+			<option>HardTechno</option>
+			<option>Hardcore</option>
+			<option>Hardstep</option>
+			<option>Hardstyle</option>
+			<option>Hip-hop/Rap</option>
+			<option>House</option>
+			<option>IDM</option>
+			<option>Industrial</option>
+			<option>IndustrialTechno</option>
+			<option>Instrumental</option>
+			<option>Jazz</option>
+			<option>Jazz-Rap</option>
+			<option>Jazzstep</option>
+			<option>JumpStyle</option>
+			<option>LatinHouse</option>
+			<option>Liquidfunk</option>
+			<option>Lounge</option>
+			<option>Minimal</option>
+			<option>MinimalHouse</option>
+			<option>MinimalTechno</option>
+			<option>NewAge</option>
+			<option>NewRave</option>
+			<option>NuBreaks</option>
+			<option>NuJazz</option>
+			<option>OldschoolDrum&Bass</option>
+			<option>ProgressiveBreaks</option>
+			<option>ProgressiveHouse</option>
+			<option>ProgressiveTrance</option>
+			<option>R&B</option>
+			<option>RaggaJungle</option>
+			<option>Reggae</option>
+			<option>Reggaeton</option>
+			<option>Ska</option>
+			<option>SoulfulDrum&Bass</option>
+			<option>Soulfulhouse</option>
+			<option>SouthernRap</option>
+			<option>TechHouse</option>
+			<option>Techno</option>
+			<option>Trance</option>
+			<option>ОldSchoolRap</option>
+		</select>
+		<br/>
+		Обложка (картинка)
+		<br/>
+		<input type="file" name="image" value=""/>
+		<br/>
+		Поле выбора трека на жестком диске (обязательное поле)
+		<br/>
+		<input type="file" name="audio" value=""/>
+		<br/>
+		Checkbox «Доступен для скачивания» - если отмечен, разрешает всем скачивать файл.
+		<br/>
+		<input type="checkbox" name="download" <?php echo isset($_POST['download']) ? 'checked' : NULL; ?>/>
+		<br/>
+		Checkbox «Я согласен с условиями пользовательского соглашения» (обязательное поле)
+		<br/>
+		<input type="checkbox" name="agreement" />
+		<br/><br/><br/>
+		<div class="unitBtn">
+			<button name="save"><span><strong>_i18n{Save}</strong></span></button>
+		</div>
+	</form>
+</div>

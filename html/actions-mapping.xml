@@ -87,6 +87,11 @@
 		<template name="index.html" path="templates/layout-two-columns.html" />
 	</action>
 	
+	<action name="/upload.html" id="upload">
+		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
+		<template name="index.html" path="templates/layout-one-column.html" />
+	</action>
+	
 	<action name="/for-entrepreneurs.html" id="forentrepreneurs">
 		<controller class="com.itoglobal.mvc.defaults.SecureActionControllerImpl" />
 		<template name="index.html" path="templates/layout-one-column.html" />

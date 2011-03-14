@@ -27,30 +27,29 @@ class ContentController extends SecureActionControllerImpl {
 	 */
 	public function handleHome($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
-		
-		/*
-		$category = CategoryService::getCategories ();
-		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
-
-		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
-		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
-
-		$regions = RegionService::getRegions ();
-		isset ( $regions ) ? $mvc->addObject ( RegionService::REGIONS, $regions ) : null;
-		
-		*/
 		return $mvc;
 	}
 	
-	public function handleForEntrepreneurs($actionParams, $requestParams){
+	public function handleUpload($actionParams, $requestParams){
 		$mvc = $this->handleActionRequest ( $actionParams, $requestParams );
+		if(isset($requestParams['save'])){
+			//print_r($requestParams);
+			$error = array();
+			$file_image = $_FILES ['image'];
+			$file_audio = $_FILES ['audio'];
+			$error [] .= !isset($requestParams [AudioService::AUTHOR]) || $requestParams [AudioService::AUTHOR]==NULL ? 'Please, enter author name' : false;
+			$error [] .= !isset($requestParams [AudioService::AUDIO_NAME]) || $requestParams [AudioService::AUDIO_NAME]==NULL ? 'Please, enter audion name' : false;
+			$error [] .= !isset($requestParams [AudioService::GENRE]) || $requestParams [AudioService::GENRE]==NULL ? 'Please, choose audio genre' : false;
+			$error [] .= !isset($requestParams [AudioService::TYPE]) || $requestParams [AudioService::TYPE]==NULL ? 'Please, choose audio type' : false;
+			$error [] .= !isset($requestParams ['agreement']) ? 'Please, agreement' : false;
+			$error = array_filter ( $error );
+			if (count ( $error ) == 0) {
+				
+			} else {
+				$mvc->addObject ( self::ERROR, $error );
+			}
+		}
 		
-		$category = CategoryService::getCategories ();
-		isset ( $category ) ? $mvc->addObject ( CategoryService::CATEGORY, $category ) : null;
-
-		$subcategory = SubCategoryService::getSubcatByCat ($category[0][CategoryService::ID]);
-		isset ( $subcategory ) ? $mvc->addObject ( SubCategoryService::SUBCATEGORY, $subcategory ) : null;
-
 		return $mvc;
 	}
 

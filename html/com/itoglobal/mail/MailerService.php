@@ -3,8 +3,8 @@
 class MailerService {
 	
 	public static function replaceVars($email, $user, $firstname, $lastname, $path, $url) {
-		$headers = 'From: eBids4U noreply@' . $_SERVER ['SERVER_NAME'];
-		$subject = 'Unterstutzung eBids4U';
+		$headers = 'From: SoundShare noreply@' . $_SERVER ['SERVER_NAME'];
+		$subject = 'SoundShare support';
 		$vars ['###FIRST_NAME###'] = $firstname;
 		$vars ['###LAST_NAME###'] = $lastname;
 		$vars ['###CONFIRMATION_URL###'] = $url;

@@ -20,6 +20,7 @@
 	require_once 'com/itoglobal/validation/ValidationService.php';
 	
 	require_once 'com/itoglobal/sound/services/UploadsService.php';
+	require_once 'com/itoglobal/sound/services/AudioService.php';
 	require_once 'com/itoglobal/sound/services/CompanyService.php';
 	require_once 'com/itoglobal/sound/services/UsersService.php';
     require_once 'com/itoglobal/sound/services/MailService.php';

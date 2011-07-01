@@ -23,9 +23,10 @@
 	$mvc = $rd->dispatchHttpRequest($_SERVER);
 	
 	# initialize the Messages Service
-	//TODO: temporary disabled
-	//$messages = MessageService::getInstance();
-	//$messages->loadMessages(DEFAULT_LOCALE);
+	$locale = HttpHelper::getRequestLocale();
+	$messages = MessageService::getInstance();
+	$messages->setLocale($locale);
+	$messages->loadMessages($locale);
 
     //TODO: use "Trigger Registration" mechanism instead of implicitly specifying functions names at
     //      output buffering initialization.

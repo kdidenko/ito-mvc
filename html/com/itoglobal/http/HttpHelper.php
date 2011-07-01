@@ -23,6 +23,8 @@ class HttpHelper {
     const SRV_PORT = 'SERVER_PORT';
 
     const MVC_MAPNG = 'MAPPING';
+    
+    const LOCALE = 'LOCALE';
 
     const DEFAULT_DOCUMENT_NAME = 'index.html';
 
@@ -77,6 +79,13 @@ class HttpHelper {
 
       	    if ($req_uri != null) {
       	        $req_uri = rtrim($req_uri, "?");
+      	        // find locale
+      	        $tokens = array_filter(explode('/', $req_uri));
+      	        if($tokens && in_array(reset($tokens), $GLOBALS['_LOCALES'])) {
+      	        	self::$reqOpts[self::LOCALE] = array_shift($tokens);
+      	        	$req_uri = '/' . implode('/', $tokens); 
+      	        }
+      	        
                 self::$reqOpts[self::REQ_URI] = $req_uri;
             }
 
@@ -158,6 +167,10 @@ class HttpHelper {
     public static function getMappingParam(){
         return self::getOpt(self::MVC_MAPNG);
     }
+    
+    public static function getRequestLocale(){
+        return self::getOpt(self::LOCALE) ? self::getOpt(self::LOCALE) : DEFAULT_LOCALE;
+    }    
 
 }
 ?>

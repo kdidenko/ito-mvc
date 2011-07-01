@@ -2,13 +2,13 @@
 <span class="marquee">
 	<marquee direction="left">
 	<?php foreach($listings as $listing) { ?>
-		<img src="images/marquee.gif" class="separator" alt="<?php echo $listing['search_caption'] . ' ' . $listing['what_caption']?>"/>
+		<img src="images/marquee.gif" class="separator" alt="_i18n(<?php echo $listing['search_caption']?>) _i18n(<?php echo $listing['what_caption']?>)"/>
 		<b>$<?php echo $listing['price'] ?></b>
-		<a href="CONTEXT_PATH/index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>" title="<?echo $listing['search_caption']?>" class="link"><?php echo $listing['action_caption']?></a>
-		<a href="CONTEXT_PATH/index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>&amp;realty_type=<?php echo $listing['property_type']?>" title="<?php $listing['what_caption']?>" class="link"><?php echo $listing['what_caption']?></a>
-		at <a href="CONTEXT_PATH/index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>&amp;settlement_region=<?php echo $listing['region']?>" title="<?php echo $listing['name']?>" class="link">city <?php echo $listing['city']?> (<?php echo $listing['name']?>)</a>
+		<a href="<?php echo CONTEXT_PATH ?>index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>" title="_i18n(<?echo $listing['search_caption']?>)" class="link">_i18n(<?php echo $listing['action_caption']?>)</a>
+		<a href="<?php echo CONTEXT_PATH ?>index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>&amp;realty_type=<?php echo $listing['property_type']?>" title="_i18n(<?php $listing['what_caption']?>)" class="link">_i18n(<?php echo $listing['what_caption']?>)</a>
+		_i18n(at) <a href="<?php echo CONTEXT_PATH ?>index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>&amp;settlement_region=<?php echo $listing['region']?>" title="_i18n(<?php echo $listing['name']?>)" class="link">_i18n(city) _i18n(<?php echo $listing['city']?>) (_i18n(<?php echo $listing['name']?>))</a>		
 		<?php if (trim ( $listing['address'] ) != '') { ?>
-				street <?php echo $listing['address'] ?>
+				_i18n(street) <?php echo $listing['address'] ?>
 		<?php } ?> 
 	<?php } ?>
 	</marquee>
@@ -19,8 +19,8 @@
 	<?php foreach($news as $item) { ?>
 	<div class="newsblock">
 		<b><?php echo $item['date']?></b>&nbsp;
-		<b><a href="CONTEXT_PATH/index.php?action=news&amp;id=<?php echo $item['id']?>" title="<?php echo $item['caption']?>"><?php echo $item['caption']?></a></b>
-		<img src="CONTEXT_PATH/storage/news/news_<?php echo $item['id']?>.jpg" align="left" alt="<?php echo $item['caption']?>" width="62" height="60"/>
+		<b><a href="<?php echo CONTEXT_PATH ?>index.php?action=news&amp;id=<?php echo $item['id']?>" title="<?php echo $item['caption']?>"><?php echo $item['caption']?></a></b>
+		<img src="<?php echo CONTEXT_PATH ?>storage/news/news_<?php echo $item['id']?>.jpg" align="left" alt="<?php echo $item['caption']?>" width="62" height="60"/>
 		<?php echo $item['headline']?>
 	</div>
 	<?php } ?>

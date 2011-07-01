@@ -61,6 +61,7 @@ div.content span.marquee {background-color:#E1EDFC;border:1px solid #D0DBE1;colo
 
 div.content div.news {display:block;float:left;width:420px}
 div.content div.newsblock {background-color:#FBFBFB;border:1px solid #D0DBE1;color:black;font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:8pt;font-weight:normal;height:auto;margin:10px;min-height:80px;padding:3px 10px 10px;text-align:justify}
+div.content div.newsblock img {height:60px;margin:3px 10px 3px 3px;width:62px}
 
 div.content div#google120x600 {display:block;float:right;height:600px;margin:10px 10px 10px 0;width:120px}
 div.content div.google468x60 {clear:both;display:block;height:60px;margin:10px;width:468px}

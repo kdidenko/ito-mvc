@@ -2,15 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Insert title here</title>
+		<title>_i18n(Insert title here)</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo CONTEXT_PATH ?>styles/styles.css" />
 	</head>
 	<body>
 		<div class="main">
-			<h1>[PAGE_HEADER]</h1>
+			<h1>_i18n([PAGE_HEADER])</h1>
 			<div class="header">
-				<a href="[CONTEXT_PATH]" class="logo"><img src="/images/logo.png" alt="[PAGE_LOGO_ALT]"/></a>  
+				<a href="<?php echo CONTEXT_PATH ?>" class="logo"><img src="<?php echo CONTEXT_PATH ?>/images/logo.png" alt="_i18n([PAGE_LOGO_ALT])"/></a>  
 				<?php TemplateEngine::inclusion('ads/adsense-top.html', $mvc) ?>
 			</div>
 			<div class="leftMenu menu">

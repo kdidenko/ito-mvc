@@ -6,6 +6,7 @@
 //      class name change requires changes at this file!
 	
     require_once 'global-settings.php';
+    require_once 'post-processing.php';
 	
 	require_once 'com/itoglobal/xml/XsltHandler.php';
 	require_once 'com/itoglobal/http/RequestDispatcher.php';	

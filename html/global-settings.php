@@ -1,6 +1,7 @@
 <?php
 	define('DOCUMENT_ROOT', rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/');
 	define('STORAGE_PATH', DOCUMENT_ROOT . 'storage/');
+	define('DATA_PATH',  DOCUMENT_ROOT . 'data/');
 	define('SESSION_PATH', DOCUMENT_ROOT . 'storage/sessions/');
 	define('TEMPLATES_PATH', DOCUMENT_ROOT . 'templates/');	
 	define('XSLT_PATH', DOCUMENT_ROOT . 'templates/xslt/');

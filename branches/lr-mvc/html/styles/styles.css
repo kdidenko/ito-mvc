@@ -42,5 +42,15 @@ div.bigBoard h2, div.bigBoard strong {margin:0;padding: 0 0 0 300px}
 div.bigBoard h2 {font-family:tahoma;font-size:24px;font-weight:normal;padding-top:45px;text-align:right;margin-right:15px}
 div.bigBoard strong {display:block;float:right;font-family:Arial;font-size:12px;font-weight:normal;margin-right:16px;padding-left:0;text-align:right;width:230px !important}
 
-div.cities {border-top:0 none;clear:both;float:left;width:210px}
+div.leftGroup {display:block;float:left;min-width:210px;clear:both}
+
+div.cities {border-top:0 none;float:left;width:210px}
 div.cities p {background: url("../images/mnu_bgd.gif") repeat-x scroll 0 0 #6CAFD6;color:white;font-size:12px;line-height:24px;text-align:center}
+div.cities ul {padding-left:40px}
+div.cities li {height:28px;list-style-type:none;margin:0;padding:0;}
+div.cities a {border-bottom:1px dashed #6E7B83;color:#6E7B83;font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:28px;margin-right:35px;padding-left:8px;text-transform:uppercase}
+
+div.counters {display:block;float:left;margin:30px;width:90px}
+
+div.footer {clear:both;overflow:hidden;border:1px solid #D0DBE1;font-family:Arial,Helvetica,sans-serif;font-size:12px;text-align:center;width:100%}
+div.footer a {color:#6E7B83;font-weight:bolder;}

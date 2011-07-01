@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<country name="Ukraine">
+	<state name="Lviv">
+		<city>Boryslav</city>
+		<city>Brody</city>
+		<city>Busk</city>
+		<city>Gorodok</city>
+		<city>Drohobych</city>
+		<city>Zhydachiv</city>
+		<city>Zhovkva</city>
+		<city>Zolochiv</city>
+		<city>Kamjanka-busk</city>
+		<city>Lviv</city>
+		<city>Mykolayiv</city>
+		<city>Mostyska</city>
+		<city>Peremyshlyany</city>
+		<city>Pustomyty</city>
+		<city>Radehiv</city>
+		<city>Sambir</city>
+		<city>Skole</city>
+		<city>Sokal</city>
+		<city>Staryj-sambir</city>
+		<city>Stryj</city>
+		<city>Truskavec</city>
+		<city>Turka</city>
+		<city>Chervonograd</city>
+		<city>Javoriv</city>
+	</state>
+</country>

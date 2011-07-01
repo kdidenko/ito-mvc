@@ -1,0 +1,9 @@
+<?php $list = $mvc->getObject('cities'); ?>
+<div class="cities menu">
+	<p><strong>By regions</strong></p>
+	<ul>
+	<?php foreach($list as $city) {	?>
+		<li><b><a href="[CONTEXT_PATH]realestate/<?php echo strtolower($city)?>/index.html" title="<?php echo $city?>"><?php echo $city?></a></b></li>
+	<?php } ?>
+	</ul>
+</div>

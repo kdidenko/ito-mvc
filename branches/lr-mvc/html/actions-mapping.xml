@@ -8,6 +8,14 @@
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
 		<template name="Homepage" path="templates/three-columns.html" />
 	</action>
+
+	<action name="/cities-menu.html" id="cities">
+		<controller class="com.mls.cities.CityController" />
+		<template name="City List" path="templates/city-list.html" />
+		<property name="country" value="Ukraine"/>
+		<property name="state" value="Lviv"/>
+	</action>	
+	
 	
 
 	

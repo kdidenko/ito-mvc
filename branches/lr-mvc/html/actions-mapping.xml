@@ -14,9 +14,14 @@
 		<template name="City List" path="templates/city-list.html" />
 		<property name="country" value="Ukraine"/>
 		<property name="state" value="Lviv"/>
-	</action>	
+	</action>
 	
-	
+	<action name="/home.html" id="home-content">
+		<controller class="com.mls.content.ContentController" method="handleHomepage" />
+		<template name="Homepage Content" path="templates/homepage.html" />
+		<property name="listingsCnt" value="10"/>
+		<property name="newsCnt" value="9"/>
+	</action>
 
 	
 </actions>

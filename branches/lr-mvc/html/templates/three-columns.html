@@ -1,37 +1,38 @@
 <?php echo XML_CONTENT_DEFINITION ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>Insert title here</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="styles/styles.css" />
-</head>
-<body>
-<div class="main">
-	<h1>[PAGE_HEADER]</h1>
-	<div class="header">
-	   <a href="[CONTEXT_PATH]" class="logo"><img src="/images/logo.png" alt="[PAGE_LOGO_ALT]"/></a>  
-	   <?php TemplateEngine::inclusion('adsense-top.html', $mvc) ?>
-	</div>
-	<div class="leftMenu menu">
-		<?php TemplateEngine::inclusion('left-menu.html', $mvc) ?>
-	</div>
-	<div class="topMenu menu">
-   		<?php TemplateEngine::inclusion('top-menu.html', $mvc) ?>
-	</div>
-	<?php TemplateEngine::inclusion('body-top.html', $mvc) ?>
-	<div class="content">
-		<?php echo $mvc->getView() ?>
-	</div>
-	<div class="leftGroup">
-		<?php TemplateEngine::execute('/cities-menu.html', $mvc)?>
-    	<div class="links">
-  	   		<?php TemplateEngine::inclusion('counters.html', $mvc) ?>
-    	</div>
-    </div>
-	<div class="footer">
-    	<?php TemplateEngine::inclusion('footer.html', $mvc) ?>
-    </div>	
-	<?php TemplateEngine::inclusion('google-analytics.html', $mvc) ?>
- </body>
+	<head>
+		<title>Insert title here</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+	</head>
+	<body>
+		<div class="main">
+			<h1>[PAGE_HEADER]</h1>
+			<div class="header">
+				<a href="[CONTEXT_PATH]" class="logo"><img src="/images/logo.png" alt="[PAGE_LOGO_ALT]"/></a>  
+				<?php TemplateEngine::inclusion('ads/adsense-top.html', $mvc) ?>
+			</div>
+			<div class="leftMenu menu">
+				<?php TemplateEngine::inclusion('left-menu.html', $mvc) ?>
+			</div>
+			<div class="topMenu menu">
+				<?php TemplateEngine::inclusion('top-menu.html', $mvc) ?>
+			</div>
+				<?php TemplateEngine::inclusion('body-top.html', $mvc) ?>
+			<div class="content">
+				<?php TemplateEngine::execute('/' . $mvc->getView() . '.html', $mvc)?>
+			</div>
+			<div class="leftGroup">
+				<?php TemplateEngine::execute('/cities-menu.html', $mvc)?>
+				<div class="links">
+					<?php TemplateEngine::inclusion('counters.html', $mvc) ?>
+				</div>
+			</div>
+			<div class="footer">
+				<?php TemplateEngine::inclusion('footer.html', $mvc) ?>
+			</div>	
+			<?php TemplateEngine::inclusion('google-analytics.html', $mvc) ?>
+		</div>
+	</body>
 </html>

@@ -4,7 +4,7 @@
 
     function _i18n($mssg) {
         function callback($key){
-            if(count($key) > 1){
+            if(count($key) > 1){            	
                 $result = MessageService::getInstance()->getMessage($key[1]);
             }
             return $result;

@@ -1,0 +1,51 @@
+<?php echo XML_CONTENT_DEFINITION ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+<div class="main">
+	<h1>[PAGE_HEADER]</h1>
+	<div class="header">
+	   <a href="[CONTEXT_PATH]" class="logo"><img src="/images/logo.png" alt="[PAGE_LOGO_ALT]"/></a>  
+	   <div class="bannerTop">
+		   <script type="text/javascript"><!--
+				google_ad_client = "pub-1413797573789463";
+				/* Top Banner, 468x60, created 1/23/10 */
+				google_ad_slot = "2884241732";
+				google_ad_width = 468;
+				google_ad_height = 60;
+				//-->
+			</script>
+			<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		</div>	
+	</div>	
+	<div class="leftMenu menu">
+		<?php TemplateEngine::inclusion('left-menu.html', $mvc) ?>
+	</div>
+	<div class="topMenu menu">
+   		<?php TemplateEngine::inclusion('top-menu.html', $mvc) ?>
+	</div>
+   		<?php TemplateEngine::inclusion('body-top.html', $mvc) ?>
+	<div class="leftGroup">
+		<div class="cities menu">
+			<p><strong>By regions</strong></p>
+			<ul>
+				[PAGE_CITIES_LIST]
+			</ul>
+    	</div>
+    	<br />
+    	<div class="links">
+			[PAGE_COUNTERS]
+			<a href="[CONTEXT_PATH]links" style="color:#f3f8f8">Partners</a>
+    	</div>
+		<div class="footer">
+    	[PAGE_FOOTER]
+    	</div>							
+	</div>
+[GOOGLE_ANALYTICS]
+ </body>
+</html>

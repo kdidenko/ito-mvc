@@ -14,7 +14,7 @@
 	//		by smth. like "SettingsService" which must be also implemented!
 	// db settings
 	$db_host = 'localhost';
-	$db_name = 'youcademy';		
+	$db_name = 'lr';		
 	$db_user = 'root';		
 	$db_pass = '';
 	$charset = 'UTF8';

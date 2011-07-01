@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+* {margin:0;padding:0}
+body {background-color:#DAE2E3}
+img {border: 0 none;}
+
+div.main {background-color:white;border-left:15px solid #E3E9EA;border-right:15px solid #E3E9EA;display:block;width:770px;margin:0 auto;overflow: hidden;}
+h1 {background:url("../images/h1-bgd.gif") repeat-x scroll 0 0 #6CAFD6;
+    border-left: 1px solid #D0DBE1;
+    border-right: 1px solid #D0DBE1;
+	color: white;
+    font: bolder 9pt Verdana,Geneva,Arial,Helvetica,sans-serif;
+    height: 19px;
+    margin: 0;
+    text-align: left;
+    text-indent: 10px;
+    width: 100%;
+}
+div.header {
+    background: url("../images/top-bgd.gif") repeat-x scroll 0 0 transparent;
+    border: 1px solid #D0DBE1;
+    height: 108px;
+    text-align: center;
+    width: 100%;
+}
+a.logo {float:left;margin:10px}
+div.bannerTop {margin:25px;}
+
+.menu {font-family:Arial,Helvetica,sans-serif;text-decoration:none;}
+.menu a {display:block;text-decoration:none;}
+
+div.leftMenu {background-color:white;clear:both;float:left;font-size:12px;width:210px}
+div.leftMenu p {background:url("../images/left_mnu_bgd.gif") repeat-x scroll 0 0 #FF5100;border-bottom:1px solid #D0DBE1;color:white;font-size:12px;line-height:24px;text-align:center;}
+div.leftMenu a {border-top:1px dotted #D0DBE1;color:#6E7B83;font-weight:bolder;line-height:55px;padding-right:10px;text-align:right;text-transform:uppercase}
+
+div.topMenu {background:url("../images/mnu_bgd.gif") repeat-x scroll 0 0 #6CAFD6;float:right;height:24px;text-align:center;width:550px}
+div.topMenu a {border-left:1px solid #D0DBE1;color:white;float:left;font-size:12px;margin:5px 0;width:24%;}
+
+div.bigBoard {background: url("../images/lviv-opera-house.gif") no-repeat scroll 10px 5px transparent;border:1px solid #D0DBE1;color:white;float:right;height:180px;width:550px;}
+
+div.bigBoard h2, div.bigBoard strong {margin:0;padding: 0 0 0 300px}
+div.bigBoard h2 {font-family:tahoma;font-size:24px;font-weight:normal;padding-top:45px;text-align:right;margin-right:15px}
+div.bigBoard strong {display:block;float:right;font-family:Arial;font-size:12px;font-weight:normal;margin-right:16px;padding-left:0;text-align:right;width:230px !important}
+
+div.cities {border-top:0 none;clear:both;float:left;width:210px}
+div.cities p {background: url("../images/mnu_bgd.gif") repeat-x scroll 0 0 #6CAFD6;color:white;font-size:12px;line-height:24px;text-align:center}

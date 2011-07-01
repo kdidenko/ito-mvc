@@ -6,7 +6,7 @@
 
 	<action name="/index.html" id="home">
 		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
-		<template name="index.html" path="templates/index.html" />
+		<template name="Homepage" path="templates/three-columns.html" />
 	</action>
 	
 

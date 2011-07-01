@@ -5,12 +5,8 @@
 //TODO: needs reimplementation for dynamic class inclusion since each
 //      class name change requires changes at this file!
 	
-
     require_once 'global-settings.php';
 	
-	# set MVC libraries include path
-	//set_include_path(get_include_path() . PATH_SEPARATOR . 'D:\Work\www\ito-mvc\html');
-
 	require_once 'com/itoglobal/xml/XsltHandler.php';
 	require_once 'com/itoglobal/http/RequestDispatcher.php';	
     require_once 'com/itoglobal/session/SessionService.php';
@@ -31,5 +27,8 @@
 	require_once 'com/itoglobal/i18n/LocalizationFactory.php';
     require_once 'com/itoglobal/http/HttpHelper.php';
 
-	require_once 'com/itoglobal/db/DBClientHandler.php';    
+	require_once 'com/itoglobal/db/DBClientHandler.php';
+
+	require_once 'com/mls/services/ListingService.php';
+	require_once 'com/mls/services/NewsService.php';
 ?>

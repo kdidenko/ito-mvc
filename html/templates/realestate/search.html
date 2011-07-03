@@ -1,0 +1,87 @@
+<p class="message">_i18n(search_post_text)</p>
+<form action="<?php echo CONTEXT_PATH ?>index.php?realty=show&filter=on" method="post">
+	<fieldset>
+		<legend><b>_i18n(Search form:)</b></legend>
+		<dl>
+			<dt>_i18n(listing_type)</dt>
+			<dd>
+				<select name="purpose">
+					<option value="">--------------------- _i18n(Please select) ---------------------</option>
+					<option value="for-sale">_i18n(search_for_sale)</option>
+					<option value="for-rent">_i18n(search_for_rent)</option>
+					<option value="to-buy">_i18n(search_to_buy)</option>
+					<option value="to-rent">_i18n(search_to_rent)</option>
+					<option value="for-exchange">_i18n(search_for_exchange)</option>
+				</select>
+			</dd>
+			<dt>_i18n(listing_realestate_type)</dt>
+			<dd>
+				<select name="type">
+					<option value="">--------------------- _i18n(Please select) ---------------------</option>
+					<optgroup label="_i18n(apartments)">						
+						<option value="002">_i18n(single_room)</option>
+						<option value="003">_i18n(double_room)</option>
+						<option value="004">_i18n(three_room)</option>
+						<option value="005">_i18n(four_room)</option>
+						<option value="006">_i18n(five_room)</option>
+						<option value="007">_i18n(other_appartments)</option>
+					</optgroup>
+					<optgroup label="_i18n(homes)">
+						<option value="009">_i18n(cottage)</option>
+						<option value="010">_i18n(mansion)</option>
+						<option value="011">_i18n(house_part)</option>
+						<option value="012">_i18n(other_homes)</option>
+					</optgroup>
+					<optgroup label="_i18n(land)">
+						<option value="014">_i18n(unfinished_construction)</option>
+						<option value="015">_i18n(summer_cottage)</option>
+						<option value="016">_i18n(other_land)</option>
+					</optgroup>
+					<optgroup label="_i18n(facility)">
+						<option value="018">_i18n(warehouse)</option>
+						<option value="019">_i18n(commercial_premises)</option>
+						<option value="020">_i18n(production_space)</option>
+						<option value="021">_i18n(office_space)</option>
+						<option value="022">_i18n(room)</option>
+						<option value="023">_i18n(other_facility)</option>
+					</optgroup>
+				</select>
+			</dd>
+			<dt>_i18n(listing_region)</dt>
+			<dd>
+				<select name="region">
+					<option value="">--------------------- _i18n(Please select) ---------------------</option>
+					<?php $regions = $mvc->getObject('regions');
+						foreach($regions as $region) { ?>
+					<option value="<?php echo strtolower($region) ?>">_i18n(<?php echo $region ?>, City)</option>
+					<?php } ?>
+				</select>
+			</dd>
+			<dt>_i18n(listing_city)</dt>
+			<dd><input type="text" name="city" size="32"/></dd>
+			<dt>_i18n(listing_street)</dt>
+			<dd><input type="text" name="street" size="32"/></dd>			
+			<dt>_i18n(listing_space)</dt>
+			<dd>
+				<select name="space-refinement">
+					<option value="not-more-than" selected="selected">_i18n(not_more_than)</option>
+					<option value="not-less-than">_i18n(not_less_than)</option>
+				</select>
+				<input type="text" name="space" size="10"/>
+				<label>_i18n(sqm)</label>
+			</dd>			
+			<dt>_i18n(listing_price)</dt>
+			<dd>
+				<select name="price-refinement">
+					<option value="not-more-than" selected="selected">_i18n(not_more_than)</option>
+					<option value="not-less-than">_i18n(not_less_than)</option>
+				</select>			
+				<input type="text" name="price" size="10"/>
+				<label>_i18n(currency)</label>
+			</dd>			
+			<dt>_i18n(listing_search_description)</dt>
+			<dd><textarea rows="5" cols="30" name="description"></textarea></dd>			
+		</dl>
+	</fieldset>
+</form>
+<?php TemplateEngine::inclusion('../ads/google-468x60.html', $mvc) ?>

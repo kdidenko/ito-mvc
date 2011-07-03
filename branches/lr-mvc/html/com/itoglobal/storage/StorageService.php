@@ -18,6 +18,22 @@ class StorageService {
 	 */
 	const IMAGES = 'images';
 	/**
+	 * @var string - user directory name 
+	 */
+	const USERS_FOLDER = 'storage/uploads/users/';
+	/**
+	 * @var string - user avatar directory name 
+	 */
+	const USER_AVATAR = 'avatar.jpg';
+	/**
+	 * @var string - profile directory name 
+	 */
+	const USER_PROFILE = '/profile/';
+	/**
+	 * @var string - default user avatar directory name 
+	 */
+	const DEF_USER_AVATAR = 'storage/uploads/default-avatar.jpg';
+	/**
 	 * @var string - templates directory name 
 	 */
 	const TEMPLATES = 'templates';

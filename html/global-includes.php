@@ -32,4 +32,5 @@
 
 	require_once 'com/mls/services/ListingService.php';
 	require_once 'com/mls/services/NewsService.php';
+	require_once 'com/mls/services/LocationService.php';
 ?>

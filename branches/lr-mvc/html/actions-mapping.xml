@@ -22,6 +22,19 @@
 		<property name="listingsCnt" value="10"/>
 		<property name="newsCnt" value="9"/>
 	</action>
+	
+	<!-- TODO: to be refactored later -->
+	<action name="/realestate/add.html" id="listiing-add">
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl"/>
+		<template name="Three columns layout" path="templates/three-columns.html"/>
+	</action>
+	
+	<action name="/listiing-add.html" id="listiing-add">
+		<controller class="com.mls.content.RealestateController" method="handleAddRequest"/>
+		<template name="Realestate Add" path="templates/realestate/add.html"/>
+		<property name="country" value="Ukraine"/>
+		<property name="state" value="Lviv"/>		
+	</action>
 
 	
 </actions>

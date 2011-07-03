@@ -16,7 +16,7 @@ class SecureActionControllerImpl extends BaseActionControllerImpl implements Sec
 	}
 	
 	/**
-	 * Basic implementation of onAbort method defined by
+	 * Basic implementation of onLoggedIn method defined by
 	 * com.itoglobal.mvc.defaults.SecureActionController interface.
 	 *
 	 * @see SecureActionController->onLoggedIn($actionParams)
@@ -24,6 +24,37 @@ class SecureActionControllerImpl extends BaseActionControllerImpl implements Sec
 	public function onLoggedIn($actionParams) {
 		return self::getLocationOnCondition ( $actionParams, self::MVC_ON_LOGGED_IN );
 	}
+	
+	/**
+	 * Basic implementation of onRole method defined by
+	 * com.itoglobal.mvc.defaults.SecureActionController interface.
+	 *
+	 * @see SecureActionController->onLoggedIn($actionParams)
+	 */
+	public function onRole($actionParams) {
+		return self::getMethodOnCondition ( $actionParams, self::MVC_ON_ROLE );
+	}
+
+	/**
+	 * Retreives the method name parameter for a specified action processing
+	 * state condition using action configuration model object.
+	 *
+	 * @param $actionParams
+	 * @param $condition
+	 * @return unknown_type
+	 */	
+	public function getMethodOnCondition($actionParams, $condition) {
+		$result = null;
+		if ($actionParams && ($forwards = $actionParams->forwards)) {
+			foreach ( $forwards->target as $opt ) {
+				if ($opt ['condition'] && $condition == ( string ) $opt ['condition']) {
+					$result = ( string ) $opt ['class'];
+					break;
+				}
+			}
+		}
+		return $result;
+	}	
 	
 	/**
 	 * Secure actions handling method implementation. Qualifies the

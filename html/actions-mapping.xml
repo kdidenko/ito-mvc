@@ -4,9 +4,12 @@
 		 xsi:schemaLocation="http://www.ito-global.com/schema/mvc com/ito-global/schema/mvc/actions-mapping-1.2.xsd  
 		 					 http://www.ito-global.com/schema/mvc http://www.ito-global.com/schema/mvc/actions-mapping-1.2.xsd" >
 
+	<alias name="/realestate/news.html" target="/index.html"/>
+
 	<action name="/index.html" id="home">
-		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />
+		<controller class="com.itoglobal.mvc.defaults.BaseActionControllerImpl" />		
 		<template name="Homepage" path="templates/three-columns.html" />
+		<property name="showBigboard" value="true"/>
 	</action>
 
 	<action name="/cities-menu.html" id="cities">
@@ -20,7 +23,7 @@
 		<controller class="com.mls.content.ContentController" method="handleHomepage" />
 		<template name="Homepage Content" path="templates/homepage.html" />
 		<property name="listingsCnt" value="10"/>
-		<property name="newsCnt" value="9"/>
+		<property name="newsCnt" value="9"/>		
 	</action>
 	
 	<!-- TODO: to be refactored later -->

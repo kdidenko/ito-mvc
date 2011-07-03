@@ -2,7 +2,7 @@
 <span class="marquee">
 	<marquee direction="left">
 	<?php foreach($listings as $listing) { ?>
-		<img src="images/marquee.gif" class="separator" alt="_i18n(<?php echo $listing['search_caption']?>) _i18n(<?php echo $listing['what_caption']?>)"/>
+		<img src="<?php echo CONTEXT_PATH ?>images/marquee.gif" class="separator" alt="_i18n(<?php echo $listing['search_caption']?>) _i18n(<?php echo $listing['what_caption']?>)"/>
 		<b>$<?php echo $listing['price'] ?></b>
 		<a href="<?php echo CONTEXT_PATH ?>index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>" title="_i18n(<?echo $listing['search_caption']?>)" class="link">_i18n(<?php echo $listing['action_caption']?>)</a>
 		<a href="<?php echo CONTEXT_PATH ?>index.php?realty=show&amp;filter=on&amp;aim=<?php echo $listing['filter_caption']?>&amp;realty_type=<?php echo $listing['property_type']?>" title="_i18n(<?php $listing['what_caption']?>)" class="link">_i18n(<?php echo $listing['what_caption']?>)</a>

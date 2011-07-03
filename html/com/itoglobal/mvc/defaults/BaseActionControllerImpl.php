@@ -9,7 +9,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 *
 	 * @param $actionParams
 	 * @param $condition
-	 * @return unknown_type
+	 * @return string
 	 */
 	public function getLocationOnCondition($actionParams, $condition) {
 		$result = null;
@@ -59,6 +59,7 @@ class BaseActionControllerImpl implements BaseActionController {
 	 * @return void
 	 */
 	public function forwardActionRequest($location) {
+		@ob_clean();
 		header ( "Location: $location" );
 		exit ();
 	}
@@ -93,5 +94,11 @@ class BaseActionControllerImpl implements BaseActionController {
 		return self::getLocationOnCondition ( $actionParams, self::MVC_ON_ABORT );
 	}
 
+	public function setNoCashe() {
+		header("Pragma: no-cache");
+		header("cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+	}
+	
 }
 ?>

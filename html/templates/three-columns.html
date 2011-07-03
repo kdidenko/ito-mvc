@@ -18,8 +18,12 @@
 			</div>
 			<div class="topMenu menu">
 				<?php TemplateEngine::inclusion('top-menu.html', $mvc) ?>
-			</div>
-				<?php TemplateEngine::inclusion('body-top.html', $mvc) ?>
+			</div>				
+				<?php 
+					if($mvc->getProperty('showBigboard')){
+						TemplateEngine::inclusion('body-top.html', $mvc);
+					} 
+				?>
 			<div class="content">
 				<?php TemplateEngine::execute('/' . $mvc->getView() . '.html', $mvc)?>
 			</div>

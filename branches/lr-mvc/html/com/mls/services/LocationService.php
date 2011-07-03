@@ -15,9 +15,9 @@ class LocationService {
 	
 	public static function citiesList($country, $state) {
 		self::load();
+		$cities = array();
 		$xpath = "//country[@name='{$country}']/state[@name='{$state}']/city";
 		$res = self::$config->xpath($xpath);
-		$cities = array();
 		foreach($res as $city) {
 			array_push($cities, (string) $city);
 		}

@@ -5,7 +5,7 @@ class ListingService {
 	public static function getLatest($cnt) {
 		$result = array();
 		$dao = DBClientHandler::getInstance();
-		$query = "SELECT l.post_id AS id, l.r_what, l.r_region, l.r_city, l.r_price, l.r_street, 
+		$query = "SELECT l.post_id AS id, l.r_what, l.r_type, l.r_region, l.r_city, l.r_price, l.r_street, l.r_date, 
 				a.search_caption, a.filter_caption, a.Action_caption, t.what_caption, s.name 
 				FROM realty_data l LEFT JOIN actions a ON l.r_type = a.a_id LEFT JOIN types t ON l.r_what = t.t_id 
 				LEFT JOIN settlements s ON l.r_region = s.s_id 
@@ -15,10 +15,12 @@ class ListingService {
 		while ( $row = mysql_fetch_array ( $res ) ) {
 			$l['id'] = $row['id'];
 			$l['property_type'] = $row['r_what'];
+			$l['purpose'] = $row['r_type'];
 			$l['region'] = $row['r_region'];
 			$l['city'] = $row['r_city'];
 			$l['price'] = $row['r_price'];
 			$l['address'] = $row['r_street'];
+			$l['date'] = $row['r_date'];
 			//TODO: get reed of next params (useless!) 
 			$l['search_caption'] = $row['search_caption'];
 			$l['filter_caption'] = $row['filter_caption'];

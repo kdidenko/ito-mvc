@@ -1,0 +1,41 @@
+<?php $listings = $mvc->getObject('listings') ?>
+
+<?php foreach($listings as $listing) { ?>
+<div class="listing">
+	<div class="h">
+		<b>_i18n(caption_<?php echo $listing['purpose']?>)</b>
+		<span><?php echo $listing['date']?></span>
+	</div>
+	<div class="b">
+		<p class="description">
+			<b>_i18n(purpose_<?php echo $listing['purpose']?>)</b> _i18n(property_type_<?php echo $listing['property_type']?>) _i18n(in_city)
+			_i18n(<?php echo $listing['city']?>) (_i18n(region_<?php echo $listing['region']?>))
+		
+		</p>	
+	</div>
+</div>
+<?php } ?>
+
+<table class="onePost" cellspacing="0">
+	<tr>
+		<td class="header">Оголошення:</td>
+		<td class="date"><b>[POST_DATE]</b></td>
+	</tr>
+	<tr>
+		<td>
+		<b>[POST_AIM_SELECT]</b> [REALTY_TYPE_SELECT] у м.[SETTLEMENTS_SELECT] [STREET_INPUT] загальною площею [SPACE_INPUT] м.кв.<br />
+		<b>Додаткові дані:</b><br />
+		[DESCRIPTION_INPUT]<br />
+		<b>Контактні дані:</b><br />
+		<img src="[CONTEXT_PATH]IMG/person.jpg" height="18" width="13" alt="Ім'я" />
+		[PERSONNAME_INPUT]&nbsp;&nbsp;&nbsp; 
+		<img src="[CONTEXT_PATH]IMG/mail.jpg" height="17" width="16" alt="e-mail" /> 
+		<a href="mailto:[MAIL_INPUT]">[MAIL_INPUT]</a><br />
+		<img src="[CONTEXT_PATH]IMG/icq.jpg" height="17" width="16" alt="ICQ" />
+		[ICQ_INPUT]&nbsp;&nbsp;&nbsp; 
+		<img src="[CONTEXT_PATH]IMG/phone.jpg" height="17" width="16" alt="Телефон"/> 
+		[PHONE_INPUT]
+		</td>
+		<td class="info">[PRICE_INPUT] у.о.</td>
+	</tr>
+</table>

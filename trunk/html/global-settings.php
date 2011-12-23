@@ -1,5 +1,4 @@
 <?php
-
 	define('DEFAULT_SCRIPT', 'index.php');
 	define('DOCUMENT_ROOT', rtrim(str_replace(DEFAULT_SCRIPT, '', $_SERVER['SCRIPT_FILENAME']), '/\\') . '/');
 	
@@ -15,14 +14,13 @@
 	
 	//TODO: setting below must be stored somewhere else and have to be dynamically loaded 
 	//		by smth. like "SettingsService" which must be also implemented!
-	$support = 'support@project.com'; 
+	$support = 'support@project.com';
 	
-	# db settings
-	$db_host = '';
-	$db_name = '';		
-	$db_user = '';		
-	$db_pass = '';
-	$charset = '';
+	$db_host = 'localhost';
+	$db_name = 'kdidenko_acclvivrealty';
+	$db_user = 'kdidenko_script';		
+	$db_pass = 'password';
+	$charset = 'UTF8';
 	
 	#max size of file (in bytes)
 	$upload_file_size = 512000;

@@ -1,5 +1,8 @@
 <?php
-	define('DOCUMENT_ROOT', rtrim($_SERVER['DOCUMENT_ROOT'], '/\\') . '/');
+
+	define('DEFAULT_SCRIPT', 'index.php');
+	define('DOCUMENT_ROOT', rtrim(str_replace(DEFAULT_SCRIPT, '', $_SERVER['SCRIPT_FILENAME']), '/\\') . '/');
+	
 	define('STORAGE_PATH', DOCUMENT_ROOT . 'storage/');
 	define('SESSION_PATH', DOCUMENT_ROOT . 'storage/sessions/');
 	define('TEMPLATES_PATH', DOCUMENT_ROOT . 'templates/');	
@@ -7,15 +10,24 @@
 
 	define('XML_CONTENT_DEFINITION', "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r");
 
-	// localization:
+	# localization:
 	define('DEFAULT_LOCALE', 'en');
 	
 	//TODO: setting below must be stored somewhere else and have to be dynamically loaded 
 	//		by smth. like "SettingsService" which must be also implemented!
-	// db settings
-	$db_host = 'localhost';
-	$db_name = 'youcademy';		
-	$db_user = 'root';		
+	$support = 'support@project.com'; 
+	
+	# db settings
+	$db_host = '';
+	$db_name = '';		
+	$db_user = '';		
 	$db_pass = '';
-	$charset = 'UTF8';
+	$charset = '';
+	
+	#max size of file (in bytes)
+	$upload_file_size = 512000;
+	
+	define('SUPPORT', $support);
+	define('ON_PAGE', $on_page);
+	define('FILE_SIZE', $upload_file_size);
 ?>

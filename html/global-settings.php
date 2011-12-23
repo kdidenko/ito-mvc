@@ -28,6 +28,5 @@
 	$upload_file_size = 512000;
 	
 	define('SUPPORT', $support);
-	define('ON_PAGE', $on_page);
 	define('FILE_SIZE', $upload_file_size);
 ?>

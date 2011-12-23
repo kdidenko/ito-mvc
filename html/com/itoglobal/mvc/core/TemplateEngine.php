@@ -40,17 +40,26 @@ class TemplateEngine {
 	}
 	
 	/** 
-	 * Wrapper method for including files from template 
-	 * @param string the $filename to include
+	 * Wrapper method for including files from within template. 
+	 * @param $filename string path relative to the script that was calling inclusion.
 	 * @param ModelAndView the $mvc Object
 	 */
 	public static function inclusion($filename, $mvc = null) {
-		include_once TEMPLATES_PATH . $filename;
+		# get the path of caller script
+		$bt = debug_backtrace();
+		$path = dirname($bt[0]["file"]);
+		# include the file
+		include_once $path . '/' . $filename;
 	}
 	
-	public static function execute($action) {
+	public static function execute($action, $mvc = null) {
 		$rd = RequestDispatcher::getInstance ();
-		TemplateEngine::run ( $rd->dispatchActionRequest ( $action ) );
+		$result = $rd->dispatchActionRequest($action, $mvc);
+		if($mvc != null){
+			# append the old values to the new model
+			$result = MVCService::margeModels($result, $mvc);	
+		}
+		TemplateEngine::run ($result);
 	}
 	
 	public static function getView($view) {

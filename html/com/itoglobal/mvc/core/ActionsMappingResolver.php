@@ -1,4 +1,7 @@
 <?php
+
+require_once 'com/itoglobal/xml/XmlElement.php';
+
 class ActionsMappingResolver {
 	
 	const DEFAULT_MAPPING_FILE = 'actions-mapping.xml';
@@ -15,6 +18,11 @@ class ActionsMappingResolver {
 	private static $actionsMapping = array ();
 	
 	/**
+	 * @var array() aliases objects buffer.
+	 */
+	private static $aliases = array ();	
+	
+	/**
 	 * Service initialyzation method used for mapping XML processing.
 	 *
 	 * @param $mapping the MVC mapping filename.
@@ -22,7 +30,12 @@ class ActionsMappingResolver {
 	 */
 	public static function init($mapping = self::DEFAULT_MAPPING_FILE) {
 		$xmlStr = file_get_contents ( $mapping );
-		$xmlObj = new SimpleXMLElement ( $xmlStr );
+		$xmlObj = new XMLElement ( $xmlStr );
+		
+		foreach ( $xmlObj->alias as $alias ) {
+			self::$aliases [( string ) $alias ['name']] = ( string ) $alias ['target'];
+		}		
+		
 		foreach ( $xmlObj->action as $action ) {
 			self::$actionsMapping [( string ) $action ['name']] = $action;
 		}
@@ -48,11 +61,14 @@ class ActionsMappingResolver {
 	
 	public static function getActionMapping($uri) {
 		$res = null;
-		if (! key_exists ( $uri, self::$actionsMapping )) {
-			// try wilecard matching if no object were found
-			$res = self::patternSearch ( $uri );
-		} else {
+		if (key_exists ($uri, self::$actionsMapping)) {
 			$res = self::$actionsMapping [$uri];
+		} else {
+			if(key_exists ($uri, self::$aliases)){
+				$res = self::getActionMapping(self::$aliases[$uri]);
+			}else{
+				$res = self::patternSearch ( $uri );
+			}
 		}
 		return $res;
 	}

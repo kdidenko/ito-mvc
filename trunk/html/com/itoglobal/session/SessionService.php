@@ -2,6 +2,8 @@
 
 class SessionService {
 	
+	const LOCALE = 'locale';
+
 	const USERS_ID = 'user_id';
 	
 	const USERNAME = 'username';
@@ -13,6 +15,8 @@ class SessionService {
 	const EMAIL = 'email';
 	
 	const ROLE = 'role';
+	
+	const PLAN_ID = 'plan_id';
 	
 	const ROLE_VR = 'VR';
 	

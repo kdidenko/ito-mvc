@@ -13,7 +13,7 @@ class RequestDispatcher {
 		return $this->dispatchActionRequest ( $action );
 	}
 	
-	public function dispatchActionRequest($action) {
+	public function dispatchActionRequest($action, $mvc = null) {
 		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
@@ -22,29 +22,32 @@ class RequestDispatcher {
 			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $action . ' Not found on server' );
 		}
-		return $this->dispatch ( $mappingObj );
+		return $this->dispatch ($mappingObj, $mvc);
 	}
 	
 	public function dispatchViewRequest($view) {
 		$map = $this->getMappingConfig ();
 		# initialize the ActionsMappingResolver and retreive the action mapping model
 		ActionsMappingResolver::init ( $map );
-		$mappingObj = ActionsMappingResolver::getViewMapping ( $view );
+		$mappingObj = ActionsMappingResolver::getViewMapping ($view);
 		if (! isset ( $mappingObj )) {
-			error_log ( "Could not resolve the Action Mapping for request path: $action \r Environment details: \r" . print_r ( $_SERVER, true ) );
+			error_log ( "Could not resolve the Action Mapping for request path: $view \r Environment details: \r" . print_r ( $_SERVER, true ) );
 			die ( $view . ' Not found on server' );
 		}
 		return $this->dispatch ( $mappingObj );
 	}
 	
-	private function dispatch($mappingObj) {
+	private function dispatch($mappingObj, $mvc = null) {
 		$result = null;
-		# get the conntroller object instance
-		$controller = MVCService::getController ( ( string ) $mappingObj->controller ['class'] );
+		# get the conntroller object instances
+		$mappingObj = MVCService::optimizeMapping($mappingObj);
+		$mappingObj = MVCService::getForwards($mappingObj, $mvc);
+		$controller = MVCService::getController ($mappingObj);		
 		# do handle action
 		$methodName = isset ( $mappingObj->controller ['method'] ) ? ( string ) $mappingObj->controller ['method'] : BaseActionController::MVC_DEFAULT_METHOD;
+		$methodName = method_exists($controller, $methodName) ? $methodName : BaseActionController::MVC_DEFAULT_METHOD;
 		# run the controller method and return MVC model object
-		$result = $controller->$methodName ( $mappingObj, $_REQUEST );
+		$result = $controller->$methodName ($mappingObj, $_REQUEST);
 		return $result;
 	}
 	
